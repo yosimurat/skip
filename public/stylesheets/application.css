@@ -110,6 +110,55 @@ div.box_space {
     padding: 1px;
     font-size: 10px; }
 
+h2.topix_title {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px dashed #ccc;
+  padding: 4px 0px 2px 7px;
+  background-color: #f3f3ff;
+  background-image: url(./../images/skip/gradient.png);
+  font-size: 16px;
+  font-weight: bold;
+  color: #003399;
+  vertical-align: bottom;
+  margin-left: 5px; }
+
+div.topix_body {
+  margin: 0px 0px 10px 5px; }
+  div.topix_body a:visited {
+    color: purple; }
+  div.topix_body .page_line, div.topix_body .item_line {
+    border-bottom: 1px dotted silver;
+    padding: 1px 2px 3px 2px;
+    margin-bottom: 2px; }
+  div.topix_body .page_reading {
+    float: left; }
+  div.topix_body .page_title {
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px; }
+  div.topix_body .page_from {
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  div.topix_body .page_date, div.topix_body .item_date {
+    text-align: right;
+    font-size: 10px; }
+  div.topix_body .item_name {
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 120px; }
+  div.topix_body .item_desc {
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 50%; }
+
 div#contents_container {
   width: 100%;
   margin-left: auto;
