@@ -227,56 +227,6 @@ div.notice span, div.warning span {
   top: 15px;
   font-size: 10px;
 }
-/* ----------------------------------- */
-/* ボックス型 */
-/* 外側の表示枠 */
-div.box_space {
-  background-color: #ffffff;
-  border: 1px solid silver;
-  padding: 1px;
-  margin-bottom: 5px;
-  border-right: 2px solid silver;
-  border-bottom: 2px solid #aaaaaa;
-}
-/* タイトル部分 */
-div.box_space div.box_space_title {
-  padding: 1px;
-  border-top: 1px solid silver;
-  border-left: 1px solid silver;
-  color: #0033cc;
-  font-size: 15px;
-  font-weight: bold;
-  background-image: url(./../images/label_bar.png);
-}
-/* タイトル中のサイズの小さい文字 */
-div.box_space div.box_space_title span.small {
-  font-size: 10px;
-  margin-left: 3px;
-}
-/* 本体部分 */
-div.box_space div.box_space_body {
-  text-align: left;
-  margin: 2px;
-  word-break:break-all;
-  overflow: hidden;
-}
-/* 本体部分 */
-div.box_space div.box_space_img_body {
-  text-align: center;
-  margin: 2px;
-}
-/* 本体の中の箇条書き */
-div.box_space div.box_space_body ul {
-  list-style-type: none;
-}
-/* 底の部分 */
-div.box_space div.box_space_bottom {
-  text-align: right;
-  border-right: 1px solid silver;
-  border-bottom: 1px solid silver;
-  padding: 1px;
-  font-size: 10px;
-}
 
 /* ----------------------------------- */
 /* オートコンプリートで使う */

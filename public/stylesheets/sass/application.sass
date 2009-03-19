@@ -100,6 +100,44 @@ form
   :border 1px solid pink
   :display block
 
+// サイドカラムに配置するボックス
+// ------------------------------------------------------------
+div.box_space
+  :background-color = !base_background_color
+  :border 1px solid #ccc
+  :border-right 2px solid #ccc
+  :border-bottom 2px solid #aaa
+  :padding 1px
+  :margin-bottom 5px
+  div.box_space_title
+    :padding 1px
+    :border-top 1px solid #ccc
+    :border-left 1px solid #ccc
+    :font
+      :size 15px
+      :weight bold
+    :color #03c
+    :background-image url(./../images/label_bar.png)
+    span.small
+      :font-size 10px
+      :margin-left 3px
+  div.box_space_body
+    :text-align left
+    :margin 2px
+    :word-break break-all
+    :overflow hidden
+    ul
+      :list-style-type none
+  div.box_space_img_body
+    :text-align center
+    :margin 2px
+  div.box_space_bottom
+    :text-align right
+    :border-right 1px solid #ccc
+    :border-bottom 1px solid #ccc
+    :padding 1px
+    :font-size 10px
+
 // ============================================================
 // 2. 共通の構造
 // ============================================================

@@ -75,6 +75,41 @@ form {
   border: 1px solid pink;
   display: block; }
 
+div.box_space {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-right: 2px solid #ccc;
+  border-bottom: 2px solid #aaa;
+  padding: 1px;
+  margin-bottom: 5px; }
+  div.box_space div.box_space_title {
+    padding: 1px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    font-size: 15px;
+    font-weight: bold;
+    color: #03c;
+    background-image: url(./../images/label_bar.png); }
+    div.box_space div.box_space_title span.small {
+      font-size: 10px;
+      margin-left: 3px; }
+  div.box_space div.box_space_body {
+    text-align: left;
+    margin: 2px;
+    word-break: break-all;
+    overflow: hidden; }
+    div.box_space div.box_space_body ul {
+      list-style-type: none; }
+  div.box_space div.box_space_img_body {
+    text-align: center;
+    margin: 2px; }
+  div.box_space div.box_space_bottom {
+    text-align: right;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 1px;
+    font-size: 10px; }
+
 div#contents_container {
   width: 100%;
   margin-left: auto;
