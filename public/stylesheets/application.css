@@ -127,6 +127,17 @@ div#contents_container {
     width: 100%;
     clear: left; }
 
+div.top_info {
+  margin-bottom: 5px;
+  padding: 3px 10px;
+  background-color: #f5f5ff; }
+  div.top_info.system_message {
+    border: 2px dotted #a0a0ff; }
+  div.top_info.important_message {
+    border: 2px dotted #ffc000;
+    font-size: 14px;
+    font-weight: bold; }
+
 span.share_file_uploader.trigger {
   font-size: 10px;
   margin-left: 5em; }
