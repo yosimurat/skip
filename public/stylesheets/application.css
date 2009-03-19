@@ -82,6 +82,15 @@ div#contents_container {
   text-align: left; }
   div#contents_container .content {
     margin-bottom: 20px; }
+  div#contents_container div#contents_left {
+    float: left;
+    width: 150px; }
+  div#contents_container div#contents_right {
+    margin-left: 160px;
+    _width: 100%; }
+  div#contents_container div#contents_bottom {
+    width: 100%;
+    clear: left; }
 
 span.share_file_uploader.trigger {
   font-size: 10px;

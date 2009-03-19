@@ -342,21 +342,6 @@ div.auto_complete ul strong.highlight {
 /* ----------------------------------- */
 /* コンテンツの左メニュー・右中身の構造 */
 
-/* レイアウトの左側 */
-div#contents_left {
-  width:150px;
-  float:left;
-}
-/* レイアウトの右側 */
-div#contents_right {
-  margin-left: 160px;
-  _width: 100%;
-}
-/* レイアウトの下側 */
-div#contents_bottom {
-  width:100%;
-  clear:left;
-}
 /* ----------------------------------- */
 /* 紹介文のところで使う */
 table.chain_table {
