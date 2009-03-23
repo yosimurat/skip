@@ -131,18 +131,21 @@ div.topix_body {
     padding: 1px 2px 3px 2px;
     margin-bottom: 2px; }
   div.topix_body .page_reading {
-    float: left; }
+    float: left;
+    margin-right: 5px; }
   div.topix_body .page_title {
     float: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 200px; }
+    width: 65%; }
   div.topix_body .page_from {
     float: left;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; }
+    text-overflow: ellipsis;
+    width: 70px;
+    margin-left: 5px; }
   div.topix_body .page_date, div.topix_body .item_date {
     text-align: right;
     font-size: 10px; }
@@ -151,7 +154,8 @@ div.topix_body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 120px; }
+    width: 120px;
+    margin-right: 15px; }
   div.topix_body .item_desc {
     float: left;
     white-space: nowrap;
