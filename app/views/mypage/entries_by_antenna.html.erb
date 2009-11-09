@@ -19,7 +19,7 @@
 
 <% content_for :contents_right do -%>
   <% @symbol2name_hash ||= nil -%>
-  <% if @entries.blank? %>
+  <% unless @antenna_entry.need_search? %>
     <%= _('This subscription has no items.') %>
   <% else %>
     <div id="antenna_navi" style="text-align: right; padding: 0pt 0pt 12pt 0pt;">
