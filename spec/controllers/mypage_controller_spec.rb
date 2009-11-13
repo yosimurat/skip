@@ -103,7 +103,7 @@ describe MypageController, 'mypage > home 関連' do
     end
     it '最近の人気記事が設定されること' do
       @access_blogs = {}
-      controller.should_receive(:find_access_blogs_as_locals).with(:per_page => 5).and_return(@access_blogs)
+      controller.should_receive(:find_access_blogs_as_locals).with(:per_page => 10).and_return(@access_blogs)
       get :index
       assigns[:access_blogs].should == @access_blogs
     end
@@ -654,6 +654,9 @@ describe MypageController, '#system_messages' do
     @controller.stub!(:current_user).and_return(@user)
   end
   describe 'ようこそメッセージを表示しない場合' do
+    before do
+      SkipEmbedded::InitialSettings.stub!("[]").with('system_notice').and_return({ 'title' => "" })
+    end
     it { @controller.send(:system_messages).size.should == 1 }
   end
 end
