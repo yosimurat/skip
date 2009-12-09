@@ -136,7 +136,7 @@ module ApplicationHelper
       file_name = 'retired.png'
     elsif picture = user.picture
       unless picture.new_record?
-        file_name = url_for(:controller => '/pictures', :action => 'picture', :id => picture.id, :format => :png)
+        file_name = url_for(:controller => '/pictures', :action => 'picture', :id => picture.id, :format => :png) + "?#{picture.updated_on.to_i.to_s}"
       else
         file_name = 'default_picture.png'
       end
