@@ -5,9 +5,11 @@ ActionController::Routing::Routes.draw do |map|
   # TODO users配下に移す
   map.resources :notices
 
-  map.resources :users, :only => [:index] do |user|
-    user.resources :chains
-    user.resources :pictures
+  map.resources :users, :only => [:index] do |user_map|
+    user_map.with_options :requirements => { :user_id => /[a-zA-Z0-9\-_\.]+/ } do |user|
+      user.resources :chains
+      user.resources :pictures
+    end
   end
 
   map.share_file  ':controller_name/:symbol_id/files/:file_name',
