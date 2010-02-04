@@ -54,10 +54,10 @@ class BoardEntry < ActiveRecord::Base
   TIMLINE_AIM_TYPES = %w(entry).freeze
   validates_inclusion_of :aim_type, :in => AIM_TYPES
 
-  named_scope :accessible, proc { |user|
-    { :conditions => ['entry_publications.symbol in (:publication_symbols)',
-      { :publication_symbols => user.belong_symbols << Symbol::SYSTEM_ALL_USER }],
-      :include => [:entry_publications] }
+  alias_scope :accessible, proc { |user|
+    return scoped({}) if user.blank?
+    accessible_ids = EntryPublication.symbol_is(user.belong_symbols << Symbol::SYSTEM_ALL_USER).all(:select => 'distinct(board_entry_id)').map(&:board_entry_id)
+    id_is(accessible_ids)
   }
 
   named_scope :category_like, proc { |category|
