@@ -19,6 +19,4 @@ class EventAttendee < ActiveRecord::Base
   belongs_to :event
   validates_uniqueness_of :event_id, :scope => [:user_id]
 
-  named_scope :attendance, :conditions => { :status => "attend" }
-
 end

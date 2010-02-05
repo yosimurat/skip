@@ -51,7 +51,7 @@
     <div class="box_space_title"><%= icon_tag('group') -%><%= _('Members')%></div>
     <div class="box_space_body">
       <ul>
-        <% @event.event_attendees.attendance.each do |attendee| -%>
+        <% @event.event_attendees.status_is('attend').each do |attendee| -%>
           <li><%= user_link_to User.find(attendee.user_id) %></li>
         <% end -%>
       </ul>
