@@ -53,7 +53,11 @@ class MypageController < ApplicationController
     #  main area entries
     # ============================================================
     @questions = find_questions_as_locals({:recent_day => recent_day})
-    @access_blogs = find_access_blogs_as_locals({:per_page => 10})
+    @access_blogs_cache_key = "access_blog_#{Time.now.strftime('%Y%m%d%H')}"
+    unless read_fragment(@access_blogs_cache_key)
+      debugger
+      @access_blogs = find_access_blogs_as_locals({:per_page => 10})
+    end
     @recent_blogs = find_recent_blogs_as_locals({:per_page => per_page})
     @timelines = find_timelines_as_locals({:per_page => per_page}) if current_user.custom.display_entries_format == 'tabs'
     @recent_bbs = recent_bbs
@@ -499,7 +503,7 @@ class MypageController < ApplicationController
 
   # 質問記事一覧を取得する（partial用のオプションを返す）
   def find_questions_as_locals options
-    pages = BoardEntry.accessible(current_user).question.visible.order_new.scoped(:include => [:state, :user])
+    pages = BoardEntry.question.visible.accessible(current_user).order_new.scoped(:include => [:state, :user])
 
     locals = {
       :id_name => 'questions',
