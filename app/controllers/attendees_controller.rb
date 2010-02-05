@@ -17,10 +17,10 @@ class AttendeesController < ApplicationController
 
   def attend
     event = Event.find(params[:id])
-    attendance = event.attendees.find_by_event_id_and_user_id(event.id, current_user.id)
+    attendance = event.attendees.find_by_user_id(current_user.id)
 
     unless attendance
-      event.attendees.create(:user_id => current_user.id, :status => 'attend', :comment => 'auto comment')
+      event.attendees.create(:user_id => current_user.id, :status => 'attend', :comment => 'auto comment') #TODO:commentは画面から入力できるように
     else
       attendance.status = 'attend'
       attendance.save
@@ -33,7 +33,7 @@ class AttendeesController < ApplicationController
 
   def absent
     event = Event.find(params[:id])
-    attendance = event.attendees.find_by_event_id_and_user_id(event.id, current_user.id)
+    attendance = event.attendees.find_by_user_id(current_user.id)
 
     if attendance
       attendance.status = 'absent'
