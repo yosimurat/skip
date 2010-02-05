@@ -16,9 +16,6 @@
 class EventsController < ApplicationController
   before_filter :setup_layout
 
-  verify :method => :post, :only => [ :create ],
-          :redirect_to => { :action => :index }
-
   def index
     @events = Event.all.paginate(:page => params[:page], :per_page => 50)
   end

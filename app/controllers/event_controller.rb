@@ -14,6 +14,8 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class EventController < ApplicationController
+  verify :method => :post, :only => [ :create ],
+    :redirect_to => { :action => :index }
 
   def new
     @event = Event.new
@@ -24,14 +26,22 @@ class EventController < ApplicationController
     @event.creator_id = current_user.id
     if @event.save
       flash[:notice] = _('Event was created successfully.')
-      redirect_to event_path(@event)
+
+      respond_to do |format|
+        format.html { redirect_to event_path(@event) }
+      end
+
     else
-      render :action => 'new'
+      respond_to do |format|
+        format.html { render :action => 'new' }
+      end
     end
   end
+
+  #def edit
+  #end
 
   def show
     @event = Event.find(params[:id])
   end
-
 end
