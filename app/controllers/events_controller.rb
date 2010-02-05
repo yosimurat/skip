@@ -20,6 +20,34 @@ class EventsController < ApplicationController
     @events = Event.all.paginate(:page => params[:page], :per_page => 50)
   end
 
+  def show
+    @event = Event.find(params[:id])
+  end
+
+  def new
+    @event = Event.new
+  end
+
+  def create
+    @event = Event.new(params[:event]) #TODO current_user.events.build で作成するように & 関連をはる
+    @event.user_id = current_user.id
+    if @event.save
+      flash[:notice] = _('Event was created successfully.')
+
+      respond_to do |format|
+        format.html { redirect_to event_path(@event) }
+      end
+
+    else
+      respond_to do |format|
+        format.html { render :action => 'new' }
+      end
+    end
+  end
+
+  #def edit
+  #end
+
 private
   def setup_layout
     @main_menu = @title = _('Events')

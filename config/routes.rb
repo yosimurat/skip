@@ -134,7 +134,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :attachments
 
-  map.resources :event
+  map.resources :events, :except => [:destroy] do |event|
+    map.resources :attendees, :only => [], :member => {:attend => :post, :absent => :post}
+  end
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

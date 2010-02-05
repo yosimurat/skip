@@ -13,8 +13,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class EventAttendee < ActiveRecord::Base
-  include SkipEmbedded::LogicalDestroyable
+class Attendee < ActiveRecord::Base
 
   belongs_to :event
   validates_uniqueness_of :event_id, :scope => [:user_id]

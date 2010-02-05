@@ -13,14 +13,14 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class EventAttendeeController < ApplicationController
+class AttendeesController < ApplicationController
 
   def attend
     event = Event.find(params[:id])
-    attendance = event.event_attendees.find_by_event_id_and_user_id(event.id, current_user.id)
+    attendance = event.attendees.find_by_event_id_and_user_id(event.id, current_user.id)
 
     unless attendance
-      event.event_attendees.create(:user_id => current_user.id, :status => 'attend', :comment => 'auto comment')
+      event.attendees.create(:user_id => current_user.id, :status => 'attend', :comment => 'auto comment')
     else
       attendance.status = 'attend'
       attendance.save
@@ -33,7 +33,7 @@ class EventAttendeeController < ApplicationController
 
   def absent
     event = Event.find(params[:id])
-    attendance = event.event_attendees.find_by_event_id_and_user_id(event.id, current_user.id)
+    attendance = event.attendees.find_by_event_id_and_user_id(event.id, current_user.id)
 
     if attendance
       attendance.status = 'absent'

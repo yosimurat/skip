@@ -16,7 +16,8 @@
 class Event < ActiveRecord::Base
   include SkipEmbedded::LogicalDestroyable
 
-  has_many :event_attendees, :dependent => :destroy
+  has_many :attendees, :dependent => :destroy
+  belongs_to :user
 
   validates_presence_of :title, :start_date
 end

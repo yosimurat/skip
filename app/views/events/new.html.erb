@@ -1,4 +1,5 @@
 <div class="edit_form_space ui-corner-all">
+<%# TODO: あとでform_forに書き換える %>
 <% form_tag({:action => 'create'}, :id => 'event_form') do -%>
   <%= render :partial => "form" %>
   <%= submit_tag _('Create'), :disable_with => _('Creating...') %>

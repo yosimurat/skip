@@ -1,6 +1,5 @@
 <% unless events.empty? -%>
-  <%= hidden_field_tag("authenticity_token", form_authenticity_token) %>
-  <%= i18n_will_paginate_with_container_wrapper @events %>
+  <%= i18n_will_paginate_with_container_wrapper events %>
   <table class="group_list_box normal">
     <col />
     <col class="col75" />
@@ -13,12 +12,12 @@
       </tr>
       <% events.each do |event| -%>
         <tr class="<%= cycle('line_0', 'line_1') %>">
-          <td class="name"><span class="nowrap"><%= link_to(event.title, event_path(event.id)) %></span></td>
-          <td class="count"><%= event.event_attendees.count %></td>
+          <td class="name"><span class="nowrap"><%= link_to(h(event.title), event_path(event)) %></span></td>
+          <td class="count"><%= event.attendees.count %></td>
           <td class="date"><span class="nowrap"><%= event.start_date.strftime(_('%B %d %Y')) %></span></td>
         </tr>
       <% end -%>
     </tbody>
   </table>
-  <%= i18n_will_paginate_with_container_wrapper @events %>
+  <%= i18n_will_paginate_with_container_wrapper events %>
 <% end -%>
