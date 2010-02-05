@@ -23,21 +23,6 @@ class EventsController < ApplicationController
     @events = Event.all.paginate(:page => params[:page], :per_page => 50)
   end
 
-  def new
-    @event = Event.new
-  end
-
-  def create
-    @event = Event.new(params[:event])
-    @event.creator_id = current_user.id
-    if @event.save
-      flash[:notice] = _('Event was created successfully.')
-      redirect_to :controller => 'event', :action => 'show', :id => @event.id
-    else
-      render :action => 'new'
-    end
-  end
-
 private
   def setup_layout
     @main_menu = @title = _('Events')
