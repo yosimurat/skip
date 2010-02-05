@@ -134,6 +134,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :attachments
 
+  map.resources :event
+
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 

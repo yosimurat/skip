@@ -1,0 +1,36 @@
+<%= template_error_messages_for 'event' %>
+<div class="input_line">
+  <div class="input_label"><%= label :event, :title, _('Name of Event') %></div>
+  <div class="input_value"><%= text_field 'event', 'title', :size => 40 %></div>
+</div>
+
+<div class="input_line">
+  <div class="input_label"><%= label :event, :description, s_('Event|Description') %></div>
+  <div class="input_value richtext" style="clear: left;"><%= text_area :event, :description, :class => 'invisible' %></div>
+</div>
+
+<div class="input_line">
+  <div class="input_label"><%= _('Start Date')%></div>
+  <div class="input_value">
+    <p><%= datetime_select 'event', 'start_date', :use_month_numbers => true -%></p>
+  </div>
+  <div style="clear: left"></div>
+</div>
+<div class="input_line">
+  <div class="input_label"><%= _('End Date')%></div>
+  <div class="input_value">
+    <p><%= datetime_select 'event', 'end_date', :use_month_numbers => true -%></p>
+  </div>
+  <div style="clear: left"></div>
+</div>
+
+<%= ckeditor "event_description" %>
+
+<% content_for :javascript_initializers do -%>
+      $j('.category_radio_button')
+      .click(function(){
+          $j('.category_radio_button').parent().parent().css('backgroundColor','#fff');
+          $j(this).parent().parent().css('backgroundColor','#ffb');
+      });
+      $j('.category_radio_button:checked').click();
+<% end -%>

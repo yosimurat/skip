@@ -1,0 +1,26 @@
+<%= link_to _('Create new event'), :action => 'new' %>
+<div class="search_cond_space ui-corner-all">
+  <% form_tag({:action => 'index'}, :method => 'get') do -%>
+    <table class="search_cond_box">
+      <tr>
+        <th><%= _('Event Name / Explanation')%></th>
+        <td>
+          <%= text_field_tag 'keyword' , params[:keyword], :size => 50 %><br/>
+        </td>
+      </tr>
+    </table>
+    <div class="submit">
+      <%= submit_tag _('Search') %>
+      <span class="margin05em">
+        <%= hidden_field_tag 'yet_participation', "false", :id => "hidden_yet_participation" %>
+        <%= check_box_tag 'yet_participation', 'true', params[:yet_participation] == 'true' %>
+        <%= label_tag 'yet_participation', _('Show only events that will be held in the future') %>
+      </span>
+    </div>
+  <% end -%>
+</div><!-- search_cond_space -->
+
+<div class="search_result_space">
+  <%= render :partial => 'events/event_list',
+    :locals => { :events => @events } %>
+</div><!-- search_result_space -->

@@ -1,0 +1,13 @@
+<div class="action_buttons ui-corner-all">
+  <ul class="no_style">
+    <% if attended? @event.id -%>
+      <% if @event.public -%>
+        <li><%= link_to(content_tag('span', _('Cancel this event')), {:action => "absent", :id => @event.id} , {:class => "rounded", :method => :post}) -%></li>
+      <% else -%>
+        <li><%= link_to(content_tag('span', _('Absent this event')), {:action => "absent", :id => @event.id} , {:class => "rounded", :method => :post}) -%></li>
+      <% end -%>
+    <% else -%>
+      <li><%= link_to(content_tag('span', _('Attend this event')), {:action => "attend", :id => @event.id} , {:class => "rounded", :method => :post}) -%></li>
+    <% end -%>
+  </ul>
+</div>

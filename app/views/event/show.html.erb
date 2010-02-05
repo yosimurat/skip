@@ -1,0 +1,73 @@
+<% content_for :stylesheet do -%>
+  <style type="text/css">
+  div.group_info_space {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  div.group_info_space_desc {
+    margin-top: 5px;
+    margin-left: 10px;
+    width: 97%;
+    text-align: left;
+    border: 1px solid silver;
+    overflow: hidden;
+  }
+  div.group_info_space_desc_body {
+    margin: 5px;
+  }
+  div.group_info_space_lines {
+    margin-left: 10px;
+    width: 97%;
+    text-align: left;
+    overflow: hidden;
+    font-weight: bold;
+  }
+  div.group_info_space_lines_line {
+    margin-top: 5px;
+    border-bottom: 1px dashed silver;
+  }
+  div.box_space_body p.button {
+    text-align: center;
+    margin-top: 5px;
+  }
+  </style>
+<% end -%>
+
+<% content_for :contents_left do -%>
+  <%= render :partial => 'action_box' %>
+
+  <div class="box_space">
+    <div class="box_space_title"><%= icon_tag('user_suit') -%><%= _('Administrator')%></div>
+    <div class="box_space_body">
+      <ul>
+        <li><%= user_link_to User.find(@event.creator_id) %></li>
+      </ul>
+    </div>
+    <div class="box_space_bottom"></div>
+  </div><!-- box_space -->
+
+  <% if @event.event_attendees %>
+  <div class="box_space">
+    <div class="box_space_title"><%= icon_tag('group') -%><%= _('Members')%></div>
+    <div class="box_space_body">
+      <ul>
+        <% @event.event_attendees.attendance.each do |attendee| -%>
+          <li><%= user_link_to User.find(attendee.user_id) %></li>
+        <% end -%>
+      </ul>
+    </div>
+    <div class="box_space_bottom"><%#= link_to _("[...See all]"), :action => 'users' %></div>
+  </div><!-- box_space -->
+  <% end -%>
+<% end -%>
+
+
+<% content_for :contents_right do -%>
+
+<div class="group_info_space">
+  <div class="group_info_space_desc ui-corner-all">
+    <div class="group_info_space_desc_body"><%= render_richtext(@event.description, "1") -%></div>
+  </div>
+</div><!-- event_info_space -->
+<% end -%>
+
