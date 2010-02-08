@@ -20,4 +20,14 @@ class Event < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :title, :start_date
+
+  named_scope :order_start_date, proc { { :order => 'start_date DESC' } }
+
+  named_scope :partial_match_title_or_description, proc {|word|
+    return {} if word.blank?
+    {:conditions => ["title LIKE ? OR description LIKE ?", SkipUtil.to_lqs(word), SkipUtil.to_lqs(word)]}
+  }
+
+  named_scope :unhold, proc { { :conditions => ["start_date >= ?", Time.now]} }
+
 end

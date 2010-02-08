@@ -17,7 +17,11 @@ class EventsController < ApplicationController
   before_filter :setup_layout
 
   def index
-    @events = Event.all.paginate(:page => params[:page], :per_page => 50)
+    params[:yet_hold] ||= "true"
+    scope = Event.partial_match_title_or_description(params[:keyword]).order_start_date
+    scope = scope.unhold if params[:yet_hold] == 'true'
+    @events = scope.paginate(:page => params[:page], :per_page => 50)
+    flash.now[:notice] = _('No matching events found.') if @events.empty?
   end
 
   def show

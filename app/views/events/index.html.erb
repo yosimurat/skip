@@ -13,9 +13,9 @@
     <div class="submit">
       <%= submit_tag _('Search') %>
       <span class="margin05em">
-        <%= hidden_field_tag 'yet_participation', "false", :id => "hidden_yet_participation" %>
-        <%= check_box_tag 'yet_participation', 'true', params[:yet_participation] == 'true' %>
-        <%= label_tag 'yet_participation', _('Show only events that will be held in the future') %>
+        <%= hidden_field_tag 'yet_hold', "false", :id => "hidden_yet_hold" %>
+        <%= check_box_tag 'yet_hold', 'true', params[:yet_hold] == 'true' %>
+        <%= label_tag 'yet_hold', _('Show only events that will be held in the future') %>
       </span>
     </div>
   <% end -%>
