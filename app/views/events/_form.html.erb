@@ -24,6 +24,15 @@
   <div style="clear: left"></div>
 </div>
 
+<div class="input_line">
+  <div class="input_label"><%= _('Requirement of participation') %></div>
+  <div class="input_value">
+    <p><%= form.radio_button 'publication', 'true' %><%= form.label 'publication_true', _('Anyone') %></p>
+    <p><%= form.radio_button 'publication', 'false' %><%= form.label 'publication_false', _('Only invited members') %></p>
+  </div>
+  <div style="clear: left"></div>
+</div>
+
 <%= ckeditor "event_description" %>
 
 <% content_for :javascript_initializers do -%>

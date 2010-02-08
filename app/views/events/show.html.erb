@@ -35,20 +35,6 @@
     </div>
     <div class="box_space_bottom"></div>
   </div><!-- box_space -->
-
-  <% if @event.attendees %>
-  <div class="box_space">
-    <div class="box_space_title"><%= icon_tag('group') -%><%= _('Members')%></div>
-    <div class="box_space_body">
-      <ul>
-        <% @event.attendees.status_is('attend').each do |attendee| -%>
-          <li><%= user_link_to attendee.user %></li>
-        <% end -%>
-      </ul>
-    </div>
-    <div class="box_space_bottom"><%#= link_to _("[...See all]"), :action => 'users' %></div>
-  </div><!-- box_space -->
-  <% end -%>
 <% end -%>
 
 
@@ -60,5 +46,11 @@
   </div>
 </div><!-- event_info_space -->
 
-  <%= link_to(_('[Edit]'), edit_event_path(@event)) if current_user == @event.user %>
+<p><%= link_to(_('[Edit]'), edit_event_path(@event)) if current_user == @event.user %></p>
+
+<% if @event.attendees -%>
+  <%= render :partial => 'member_list', :locals => {
+    :attendees => @event.attendees.status_is('attend').paginate(:page => params[:page], :per_page => 50)
+  } %>
+<% end -%>
 <% end -%>

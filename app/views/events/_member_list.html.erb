@@ -1,0 +1,18 @@
+<div class="topix_entries_wrapper">
+  <h2 class="title"><%= icon_tag('group') %><%= _('Attendees') %></h2>
+  <%# TODO:class属性を変更する %>
+  <%= i18n_will_paginate_with_container_wrapper attendees %>
+  <table class="topix_entries">
+    <col class="col100" />
+    <col />
+    <tbody>
+      <% attendees.each do |attendee| -%>
+        <tr>
+          <td><%= user_link_to attendee.user %></td>
+          <td><%= attendee.comment %></td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+  <%= i18n_will_paginate_with_container_wrapper attendees %>
+</div>

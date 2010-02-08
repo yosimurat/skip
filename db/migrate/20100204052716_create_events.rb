@@ -5,8 +5,8 @@ class CreateEvents < ActiveRecord::Migration
       t.text        "description"
       t.datetime    "start_date"
       t.datetime    "end_date"
-      t.boolean     "public",       :default => true,       :null => false
-      t.references  "user",      :null => false
+      t.boolean     "publication",  :default => true,       :null => false
+      t.references  "user",         :null => false
       t.timestamps
 
       t.index       "user"
