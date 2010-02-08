@@ -1,25 +1,25 @@
 <%= template_error_messages_for 'event' %>
 <div class="input_line">
-  <div class="input_label"><%= label :event, :title, _('Name of Event') %></div>
-  <div class="input_value"><%= text_field 'event', 'title', :size => 40 %></div>
+  <div class="input_label"><%= form.label :title, _('Name of Event') %></div>
+  <div class="input_value"><%= form.text_field 'title', :size => 40 %></div>
 </div>
 
 <div class="input_line">
-  <div class="input_label"><%= label :event, :description, s_('Event|Description') %></div>
-  <div class="input_value richtext" style="clear: left;"><%= text_area :event, :description, :class => 'invisible' %></div>
+  <div class="input_label"><%= form.label :description, s_('Event|Description') %></div>
+  <div class="input_value richtext" style="clear: left;"><%= form.text_area :description, :class => 'invisible' %></div>
 </div>
 
 <div class="input_line">
   <div class="input_label"><%= _('Start Date')%></div>
   <div class="input_value">
-    <p><%= datetime_select 'event', 'start_date', :use_month_numbers => true -%></p>
+    <p><%= form.datetime_select 'start_date', :use_month_numbers => true -%></p>
   </div>
   <div style="clear: left"></div>
 </div>
 <div class="input_line">
   <div class="input_label"><%= _('End Date')%></div>
   <div class="input_value">
-    <p><%= datetime_select 'event', 'end_date', :use_month_numbers => true -%></p>
+    <p><%= form.datetime_select 'end_date', :use_month_numbers => true -%></p>
   </div>
   <div style="clear: left"></div>
 </div>
