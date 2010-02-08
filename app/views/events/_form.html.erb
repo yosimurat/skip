@@ -29,6 +29,9 @@
   <div class="input_value">
     <p><%= form.radio_button 'publication', 'true' %><%= form.label 'publication_true', _('Anyone') %></p>
     <p><%= form.radio_button 'publication', 'false' %><%= form.label 'publication_false', _('Only invited members') %></p>
+    <div id="editor_symbols_space" style="display: none; margin-top: 5px;">
+       <%= render :partial => "shared/symbol_autocomplete_field", :locals => {:publication_symbols_value => params[:publication_symbols_value], :editor_symbols_value => params[:editor_symbols_value], :edit_checkbox => false } %>
+    </div>
   </div>
   <div style="clear: left"></div>
 </div>
@@ -36,10 +39,19 @@
 <%= ckeditor "event_description" %>
 
 <% content_for :javascript_initializers do -%>
-      $j('.category_radio_button')
-      .click(function(){
-          $j('.category_radio_button').parent().parent().css('backgroundColor','#fff');
-          $j(this).parent().parent().css('backgroundColor','#ffb');
-      });
-      $j('.category_radio_button:checked').click();
-<% end -%>
+    var changePublicationType = function() {
+        if ($j('#event_publication_false:checked').length > 0) {
+            $j('#editor_symbols_space').show();
+            $j('#publication_symbols_space').show();
+            $j('#publication_symbol').focus();
+        } else {
+            $j('#editor_symbols_space').hide();
+        }
+    };
+
+    $j('#event_publication_true, #event_publication_false')
+    .click(function() {
+        changePublicationType();
+    });
+
+  <% end -%>
