@@ -39,7 +39,7 @@ class EventsController < ApplicationController
       flash[:notice] = _('Event was created successfully.')
 
       respond_to do |format|
-        format.html { redirect_to event_path(@event) }
+        format.html { redirect_to event_url(@event) }
       end
 
     else
@@ -49,8 +49,27 @@ class EventsController < ApplicationController
     end
   end
 
-  #def edit
-  #end
+  def edit
+    @event = Event.find(params[:id])
+
+    respond_to do |format|
+      format.html { @event ? render : render_404 }
+    end
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    respond_to do |format|
+      if @event.update_attributes(params[:event])
+        format.html do
+          flash[:notice] = _('Event was updated successfully.')
+          redirect_to event_url(@event)
+        end
+      else
+        format.html { render :edit }
+      end
+    end
+  end
 
 private
   def setup_layout

@@ -42,7 +42,7 @@
     <div class="box_space_body">
       <ul>
         <% @event.attendees.status_is('attend').each do |attendee| -%>
-          <li><%= user_link_to User.find(attendee.user_id) %></li>
+          <li><%= user_link_to attendee.user %></li>
         <% end -%>
       </ul>
     </div>
@@ -59,5 +59,6 @@
     <div class="event_info_space_desc_body"><%= render_richtext(@event.description, "1") -%></div>
   </div>
 </div><!-- event_info_space -->
-<% end -%>
 
+  <%= link_to(_('[Edit]'), edit_event_path(@event)) if current_user == @event.user %>
+<% end -%>
