@@ -3,11 +3,13 @@
   <%# TODO:class属性を変更する %>
   <%= i18n_will_paginate_with_container_wrapper attendees %>
   <table class="topix_entries">
+    <col class="col25" />
     <col class="col100" />
     <col />
     <tbody>
       <% attendees.each do |attendee| -%>
         <tr>
+          <td><%= attendee_icon(attendee) %></td>
           <td><%= user_link_to attendee.user %></td>
           <td><%= attendee.comment %></td>
         </tr>
