@@ -16,12 +16,10 @@
   </div>
   <div style="clear: left"></div>
 </div>
+
 <div class="input_line">
-  <div class="input_label"><%= _('End Date')%></div>
-  <div class="input_value">
-    <p><%= form.datetime_select 'end_date', :use_month_numbers => true -%></p>
-  </div>
-  <div style="clear: left"></div>
+  <div class="input_label"><%= form.label :term, _('Term of Event') %></div>
+  <div class="input_value"><%= form.text_field 'term', :size => 20 %></div>
 </div>
 
 <div class="input_line">
