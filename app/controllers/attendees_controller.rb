@@ -17,13 +17,19 @@ class AttendeesController < ApplicationController
 
   def attend
     event = Event.find(params[:id])
-    attendance = event.attendees.find_by_user_id(current_user.id)
 
-    unless attendance
-      event.attendees.create(:user_id => current_user.id, :status => true, :comment => 'auto comment') #TODO:commentは画面から入力できるように
+    if event.enable_attend_or_absent?(current_user)
+      attendee = event.attendees.find_by_user_id(current_user.id)
+
+      unless attendee
+        event.attendees.create(:user_id => current_user.id, :status => true, :comment => 'auto comment')
+      else
+        attendee.status = true
+        attendee.save
+      end
+      flash[:notice] = _('Event was successfully updated.')
     else
-      attendance.status = true
-      attendance.save
+      flash[:notice] = _('You are not allowed this operation.')
     end
 
     respond_to do |format|
@@ -33,11 +39,16 @@ class AttendeesController < ApplicationController
 
   def absent
     event = Event.find(params[:id])
-    attendance = event.attendees.find_by_user_id(current_user.id)
+    if event.enable_attend_or_absent?(current_user)
+      attendee = event.attendees.find_by_user_id(current_user.id)
 
-    if attendance
-      attendance.status = false
-      attendance.save
+      if attendee
+        attendee.status = false
+        attendee.save
+      end
+      flash[:notice] = _('Event was successfully updated.')
+    else
+      flash[:notice] = _('You are not allowed this operation.')
     end
 
     respond_to do |format|

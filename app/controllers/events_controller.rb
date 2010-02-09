@@ -33,11 +33,18 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(params[:event]) #TODO current_user.events.build で作成するように & 関連をはる
+    @event = current_user.events.build(params[:event])
     @event.user_id = current_user.id
 
+    if @event.publication_type == 'protected'
+      if params[:publication_symbols_value].blank?
+        @event.publication_type = 'public'
+      else
+        @event.publication_symbols_value = params[:publication_symbols_value]
+      end
+    end
+
     if @event.save
-      create_attendees_for_symbols(params[:publication_symbols_value]) unless params[:publication_symbols_value].blank?
       flash[:notice] = _('Event was created successfully.')
 
       respond_to do |format|
@@ -61,9 +68,11 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
+    @event.publication_symbols_value = params[:publication_symbols_value] unless params[:publication_symbols_value].blank?
+
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        create_attendees_for_symbols(params[:publication_symbols_value]) unless params[:publication_symbols_value].blank?
+
         format.html do
           flash[:notice] = _('Event was updated successfully.')
           redirect_to event_url(@event)
@@ -77,19 +86,5 @@ class EventsController < ApplicationController
 private
   def setup_layout
     @main_menu = @title = _('Events')
-  end
-
-  def create_attendees_for_symbols symbols
-    # TODO:リファクタリング
-    symbols.split(',').each do |value|
-      symbol_type, symbol_id = SkipUtil.split_symbol value
-      if symbol_type == 'gid'
-        Group.find_by_gid(symbol_id).users.each do |u|
-          attendee = @event.attendees.create(:event_id => @event.id, :user_id => u.id, :status => 'uninput')
-        end
-      elsif symbol_type == 'uid'
-        attendee = @event.attendees.create(:event_id => @event.id, :user_id => User.find_by_uid(symbol_id).id, :status => 'uninput')
-      end
-    end
   end
 end

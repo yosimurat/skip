@@ -50,9 +50,9 @@
 
 <%# TODO:リファクタリング %>
 <% unless @event.attendees.blank? -%>
-  <% if @event.publication -%>
+  <% if @event.publication_type == 'public' -%>
     <%= render :partial => 'member_list', :locals => {
-      :attendees => @event.attendees.status_is('attend').paginate(:page => params[:page], :per_page => 50)
+      :attendees => @event.attendees.status_is(true).paginate(:page => params[:page], :per_page => 50)
     } %>
   <% else -%>
     <%= render :partial => 'member_list', :locals => {

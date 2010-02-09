@@ -25,10 +25,11 @@
 <div class="input_line">
   <div class="input_label"><%= _('Requirement of participation') %></div>
   <div class="input_value">
-    <p><%= form.radio_button 'publication', 'true' %><%= form.label 'publication_true', _('Anyone') %></p>
-    <p><%= form.radio_button 'publication', 'false' %><%= form.label 'publication_false', _('Only invited members') %></p>
+    <p><%= form.radio_button 'publication_type', 'public' %><%= form.label 'publication_type_public', _('Anyone') %></p>
+    <p><%= form.radio_button 'publication_type', 'protected' %><%= form.label 'publication_type_protected', _('Only invited members') %></p>
     <div id="editor_symbols_space" style="display: none; margin-top: 5px;">
-       <%= render :partial => "shared/symbol_autocomplete_field", :locals => {:publication_symbols_value => params[:publication_symbols_value], :editor_symbols_value => params[:editor_symbols_value], :edit_checkbox => false } %>
+       <%#= render :partial => "shared/symbol_autocomplete_field", :locals => {:publication_symbols_value => params[:publication_symbols_value], :editor_symbols_value => params[:editor_symbols_value], :edit_checkbox => false } %>
+       <%= render :partial => "shared/symbol_autocomplete_field", :locals => {:publication_symbols_value => form.object.publication_symbols_value, :editor_symbols_value => params[:editor_symbols_value], :edit_checkbox => false } %>
     </div>
   </div>
   <div style="clear: left"></div>
@@ -38,7 +39,7 @@
 
 <% content_for :javascript_initializers do -%>
     var changePublicationType = function() {
-        if ($j('#event_publication_false:checked').length > 0) {
+        if ($j('#event_publication_type_protected:checked').length > 0) {
             $j('#editor_symbols_space').show();
             $j('#publication_symbols_space').show();
             $j('#publication_symbol').focus();
@@ -47,7 +48,7 @@
         }
     };
 
-    $j('#event_publication_true, #event_publication_false')
+    $j('#event_publication_type_public, #event_publication_type_protected')
     .click(function() {
         changePublicationType();
     });

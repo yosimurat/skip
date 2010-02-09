@@ -30,4 +30,12 @@ class Event < ActiveRecord::Base
 
   named_scope :unhold, proc { { :conditions => ["start_date >= ?", Time.now]} }
 
+  def enable_attend_or_absent? user
+    if self.publication_type == 'public'
+      return true
+    elsif self.publication_type == 'protected'
+      !(self.publication_symbols_value.split(',') & user.belong_symbols).blank?
+    end
+  end
+
 end

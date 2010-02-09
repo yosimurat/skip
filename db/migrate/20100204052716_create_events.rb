@@ -5,7 +5,8 @@ class CreateEvents < ActiveRecord::Migration
       t.text        "description"
       t.datetime    "start_date"
       t.string      "term"
-      t.boolean     "publication",  :default => true,       :null => false
+      t.string      "publication_type",           :default => 'public',       :null => false
+      t.string      "publication_symbols_value"
       t.references  "user",         :null => false
       t.timestamps
 
