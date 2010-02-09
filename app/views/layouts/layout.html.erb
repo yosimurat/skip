@@ -66,7 +66,7 @@
     <% elsif @event and !@event.new_record? %>
       <h1 id="title"><%=h @event.title %></h1>
       <ul class="no_style horizontal">
-        <li><%= _('event date:') %><%= @event.start_date.strftime(_('%Y/%m/%d at %H:%M')) + " - " + @event.term %></li>
+        <li><%= _('event date:') %><%= @event.start_date.strftime(_('%Y/%m/%d at %H:%M')) + " - " + @event.period %></li>
         <li><%= (_('Members count: %{count}') % {:count => @event.attendees.status_is(true).count}) %></li>
         <li><%= _('Joining the event:') %><%= @event.publication_type == 'public' ? _("No invitation needed to join this group.") : _('Need invitation of the Administrator.') %></li>
       </ul>

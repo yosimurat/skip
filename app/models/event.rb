@@ -21,6 +21,14 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :title, :start_date
 
+  named_scope :recent, proc { |day_count|
+    { :conditions => ['created_at > ?', Time.now.ago(day_count.to_i.day)] }
+  }
+
+  named_scope :order_recent, proc { { :order => 'created_at DESC' } }
+
+  named_scope :limit, proc { |num| { :limit => num } }
+
   named_scope :order_start_date, proc { { :order => 'start_date DESC' } }
 
   named_scope :partial_match_title_or_description, proc {|word|
