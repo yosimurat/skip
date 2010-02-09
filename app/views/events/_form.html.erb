@@ -25,11 +25,18 @@
 <div class="input_line">
   <div class="input_label"><%= _('Requirement of participation') %></div>
   <div class="input_value">
-    <p><%= form.radio_button 'publication_type', 'public' %><%= form.label 'publication_type_public', _('Anyone') %></p>
-    <p><%= form.radio_button 'publication_type', 'protected' %><%= form.label 'publication_type_protected', _('Only invited members') %></p>
-    <div id="editor_symbols_space" style="display: none; margin-top: 5px;">
-       <%#= render :partial => "shared/symbol_autocomplete_field", :locals => {:publication_symbols_value => params[:publication_symbols_value], :editor_symbols_value => params[:editor_symbols_value], :edit_checkbox => false } %>
-       <%= render :partial => "shared/symbol_autocomplete_field", :locals => {:publication_symbols_value => form.object.publication_symbols_value, :editor_symbols_value => params[:editor_symbols_value], :edit_checkbox => false } %>
+    <table><tr><td>
+          <%= form.radio_button 'publication_type', 'public' %><%= form.label 'publication_type_public', _('Anyone') %>
+          <%= form.radio_button 'publication_type', 'protected' %><%= form.label 'publication_type_protected', _('Only invited members') %>
+          <div id="editor_symbols_space" style="display: none; margin-top: 5px;">
+            <%# TODO:editor_symbols_valueを必須にしないように改修 %>
+            <%= render :partial => "shared/symbol_autocomplete_field",
+              :locals => {
+              :publication_symbols_value => form.object.publication_symbols_value,
+              :editor_symbols_value => params[:editor_symbols_value],
+              :edit_checkbox => false
+            } %>
+      </td></tr></table>
     </div>
   </div>
   <div style="clear: left"></div>
