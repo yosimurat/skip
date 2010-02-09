@@ -22,7 +22,7 @@ class AttendeesController < ApplicationController
       attendee = event.attendees.find_by_user_id(current_user.id)
 
       unless attendee
-        event.attendees.create(:user_id => current_user.id, :status => true, :comment => 'auto comment')
+        event.attendees.create(:user_id => current_user.id, :status => true)
       else
         attendee.status = true
         attendee.save
@@ -42,7 +42,9 @@ class AttendeesController < ApplicationController
     if event.enable_attend_or_absent?(current_user)
       attendee = event.attendees.find_by_user_id(current_user.id)
 
-      if attendee
+      unless attendee
+        event.attendees.create(:user_id => current_user.id, :status => false)
+      else
         attendee.status = false
         attendee.save
       end

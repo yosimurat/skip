@@ -46,7 +46,7 @@
   </div>
 </div><!-- event_info_space -->
 
-<p><%= link_to(_('[Edit]'), edit_event_path(@event)) if current_user == @event.user %></p>
+<p style="text-align: right; margin-right: 20px;"><%= link_to(_('[Edit]'), edit_event_path(@event)) if current_user == @event.user %></p>
 
 <%# TODO:リファクタリング %>
 <% unless @event.attendees.blank? -%>

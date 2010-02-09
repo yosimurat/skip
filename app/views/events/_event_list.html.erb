@@ -13,7 +13,7 @@
       <% events.each do |event| -%>
         <tr class="<%= cycle('line_0', 'line_1') %>">
           <td class="name"><span class="nowrap"><%= link_to(h(event.title), event_path(event)) %><%= event_type_icon event %></span></td>
-          <td class="count"><%= event.attendees.count %></td>
+          <td class="count"><%= event.attendees.status_is(true).count %></td>
           <td class="date"><span class="nowrap"><%= event.start_date.strftime(_('%B %d %Y')) %></span></td>
         </tr>
       <% end -%>
