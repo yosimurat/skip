@@ -15,7 +15,7 @@ class CreateEvents < ActiveRecord::Migration
     create_table :attendees do |t|
       t.references    "event",        :null => false
       t.references    "user",         :null => false
-      t.string        "status",       :default => "uninput",  :null => false
+      t.boolean       "status",       :default => true,  :null => false
       t.string        "comment"
       t.timestamps
 

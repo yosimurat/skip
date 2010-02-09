@@ -20,9 +20,9 @@ class AttendeesController < ApplicationController
     attendance = event.attendees.find_by_user_id(current_user.id)
 
     unless attendance
-      event.attendees.create(:user_id => current_user.id, :status => 'attend', :comment => 'auto comment') #TODO:commentは画面から入力できるように
+      event.attendees.create(:user_id => current_user.id, :status => true, :comment => 'auto comment') #TODO:commentは画面から入力できるように
     else
-      attendance.status = 'attend'
+      attendance.status = true
       attendance.save
     end
 
@@ -36,7 +36,7 @@ class AttendeesController < ApplicationController
     attendance = event.attendees.find_by_user_id(current_user.id)
 
     if attendance
-      attendance.status = 'absent'
+      attendance.status = false
       attendance.save
     end
 

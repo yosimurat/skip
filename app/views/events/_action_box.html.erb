@@ -1,6 +1,6 @@
 <div class="action_buttons ui-corner-all">
   <ul class="no_style">
-    <% if @event.attendees.status_is('attend').find_by_user_id(current_user.id) -%>
+    <% if @event.attendees.status_is(true).find_by_user_id(current_user.id) -%>
       <% if @event.publication -%>
         <li><%= link_to(content_tag('span', _('Cancel this event')), absent_attendee_path(@event) , {:class => "rounded", :method => :post}) %></li>
       <% else -%>
