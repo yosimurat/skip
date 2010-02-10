@@ -55,7 +55,6 @@ class MypageController < ApplicationController
     @questions = find_questions_as_locals({:recent_day => recent_day})
     @access_blogs_cache_key = "access_blog_#{Time.now.strftime('%Y%m%d%H')}"
     unless read_fragment(@access_blogs_cache_key)
-      debugger
       @access_blogs = find_access_blogs_as_locals({:per_page => 10})
     end
     @recent_blogs = find_recent_blogs_as_locals({:per_page => per_page})
@@ -483,7 +482,7 @@ class MypageController < ApplicationController
       :id_name => 'message',
       :title_icon => "email",
       :title_name => _("Notices for you"),
-      :pages => pages = BoardEntry.accessible(current_user).notice.unread_only_notice(current_user).order_new,
+      :pages => pages = BoardEntry.from_recents.accessible(current_user).notice.unread_only_notice(current_user).order_new,
       :symbol2name_hash => BoardEntry.get_symbol2name_hash(pages)
     }
   end
@@ -503,7 +502,7 @@ class MypageController < ApplicationController
 
   # 質問記事一覧を取得する（partial用のオプションを返す）
   def find_questions_as_locals options
-    pages = BoardEntry.question.visible.accessible(current_user).order_new.scoped(:include => [:state, :user])
+    pages = BoardEntry.from_recents.question.visible.accessible(current_user).order_new.scoped(:include => [:state, :user])
 
     locals = {
       :id_name => 'questions',
@@ -539,7 +538,7 @@ class MypageController < ApplicationController
     pages = BoardEntry.scoped(
       :conditions => find_params[:conditions],
       :include => find_params[:include] | [ :user, :state ]
-    ).timeline.order_new.paginate(:page => target_page(id_name), :per_page => options[:per_page])
+    ).from_recents.timeline.order_new.paginate(:page => target_page(id_name), :per_page => options[:per_page])
 
     locals = {
       :id_name => id_name,
@@ -553,7 +552,7 @@ class MypageController < ApplicationController
 
   def find_timelines_as_locals options
     id_name = 'timelines'
-    pages = BoardEntry.accessible(current_user).timeline.order_new.scoped(:include => [:state, :user]).paginate(:page => target_page(id_name), :per_page => options[:per_page])
+    pages = BoardEntry.from_recents.accessible(current_user).timeline.order_new.scoped(:include => [:state, :user]).paginate(:page => target_page(id_name), :per_page => options[:per_page])
     locals = {
       :id_name => id_name,
       :title_name => _('See all'),
@@ -577,7 +576,7 @@ class MypageController < ApplicationController
       pages = BoardEntry.scoped(
         :conditions => find_params[:conditions],
         :include => find_params[:include] | [ :user, :state ]
-      ).timeline.order_new.paginate(:page => target_page(id_name), :per_page => options[:per_page])
+      ).from_recents.timeline.order_new.paginate(:page => target_page(id_name), :per_page => options[:per_page])
     end
     locals = {
       :id_name => id_name,
