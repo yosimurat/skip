@@ -22,14 +22,27 @@ class EventsController < ApplicationController
     scope = scope.unhold if params[:yet_hold] == 'true'
     @events = scope.paginate(:page => params[:page], :per_page => 50)
     flash.now[:notice] = _('No matching events found.') if @events.empty?
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def show
     @event = Event.find(params[:id])
+    @attendee = @event.attendees.find_by_user_id(current_user.id) || @event.attendees.build
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def new
     @event = Event.new
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def create
