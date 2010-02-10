@@ -46,4 +46,23 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def uninput_members
+    uninput_users = []
+    inputed_users = []
+    self.publication_symbols_value.split(',').each do |sym|
+      symbol_type, symbol_id = SkipUtil.split_symbol(sym)
+      case symbol_type
+      when "uid"
+        uninput_users << User.active.find_by_uid(symbol_id)
+      when "gid"
+        group = Group.active.find_by_gid(symbol_id, :include => [:group_participations])
+        uninput_users << group.group_participations.map { |part| part.user if part.user.active? } if group
+      end
+    end
+
+    self.attendees.each { |attendee| inputed_users << attendee.user }
+
+    uninput_users.flatten.uniq.compact - inputed_users.flatten.uniq.compact
+  end
+
 end
