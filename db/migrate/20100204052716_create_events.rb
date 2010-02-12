@@ -17,7 +17,7 @@ class CreateEvents < ActiveRecord::Migration
       t.references    "event",        :null => false
       t.references    "user",         :null => false
       t.boolean       "status",       :default => true,  :null => false
-      t.string        "comment"
+      t.string        "comment",      :default => ''
       t.timestamps
 
       t.index         "event"

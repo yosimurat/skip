@@ -66,15 +66,12 @@
     <div class="topix_events_wrapper">
       <% if @event.publication_type == 'public' -%>
         <h2 class="title"><%= icon_tag('group') %><%= _('Attendees') %></h2>
-        <%= render :partial => 'member_list', :locals => {
-          :attendees => @event.attendees.status_is(true).paginate(:page => params[:page], :per_page => 50)
-        } %>
       <% else -%>
         <h2 class="title"><%= icon_tag('group') %><%= _('Inputed members') %></h2>
-        <%= render :partial => 'member_list', :locals => {
-          :attendees => @event.attendees.order_attendees_status.paginate(:page => params[:page], :per_page => 50)
-        } %>
       <% end -%>
+      <%= render :partial => 'member_list', :locals => {
+        :attendees => @attendees
+      } %>
     </div>
   <% end -%>
 <% end -%>

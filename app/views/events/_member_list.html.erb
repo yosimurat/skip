@@ -1,3 +1,4 @@
+<% attendee_url = "" -%>
 <%= i18n_will_paginate_with_container_wrapper attendees %>
 <table class="topix_events">
   <col class="col25" />
@@ -5,12 +6,26 @@
   <col />
   <tbody>
     <% attendees.each do |attendee| -%>
+      <% attendee_url = attendee_url(attendee) if attendee.user == current_user -%>
       <tr>
         <td><%= attendee_icon(attendee) %></td>
         <td><%= user_link_to attendee.user %></td>
-        <td><%= attendee.comment %></td>
+        <% if attendee.user == current_user -%><td class="in_place_editor_comment"><% else -%><td><% end -%><%= attendee.comment %></td>
       </tr>
     <% end -%>
   </tbody>
 </table>
 <%= i18n_will_paginate_with_container_wrapper attendees %>
+
+<% content_for :javascript_initializers do -%>
+  $j(".in_place_editor_comment").editInPlace({
+    url: "<%= attendee_url %>",
+    show_buttons: true,
+    params: '_method=put',
+    update_value: 'comment',
+    cancel_button: '<button class="inplace_cancel"><%= _("Cancel") %></button>',
+    save_button: '<button class="inplace_save"><%= _("Save") %></button>',
+    default_text: "<%= _('Input Comment.') %>",
+    saving_text: "<%= _('Saving...') %>"
+  });
+<% end -%>

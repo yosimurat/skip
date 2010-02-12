@@ -32,6 +32,12 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @attendee = @event.attendees.find_by_user_id(current_user.id) || @event.attendees.build
 
+    @attendees = if @event.publication_type == "public"
+      @event.attendees.status_is(true).paginate(:page => params[:page], :per_page => 50)
+    else
+      @event.attendees.order_attendees_status.paginate(:page => params[:page], :per_page => 50)
+    end
+
     respond_to do |format|
       format.html
     end

@@ -57,4 +57,13 @@ class AttendeesController < ApplicationController
       format.html { redirect_to event_path(event) }
     end
   end
+
+  def update
+    attendee = Attendee.find(params[:id])
+    attendee.comment = params[:comment]
+    attendee.save
+    respond_to do |format|
+      format.js { render :text => attendee.comment, :status => :ok }
+    end
+  end
 end
