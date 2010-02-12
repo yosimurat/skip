@@ -59,7 +59,7 @@ class AttendeesController < ApplicationController
   end
 
   def update
-    attendee = Attendee.find(params[:id])
+    attendee = Attendee.find(params[:event_id])
     attendee.comment = params[:comment]
     attendee.save
     respond_to do |format|

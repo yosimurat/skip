@@ -2,12 +2,12 @@
   <ul class="no_style">
     <% if @event.enable_attend_or_absent?(current_user) -%>
       <% if !@event.attendees.find_by_user_id(current_user.id) && @event.publication_type == 'protected' -%>
-        <li><%= link_to(content_tag('span', _('Attend this event')), attend_attendee_path(@event) , {:class => "rounded", :method => :post}) %></li>
-        <li><%= link_to(content_tag('span', _('Absent this event')), absent_attendee_path(@event) , {:class => "rounded", :method => :post}) %></li>
+        <li><%= link_to(content_tag('span', _('Attend this event')), attend_event_attendee_path(@event) , {:class => "rounded", :method => :post}) %></li>
+        <li><%= link_to(content_tag('span', _('Absent this event')), absent_event_attendee_path(@event) , {:class => "rounded", :method => :post}) %></li>
       <% elsif @event.attendees.status_is(true).find_by_user_id(current_user.id) -%>
-        <li><%= link_to(content_tag('span', _('Absent this event')), absent_attendee_path(@event) , {:class => "rounded", :method => :post}) %></li>
+        <li><%= link_to(content_tag('span', _('Absent this event')), absent_event_attendee_path(@event) , {:class => "rounded", :method => :post}) %></li>
       <% else -%>
-        <li><%= link_to(content_tag('span', _('Attend this event')), attend_attendee_path(@event) , {:class => "rounded", :method => :post}) %></li>
+        <li><%= link_to(content_tag('span', _('Attend this event')), attend_event_attendee_path(@event) , {:class => "rounded", :method => :post}) %></li>
       <% end -%>
     <% end -%>
   </ul>
