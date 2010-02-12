@@ -82,7 +82,12 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     respond_to do |format|
-      format.html { @event ? render : render_404 }
+      if @event.user == current_user
+        format.html
+      else
+        flash[:notice] = _('You are not allowed this operation.')
+        format.html { redirect_to event_url(@event) }
+      end
     end
   end
 
@@ -91,14 +96,18 @@ class EventsController < ApplicationController
     @event.publication_symbols_value = params[:publication_symbols_value] unless params[:publication_symbols_value].blank?
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
-
-        format.html do
-          flash[:notice] = _('Event was updated successfully.')
-          redirect_to event_url(@event)
-        end
+      unless @event.user == current_user 
+        flash[:notice] = _('You are not allowed this operation.')
+        redirect_to event_url(@event)
       else
-        format.html { render :edit }
+        if@event.update_attributes(params[:event])
+          format.html do
+            flash[:notice] = _('Event was updated successfully.')
+            redirect_to event_url(@event)
+          end
+        else
+          format.html { render :edit }
+        end
       end
     end
   end

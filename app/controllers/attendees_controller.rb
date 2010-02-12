@@ -60,10 +60,13 @@ class AttendeesController < ApplicationController
 
   def update
     attendee = Attendee.find(params[:id])
-    attendee.comment = params[:comment]
-    attendee.save
+
+    if attendee.user == current_user
+      attendee.comment = params[:comment]
+      attendee.save
+    end
     respond_to do |format|
-      format.js { render :text => attendee.comment, :status => :ok }
+      format.js { render :text => ERB::Util.h(attendee.comment), :status => :ok }
     end
   end
 end
