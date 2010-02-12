@@ -35,7 +35,7 @@ class EventsController < ApplicationController
     @attendees = if @event.publication_type == "public"
       @event.attendees.status_is(true).paginate(:page => params[:page], :per_page => 50)
     else
-      @event.attendees.order_attendees_status.paginate(:page => params[:page], :per_page => 50)
+      @event.attendees.descend_by_status.paginate(:page => params[:page], :per_page => 50)
     end
 
     respond_to do |format|

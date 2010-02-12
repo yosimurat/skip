@@ -19,5 +19,4 @@ class Attendee < ActiveRecord::Base
   belongs_to :user
   validates_uniqueness_of :event_id, :scope => [:user_id]
 
-  named_scope :order_attendees_status, proc { { :order => 'status DESC' } }
 end
