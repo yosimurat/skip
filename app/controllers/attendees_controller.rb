@@ -19,42 +19,32 @@ class AttendeesController < ApplicationController
     event = Event.find(params[:event_id])
 
     if event.enable_attend_or_absent?(current_user)
-      attendee = event.attendees.find_by_user_id(current_user.id)
-
-      unless attendee
-        event.attendees.create(:user_id => current_user.id, :status => true)
-      else
-        attendee.status = true
-        attendee.save
-      end
+      attendee = event.attendees.find_or_initialize_by_user_id(current_user.id)
+      attendee.status = true
+      attendee.save
       flash[:notice] = _('Event was successfully updated.')
     else
       flash[:notice] = _('You are not allowed this operation.')
     end
 
     respond_to do |format|
-      format.html { redirect_to event_path(event) }
+      format.html { redirect_to event_url(event) }
     end
   end
 
   def absent
     event = Event.find(params[:event_id])
     if event.enable_attend_or_absent?(current_user)
-      attendee = event.attendees.find_by_user_id(current_user.id)
-
-      unless attendee
-        event.attendees.create(:user_id => current_user.id, :status => false)
-      else
-        attendee.status = false
-        attendee.save
-      end
+      attendee = event.attendees.find_or_initialize_by_user_id(current_user.id)
+      attendee.status = false
+      attendee.save
       flash[:notice] = _('Event was successfully updated.')
     else
       flash[:notice] = _('You are not allowed this operation.')
     end
 
     respond_to do |format|
-      format.html { redirect_to event_path(event) }
+      format.html { redirect_to event_url(event) }
     end
   end
 
