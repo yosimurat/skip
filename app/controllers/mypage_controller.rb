@@ -42,7 +42,7 @@ class MypageController < ApplicationController
     @year, @month, @day = parse_date
     @recent_groups =  Group.active.recent(recent_day).order_recent.limit(5)
     @recent_users = User.recent(recent_day).order_recent.limit(5) - [current_user]
-    @recent_events =  Event.recent(recent_day).order_recent.limit(5)
+    @recent_events =  Event.created_at_greater_than(5.days.ago).descend_by_created_at.limit(5)
 
     # ============================================================
     #  main area top messages

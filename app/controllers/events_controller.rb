@@ -18,7 +18,7 @@ class EventsController < ApplicationController
 
   def index
     params[:yet_hold] ||= "true"
-    scope = Event.partial_match_title_or_description(params[:keyword]).order_start_date
+    scope = Event.partial_match_title_or_description(params[:keyword]).descend_by_start_date
     scope = scope.unhold if params[:yet_hold] == 'true'
     @events = scope.paginate(:page => params[:page], :per_page => 50)
     flash.now[:notice] = _('No matching events found.') if @events.empty?
