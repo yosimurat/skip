@@ -16,7 +16,7 @@
 class AttendeesController < ApplicationController
 
   def attend
-    event = Event.find(params[:id])
+    event = Event.find(params[:event_id])
 
     if event.enable_attend_or_absent?(current_user)
       attendee = event.attendees.find_by_user_id(current_user.id)
@@ -38,7 +38,7 @@ class AttendeesController < ApplicationController
   end
 
   def absent
-    event = Event.find(params[:id])
+    event = Event.find(params[:event_id])
     if event.enable_attend_or_absent?(current_user)
       attendee = event.attendees.find_by_user_id(current_user.id)
 
@@ -59,7 +59,7 @@ class AttendeesController < ApplicationController
   end
 
   def update
-    attendee = Attendee.find(params[:event_id])
+    attendee = Attendee.find(params[:id])
     attendee.comment = params[:comment]
     attendee.save
     respond_to do |format|

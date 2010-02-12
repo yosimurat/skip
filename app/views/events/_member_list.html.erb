@@ -6,7 +6,7 @@
   <col />
   <tbody>
     <% attendees.each do |attendee| -%>
-      <% attendee_url = event_attendee_url(attendee) if attendee.user == current_user -%>
+      <% attendee_url = event_attendee_url(event) if attendee.user == current_user -%>
       <tr>
         <td><%= attendee_icon(attendee) %></td>
         <td><%= user_link_to attendee.user %></td>

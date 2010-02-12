@@ -45,6 +45,7 @@
         <h2 class="title"><%= icon_tag('group') %><%= _('Inputed members') %></h2>
       <% end -%>
       <%= render :partial => 'member_list', :locals => {
+        :event => @event,
         :attendees => @attendees
       } %>
     </div>
