@@ -42,6 +42,7 @@ class Event < ActiveRecord::Base
     if self.publication_type == 'public'
       return true
     elsif self.publication_type == 'protected'
+      return true if self.user_id == user.id
       !(self.publication_symbols_value.split(',') & user.belong_symbols).blank?
     end
   end

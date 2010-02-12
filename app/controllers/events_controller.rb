@@ -64,6 +64,7 @@ class EventsController < ApplicationController
     end
 
     if @event.save
+      @event.attendees.create(:user_id => current_user.id, :status => true)
       flash[:notice] = _('Event was created successfully.')
 
       respond_to do |format|
