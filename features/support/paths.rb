@@ -35,6 +35,9 @@ module NavigationHelpers
     when /グループの新規作成ページ/
       url_for(:controller => 'groups', :action => 'new')
 
+    when /イベントの新規作成ページ/
+      url_for(:controller => 'events', :action => 'new')
+
     when /(.*)ランキングの総合ページ/
       url_for(:controller => "rankings", :action => "data", :content_type => $1, :year => "", :month => "")
 
