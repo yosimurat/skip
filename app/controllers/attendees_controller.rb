@@ -15,39 +15,6 @@
 
 class AttendeesController < ApplicationController
 
-  def attend
-    event = Event.find(params[:event_id])
-
-    if event.enable_attend_or_absent?(current_user)
-      attendee = event.attendees.find_or_initialize_by_user_id(current_user.id)
-      attendee.status = true
-      attendee.save
-      flash[:notice] = _('Event was successfully updated.')
-    else
-      flash[:notice] = _('You are not allowed this operation.')
-    end
-
-    respond_to do |format|
-      format.html { redirect_to event_url(event) }
-    end
-  end
-
-  def absent
-    event = Event.find(params[:event_id])
-    if event.enable_attend_or_absent?(current_user)
-      attendee = event.attendees.find_or_initialize_by_user_id(current_user.id)
-      attendee.status = false
-      attendee.save
-      flash[:notice] = _('Event was successfully updated.')
-    else
-      flash[:notice] = _('You are not allowed this operation.')
-    end
-
-    respond_to do |format|
-      format.html { redirect_to event_url(event) }
-    end
-  end
-
   def update
     attendee = Attendee.find(params[:id])
 

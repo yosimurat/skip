@@ -30,10 +30,9 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @attendee = @event.attendees.find_by_user_id(current_user.id) || @event.attendees.build
 
     @attendees = if @event.publication_type == "public"
-      @event.attendees.status_is(true).paginate(:page => params[:page], :per_page => 50)
+      @event.attendees.status_is(true).descend_by_status_and_updated_at.paginate(:page => params[:page], :per_page => 50)
     else
       @event.attendees.descend_by_status_and_updated_at.paginate(:page => params[:page], :per_page => 50)
     end
@@ -109,6 +108,40 @@ class EventsController < ApplicationController
           format.html { render :edit }
         end
       end
+    end
+  end
+
+  def attend
+    event = Event.find(params[:id])
+    if event.enable_attend_or_absent?(current_user)
+      attendee = event.attendees.find_or_initialize_by_user_id(current_user.id)
+      attendee.status = true
+      if attendee.save
+        flash[:notice] = _('Event was successfully updated.')
+      else
+        flash[:notice] = _('You are not allowed this operation.')
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to event_url(event) }
+    end
+  end
+
+  def absent
+    event = Event.find(params[:id])
+    if event.enable_attend_or_absent?(current_user)
+      attendee = event.attendees.find_or_initialize_by_user_id(current_user.id)
+      attendee.status = false
+      if attendee.save
+        flash[:notice] = _('Event was successfully updated.')
+      else
+        flash[:notice] = _('You are not allowed this operation.')
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to event_url(event) }
     end
   end
 
