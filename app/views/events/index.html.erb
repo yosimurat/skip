@@ -1,26 +1,37 @@
-<div class="search_cond_space ui-corner-all">
-  <%# TODO:search logicを使うように %>
-  <% form_tag({:action => 'index'}, :method => 'get') do -%>
-    <table class="search_cond_box">
-      <tr>
-        <th><%= _('Event Name / Explanation')%></th>
-        <td>
-          <%= text_field_tag 'keyword' , params[:keyword], :size => 50 %><br/>
-        </td>
-      </tr>
-    </table>
-    <div class="submit">
-      <%= submit_tag _('Search') %>
-      <span class="margin05em">
-        <%= hidden_field_tag 'yet_hold', "false", :id => "hidden_yet_hold" %>
-        <%= check_box_tag 'yet_hold', 'true', params[:yet_hold] == 'true' %>
-        <%= label_tag 'yet_hold', _('Show only events that will be held in the future') %>
-      </span>
-    </div>
-  <% end -%>
-</div><!-- search_cond_space -->
+<% content_for :contents_left do -%>
+  <div class="action_buttons ui-corner-all">
+    <ul class="no_style">
+       <li><%= link_to(content_tag('span', _('Create New Event')), new_event_path, :class => 'rounded', :title => _('Create New Event')) %></li>
+    </ul>
+  </div>
+<% end -%>
 
-<div class="search_result_space">
-  <%= render :partial => 'events/event_list',
-    :locals => { :events => @events } %>
-</div><!-- search_result_space -->
+<% content_for :contents_right do -%>
+  <div class="search_cond_space ui-corner-all">
+    <%# TODO:search logicを使うように %>
+    <% form_tag({:action => 'index'}, :method => 'get') do -%>
+      <table class="search_cond_box">
+        <tr>
+          <th><%= _('Event Name / Explanation')%></th>
+          <td>
+            <%= text_field_tag 'keyword' , params[:keyword], :size => 50 %><br/>
+          </td>
+        </tr>
+      </table>
+      <div class="submit">
+        <%= submit_tag _('Search') %>
+        <span class="margin05em">
+          <%= hidden_field_tag 'yet_hold', "false", :id => "hidden_yet_hold" %>
+          <%= check_box_tag 'yet_hold', 'true', params[:yet_hold] == 'true' %>
+          <%= label_tag 'yet_hold', _('Show only events that will be held in the future') %>
+        </span>
+      </div>
+    <% end -%>
+  </div><!-- search_cond_space -->
+
+  <div class="search_result_space">
+    <%= render :partial => 'events/event_list',
+      :locals => { :events => @events }
+    %>
+  </div><!-- search_result_space -->
+<% end -%>
