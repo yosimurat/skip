@@ -16,15 +16,15 @@
 class Apps::EventsController < Apps::ApplicationController
   before_filter :setup_layout
 
-  %w(index).each do |method_name|
+  %w(index new create).each do |method_name|
     define_method method_name do
       client = HTTPClient.new
-      apps_url = "http://localhost:4000#{request.path.sub(/^\/apps/,'')}"
+      apps_url = "http://localhost:4000#{request.path}"
       body =
         if request.get?
-          client.get_content(apps_url, request.query_parameters)
+          client.get_content(apps_url, request.request_parameters)
         else
-          client.post_content(apps_url, params.query_parameters)
+          client.post_content(apps_url, request.request_parameters)
         end
 
       respond_to do |format|
@@ -44,41 +44,6 @@ class Apps::EventsController < Apps::ApplicationController
 
     respond_to do |format|
       format.html
-    end
-  end
-
-  def new
-    @event = Event.new
-
-    respond_to do |format|
-      format.html
-    end
-  end
-
-  def create
-    @event = current_user.events.build(params[:event])
-    @event.user_id = current_user.id
-
-    if @event.publication_type == 'protected'
-      if params[:publication_symbols_value].blank?
-        @event.publication_type = 'public'
-      else
-        @event.publication_symbols_value = params[:publication_symbols_value]
-      end
-    end
-
-    if @event.save
-      @event.attendees.create(:user_id => current_user.id, :status => true)
-      flash[:notice] = _('Event was created successfully.')
-
-      respond_to do |format|
-        format.html { redirect_to event_url(@event) }
-      end
-
-    else
-      respond_to do |format|
-        format.html { render :action => 'new' }
-      end
     end
   end
 

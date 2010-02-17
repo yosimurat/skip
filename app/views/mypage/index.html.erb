@@ -175,12 +175,12 @@
     <%#  main area recent events -%>
     <%# ============================================================ -%>
     <% if @recent_events.size > 0 -%>
-    <%= show_title_bar("flag_blue", _("Recent Events"), url_for(:controller => "events", :action => "index")) %>
+    <%= show_title_bar("flag_blue", _("Recent Events"), apps_events_path) %>
     <div class="topix_body">
       <% @recent_events.each do |event| -%>
         <div class="topix_line">
           <div class="page_title">
-            <%= link_to(event.title, event_path(event)) %>&nbsp;<span class="small_text">(<%= truncate(strip_tags(event.description), 30) %>)</span>
+            <%= link_to(event.title, apps_events_path(event)) %>&nbsp;<span class="small_text">(<%= truncate(strip_tags(event.description), 30) %>)</span>
           </div>
           <div class="page_date"><%=h event.created_at.strftime(_("%B %d %Y")) %></div>
         </div>
