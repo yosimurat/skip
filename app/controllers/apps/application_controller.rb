@@ -13,17 +13,5 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class AttendeesController < ApplicationController
-
-  def update
-    attendee = Attendee.find(params[:id])
-
-    if attendee.user == current_user
-      attendee.comment = params[:comment]
-      attendee.save
-    end
-    respond_to do |format|
-      format.js { render :text => ERB::Util.h(attendee.comment), :status => :ok }
-    end
-  end
+class Apps::ApplicationController < ApplicationController
 end

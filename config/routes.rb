@@ -134,8 +134,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :attachments
 
-  map.resources :events, :member => {:attend => :post, :absent => :post}, :except => [:destroy] do |event|
-    event.resources :attendees, :only => [:update]
+  map.namespace "apps" do |app|
+    app.resources :events, :member => {:attend => :post, :absent => :post}, :except => [:destroy] do |event|
+      event.resources :attendees, :only => [:update]
+    end
   end
 
   map.connect ':controller/:action/:id'
