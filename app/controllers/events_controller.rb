@@ -17,14 +17,23 @@ class EventsController < ApplicationController
   before_filter :setup_layout
 
   def index
-    params[:yet_hold] ||= "true"
-    scope = Event.partial_match_title_or_description(params[:keyword]).descend_by_start_date
-    scope = scope.unhold if params[:yet_hold] == 'true'
-    @events = scope.paginate(:page => params[:page], :per_page => 50)
-    flash.now[:notice] = _('No matching events found.') if @events.empty?
+ #   params[:yet_hold] ||= "true"
+ #   scope = Event.partial_match_title_or_description(params[:keyword]).descend_by_start_date
+ #   scope = scope.unhold if params[:yet_hold] == 'true'
+ #   @events = scope.paginate(:page => params[:page], :per_page => 50)
+ #   flash.now[:notice] = _('No matching events found.') if @events.empty?
+#
+#    respond_to do |format|
+#      format.html
+#    end
+    require 'net/http'
+    response = nil
+    Net::HTTP.start( 'localhost', 4000 ) {|http|
+      response = http.get( '/events' )
+    }
 
     respond_to do |format|
-      format.html
+      format.html { render :text => response.body, :layout => true }
     end
   end
 
