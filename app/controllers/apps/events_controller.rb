@@ -16,7 +16,7 @@
 class Apps::EventsController < Apps::ApplicationController
   before_filter :setup_layout
 
-  %w(index new create).each do |method_name|
+  %w(index new create show edit update attend absent).each do |method_name|
     define_method method_name do
       client = HTTPClient.new
 
@@ -32,88 +32,6 @@ class Apps::EventsController < Apps::ApplicationController
       respond_to do |format|
         format.html { render :text => body, :layout => true }
       end
-    end
-  end
-
-  def show
-    @event = Event.find(params[:id])
-
-    @attendees = if @event.publication_type == "public"
-      @event.attendees.status_is(true).descend_by_status_and_updated_at.paginate(:page => params[:page], :per_page => 50)
-    else
-      @event.attendees.descend_by_status_and_updated_at.paginate(:page => params[:page], :per_page => 50)
-    end
-
-    respond_to do |format|
-      format.html
-    end
-  end
-
-  def edit
-    @event = Event.find(params[:id])
-
-    respond_to do |format|
-      if @event.user == current_user
-        format.html
-      else
-        flash[:notice] = _('You are not allowed this operation.')
-        format.html { redirect_to event_url(@event) }
-      end
-    end
-  end
-
-  def update
-    @event = Event.find(params[:id])
-    @event.publication_symbols_value = params[:publication_symbols_value] unless params[:publication_symbols_value].blank?
-
-    respond_to do |format|
-      unless @event.user == current_user 
-        flash[:notice] = _('You are not allowed this operation.')
-        redirect_to event_url(@event)
-      else
-        if@event.update_attributes(params[:event])
-          format.html do
-            flash[:notice] = _('Event was updated successfully.')
-            redirect_to event_url(@event)
-          end
-        else
-          format.html { render :edit }
-        end
-      end
-    end
-  end
-
-  def attend
-    event = Event.find(params[:id])
-    if event.enable_attend_or_absent?(current_user)
-      attendee = event.attendees.find_or_initialize_by_user_id(current_user.id)
-      attendee.status = true
-      if attendee.save
-        flash[:notice] = _('Event was successfully updated.')
-      else
-        flash[:notice] = _('You are not allowed this operation.')
-      end
-    end
-
-    respond_to do |format|
-      format.html { redirect_to event_url(event) }
-    end
-  end
-
-  def absent
-    event = Event.find(params[:id])
-    if event.enable_attend_or_absent?(current_user)
-      attendee = event.attendees.find_or_initialize_by_user_id(current_user.id)
-      attendee.status = false
-      if attendee.save
-        flash[:notice] = _('Event was successfully updated.')
-      else
-        flash[:notice] = _('You are not allowed this operation.')
-      end
-    end
-
-    respond_to do |format|
-      format.html { redirect_to event_url(event) }
     end
   end
 
