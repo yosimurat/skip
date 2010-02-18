@@ -14,5 +14,4 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Apps::ApplicationController < ApplicationController
-  skip_before_filter :verify_authenticity_token
 end

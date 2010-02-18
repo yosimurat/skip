@@ -19,12 +19,14 @@ class Apps::EventsController < Apps::ApplicationController
   %w(index new create).each do |method_name|
     define_method method_name do
       client = HTTPClient.new
+
       apps_url = "http://localhost:4000#{request.path}"
+      common_headers = {'CsrfToken' => form_authenticity_token, 'SkipUserId' => current_user.id}
       body =
         if request.get?
-          client.get_content(apps_url, request.request_parameters)
+          client.get_content(apps_url, request.request_parameters, common_headers)
         else
-          client.post_content(apps_url, request.request_parameters)
+          client.post_content(apps_url, request.request_parameters, common_headers)
         end
 
       respond_to do |format|
