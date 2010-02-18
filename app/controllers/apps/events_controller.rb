@@ -26,7 +26,7 @@ class Apps::EventsController < Apps::ApplicationController
         if request.get?
           client.get_content(apps_url, request.request_parameters, common_headers)
         else
-          client.post_content(apps_url, request.request_parameters, common_headers)
+          client.post_content(apps_url, request.request_parameters.to_json, common_headers.merge({'Content-Type' => 'application/json'}))
         end
 
       respond_to do |format|
