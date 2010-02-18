@@ -24,7 +24,7 @@ class Apps::EventsController < Apps::ApplicationController
       common_headers = {'CsrfToken' => form_authenticity_token, 'SkipUserId' => current_user.id}
       body =
         if request.get?
-          client.get_content(apps_url, request.request_parameters, common_headers)
+          client.get_content(apps_url, request.query_parameters, common_headers)
         else
           client.post_content(apps_url, request.request_parameters.to_json, common_headers.merge({'Content-Type' => 'application/json'}))
         end
