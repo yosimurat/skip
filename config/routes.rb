@@ -138,6 +138,7 @@ ActionController::Routing::Routes.draw do |map|
     app.resources :events, :member => {:attend => :post, :absent => :post}, :except => [:destroy] do |event|
       event.resources :attendees, :only => [:update]
     end
+    app.resource :javascripts, :only => [], :member => {:application => :get}
   end
 
   map.connect ':controller/:action/:id'

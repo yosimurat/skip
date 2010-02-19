@@ -14,4 +14,38 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Apps::ApplicationController < ApplicationController
+
+  protected
+  def proxy_request_to_simple_apps
+    client = HTTPClient.new
+    apps_url = "http://localhost:4000#{request.path}"
+    common_headers = {'CsrfToken' => form_authenticity_token, 'SkipUserId' => current_user.id}
+    res =
+      if request.get?
+        client.get(apps_url, request.query_parameters, common_headers)
+      else
+        client.post(apps_url, request.request_parameters.to_json, common_headers.merge({'Content-Type' => 'application/json'}))
+      end
+    if HTTPClient::HTTP::Status.successful?(res.status)
+      respond_to do |format|
+        format.html { render :text => res.content, :layout => true }
+        format.js { render :text => res.content, :layout => false }
+      end
+    elsif HTTPClient::HTTP::Status.redirect?(res.status)
+      respond_to do |format|
+        format.html do
+          uri = client.urify(request.url)
+          new_uri = client.default_redirect_uri_callback(uri, res)
+          new_uri.host =  uri.host
+          new_uri.port = uri.port
+          redirect_to new_uri.to_s
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { render :text => res.content, :layout => true }
+        format.js { render :text => res.content, :layout => false }
+      end
+    end
+  end
 end

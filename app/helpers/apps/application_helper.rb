@@ -13,10 +13,8 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Apps::AttendeesController < Apps::ApplicationController
-  %w(update).each do |method_name|
-    define_method method_name do
-      proxy_request_to_simple_apps
-    end
+module Apps::ApplicationHelper
+  def simple_apps_application_javascript_include_tag
+    javascript_include_tag(application_apps_javascripts_url(:format => :js))
   end
 end
