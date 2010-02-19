@@ -22,15 +22,30 @@ class Apps::EventsController < Apps::ApplicationController
 
       apps_url = "http://localhost:4000#{request.path}"
       common_headers = {'CsrfToken' => form_authenticity_token, 'SkipUserId' => current_user.id}
-      body =
+      res =
         if request.get?
-          client.get_content(apps_url, request.query_parameters, common_headers)
+          client.get(apps_url, request.query_parameters, common_headers)
         else
-          client.post_content(apps_url, request.request_parameters.to_json, common_headers.merge({'Content-Type' => 'application/json'}))
+          client.post(apps_url, request.request_parameters.to_json, common_headers.merge({'Content-Type' => 'application/json'}))
         end
-
-      respond_to do |format|
-        format.html { render :text => body, :layout => true }
+      if HTTPClient::HTTP::Status.successful?(res.status)
+        respond_to do |format|
+          format.html { render :text => res.content, :layout => true }
+        end
+      elsif HTTPClient::HTTP::Status.redirect?(res.status)
+        respond_to do |format|
+          format.html do
+            uri = client.urify(request.url)
+            new_uri = client.default_redirect_uri_callback(uri, res)
+            new_uri.host =  uri.host
+            new_uri.port = uri.port
+            redirect_to new_uri.to_s
+          end
+        end
+      else
+        respond_to do |format|
+          format.html { render :text => res.content, :layout => true }
+        end
       end
     end
   end
