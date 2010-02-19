@@ -28,7 +28,7 @@ class Apps::ApplicationController < ApplicationController
       end
     if HTTPClient::HTTP::Status.successful?(res.status)
       respond_to do |format|
-        format.html { render :text => res.content, :layout => true }
+        format.html { render :inline => res.content + '<%= ckeditor \'.ckeditor_area\' %>', :layout => true }
         format.js { render :text => res.content, :layout => false }
       end
     elsif HTTPClient::HTTP::Status.redirect?(res.status)
