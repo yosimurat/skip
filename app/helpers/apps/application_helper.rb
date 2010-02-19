@@ -15,6 +15,6 @@
 
 module Apps::ApplicationHelper
   def simple_apps_application_javascript_include_tag
-    javascript_include_tag(application_apps_javascripts_url(:format => :js))
+    javascript_include_tag(application_apps_javascripts_path(:format => :js))
   end
 end
