@@ -14,7 +14,6 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Apps::EventsController < Apps::ApplicationController
-  before_filter :setup_layout
 
   %w(index new create show edit update attend absent).each do |method_name|
     define_method method_name do
@@ -48,10 +47,5 @@ class Apps::EventsController < Apps::ApplicationController
         end
       end
     end
-  end
-
-private
-  def setup_layout
-    @main_menu = @title = _('Events')
   end
 end
