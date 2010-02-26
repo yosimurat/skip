@@ -13,7 +13,11 @@
   <% end -%>
   </div>
   <div class="box_space_bottom">
-    <%= link_to _("[Cancel selection]"), :controller => 'share_file', :action => 'list', :uid => current_target_user.uid, :sort_type => 'date' %>
+    <% if owner.class == User -%>
+      <%= link_to _("[Cancel selection]"), :controller => 'share_file', :action => 'list', :uid => current_target_user.uid, :sort_type => 'date' %>
+    <% else -%>
+      <%= link_to _("[Cancel selection]"), :controller => 'share_file', :action => 'list', :gid => current_target_group.gid, :sort_type => 'date' %>
+    <% end -%>
   </div>
 </div><!-- box_space -->
 <% end -%>
