@@ -11,7 +11,7 @@ class ConvertFromAntennasToNotices < ActiveRecord::Migration
                    else
                      nil
                    end
-          if target
+          if target && !Notice.find_by_user_id_and_target_id_and_target_type(antenna.user_id, target.id, target.class.name)
             Notice.create! :user_id => antenna.user_id, :target_id => target.id, :target_type => target.class.name
             p "successed antenna_id:#{antenna.id}, antenna_item_id:#{item.id}"
           else
