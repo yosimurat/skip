@@ -58,6 +58,9 @@
 
         // Finally shoves the loaded img@src
         $el.attr("src", this.src);
+
+        // patch for IE6/7 problem(multiple call with animation GIF)
+        img.onload = null;
       };
 
       // load the target image and fire the callbacks
