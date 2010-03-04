@@ -3,7 +3,7 @@
  # :locals => { :categories }
 -%>
 <% owner ||= (current_target_user || current_target_group) %>
-<% if tags = Tag.entries_owned_by(owner).all(:select => '*, count(tags.id) as count') and !tags.empty? -%>
+<% if tags = Tag.entries_owned_by(owner).all(:select => 'tags.name, count(tags.id) as count') and !tags.empty? -%>
 <div class="box_space">
   <div class="box_space_title"><%= icon_tag 'tag_blue' -%><%= _('Tags')%></div>
   <div class="box_space_body tag_cloud">
