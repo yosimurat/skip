@@ -20,6 +20,7 @@ div#global_links_wrapper
   :border-bottom = !base_border
   :padding-top 5px
   :padding-bottom 5px
+  :position relative
   div#global_links
     :margin 0px 20px
     :font
@@ -30,14 +31,52 @@ div#global_links_wrapper
       &:hover
         :color #f60
         :text-decoration none
-    span.home_link
-      :float left
-    span.search_links
-      :margin-left 40px
+    ul#nav
+      :list-style none
+      :list-style-position outside
+      :position relative
+      :line-height 1.5em
+      :font
+        :size 14px
+      :z-index 1
       a
-        :margin 0px 6px
-    span.other_links
-      :float right
+        :display block
+        :padding 0 5px
+        :background-color #fff
+        :text-decoration none
+      li.home_link
+        :margin-right 50px
+        :float left
+      li
+        :position relative
+        :list-style none
+        :margin-right 10px
+        :float left
+        ul
+          :z-index 1
+          a
+            :width 10em
+            :height auto
+            :float left
+          ul
+            :left 10em
+      ul
+        :position absolute
+        :display none
+        :width 10em
+        ul
+          :top auto
+      li:hover ul
+        :display none
+        :z-index 1
+      li:hover li
+        :display block
+        :z-index 1
+  div#customize_design
+    :position absolute
+    :right 10px
+    :top 5px
+    :padding-bottom 2px
 
 ul.no_style
   :list-style-type none
@@ -52,6 +91,11 @@ b.retired
 
 b.remarkable
   :color red
+
+b.attendees
+  :color red
+  :font-size 16px
+
 
 a.tag
   :font-size = !small_font_size
@@ -1009,6 +1053,13 @@ div.pictures
     &.selected
       :background #fff5ee
 
+// 招待
+table.invitation
+  :width 98%
+  input
+    :width 98%
+  textarea
+    :width 98%
 
 // ユーザ
 // ------------------------------------------------------------
@@ -1023,6 +1074,7 @@ div.panel_top
     :position absolute
     :top 0px
     :left 80px
+  #panel_abst
   #tab_menu
     :position absolute
     :bottom 0px
@@ -1241,9 +1293,9 @@ div#hide_message
     li.history
       :display none
 
-// 一覧(記事、共有ファイル, ブックマーク)
+// 一覧(記事、共有ファイル, ブックマーク、イベント)
 // ------------------------------------------------------------
-div.topix_entries_wrapper, div.topix_share_files_wrapper, div.topix_bookmarks_wrapper
+div.topix_entries_wrapper, div.topix_share_files_wrapper, div.topix_bookmarks_wrapper, div.topix_events_wrapper
   :margin 10px 0
   :color #555
   h2.title
@@ -1258,7 +1310,7 @@ div.topix_entries_wrapper, div.topix_share_files_wrapper, div.topix_bookmarks_wr
     :vertical-align bottom
     :margin-left 0
     :margin-bottom 5px
-  table.topix_entries, table.topix_share_files, table.topix_bookmarks
+  table.topix_entries, table.topix_share_files, table.topix_bookmarks, table.topix_events
     :table-layout fixed
     :width 100%
     tr
@@ -1319,6 +1371,23 @@ div.topix_entries_wrapper, div.topix_share_files_wrapper, div.topix_bookmarks_wr
           :font-size 8px
           :vertical-align bottom
           :color #808080
+
+div.event_info_space
+  :margin-bottom 10px
+  :width 100%
+div.event_info_space_desc
+  :margin-top 5px
+  :margin-left 10px
+  :width 97%
+  :text-align left
+  :border 1px solid silver
+  :overflow hidden
+div.event_info_space_desc_body
+  :margin 5px
+div.box_space_body
+  p.button
+    :text-align center
+    :margin-top 5px
 
 // ブックマーク
 // ------------------------------------------------------------

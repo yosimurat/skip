@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
       user.resources :chains
       user.resources :pictures
       user.resources :system_messages, :only => [:destroy]
+      user.resources :invitations, :only => [:new, :create]
     end
   end
 
@@ -132,6 +133,13 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :attachments
+
+  map.namespace "apps" do |app|
+    app.resources :events, :member => {:attend => :post, :absent => :post}, :collection => { :recent => :get }, :except => [:destroy] do |event|
+      event.resources :attendees, :only => [:update]
+    end
+    app.resource :javascripts, :only => [], :member => {:application => :get}
+  end
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

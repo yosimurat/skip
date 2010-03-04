@@ -15,6 +15,7 @@
         links << content_tag('b', user_name_mode?(:code) ? h(current_user.code) : h(current_user.uid))
         links << link_to("iSKIP", iskip_url) if SkipEmbedded::InitialSettings['iskip']
         links << link_to(what_new_message, what_new_url, :target => "_blank", :class => "attention_underline_link") unless what_new_url.blank?
+        links << link_to(_('Invite a user'), new_user_invitation_url(current_user), :title => _('Invite a user')) if SkipEmbedded::InitialSettings['invitation'] && SkipEmbedded::InitialSettings['invitation']['enable']
         links << link_to(_("My Account"), {:controller => "/mypage", :action => :manage, :only_path => false}, :class => "underline_link")
         links << link_to(_("System Administration"), {:controller => "/admin", :action => "index"}, :title => _("Administration of the site."), :class => "underline_link") if current_user.admin?
         links << link_to(_('Help'), help_url, :target => "_blank", :class => "underline_link") unless help_url.blank?
@@ -70,15 +71,18 @@
   <% end -%>
 </div><!-- header -->
 <div id="global_links_wrapper">
-  <div id="global_links">
-    <%= global_links if current_user && current_user.active? %>
-    <span class="other_links">
+  <% if current_user && current_user.active? -%>
+    <div id="global_links">
+      <%= render :partial => 'shared/global_navigation' %>
+    </div>
+    <div id="customize_design">
       <% skin_themes.each do |skin| -%>
-        <%= link_to(image_tag("../stylesheets/skins/#{skin}/color.png", :size => "15x15", :title => "#{skin}"), {:action => 'update_customize', :user_custom => {"theme" => skin}}, :method => :post) %>
+        <%= link_to(image_tag("../stylesheets/skins/#{skin}/color.png", :size => "15x15", :title => "#{skin}"), {:controller => '/mypage', :action => 'update_customize', :user_custom => {"theme" => skin}}, :method => :post) %>
       <% end -%>
-    </span>&nbsp;
+    </div>
+    <div class="clear_both"></div>
+  <% end -%>
 
-  </div>
   <% unless SkipEmbedded::InitialSettings['enable_ad_for_oss'] == "lovelyskip" -%>
     <div style="margin-top: 0.5em; padding-top: 0.5em; border-top: 1px solid silver;">
       <div style="margin-left: 30px; text-valign:middle;">
@@ -97,3 +101,14 @@
     </div>
   <% end -%>
 </div>
+
+<% content_for :javascript_initializers do -%>
+  $j(" #nav ul ").css({display: "none"}); // Opera Fix
+  $j(" #nav li").hover(
+    function(){
+      $j(this).find('ul:first').css({visibility:"visible",display:"none"}).show(100);
+    },function(){
+      $j(this).find('ul:first').css({visibility:"hidden"});
+    }
+  );
+<% end -%>

@@ -135,8 +135,7 @@ module ApplicationHelper
     file_name =
       if picture = user.picture
         unless picture.new_record?
-          # プロフィール更新時にキャッシュさせないために更新時間をURLに含めている
-          user_picture_path(user, picture, :format => :png) + "?#{picture.updated_on.to_i.to_s}"
+          user_picture_path(user, picture, :format => :png)
         else
           'default_picture.png'
         end
@@ -333,34 +332,16 @@ module ApplicationHelper
       groups.group_by(&:group_category).sort_by{|c, g| c.sort_order}.each do |category, groups_by_category|
         option_tags << content_tag(:option, "[#{h(category.name)}]", :disabled => 'disabled', :style => 'color: gray')
         groups_by_category.each do |group|
-          option_tags << content_tag(:option, "&nbsp;#{truncate(h(group.name), :length => 15)}", :value => url_for({:controller => '/group', :gid => group.gid, :action => 'show'}))
+          option_tags << content_tag(:option, "&nbsp;#{truncate(h(group.name), :length => 18)}", :value => url_for({:controller => '/group', :gid => group.gid, :action => 'show'}))
         end
       end
     end
     "<select class=\"select_navi\">#{option_tags.join('')}</select>"
   end
 
-  def global_links
-    links = ''
-    links << content_tag(:span, link_to_unless_current(icon_tag('house', :title => _('My Page')) + _('My Page'), root_url), :class => 'home_link')
-    other_links = []
-    links << content_tag(:span, other_links, :class => 'other_links')
-    search_links = []
-    search_links << link_to_unless_current(icon_tag('report', :title => _('Entries')) + _('Entries'),  :controller => '/search', :action => 'entry_search') if BoardEntry.count > 0
-    search_links << link_to_unless_current(icon_tag('disk_multiple', :title => _('Files')) + _('Files'),  :controller => '/search', :action => 'share_file_search') if ShareFile.count > 0
-    search_links << link_to_unless_current(icon_tag('user_suit', :title => _('Users')) + _('Users'),  :controller => '/users', :action => 'index') if User.count > 1
-    search_links << link_to_unless_current(icon_tag('group', :title => _('Groups')) + _('Groups'),  :controller => '/groups', :action => 'index') if Group.count > 0
-    search_links << link_to_unless_current(icon_tag('tag_blue', :title => _('Bookmarks')) + _('Bookmarks'),  :controller => '/bookmarks', :action => 'index') if bookmark_enabled? && Bookmark.count > 0
-    if SkipEmbedded::InitialSettings['wiki'] and SkipEmbedded::InitialSettings['wiki']['use']
-      search_links << link_to(icon_tag('page_white_paint', :title => _('Wiki')) + _('Wiki'), wiki_path((Page.root || Page.first({:conditions=>["parent_id = ?",0]})).title))
-    end
-    links << content_tag(:span, search_links.join(' '), :class => 'search_links')
-  end
-
   def skin_themes
     %w(tile blue green silver snow sakura pink orange)
   end
-
 
 private
   def relative_url_root
