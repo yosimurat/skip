@@ -169,6 +169,9 @@ protected
       ActionController::RoutingError, ActiveRecord::RecordNotFound
       render_404
     else
+      logger.error ex
+      ex.backtrace.each { |line| logger.error line}
+
       render :template => "system/500" , :status => :internal_server_error
 
       if SkipEmbedded::InitialSettings['exception_notifier']['enable']
