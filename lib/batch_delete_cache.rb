@@ -30,7 +30,7 @@ class BatchDeleteCache < BatchBase
 
   class DefaultDeleter
     def all_ids
-      @all_ids if @all_ids
+      return @all_ids if @all_ids
       con = self.class.name.underscore.split('/').last.split("_")[0..-2].join("_").classify.constantize
       @all_ids = con.find(:all, :select => "id", :order => "id asc").map{|item| item.id}
     rescue NameError => e
@@ -99,7 +99,7 @@ class BatchDeleteCache < BatchBase
   class GroupDeleter < DefaultDeleter
     BatchDeleteCache.add_deleter self
     def all_ids
-      @all_ids if @all_ids
+      return @all_ids if @all_ids
       @all_ids = Group.active.all(:select => "id", :order => "id asc").map(&:id)
     end
 
