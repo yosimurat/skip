@@ -53,7 +53,10 @@ class Sanitize
     SKIP = {
       :elements => ["a", "abbr", "acronym", "address", "b", "big", "blockquote", "br", "caption", "cite", "code", "dd", "del", "dfn", "div", "dt", "em", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "i", "img", "ins", "kbd", "li", "ol", "p", "pre", "samp", "small", "span", "strike", "strong", "sub", "sup", "table", "tbody", "td", "th", "tr", "tt", "u", "ul", "var"],
       :attributes => {
-        :all => ["abbr", "align", "alt", "border", "cellpadding", "cellspacing", "cite", "class", "datetime", "height", "href", "name", "src", "style", "summary", "target", "title", "width", "xml:lang"]
+        :all => ["abbr", "align", "alt", "border", "cellpadding", "cellspacing", "cite", "class", "datetime", "height", "href", "name", "src", "style", "summary", "target", "title", "width", "xml:lang"],
+        'table' => ["bgcolor"],
+        'td' => ["bgcolor"],
+        'th' => ["bgcolor"]
       },
       :protocols => {
         'a' => {'href' => ['ftp', 'http', 'https', 'mailto', :relative]},
