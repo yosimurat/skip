@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
 
   init_gettext "skip" if defined? GetText
 
-  helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_participation, :owner_entries_path, :bookmark_enabled?, :notice_entry_enabled?, :event_enabled?
+  helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_participation, :owner_entries_path, :bookmark_enabled?, :notice_entry_enabled?, :event_enabled?, :ranking_enabled?
 protected
   include InitialSettingsHelper
   # アプリケーションで利用するセッションの準備をする
@@ -331,6 +331,14 @@ protected
     if !SkipEmbedded::InitialSettings['wiki'] or !SkipEmbedded::InitialSettings['wiki']['use']
       redirect_to root_url
     end
+  end
+
+  def ranking_enabled?
+    SkipEmbedded::InitialSettings['ranking'] && SkipEmbedded::InitialSettings['ranking']['enable']
+  end
+
+  def require_ranking_enabled
+    redirect_to root_url unless ranking_enabled?
   end
 
   private

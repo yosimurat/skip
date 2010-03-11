@@ -214,6 +214,9 @@ default: &default
   invitation:
     enable: false
 
+  ranking:
+    enable: false
+
   simple_apps:                                                        # オープンソース版では利用できません
     url:
     event:
