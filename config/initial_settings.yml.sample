@@ -165,6 +165,8 @@ default: &default
     googlemap:
       - http://maps.google.co.jp/
       - http://maps.google.com/
+      - http://www.google.co.jp/maps
+      - http://www.google.com/maps
 
   # ================================================================================================
   # 連携アプリに関する設定
