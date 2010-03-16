@@ -111,4 +111,7 @@
       $j(this).find('ul:first').css({visibility:"hidden"});
     }
   );
+  if ($j.browser.msie && $j.browser.version == 6) {
+    $j('#other_links').bgiframe();
+  }
 <% end -%>
