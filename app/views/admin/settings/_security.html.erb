@@ -9,7 +9,7 @@
 <div class="box tabular">
   <p>
     <%= settings_label_with_check_box_tag :enable_password_periodic_change %>
-    <%= link_to(_('[Reset the password expiration period for all users]'), reset_all_password_expiration_periods_admin_users_path, :id => 'reset_passwords', :confirm => _('Are you sure?'), :method => :post) %>
+    <%= link_to(_('[Reset the password expiration period for all users]'), reset_all_password_expiration_periods_admin_tenant_users_path(current_tenant), :id => 'reset_passwords', :confirm => _('Are you sure?'), :method => :post) %>
   </p>
   <p><%= settings_label_with_text_field_tag :password_change_interval %></p>
 </div>
@@ -18,7 +18,7 @@
   <p>
     <%= settings_label_with_select_tag :password_strength, password_strength_container %>
     <% if enable_forgot_password? -%>
-      <%= link_to(_('[Request all users to reset their passwords]'), lock_actives_admin_users_path, :id => 'lock_actives', :confirm => _('This will lock all user accounts including yourself. All logged in users will be forced to log out and passwords need to be reset to log in again. Are you sure to proceed?'), :method => :post) %>
+      <%= link_to(_('[Request all users to reset their passwords]'), lock_actives_admin_tenant_users_path(current_tenant), :id => 'lock_actives', :confirm => _('This will lock all user accounts including yourself. All logged in users will be forced to log out and passwords need to be reset to log in again. Are you sure to proceed?'), :method => :post) %>
       <%= help_icon_tag :content => _('Lock all current user accounts. Users will be asked to reset their passwords next time they log in. Use this when you want all users to reset their passwords in cases such as password strength has been strengthen.') %>
     <% end -%>
   </p>

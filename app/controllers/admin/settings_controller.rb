@@ -30,7 +30,7 @@ class Admin::SettingsController < Admin::ApplicationController
     @current_setting_hash = {}
 
     if params[:tab].blank? or !TABS.include?(params[:tab])
-      redirect_to admin_settings_path(:tab => :main)
+      redirect_to admin_tenant_settings_path(current_tenant, :tab => :main)
     end
   end
 
