@@ -373,13 +373,13 @@ msgid "Access Log"
 msgstr ""
 
 #: app/controllers/search_controller.rb:95
-msgid "Access denied by search node. Please contact system owner."
+msgid "Access denied by search node. Please contact system administrator."
 msgstr ""
 
 #: app/views/user_mailer/smtp/sent_activate.html.erb:9
 msgid ""
 "Access the URL below and click on the link [Register your profile and start "
-"using %s]."
+"using %s] in case the above link has expired."
 msgstr ""
 
 #: app/views/user_mailer/smtp/sent_forgot_openid.html.erb:3

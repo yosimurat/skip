@@ -92,7 +92,7 @@ class SearchController < ApplicationController
     else
       # Searchクラスのメッセージの国際化
       N_("Please input search query.")
-      N_("Access denied by search node. Please contact system owner.")
+      N_("Access denied by search node. Please contact system administrator.")
       @error_message = search.error
     end
   end
