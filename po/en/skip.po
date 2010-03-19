@@ -226,7 +226,7 @@ msgid "%{target} was successfully saved."
 msgstr ""
 
 #: app/helpers/system_messages_helper.rb:90
-msgid "%{user_name} leaved your group %{group_name}."
+msgid "%{user_name} left your group %{group_name}."
 msgstr ""
 
 #: app/views/entry_hide_operations/_list.html.erb:6

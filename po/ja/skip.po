@@ -229,7 +229,7 @@ msgid "%{target} was successfully saved."
 msgstr "%{target}を保存しました。"
 
 #: app/helpers/system_messages_helper.rb:90
-msgid "%{user_name} leaved your group %{group_name}."
+msgid "%{user_name} left your group %{group_name}."
 msgstr "%{user_name}さんが[%{group_name}]から退会しました。"
 
 #: app/views/entry_hide_operations/_list.html.erb:6
