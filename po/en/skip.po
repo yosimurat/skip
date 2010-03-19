@@ -1162,6 +1162,7 @@ msgstr ""
 #: app/models/admin/setting.rb:50
 msgid "Admin::Setting|Googlemap description"
 msgstr ""
+"Check to enable embedding Google Maps in rich texts."
 
 #: app/models/admin/setting.rb:55
 msgid "Admin::Setting|Hide email"
@@ -1312,6 +1313,7 @@ msgstr "You can change the name of point button for blogs and forums."
 #: app/models/admin/setting.rb:49
 msgid "Admin::Setting|Slideshare description"
 msgstr ""
+"Check to enable embedding Slideshare slides in rich texts."
 
 #: app/models/admin/setting.rb:53
 msgid "Admin::Setting|Stop new user"
@@ -1355,6 +1357,7 @@ msgstr " "
 #: app/models/admin/setting.rb:48
 msgid "Admin::Setting|Youtube description"
 msgstr ""
+"Check to enable embedding Youtube videos in rich texts."
 
 #: app/models/admin/share_file.rb:26
 msgid "Admin::ShareFile|Category"
