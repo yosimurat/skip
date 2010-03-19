@@ -1980,7 +1980,7 @@ msgid "Basic Information"
 msgstr "基本情報"
 
 #: app/views/search/_full_text_search.html.erb:43
-msgid "Because of the limited view, is less than the actual number."
+msgid "Some results are not shown due to the publicity limits."
 msgstr "[注]閲覧制限のため実件数よりも少なく表示されています。"
 
 #: app/views/histories/index.html.erb:14
