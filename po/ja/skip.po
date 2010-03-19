@@ -1868,8 +1868,8 @@ msgstr "4月"
 msgid "Are you sure destroing with nest comments?"
 msgstr "関連するコメントも一緒に削除されますが、よろしいですか？"
 
-#: app/views/group/_action_box.html.erb:20
-msgid "Are you sure leave the group?"
+#: app/views/group/_action_box.html.erb:22
+msgid "Are you sure to leave the group?"
 msgstr "グループを退会しますがよろしいですか?"
 
 #: app/helpers/share_file_helper.rb:26

@@ -19,7 +19,7 @@
         <% url_hash = {:controller => '/share_file', :action => :new, :owner_symbol => h(current_target_group.symbol), :owner_name => h(current_target_group.name)} -%>
         <li><%= link_to(content_tag('span', _('Upload a file')), url_hash, :title => _('Upload a file'), :class => 'rounded', :onclick => "sub_window_open('#{url_for(url_hash)}', 'subwindow', 550, 400); return false;") %></li>
         <% unless current_participation.owned? -%>
-          <li><%= link_to(content_tag('span', _('Leave the group')), {:action => 'leave'}, {:confirm => _('Are you sure leave the group?'), :method => :post, :class => "rounded"}) %></li>
+          <li><%= link_to(content_tag('span', _('Leave the group')), {:action => 'leave'}, {:confirm => _('Are you sure to leave the group?'), :method => :post, :class => "rounded"}) %></li>
         <% end -%>
       <% end -%>
     <% end -%>
