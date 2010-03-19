@@ -92,7 +92,7 @@ msgstr "%sのみ"
 
 #: app/controllers/group_controller.rb:215
 #: app/controllers/group_controller.rb:230
-msgid "%s are not a member of the group."
+msgid "%s is not a member of the group."
 msgstr "%sさんはそのグループには参加していません。"
 
 #: app/models/group.rb:187
@@ -166,7 +166,7 @@ msgstr "%{icon} %{time}の推移を表示"
 #: app/controllers/admin/admin_module.rb:234
 #: app/controllers/admin/admin_module.rb:244
 #: app/controllers/admin/admin_module.rb:266
-msgid "%{model} Show"
+msgid "Show %{model}"
 msgstr "%{model}の詳細"
 
 #: app/controllers/admin/pictures_controller.rb:52

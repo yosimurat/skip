@@ -212,7 +212,7 @@ class GroupController < ApplicationController
         end
         flash[:notice] = _('Successfully left the group.')
       else
-        flash[:notice] = _('%s are not a member of the group.') % 'You'
+        flash[:notice] = _('%s is not a member of the group.') % 'You'
       end
     end
     redirect_to :action => 'show'
@@ -227,7 +227,7 @@ class GroupController < ApplicationController
         SystemMessage.create_message :message_type => 'FORCED_LEAVE', :user_id => group_participation.user.id, :message_hash => {:group_id => @group.id}
         flash[:notice] = _("Removed %s from members of the group.") % group_participation.user.name
       else
-        flash[:notice] = _('%s are not a member of the group.') % group_participation.user.name
+        flash[:notice] = _('%s is not a member of the group.') % group_participation.user.name
       end
     end
     redirect_to :action => 'manage', :menu => 'manage_participations'
