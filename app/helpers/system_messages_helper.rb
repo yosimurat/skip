@@ -87,7 +87,7 @@ module SystemMessagesHelper
         group = current_tenant.groups.find(message.message_hash[:group_id])
         user = User.find(message.message_hash[:user_id])
         {
-          :message => _("%{user_name} leaved your group %{group_name}.") % {:user_name => user.name, :group_name => group.name},
+          :message => _("%{user_name} left your group %{group_name}.") % {:user_name => user.name, :group_name => group.name},
           :icon => 'group_delete',
           :url => polymorphic_url([current_tenant, user], :system_message_id => message.id)
         }
