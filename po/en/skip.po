@@ -1129,11 +1129,12 @@ msgstr ""
 
 #: app/models/admin/setting.rb:65
 msgid "Admin::Setting|Entry showed tab limit per page"
-msgstr ""
+msgstr "Entries per Tab"
 
 #: app/models/admin/setting.rb:66
 msgid "Admin::Setting|Entry showed tab limit per page description"
 msgstr ""
+"The number of entries shown in each tab when showing tabs in \"My Page\"."
 
 #: app/models/admin/setting.rb:38
 msgid "Admin::Setting|Footer first"
