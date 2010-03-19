@@ -1002,11 +1002,12 @@ msgstr "Choose how many days activation URLs stay valid since issued."
 
 #: app/models/admin/setting.rb:67
 msgid "Admin::Setting|Close question limit"
-msgstr ""
+msgstr "Questioning Period (days)"
 
 #: app/models/admin/setting.rb:68
 msgid "Admin::Setting|Close question limit description"
 msgstr ""
+"You can set the time limit for a question to stay open. It will be automatically set to \"Solved\" after the time limit has passed since it has been posted."
 
 #: app/models/admin/setting.rb:34
 msgid "Admin::Setting|Contact addr"
