@@ -1668,7 +1668,7 @@ msgstr ""
 #: app/controllers/admin/users_controller.rb:124
 msgid ""
 "Administrative user has already been registered. Log in with the account or "
-"contact {contact_link} in case of failure."
+"contact %{contact_link} in case of failure."
 msgstr ""
 
 #: app/helpers/groups_helper.rb:22

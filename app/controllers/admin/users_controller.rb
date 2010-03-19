@@ -121,7 +121,7 @@ class Admin::UsersController < Admin::ApplicationController
     else
       contact_link = "<a href=\"mailto:#{SkipEmbedded::InitialSettings['administrator_addr']}\" target=\"_blank\">" + _('Inquiries') + '</a>'
       if User.find_by_admin(true)
-        flash[:error] = _('Administrative user has already been registered. Log in with the account or contact {contact_link} in case of failure.') % {:contact_link => contact_link}
+        flash[:error] = _('Administrative user has already been registered. Log in with the account or contact %{contact_link} in case of failure.') % {:contact_link => contact_link}
         redirect_to :controller => "/platform", :action => :index
       else
         flash.now[:error] = _('Operation unauthorized. Verify the URL and retry. Contact %{contact_link} if the problem persists.') % {:contact_link => contact_link}

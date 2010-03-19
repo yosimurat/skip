@@ -1700,7 +1700,7 @@ msgstr "その操作は管理者権限が必要です。"
 #: app/controllers/admin/users_controller.rb:124
 msgid ""
 "Administrative user has already been registered. Log in with the account or "
-"contact {contact_link} in case of failure."
+"contact %{contact_link} in case of failure."
 msgstr ""
 "既に管理者ユーザが登録済みです。ログインして下さい。ログイン出来ない場合は%"
 "{contact_link}下さい。"
