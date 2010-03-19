@@ -1154,7 +1154,7 @@ msgstr "Second Line of Footer"
 #: app/models/admin/setting.rb:41
 msgid "Admin::Setting|Footer second description"
 msgstr ""
-"Message to be shown at the secibd line of footer. It is recommended to put "
+"Message to be shown at the second line of footer. It is recommended to put "
 "telephone numbers / email address / contact person for inquiries.  HTML tags "
 "are allowed.<p style=\"color:red;\">You can also use JavaScript etc. but "
 "remember to take care of security issues.</p>"
