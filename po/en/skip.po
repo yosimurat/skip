@@ -582,10 +582,10 @@ msgstr "About this site"
 #: app/controllers/admin/documents_controller.rb:21
 msgid "Admin::DocumentsController|about_this_site_description"
 msgstr ""
-"This is the page that users see when the login to SKIP for the first time."
+"This is the page that users see when they login to SKIP for the first time."
 "<br />Write about the purpose and outline of the site and important rules of "
 "using SKIP.<br />Also write about the security policy and how to make use of "
-"the site in terms of businiess.<br />It is linked from the footer in the "
+"the site in terms of business.<br />It is linked from the footer in the "
 "system."
 
 #: app/controllers/admin/documents_controller.rb:22
