@@ -17,6 +17,8 @@
   <%# left side top messages -%>
   <%# ============================================================ -%>
 
+  <%= render :partial => 'contents_left_base', :locals => {:mail_your_messages => @mail_your_messages} %>
+
   <% unless @mail_your_messages[:pages].empty? -%>
     <div id="messages_box" class="ui-corner-all">
       <h2 class="ui-corner-top">
@@ -47,8 +49,6 @@
       </div>
     </div>
   <% end -%>
-
-  <%= render :partial => 'contents_left_base' %>
 <% end -%>
 
 <% content_for :contents_right do -%>
