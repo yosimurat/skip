@@ -5922,7 +5922,7 @@ msgstr "購読者数"
 
 #: app/views/mypage/_antenna_box.html.erb:3
 msgid "Subscriptions"
-msgstr "新着通知"
+msgstr "新着通知一覧"
 
 #: app/views/layouts/subwindow.html.erb:7
 msgid "Subwindow"
