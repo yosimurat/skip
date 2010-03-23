@@ -87,7 +87,7 @@ module SystemMessagesHelper
         group = Group.active.find(message.message_hash[:group_id])
         user = User.find(message.message_hash[:user_id])
         {
-          :message => _("%{user_name} leaved your group %{group_name}.") % {:user_name => user.name, :group_name => group.name},
+          :message => _("%{user_name} left your group %{group_name}.") % {:user_name => user.name, :group_name => group.name},
           :icon => 'group_delete',
           :url => url_for({:controller => 'user', :action => 'show', :uid => user.uid, :system_message_id => message.id})
         }

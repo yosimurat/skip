@@ -92,7 +92,7 @@ msgstr "%sのみ"
 
 #: app/controllers/group_controller.rb:215
 #: app/controllers/group_controller.rb:230
-msgid "%s are not a member of the group."
+msgid "%s is not a member of the group."
 msgstr "%sさんはそのグループには参加していません。"
 
 #: app/models/group.rb:187
@@ -166,7 +166,7 @@ msgstr "%{icon} %{time}の推移を表示"
 #: app/controllers/admin/admin_module.rb:234
 #: app/controllers/admin/admin_module.rb:244
 #: app/controllers/admin/admin_module.rb:266
-msgid "%{model} Show"
+msgid "Show %{model}"
 msgstr "%{model}の詳細"
 
 #: app/controllers/admin/pictures_controller.rb:52
@@ -229,7 +229,7 @@ msgid "%{target} was successfully saved."
 msgstr "%{target}を保存しました。"
 
 #: app/helpers/system_messages_helper.rb:90
-msgid "%{user_name} leaved your group %{group_name}."
+msgid "%{user_name} left your group %{group_name}."
 msgstr "%{user_name}さんが[%{group_name}]から退会しました。"
 
 #: app/views/entry_hide_operations/_list.html.erb:6
@@ -281,7 +281,7 @@ msgid "(The search targets are titles and comments)"
 msgstr "（タイトル、コメントが検索対象となります）"
 
 #: app/views/share_file/confirm_download.html.erb:12
-msgid "(This screen is to avoid security risks ralated to direct downloading)"
+msgid "(This screen is to avoid security risks related to direct downloading)"
 msgstr ""
 "（この画面は、直ダウンロードによるセキュリティ上の懸念を解消するために表示し"
 "ています）"
@@ -295,7 +295,7 @@ msgid ""
 "*A group ID consists of 4 or more letters of alphabets, numbers, \"-\" and "
 "\"_\".<br>\n"
 "  *Group ID is used in many situations e.g. URLs to identify the group so "
-"choose a understandable one."
+"choose an understandable one."
 msgstr ""
 "※グループIDは4文字以上で、数字orアルファベットor記号(ハイフン「-」 アンダー"
 "バー「_」)で入力してください。<br/>\n"
@@ -391,14 +391,14 @@ msgid "Access Log"
 msgstr "アクセス履歴"
 
 #: app/controllers/search_controller.rb:95
-msgid "Access denied by search node. Please contact system owner."
+msgid "Access denied by search node. Please contact system administrator."
 msgstr ""
 "検索エンジンにアクセスできませんでした。システム管理者に連絡してください。"
 
 #: app/views/user_mailer/smtp/sent_activate.html.erb:9
 msgid ""
 "Access the URL below and click on the link [Register your profile and start "
-"using %s]."
+"using %s] in case the above link has expired."
 msgstr ""
 "無効になってしまった場合、以下のURLにアクセスし、[ユーザ登録して%sの利用を開"
 "始する]リンクをクリックして下さい。"
@@ -1700,7 +1700,7 @@ msgstr "その操作は管理者権限が必要です。"
 #: app/controllers/admin/users_controller.rb:124
 msgid ""
 "Administrative user has already been registered. Log in with the account or "
-"contact {contact_link} in case of failure."
+"contact %{contact_link} in case of failure."
 msgstr ""
 "既に管理者ユーザが登録済みです。ログインして下さい。ログイン出来ない場合は%"
 "{contact_link}下さい。"
@@ -1868,8 +1868,8 @@ msgstr "4月"
 msgid "Are you sure destroing with nest comments?"
 msgstr "関連するコメントも一緒に削除されますが、よろしいですか？"
 
-#: app/views/group/_action_box.html.erb:20
-msgid "Are you sure leave the group?"
+#: app/views/group/_action_box.html.erb:22
+msgid "Are you sure to leave the group?"
 msgstr "グループを退会しますがよろしいですか?"
 
 #: app/helpers/share_file_helper.rb:26
@@ -1980,7 +1980,7 @@ msgid "Basic Information"
 msgstr "基本情報"
 
 #: app/views/search/_full_text_search.html.erb:43
-msgid "Because of the limited view, is less than the actual number."
+msgid "Some results are not shown due to the publicity limits."
 msgstr "[注]閲覧制限のため実件数よりも少なく表示されています。"
 
 #: app/views/histories/index.html.erb:14

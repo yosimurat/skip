@@ -90,7 +90,7 @@ msgstr ""
 
 #: app/controllers/group_controller.rb:215
 #: app/controllers/group_controller.rb:230
-msgid "%s are not a member of the group."
+msgid "%s is not a member of the group."
 msgstr ""
 
 #: app/models/group.rb:187
@@ -162,7 +162,7 @@ msgstr ""
 #: app/controllers/admin/admin_module.rb:234
 #: app/controllers/admin/admin_module.rb:244
 #: app/controllers/admin/admin_module.rb:266
-msgid "%{model} Show"
+msgid "Show %{model}"
 msgstr ""
 
 #: app/controllers/admin/pictures_controller.rb:52
@@ -226,7 +226,7 @@ msgid "%{target} was successfully saved."
 msgstr ""
 
 #: app/helpers/system_messages_helper.rb:90
-msgid "%{user_name} leaved your group %{group_name}."
+msgid "%{user_name} left your group %{group_name}."
 msgstr ""
 
 #: app/views/entry_hide_operations/_list.html.erb:6
@@ -275,7 +275,7 @@ msgid "(The search targets are titles and comments)"
 msgstr ""
 
 #: app/views/share_file/confirm_download.html.erb:12
-msgid "(This screen is to avoid security risks ralated to direct downloading)"
+msgid "(This screen is to avoid security risks related to direct downloading)"
 msgstr ""
 
 #: app/views/bookmark/new.html.erb:17
@@ -287,7 +287,7 @@ msgid ""
 "*A group ID consists of 4 or more letters of alphabets, numbers, \"-\" and "
 "\"_\".<br>\n"
 "  *Group ID is used in many situations e.g. URLs to identify the group so "
-"choose a understandable one."
+"choose an understandable one."
 msgstr ""
 
 #: app/views/edit/edit.html.erb:7
@@ -373,13 +373,13 @@ msgid "Access Log"
 msgstr ""
 
 #: app/controllers/search_controller.rb:95
-msgid "Access denied by search node. Please contact system owner."
+msgid "Access denied by search node. Please contact system administrator."
 msgstr ""
 
 #: app/views/user_mailer/smtp/sent_activate.html.erb:9
 msgid ""
 "Access the URL below and click on the link [Register your profile and start "
-"using %s]."
+"using %s] in case the above link has expired."
 msgstr ""
 
 #: app/views/user_mailer/smtp/sent_forgot_openid.html.erb:3
@@ -582,10 +582,10 @@ msgstr "About this site"
 #: app/controllers/admin/documents_controller.rb:21
 msgid "Admin::DocumentsController|about_this_site_description"
 msgstr ""
-"This is the page that users see when the login to SKIP for the first time."
+"This is the page that users see when they login to SKIP for the first time."
 "<br />Write about the purpose and outline of the site and important rules of "
 "using SKIP.<br />Also write about the security policy and how to make use of "
-"the site in terms of businiess.<br />It is linked from the footer in the "
+"the site in terms of business.<br />It is linked from the footer in the "
 "system."
 
 #: app/controllers/admin/documents_controller.rb:22
@@ -1002,11 +1002,12 @@ msgstr "Choose how many days activation URLs stay valid since issued."
 
 #: app/models/admin/setting.rb:67
 msgid "Admin::Setting|Close question limit"
-msgstr ""
+msgstr "Questioning Period (days)"
 
 #: app/models/admin/setting.rb:68
 msgid "Admin::Setting|Close question limit description"
 msgstr ""
+"You can set the time limit for a question to stay open. It will be automatically set to \"Solved\" after the time limit has passed since it has been posted."
 
 #: app/models/admin/setting.rb:34
 msgid "Admin::Setting|Contact addr"
@@ -1128,11 +1129,12 @@ msgstr ""
 
 #: app/models/admin/setting.rb:65
 msgid "Admin::Setting|Entry showed tab limit per page"
-msgstr ""
+msgstr "Entries per Tab"
 
 #: app/models/admin/setting.rb:66
 msgid "Admin::Setting|Entry showed tab limit per page description"
 msgstr ""
+"The number of entries shown in each tab when showing tabs in \"My Page\"."
 
 #: app/models/admin/setting.rb:38
 msgid "Admin::Setting|Footer first"
@@ -1152,7 +1154,7 @@ msgstr "Second Line of Footer"
 #: app/models/admin/setting.rb:41
 msgid "Admin::Setting|Footer second description"
 msgstr ""
-"Message to be shown at the secibd line of footer. It is recommended to put "
+"Message to be shown at the second line of footer. It is recommended to put "
 "telephone numbers / email address / contact person for inquiries.  HTML tags "
 "are allowed.<p style=\"color:red;\">You can also use JavaScript etc. but "
 "remember to take care of security issues.</p>"
@@ -1160,6 +1162,7 @@ msgstr ""
 #: app/models/admin/setting.rb:50
 msgid "Admin::Setting|Googlemap description"
 msgstr ""
+"Check to enable embedding Google Maps in rich texts."
 
 #: app/models/admin/setting.rb:55
 msgid "Admin::Setting|Hide email"
@@ -1310,6 +1313,7 @@ msgstr "You can change the name of point button for blogs and forums."
 #: app/models/admin/setting.rb:49
 msgid "Admin::Setting|Slideshare description"
 msgstr ""
+"Check to enable embedding Slideshare slides in rich texts."
 
 #: app/models/admin/setting.rb:53
 msgid "Admin::Setting|Stop new user"
@@ -1353,6 +1357,7 @@ msgstr " "
 #: app/models/admin/setting.rb:48
 msgid "Admin::Setting|Youtube description"
 msgstr ""
+"Check to enable embedding Youtube videos in rich texts."
 
 #: app/models/admin/share_file.rb:26
 msgid "Admin::ShareFile|Category"
@@ -1663,7 +1668,7 @@ msgstr ""
 #: app/controllers/admin/users_controller.rb:124
 msgid ""
 "Administrative user has already been registered. Log in with the account or "
-"contact {contact_link} in case of failure."
+"contact %{contact_link} in case of failure."
 msgstr ""
 
 #: app/helpers/groups_helper.rb:22
@@ -1820,8 +1825,8 @@ msgstr ""
 msgid "Are you sure destroing with nest comments?"
 msgstr ""
 
-#: app/views/group/_action_box.html.erb:20
-msgid "Are you sure leave the group?"
+#: app/views/group/_action_box.html.erb:22
+msgid "Are you sure to leave the group?"
 msgstr ""
 
 #: app/helpers/share_file_helper.rb:26
@@ -1932,7 +1937,7 @@ msgid "Basic Information"
 msgstr ""
 
 #: app/views/search/_full_text_search.html.erb:43
-msgid "Because of the limited view, is less than the actual number."
+msgid "Some results are not shown due to the publicity limits."
 msgstr ""
 
 #: app/views/histories/index.html.erb:14
