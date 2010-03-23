@@ -19,7 +19,7 @@ class Admin::BoardEntryCommentsController < Admin::ApplicationController
 
   private
   def load_parent
-    @board_entry ||= Admin::BoardEntry.find(params[:board_entry_id])
+    @board_entry ||= Admin::BoardEntry.find_by_tenant_id_and_id!(current_tenant.id, params[:board_entry_id])
   end
 
   def url_prefix

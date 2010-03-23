@@ -15,8 +15,8 @@
 
 class Admin::MastersController < Admin::ApplicationController
   def index
-    @group_categories = Admin::GroupCategory.all
-    @user_profile_master_categories = Admin::UserProfileMasterCategory.all
-    @user_profile_masters = Admin::UserProfileMaster.all
+    @group_categories = Admin::GroupCategory.find_all_by_tenant_id(current_tenant.id)
+    @user_profile_master_categories = Admin::UserProfileMasterCategory.find_all_by_tenant_id(current_tenant.id)
+    @user_profile_masters = Admin::UserProfileMaster.find_all_by_tenant_id(current_tenant.id)
   end
 end

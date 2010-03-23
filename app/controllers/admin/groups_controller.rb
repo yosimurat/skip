@@ -17,7 +17,7 @@ class Admin::GroupsController < Admin::ApplicationController
   include Admin::AdminModule::AdminRootModule
 
   def destroy
-    @group = Admin::Group.find(params[:id])
+    @group = Admin::Group.find_by_tenant_id_and_id!(current_tenant.id, params[:id])
     @group.logical_destroy
 
     respond_to do |format|

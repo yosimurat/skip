@@ -19,7 +19,7 @@ class Admin::GroupParticipationsController < Admin::ApplicationController
 
   private
   def load_parent
-    @group ||= Admin::Group.find(params[:group_id])
+    @group ||= Admin::Group.find_by_tenant_id_and_id!(current_tenant.id, params[:group_id])
   end
 
   def url_prefix
