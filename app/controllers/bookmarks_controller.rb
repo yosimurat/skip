@@ -31,6 +31,12 @@ class BookmarksController < ApplicationController
     flash.now[:notice] = _('No matching bookmarks found') if @bookmarks.empty?
   end
 
+  # ログ解析のためにブックマーククリックでの遷移をログに残すためのAction
+  # ブックマークのURLクリック時に非同期でリクエストされる
+  def touch_bookmark_url
+    render :text => '', :layout => false
+  end
+
 private
   def setup_layout
     @main_menu = @title = _('Bookmarks')

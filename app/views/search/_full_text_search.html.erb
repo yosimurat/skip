@@ -43,3 +43,16 @@
 <div class="g_desc"><%= _('Because of the limited view, is less than the actual number.') %></div>
   <% end -%>
 <% end %>
+
+<% content_for :javascript_initializers do -%>
+  $j('.g_title a').click(function() {
+    $j.ajax({
+      type: 'GET',
+      url: '<%= url_for :controller => 'search', :action => 'touch_full_text_search' %>',
+      data: {target_url: this.href},
+      success: function() {},
+      error: function() {},
+      complete: function() {}
+    });
+  });
+<% end -%>
