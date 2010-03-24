@@ -13,8 +13,6 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# FIXME new, edit, updateに本人かどうかのチェックがいる
-# FIXME new, update, agreementにrequired_loginに相当するチェックがいる
 class UsersController < ApplicationController
   skip_before_filter :prepare_session, :only => %w(agreement new update_active)
   skip_before_filter :sso, :only => %w(agreement new update_active)
@@ -129,11 +127,19 @@ class UsersController < ApplicationController
 
   private
   def registerable_filter
+    # 本人のみ許可
+    if current_target_user.id != current_user.id
+      redirect_to root_url
+      return false
+    end
+
+    # 未使用ユーザのみ許可
     if current_user and !current_user.unused?
       redirect_to root_url
       return false
     end
 
+    # ユーザ登録可能状態の時のみ許可
     if Admin::Setting.stop_new_user
       @deny_message = _("New user registration is suspended for now.")
     end
