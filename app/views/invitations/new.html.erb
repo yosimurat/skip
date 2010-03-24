@@ -15,8 +15,12 @@
             <td><%= f.text_field :subject, :size => 60 %></td>
           </tr>
           <tr>
-            <th><%= f.label :body %></th>
-            <td><%= f.text_area :body, :size => '60x20' %></td>
+            <th><%= f.label :body %><%= _('(When the email send, the body template append to the body.)') %></th>
+            <td>
+              <%= f.text_area :body, :size => '60x15' %>
+              <pre><%= h(@invitation.body_template) %></pre>
+              <%= f.hidden_field :body_template %>
+            </td>
           </tr>
       </table>
       <%= f.submit _('Send'), :disable_with => _('Sending...') %>
