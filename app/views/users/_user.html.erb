@@ -1,4 +1,5 @@
 <% group ||= nil %>
+<% action_links ||= [] %>
 <ul class="user_box ui-corner-all">
   <li class="image"><%= user_link_to_with_portrait(user)%></li>
   <% if group -%>
@@ -9,5 +10,8 @@
   <li class="data_row"><%= user_link_to user %></li>
   <li class="data_row"><%= h user.section %></li>
   <li class="data_row"><%= user.retired? ? content_tag(:b, _('This user has already left.'), :class => 'retired') : h(user.before_access) %></li>
+  <% action_links.each do |action_link| -%>
+    <li class="data_row"><%= action_link %></li>
+  <% end -%>
 </ul>
 

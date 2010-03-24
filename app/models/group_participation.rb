@@ -61,18 +61,27 @@ class GroupParticipation < ActiveRecord::Base
   end
 
   # TODO 回帰テストを書く
-  def join! target_user, options = {}
+  def join! current_user, options = {}
     self.waiting = (!options[:force] && self.group.protected?)
     if self.new_record?
       self.save!
-      target_user.notices.create!(:target => self) unless target_user.notices.find_by_target_id(self.group.id)
+      self.user.notices.create!(:target => self) unless self.user.notices.find_by_target_id(self.group.id)
+      unless self.waiting?
+        if self.user.id == current_user.id
+          self.group.group_participations.only_owned.each do |owner_participation|
+            SystemMessage.create_message :message_type => 'JOIN', :user_id => owner_participation.user_id, :message_hash => {:group_id => group.id}
+          end
+        else
+          SystemMessage.create_message :message_type => 'FORCED_JOIN', :user_id => self.user.id, :message_hash => {:group_id => self.group.id}
+        end
+      end
       if block_given?
         yield true, self
       else
         true
       end
     else
-      self.errors.add_to_base _("%s has already joined / applied to join this group.") % target_user.name
+      self.errors.add_to_base _("%s has already joined / applied to join this group.") % self.user.name
       if block_given?
         yield false, self
       else

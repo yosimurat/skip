@@ -40,7 +40,10 @@ ActionController::Routing::Routes.draw do |map|
       user.resources :groups, :only => %w(index)
     end
     tenant.resources :groups, :member => {:members => :get} do |group|
-      group.resources :group_participations, :only => %w(create destroy), :member => { :manage_members => :get, :manage_waiting_members => :get, :add_admin_control => :put, :remove_admin_control => :put, :approve => :put, :disapprove => :delete }
+      group.resources :group_participations, :only => %w(new destroy), :collection => { :manage_members => :get, :manage_waiting_members => :get }, :member => { :add_admin_control => :put, :remove_admin_control => :put, :approve => :put, :disapprove => :delete }
+      group.resources :users, :only => [] do |user|
+        user.resources :group_participations, :only => %w(create)
+      end
       group.resources :board_entries, :member => {:print => :get, :toggle_hide => :put}, :collection => {:preview => :post} do |board_entry|
         board_entry.resources :entry_trackbacks, :only => %w(destroy)
         board_entry.resource :board_entry_point, :only => [], :member => {:pointup => :put}

@@ -16,7 +16,7 @@
 class GroupsController < ApplicationController
   include AccessibleGroup
   before_filter :setup_layout, :except => %w(new create)
-  before_filter :target_group_required => %w(show update destroy)
+  before_filter :target_group_required => %w(show update destroy members)
   before_filter :required_full_accessible_group, :only => %w(update destroy)
   after_filter :remove_system_message, :only => %w(show members)
 

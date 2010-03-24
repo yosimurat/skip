@@ -41,6 +41,7 @@
       </tr>
     <% end %>
     </table>
+    <%= link_to _('New %{model}') % {:model => _('Member')}, new_polymorphic_path([current_tenant, current_target_group, :group_participation]) %>
   </div>
   <%= i18n_will_paginate_with_container_wrapper @participations %>
 <% end -%>

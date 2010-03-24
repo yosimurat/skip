@@ -1,0 +1,36 @@
+<% content_for :contents_left do -%>
+  <%= render :partial => "groups/manage_action_box" %>
+<% end -%>
+
+<% content_for :contents_right do -%>
+<div class="search_cond_space ui-corner-all">
+  <% form_for @search, :url => new_polymorphic_path([current_tenant, current_target_group, :group_participation]) do |f| %>
+    <table class="search_cond_box">
+      <tr>
+        <th><%= f.label :section_like, s_('User|Section') %></th>
+        <td><%= f.select :section_like, User.grouped_sections, :include_blank => true %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :name_like, s_('User|Name') %></th>
+        <td><%= f.text_field :name_like %></td>
+      </tr>
+      <tr>
+    </table>
+    <div class="submit">
+      <%= f.submit _('Search') %>
+    </div>
+  <% end -%>
+  <div class="search_result_space">
+  <% unless @users.empty? -%>
+    <%= i18n_will_paginate_with_container_wrapper @users %>
+    <% @users.each do |user| -%>
+      <% action_links = [] %>
+      <% action_links << (user.joined?(current_target_group) ? _('Joined') : link_to(_('Add as Member'), [current_tenant, current_target_group, user, :group_participations], :method => :post)) %>
+      <%= render :partial => 'users/user', :locals => {:user => user, :action_links => action_links} %>
+    <% end -%>
+    <div class="clear_left"></div>
+    <%= i18n_will_paginate_with_container_wrapper @users %>
+  <% end -%>
+  </div>
+</div>
+<% end -%>
