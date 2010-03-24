@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.7.0\n"
-"POT-Creation-Date: 2010-03-24 10:39+0900\n"
+"POT-Creation-Date: 2010-03-24 14:20+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -278,6 +278,10 @@ msgstr ""
 msgid "(This screen is to avoid security risks ralated to direct downloading)"
 msgstr ""
 
+#: app/views/invitations/new.html.erb:18
+msgid "(When the email send, the body template append to the body.)"
+msgstr ""
+
 #: app/views/bookmark/new.html.erb:17
 msgid "(Will open as a new window)"
 msgstr ""
@@ -409,6 +413,7 @@ msgstr[1] ""
 msgid "Account Information"
 msgstr ""
 
+#: app/views/user/_account_information.html.erb:1
 #: app/views/user/show.html.erb:21
 msgid "Account information"
 msgstr ""
@@ -1594,7 +1599,8 @@ msgstr ""
 "Check to lock the user. Locked users are not allowed to login until they are "
 "unchecked or their password are reset."
 
-#: app/models/admin/user.rb:28 app/views/user/show.html.erb:36
+#: app/models/admin/user.rb:28 app/views/user/_account_information.html.erb:16
+#: app/views/user/show.html.erb:36
 #: app/views/portal/_registration_form.html.erb:16
 #: app/views/admin/users/import.html.erb:20
 msgid "Admin::User|Name"
@@ -2258,7 +2264,7 @@ msgstr ""
 
 #: app/helpers/user_helper.rb:44 app/controllers/services_controller.rb:44
 #: app/controllers/bookmark_controller.rb:102
-#: app/controllers/bookmarks_controller.rb:36
+#: app/controllers/bookmarks_controller.rb:42
 #: app/views/shared/_global_navigation.html.erb:7
 #: app/views/admin/_data_menu_box.html.erb:8
 msgid "Bookmarks"
@@ -3782,7 +3788,7 @@ msgstr ""
 msgid "Introduction: "
 msgstr ""
 
-#: app/views/user/show.html.erb:90
+#: app/views/user/_against_chains.html.erb:3
 msgid "Introductions"
 msgstr ""
 
@@ -4372,12 +4378,12 @@ msgstr ""
 msgid "No matching data found."
 msgstr ""
 
-#: app/controllers/user_controller.rb:51
+#: app/controllers/user_controller.rb:56
 msgid "No matching entries found."
 msgstr ""
 
 #: app/controllers/groups_controller.rb:33
-#: app/controllers/user_controller.rb:111
+#: app/controllers/user_controller.rb:116
 msgid "No matching groups found."
 msgstr ""
 
@@ -4974,7 +4980,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: app/helpers/user_helper.rb:38 app/views/user/show.html.erb:13
-#: app/views/users/index.html.erb:14
+#: app/views/user/show_retired.html.erb:3 app/views/users/index.html.erb:14
 msgid "Profile"
 msgstr ""
 
@@ -5402,7 +5408,7 @@ msgstr ""
 
 #: app/views/platform/_mail_form.html.erb:7
 #: app/views/platform/reset_openid.html.erb:25
-#: app/views/invitations/new.html.erb:22
+#: app/views/invitations/new.html.erb:26
 msgid "Send"
 msgstr ""
 
@@ -5428,7 +5434,7 @@ msgstr ""
 msgid "Send the URL to the email address below."
 msgstr ""
 
-#: app/views/invitations/new.html.erb:22
+#: app/views/invitations/new.html.erb:26
 msgid "Sending..."
 msgstr ""
 
@@ -6047,11 +6053,11 @@ msgstr ""
 msgid "The titles are shared among all users so be careful upon updating."
 msgstr ""
 
-#: app/controllers/user_controller.rb:56 app/controllers/user_controller.rb:82
+#: app/controllers/user_controller.rb:61 app/controllers/user_controller.rb:87
 msgid "There are no entries posted."
 msgstr ""
 
-#: app/controllers/user_controller.rb:168
+#: app/controllers/user_controller.rb:173
 msgid "There are no introductions."
 msgstr ""
 
@@ -6772,7 +6778,8 @@ msgstr ""
 msgid "User|Disclosure|true"
 msgstr ""
 
-#: app/models/user.rb:- app/views/user/show.html.erb:41
+#: app/models/user.rb:- app/views/user/_account_information.html.erb:21
+#: app/views/user/show.html.erb:41
 #: app/views/portal/_registration_form.html.erb:20
 #: app/views/shared/_password_login_form.html.erb:11
 #: app/views/platform/_mail_form.html.erb:3
@@ -6783,11 +6790,13 @@ msgstr ""
 msgid "User|Enable simple login"
 msgstr ""
 
-#: app/models/user.rb:- app/views/user/show.html.erb:51
+#: app/models/user.rb:- app/views/user/_account_information.html.erb:31
+#: app/views/user/show.html.erb:51
 msgid "User|Issued at"
 msgstr ""
 
-#: app/models/user.rb:- app/views/user/show.html.erb:55
+#: app/models/user.rb:- app/views/user/_account_information.html.erb:35
+#: app/views/user/show.html.erb:55
 msgid "User|Last authenticated at"
 msgstr ""
 
@@ -6819,7 +6828,8 @@ msgstr ""
 msgid "User|Password confirmation"
 msgstr ""
 
-#: app/models/user.rb:- app/views/user/show.html.erb:60
+#: app/models/user.rb:- app/views/user/_account_information.html.erb:40
+#: app/views/user/show.html.erb:60
 msgid "User|Password expires at"
 msgstr ""
 
@@ -6839,7 +6849,8 @@ msgstr ""
 msgid "User|Reset auth token expires at"
 msgstr ""
 
-#: app/models/user.rb:- app/views/user/show.html.erb:46
+#: app/models/user.rb:- app/views/user/_account_information.html.erb:26
+#: app/views/user/show.html.erb:46
 #: app/views/portal/_registration_form.html.erb:24
 #: app/views/shared/_symbol_autocomplete_field.html.erb:10
 #: app/views/admin/users/import.html.erb:9 app/views/users/index.html.erb:10
@@ -7016,7 +7027,7 @@ msgstr ""
 msgid "You are invited to the %{abbr_app_title} from %{user_name}"
 msgstr ""
 
-#: app/controllers/user_controller.rb:82
+#: app/controllers/user_controller.rb:87
 msgid "You are not allowed to see the page."
 msgstr ""
 
@@ -7874,6 +7885,7 @@ msgstr ""
 #: app/helpers/initial_settings_helper.rb:43
 #: app/controllers/admin/users_controller.rb:196
 #: app/controllers/admin/users_controller.rb:204 app/models/share_file.rb:312
+#: app/views/user/_account_information.html.erb:11
 #: app/views/user/show.html.erb:31
 #: app/views/portal/_registration_form.html.erb:42
 #: app/views/admin/users/create_uid.html.erb:12
