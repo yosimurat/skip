@@ -22,7 +22,7 @@
         <th class="num"><%= "r#{params[:to]}" %></th>
 
         <th><%= _("Content of rev.%{from}") % {:from => params[:from]} %></th>
-        <th><%= _("Content of rev.%{to}") % {:from => params[:to]} %></th>
+        <th><%= _("Content of rev.%{to}") % {:to => params[:to]} %></th>
       </tr>
 
       <% @diffs.each do |symbol, (old_n,old_s), (new_n,new_s)| -%>
