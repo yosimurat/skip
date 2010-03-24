@@ -2844,7 +2844,7 @@ msgid "Display Order"
 msgstr "表示順"
 
 #: app/views/histories/diff.html.erb:7
-msgid "Display change part from rev.%{from} to rev.%{to}"
+msgid "Changes between rev.%{from} and rev.%{to}"
 msgstr "リビジョン%{from}からリビジョン%{to}への変更点"
 
 #: app/views/chapters/_page_content.html.erb:29
