@@ -23,6 +23,11 @@ class UserController < ApplicationController
   def show
     # 紹介してくれた人一覧
     @against_chains = @user.against_chains.order_new.limit(5)
+    if current_target_user.retired?
+      render :show_retired
+    else
+      render
+    end
   end
 
   # tab_menu
