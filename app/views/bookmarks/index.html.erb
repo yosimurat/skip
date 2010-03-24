@@ -33,6 +33,7 @@
     <% end -%>
   </div>
 
+  <%= i18n_page_entries_info @bookmarks, :entry_name => 'Bookmark' %>
   <%= i18n_will_paginate_with_container_wrapper @bookmarks %>
   <%= render :partial => "topix_bookmarks", :locals => { :bookmarks => @bookmarks, :title => _('Search result') } %>
   <%= i18n_will_paginate_with_container_wrapper @bookmarks %>

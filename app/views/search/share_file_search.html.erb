@@ -18,6 +18,7 @@
   <% end -%>
 </div>
 
+<%= i18n_page_entries_info @share_files, :entry_name => 'Share File' %>
 <%= i18n_will_paginate_with_container_wrapper @share_files %>
 <%= render :partial => "share_file/topix_share_files", :locals => { :share_files => @share_files, :title => _('Search result'), :symbol2name_hash => BoardEntry.get_symbol2name_hash(@share_files) } %>
 <%= i18n_will_paginate_with_container_wrapper @share_files %>
