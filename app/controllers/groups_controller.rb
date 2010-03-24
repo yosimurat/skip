@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
         if search_params[:unjoin]
           search_params[:unjoin] = search_params[:unjoin] == 'false' ?  nil : current_user.id
         end
-        Group.active.order_active
+        Group.active.tenant_id_is(current_tenant.id).order_active
       end
     @search = @search.search(search_params)
     # paginteの検索条件にgroup byが含まれる場合、countでgroup by が考慮されないので
