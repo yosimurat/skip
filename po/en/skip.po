@@ -2792,7 +2792,7 @@ msgid "Display page"
 msgstr ""
 
 #: app/views/histories/index.html.erb:20
-msgid "Display rev.%{revision}"
+msgid "Show rev.%{revision}"
 msgstr ""
 
 #: app/views/entries/_entry_detail.html.erb:223
@@ -2801,16 +2801,16 @@ msgstr ""
 
 #: app/helpers/application_helper.rb:62
 msgid ""
-"Displaying %{entry_name} <b>%{start}&nbsp;-&nbsp;%{end}</b> of <b>%{max}</b> "
+"Showing %{entry_name} <b>%{start}&nbsp;-&nbsp;%{end}</b> of <b>%{max}</b> "
 "in total."
 msgstr ""
 
 #: app/helpers/application_helper.rb:58
-msgid "Displaying <b>1</b> %s."
+msgid "Showing <b>1</b> %s."
 msgstr ""
 
 #: app/helpers/application_helper.rb:59
-msgid "Displaying <b>all %d</b> %s."
+msgid "Showing <b>all %d</b> %s."
 msgstr ""
 
 #: app/views/user_mailer/smtp/sent_cleaning_notification.html.erb:3

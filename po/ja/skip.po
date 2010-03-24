@@ -2852,7 +2852,7 @@ msgid "Display page"
 msgstr "ページを表示する"
 
 #: app/views/histories/index.html.erb:20
-msgid "Display rev.%{revision}"
+msgid "Show rev.%{revision}"
 msgstr "リビジョン%{revision}を表示"
 
 #: app/views/entries/_entry_detail.html.erb:223
@@ -2861,18 +2861,18 @@ msgstr "表示: "
 
 #: app/helpers/application_helper.rb:62
 msgid ""
-"Displaying %{entry_name} <b>%{start}&nbsp;-&nbsp;%{end}</b> of <b>%{max}</b> "
+"Showing %{entry_name} <b>%{start}&nbsp;-&nbsp;%{end}</b> of <b>%{max}</b> "
 "in total."
 msgstr ""
 "全<b>%{max}</b>件中 <b>%{start}&nbsp;-&nbsp;%{end}</b>件目の%{entry_name}を表"
 "示しています。"
 
 #: app/helpers/application_helper.rb:58
-msgid "Displaying <b>1</b> %s."
+msgid "Showing <b>1</b> %s."
 msgstr "<b>1</b>件の%sを表示しています。"
 
 #: app/helpers/application_helper.rb:59
-msgid "Displaying <b>all %d</b> %s."
+msgid "Showing <b>all %d</b> %s."
 msgstr "全<b>%d</b>件の%sを表示しています。"
 
 #: app/views/user_mailer/smtp/sent_cleaning_notification.html.erb:3

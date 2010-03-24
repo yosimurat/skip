@@ -55,11 +55,11 @@ module ApplicationHelper
     if collection.total_pages < 2
       case collection.size
       when 0; _("No matching %s found.") % _(entry_name.pluralize)
-      when 1; _("Displaying <b>1</b> %s.") % _(entry_name)
-      else;   _("Displaying <b>all %d</b> %s.") % [collection.size, _(entry_name.pluralize)]
+      when 1; _("Showing <b>1</b> %s.") % _(entry_name)
+      else;   _("Showing <b>all %d</b> %s.") % [collection.size, _(entry_name.pluralize)]
       end
     else
-      _("Displaying %{entry_name} <b>%{start}&nbsp;-&nbsp;%{end}</b> of <b>%{max}</b> in total.") % {
+      _("Showing %{entry_name} <b>%{start}&nbsp;-&nbsp;%{end}</b> of <b>%{max}</b> in total.") % {
         :entry_name => _(entry_name.pluralize),
         :start => collection.offset + 1,
         :end => collection.offset + collection.length,
