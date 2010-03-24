@@ -1,0 +1,23 @@
+<% unless @against_chains.empty? -%>
+<div class="relative100">
+  <h2 class="topix_title"><%= icon_tag('asterisk_orange') %><%= link_to _('Introductions'), :action => 'social', :menu => 'social_chain', :uid => current_target_user.uid %></h2>
+  <div class="topix_body">
+    <table class="normal user_chain ui-corner-all">
+    <% @against_chains.each do |chain| -%>
+      <tr>
+        <th rowspan="2">
+          <%= user_link_to_with_portrait(chain.from_user, :width => 60, :height => 40) %><br/>
+          <%= user_link_to(chain.from_user) %>
+        </th>
+        <td>
+          <%= chain_tag_search_links_tag chain.tags_as_s %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= render_richtext(chain.comment) %></td>
+      </tr>
+    <% end -%>
+    </table>
+  </div>
+</div>
+<% end -%>
