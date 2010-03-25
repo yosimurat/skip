@@ -15,8 +15,7 @@
 
 class Admin::User < User
   require 'fastercsv'
-  belongs_to :tenant, :class_name => 'Admin::Tenant'
-  has_many :openid_identifiers, :dependent => :destroy, :class_name => 'Admin::OpenidIdentifier'
+  belongs_to :tenant, :class_name => 'Admin::Tenant' has_many :openid_identifiers, :dependent => :destroy, :class_name => 'Admin::OpenidIdentifier'
   has_many :user_profile_values, :dependent => :destroy, :class_name => 'Admin::UserProfileValue'
   has_one :picture, :dependent => :destroy, :class_name => 'Admin::Picture'
 
@@ -112,8 +111,8 @@ class Admin::User < User
     enable_forgot_password? ? update_all('locked = 1, auth_session_token = NULL, remember_token = NULL, remember_token_expires_at = NULL', ['status = ?', 'ACTIVE']) : 0
   end
 
-  def self.reset_all_password_expiration_periods
-    update_all("password_expires_at = '#{Admin::Setting.password_change_interval.day.since.to_formatted_s(:db)}'", ['status = ?', 'ACTIVE'])
+  def self.reset_all_password_expiration_periods tenant
+    update_all("password_expires_at = '#{Admin::Setting.password_change_interval(tenant).day.since.to_formatted_s(:db)}'", ['status = ?', 'ACTIVE'])
   end
 
   def to_param

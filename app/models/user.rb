@@ -166,7 +166,7 @@ class User < ActiveRecord::Base
   def before_save
     if password_required?
       self.crypted_password = encrypt(password)
-      self.password_expires_at = Time.now.since(Admin::Setting.password_change_interval.day)
+      self.password_expires_at = Time.now.since(Admin::Setting.password_change_interval(self.tenant).day)
       self.reset_auth_token = nil
       self.reset_auth_token_expires_at = nil
       self.locked = false
@@ -196,7 +196,7 @@ class User < ActiveRecord::Base
     if password_required?
       errors.add(:password, _('shall not be the same with login ID.')) if self.uid == self.password
       errors.add(:password, _('shall not be the same with the previous one.')) if self.crypted_password_was == encrypt(self.password)
-      errors.add(:password, Admin::Setting.password_strength_validation_error_message) unless Admin::Setting.password_strength_regex.match(self.password)
+      errors.add(:password, Admin::Setting.password_strength_validation_error_message(self.tenant)) unless Admin::Setting.password_strength_regex(self.tenant).match(self.password)
     end
   end
 
@@ -210,7 +210,7 @@ class User < ActiveRecord::Base
   end
 
   def self.auth(tenant, code_or_email, password, key_phrase = nil)
-    unless user = tenant.users.find_by_code_or_email_with_key_phrase(code_or_email, key_phrase)
+    unless user = tenant.users.find_by_code_or_email_with_key_phrase(tenant, code_or_email, key_phrase)
       result, result_user = false, nil
     else
       if user.unused?
@@ -272,7 +272,7 @@ class User < ActiveRecord::Base
     users.each do |u|
       if u.unused?
         u.activation_token = make_token
-        u.activation_token_expires_at = Time.now.since(activation_lifetime.day)
+        u.activation_token_expires_at = Time.now.since(activation_lifetime(tenant).day)
         u.save_without_validation!
         unused_users << u
       elsif u.active?
@@ -283,8 +283,8 @@ class User < ActiveRecord::Base
     [unused_users, active_users]
   end
 
-  def self.activation_lifetime
-    Admin::Setting.activation_lifetime
+  def self.activation_lifetime tenant
+    Admin::Setting.activation_lifetime(tenant)
   end
 
   def self.find_by_openid_identifier openid_identifier
@@ -379,7 +379,7 @@ class User < ActiveRecord::Base
   end
 
   def update_auth_session_token!
-    if Admin::Setting.enable_single_session || self.auth_session_token.blank?
+    if Admin::Setting.enable_single_session(self.tenant) || self.auth_session_token.blank?
       self.auth_session_token = self.class.make_token
     end
     save(false)
@@ -397,7 +397,7 @@ class User < ActiveRecord::Base
 
   def issue_activation_code
     self.activation_token = self.class.make_token
-    self.activation_token_expires_at = Time.now.since(self.class.activation_lifetime.day)
+    self.activation_token_expires_at = Time.now.since(self.class.activation_lifetime(self.tenant).day)
   end
 
   def activate!
@@ -435,7 +435,7 @@ class User < ActiveRecord::Base
   end
 
   def within_time_limit_of_password?
-    if Admin::Setting.enable_password_periodic_change
+    if Admin::Setting.enable_password_periodic_change(self.tenant)
       self.password_expires_at && Time.now <= self.password_expires_at
     else
       true
@@ -532,9 +532,9 @@ private
     find_by_email(code_or_email)
   end
 
-  def self.find_by_code_or_email_with_key_phrase(code_or_email, key_phrase)
-    if Admin::Setting.enable_login_keyphrase
-      find_by_code_or_email(code_or_email) if Admin::Setting.login_keyphrase == key_phrase
+  def self.find_by_code_or_email_with_key_phrase(tenant, code_or_email, key_phrase)
+    if Admin::Setting.enable_login_keyphrase(tenant)
+      find_by_code_or_email(code_or_email) if Admin::Setting.login_keyphrase(tenant) == key_phrase
     else
       find_by_code_or_email(code_or_email)
     end
@@ -550,8 +550,8 @@ private
   end
 
   def self.auth_failed user
-    if !user.locked? && Admin::Setting.enable_user_lock
-      if user.trial_num < Admin::Setting.user_lock_trial_limit
+    if !user.locked? && Admin::Setting.enable_user_lock(user.tenant)
+      if user.trial_num < Admin::Setting.user_lock_trial_limit(user.tenant)
         user.trial_num += 1
         user.save(false)
       else

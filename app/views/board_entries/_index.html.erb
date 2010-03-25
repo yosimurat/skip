@@ -26,7 +26,7 @@
         <td>
           <%= f.radio_button :order_sort_type, "date" %><%= f.label :order_sort_type_date, _('[Sort by %s]') % s_('BoardEntry|Last updated') %>
           <%= f.radio_button :order_sort_type, "access" %><%= f.label :order_sort_type_access, _('[Sort by %s]') % _('Access Count') %>
-          <%= f.radio_button :order_sort_type, "point" %><%= f.label :order_sort_type_point, _('[Sort by %s]') % Admin::Setting.point_button %>
+          <%= f.radio_button :order_sort_type, "point" %><%= f.label :order_sort_type_point, _('[Sort by %s]') % Admin::Setting.point_button(current_tenant) %>
         </td>
       </tr>
       <%= render :partial => 'search/tag_search', :locals => {:tags => @tags} %>

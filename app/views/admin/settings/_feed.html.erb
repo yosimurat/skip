@@ -8,7 +8,7 @@
     <a id="add_feed_item" href="#"><%= _("[Add feed field]")%></a>
     <a id="remove_feed_item" href="#"><%= _("[Delete feed field]")%></a>
     </p>
-    <% Admin::Setting.mypage_feed_settings.each_with_index do |feed_setting, index| -%>
+    <% Admin::Setting.mypage_feed_settings(current_tenant).each_with_index do |feed_setting, index| -%>
       <% @feed_setting = feed_setting %>
       <% @index = index %>
       <%= render :partial => 'feed_item' %>

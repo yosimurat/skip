@@ -1,12 +1,12 @@
 <%= @header %>
 
 <%= _('Access the URL below to complete the registration process.')%>
-<%= n_("The URL below will be expired %s day after this email has been sent.", "The URL below will be expired %s days after this email has been sent.", User.activation_lifetime) % User.activation_lifetime %>
+<%= n_("The URL below will be expired %s day after this email has been sent.", "The URL below will be expired %s days after this email has been sent.", User.activation_lifetime(@tenant)) % User.activation_lifetime(@tenant) %>
 
 <%= @signup_url %>
 
 <% if enable_activate? -%>
-<%= _('Access the URL below and click on the link [Register your profile and start using %s].') % Admin::Setting.abbr_app_title%>
+<%= _('Access the URL below and click on the link [Register your profile and start using %s].') % Admin::Setting.abbr_app_title(@tenant) %>
 <%= _('You can restart the user registration.')%>
 
 <%= @site_url %>

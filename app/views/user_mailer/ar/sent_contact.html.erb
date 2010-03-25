@@ -2,7 +2,7 @@
     <%= @owner.name %>
 <% end -%>
     <%= @entry.title %>
-<% if Admin::Setting.contact_mail_contain_contents -%>
+<% if Admin::Setting.contact_mail_contain_contents(@owner.tenant) -%>
 
 <%= convert_plain(@entry) %>
 

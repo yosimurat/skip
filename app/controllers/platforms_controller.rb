@@ -71,7 +71,7 @@ class PlatformsController < ApplicationController
       if @user.active?
         @user.issue_reset_auth_token
         @user.save_without_validation!
-        UserMailer::Smtp.deliver_sent_forgot_password(email, reset_password_url(@user.reset_auth_token))
+        UserMailer::Smtp.deliver_sent_forgot_password(current_tenant, email, reset_password_url(@user.reset_auth_token))
         flash[:notice] = _("An email contains the URL for resetting the password has been sent to %s.") % email
         redirect_to [current_tenant, :platform]
       else
@@ -120,7 +120,7 @@ class PlatformsController < ApplicationController
       if  @user.unused?
         @user.issue_activation_code
         @user.save_without_validation!
-        UserMailer::Smtp.deliver_sent_activate(email, signup_url(@user.activation_token))
+        UserMailer::Smtp.deliver_sent_activate(current_tenant, email, @user, signup_url(@user.activation_token))
         flash[:notice] = _("An email containing the URL for signup will be sent to %{email}.") % {:email => email}
         redirect_to [current_tenant, :platform]
       else
@@ -164,7 +164,7 @@ class PlatformsController < ApplicationController
       if user.active?
         user.issue_reset_auth_token
         user.save_without_validation!
-        UserMailer::Smtp.deliver_sent_forgot_openid(email, reset_openid_url(user.reset_auth_token))
+        UserMailer::Smtp.deliver_sent_forgot_openid(current_tenant, email, reset_openid_url(user.reset_auth_token))
         flash[:notice] = _("Sent an email containing the URL for resettig OpenID URL to %{email}.") % {:email => email}
         redirect_to [current_tenant, :platform]
       else
@@ -294,7 +294,7 @@ class PlatformsController < ApplicationController
   def set_error_message_from_user_and_redirect(user)
     logger.error("[FIXED OP ERROR] User cannot create because #{user.errors.full_messages}")
     logger.error("[DETAIL USER INFO] #{user.attributes}")
-    set_error_message_and_redirect _("Failed to register user. Contact administrator %{contact_addr}.<br/>%{msg}")%{:contact_addr => Admin::Setting.contact_addr, :msg => user.errors.full_messages}
+    set_error_message_and_redirect _("Failed to register user. Contact administrator %{contact_addr}.<br/>%{msg}")%{:contact_addr => Admin::Setting.contact_addr(current_tenant), :msg => user.errors.full_messages}
   end
 
   def set_error_message_not_create_new_user_and_redirect
@@ -319,7 +319,7 @@ class PlatformsController < ApplicationController
         else
           if user
             if user.locked?
-              reason = _("%s is locked. Please reset password.") % Admin::Setting.login_account
+              reason = _("%s is locked. Please reset password.") % Admin::Setting.login_account(current_tenant)
               redirect_to_url = forgot_password_url
             elsif !user.within_time_limit_of_password?
               reason = _("Password is expired. Please reset password.")

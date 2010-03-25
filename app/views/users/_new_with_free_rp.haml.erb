@@ -1,7 +1,7 @@
 <%= render :partial => 'registration_sequence' %>
 <div class="desc ui-corner-all margin05em">
-  <%= _("You are about to register the basic information for using %s.") % h(Admin::Setting.abbr_app_title)%><br/>
-  <%= _("Register a unique user ID in %s, your name to be shown and your email address.") % h(Admin::Setting.abbr_app_title)%>
+  <%= _("You are about to register the basic information for using %s.") % h(Admin::Setting.abbr_app_title(current_tenant))%><br/>
+  <%= _("Register a unique user ID in %s, your name to be shown and your email address.") % h(Admin::Setting.abbr_app_title(current_tenant))%>
 </div>
 <div>
 <% form_for(@user, :url => { :controller => :portal, :action => :registration }) do |f| -%>

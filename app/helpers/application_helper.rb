@@ -147,7 +147,7 @@ module ApplicationHelper
   end
 
   def header_logo_link(url = root_url)
-    "<div id=\"logo\">" + link_to(image_tag("/custom/images/header_logo.png", :alt => h(Admin::Setting.abbr_app_title), :height => "45"), url) + "</div>"
+    "<div id=\"logo\">" + link_to(image_tag("/custom/images/header_logo.png", :alt => h(Admin::Setting.abbr_app_title(current_tenant)), :height => "45"), url) + "</div>"
   end
 
   def favicon_include_tag
@@ -161,7 +161,7 @@ module ApplicationHelper
       link_to(h(p.setting.name), h(p.setting.root_url), :class => "underline_link")
     end
     unless application_links.empty?
-      application_links.unshift(link_to(Admin::Setting.abbr_app_title, tenant_root_url(current_tenant), :class => "underline_link"))
+      application_links.unshift(link_to(Admin::Setting.abbr_app_title(current_tenant), tenant_root_url(current_tenant), :class => "underline_link"))
       application_link = content_tag :div, :id => 'collaboration_apps_link' do
         application_links.join('&nbsp')
       end
@@ -172,13 +172,13 @@ module ApplicationHelper
   def footer_link
     returning str = "" do |s|
       s << content_tag(:div, :class => "info") do
-        content_tag(:div, Admin::Setting.footer_first, :class => "first") +
-          content_tag(:div, Admin::Setting.footer_second, :class => "second")
+        content_tag(:div, Admin::Setting.footer_first(current_tenant), :class => "first") +
+          content_tag(:div, Admin::Setting.footer_second(current_tenant), :class => "second")
       end
       if footer_image_link_tag = SkipEmbedded::InitialSettings['footer_image_link_tag']
         s << content_tag(:div, footer_image_link_tag, :class => "powered_by")
       else
-        s << content_tag(:div, ("powered_by"+link_to(image_tag("/custom/images/footer_logo.png"), h(Admin::Setting.footer_image_link_url))), :class => "powered_by")
+        s << content_tag(:div, ("powered_by"+link_to(image_tag("/custom/images/footer_logo.png"), h(Admin::Setting.footer_image_link_url(current_tenant)))), :class => "powered_by")
       end
     end
   end

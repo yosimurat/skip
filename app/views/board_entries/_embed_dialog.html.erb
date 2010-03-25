@@ -19,9 +19,9 @@
               <th>
                 <%= label_tag 'embed_html', _('Corresponding sites') %>
                 <span class="small_text">
-                  <%= 'YouTube ' if Admin::Setting.youtube %>
-                  <%= 'SlideShare ' if Admin::Setting.slideshare %>
-                  <%= 'Google Maps ' if Admin::Setting.googlemap%>
+                  <%= 'YouTube ' if Admin::Setting.youtube(current_tenant) %>
+                  <%= 'SlideShare ' if Admin::Setting.slideshare(current_tenant) %>
+                  <%= 'Google Maps ' if Admin::Setting.googlemap(current_tenant)%>
                 </span>
               </th>
             </tr>

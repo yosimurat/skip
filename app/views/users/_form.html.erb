@@ -14,7 +14,7 @@
   </tr>
   <tr>
     <th><%= form.label :section %></th>
-  <% if Admin::Setting.enable_change_section -%>
+  <% if Admin::Setting.enable_change_section(current_tenant) -%>
     <td>
       <% if sections = current_tenant.users.grouped_sections -%>
       <p>

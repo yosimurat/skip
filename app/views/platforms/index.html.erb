@@ -8,12 +8,12 @@
 <% end -%>
 
 <div id="platform_main_wrapper">
-  <div id="platform_main" class="<%= Admin::Setting.enable_login_keyphrase ? 'with_keyphrase' : "without_keyphrase" %>">
+  <div id="platform_main" class="<%= Admin::Setting.enable_login_keyphrase(current_tenant) ? 'with_keyphrase' : "without_keyphrase" %>">
     <div class="col">
       <% if enable_activate? -%>
       <div class="login-box ui-corner-all">
         <p><%= _('Signup') %></p>
-        <div style="text-align: center; font-weight: bold; font-size: 14px;"><%= link_to _('Register your profile and start using %s') % Admin::Setting.abbr_app_title, activate_tenant_platform_url(current_tenant) %></div>
+        <div style="text-align: center; font-weight: bold; font-size: 14px;"><%= link_to _('Register your profile and start using %s') % Admin::Setting.abbr_app_title(current_tenant), activate_tenant_platform_url(current_tenant) %></div>
       </div>
       <% end -%>
     </div>
@@ -25,7 +25,7 @@
 </div>
 
 <% content_for :header_form do -%>
-  <div id="login_container" class="<%= Admin::Setting.enable_login_keyphrase ? 'with_keyphrase' : "without_keyphrase" %> ui-corner-all">
+  <div id="login_container" class="<%= Admin::Setting.enable_login_keyphrase(current_tenant) ? 'with_keyphrase' : "without_keyphrase" %> ui-corner-all">
     <%= render :partial => 'shared/login_form' %>
   </div>
 <% end -%>

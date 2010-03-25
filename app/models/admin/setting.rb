@@ -14,6 +14,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Admin::Setting < ActiveRecord::Base
+  belongs_to :tenant
   # ================================================================================================
   # 通常のカラム
   # ================================================================================================
@@ -119,10 +120,9 @@ class Admin::Setting < ActiveRecord::Base
   cattr_accessor :available_settings
   @@available_settings = YAML::load(File.open("#{File.dirname(__FILE__)}/../../../config/settings.yml"))
 
-  SMTP_AUTHENTICATIONS = %w(plain login cram_md5).freeze
   PASSWORD_STRENGTH_VALUES = %w(low middle high custom).freeze
 
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :scope => :tenant_id
   validates_inclusion_of :name, :in => @@available_settings.keys
 
   validates_numericality_of :value, :only_integer => true, :greater_than => 0, :if => Proc.new { |setting| @@available_settings[setting.name]['format'] == 'int' }
@@ -135,7 +135,8 @@ class Admin::Setting < ActiveRecord::Base
                       :with => URI.regexp(['http', 'https']),
                       :if => Proc.new { |setting| @@available_settings[setting.name]['format'] == 'url' && @@available_settings[setting.name]['allow_blank'].nil? }
 
-  validates_presence_of :value, :if => Proc.new{ |setting| setting.class.password_strength == 'custom' && setting.name == 'custom_password_strength_regex' || setting.name == 'custom_password_strength_validation_message' }
+  validates_presence_of :name, :tenant_id
+  validates_presence_of :value, :if => Proc.new{ |setting| setting.class.password_strength(setting.tenant) == 'custom' && setting.name == 'custom_password_strength_regex' || setting.name == 'custom_password_strength_validation_message' }
 
   validates_format_of :value, :with => Authentication.email_regex, :if => Proc.new { |setting| @@available_settings[setting.name]['format'] == 'email' }
 
@@ -174,13 +175,13 @@ class Admin::Setting < ActiveRecord::Base
   end
 
   # Returns the value of the setting named name
-  def self.[](name)
+  def self.[](tenant, name)
     v = @cached_settings[name]
-    v ? v : (@cached_settings[name] = find_or_default(name).value)
+    v ? v : (@cached_settings[name] = find_or_default(tenant, name).value)
   end
 
-  def self.[]=(name, v)
-    setting = find_or_default(name)
+  def self.[]=(tenant, name, v)
+    setting = find_or_default(tenant, name)
     setting.value = (v ? v : "")
     @cached_settings[name] = nil
     setting.save
@@ -192,20 +193,20 @@ class Admin::Setting < ActiveRecord::Base
   # or set using Setting.some_setting_name = "some value"
   @@available_settings.each do |name, params|
     src = <<-END_SRC
-    def self.#{name}
-      self[:#{name}]
+    def self.#{name}(tenant)
+      self.[](tenant, :#{name})
     end
 
     def self.default_#{name}
       self.available_settings['#{name}']['default']
     end
 
-    def self.#{name}?
-      self[:#{name}] == 'true'
+    def self.#{name}?(tenant)
+      self.[](tenant, :#{name}) == 'true'
     end
 
-    def self.#{name}=(value)
-      self[:#{name}] = value
+    def self.set_#{name}(tenant, value)
+      self.[]=(tenant, :#{name}, value)
     end
     END_SRC
     class_eval src, __FILE__, __LINE__
@@ -223,7 +224,7 @@ class Admin::Setting < ActiveRecord::Base
     end
   end
 
-  def self.password_strength_regex
+  def self.password_strength_regex tenant
     lower = 'a-z'
     lower_negative_lookahead = "(?!^[^#{lower}]*$)"
     upper = 'A-Z'
@@ -240,17 +241,17 @@ class Admin::Setting < ActiveRecord::Base
       when 'low' then /#{low_regex_s}/
       when 'middle' then /#{middle_regex_s}/
       when 'high' then /#{high_regex_s}/
-      when 'custom' then /#{Admin::Setting.custom_password_strength_regex}/
+      when 'custom' then /#{Admin::Setting.custom_password_strength_regex(tenant)}/
       else /#{middle_regex_s}/
     end
   end
 
-  def self.password_strength_validation_error_message
-    if PASSWORD_STRENGTH_VALUES.include? Admin::Setting.password_strength
-      if Admin::Setting.password_strength == 'custom'
-        Admin::Setting.custom_password_strength_validation_message
+  def self.password_strength_validation_error_message tenant
+    if PASSWORD_STRENGTH_VALUES.include? Admin::Setting.password_strength(tenant)
+      if Admin::Setting.password_strength(tenant) == 'custom'
+        Admin::Setting.custom_password_strength_validation_message(tenant)
       else
-        _('Admin::Setting|Password strength|Validation message ' + password_strength)
+        _('Admin::Setting|Password strength|Validation message ' + password_strength(tenant))
       end
     else
       _('Admin::Setting|Password strength|Validation message middle')
@@ -266,10 +267,10 @@ class Admin::Setting < ActiveRecord::Base
   private
   # Returns the Setting instance for the setting named name
   # (record found in database or new record with default value)
-  def self.find_or_default(name)
+  def self.find_or_default(tenant, name)
     name = name.to_s
     raise "There's no setting named #{name}" unless @@available_settings.has_key?(name)
-    setting = find_by_name(name)
-    setting ||= new(:name => name, :value => @@available_settings[name]['default'])
+    setting = find_by_tenant_id_and_name(tenant.id, name)
+    setting ||= new(:tenant_id => tenant.id, :name => name, :value => @@available_settings[name]['default'])
   end
 end

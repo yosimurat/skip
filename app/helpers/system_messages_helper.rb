@@ -26,7 +26,7 @@ module SystemMessagesHelper
       system_message_links << link_to(icon_tag('information') + 'SKIPのご利用ありがとうございます。品質向上のためのアンケートを実施しています。この機会に皆様の声をぜひお聞かせください。ご協力お願いします。 ', 'https://spreadsheets.google.com/viewform?formkey=dHprYkFZODlOYnVlRVo5OS1sYzhYWlE6MA', :id => 'enquete_link')
     end
 
-    if Admin::Setting.enable_password_periodic_change && !current_user.password_expires_at.blank? && current_user.password_expires_at.ago(2.week) < Time.now
+    if Admin::Setting.enable_password_periodic_change(current_tenant) && !current_user.password_expires_at.blank? && current_user.password_expires_at.ago(2.week) < Time.now
       system_message_links << link_to(icon_tag('bullet_error') + _('The password expiration date (%s) approaches') % current_user.password_expires_at.ago(1.day).strftime(_('%B %d %Y')), edit_tenant_user_password_path(current_tenant, current_user))
     end
 

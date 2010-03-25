@@ -36,7 +36,7 @@
     <thead>
       <tr>
         <th><%= _('Line') %></th>
-        <th><label><%= h Admin::Setting.login_account %></label></th>
+        <th><label><%= h Admin::Setting.login_account(current_tenant) %></label></th>
         <th><%= label Admin::User.name, :name %></th>
         <th><%= label Admin::User.name, :email %></th>
         <th><%= label Admin::User.name, :section %></th>

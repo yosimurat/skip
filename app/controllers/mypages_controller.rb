@@ -128,7 +128,7 @@ class MypagesController < ApplicationController
 
   private
   def per_page
-    current_user.custom.display_entries_format == 'tabs' ? Admin::Setting.entry_showed_tab_limit_per_page : 8
+    current_user.custom.display_entries_format == 'tabs' ? Admin::Setting.entry_showed_tab_limit_per_page(current_tenant) : 8
   end
 
   def setup_layout
@@ -328,15 +328,15 @@ class MypagesController < ApplicationController
 
   def unifed_feeds
     returning [] do |feeds|
-      Admin::Setting.mypage_feed_settings.each do |setting|
+      Admin::Setting.mypage_feed_settings(current_tenant).each do |setting|
         feed = nil
-        timeout(Admin::Setting.mypage_feed_timeout.to_i) do
+        timeout(Admin::Setting.mypage_feed_timeout(current_tenant).to_i) do
           feed = open(setting[:url], :proxy => SkipEmbedded::InitialSettings['proxy_url']) do |f|
             FeedNormalizer::FeedNormalizer.parse(f.read)
           end
         end
         feed.title = setting[:title] if setting[:title]
-        limit = (setting[:limit] || Admin::Setting.mypage_feed_default_limit)
+        limit = (setting[:limit] || Admin::Setting.mypage_feed_default_limit(current_tenant))
         feed.items.slice!(limit..-1) if feed.items.size > limit
         feeds << feed
       end

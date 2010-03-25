@@ -3,7 +3,7 @@
   <div class="box_space_body">
   <ul>
     <li><%= link_to_unless_current _('Edit Profile'), edit_tenant_user_path(current_tenant, current_user) %></li>
-    <% if Admin::Setting.enable_change_picture -%>
+    <% if Admin::Setting.enable_change_picture(current_tenant) -%>
       <li><%= link_to_unless_current _('Change Profile Picture'), new_tenant_user_picture_path(current_tenant, current_user) %></li>
     <% end -%>
     <% if SkipEmbedded::InitialSettings['password_edit_setting'] and login_mode?(:password) -%>

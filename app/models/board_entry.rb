@@ -465,7 +465,7 @@ class BoardEntry < ActiveRecord::Base
       end
       # FIXME: 管理機能で足跡の件数を減らしたときに、これまでの最大数の足跡がついたものは、減らない
       # レアケースなので、一旦PEND
-      if  EntryAccess.count(:conditions => ["board_entry_id = ?", id]) >= Admin::Setting.access_record_limit
+      if  EntryAccess.count(:conditions => ["board_entry_id = ?", id]) >= Admin::Setting.access_record_limit(self.tenant)
         EntryAccess.find(:first, :conditions => ["board_entry_id = ?", id], :order => "updated_on ASC").destroy
       end
       EntryAccess.create(:board_entry_id => id, :visitor_id => login_user_id)

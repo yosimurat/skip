@@ -28,7 +28,7 @@ module InitialSettingsHelper
   end
 
   def enable_activate?
-    login_mode?(:password) && !Admin::Setting.stop_new_user && SkipEmbedded::InitialSettings['mail']['show_mail_function']
+    login_mode?(:password) && !Admin::Setting.stop_new_user(current_tenant) && SkipEmbedded::InitialSettings['mail']['show_mail_function']
   end
 
   def enable_signup?

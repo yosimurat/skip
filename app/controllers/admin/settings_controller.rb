@@ -47,7 +47,7 @@ class Admin::SettingsController < Admin::ApplicationController
           value = value.values.delete_if { |item| (item.class == String) ? item.blank? : has_empty_value?(item.values) }
         end
         # Admin::Setting[name] = value と評価すると value の値がmapに収納されてしまうので
-        Admin::Setting.[]=(name,value)
+        Admin::Setting.[]=(current_tenant, name, value)
       end
       @error_messages = Admin::Setting.error_messages(settings)
       raise ActiveRecord::Rollback unless @error_messages.empty?
@@ -71,7 +71,7 @@ class Admin::SettingsController < Admin::ApplicationController
   end
 
   def current_setting symbolize_key
-    value = @current_setting_hash[symbolize_key] || ERB::Util.h(Admin::Setting.send(symbolize_key.to_s))
+    value = @current_setting_hash[symbolize_key] || ERB::Util.h(Admin::Setting.send(symbolize_key.to_s, current_tenant))
     if value == 'true'
       true
     elsif value == 'false'

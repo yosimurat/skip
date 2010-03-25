@@ -269,7 +269,7 @@ class ShareFile < ActiveRecord::Base
                                                :include => :user)
     buf = ""
     CSV::Writer.generate(buf) do |csv|
-      header = [_("Date Accessed"), Admin::Setting.login_account, _('user name')]
+      header = [_("Date Accessed"), Admin::Setting.login_account(self.tenant), _('user name')]
       header.map! {|col| NKF.nkf('-sZ', col) }
       csv << header
       share_file_accesses.each do |access|

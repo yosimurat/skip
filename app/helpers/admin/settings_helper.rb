@@ -41,10 +41,6 @@ module Admin::SettingsHelper
       help_icon_tag(:content => s_(Admin::Setting.name + '|' + (symbolize_key.to_s + '_description').humanize))
   end
 
-  def smtp_authentication_container
-    [''] + Admin::Setting::SMTP_AUTHENTICATIONS
-  end
-
   def password_strength_container
     returning container = [] do
       Admin::Setting::PASSWORD_STRENGTH_VALUES.each do |value|
@@ -54,7 +50,7 @@ module Admin::SettingsHelper
   end
 
   def enable_any_embed?
-    Admin::Setting.youtube || Admin::Setting.slideshare || Admin::Setting.googlemap
+    Admin::Setting.youtube(current_tenant) || Admin::Setting.slideshare(current_tenant) || Admin::Setting.googlemap(current_tenant)
   end
 end
 

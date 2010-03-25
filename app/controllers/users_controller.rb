@@ -100,7 +100,7 @@ class UsersController < ApplicationController
         @user.save!
 
         UserAccess.create!(:user_id => @user.id, :last_access => Time.now, :access_count => 0)
-        UserMailer::Smtp.deliver_sent_signup_confirm(@user.email, @user.code, root_url)
+        UserMailer::Smtp.deliver_sent_signup_confirm(@user.email, @user, root_url)
 
         @user.activate!
 
@@ -140,7 +140,7 @@ class UsersController < ApplicationController
     end
 
     # ユーザ登録可能状態の時のみ許可
-    if Admin::Setting.stop_new_user
+    if Admin::Setting.stop_new_user(current_tenant)
       @deny_message = _("New user registration is suspended for now.")
     end
     if @deny_message

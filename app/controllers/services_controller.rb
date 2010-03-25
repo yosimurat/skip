@@ -33,7 +33,7 @@ class ServicesController < ActionController::Base
       end
       result = { :group_symbols => group_hash }
     else
-      result = { :error => _("No user information registered in %s." ) % Admin::Setting.abbr_app_title}
+      result = { :error => _("No user information registered in %s." ) % Admin::Setting.abbr_app_title(current_tenant)}
     end
     render :text => result.to_json
   end

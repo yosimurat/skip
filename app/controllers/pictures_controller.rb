@@ -54,7 +54,7 @@ class PicturesController < ApplicationController
       unless picture
         flash[:warn] = _('Picture could not be deleted since it does not found.')
       else
-        if Admin::Setting.enable_change_picture
+        if Admin::Setting.enable_change_picture(current_tenant)
           picture.destroy
           flash[:notice] = _("Picture was deleted successfully.")
         else

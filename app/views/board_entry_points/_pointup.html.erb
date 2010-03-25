@@ -6,10 +6,10 @@
 <% entry_point = entry.state -%>
 <% if entry.accessible_without_writer?(current_user) -%>
   <% form_for entry_point, :url => polymorphic_path([current_tenant, current_target_owner, entry, :board_entry_point], :action => :pointup, :format => :js), :html => {:method => :put, :id => :entry_point_form} do  |f| -%>
-    <%= f.submit "#{entry_point.point} #{h Admin::Setting.point_button}" %>
+    <%= f.submit "#{entry_point.point} #{h Admin::Setting.point_button(current_tenant)}" %>
   <% end -%>
 <% else -%>
-  <%= _("(Got %{point} %{point_button})") % {:point => entry_point.point , :point_button => h(Admin::Setting.point_button)}%>
+  <%= _("(Got %{point} %{point_button})") % {:point => entry_point.point , :point_button => h(Admin::Setting.point_button(current_tenant))}%>
 <% end -%>
 
 <% content_for :javascript_initializers do -%>

@@ -29,31 +29,30 @@ private
     end
   end
 
-  def site_url
-    #root_url
-    default_url_options[:protocol] + default_url_options[:host]
+  def site_url tenant
+    default_url_options[:protocol] + default_url_options[:host] + "tenant/#{tenant.id}"
   end
 
-  def contact_addr
-    Admin::Setting.contact_addr
+  def contact_addr tenant
+    Admin::Setting.contact_addr(tenant)
   end
 
-  def from
-    self.class.base64(Admin::Setting.abbr_app_title) + "<#{contact_addr}>"
+  def from tenant
+    self.class.base64(Admin::Setting.abbr_app_title(tenant)) + "<#{contact_addr(tenant)}>"
   end
 
   def header
   end
 
-  def footer
+  def footer tenant
     noreply_description = _('*This email is automatically delivered from the system. Please do not reply.')
     contact_description = _('For questions regarding this email, please contact:') % {:sender => sender}
     "----\n#{noreply_description}\n\n" +
-    "*#{contact_description}\n#{contact_addr}\n\n*#{sender}\n#{site_url}"
+    "*#{contact_description}\n#{contact_addr(tenant)}\n\n*#{sender(tenant)}\n#{site_url(tenant)}"
   end
 
-  def sender
-    ERB::Util.html_escape(Admin::Setting.abbr_app_title)
+  def sender tenant
+    ERB::Util.html_escape(Admin::Setting.abbr_app_title(tenant))
   end
 
   def smtp_settings

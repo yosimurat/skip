@@ -9,7 +9,7 @@ class AppliedEmailsController < ApplicationController
     @applied_email.email = params[:applied_email][:email]
 
     if @applied_email.save
-      UserMailer::Smtp.deliver_sent_apply_email_confirm(@applied_email.email, complete_tenant_user_applied_email_url(current_tenant, current_user, :id => @applied_email.onetime_code))
+      UserMailer::Smtp.deliver_sent_apply_email_confirm(current_tenant, @applied_email.email, complete_tenant_user_applied_email_url(current_tenant, current_user, :id => @applied_email.onetime_code))
       flash[:notice] = _("Your request of changing email address accepted. Check your email to complete the process.")
       redirect_to new_tenant_user_applied_email_path(current_tenant, current_user)
     else

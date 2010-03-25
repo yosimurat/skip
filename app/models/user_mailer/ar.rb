@@ -17,7 +17,6 @@ class UserMailer::AR < UserMailer::Base
   self.delivery_method = :activerecord
 
   def sent_contact(recipient, owner, entry)
-    user_name = entry.user.name
     if recipient.include? ","
       @bcc        = recipient
     else
@@ -27,19 +26,19 @@ class UserMailer::AR < UserMailer::Base
     subject_part << s_("BoardEntry|Aim type|#{entry.aim_type}") unless entry.is_entry?
     subject_part << owner.name
     subject_part << entry.title
-    @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title}] #{subject_part.join(': ')}")
-    @from       = from
+    @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title(owner.tenant)}] #{subject_part.join(': ')}")
+    @from       = from(owner.tenant)
     @send_on    = Time.now
     @headers    = {}
-    @body       = {:name => user_name, :entry => entry, :header => header, :footer => footer, :owner => owner}
+    @body       = {:entry => entry, :header => header, :footer => footer(owner.tenant), :owner => owner}
   end
 
-  def sent_message(recipient, link_url, message ,message_manage_url)
+  def sent_message(tenant, recipient, link_url, message ,message_manage_url)
     @recipients = recipient
-    @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title}] #{message}")
+    @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title(tenant)}] #{message}")
     @from       = from
     @send_on    = Time.now
     @headers    = {}
-    @body       = {:link_url => link_url, :message => message, :message_manage_url => message_manage_url, :header => header, :footer => footer}
+    @body       = {:link_url => link_url, :message => message, :message_manage_url => message_manage_url, :header => header, :footer => footer(tenant)}
   end
 end
