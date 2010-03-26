@@ -37,7 +37,7 @@ private
     Admin::Setting.contact_addr(tenant)
   end
 
-  def from tenant
+  def from_addr tenant
     self.class.base64(Admin::Setting.abbr_app_title(tenant)) + "<#{contact_addr(tenant)}>"
   end
 
@@ -46,7 +46,7 @@ private
 
   def footer tenant
     noreply_description = _('*This email is automatically delivered from the system. Please do not reply.')
-    contact_description = _('For questions regarding this email, please contact:') % {:sender => sender}
+    contact_description = _('For questions regarding this email, please contact:') % {:sender => sender(tenant)}
     "----\n#{noreply_description}\n\n" +
     "*#{contact_description}\n#{contact_addr(tenant)}\n\n*#{sender(tenant)}\n#{site_url(tenant)}"
   end

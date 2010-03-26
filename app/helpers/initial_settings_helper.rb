@@ -14,21 +14,21 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 module InitialSettingsHelper
-  def login_mode?(mode)
+  def login_mode?(mode, tenant = current_tenant)
     case mode
     when :password
-      return current_tenant.initial_settings['login_mode'] == 'password'
+      return tenant.initial_settings['login_mode'] == 'password'
     when :free_rp
-      return (current_tenant.initial_settings['login_mode'] == 'rp' and current_tenant.initial_settings['fixed_op_url'].blank?)
+      return (tenant.initial_settings['login_mode'] == 'rp' and tenant.initial_settings['fixed_op_url'].blank?)
     when :fixed_rp
-      return (current_tenant.initial_settings['login_mode'] == 'rp' and !current_tenant.initial_settings['fixed_op_url'].blank?)
+      return (tenant.initial_settings['login_mode'] == 'rp' and !tenant.initial_settings['fixed_op_url'].blank?)
     else
       return false
     end
   end
 
-  def enable_activate?
-    login_mode?(:password) && !Admin::Setting.stop_new_user(current_tenant) && GlobalInitialSetting['mail']['show_mail_function']
+  def enable_activate? tenant = current_tenant
+    login_mode?(:password, tenant) && !Admin::Setting.stop_new_user(tenant) && GlobalInitialSetting['mail']['show_mail_function']
   end
 
   def enable_signup?

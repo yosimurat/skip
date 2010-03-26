@@ -27,7 +27,7 @@ class UserMailer::AR < UserMailer::Base
     subject_part << owner.name
     subject_part << entry.title
     @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title(owner.tenant)}] #{subject_part.join(': ')}")
-    @from       = from(owner.tenant)
+    @from       = from_addr(owner.tenant)
     @send_on    = Time.now
     @headers    = {}
     @body       = {:entry => entry, :header => header, :footer => footer(owner.tenant), :owner => owner}

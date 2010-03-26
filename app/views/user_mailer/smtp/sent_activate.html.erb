@@ -5,7 +5,7 @@
 
 <%= @signup_url %>
 
-<% if enable_activate? -%>
+<% if enable_activate?(@tenant) -%>
 <%= _('Access the URL below and click on the link [Register your profile and start using %s].') % Admin::Setting.abbr_app_title(@tenant) %>
 <%= _('You can restart the user registration.')%>
 

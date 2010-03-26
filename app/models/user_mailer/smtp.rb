@@ -16,8 +16,8 @@
 class UserMailer::Smtp < UserMailer::Base
   def sent_signup_confirm(recipient, login_user, login_url)
     @recipients = recipient
-    @subject    = UserMailer::Base.base64(_("[%s] User registration completed") % Admin::Setting.abbr_app_title(login_user.tenant)
-    @from       = from(tenant)
+    @subject    = UserMailer::Base.base64(_("[%s] User registration completed") % Admin::Setting.abbr_app_title(login_user.tenant))
+    @from       = from_addr(login_user.tenant)
     @send_on    = Time.now
     @headers    = {}
     @body       = {:login_user => login_user, :login_url => login_url, :header => header, :footer => footer(login_user.tenant)}
@@ -26,7 +26,7 @@ class UserMailer::Smtp < UserMailer::Base
   def sent_apply_email_confirm(tenant, recipient, confirm_url)
     @recipients = recipient
     @subject    = UserMailer::Base.base64(_("[%s] Confirmation for changing email address") % Admin::Setting.abbr_app_title(tenant))
-    @from       = from(tenant)
+    @from       = from_addr(tenant)
     @send_on    = Time.now
     @headers    = {}
     @body       = {:confirm_url => confirm_url, :header => header, :footer => footer(tenant)}
@@ -35,7 +35,7 @@ class UserMailer::Smtp < UserMailer::Base
   def sent_forgot_password(tenant, recipient, reset_password_url)
     @recipients = recipient
     @subject    = UserMailer::Base.base64(_("[%s] Resetting your password") % Admin::Setting.abbr_app_title(tenant))
-    @from       = from(tenant)
+    @from       = from_addr(tenant)
     @send_on    = Time.now
     @headers    = {}
     @body       = {:reset_password_url => reset_password_url, :header => header, :footer => footer(tenant)}
@@ -44,7 +44,7 @@ class UserMailer::Smtp < UserMailer::Base
   def sent_forgot_openid(tenant, recipient, reset_openid_url)
     @recipients = recipient
     @subject    = UserMailer::Base.base64(_("[%s] Resetting your OpenID") % Admin::Setting.abbr_app_title(tenant))
-    @from       = from(tenant)
+    @from       = from_addr(tenant)
     @send_on    = Time.now
     @headers    = {}
     @body       = {:reset_openid_url => reset_openid_url, :header => header, :footer => footer(tenant)}
@@ -53,7 +53,7 @@ class UserMailer::Smtp < UserMailer::Base
   def sent_activate(tenant, recipient, user, signup_url)
     @recipients = recipient
     @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title(tenant)}] " + _('Activate your account and start using'))
-    @from       = from(tenant)
+    @from       = from_addr(tenant)
     @send_on    = Time.now
     @headers    = {}
     @body       = {:tenant => tenant, :signup_url => signup_url, :site_url => site_url(tenant), :header => header, :footer => footer(tenant)}
@@ -62,7 +62,7 @@ class UserMailer::Smtp < UserMailer::Base
   def sent_cleaning_notification(tenant, recipient)
     @recipients = recipient
     @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title(tenant)}] " + _('Remember to clean up the user data periodically'))
-    @from       = from(tenant)
+    @from       = from_addr(tenant)
     @send_on    = Time.now
     @headers    = {}
     @body       = {:header => header, :footer => footer(tenant)}
@@ -71,7 +71,7 @@ class UserMailer::Smtp < UserMailer::Base
   def sent_invitation(tenant, invitation)
     @recipients = invitation.email
     @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title(tenant)}] " + invitation.subject)
-    @from       = from(tenant)
+    @from       = from_addr(tenant)
     @send_on    = Time.now
     @headers    = {}
     @body       = invitation.body
