@@ -10,4 +10,14 @@ class Tenant < ActiveRecord::Base
   has_many :site_counts, :dependent => :destroy
 
   serialize :initial_settings
+
+  validates_presence_of :initial_settings
+
+  cattr_accessor :config_path
+  @@config_path = File.expand_path("config/initial_settings.yml", Rails.root)
+
+  def before_validation_on_create
+    env = defined?(RAILS_ENV) ? RAILS_ENV : "development"
+    self.initial_settings = YAML.load_file(@@config_path)[env]
+  end
 end
