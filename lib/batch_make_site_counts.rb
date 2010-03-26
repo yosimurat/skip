@@ -18,7 +18,9 @@ require File.expand_path(File.dirname(__FILE__) + "/batch_base")
 class BatchMakeSiteCounts < BatchBase
 
   def self.execute options
-    SiteCount.create_data
+    Tenant.all.each do |tenant|
+      SiteCount.create_data(tenant)
+    end
   end
 end
 

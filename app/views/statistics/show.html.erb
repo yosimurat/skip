@@ -1,6 +1,6 @@
 <% content_for :contents_left do -%>
   <div id="calendar">
-    <%= render :partial => "shared/calendar",
+    <%= render :partial => "calendar",
                :locals => {
                  :sel_year => @date.year,
                  :sel_month => @date.month,
@@ -44,5 +44,5 @@
 <% end -%>
 
 <% content_for :javascript_initializers do -%>
-    setupLoadCalendar("<%= url_for(:action => 'load_calendar') %>");
+  setupLoadCalendar("<%= polymorphic_url([current_tenant, :statistics], :action => :load_calendar) %>");
 <% end -%>

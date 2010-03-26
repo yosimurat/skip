@@ -16,11 +16,11 @@
 class StatisticsController < ApplicationController
   before_filter :setup_layout
 
-  def index
+  def show
     @date = Date.today
     if (params[:year] and params[:month] and params[:day])
       @date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      @site_count = SiteCount.get_by_date(@date) || SiteCount.new
+      @site_count = SiteCount.get_by_date(current_tenant, @date) || SiteCount.new
     else
       @site_count = SiteCount.find(:first, :order => "created_on desc") || SiteCount.new
     end
@@ -29,7 +29,7 @@ class StatisticsController < ApplicationController
   end
 
   def load_calendar
-    render :partial => "shared/calendar",
+    render :partial => "calendar",
            :locals => { :sel_year => params[:year].to_i,
                         :sel_month => params[:month].to_i,
                         :sel_day => nil,

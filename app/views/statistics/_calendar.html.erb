@@ -1,14 +1,13 @@
-<%# locals: sel_year, sel_month, sel_day, item_count, action -%>
+<%# locals: sel_year, sel_month, sel_day, item_count -%>
 <% selected_month = Date.new(sel_year.to_i, sel_month.to_i, 1) -%>
 <% prev_month = selected_month << 1 -%>
 <% next_month = selected_month >> 1 -%>
 <% now_month = Date.today -%>
-<% action ||= 'index' -%>
 <div class="box_space" id="calendar_body">
   <div class="box_space_body">
     <%= calendar(:year => sel_year, :month => sel_month) do |day|
           if item_count == nil or item_count[day.mday]
-            cell_text = link_to(day.mday, :action => action, :year => sel_year, :month => sel_month, :day => day.mday)
+            cell_text = link_to(day.mday, polymorphic_url([current_tenant, :statistics], :year => sel_year, :month => sel_month, :day => day.mday))
           else
             cell_text = day.mday
           end
@@ -28,7 +27,7 @@
   </div>
   <div class="box_space_bottom">
     <%= link_to(_('[Prev month]'), '#', :id => 'prev_month_link', :year => prev_month.year, :month => prev_month.month) %>
-    <%= link_to(_('[Today]'), {:action => action, :year => now_month.year, :month => now_month.month, :day => now_month.day}) %>
+    <%= link_to(_('[Today]'), polymorphic_url([current_tenant, :statistics], :year => now_month.year, :month => now_month.month, :day => now_month.day)) %>
     <%= link_to(_('[Next month]'), '#', :id => 'next_month_link', :year => next_month.year, :month => next_month.month) %>
   </div>
 </div><!-- box_space -->

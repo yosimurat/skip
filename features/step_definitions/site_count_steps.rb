@@ -1,9 +1,9 @@
 Given /^現在の統計データを退避する$/ do
-  @site_count_was = SiteCount.create_data
+  @site_count_was = SiteCount.create_data(tenant)
 end
 
 Given /^統計データを取得する$/ do
-  @site_count_now = SiteCount.create_data
+  @site_count_now = SiteCount.create_data(tenant)
 end
 
 Then /^"([^\"]*)"が"([^\"]*)"変化すること$/ do |column, value|

@@ -14,6 +14,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class SiteCount < ActiveRecord::Base
+  belongs_to :tenant
   STATISTICS_KEYS = %w(total_user_count today_user_count total_blog_count today_blog_count writer_at_month user_access_at_month).freeze
   STATISTICS_ITEMS = {
     :total_user_count => {
@@ -48,22 +49,23 @@ class SiteCount < ActiveRecord::Base
     }
   }.freeze
 
-  def self.get_by_date date
-    SiteCount.find(:first,
-                   :conditions => ["DATE_FORMAT(created_on, '%Y-%m-%d') = ?", date.strftime('%Y-%m-%d')]) || SiteCount.new #"
+  validates_presence_of :tenant_id
+
+  def self.get_by_date tenant, date
+    tenant.site_counts.first(:conditions => ["DATE_FORMAT(created_on, '%Y-%m-%d') = ?", date.strftime('%Y-%m-%d')]) || SiteCount.new
   end
 
   # TODO 回帰テストを書く
-  def self.create_data
+  def self.create_data(tenant)
     now = Time.now
-    SiteCount.delete_all ["created_on like ?", now.strftime("%Y-%m-%d") + "%"]
-    SiteCount.create(
+    SiteCount.delete_all ["tenant_id = ? AND created_on like ?", tenant.id, now.strftime("%Y-%m-%d") + "%"]
+    tenant.site_counts.create(
       :total_user_count => User.active.count,
       :today_user_count => UserAccess.last_access_gt(now.beginning_of_day).count,
       :total_blog_count => BoardEntry.count,
       :today_blog_count => BoardEntry.scoped(:conditions => ["created_on > ?", now.beginning_of_day]).count,
-      :writer_at_month =>  calc_writer_at_month(now),
-      :user_access_at_month => calc_user_access_at_month(now),
+      :writer_at_month =>  calc_writer_at_month(tenant, now),
+      :user_access_at_month => calc_user_access_at_month(tenant, now),
       :active_users => UserAccess.active_user.last_access_gt(now.beginning_of_day.ago(10.day)).count,
       :write_users_all => BoardEntry.active_user.publication_type_eq('public').diary.count(:distinct => true, :select => 'user_id'),
       :write_users_with_pvt => BoardEntry.active_user.diary.count(:distinct => true, :select => 'user_id'),
@@ -75,18 +77,20 @@ class SiteCount < ActiveRecord::Base
 
   private
   # ここ一ヶ月以内にコメントか記事を投稿したユーザー数
-  def self.calc_writer_at_month time_now
-    user_ids = BoardEntry.active_user.scoped(:conditions => ["created_on BETWEEN ? and ?", time_now.last_month, time_now]).map(&:user_id)
-    user_ids << BoardEntryComment.active_user.scoped(:conditions => ["created_on BETWEEN ? and ?", time_now.last_month, time_now]).map(&:user_id)
+  def self.calc_writer_at_month tenant, time_now
+    user_ids = tenant.board_entries.active_user.scoped(:conditions => ["created_on BETWEEN ? and ?", time_now.last_month, time_now]).map(&:user_id)
+    tenant_entry_ids = tenant.board_entries.map(&:id)
+    user_ids << BoardEntryComment.board_entry_id_is(tenant_entry_ids).active_user.scoped(:conditions => ["created_on BETWEEN ? and ?", time_now.last_month, time_now]).map(&:user_id)
     user_ids.flatten.uniq.size
   end
 
   # ここ一ヶ月以内にログインしたユーザの平均カウント（平日のみ）
-  def self.calc_user_access_at_month time_now
+  def self.calc_user_access_at_month tenant, time_now
     # 今日以外のデータを取得
-    site_counts = SiteCount.find(:all,
-                                 :conditions => ["created_on BETWEEN ? and ?",
-                                                 time_now.last_month, time_now.beginning_of_day])
+    site_counts = tenant.site_counts.all(:conditions => [
+      "created_on BETWEEN ? and ?",
+      time_now.last_month, time_now.beginning_of_day
+    ])
     return calc_user_access_at_month_only_weekday(site_counts)
   end
 
