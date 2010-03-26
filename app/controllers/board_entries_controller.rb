@@ -30,6 +30,10 @@ class BoardEntriesController < ApplicationController
       search_params[:owner_type] = current_target_owner.class.name
       search_params[:owner_id] = current_target_owner.id
     end
+    search_params[:selected_owner_type] ||= 'All'
+    search_params[:aim_type] ||= 'entry'
+    search_params[:order_sort_type] ||= 'date'
+
     @search = BoardEntry.accessible(current_user).tagged(params[:tag_words], params[:tag_select]).search(search_params)
 
     @entries = @search.paginate(:page => params[:page], :per_page => 25)

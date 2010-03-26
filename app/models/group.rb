@@ -83,6 +83,11 @@ class Group < ActiveRecord::Base
     { :conditions => ['created_on > ?', Time.now.ago(day_count.to_i.day)] }
   }
 
+  named_scope :group_category_id_is, proc { |group_category_ids|
+    return {} if (group_category_ids.blank? || group_category_ids == 'all')
+    { :conditions => ['group_category_id IN (?)', [group_category_ids].flatten] }
+  }
+
   named_scope :order_participate_recent, proc {
     { :order => "group_participations.created_on DESC" }
   }

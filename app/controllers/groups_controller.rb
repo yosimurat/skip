@@ -22,6 +22,7 @@ class GroupsController < ApplicationController
 
   def index
     search_params = params[:search] || {}
+    search_params[:group_category_id_is] ||= 'all'
     @search =
       if current_target_user
         current_target_user.groups.active.order_active
