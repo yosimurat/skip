@@ -63,7 +63,7 @@ end
 describe ShareFile, '#full_path' do
   before do
     @share_file_path = 'temp'
-    SkipEmbedded::InitialSettings["share_file_path"] = @share_file_path
+    GlobalInitialSetting["share_file_path"] = @share_file_path
     FileUtils.stub!(:mkdir_p)
   end
   describe 'ユーザ所有の共有ファイルの場合' do

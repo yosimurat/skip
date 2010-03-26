@@ -289,7 +289,7 @@ class ShareFile < ActiveRecord::Base
   end
 
   def dir_path
-    File.join(SkipEmbedded::InitialSettings['share_file_path'], tenant.id.to_s, owner_type.downcase, owner_id.to_s)
+    File.join(GlobalInitialSetting['share_file_path'], tenant.id.to_s, owner_type.downcase, owner_id.to_s)
   end
 #
 #  def self.total_share_file_size symbol

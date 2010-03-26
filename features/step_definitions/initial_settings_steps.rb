@@ -14,7 +14,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Given /^メール機能を有効にする$/ do
-  SkipEmbedded::InitialSettings['mail']['show_mail_function'] = true
+  GlobalInitialSetting['mail']['show_mail_function'] = true
 end
 
 Given /^お知らせ機能を有効にする$/ do

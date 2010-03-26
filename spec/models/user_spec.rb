@@ -899,8 +899,8 @@ end
 
 describe User, "#belong_symbols_with_collaboration_apps" do
   before do
-    SkipEmbedded::InitialSettings['host_and_port'] = 'test.host'
-    SkipEmbedded::InitialSettings['protocol'] = 'http://'
+    GlobalInitialSetting['host_and_port'] = 'test.host'
+    GlobalInitialSetting['protocol'] = 'http://'
     @user = stub_model(User, :belong_symbols => ["uid:a_user", "gid:a_group"], :code => "a_user")
   end
   describe "SkipEmbedded::InitialSettingsが設定されている場合" do
@@ -953,8 +953,8 @@ end
 
 describe User, "#openid_identifier" do
   before do
-    SkipEmbedded::InitialSettings['host_and_port'] = 'test.host'
-    SkipEmbedded::InitialSettings['protocol'] = 'http://'
+    GlobalInitialSetting['host_and_port'] = 'test.host'
+    GlobalInitialSetting['protocol'] = 'http://'
     @user = stub_model(User, :code => "a_user")
   end
   it "OPとして発行する OpenID identifier を返すこと" do

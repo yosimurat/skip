@@ -25,8 +25,8 @@ describe BatchMakeCache, "#create_meta" do
       :icon_type => "icon"
     }
     @result = bmc.create_meta(params)
-    SkipEmbedded::InitialSettings['protocol'] = 'http://'
-    SkipEmbedded::InitialSettings['host_and_port'] = 'localhost:3000'
+    GlobalInitialSetting['protocol'] = 'http://'
+    GlobalInitialSetting['host_and_port'] = 'localhost:3000'
   end
   it "link_urlが正しく設定されること" do
     yaml = YAML.parse(@result)

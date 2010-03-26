@@ -17,7 +17,7 @@ require 'tempfile'
 
 class ApplicationController < ActionController::Base
   include OpenidServerSystem
-  include ExceptionNotifiable if SkipEmbedded::InitialSettings['exception_notifier']['enable']
+  include ExceptionNotifiable if GlobalInitialSetting['exception_notifier']['enable']
 
   helper :all
 
@@ -184,7 +184,7 @@ protected
     else
       render :template => "system/500" , :status => :internal_server_error
 
-      if SkipEmbedded::InitialSettings['exception_notifier']['enable']
+      if GlobalInitialSetting['exception_notifier']['enable']
         deliverer = self.class.exception_data
         data = case deliverer
           when nil then {}
@@ -293,7 +293,7 @@ protected
   end
 
   def scheme
-    SkipEmbedded::InitialSettings['protocol']
+    GlobalInitialSetting['protocol']
   end
 
   def endpoint_url

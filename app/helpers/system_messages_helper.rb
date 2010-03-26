@@ -18,7 +18,7 @@ module SystemMessagesHelper
     return @system_message_links if @system_message_links
     system_message_links = []
 
-    if system_notice = SkipEmbedded::InitialSettings['system_notice'] and !system_notice['title'].blank?
+    if system_notice = GlobalInitialSetting['system_notice'] and !system_notice['title'].blank?
       system_message_links << link_to(icon_tag('information') + h(system_notice['title']), system_notice['url'])
     end
 

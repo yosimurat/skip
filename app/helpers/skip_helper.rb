@@ -86,7 +86,7 @@ module SkipHelper
 
   # Google Analytics
   def google_analytics_tag
-    unless (ga_code = SkipEmbedded::InitialSettings['google_analytics']).blank?
+    unless (ga_code = GlobalInitialSetting['google_analytics']).blank?
     <<-EOS
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

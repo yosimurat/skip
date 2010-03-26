@@ -1,0 +1,138 @@
+# SKIP(Social Knowledge & Innovation Platform)
+# Copyright (C) 2008-2010 TIS Inc.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# ==================================================================================================
+# この設定ファイルは、"global_initial_settings.yml"というファイル名でコピーして利用してください
+# ここで設定する項目は、サーバーの起動前に設定する初期設定項目です
+# 起動後に変更した場合、再起動が必要となります
+# ==================================================================================================
+
+default: &default
+
+  # ================================================================================================
+  # 以下の項目はセキュリティ上の観点から、インターネットでの稼動時は必ず変更して下さい
+  # ================================================================================================
+  session:
+    :key: _skip_session                                     # セッションの名称です。
+    :secret: change-mechange-mechange-mechange-me                   # cookieの暗号化に使う鍵です。
+  sha1_digest_key: change-me                                        # ユーザのパスワードを登録する際に使う鍵です。
+
+  # ================================================================================================
+  # バッチ・メール送信時のシステムのURLに含まれるホスト情報の設定
+  # メール送信時の本文などに利用する言語設定
+  # ================================================================================================
+  host_and_port:                                                    # システムが動作するURLのホスト部分とポート番号（例：localhost:3000 or demo.openskip.org）
+  protocol:                                                         # システムが動作する標準のプロトコル(例:http:// or https://)
+  default_locale: ja-JP                                                # メール送信時の言語設定
+
+  # ================================================================================================
+  # 共有ファイルのファイルサイズの制限に関する設定（単位：バイト）
+  #   "max_share_file_size_of_system"の値でのチェックを最優先で行います。
+  #   （ファイル単位を大きくしてもシステム全体で足りない場合、アップロードできません）
+  # ================================================================================================
+  max_share_file_size_of_system: 1073741824                         # システム全体でアップできる最大許可容量(  1GB = 1073741824 )
+  max_share_file_size: 10485760                                     # ファイル単位でアップできる最大許可容量(  10M = 10485760 )
+
+  # ================================================================================================
+  # ファイルの保存先・バッチのログ出力先に関する設定
+  # ================================================================================================
+  share_file_path: tmp/share_file_path                              # 共有ファイルの保存ディレクトリ
+  batch_log_path: log/batch.log                                     # バッチ実行時のログ出力先(指定がなければ log/batch.log)
+  cache_path: tmp/app_cache                                         # 全文検索用cacheファイルの出力先
+
+  # ================================================================================================
+  # システム運用担当者
+  # ================================================================================================
+  administrator_addr: youradmin@example.com                         # 500エラーの送信と管理者登録失敗の場合に表示されるアドレス
+
+  # ================================================================================================
+  # メールに関する設定
+  # ================================================================================================
+  raise_delivery_errors: false                                      # メール送信に失敗した場合のエラー処理を行なうか
+  # 通常のメール関連機能のための設定
+  mail:
+    enable_send_email_to_all_users: true                            # 全体へのメール送信機能を有効にするかどうか
+    smtp_settings:
+      :address:    localhost
+      :port:       25
+      :domain:     localhost.localdomain
+      :user_name:
+      :password:
+      :authentication:
+      :tls:        false                                            # ruby 1.8.6以下でtlsを有効にする場合はtrueにする
+  # システムにエラーが発生した場合にエラーメールを送信するための設定
+  exception_notifier:
+    enable: false                                                    # システムエラーをシステム運用担当者にメールするかどうか
+    sender_addr: yoursender@example.com                              # システムエラーメールの送信元アドレス
+    email_prefix: [ERROR]                                            # システムエラーメールのタイトルにつけるprefix
+    smtp_settings:
+      :address:    localhost
+      :port:       25
+      :domain:     localhost.localdomain
+      :user_name:
+      :password:
+      :authentication:
+      :tls:        false                                             # ruby 1.8.6以下でtlsを有効にする場合はtrueにする
+
+  # ================================================================================================
+  # システムからのお知らせ
+  # ================================================================================================
+  system_notice:
+    title:
+    url:
+
+  # ================================================================================================
+  # Richtextで許可する埋め込みタグのURLリスト
+  # ================================================================================================
+  # object/embed
+  whitelist_object_urls:
+    youtube:
+      - http://www.youtube.com/
+    slideshare:
+      - http://static.slidesharecdn.com/
+
+  # iframe
+  whitelist_iframe_urls:
+    googlemap:
+      - http://maps.google.co.jp/
+      - http://maps.google.com/
+
+  # ================================================================================================
+  # その他
+  # ================================================================================================
+  proxy_url:                                                         # プロキシサーバのURL(例:http://proxy.com:8080/)
+  google_analytics:                                                  # Google Analyticsを利用したアクセス解析のための設定
+  help_url: http://help.skipaas.jp/                                  # ヘルプのURL
+  what_new:                                                          # 新機能案内の設定
+    message:
+    url:
+
+####################################################################################################
+# 以下設定不要
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  delivery_method: test
+  default_locale: en
+
+cucumber:
+  <<: *default
+  delivery_method: test
+
+production:
+  <<: *default

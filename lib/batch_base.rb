@@ -17,10 +17,10 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 
 class BatchBase
   include ActionController::UrlWriter
-  default_url_options[:host] = SkipEmbedded::InitialSettings['host_and_port']
-  default_url_options[:protocol] = SkipEmbedded::InitialSettings['protocol']
+  default_url_options[:host] = GlobalInitialSetting['host_and_port']
+  default_url_options[:protocol] = GlobalInitialSetting['protocol']
 
-  @@logger = Logger.new(SkipEmbedded::InitialSettings['batch_log_path'])
+  @@logger = Logger.new(GlobalInitialSetting['batch_log_path'])
 
   include GetText
   bindtextdomain("skip", { :path => File.join(RAILS_ROOT, "locale")})
@@ -28,7 +28,7 @@ class BatchBase
   textdomain_to(ActionMailer::Base, "skip") if defined? ActionMailer::Base
 
   def self.execution options = {}
-    I18n.locale = SkipEmbedded::InitialSettings['default_locale'].to_sym
+    I18n.locale = GlobalInitialSetting['default_locale'].to_sym
 
     starttime = Time.now
     log_info "[START] <#{self.to_s}> --- start batch (#{starttime.to_s})"

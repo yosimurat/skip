@@ -1,3 +1,3 @@
-ActionMailer::Base.raise_delivery_errors = SkipEmbedded::InitialSettings['raise_delivery_errors']
+ActionMailer::Base.raise_delivery_errors = GlobalInitialSetting['raise_delivery_errors']
 
-ActionMailer::Base.smtp_settings = SkipEmbedded::InitialSettings['exception_notifier']['smtp_settings']
+ActionMailer::Base.smtp_settings = GlobalInitialSetting['exception_notifier']['smtp_settings']

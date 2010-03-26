@@ -331,7 +331,7 @@ class MypagesController < ApplicationController
       Admin::Setting.mypage_feed_settings(current_tenant).each do |setting|
         feed = nil
         timeout(Admin::Setting.mypage_feed_timeout(current_tenant).to_i) do
-          feed = open(setting[:url], :proxy => SkipEmbedded::InitialSettings['proxy_url']) do |f|
+          feed = open(setting[:url], :proxy => GlobalInitialSetting['proxy_url']) do |f|
             FeedNormalizer::FeedNormalizer.parse(f.read)
           end
         end

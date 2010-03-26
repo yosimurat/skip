@@ -7,10 +7,10 @@
     <% if current_user && current_user.active? -%>
       <%
         links = []
-        help_url = h(SkipEmbedded::InitialSettings['help_url'])
-        what_new_message = h(SkipEmbedded::InitialSettings['what_new']['message'] || _("What's New"))
-        what_new_url = h(SkipEmbedded::InitialSettings['what_new']['url'])
-        iskip_url = "http://portal.skipaas.jp/infoscoop/openid_consumer_redirect.jsp?org=#{SkipEmbedded::InitialSettings['host_and_port']}&amp;user=#{current_user.code}"
+        help_url = h(GlobalInitialSetting['help_url'])
+        what_new_message = h(GlobalInitialSetting['what_new']['message'] || _("What's New"))
+        what_new_url = h(GlobalInitialSetting['what_new']['url'])
+        iskip_url = "http://portal.skipaas.jp/infoscoop/openid_consumer_redirect.jsp?org=#{GlobalInitialSetting['host_and_port']}&amp;user=#{current_user.code}"
 
         links << link_to("iSKIP", iskip_url) if SkipEmbedded::InitialSettings['iskip']
         links << link_to(what_new_message, what_new_url, :target => "_blank", :class => "attention_underline_link") unless what_new_url.blank?

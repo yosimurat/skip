@@ -192,7 +192,7 @@ class Admin::UsersController < Admin::ApplicationController
     if result = params[:code] && current_activation
       yield if block_given?
     else
-      contact_link = "<a href=\"mailto:#{SkipEmbedded::InitialSettings['administrator_addr']}\" target=\"_blank\">" + _('Inquiries') + '</a>'
+      contact_link = "<a href=\"mailto:#{GlobalInitialSetting['administrator_addr']}\" target=\"_blank\">" + _('Inquiries') + '</a>'
       if User.tenant_id_is(current_tenant.id).find_by_admin(true)
         flash[:error] = _('Administrative user has already been registered. Log in with the account or contact {contact_link} in case of failure.') % {:contact_link => contact_link}
         redirect_to :controller => "/platform", :action => :index

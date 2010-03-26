@@ -22,8 +22,8 @@ class Activation < ActiveRecord::Base
 
   validates_uniqueness_of :tenant_id
 
-  default_url_options[:host] = SkipEmbedded::InitialSettings['host_and_port']
-  default_url_options[:protocol] = SkipEmbedded::InitialSettings['protocol']
+  default_url_options[:host] = GlobalInitialSetting['host_and_port']
+  default_url_options[:protocol] = GlobalInitialSetting['protocol']
 
   def initialize(attr ={})
     super(attr)

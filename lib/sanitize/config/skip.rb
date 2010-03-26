@@ -6,7 +6,7 @@ class Sanitize
 
       return nil unless name == 'param' || name == 'embed'
       return nil unless node.parent.name.to_s.downcase == 'object'
-      whitelist_object_urls = SkipEmbedded::InitialSettings['whitelist_object_urls']
+      whitelist_object_urls = GlobalInitialSetting['whitelist_object_urls']
       return nil unless whitelist_object_urls
 
       if name == 'param'
@@ -20,7 +20,7 @@ class Sanitize
         Admin::Setting[key] ? whitelist_object_urls[key] : []
       end.flatten
       # SKIPにアップロードされたflashはsanitizeせずに表示させるため
-      whitelist_urls << "#{SkipEmbedded::InitialSettings[:protocol]}#{SkipEmbedded::InitialSettings[:host_and_port]}"
+      whitelist_urls << "#{GlobalInitialSetting[:protocol]}#{GlobalInitialSetting[:host_and_port]}"
 
       if url && whitelist_urls.any? { |whitelist_url| url.index(whitelist_url) == 0 }
         return {
@@ -34,7 +34,7 @@ class Sanitize
       name = node.name.to_s.downcase
 
       return nil unless name == 'iframe'
-      whitelist_iframe_urls = SkipEmbedded::InitialSettings['whitelist_iframe_urls']
+      whitelist_iframe_urls = GlobalInitialSetting['whitelist_iframe_urls']
       return nil unless whitelist_iframe_urls
 
       url = node['src']

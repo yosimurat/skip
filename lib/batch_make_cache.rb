@@ -36,11 +36,11 @@ class BatchMakeCache < BatchBase
         maker.send(method, contents_type, cache_path)
       end
     end
-    File.symlink( SkipEmbedded::InitialSettings['share_file_path'],"#{cache_path}/share_file" ) unless FileTest.symlink?("#{cache_path}/share_file")
+    File.symlink( GlobalInitialSetting['share_file_path'],"#{cache_path}/share_file" ) unless FileTest.symlink?("#{cache_path}/share_file")
   end
 
   def self.get_cache_path
-    if cache_path = SkipEmbedded::InitialSettings['cache_path']
+    if cache_path = GlobalInitialSetting['cache_path']
       cache_path
     else
       raise StandardError, "Invalid cache path (cache_path: #{cache_path}). Please check your initial_settings.yml."

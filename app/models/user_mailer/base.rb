@@ -17,8 +17,8 @@ class UserMailer::Base < ActionMailer::Base
   helper :initial_settings
   helper :user_mailer
 
-  default_url_options[:host] = SkipEmbedded::InitialSettings['host_and_port']
-  default_url_options[:protocol] = SkipEmbedded::InitialSettings['protocol']
+  default_url_options[:host] = GlobalInitialSetting['host_and_port']
+  default_url_options[:protocol] = GlobalInitialSetting['protocol']
 
 private
   def self.base64(text)
@@ -56,6 +56,6 @@ private
   end
 
   def smtp_settings
-    SkipEmbedded::InitialSettings['mail']['smtp_settings']
+    GlobalInitialSetting['mail']['smtp_settings']
   end
 end

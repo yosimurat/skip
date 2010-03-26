@@ -431,7 +431,7 @@ class User < ActiveRecord::Base
   end
 
   def openid_identifier
-    identity_url(:user => self.code, :protocol => SkipEmbedded::InitialSettings['protocol'], :host => SkipEmbedded::InitialSettings['host_and_port'])
+    identity_url(:user => self.code, :protocol => GlobalInitialSetting['protocol'], :host => GlobalInitialSetting['host_and_port'])
   end
 
   def within_time_limit_of_password?

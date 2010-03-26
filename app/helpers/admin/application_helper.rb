@@ -44,12 +44,12 @@ module Admin::ApplicationHelper
   end
 
   def system_summary
-    "#{QuotaValidation::FileSizeCounter.per_system/1.megabyte}" + " / " + "#{SkipEmbedded::InitialSettings['max_share_file_size_of_system']/1.megabyte}"
+    "#{QuotaValidation::FileSizeCounter.per_system/1.megabyte}" + " / " + "#{GlobalInitialSetting['max_share_file_size_of_system']/1.megabyte}"
   end
 
   def warning_size
     file_size = "#{QuotaValidation::FileSizeCounter.per_system/1.megabyte}".to_f
-    max_system_size = "#{SkipEmbedded::InitialSettings['max_share_file_size_of_system']/1.megabyte}".to_f
+    max_system_size = "#{GlobalInitialSetting['max_share_file_size_of_system']/1.megabyte}".to_f
     (file_size / max_system_size) > 0.80
   end
 
