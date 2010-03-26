@@ -128,7 +128,7 @@ class UsersController < ApplicationController
   private
   def registerable_filter
     # 本人のみ許可
-    if current_target_user.id != current_user.id
+    if current_target_user && (current_target_user.id != current_user.id)
       redirect_to root_url
       return false
     end

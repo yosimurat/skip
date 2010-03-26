@@ -237,7 +237,7 @@ class Admin::Setting < ActiveRecord::Base
     low_regex_s = "^[#{lower_upper_digit_symbol}]{6,}$"
     middle_regex_s = "#{lower_negative_lookahead}#{upper_negative_lookahead}#{digit_negative_lookahead}^[#{lower_upper_digit_symbol}]{8,}$"
     high_regex_s = "#{symbol_negative_lookahead}#{middle_regex_s}"
-    case password_strength
+    case password_strength(tenant)
       when 'low' then /#{low_regex_s}/
       when 'middle' then /#{middle_regex_s}/
       when 'high' then /#{high_regex_s}/
