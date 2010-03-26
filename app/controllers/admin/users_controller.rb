@@ -39,7 +39,7 @@ class Admin::UsersController < Admin::ApplicationController
           @user.save!
         else
           @user = Admin::User.make_new_user({:user => params[:user]})
-          @user.tenant = current_tenant
+          @user.tenant_id = current_tenant.id
           @user.save!
         end
       end
