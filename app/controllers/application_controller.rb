@@ -49,7 +49,7 @@ protected
 
     # プロフィール情報が登録されていない場合、platformに戻す
     unless user.active?
-      redirect_to user.retired? ? { :controller => '/platform', :action => :logout, :message => 'retired' } : { :controller => '/portal' }
+      redirect_to user.retired? ? polymorphic_url([current_tenant, :platform], :action => :logout) : new_polymorphic_url([current_tenant, :user])
       return
     end
 
