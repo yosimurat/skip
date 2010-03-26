@@ -36,7 +36,7 @@ class Admin::PicturesController < Admin::ApplicationController
   def new
     @user = Admin::User.find(params[:user_id])
     @picture = @user.pictures.build
-    @topics = [[_('Listing %{model}') % {:model => _('user')}, admin_users_path],
+    @topics = [[_('Listing %{model}') % {:model => _('user')}, admin_tenant_users_path(current_tenant)],
                [_('New %{model}') % {:model => _('picture')}]]
     respond_to do |format|
       format.html # new.html.erb
@@ -47,12 +47,12 @@ class Admin::PicturesController < Admin::ApplicationController
     @user = Admin::User.find(params[:user_id])
     @picture = @user.pictures.build(params[:picture])
     @picture.active = true if @user.pictures.size == 1
-    @topics = [[_('Listing %{model}') % {:model => _('user')}, admin_users_path],
+    @topics = [[_('Listing %{model}') % {:model => _('user')}, admin_tenant_users_path(current_tenant)],
                [_('New %{model}') % {:model => _('picture')}]]
     respond_to do |format|
       if @picture.save
         flash[:notice] = _("%{model} was successfully created.") % {:model => _('picture')}
-        format.html { redirect_to(admin_pictures_path) }
+        format.html { redirect_to(admin_tenant_pictures_path(current_tenant)) }
       else
         format.html { render :action => "new" }
       end
