@@ -20,8 +20,8 @@ class Group < ActiveRecord::Base
   belongs_to :group_category
   has_many :group_participations, :dependent => :destroy
   has_many :users, :through => :group_participations, :conditions => ['group_participations.waiting = ?', false]
-  has_many :owner_entries, :class_name => 'BoardEntry', :as => :owner
-  has_many :owner_share_files, :class_name => 'ShareFile', :as => :owner
+  has_many :owner_entries, :class_name => 'BoardEntry', :as => :owner, :dependent => :destroy
+  has_many :owner_share_files, :class_name => 'ShareFile', :as => :owner, :dependent => :destroy
 
   validates_presence_of :name, :description, :gid, :tenant_id
   validates_uniqueness_of :gid, :case_sensitive => false
@@ -120,13 +120,8 @@ class Group < ActiveRecord::Base
 
   # グループに関連する情報の削除
   def after_logical_destroy
-    # FIXME [#855][#907]Rails2.3.2のバグでcounter_cacheと:dependent => destoryを併用すると常にStaleObjectErrorとなる
-    # SKIPではBoardEntryとBoardEntryCommentの関係が該当する。Rails2.3.5でFixされたら以下を修正すること
-    # 詳細は http://dev.openskip.org/redmine/issues/show/855
-    board_entry_ids = BoardEntry.scoped(:conditions => ['symbol = ?', self.symbol]).all.map(&:id)
-    BoardEntryComment.destroy_all(['board_entry_id in (?)', board_entry_ids])
-    BoardEntry.destroy_all(["id in (?)", board_entry_ids])
-    ShareFile.destroy_all(["owner_symbol = ?", self.symbol])
+    owner_entries.destroy_all
+    owner_share_files.destroy_all
   end
 
   def validate
