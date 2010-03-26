@@ -152,13 +152,13 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def issue_activation_code
-    do_issue_activation_codes([params[:id]])
+    do_issue_activation_codes [params[:id]]
     redirect_to admin_tenant_users_path(current_tenant)
   end
 
   def issue_activation_codes
     do_issue_activation_codes params[:ids]
-    redirect_to admin_users_path
+    redirect_to admin_tenant_users_path(current_tenant)
   end
 
   def issue_password_reset_code
