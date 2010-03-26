@@ -27,7 +27,7 @@
             signup_url = signup_tenant_platform_url(current_tenant, :code => object.activation_token)
             _('To be activated') + "(" + link_to(_('Confirm'), h(signup_url)) + ")"
           else
-            issue_link_str = SkipEmbedded::InitialSettings['mail']['show_mail_function'] ? _('Notify activation') : _('Prepare for activation')
+            issue_link_str = GlobalInitialSetting['mail']['show_mail_function'] ? _('Notify activation') : _('Prepare for activation')
             issue_link = link_to(issue_link_str, issue_activation_code_admin_tenant_user_path(current_tenant, object), :class => 'issue_activation_code_link')
             if login_mode?(:password)
               s_("User|Status|#{object.status}") + "(#{issue_link})"
@@ -61,13 +61,13 @@
     }
               }
   -%>
-  <%= submit_tag SkipEmbedded::InitialSettings['mail']['show_mail_function'] ? _('Send activation email to selected users') : _('Issue activation url for selected users') %>
+  <%= submit_tag GlobalInitialSetting['mail']['show_mail_function'] ? _('Send activation email to selected users') : _('Issue activation url for selected users') %>
   <% end -%>
 </div>
 
 <% content_for :javascript_initializers do -%>
     $j('.issue_activation_code_link')
     .click(function() {
-        return confirm('<%= SkipEmbedded::InitialSettings['mail']['show_mail_function'] ? _('Are you sure to send activation email to target user?') : _('Activation URL is to be issued. Send the URL shown by clicking the confirmation link in the next screen to the user.') %>');
+        return confirm('<%= GlobalInitialSetting['mail']['show_mail_function'] ? _('Are you sure to send activation email to target user?') : _('Activation URL is to be issued. Send the URL shown by clicking the confirmation link in the next screen to the user.') %>');
     });
 <% end -%>

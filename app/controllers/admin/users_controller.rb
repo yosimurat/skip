@@ -225,7 +225,7 @@ class Admin::UsersController < Admin::ApplicationController
       unless unused_users.empty?
         email = unused_users.map(&:email).join(',')
         flash[:notice] =
-          if SkipEmbedded::InitialSettings['mail']['show_mail_function']
+          if GlobalInitialSetting['mail']['show_mail_function']
             n_("An email containing the URL for signup will be sent to %{email}.", "%{num} emails containing the URL for signup will be sent to the following email address. %{email}", unused_users.size) % {:num => unused_users.size, :email => email}
           else
             n_("The URL for signup issued. Please contact a use from comfirm link", "The URLs for signup issued. Please contact some users from comfirm link", unused_users.size)

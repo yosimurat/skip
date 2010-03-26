@@ -17,7 +17,7 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe UserMailer::Base, "#smtp_settings" do
   before(:all) do
-    SkipEmbedded::InitialSettings['mail'] = {'show_mail_function' => true}
+    GlobalInitialSetting['mail'] = {'show_mail_function' => true}
     @before_method = ActionMailer::Base.delivery_method
     @before_errors = ActionMailer::Base.raise_delivery_errors
     ActionMailer::Base.delivery_method = :smtp_failover_activerecord

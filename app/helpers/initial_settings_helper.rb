@@ -28,7 +28,7 @@ module InitialSettingsHelper
   end
 
   def enable_activate?
-    login_mode?(:password) && !Admin::Setting.stop_new_user(current_tenant) && SkipEmbedded::InitialSettings['mail']['show_mail_function']
+    login_mode?(:password) && !Admin::Setting.stop_new_user(current_tenant) && GlobalInitialSetting['mail']['show_mail_function']
   end
 
   def enable_signup?
@@ -36,10 +36,10 @@ module InitialSettingsHelper
   end
 
   def enable_forgot_password?
-    login_mode?(:password) && SkipEmbedded::InitialSettings['mail']['show_mail_function']
+    login_mode?(:password) && GlobalInitialSetting['mail']['show_mail_function']
   end
 
   def enable_forgot_openid?
-    login_mode?(:free_rp) && SkipEmbedded::InitialSettings['mail']['show_mail_function']
+    login_mode?(:free_rp) && GlobalInitialSetting['mail']['show_mail_function']
   end
 end

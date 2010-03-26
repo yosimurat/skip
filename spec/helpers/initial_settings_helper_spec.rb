@@ -48,7 +48,7 @@ describe InitialSettingsHelper, '#enable_activate?' do
   describe 'パスワードモード かつ ユーザ登録可 かつ メール機能有効の場合' do
     before do
       SkipEmbedded::InitialSettings['login_mode'] = 'password'
-      SkipEmbedded::InitialSettings['mail'] = {'show_mail_function' => true}
+      GlobalInitialSetting['mail'] = {'show_mail_function' => true}
     end
     it { helper.enable_activate?.should be_true }
   end
@@ -75,7 +75,7 @@ describe InitialSettingsHelper, '#enable_activate?' do
   describe 'メール機能無効の場合' do
     before do
       SkipEmbedded::InitialSettings['login_mode'] = 'password'
-      SkipEmbedded::InitialSettings['mail'] = {'show_mail_function' => false}
+      GlobalInitialSetting['mail'] = {'show_mail_function' => false}
     end
     it { helper.enable_activate?.should be_false }
   end
@@ -108,7 +108,7 @@ describe InitialSettingsHelper, '#enable_forgot_password?' do
   describe 'パスワードモード かつ メール機能有効の場合' do
     before do
       SkipEmbedded::InitialSettings['login_mode'] = 'password'
-      SkipEmbedded::InitialSettings['mail'] = {'show_mail_function' => true}
+      GlobalInitialSetting['mail'] = {'show_mail_function' => true}
     end
     it { helper.enable_forgot_password?.should be_true }
   end
@@ -129,7 +129,7 @@ describe InitialSettingsHelper, '#enable_forgot_password?' do
   describe 'メール機能無効の場合' do
     before do
       SkipEmbedded::InitialSettings['login_mode'] = 'password'
-      SkipEmbedded::InitialSettings['mail'] = {'show_mail_function' => false}
+      GlobalInitialSetting['mail'] = {'show_mail_function' => false}
     end
     it { helper.enable_forgot_password?.should be_false }
   end
@@ -140,7 +140,7 @@ describe InitialSettingsHelper, '#enable_forgot_openid?' do
     before do
       SkipEmbedded::InitialSettings['login_mode'] = 'rp'
       SkipEmbedded::InitialSettings['fixed_op_url'] = nil
-      SkipEmbedded::InitialSettings['mail'] = {'show_mail_function' => true}
+      GlobalInitialSetting['mail'] = {'show_mail_function' => true}
     end
     it { helper.enable_forgot_openid?.should be_true }
   end
@@ -160,7 +160,7 @@ describe InitialSettingsHelper, '#enable_forgot_openid?' do
   describe 'メール機能無効の場合' do
     before do
       SkipEmbedded::InitialSettings['login_mode'] = 'password'
-      SkipEmbedded::InitialSettings['mail'] = {'show_mail_function' => false}
+      GlobalInitialSetting['mail'] = {'show_mail_function' => false}
     end
     it { helper.enable_forgot_openid?.should be_false }
   end
