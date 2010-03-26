@@ -118,7 +118,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def import_confirmation
-    @topics = [[_('Listing %{model}') % {:model => _('user')}, admin_users_path], _('New users from CSV')]
+    @topics = [[_('Listing %{model}') % {:model => _('user')}, admin_tenant_users_path(current_tenant)], _('New users from CSV')]
     if request.get? || !valid_file?(params[:file], :content_types => ['text/csv', 'application/x-csv', 'application/vnd.ms-excel', 'text/plain'])
       @users = []
       return render(:action => :import)
@@ -135,7 +135,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def import
-    @topics = [[_('Listing %{model}') % {:model => _('user')}, admin_users_path], _('New users from CSV')]
+    @topics = [[_('Listing %{model}') % {:model => _('user')}, admin_tenant_users_path(current_tenant)], _('New users from CSV')]
     @error_row_only = true
     if request.get? || !valid_file?(params[:file], :content_types => ['text/csv', 'application/x-csv', 'application/vnd.ms-excel', 'text/plain'])
       @users = []
@@ -144,7 +144,7 @@ class Admin::UsersController < Admin::ApplicationController
     @users = Admin::User.make_users(params[:file], params[:options], params[:update_registered].blank?)
     import!(@users, false)
     flash[:notice] = _('Successfully added/updated users from CSV file.')
-    redirect_to admin_users_path
+    redirect_to admin_tenant_users_path(current_tenant)
   rescue ActiveRecord::RecordInvalid,
          ActiveRecord::RecordNotSaved => e
     @users.each {|user| user.valid?}
@@ -211,6 +211,7 @@ class Admin::UsersController < Admin::ApplicationController
   def import!(users, rollback = true)
     Admin::User.transaction do
       users.each do |user|
+        user.tenant_id = current_tenant.id
         user.save!
       end
       raise ActiveRecord::Rollback if rollback
