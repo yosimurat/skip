@@ -24,7 +24,7 @@ class SearchController < ApplicationController
     params[:per_page] = 10
     params[:offset] ||= 0
 
-    search = Search.new(params, current_user.belong_symbols_with_collaboration_apps)
+    search = Search.new(params, current_user.belong_symbols)
     if search.error.blank?
       # TODO: インスタンス変数に代入することなく@searchで画面表示
       @invisible_count = search.invisible_count

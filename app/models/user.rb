@@ -504,17 +504,6 @@ class User < ActiveRecord::Base
     @belong_symbols ||= self.group_symbols
   end
 
-  # TODO 使用箇所を潰した上で廃止
-  def belong_symbols_with_collaboration_apps
-    symbols = ['sid:allusers'] + belong_symbols
-    (SkipEmbedded::InitialSettings['belong_info_apps'] || {}).each do |app_name, setting|
-      join_info = SkipEmbedded::WebServiceUtil.open_service_with_url(setting["url"], { :user => self.openid_identifier }, setting["ca_file"])
-      symbols += join_info.map{|item| item["publication_symbols"]} if join_info
-    end
-    # TODO: 外のアプリの全公開のコンテンツは、"public"とする。今後、Symbol::SYSTEM_ALL_USERを単に、"public"に変更する。
-    symbols << "public"
-  end
-
 private
   def password_required?
     if tenant.initial_settings['login_mode'] == 'password'
