@@ -156,7 +156,7 @@ class BoardEntry < ActiveRecord::Base
   }
 
   named_scope :from_recents, proc {
-    num = SkipEmbedded::InitialSettings['mypage_entry_search_limit'] || 1000
+    num = GlobalInitialSetting['mypage_entry_search_limit'] || 1000
     { :from => "(SELECT * FROM board_entries ORDER BY board_entries.last_updated DESC LIMIT #{num}) AS board_entries" }
   }
 
@@ -406,7 +406,7 @@ class BoardEntry < ActiveRecord::Base
   def send_contact_mails
     return unless self.send_mail?
     return if diary? && private?
-    return if !SkipEmbedded::InitialSettings['mail']['enable_send_email_to_all_users'] && public?
+    return if !tenant.initial_settings['mail']['enable_send_email_to_all_users'] && public?
 
     users = publication_users
     users.each do |u|
@@ -575,8 +575,8 @@ class BoardEntry < ActiveRecord::Base
     end
   end
 
-  def self.enable_aim_types
-    if SkipEmbedded::InitialSettings['notice_entry'] && SkipEmbedded::InitialSettings['notice_entry']['enable']
+  def self.enable_aim_types tenant
+    if tenant.initial_settings['notice_entry'] && tenant.initial_settings['notice_entry']['enable']
       AIM_TYPES
     else
       AIM_TYPES - ['notice']

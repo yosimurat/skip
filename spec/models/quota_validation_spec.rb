@@ -22,7 +22,7 @@ describe QuotaValidation do
     describe "ファイルサイズが最大値を超えている場合" do
       it "エラーが追加されること" do
         @muf.stub!(:size).and_return(GlobalInitialSetting['max_share_file_size'].to_i + 100)
-        @vf.errors.should_receive(:add_to_base).with("Files larger than #{SkipEmbedded::InitialSettings['max_share_file_size'].to_i/1.megabyte}MBytes are not permitted.")
+        @vf.errors.should_receive(:add_to_base).with("Files larger than #{GlobalInitialSetting['max_share_file_size'].to_i/1.megabyte}MBytes are not permitted.")
         @vf.valid_size_of_file(@muf)
       end
     end

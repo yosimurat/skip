@@ -26,7 +26,7 @@ div.input_line textarea {
 
 <div class="input_line">
   <div class="input_label"><%= form.label :aim_type, _('Types') %></div>
-  <% aim_types = BoardEntry.enable_aim_types.map{|type| [s_("BoardEntry|Aim type|Desc|#{type}"), type]} -%>
+  <% aim_types = BoardEntry.enable_aim_types(current_tenant).map{|type| [s_("BoardEntry|Aim type|Desc|#{type}"), type]} -%>
   <div class="input_value"><%= form.select :aim_type, options_for_select(aim_types, form.object.aim_type) %></div>
   <div class="clear_left"></div>
 </div>
@@ -154,7 +154,7 @@ div.input_line textarea {
       return(str);
   }
 
-  <% unless SkipEmbedded::InitialSettings['mail']['enable_send_email_to_all_users'] -%>
+  <% unless current_tenant.initial_settings['mail']['enable_send_email_to_all_users'] -%>
   // メール送信チェックボックスの表示制御
   var toggleSendMail = function() {
   <% if form.object.diary? -%>
@@ -171,7 +171,7 @@ div.input_line textarea {
   <% end -%>
 
   $j('#board_entry_publiation_type_public, #board_entry_publiation_type_private').live('click', function(){
-    <% unless SkipEmbedded::InitialSettings['mail']['enable_send_email_to_all_users'] -%>
+    <% unless current_tenant.initial_settings['mail']['enable_send_email_to_all_users'] -%>
       toggleSendMail();
     <% end -%>
   });

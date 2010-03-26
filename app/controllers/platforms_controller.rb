@@ -20,10 +20,6 @@ class PlatformsController < ApplicationController
 
   before_filter :require_not_login, :except => [:logout]
 
-  # OpenIDのSSOの際にリダイレクトしているため、GETを許可する必要がある
-  # 直接OpenIDの処理を行なうようにすれば、POSTのみでもOKになる
-  verify :method => :post, :only => %w(login), :redirect_to => {:action => :show} if SkipEmbedded::InitialSettings["login_mode"] != "rp"
-
   def show
     # TODO OpenID絡みの部分。後で消すか修正する
     # response.headers['X-XRDS-Location'] = server_url(:format => :xrds, :protocol => scheme)
@@ -54,7 +50,7 @@ class PlatformsController < ApplicationController
     notice = notice + "<br>" + _('You had been retired.') unless params[:message].blank?
     flash[:notice] = notice
 
-    redirect_to login_mode?(:fixed_rp) ? "#{SkipEmbedded::InitialSettings['fixed_op_url']}logout" : tenant_platform_url(current_tenant)
+    redirect_to login_mode?(:fixed_rp) ? "#{current_tenant.initial_settings['fixed_op_url']}logout" : tenant_platform_url(current_tenant)
   end
 
   def forgot_password
@@ -222,7 +218,7 @@ class PlatformsController < ApplicationController
     session[:return_to] = params[:return_to] if !params[:return_to].blank? and params[:open_id_complete].blank?
     begin
       authenticate_with_open_id( params[:openid_url], :method => 'post',
-                                :required => SkipEmbedded::InitialSettings["ax_fetchrequest"].values.flatten) do |result, identity_url, registration|
+                                :required => current_tenant.initial_settings["ax_fetchrequest"].values.flatten) do |result, identity_url, registration|
         if result.successful?
           logger.info("[Login successful with OpenId] \"OpenId\" => #{identity_url}")
           remove_current_page_from_cookie
@@ -248,7 +244,7 @@ class PlatformsController < ApplicationController
   end
 
   def create_user_from(identity_url, registration)
-    if login_mode?(:fixed_rp) and identity_url.include?(SkipEmbedded::InitialSettings['fixed_op_url'])
+    if login_mode?(:fixed_rp) and identity_url.include?(current_tenant.initial_settings['fixed_op_url'])
       user = User.create_with_identity_url(identity_url, create_user_params(registration))
       if user.valid?
         reset_session
@@ -274,7 +270,7 @@ class PlatformsController < ApplicationController
 
   def create_user_params(fetched)
     returning({}) do |res|
-      SkipEmbedded::InitialSettings["ax_fetchrequest"].each do |k, vs|
+      current_tenant.initial_settings["ax_fetchrequest"].each do |k, vs|
         fetched.each{|fk, (fv,_)| res[k] = fv if !fv.blank? && vs == fk }
       end
       res[:tenant_id] = current_tenant.id

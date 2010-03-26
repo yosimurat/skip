@@ -156,7 +156,7 @@ describe BoardEntry, '#send_contact_mails' do
       end
       describe '全体へのメール送信が有効の場合' do
         before do
-          SkipEmbedded::InitialSettings['mail']['enable_send_email_to_all_users'] = true
+          tenant.initial_settings['mail']['enable_send_email_to_all_users'] = true
         end
         it 'アクティブなユーザ全員分(自分以外)のEmailが出来ていること' do
           lambda do
@@ -166,7 +166,7 @@ describe BoardEntry, '#send_contact_mails' do
       end
       describe '全体へのメール送信が無効の場合' do
         before do
-          SkipEmbedded::InitialSettings['mail']['enable_send_email_to_all_users'] = false
+          tenant.initial_settings['mail']['enable_send_email_to_all_users'] = false
         end
         it 'Emailが作られないこと' do
           lambda do

@@ -65,7 +65,7 @@ describe Search::HyperEstraier, ".get_condition" do
   end
   describe "target_aidが設定されている場合" do
     before do
-      SkipEmbedded::InitialSettings['search_apps'] = { "app" => { "cache" => "http://cache:3000/cache" } }
+      tenant.initial_settings['search_apps'] = { "app" => { "cache" => "http://cache:3000/cache" } }
     end
     it "正しいattrが設定されていること" do
       cond = Search::HyperEstraier.get_condition("query", "app")

@@ -322,15 +322,15 @@ protected
   end
 
   def notice_entry_enabled?
-    SkipEmbedded::InitialSettings['notice_entry'] && SkipEmbedded::InitialSettings['notice_entry']['enable']
+    current_tenant.initial_settings['notice_entry'] && current_tenant.initial_settings['notice_entry']['enable']
   end
 
   def event_enabled?
-    SkipEmbedded::InitialSettings['simple_apps'] && SkipEmbedded::InitialSettings['simple_apps']['event'] && SkipEmbedded::InitialSettings['simple_apps']['event']['enable']
+    current_tenant.initial_settings['simple_apps'] && current_tenant.initial_settings['simple_apps']['event'] && current_tenant.initial_settings['simple_apps']['event']['enable']
   end
 
   def require_wiki_enabled
-    if !SkipEmbedded::InitialSettings['wiki'] or !SkipEmbedded::InitialSettings['wiki']['use']
+    if !current_tenant.initial_settings['wiki'] or !current_tenant.initial_settings['wiki']['use']
       redirect_to root_url
     end
   end
@@ -349,7 +349,7 @@ protected
       if request.env['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'
         render :text => _('Session expired. You need to log in again.'), :status => :bad_request
       else
-        redirect_to :controller => '/platform', :action => :login, :openid_url => SkipEmbedded::InitialSettings['fixed_op_url'], :return_to => URI.encode(request.url)
+        redirect_to :controller => '/platform', :action => :login, :openid_url => current_tenant.initial_settings['fixed_op_url'], :return_to => URI.encode(request.url)
       end
       return false
     end

@@ -12,9 +12,9 @@
         what_new_url = h(GlobalInitialSetting['what_new']['url'])
         iskip_url = "http://portal.skipaas.jp/infoscoop/openid_consumer_redirect.jsp?org=#{GlobalInitialSetting['host_and_port']}&amp;user=#{current_user.code}"
 
-        links << link_to("iSKIP", iskip_url) if SkipEmbedded::InitialSettings['iskip']
+        links << link_to("iSKIP", iskip_url) if current_tenant.initial_settings['iskip']
         links << link_to(what_new_message, what_new_url, :target => "_blank", :class => "attention_underline_link") unless what_new_url.blank?
-        links << link_to(_('Invite a user'), new_user_invitation_url(current_user), :title => _('Invite a user')) if SkipEmbedded::InitialSettings['invitation'] && SkipEmbedded::InitialSettings['invitation']['enable']
+        links << link_to(_('Invite a user'), new_user_invitation_url(current_user), :title => _('Invite a user')) if current_tenant.initial_settings['invitation'] && current_tenant.initial_settings['invitation']['enable']
         links << link_to(_("My Account"), edit_tenant_user_url(current_tenant, current_user), :class => "underline_link")
         links << link_to(_("System Administration"), admin_tenant_root_path(current_tenant), :title => _("Administration of the site."), :class => "underline_link") if current_user.admin?
         links << link_to(_('Help'), help_url, :target => "_blank", :class => "underline_link") unless help_url.blank?
@@ -36,7 +36,7 @@
           other_links_tag = content_tag :div, other_links.join(''), :id => 'other_links', :class => 'invisible'
         end
 
-        links << link_to(_("Sign out"), logout_tenant_platform_url(current_tenant), :class => "underline_link") unless SkipEmbedded::InitialSettings['hide_header_logout_link']
+        links << link_to(_("Sign out"), logout_tenant_platform_url(current_tenant), :class => "underline_link") unless current_tenant.initial_settings['hide_header_logout_link']
 
       -%>
 
@@ -50,7 +50,7 @@
   <div class="banner"></div>
 
   <% if current_user -%>
-    <% if SkipEmbedded::InitialSettings['full_text_search_setting'] && current_user.active? -%>
+    <% if current_tenant.initial_settings['full_text_search_setting'] && current_user.active? -%>
       <div id="search" class="ui-corner-all">
         <% form_tag({:controller => '/search', :action => 'full_text_search'},{:method => 'get'}) do -%>
           <%= text_field_tag "full_text_query", search_label, :class => "labeled-field" %>
@@ -81,7 +81,7 @@
     <div class="clear_both"></div>
   <% end -%>
 
-  <% unless SkipEmbedded::InitialSettings['enable_ad_for_oss'] == "lovelyskip" -%>
+  <% unless current_tenant.initial_settings['enable_ad_for_oss'] == "lovelyskip" -%>
     <div style="margin-top: 0.5em; padding-top: 0.5em; border-top: 1px solid silver;">
       <div style="margin-left: 30px; text-valign:middle;">
         <%= _('Sponsored link:') %>

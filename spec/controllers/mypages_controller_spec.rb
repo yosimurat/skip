@@ -407,7 +407,7 @@ describe MypagesController, 'mypage > manage(管理) 関連' do
 
   describe MypagesController, "POST #apply_password" do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = "password"
+      tenant.initial_settings['login_mode'] = "password"
 
       @user = user_login
       @user.should_receive(:change_password)
@@ -437,9 +437,9 @@ describe MypagesController, 'mypage > manage(管理) 関連' do
   describe MypagesController, "POST #apply_ident_url" do
     before do
       @user = user_login
-      SkipEmbedded::InitialSettings['login_mode'] = "rp"
-      SkipEmbedded::InitialSettings['fixed_op_url'] = nil
-      SkipEmbedded::InitialSettings['password_edit_setting'] = true
+      tenant.initial_settings['login_mode'] = "rp"
+      tenant.initial_settings['fixed_op_url'] = nil
+      tenant.initial_settings['password_edit_setting'] = true
       @openid_url = "http://id.example.com/a_user"
     end
     describe '認証を開始した場合' do

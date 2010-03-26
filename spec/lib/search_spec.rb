@@ -86,7 +86,7 @@ end
 describe Search, ".get_metadata" do
   describe "メタ情報が取得される場合" do
     before do
-      SkipEmbedded::InitialSettings["search_apps"] = {
+      tenant.initial_settings["search_apps"] = {
         "SKIP" => { "meta" => "/hoge/fuga/meta", "cache" => "http://localhost:3000/app_cache" }
       }
 
@@ -101,12 +101,12 @@ describe Search, ".get_metadata" do
   end
   describe "設定ファイルから取得される場合" do
     before do
-      SkipEmbedded::InitialSettings["search_apps"] = {
+      tenant.initial_settings["search_apps"] = {
         "SKIP" => { "cache" => "http://localhost:3000/app_cache" }
       }
     end
     it "icon_typeがある場合 設定ファイルから設定されること" do
-      SkipEmbedded::InitialSettings["search_apps"] = {
+      tenant.initial_settings["search_apps"] = {
         "SKIP" => { "cache" => "http://localhost:3000/app_cache", "icon_type" => "icon_a" }
       }
       result = Search.get_metadata "contents", "http://localhost:3000/app_cache/hoge/fuga", "title"
@@ -121,7 +121,7 @@ describe Search, ".get_metadata" do
   end
   describe "cacheにヒットしない場合" do
     it "引数から設定されること" do
-      SkipEmbedded::InitialSettings["search_apps"] = {}
+      tenant.initial_settings["search_apps"] = {}
       result = Search.get_metadata "contents", "http://localhost:3000/app_cache/hoge/fuga", "title"
       result[:title].should == "title"
       result[:publication_symbols].should == Symbol::SYSTEM_ALL_USER

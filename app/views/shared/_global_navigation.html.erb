@@ -7,7 +7,7 @@
   <% if event_enabled? -%>
   <li><%= link_to(icon_tag('flag_blue', :title => _('Events')) + _('Events'), apps_events_path) %></li>
   <% end -%>
-  <% if SkipEmbedded::InitialSettings['wiki'] and SkipEmbedded::InitialSettings['wiki']['use'] -%>
+  <% if current_tenant.initial_settings['wiki'] and current_tenant.initial_settings['wiki']['use'] -%>
   <li><%= link_to(icon_tag('page_white_paint', :title => _('Wiki')) + _('Wiki'), wiki_path((Page.root || Page.first({:conditions=>["parent_id = ?",0]})).title)) %></li>
   <% end -%>
 </ul>

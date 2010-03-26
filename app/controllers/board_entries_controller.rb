@@ -59,9 +59,9 @@ class BoardEntriesController < ApplicationController
       @board_entry.publication_type ||= 'public'
       @board_entry.editor_mode ||= current_user.custom.editor_mode
       if @board_entry.owner.is_a?(Group)
-        @board_entry.send_mail = (@board_entry.is_question? && SkipEmbedded::InitialSettings['mail']['default_send_mail_of_question']) || @board_entry.owner.default_send_mail
+        @board_entry.send_mail = (@board_entry.is_question? && current_tenant.initial_settings['mail']['default_send_mail_of_question']) || @board_entry.owner.default_send_mail
       elsif @board_entry.owner.is_a?(User)
-        @board_entry.send_mail = @board_entry.is_question? && SkipEmbedded::InitialSettings['mail']['default_send_mail_of_question']
+        @board_entry.send_mail = @board_entry.is_question? && current_tenant.initial_settings['mail']['default_send_mail_of_question']
       end
 
       setup_layout @board_entry

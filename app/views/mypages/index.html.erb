@@ -25,7 +25,7 @@
   <%#  right side area -%>
   <%# ============================================================ -%>
   <div id="mypage_right">
-    <% unless SkipEmbedded::InitialSettings['enable_ad_for_oss'] == "lovelyskip" -%>
+    <% unless current_tenant.initial_settings['enable_ad_for_oss'] == "lovelyskip" -%>
       <%= render "ad_for_oss" %>
     <% end -%>
 

@@ -30,7 +30,7 @@ describe UserMailer::Base, "#smtp_settings" do
       :password => 'password',
       :authentication => :login
     }}
-    SkipEmbedded::InitialSettings['mail'] = mail_settings
+    GlobalInitialSetting['mail'] = mail_settings
     @smtp = mock('smtp')
     @smtp.stub!(:sendmail)
     Net::SMTP.should_receive(:new).and_return(@smtp)

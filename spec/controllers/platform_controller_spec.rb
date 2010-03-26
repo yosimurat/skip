@@ -178,8 +178,8 @@ describe PlatformController, "#logout" do
   end
   describe "固定OP利用RPモードの場合" do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = "rp"
-      SkipEmbedded::InitialSettings['fixed_op_url'] = 'http://skipop.url/'
+      tenant.initial_settings['login_mode'] = "rp"
+      tenant.initial_settings['fixed_op_url'] = 'http://skipop.url/'
     end
     it 'セッションとクッキーがクリアされること' do
       controller.should_receive(:logout_killing_session!)
@@ -187,12 +187,12 @@ describe PlatformController, "#logout" do
     end
     it "OPのログアウトにリダイレクトすること" do
       get :logout
-      response.should redirect_to("#{SkipEmbedded::InitialSettings['fixed_op_url']}logout")
+      response.should redirect_to("#{tenant.initial_settings['fixed_op_url']}logout")
     end
   end
   describe "その他のモードの場合" do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = "password"
+      tenant.initial_settings['login_mode'] = "password"
     end
     describe "通常のログアウト" do
       before do
@@ -541,8 +541,8 @@ describe PlatformController, "#create_user_from" do
 
   describe "専用OPモードの場合" do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = "rp"
-      SkipEmbedded::InitialSettings['fixed_op_url'] = "http://skipop.url/"
+      tenant.initial_settings['login_mode'] = "rp"
+      tenant.initial_settings['fixed_op_url'] = "http://skipop.url/"
     end
     describe "identity_urlが適切な場合" do
       before do
@@ -583,8 +583,8 @@ describe PlatformController, "#create_user_from" do
   end
   describe "フリーOPモードの場合" do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = "rp"
-      SkipEmbedded::InitialSettings['fixed_op_url'] = nil
+      tenant.initial_settings['login_mode'] = "rp"
+      tenant.initial_settings['fixed_op_url'] = nil
 
       @session = {}
       @session.stub!(:[]=).with(:identity_url, @identity_url)
@@ -604,7 +604,7 @@ describe PlatformController, "#create_user_from" do
   end
   describe "OP専用モードでない場合" do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = "password"
+      tenant.initial_settings['login_mode'] = "password"
     end
     it "ログイン画面に遷移して、エラーメッセージを表示すること" do
       controller.should_receive(:set_error_message_not_create_new_user_and_redirect)
@@ -624,7 +624,7 @@ describe PlatformController, "#create_user_params" do
       "http://axschema.org/namePerson" => ["ほげ ふが"],
       "http://axschema.org/contact/email" => ["hoge@hoge.host"]
     }
-    SkipEmbedded::InitialSettings['ax_fetchrequest'] = {
+    tenant.initial_settings['ax_fetchrequest'] = {
       :name => "http://axschema.org/namePerson",
       :email => "http://axschema.org/contact/email",
       :code => "http://axschema.org/namePerson/friendly"

@@ -237,7 +237,7 @@ class User < ActiveRecord::Base
   end
 
   def self.encrypt(password)
-    Digest::SHA1.hexdigest("#{SkipEmbedded::InitialSettings['sha1_digest_key']}--#{password}--")
+    Digest::SHA1.hexdigest("#{GlobalInitialSetting['sha1_digest_key']}--#{password}--")
   end
 
   def self.new_with_identity_url(identity_url, params)
@@ -517,7 +517,7 @@ class User < ActiveRecord::Base
 
 private
   def password_required?
-    if SkipEmbedded::InitialSettings['login_mode'] == 'password'
+    if tenant.initial_settings['login_mode'] == 'password'
       active? and crypted_password.blank? or !password.blank?
     else
       false

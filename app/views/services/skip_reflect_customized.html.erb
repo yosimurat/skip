@@ -19,7 +19,7 @@
         )
       );
     };
-    var url = '#{SkipEmbedded::InitialSettings['advertisements_url']}'
+    var url = '#{current_tenant.initial_settings['advertisements_url']}'
     if( url != '' )
       jQuery.getJSON(url, replaceBannerLink);
   RUBY
@@ -31,7 +31,7 @@
 (function() {
     // ロゴのリプレイス
     jQuery('#logo').find('img').attr('src', '#{root_url + "custom/images/header_logo.png"}');
-    #{replace_advertisement_js if SkipEmbedded::InitialSettings['advertisements_url']}
+    #{replace_advertisement_js if current_tenant.initial_settings['advertisements_url']}
     #{replace_application_link_js unless OauthProvider.enable.empty?}
     // フッターのリプレイス
     jQuery('#footer').html('#{footer_link}');

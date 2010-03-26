@@ -18,8 +18,8 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe InitialSettingsHelper, "#login_mode?" do
   describe "固定RPモードの場合" do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
-      SkipEmbedded::InitialSettings['fixed_op_url'] = 'http://op.openskip.org/'
+      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.initial_settings['fixed_op_url'] = 'http://op.openskip.org/'
     end
     it { helper.login_mode?(:password).should be_false }
     it { helper.login_mode?(:free_rp).should be_false }
@@ -27,8 +27,8 @@ describe InitialSettingsHelper, "#login_mode?" do
   end
   describe "フリーRPモードの場合" do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
-      SkipEmbedded::InitialSettings['fixed_op_url'] = nil
+      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.initial_settings['fixed_op_url'] = nil
     end
     it { helper.login_mode?(:password).should be_false }
     it { helper.login_mode?(:free_rp).should be_true }
@@ -36,7 +36,7 @@ describe InitialSettingsHelper, "#login_mode?" do
   end
   describe "パスワードモードの場合" do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'password'
+      tenant.initial_settings['login_mode'] = 'password'
     end
     it { helper.login_mode?(:password).should be_true }
     it { helper.login_mode?(:free_rp).should be_false }
@@ -47,22 +47,22 @@ end
 describe InitialSettingsHelper, '#enable_activate?' do
   describe 'パスワードモード かつ ユーザ登録可 かつ メール機能有効の場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'password'
+      tenant.initial_settings['login_mode'] = 'password'
       GlobalInitialSetting['mail'] = {'show_mail_function' => true}
     end
     it { helper.enable_activate?.should be_true }
   end
   describe '固定RPモードの場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
-      SkipEmbedded::InitialSettings['fixed_op_url'] = 'http://op.openskip.org/'
+      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.initial_settings['fixed_op_url'] = 'http://op.openskip.org/'
     end
     it { helper.enable_activate?.should be_false }
   end
   describe 'フリーRPモードの場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
-      SkipEmbedded::InitialSettings['fixed_op_url'] = nil
+      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.initial_settings['fixed_op_url'] = nil
     end
     it { helper.enable_activate?.should be_false }
   end
@@ -74,7 +74,7 @@ describe InitialSettingsHelper, '#enable_activate?' do
   end
   describe 'メール機能無効の場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'password'
+      tenant.initial_settings['login_mode'] = 'password'
       GlobalInitialSetting['mail'] = {'show_mail_function' => false}
     end
     it { helper.enable_activate?.should be_false }
@@ -84,21 +84,21 @@ end
 describe InitialSettingsHelper, '#enable_signup?' do
   describe 'パスワードモードの場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'password'
+      tenant.initial_settings['login_mode'] = 'password'
     end
     it { helper.enable_signup?.should be_true }
   end
   describe '固定RPモードの場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
-      SkipEmbedded::InitialSettings['fixed_op_url'] = 'http://op.openskip.org/'
+      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.initial_settings['fixed_op_url'] = 'http://op.openskip.org/'
     end
     it { helper.enable_signup?.should be_false }
   end
   describe 'フリーRPモードの場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
-      SkipEmbedded::InitialSettings['fixed_op_url'] = nil
+      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.initial_settings['fixed_op_url'] = nil
     end
     it { helper.enable_signup?.should be_false }
   end
@@ -107,28 +107,28 @@ end
 describe InitialSettingsHelper, '#enable_forgot_password?' do
   describe 'パスワードモード かつ メール機能有効の場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'password'
+      tenant.initial_settings['login_mode'] = 'password'
       GlobalInitialSetting['mail'] = {'show_mail_function' => true}
     end
     it { helper.enable_forgot_password?.should be_true }
   end
   describe '固定RPモードの場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
-      SkipEmbedded::InitialSettings['fixed_op_url'] = 'http://op.openskip.org/'
+      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.initial_settings['fixed_op_url'] = 'http://op.openskip.org/'
     end
     it { helper.enable_forgot_password?.should be_false }
   end
   describe 'フリーRPモードの場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
-      SkipEmbedded::InitialSettings['fixed_op_url'] = nil
+      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.initial_settings['fixed_op_url'] = nil
     end
     it { helper.enable_forgot_password?.should be_false }
   end
   describe 'メール機能無効の場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'password'
+      tenant.initial_settings['login_mode'] = 'password'
       GlobalInitialSetting['mail'] = {'show_mail_function' => false}
     end
     it { helper.enable_forgot_password?.should be_false }
@@ -138,28 +138,28 @@ end
 describe InitialSettingsHelper, '#enable_forgot_openid?' do
   describe 'フリーRPモードの場合 かつ メール機能有効の場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
-      SkipEmbedded::InitialSettings['fixed_op_url'] = nil
+      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.initial_settings['fixed_op_url'] = nil
       GlobalInitialSetting['mail'] = {'show_mail_function' => true}
     end
     it { helper.enable_forgot_openid?.should be_true }
   end
   describe 'パスワードモードの場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'password'
+      tenant.initial_settings['login_mode'] = 'password'
     end
     it { helper.enable_forgot_openid?.should be_false }
   end
   describe '固定RPモードの場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
-      SkipEmbedded::InitialSettings['fixed_op_url'] = 'http://op.openskip.org/'
+      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.initial_settings['fixed_op_url'] = 'http://op.openskip.org/'
     end
     it { helper.enable_forgot_openid?.should be_false }
   end
   describe 'メール機能無効の場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'password'
+      tenant.initial_settings['login_mode'] = 'password'
       GlobalInitialSetting['mail'] = {'show_mail_function' => false}
     end
     it { helper.enable_forgot_openid?.should be_false }

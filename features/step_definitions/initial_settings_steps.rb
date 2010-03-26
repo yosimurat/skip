@@ -18,27 +18,20 @@ Given /^メール機能を有効にする$/ do
 end
 
 Given /^お知らせ機能を有効にする$/ do
-  SkipEmbedded::InitialSettings['notice_entry']['enable'] = true
+  tenant.initial_settings['notice_entry']['enable'] = true
+  tenant.save
 end
 
 Given /^Wiki機能を有効にする$/ do
-  SkipEmbedded::InitialSettings['wiki']['use'] = true
+  tenant.initial_settings['wiki']['use'] = true
+  tenant.save
 end
 
 Given /^質問の告知方法の既定値をメール送信にする機能を"([^\"]*)"にする$/ do |str|
   if str == '有効'
-    SkipEmbedded::InitialSettings['mail']['default_send_mail_of_question'] = true
+    tenant.initial_settings['mail']['default_send_mail_of_question'] = true
   else
-    SkipEmbedded::InitialSettings['mail']['default_send_mail_of_question'] = false
+    tenant.initial_settings['mail']['default_send_mail_of_question'] = false
   end
-end
-
-module SkipEmbedded
-  class InitialSettings
-    # テストの時のみ値の入れ替えを可能にしたいので。
-    def self.[]=(key, val)
-      instance.instance_variable_set(:@config, instance.instance_variable_get(:@config).dup)
-      instance.instance_variable_get(:@config)[key] = val
-    end
-  end
+  tenant.save
 end

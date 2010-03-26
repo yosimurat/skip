@@ -231,8 +231,8 @@ end
 
 describe User, "#before_save" do
   before do
-    SkipEmbedded::InitialSettings['login_mode'] = 'password'
-    SkipEmbedded::InitialSettings['sha1_digest_key'] = "digest_key"
+    tenant.initial_settings['login_mode'] = 'password'
+    GlobalInitialSetting['sha1_digest_key'] = "digest_key"
   end
   describe '新規の場合' do
     before do
@@ -436,8 +436,8 @@ end
 
 describe User, '#change_password' do
   before do
-    SkipEmbedded::InitialSettings['login_mode'] = 'password'
-    SkipEmbedded::InitialSettings['sha1_digest_key'] = 'digest_key'
+    tenant.initial_settings['login_mode'] = 'password'
+    GlobalInitialSetting['sha1_digest_key'] = 'digest_key'
     @user = create_user(:user_options => {:password => 'Password1'})
     @old_password = 'Password1'
     @new_password = 'Hogehoge1'
@@ -897,60 +897,6 @@ describe User, '#belong_symbols' do
   end
 end
 
-describe User, "#belong_symbols_with_collaboration_apps" do
-  before do
-    GlobalInitialSetting['host_and_port'] = 'test.host'
-    GlobalInitialSetting['protocol'] = 'http://'
-    @user = stub_model(User, :belong_symbols => ["uid:a_user", "gid:a_group"], :code => "a_user")
-  end
-  describe "SkipEmbedded::InitialSettingsが設定されている場合" do
-    before do
-      SkipEmbedded::InitialSettings["belong_info_apps"] = {
-        'app' => { "url" => "http://localhost:3100/notes.js", "ca_file" => "hoge/fuga" }
-      }
-    end
-    describe "情報が返ってくる場合" do
-      before do
-        SkipEmbedded::WebServiceUtil.stub!(:open_service_with_url).and_return([{"publication_symbols" => "note:1"}, { "publication_symbols" => "note:4"}])
-      end
-      it "SKIP内の所属情報を返すこと" do
-        ["uid:a_user", "gid:a_group", Symbol::SYSTEM_ALL_USER].each do |symbol|
-          @user.belong_symbols_with_collaboration_apps.should be_include(symbol)
-        end
-      end
-      it "SkipEmbedded::WebServiceUtilから他のアプリにアクセスすること" do
-        SkipEmbedded::WebServiceUtil.should_receive(:open_service_with_url).with("http://localhost:3100/notes.js", { :user => "http://test.host/id/a_user" }, "hoge/fuga")
-        @user.belong_symbols_with_collaboration_apps
-      end
-      it "連携アプリ内の所属情報を返すこと" do
-        ["note:1"].each do |symbol|
-          @user.belong_symbols_with_collaboration_apps.should be_include(symbol)
-        end
-      end
-    end
-    describe "情報が取得できない場合" do
-      before do
-        SkipEmbedded::WebServiceUtil.stub!(:open_service_with_url)
-      end
-      it "publicが追加されること" do
-        ["uid:a_user", "gid:a_group", Symbol::SYSTEM_ALL_USER, "public"].each do |symbol|
-          @user.belong_symbols_with_collaboration_apps.should be_include(symbol)
-        end
-      end
-    end
-  end
-  describe "SkipEmbedded::InitialSettingsが設定されていない場合" do
-    before do
-      SkipEmbedded::InitialSettings["belong_info_apps"] = {}
-    end
-    it "SKIP内の所属情報を返すこと" do
-      ["uid:a_user", "gid:a_group", Symbol::SYSTEM_ALL_USER, "public"].each do |symbol|
-        @user.belong_symbols_with_collaboration_apps.should be_include(symbol)
-      end
-    end
-  end
-end
-
 describe User, "#openid_identifier" do
   before do
     GlobalInitialSetting['host_and_port'] = 'test.host'
@@ -1083,7 +1029,7 @@ describe User, 'password_required?' do
   end
   describe 'パスワードモードの場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'password'
+      tenant.initial_settings['login_mode'] = 'password'
     end
     describe 'パスワードが空の場合' do
       before do
@@ -1130,7 +1076,7 @@ describe User, 'password_required?' do
   end
   describe 'パスワードモード以外の場合' do
     before do
-      SkipEmbedded::InitialSettings['login_mode'] = 'rp'
+      tenant.initial_settings['login_mode'] = 'rp'
     end
     it '必要ではない(false)と判定されること' do
       @user.send(:password_required?).should be_false

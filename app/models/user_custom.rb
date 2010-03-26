@@ -14,6 +14,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class UserCustom < ActiveRecord::Base
+  belongs_to :user
   validates_presence_of :theme
   validates_presence_of :display_entries_format
   validates_inclusion_of :display_entries_format, :in => %w(tabs flat)
@@ -27,6 +28,6 @@ class UserCustom < ActiveRecord::Base
 
   def initialize(attr = {})
     super(attr)
-    self.theme = SkipEmbedded::InitialSettings['default_theme'] || "silver"
+    self.theme = user.tenant.initial_settings['default_theme'] || "silver"
   end
 end

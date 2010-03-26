@@ -22,7 +22,7 @@ module QuotaValidation
     end
     def self.per_system
       sum = 0
-      Dir.glob("#{SkipEmbedded::InitialSettings['share_file_path']}/**/*").each do |f|
+      Dir.glob("#{GlobalInitialSetting['share_file_path']}/**/*").each do |f|
         sum += File.stat(f).size
       end
       sum

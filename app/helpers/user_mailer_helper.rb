@@ -18,7 +18,7 @@ module UserMailerHelper
   def convert_plain entry
     return '' if entry.blank?
     html = if entry.editor_mode == 'hiki'
-             HikiDoc.new((entry.contents || ''), Regexp.new(SkipEmbedded::InitialSettings['not_blank_link_re'])).to_html
+             HikiDoc.new((entry.contents || ''), Regexp.new(current_tenant.initial_settings['not_blank_link_re'])).to_html
            else
              entry.contents
            end
