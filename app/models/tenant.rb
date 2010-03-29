@@ -20,4 +20,12 @@ class Tenant < ActiveRecord::Base
     env = defined?(RAILS_ENV) ? RAILS_ENV : "development"
     self.initial_settings = YAML.load_file(@@config_path)[env]
   end
+
+  def self.find_by_op_endpoint(endpoint)
+    if endpoint.match(/^https:\/\/www\.google\.com\/a\/(.*)\/o8\/ud\?be=o8$/)
+      self.find_by_op_url($1)
+    else
+      self.find_by_op_url(endpoint)
+    end
+  end
 end

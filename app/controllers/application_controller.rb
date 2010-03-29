@@ -49,7 +49,7 @@ protected
 
     # プロフィール情報が登録されていない場合、platformに戻す
     unless user.active?
-      redirect_to user.retired? ? polymorphic_url([current_tenant, :platform], :action => :logout) : new_polymorphic_url([current_tenant, :user])
+      redirect_to user.retired? ? logout_platform_url(:message => 'retired') : new_tenant_user_url(current_tenant)
       return
     end
 
@@ -144,7 +144,7 @@ protected
   end
 
   def current_tenant
-    @current_tenant ||= Tenant.find(params[:tenant_id])
+    @current_tenant ||= Tenant.find_by_id(params[:tenant_id])
   end
 
   def login_required
@@ -165,7 +165,7 @@ protected
   end
 
   def valid_tenant_required
-    unless current_user.tenant.id == current_tenant.id
+    unless current_tenant and current_user.tenant.id == current_tenant.id
       redirect_to root_url
     end
   end
@@ -301,8 +301,7 @@ protected
   end
 
   def identifier(user)
-    user_str = user.is_a?(User) ? user.code : user
-    identity_url(:user => user_str, :protocol => scheme)
+    tenant_id_url(user.tenant, :id => user.code, :protocol => scheme)
   end
 
   def checkid_request
@@ -317,6 +316,7 @@ protected
     @current_openid_request ||= OpenIdRequest.find_by_token(session[:request_token]) if session[:request_token]
   end
 
+  # TODO: openid_identifierからユーザを特定して、emailを算出するメソッドに変更する
   def extract_login_from_identifier(openid_url)
     openid_url.gsub(identifier(''), '')
   end
@@ -335,13 +335,14 @@ protected
     end
   end
 
-  def root_url
+  def root_url_with_logged_in
     if logged_in?
       tenant_root_url(current_user.tenant)
     else
-      tenant_root_url(current_tenant)
+      root_url_without_logged_in
     end
   end
+  alias_method_chain :root_url, :logged_in
 
   private
   def sso
@@ -349,7 +350,7 @@ protected
       if request.env['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'
         render :text => _('Session expired. You need to log in again.'), :status => :bad_request
       else
-        redirect_to :controller => '/platform', :action => :login, :openid_url => current_tenant.initial_settings['fixed_op_url'], :return_to => URI.encode(request.url)
+        redirect_to login_platform_url(:openid_url => current_tenant.op_url, :return_to => URI.encode(request.url))
       end
       return false
     end

@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def new
     unless current_user
       flash[:error] = _('Unable to continue with the user registration process. A fresh start is required.')
-      redirect_to tenant_platform_url(current_tenant)
+      redirect_to platform_url
       return
     end
     @user = current_user
@@ -117,11 +117,7 @@ class UsersController < ApplicationController
   end
 
   def agreement
-    session[:agreement] = if login_mode?(:free_rp) and !session[:identity_url].blank?
-                                       :agree_with_free_rp
-                                     else
-                                       :agree
-                                     end
+    session[:agreement] = :agree
     redirect_to :action => :new
   end
 

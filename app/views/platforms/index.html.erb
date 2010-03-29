@@ -8,14 +8,15 @@
 <% end -%>
 
 <div id="platform_main_wrapper">
-  <div id="platform_main" class="<%= Admin::Setting.enable_login_keyphrase(current_tenant) ? 'with_keyphrase' : "without_keyphrase" %>">
+  <div id="platform_main" class="<%# TODO login keyphrase が動作しない = Admin::Setting.enable_login_keyphrase(current_tenant) ? 'with_keyphrase' : "without_keyphrase" %>">
     <div class="col">
-      <% if enable_activate? -%>
       <div class="login-box ui-corner-all">
         <p><%= _('Signup') %></p>
-        <div style="text-align: center; font-weight: bold; font-size: 14px;"><%= link_to _('Register your profile and start using %s') % Admin::Setting.abbr_app_title(current_tenant), activate_tenant_platform_url(current_tenant) %></div>
+        <div style="text-align: center; font-weight: bold; font-size: 14px;">
+          <%# TODO アプリ名が表示できない = link_to _('Register your profile and start using %s') % Admin::Setting.abbr_app_title(current_tenant), activate_platform_url %>
+          <%= link_to _('Register your profile and start using SKIP'), activate_platform_url %>
+        </div>
       </div>
-      <% end -%>
     </div>
     <div class="col">
       <div id="desc_before_login" class="ui-corner-all"><%= skip_image_tag 'indicator.gif' %></div>
@@ -25,7 +26,7 @@
 </div>
 
 <% content_for :header_form do -%>
-  <div id="login_container" class="<%= Admin::Setting.enable_login_keyphrase(current_tenant) ? 'with_keyphrase' : "without_keyphrase" %> ui-corner-all">
+  <div id="login_container" class="<%# TODO login keyphrase が動作しない = Admin::Setting.enable_login_keyphrase(current_tenant) ? 'with_keyphrase' : "without_keyphrase" %> ui-corner-all">
     <%= render :partial => 'shared/login_form' %>
   </div>
 <% end -%>

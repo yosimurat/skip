@@ -34,8 +34,9 @@ class Admin::UsersController < Admin::ApplicationController
       Admin::User.transaction do
         if login_mode?(:fixed_rp)
           @user = User.create_with_identity_url(params[:openid_identifier][:url],
-                                                  :name => params[:user][:name],
-                                                  :email => params[:user][:email])
+                                                :name => params[:user][:name],
+                                                :email => params[:user][:email],
+                                                :tenant => current_tenant)
           @user.save!
         else
           @user = Admin::User.make_new_user({:user => params[:user]})
@@ -221,7 +222,7 @@ class Admin::UsersController < Admin::ApplicationController
   def do_issue_activation_codes user_ids
     User.issue_activation_codes(current_tenant, user_ids) do |unused_users, active_users|
       unused_users.each do |unused_user|
-        UserMailer::Smtp.deliver_sent_activate(current_tenant, unused_user.email, unused_user, signup_tenant_platform_url(current_tenant, :code => unused_user.activation_token))
+        UserMailer::Smtp.deliver_sent_activate(current_tenant, unused_user.email, unused_user, signup_platform_url(:code => unused_user.activation_token))
       end
       unless unused_users.empty?
         email = unused_users.map(&:email).join(',')

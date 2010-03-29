@@ -134,7 +134,7 @@ class User < ActiveRecord::Base
     { :order => 'user_accesses.last_access DESC', :include => [:user_access] }
   }
 
-  attr_accessor :old_password, :password
+  attr_accessor :old_password, :password, :first_name, :last_name
   attr_protected :admin, :status
   cattr_reader :per_page
   @@per_page = 40
@@ -179,6 +179,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  before_validation :build_name_with_divided_names
+
+  def build_name_with_divided_names
+    self.name = _("%{first_name} %{last_name}") % { :first_name => self.first_name, :last_name => self.last_name } if self.name.blank?
+  end
+
   def before_create
     self.issued_at = Time.now
   end
@@ -206,8 +212,8 @@ class User < ActiveRecord::Base
     alias_method_chain :find, :retired_skip
   end
 
-  def self.auth(tenant, code_or_email, password, key_phrase = nil)
-    unless user = tenant.users.find_by_code_or_email_with_key_phrase(tenant, code_or_email, key_phrase)
+  def self.auth(code_or_email, password, key_phrase = nil)
+    unless user = User.find_by_code_or_email_with_key_phrase(code_or_email, key_phrase)
       result, result_user = false, nil
     else
       if user.unused?
@@ -241,7 +247,7 @@ class User < ActiveRecord::Base
     params ||= {}
     code = params.delete(:code)
     password = encrypt(params[:code])
-    user = new(params.slice(:name, :email, :tenant_id).merge(:password => password, :password_confirmation => password))
+    user = new(params.slice(:name, :email, :tenant, :first_name, :last_name).merge(:password => password, :password_confirmation => password))
     user.openid_identifiers << OpenidIdentifier.new(:url => identity_url)
     user.status = 'UNUSED'
     user
@@ -503,7 +509,7 @@ class User < ActiveRecord::Base
 
 private
   def password_required?
-    if tenant.initial_settings['login_mode'] == 'password'
+    if !(tenant and tenant.op_url)
       active? and crypted_password.blank? or !password.blank?
     else
       false
@@ -518,12 +524,12 @@ private
     find_by_email(code_or_email)
   end
 
-  def self.find_by_code_or_email_with_key_phrase(tenant, code_or_email, key_phrase)
-    if Admin::Setting.enable_login_keyphrase(tenant)
-      find_by_code_or_email(code_or_email) if Admin::Setting.login_keyphrase(tenant) == key_phrase
-    else
+  def self.find_by_code_or_email_with_key_phrase(code_or_email, key_phrase)
+    # if Admin::Setting.enable_login_keyphrase(tenant)
+    #   find_by_code_or_email(code_or_email) if Admin::Setting.login_keyphrase(tenant) == key_phrase
+    # else
       find_by_code_or_email(code_or_email)
-    end
+    # end
   end
 
   def self.auth_successed user
@@ -549,5 +555,5 @@ private
     nil
   end
 
-  private_class_method :find_by_code_or_email, :find_by_code_or_email_with_key_phrase, :auth_successed, :auth_failed
+  private_class_method :find_by_code_or_email, :auth_successed, :auth_failed
 end

@@ -2,7 +2,7 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <%= favicon_include_tag %>
 
-<title><%= h(title.blank? ? Admin::Setting.abbr_app_title(current_tenant) : "#{title} - #{Admin::Setting.abbr_app_title(current_tenant)}") %></title>
+<title><%= h(title.blank? ?  app_title : "#{title} - #{app_title}") %></title>
 
 <%= stylesheet_link_tag("skins/#{current_user.custom.theme}/skin.css") if logged_in? %>
 <%= skip_stylesheet_link_tag 'jquery.autocomplete.css' %>

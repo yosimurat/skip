@@ -1,11 +1,68 @@
-<% form_tag(login_tenant_platform_url(current_tenant), :id => 'login_form') do -%>
+<% form_tag(login_platform_url, :id => 'login_form') do -%>
   <%= hidden_field_tag "return_to", h(params[:return_to]) %>
-  <% if login_mode?(:password) -%>
-    <%= render :partial => 'shared/password_login_form' %>
-  <% elsif login_mode?(:fixed_rp) -%>
-    <%= render :partial => 'shared/fixed_rp_login_form' %>
-  <% else -%>
-    No matched login-mode. Check your initial_settings.yml!
+  <table cellspacing="0" cellpadding="0">
+    <col width="180px" />
+    <col width="180px" />
+    <col width="80px" />
+    <tbody>
+      <% if checkid_request && !checkid_request.id_select %>
+        <tr>
+          <td colspan="2">
+            <%= _('Your OpenID:') %><%= checkid_request.identity %>
+            <br />
+            <%= link_to _('cancel this request'), cancel_path %>
+          </td>
+        </tr>
+      <% end -%>
+      <tr>
+        <td class="label_field">
+          <label for="login_key"><b><%= h _('Login ID') %> or <%= s_('User|Email') %></b></label>
+        </td>
+        <td class="label_field">
+          <label for="login_password"><b><%= _('Password') %></b></label>
+        </td>
+        <td class="input_field">
+        </td>
+      </tr>
+      <tr>
+        <td class="input_field">
+          <%= text_field 'login', 'key', :autocomplete => :on, :tabindex => "1" %>
+        </td>
+        <td class="input_field">
+          <%= password_field 'login', 'password', :autocomplete => :on, :tabindex => "2" %>
+        </td>
+        <td class="submit"><%= submit_tag _("Login"), :onclick=>"saveLoginData();", :tabindex => "4" %></td>
+      </tr>
+      <tr>
+        <td class="label_field">
+          <%= check_box_tag "login_save", true, true %>
+          <%= label_tag "login_save", _('Login automatically from next time') %>
+        </td>
+        <td class="label_field">
+          <%= link_to(_('Forgot your password? Click here.'), forgot_password_platform_path, {:class => 'small_text'}) %></td>
+        <td class="input_field">
+        </td>
+      </tr>
+      <tr>
+        <td class="label_field">
+          <label for="openid_url"><b><%= h _('OpenID URL') %></b></label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= text_field_tag "openid_url" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <% content_for :javascript_initializers do -%>
+    $j('#login_save').attr('checked', ($j.cookie('login_save') == 'true'));
+    $j('#login_key').focus();
+
+    saveLoginData = function(){
+    $j.cookie('login_save', $j('#login_save').attr('checked').toString(), {expires: 14});
+    return true;
+    };
   <% end -%>
 <% end -%>
-

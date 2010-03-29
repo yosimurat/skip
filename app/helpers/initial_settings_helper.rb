@@ -17,11 +17,9 @@ module InitialSettingsHelper
   def login_mode?(mode, tenant = current_tenant)
     case mode
     when :password
-      return tenant.initial_settings['login_mode'] == 'password'
-    when :free_rp
-      return (tenant.initial_settings['login_mode'] == 'rp' and tenant.initial_settings['fixed_op_url'].blank?)
+      return !(current_tenant and tenant.op_url)
     when :fixed_rp
-      return (tenant.initial_settings['login_mode'] == 'rp' and !tenant.initial_settings['fixed_op_url'].blank?)
+      return !!(current_tenant and tenant.op_url)
     else
       return false
     end

@@ -58,6 +58,17 @@ default: &default
   administrator_addr: youradmin@example.com                         # 500エラーの送信と管理者登録失敗の場合に表示されるアドレス
 
   # ================================================================================================
+  # ログインの際に利用する認証方式の設定
+  # ================================================================================================
+  # 以下RPとして稼動の場合の設定
+  ax_fetchrequest:
+    :name: "http://axschema.org/namePerson"
+    :email: "http://axschema.org/contact/email"
+    :code: "http://axschema.org/namePerson/friendly"
+    :first_name: "http://axschema.org/namePerson/first"
+    :last_name: "http://axschema.org/namePerson/last"
+
+  # ================================================================================================
   # メールに関する設定
   # ================================================================================================
   raise_delivery_errors: false                                      # メール送信に失敗した場合のエラー処理を行なうか
