@@ -32,7 +32,6 @@ class User < ActiveRecord::Base
   has_many :groups, :through => :group_participations, :conditions => 'groups.deleted_at IS NULL'
 
   has_many :openid_identifiers
-  has_many :user_oauth_accesses
 
   has_many :follow_chains, :class_name => 'Chain', :foreign_key => 'from_user_id'
   has_many :against_chains, :class_name => 'Chain', :foreign_key => 'to_user_id'
@@ -188,8 +187,6 @@ class User < ActiveRecord::Base
     self.password = nil
     self.password_confirmation = nil
     self.old_password = nil
-
-    user_oauth_accesses.delete_all if retired?
   end
 
   def validate

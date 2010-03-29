@@ -1,6 +1,0 @@
-<% OauthProvider.enable.each do |provider| -%>
-  <% provider.setting.operations(params[:controller]).each do |operation| -%>
-    <%= render :partial => 'collaboration_app/operation_box', :locals => {:title => operation['title'], :links => operation['links']} %>
-  <% end -%>
-<% end -%>
-

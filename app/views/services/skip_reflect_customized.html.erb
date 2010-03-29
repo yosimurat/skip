@@ -23,16 +23,11 @@
     if( url != '' )
       jQuery.getJSON(url, replaceBannerLink);
   RUBY
-  replace_application_link_js = <<-RUBY
-    // アプリメニューのリプレイス
-    jQuery('#application_link').html('#{application_link}');
-  RUBY
   header_js = <<-RUBY
 (function() {
     // ロゴのリプレイス
     jQuery('#logo').find('img').attr('src', '#{root_url + "custom/images/header_logo.png"}');
     #{replace_advertisement_js if current_tenant.initial_settings['advertisements_url']}
-    #{replace_application_link_js unless OauthProvider.enable.empty?}
     // フッターのリプレイス
     jQuery('#footer').html('#{footer_link}');
     jQuery('#other_link')

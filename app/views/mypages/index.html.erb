@@ -91,11 +91,6 @@
     <%= render :partial => "publicated_entries_#{current_user.custom.display_entries_format}" %>
 
     <%# ============================================================ -%>
-    <%#  main area collaboration_apps feeds -%>
-    <%# ============================================================ -%>
-    <%= render(:partial => 'collaboration_app/feeds') %>
-
-    <%# ============================================================ -%>
     <%#  main area recent users -%>
     <%# ============================================================ -%>
     <% unless @recent_users.empty? -%>

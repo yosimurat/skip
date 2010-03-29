@@ -156,17 +156,13 @@ module ApplicationHelper
       %!<link rel="icon" href="#{favicon_url}" type="image/ico" />!
   end
 
+  # TODO 連携アプリが無くなった現状では不要なので消してしまったほうがいいかもしれない。
   def application_link
-    application_links = OauthProvider.enable.map do |p|
-      link_to(h(p.setting.name), h(p.setting.root_url), :class => "underline_link")
-    end
+    application_links = []
     unless application_links.empty?
       application_links.unshift(link_to(Admin::Setting.abbr_app_title(current_tenant), tenant_root_url(current_tenant), :class => "underline_link"))
-      application_link = content_tag :div, :id => 'collaboration_apps_link' do
-        application_links.join('&nbsp')
-      end
-      application_link
     end
+    application_links
   end
 
   def footer_link
