@@ -1,4 +1,4 @@
-class Admin::Tenant < ActiveRecord::Base
+class Admin::Tenant < Tenant
   has_many :users, :class_name => 'Admin::User', :dependent => :destroy
   has_many :board_entries, :class_name => 'Admin::BoardEntry', :dependent => :destroy
   has_many :share_files, :class_name => 'Admin::ShareFile', :dependent => :destroy
