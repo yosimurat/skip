@@ -19,20 +19,7 @@ class BatchCheckUserReadings < BatchBase
 
   def self.execute options
     check_month = options[:check_month].to_i
-    checkpoint = Date.today << check_month
-
-    conditions_state =  ["last_updated <= ?"]
-    conditions_state << checkpoint.to_s
-    conditions_state[0] << " AND( board_entry_comments.updated_on <= ? OR board_entry_comments.updated_on is NULL )"
-    conditions_state << checkpoint.to_s
-
-    board_entry = BoardEntry.find(:all,
-                                  :conditions => conditions_state,
-                                  :select => "board_entries.id",
-                                  :include => [:board_entry_comments])
-    entry_ids = board_entry.map {|entry| entry.id }
-
-    UserReading.update_all('user_readings.read = 1,checked_on = now()',["user_readings.board_entry_id in (?) AND user_readings.read = 0", entry_ids])
+    UserReading.be_read_too_old_entries(:month_before => check_month)
   end
 
 end
@@ -43,7 +30,7 @@ end
 
 check_month = ARGV[0] || "3"
 if check_month.index(/[0-9]+/)
-  BatchCheckUserReadings.execution({ :check_month => check_month})
+  BatchCheckUserReadings.execution({:check_month => check_month})
 else
   BatchCheckUserReadings::log_error "数値以外の引数が指定されています。"
 end

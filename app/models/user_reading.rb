@@ -14,6 +14,8 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class UserReading < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :board_entry
 
   def self.create_or_update(user_id, board_entry_id, read = true)
     user_reading = UserReading.find_by_user_id_and_board_entry_id(user_id, board_entry_id)
@@ -23,6 +25,12 @@ class UserReading < ActiveRecord::Base
     user_reading.notice_type = 'notice' if BoardEntry.find(board_entry_id).is_notice?
     user_reading.save
     user_reading
+  end
+
+  def self.be_read_too_old_entries options = {}
+    options = {:month_before => 3}.merge!(options)
+    entry_ids = BoardEntry.updated_on_lte(Time.now.ago(options[:month_before].to_i.month)).all(:select => 'board_entries.id').map(&:id)
+    UserReading.board_entry_id_is(entry_ids).read_is(false).update_all(['user_readings.read = 1, user_readings.checked_on = ?', Time.now])
   end
 
 end
