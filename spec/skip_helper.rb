@@ -176,6 +176,18 @@ def create_user_reading(options = {})
   board_entry.user_readings.create!({:user => user, :read => false, :checked_on => Time.now}.merge(options))
 end
 
+def create_system_message(options = {})
+  system_message = SystemMessage.new({:send_flag => false, :message_hash => {:board_entry => 1}}.merge!(options))
+  system_message.save!
+  system_message
+end
+
+def create_user_message_unsubscribe(options = {})
+  user = options[:user] || create_user
+  user_message_unsubscribe = user.user_message_unsubscribes.create!({:message_type => 'MESSAGE'}.merge!(options))
+  user_message_unsubscribe
+end
+
 # --- OpenID Provider関連テスト用
 def checkid_request_params
   { 'openid.ns' => OpenID::OPENID2_NS,

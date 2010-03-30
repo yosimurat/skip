@@ -20,7 +20,6 @@ describe BatchSendMails, '#.execute' do
     @sender = BatchSendMails.new
     BatchSendMails.should_receive(:new).and_return(@sender)
     @sender.stub!(:send_message)
-    @sender.stub!(:send_cleaning_notification)
   end
   it 'messageメールの送信処理がおこなわれること' do
     @sender.should_receive(:send_message)
@@ -34,64 +33,47 @@ describe BatchSendMails, '#send_message' do
   end
   describe 'messagesテーブルに未送信データがある場合' do
     before do
-      user = stub_model(User, :uid => 'alice')
-      user.stub!(:retired?).and_return(false)
-      @message = stub_model(SystemMessage, :send_flag => false, :message_hash => {:board_entry_id => 1}, :user => user)
-      ActionMailer::Base.deliveries.clear
+      @alice = create_user({:name => 'アリス'})
+      @message = create_system_message(:user => @alice, :message_type => 'MESSAGE')
       @sender.stub!(:system_message_data).and_return(:message => 'message', :icon => 'icon', :url => 'url')
+      ActionMailer::Base.deliveries.clear
     end
     describe '関連するuser_message_unsubscribesテーブルが存在する場合' do
       before do
-        @message.stub!(:user_message_unsubscribe_id).and_return(SkipFaker.rand_num)
-        @message.stub!(:update_attribute)
-        SystemMessage.stub!(:all).and_return([@message])
+        create_user_message_unsubscribe(:user => @alice, :message_type => 'MESSAGE')
       end
       it 'messagesテーブルの対象レコードが送信済みとなること' do
-        @message.should_receive(:update_attribute).with(:send_flag, true)
-        SystemMessage.should_receive(:all).and_return([@message])
         @sender.send_message
+        @message.reload.send_flag.should be_true
       end
       it 'メールが送信されないこと' do
-        lambda do
-          @sender.send_message
-        end.should_not change(Email, :count)
+        @sender.send_message
+        ActionMailer::Base.deliveries.size == 0
       end
     end
     describe '関連するuser_message_unsubscribesテーブルが存在しない場合' do
       describe 'ユーザが退職していない場合' do
-        before do
-          user = stub_model(User, :retired? => false, :email => SkipFaker.email, :uid => 'alice')
-          @message = stub_model(SystemMessage, :send_flag => false, :message_type => 'COMMENT', :message_hash => {:board_entry_id => 1}, :user => user)
-          @message.stub!(:user_message_unsubscribe_id).and_return(nil)
-          @message.stub!(:update_attribute)
-          SystemMessage.should_receive(:all).and_return([@message])
-        end
         it 'messagesテーブルの対象レコードが送信済みとなること' do
-          @message.should_receive(:update_attribute).with(:send_flag, true)
           @sender.send_message
+          @message.reload.send_flag.should be_true
         end
         it 'メールが送信されること' do
-          lambda do
-            @sender.send_message
-          end.should change(Email, :count).to(1)
+          @sender.send_message
+          ActionMailer::Base.deliveries.size == 1
         end
       end
       describe 'ユーザが退職している場合' do
         before do
-          user = stub_model(User, :retired? => true, :email => SkipFaker.email, :uid => 'alice')
-          @message = stub_model(SystemMessage, :send_flag => false, :message_hash => {:board_entry_id => 1}, :user => user)
-          @message.stub!(:user_message_unsubscribe_id).and_return(nil)
-          @message.stub!(:update_attribute)
+          @alice.status = 'RETIRED'
+          @alice.save
         end
         it 'messagesテーブルの対象レコードが送信済みとなること' do
-          @message.should_receive(:update_attribute).with(:send_flag, true)
-          SystemMessage.should_receive(:all).and_return([@message])
           @sender.send_message
+          @message.reload.send_flag.should be_true
         end
         it 'メールが送信されないこと' do
-          lambda do
-            @sender.send_message
-          end.should_not change(Email, :count)
+          @sender.send_message
+          ActionMailer::Base.deliveries.size == 0
         end
       end
     end

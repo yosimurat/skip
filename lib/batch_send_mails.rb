@@ -38,10 +38,10 @@ class BatchSendMails < BatchBase
         end
 
         link_url = system_message_data[:url]
-        message_manage_url = url_for :controller => "/mypage", :action => "manage", :menu => :manage_message
+        message_manage_url = edit_tenant_user_message_unsubscribe_url(user.tenant, user)
 
         begin
-          UserMailer::AR.deliver_sent_message(user.email, link_url, system_message_data[:message], message_manage_url)
+          UserMailer::AR.deliver_sent_message(user.tenant, user.email, link_url, system_message_data[:message], message_manage_url)
           system_message.update_attribute :send_flag, true
         rescue => e
           self.class.log_error "failed send message [id]: #{e}"
