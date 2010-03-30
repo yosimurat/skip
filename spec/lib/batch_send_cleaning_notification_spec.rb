@@ -29,17 +29,19 @@ end
 
 describe BatchSendCleaningNotification, '#send_cleaning_notification' do
   before do
+    @tenant = create_tenant
+    alice = create_user(:tenant => @tenant, :name => 'alice', :admin => true)
+    bob = create_user(:tenant => @tenant, :name => 'bob')
     @sender = BatchSendCleaningNotification.new
-    @sender.stub!(:cleaning_notification_to_addresses).and_return('email1, email2')
     ActionMailer::Base.deliveries.clear
   end
   describe 'クリーニング依頼メールを送信する設定の場合' do
     before do
-      Admin::Setting.should_receive(:enable_user_cleaning_notification).and_return(true)
+      Admin::Setting.set_enable_user_cleaning_notification(@tenant, true)
     end
     describe '送信間隔が3ヶ月の場合' do
       before do
-        Admin::Setting.should_receive(:user_cleaning_notification_interval).and_return(3)
+        Admin::Setting.set_user_cleaning_notification_interval(@tenant, 3)
       end
       describe '実行日時が3/1の場合' do
         before do
@@ -88,7 +90,7 @@ describe BatchSendCleaningNotification, '#send_cleaning_notification' do
     end
     describe '送信間隔が6ヶ月の場合' do
       before do
-        Admin::Setting.should_receive(:user_cleaning_notification_interval).and_return(6)
+        Admin::Setting.set_user_cleaning_notification_interval(@tenant, 6)
       end
       describe '実行日時が3/1の場合' do
         before do
@@ -138,12 +140,11 @@ describe BatchSendCleaningNotification, '#send_cleaning_notification' do
   end
   describe 'クリーニング依頼メールを送信しない設定の場合' do
     before do
-      Admin::Setting.should_receive(:enable_user_cleaning_notification).and_return(false)
+      Admin::Setting.set_enable_user_cleaning_notification(@tenant, false)
     end
     it 'メール送信されないこと' do
-      lambda do
-        @sender.send_cleaning_notification
-      end.should_not change(ActionMailer::Base.deliveries, :size)
+      @sender.send_cleaning_notification
+      ActionMailer::Base.deliveries.size.should == 0
     end
   end
 end

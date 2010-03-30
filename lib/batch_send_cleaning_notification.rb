@@ -22,17 +22,19 @@ class BatchSendCleaningNotification < BatchBase
   end
 
   def send_cleaning_notification
-    if Admin::Setting.enable_user_cleaning_notification
-      now = Time.now
-      if now.month % Admin::Setting.user_cleaning_notification_interval == 0 && now.day == 1
-        UserMailer::Smtp.deliver_sent_cleaning_notification cleaning_notification_to_addresses
+    Tenant.all.each do |tenant|
+      if Admin::Setting.enable_user_cleaning_notification(tenant)
+        now = Time.now
+        if now.month % Admin::Setting.user_cleaning_notification_interval(tenant) == 0 && now.day == 1
+          UserMailer::Smtp.deliver_sent_cleaning_notification tenant, cleaning_notification_to_addresses(tenant)
+        end
       end
     end
   end
 
   private
-  def cleaning_notification_to_addresses
-    Admin::User.admin.active.map { |u| u.email }.join(',')
+  def cleaning_notification_to_addresses(tenant)
+    tenant.users.active.admin.map(&:email).join(',')
   end
 end
 
