@@ -379,3 +379,25 @@ describe BoardEntry, '#be_close!' do
     end
   end
 end
+
+describe BoardEntry, '.be_hide_too_old' do
+  before do
+    BoardEntry.record_timestamps = false
+    create_board_entry(:aim_type => 'question', :hide => false, :created_on => Time.now.ago(31.day))
+    create_board_entry(:aim_type => 'question', :hide => false, :created_on => Time.now.ago(30.day))
+    create_board_entry(:aim_type => 'question', :hide => false, :created_on => Time.now.ago(29.day))
+  end
+
+  describe '日数指定しない場合' do
+    subject {
+      BoardEntry.be_hide_too_old
+    }
+    it '30日より前の質問のみ閉じられること' do
+      should == 1
+    end
+  end
+
+  after do
+    BoardEntry.record_timestamps = true
+  end
+end

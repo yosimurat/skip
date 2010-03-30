@@ -20,10 +20,7 @@ class BatchCloseQuestions < BatchBase
 
   def self.execute options
     check_days_ago = options[:check_days_ago].to_i
-    checkpoint = Date.today - check_days_ago
-
-    BoardEntry.update_all('hide = 1', 
-                          ["board_entries.aim_type = 'question' AND board_entries.created_on < ? AND board_entries.hide = 0", checkpoint])
+    BoardEntry.be_hide_too_old(:day_before => check_days_ago)
   end
 end
 
