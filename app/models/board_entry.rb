@@ -234,12 +234,12 @@ class BoardEntry < ActiveRecord::Base
     generate_next_user_entry_no
   end
 
-  def after_save
-    Tag.create_by_comma_tags category, entry_tags
-  end
-
   def after_create
     BoardEntryPoint.create(:board_entry_id=>id)
+  end
+
+  def after_save
+    Tag.create_by_comma_tags category, entry_tags
   end
 
   # TODO 回帰テストを書く
@@ -303,7 +303,6 @@ class BoardEntry < ActiveRecord::Base
 #    '/page/' + id.to_s
 #  end
 
-  # ブログかどうか
   def diary?
     entry_type == DIARY
   end
@@ -365,7 +364,7 @@ class BoardEntry < ActiveRecord::Base
     end
   end
 
-  # TODO ShareFileと統合したい
+  # TODO ShareFileと統合したい, helperに持ちたい
   def visibility
     text = color = ""
     if public?
@@ -382,26 +381,6 @@ class BoardEntry < ActiveRecord::Base
     [text, color]
   end
 
-#  # TODO ShareFileと統合したい。owner_symbol_typeにしたい
-#  def symbol_type
-#    symbol.split(':')[0]
-#  end
-#
-#  # TODO ShareFileと統合したい。owner_symbol_idにしたい
-#  def symbol_id
-#    symbol.split(':')[1]
-#  end
-#
-#  # TODO ShareFileと統合したい。owner_symbol_nameにしたい
-#  def symbol_name
-#    owner = Symbol.get_item_by_symbol(self.symbol)
-#    owner ? owner.name : ''
-#  end
-
-#  def point
-#    state.point
-#  end
-
   # TODO もはやprepareじゃない。sent_contact_mailsなどにリネームする
   def send_contact_mails
     return unless self.send_mail?
@@ -411,8 +390,7 @@ class BoardEntry < ActiveRecord::Base
     users = publication_users
     users.each do |u|
       next if u.id == self.user_id
-      owner = load_owner
-      UserMailer::AR.deliver_sent_contact(u.email, owner, self)
+      UserMailer::AR.deliver_sent_contact(u.email, self.owner, self)
     end
   end
 
@@ -490,38 +468,24 @@ class BoardEntry < ActiveRecord::Base
     end
   end
 
-#  # この記事の公開対象ユーザ一覧を返す
-#  # 戻り値：Userオブジェクトの配列（重複なし）
-#  def publication_users
-#    case self.publication_type
-#    when "private"
-#      owner = load_owner
-#      if owner.is_a?(Group)
-#        owner.users.active
-#      elsif owner.is_a?(User)
-#        [owner]
-#      else
-#        []
-#      end
-#    when "protected"
-#      users = []
-#      self.publication_symbols_value.split(',').each do |sym|
-#        symbol_type, symbol_id = SkipUtil.split_symbol(sym)
-#        case symbol_type
-#        when "uid"
-#          users << User.active.find_by_uid(symbol_id)
-#        when "gid"
-#          group = Group.active.find_by_gid(symbol_id, :include => [:group_participations])
-#          users << group.group_participations.map { |part| part.user if part.user.active? } if group
-#        end
-#      end
-#      users.flatten.uniq.compact
-#    when "public"
-#      User.active.all
-#    else
-#      []
-#    end
-#  end
+  # この記事の公開対象ユーザ一覧を返す
+  # 戻り値：Userオブジェクトの配列（重複なし）
+  def publication_users
+    case self.publication_type
+    when "private"
+      if self.owner.is_a?(Group)
+        self.owner.users.active
+      elsif self.owner.is_a?(User)
+        [self.owner]
+      else
+        []
+      end
+    when "public"
+      User.active.all
+    else
+      []
+    end
+  end
 
   def root_comments
     board_entry_comments.find(:all, :conditions => ["parent_id is NULL"], :order => "created_on")
@@ -588,6 +552,11 @@ class BoardEntry < ActiveRecord::Base
     self.publication_type = 'private'
     self.save!
     true
+  end
+
+  def self.be_hide_too_old options = {}
+    options = {:day_before => 30}.merge!(options)
+    BoardEntry.aim_type_is('question').hide_is(false).created_on_lt(Time.now.ago(options[:day_before].to_i.day)).update_all('hide = 1')
   end
 
 private

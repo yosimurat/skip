@@ -67,7 +67,9 @@ def mock_record_invalid
 end
 
 def create_tenant options = {}
-  Tenant.create!({:name => 'とあるテナント'}.merge(options))
+  t = Tenant.create!({:name => 'とあるテナント'}.merge(options))
+  yield t if block_given?
+  t
 end
 
 def create_user options = {}
@@ -124,8 +126,7 @@ def create_board_entry options = {}
     :last_updated => Time.now,
     :category => '',
     :publication_type => 'public',
-    :owner_id => owner.id,
-    :owner_type => owner.class.name
+    :owner => owner
   }.merge(options))
   board_entry.save!
   yield board_entry if block_given?

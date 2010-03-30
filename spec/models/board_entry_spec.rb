@@ -15,79 +15,45 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe BoardEntry, "に何も値が設定されていない場合" do
-  before(:each) do
-    @board_entry = BoardEntry.new
+describe BoardEntry, "valid?" do
+  describe '正しい値が設定されていない場合' do
+    subject {
+      @board_entry = BoardEntry.new
+    }
+    it { should_not be_valid }
+    it { should have(1).errors_on(:title) }
+    it { should have(1).errors_on(:contents) }
+    it { should have(1).errors_on(:date) }
+    it { should have(1).errors_on(:user) }
+    it { should have(1).errors_on(:tenant) }
+    it { should have(1).errors_on(:owner) }
+    it { should have(1).errors_on(:last_updated) }
   end
-  it { @board_entry.should_not be_valid }
-  it { @board_entry.should have(1).errors_on(:title) }
-  it { @board_entry.should have(1).errors_on(:contents) }
-  it { @board_entry.should have(1).errors_on(:date) }
-  it { @board_entry.should have(1).errors_on(:user_id) }
-end
+  describe '正しい値が設定されている場合' do
+    subject {
+      @board_entry = BoardEntry.new({
+        :title => "hoge",
+        :contents => "hoge",
+        :date => Time.now,
+        :user => create_user,
+        :tenant => create_tenant,
+        :owner => create_user,
+        :last_updated => Time.now,
+        :publication_type => 'public'
+      })
+    }
 
-describe BoardEntry, "に正しい値が設定されている場合" do
-  before(:each) do
-    @board_entry = BoardEntry.new({ :title => "hoge", :contents => "hoge",
-                                    :date => Date.today, :user_id => 1,
-    # FIXME この行からvalidateがかかっていないのに保存しようとするとMysqlエラー
-                                    :last_updated => Date.today })
-  end
-
-  it { @board_entry.should be_valid }
-  it "正しく保存される" do
-    lambda { @board_entry.save! }.should_not raise_error
-  end
-  it "保存するときにBoardEntryPointが作成される" do
-    BoardEntryPoint.should_receive(:create)
-    @board_entry.save!
-  end
-
-  describe BoardEntry, "にタグが設定されている場合" do
-    before(:each) do
-      @board_entry.category = 'foo,bar'
-    end
-
-    it "保存する際にTagが保存される" do
-      Tag.should_receive(:create_by_comma_tags)
-      @board_entry.save
-    end
+    it { should be_valid }
   end
 end
 
-describe BoardEntry, "があるユーザのブログだったとき" do
-  fixtures :board_entries
-  before(:each) do
-    @board_entry = board_entries(:a_entry)
-  end
-
-  it { @board_entry.permalink.should == "/page/#{@board_entry.id}" }
-  it { @board_entry.public?.should be_true}
-  it { @board_entry.private?.should be_false }
-  it { @board_entry.protected?.should be_false  }
-  # TODO: このメソッドはいらない気がする。過去の消し忘れか
-  #  it { @board_entry.owner_is_public?.should be_true }
-  # TODO: BoardEntry#get_around_entryのテスト
-  #      select文の + の意味が分からん
-  #      文字列連結をしているようだ
-  #      周りの記事を探すだけなのになぜここまでの処理が必要か？
+describe BoardEntry, '#validate' do
 end
 
-# TODO: BoardEntry.make_conditionsのテスト
+describe BoardEntry, '#before_create' do
+end
 
-describe "BoardEntry.get_popular_tag_words で複数タグが見つかったとき" do
-  before(:each) do
-    @tag1 = mock_model(EntryTag)
-    @tag1.stub!(:name).and_return('z')
-    @tag2 = mock_model(EntryTag)
-    @tag2.stub!(:name).and_return('a')
-    @tag3 = mock_model(EntryTag)
-    @tag3.stub!(:name).and_return('z')
-    EntryTag.should_receive(:find).and_return([@tag1,@tag2,@tag3])
-  end
-  it "タグの名前をユニークして返す" do
-    BoardEntry.get_popular_tag_words.should == ['z','a']
-  end
+describe BoardEntry, '#after_create' do
 end
 
 describe BoardEntry, '#after_save' do
@@ -107,6 +73,18 @@ describe BoardEntry, '#after_save' do
       it { @entry.entry_tags.size.should == 2 }
     end
   end
+end
+
+describe BoardEntry, '#full_accessible?' do
+end
+
+describe BoardEntry, '#accessible?' do
+end
+
+describe BoardEntry, '#accessible_without_writer?' do
+end
+
+describe BoardEntry, '#writer?' do
 end
 
 describe BoardEntry, '.unescape_href' do
@@ -131,6 +109,26 @@ EOF
   end
 end
 
+describe BoardEntry, '.get_popular_tag_words' do
+  describe "複数タグが見つかったとき" do
+    before(:each) do
+      @tag1 = mock_model(EntryTag)
+      @tag1.stub!(:name).and_return('z')
+      @tag2 = mock_model(EntryTag)
+      @tag2.stub!(:name).and_return('a')
+      @tag3 = mock_model(EntryTag)
+      @tag3.stub!(:name).and_return('z')
+      EntryTag.should_receive(:find).and_return([@tag1,@tag2,@tag3])
+    end
+    it "タグの名前をユニークして返す" do
+      BoardEntry.get_popular_tag_words.should == ['z','a']
+    end
+  end
+end
+
+describe BoardEntry, '.categories_hash' do
+end
+
 describe BoardEntry, '#send_contact_mails' do
   describe 'メールを送信しない場合' do
     before do
@@ -145,28 +143,29 @@ describe BoardEntry, '#send_contact_mails' do
   end
   describe 'メールを送信する場合' do
     before do
-      @alice = create_user :user_options => {:name => 'アリス', :admin => true}
-      @jack = create_user :user_options => {:name => 'ジャック', :admin => true}
-      @nancy = create_user :user_options => {:name => 'ナンシー', :admin => true}
+      @tenant = create_tenant
+      @alice = create_user({:tenant => @tenant, :name => 'アリス', :admin => true})
+      @jack = create_user({:tenant => @tenant, :name => 'ジャック', :admin => true})
+      @nancy = create_user({:tenant => @tenant, :name => 'ナンシー', :admin => true})
     end
     describe '公開範囲が全体公開の場合' do
       before do
-        @entry = create_board_entry(:symbol => @alice.symbol, :publication_type => 'public', :user_id => @alice.id)
+        @entry = create_board_entry(:tenant => @tenant, :owner => @alice, :publication_type => 'public', :user => @alice)
         @entry.send_mail = '1'
       end
       describe '全体へのメール送信が有効の場合' do
         before do
-          tenant.initial_settings['mail']['enable_send_email_to_all_users'] = true
+          @tenant.initial_settings['mail']['enable_send_email_to_all_users'] = true
         end
-        it 'アクティブなユーザ全員分(自分以外)のEmailが出来ていること' do
+        it 'テナント内のアクティブなユーザ全員分(自分以外)のEmailが出来ていること' do
           lambda do
             @entry.send_contact_mails
-          end.should change(Email, :count).by(User.active.count - 1)
+          end.should change(Email, :count).by(@tenant.users.active.count - 1)
         end
       end
       describe '全体へのメール送信が無効の場合' do
         before do
-          tenant.initial_settings['mail']['enable_send_email_to_all_users'] = false
+          @tenant.initial_settings['mail']['enable_send_email_to_all_users'] = false
         end
         it 'Emailが作られないこと' do
           lambda do
@@ -175,20 +174,9 @@ describe BoardEntry, '#send_contact_mails' do
         end
       end
     end
-    describe '公開範囲が直接指定の場合' do
-      before do
-        @entry = create_board_entry(:symbol => @alice.symbol, :publication_type => 'protected', :user_id => @alice.id, :publication_symbols_value => [@alice, @jack, @nancy].map(&:symbol).join(','))
-        @entry.send_mail = '1'
-      end
-      it '直接指定された全員分(自分以外)のEmailが出来ていること' do
-        lambda do
-          @entry.send_contact_mails
-        end.should change(Email, :count).by(2)
-      end
-    end
     describe '公開範囲が自分だけのブログの場合' do
       before do
-        @entry = create_board_entry(:symbol => 'uid:alice', :publication_type => 'private', :user_id => @alice.id)
+        @entry = create_board_entry(:tenant => @tenant, :owner => @alice, :publication_type => 'private', :user => @alice)
         @entry.send_mail = '1'
       end
       it 'Emailが作られないこと' do
@@ -295,11 +283,6 @@ describe BoardEntry, '#publication_users' do
       @entry.publication_users.size.should == User.active.all.size
     end
 
-    it 'SKIPグループの直接指定されている記事の場合、公開されているユーザの配列が返ること' do
-      @entry = create_board_entry(:symbol => 'gid:skip_group', :publication_type => 'protected', :user_id => @alice.id, :publication_symbols_value => [@group, @mike].map(&:symbol).join(','))
-      @entry.publication_users.should == [@alice, @mike]
-    end
-
     it 'SKIPグループに private で公開されている記事の場合、公開されているユーザの配列が返ること' do
       @entry = create_board_entry(:symbol => 'gid:skip_group', :publication_type => 'private', :user_id => @alice.id, :publication_symbols_value => "")
       @entry.publication_users.should == [@alice, @mike]
@@ -310,46 +293,6 @@ describe BoardEntry, '#publication_users' do
       @entry.publication_users.size.should == User.active.all.size
     end
   end
-end
-
-describe BoardEntry, '.owner' do
-  describe '書き込み場所がUserの場合(symbolがuid:xxxxxx)' do
-    before do
-      @symbol = 'uid:111111'
-      @user = mock_model(User)
-      User.should_receive(:find_by_uid).and_return(@user)
-    end
-    it '書きこみ場所(所有者)としてユーザが返却されること' do
-      BoardEntry.owner(@symbol).should == @user
-    end
-  end
-  describe '書き込み場所がGroupの場合(symbolがgid:xxxxxx)' do
-    before do
-      @group = create_group :gid => 'skip_group'
-    end
-    it '書き込み場所(所有者)としてグループが返却されること' do
-      BoardEntry.owner('gid:skip_group').should == @group
-    end
-    describe '書き込み場所のグループが論理削除された場合' do
-      before do
-        @group.logical_destroy
-      end
-      it 'nilが返ること' do
-        BoardEntry.owner('gid:skip_group').should be_nil
-      end
-    end
-  end
-  describe '書き込み場所が不明な場合' do
-    before do
-      @symbol = 'hoge:111111'
-    end
-    it 'nilが返却されること' do
-      BoardEntry.owner(@symbol).should be_nil
-    end
-  end
-end
-
-describe BoardEntry, '#load_owner' do
 end
 
 describe BoardEntry, '#accessible_without_writer?' do
@@ -385,27 +328,6 @@ describe BoardEntry, '#accessible_without_writer?' do
     it 'falseが返却されること' do
       @board_entry.accessible_without_writer?(@user).should be_false
     end
-  end
-end
-
-describe BoardEntry, ".aim_type" do
-  before do
-    BoardEntry.delete_all
-    params = { :title => "hoge", :contents => "hoge", :date => Date.today, :user_id => 1, :last_updated => Date.today }
-    @entries = BoardEntry::AIM_TYPES.map do |type|
-      BoardEntry.create!(params.merge(:aim_type => type))
-    end.index_by(&:aim_type)
-  end
-  it "1つで検索できること" do
-    result = BoardEntry.aim_type('entry').all
-    result.size.should == 1
-    result.should be_include(@entries['entry'])
-  end
-  it "2つの条件で検索できること" do
-    result = BoardEntry.aim_type('entry,question')
-    result.size.should == 2
-    result.should be_include(@entries['entry'])
-    result.should be_include(@entries['question'])
   end
 end
 
