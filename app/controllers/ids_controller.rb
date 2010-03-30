@@ -25,7 +25,7 @@ class IdsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        response.headers['X-XRDS-Location'] = tenant_user_id(current_tenant, @user, :format => :xrds, :protocol => scheme)
+        response.headers['X-XRDS-Location'] = identifier(@user, :format => :xrds)
         render :layout => false
       end
       format.xrds

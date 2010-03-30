@@ -300,8 +300,8 @@ protected
     server_url(:protocol => scheme)
   end
 
-  def identifier(user)
-    tenant_id_url(user.tenant, :id => user.code, :protocol => scheme)
+  def identifier(user, options = {})
+    tenant_id_url(user.tenant, options.update(:id => user.code, :protocol => scheme))
   end
 
   def checkid_request

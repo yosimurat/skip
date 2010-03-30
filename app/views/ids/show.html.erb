@@ -3,7 +3,7 @@
   <head>
     <title>OpenID Identifier</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-XRDS-Location" content="<%= formatted_identity_url(:user => @user.code, :format => :xrds, :protocol => scheme) %>" />
+    <meta http-equiv="X-XRDS-Location" content="<%= identifier(@user, :format => :xrds) %>" />
     <link rel="openid.server openid2.provider" href="<%= endpoint_url %>" />
     <%= favicon_include_tag %>
   </head>
