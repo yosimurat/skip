@@ -36,9 +36,10 @@ class MypagesController < ApplicationController
     #  right side area
     # ============================================================
     @year, @month, @day = parse_date
-    @recent_groups =  Group.active.recent(recent_day).order_recent.limit(5)
-    @recent_users = User.recent(recent_day).order_recent.limit(5) - [current_user]
+    @recent_groups =  Group.active.tenant_id_is(current_tenant.id).recent(recent_day).order_recent.limit(5)
+    @recent_users = User.active.tenant_id_is(current_tenant.id).recent(recent_day).order_recent.limit(5) - [current_user]
 
+    ##BoardEntry.from_recents.accessible(current_user).entry_type_is(BoardEntry::DIARY).timeline.scoped(:include => [ :user, :state ]).order_new.paginate(:page => target_page(id_name), :per_page => options[:per_page])
     # ============================================================
     #  main area entries
     # ============================================================
