@@ -474,6 +474,7 @@ class BoardEntry < ActiveRecord::Base
     case self.publication_type
     when "private"
       if self.owner.is_a?(Group)
+        # FIXME これって参加者になってないよね?
         self.owner.users.active
       elsif self.owner.is_a?(User)
         [self.owner]
@@ -481,7 +482,7 @@ class BoardEntry < ActiveRecord::Base
         []
       end
     when "public"
-      User.active.all
+      self.tenant.users.active.all
     else
       []
     end
@@ -557,6 +558,35 @@ class BoardEntry < ActiveRecord::Base
   def self.be_hide_too_old options = {}
     options = {:day_before => 30}.merge!(options)
     BoardEntry.aim_type_is('question').hide_is(false).created_on_lt(Time.now.ago(options[:day_before].to_i.day)).update_all('hide = 1')
+  end
+
+  def reflect_user_readings
+    if self.is_notice?
+      self.publication_users.each do |user|
+        reflect_user_reading(user)
+      end
+    else
+      user_ids = []
+      Notice.subscribed(owner).each { |notice| user_ids << notice.user_id }
+      if self.owner_is_group?
+        owner.group_participations.active.each { |gp| user_ids << gp.id }
+      end
+      User.id_is(user_ids.uniq).each do |user|
+        reflect_user_reading(user)
+      end
+    end
+  end
+
+  def reflect_user_reading notice_user
+    return if notice_user.id == self.user.id
+    return unless self.accessible?(notice_user)
+
+    if user_reading = self.user_readings.checked_on_lt(self.last_updated).find_or_initialize_by_user_id(notice_user.id)
+      params = {:read => false, :checked_on => nil, :notice_type => nil}
+      params.merge!(:notice_type => 'notice') if self.is_notice?
+      user_reading.attributes = params
+      user_reading.save
+    end
   end
 
 private

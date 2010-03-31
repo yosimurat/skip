@@ -102,6 +102,7 @@ class BoardEntriesController < ApplicationController
         current_user.custom.update_attributes!(:editor_mode => @board_entry.editor_mode)
         @board_entry.send_trackbacks!(current_user, params[:trackbacks])
         @board_entry.send_contact_mails
+        @board_entry.reflect_user_readings
         respond_to do |format|
           format.html do
             flash[:notice] = _('Created successfully.')
@@ -133,6 +134,7 @@ class BoardEntriesController < ApplicationController
       current_user.custom.update_attributes!(:editor_mode => @board_entry.editor_mode)
       @board_entry.send_trackbacks!(current_user, params[:trackbacks])
       @board_entry.send_contact_mails
+      @board_entry.reflect_user_readings
       respond_to do |format|
         format.html do
           flash[:notice] = _('Entry was successfully updated.')

@@ -83,4 +83,22 @@ class BoardEntryComment < ActiveRecord::Base
   def level
     @level ||= ancestors.size + 1
   end
+
+  def reflect_user_readings
+    user_ids = self.board_entry.board_entry_comments.map(&:user_id)
+    User.id_is(user_ids.uniq).each do |user|
+      reflect_user_reading(user)
+    end
+  end
+
+  def reflect_user_reading commented_user
+    return if commented_user.id == self.user.id
+    return unless self.board_entry.accessible?(commented_user)
+
+    if user_reading = self.board_entry.user_readings.checked_on_lt(self.updated_on).find_or_initialize_by_user_id(commented_user.id)
+      params = {:read => false, :checked_on => nil, :notice_type => nil}
+      user_reading.attributes = params
+      user_reading.save
+    end
+  end
 end

@@ -134,9 +134,12 @@ def create_board_entry options = {}
 end
 
 def create_board_entry_comment options = {}
-  board_entry_comment = BoardEntryComment.new({:board_entry_id => 1,
-                                               :contents => 'とあるコメント',
-                                               :user_id => 1}.merge(options))
+  board_entry = options[:board_entry] || create_board_entry
+  user = options[:user] || create_user
+  board_entry_comment = board_entry.board_entry_comments.build({
+    :contents => 'とあるコメント',
+    :user => user
+  }.merge!(options))
   board_entry_comment.save!
   board_entry_comment
 end
@@ -172,7 +175,7 @@ end
 
 def create_user_reading(options = {})
   board_entry = options[:board_entry] || create_board_entry
-  user = options[:uer] || create_user
+  user = options[:user] || create_user
   board_entry.user_readings.create!({:user => user, :read => false, :checked_on => Time.now}.merge(options))
 end
 

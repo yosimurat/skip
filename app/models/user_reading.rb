@@ -32,5 +32,4 @@ class UserReading < ActiveRecord::Base
     entry_ids = BoardEntry.updated_on_lte(Time.now.ago(options[:month_before].to_i.month)).all(:select => 'board_entries.id').map(&:id)
     UserReading.board_entry_id_is(entry_ids).read_is(false).update_all(['user_readings.read = 1, user_readings.checked_on = ?', Time.now])
   end
-
 end

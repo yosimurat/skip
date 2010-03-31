@@ -401,3 +401,55 @@ describe BoardEntry, '.be_hide_too_old' do
     BoardEntry.record_timestamps = true
   end
 end
+
+describe BoardEntry, '#reflect_user_reading' do
+  before do
+    @tenant = create_tenant
+    @alice = create_user({:tenant => @tenant, :name => 'アリス', :admin => true})
+    @jack = create_user({:tenant => @tenant, :name => 'ジャック', :admin => true})
+    @entry = create_board_entry(:tenant => @tenant, :owner => @alice, :publication_type => 'public', :user => @alice)
+  end
+  describe '記事の最終更新者が新着作成対象者と同一の場合' do
+    it '未読が作成されないこと' do
+      lambda do
+        @entry.reflect_user_reading @alice
+      end.should_not change(UserReading, :count)
+    end
+  end
+  describe '記事の最終更新者が新着作成対象者と異なる場合' do
+    describe 'そのユーザに記事の閲覧権限がある場合' do
+      describe '記事の更新時刻以前に新着作成対象者の既読がある場合' do
+        before do
+          @user_reading = create_user_reading(:user => @jack, :board_entry => @entry, :read => true, :checked_on => @entry.last_updated.ago(1.minute))
+        end
+        subject {
+          @entry.reflect_user_reading @jack
+          @user_reading.reload
+        }
+        it 'その既読が未読に更新されること' do
+          subject.read.should be_false
+        end
+        it 'その既読のチェック日時がクリアされること' do
+          subject.checked_on.should be_nil
+        end
+      end
+      describe '記事の更新時刻以前に新着作成対象者の既読がない場合' do
+        subject {
+          @entry.reflect_user_reading @jack
+          UserReading.count
+        }
+        it { should == 1 }
+      end
+    end
+    describe 'そのユーザに記事の閲覧権限がない場合' do
+      before do
+        @entry.should_receive(:accessible?).with(@jack).and_return(false)
+      end
+      it '未読が作成されないこと' do
+        lambda do
+          @entry.reflect_user_reading @jack
+        end.should_not change(UserReading, :count)
+      end
+    end
+  end
+end
