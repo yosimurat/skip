@@ -46,6 +46,7 @@ ActionController::Routing::Routes.draw do |map|
     tenant.resources :board_entries, :only => %w(index show)
     tenant.resource :statistics, :only => %w(show), :member => { :load_calendar => :get, :ado_current_statistics => :get, :ado_statistics_history => :get }
     tenant.resources :ids, :only => :show
+    tenant.resource :search, :only => [], :member => { :full_text_search => :get }
   end
 
   map.namespace "admin" do |admin_map|
@@ -101,6 +102,8 @@ ActionController::Routing::Routes.draw do |map|
     :signup => :any,
     :require_login => :get
   }
+
+  map.resource :services, :only => [], :member => { :search_conditions => :get }
 
   map.root :controller => :platforms, :action => :show
 

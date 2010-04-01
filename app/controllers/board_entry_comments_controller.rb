@@ -9,6 +9,7 @@ class BoardEntryCommentsController < ApplicationController
     @board_entry_comment.user = current_user
     if @board_entry_comment.save
       @board_entry_comment.reflect_user_readings
+      @board_entry_comment.board_entry.update_index
       respond_to do |format|
         format.js { render :partial => "board_entry_comment", :locals => { :comment => @board_entry_comment } }
       end
@@ -22,6 +23,7 @@ class BoardEntryCommentsController < ApplicationController
   def update
     @board_entry_comment.update_attribute :contents, params[:board_entry_comment][:contents]
     @board_entry_comment.reflect_user_readings
+    @board_entry_comment.board_entry.update_index
     respond_to do |format|
       format.js { render :partial => "comment_contents", :locals =>{ :comment => @board_entry_comment } }
     end
@@ -38,6 +40,7 @@ class BoardEntryCommentsController < ApplicationController
       end
     end
     @board_entry_comment.destroy
+    @board_entry_comment.board_entry.update_index
     respond_to do |format|
       format.html do
         flash[:notice] = _("Comment was successfully deleted.")

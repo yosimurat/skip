@@ -17,9 +17,9 @@ module InitialSettingsHelper
   def login_mode?(mode, tenant = current_tenant)
     case mode
     when :password
-      return !(current_tenant and tenant.op_url)
+      return !(tenant and tenant.op_url)
     when :fixed_rp
-      return !!(current_tenant and tenant.op_url)
+      return !!(tenant and tenant.op_url)
     else
       return false
     end

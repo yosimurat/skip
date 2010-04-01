@@ -19,6 +19,7 @@ class Admin::BoardEntriesController < Admin::ApplicationController
   def destroy
     @board_entry = current_tenant.board_entries.find(params[:id])
     @board_entry.destroy
+    @board_entry.destroy_index
 
     respond_to do |format|
       flash[:notice] = _("%{model} was successfully deleted.") % {:model => _('board entry')}

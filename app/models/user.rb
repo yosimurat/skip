@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   include Authentication
   include Authentication::ByCookieToken
   include ActionController::UrlWriter
+  include Search::Indexable
 
   belongs_to :tenant
 
@@ -505,6 +506,30 @@ class User < ActiveRecord::Base
   # TODO 使用箇所を潰した上で廃止
   def belong_symbols
     @belong_symbols ||= self.group_symbols
+  end
+
+  def to_draft uri
+    body_lines = []
+    body_lines << ERB::Util.h(self.name)
+    body_lines << ERB::Util.h(self.email)
+    body_lines << ERB::Util.h(self.section)
+
+    self.user_profile_values.each do |profile|
+      body_lines << ERB::Util.h(profile.value)
+    end
+
+<<-DRAFT
+@uri=#{uri}
+@title=#{ERB::Util.h(self.name)}
+@auther=#{ERB::Util.h(self.name)}
+@cdate=#{self.created_on.rfc822}
+@mdate=#{self.updated_on.rfc822}
+@aid=skip
+@object_type=#{self.class.table_name.singularize}
+@object_id=#{self.id}
+
+#{body_lines.join("\n")}
+DRAFT
   end
 
 private

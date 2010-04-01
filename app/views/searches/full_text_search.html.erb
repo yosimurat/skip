@@ -8,7 +8,7 @@
 
   <div class="full_text_search">
     <div class="search_cond_space">
-      <% form_tag({:controller => 'search', :action => 'full_text_search'} ,:method => 'get', :id => 'full_text_form') do -%>
+      <% form_tag(polymorphic_url([current_tenant, :search], :action => :full_text_search) ,:method => 'get', :id => 'full_text_form') do -%>
       <div>
         <%= text_field_tag('query', params[:query], :size => 50 ) -%>
         <%= submit_tag _('Full-text Search') -%>
@@ -21,7 +21,7 @@
         <% end # each %>
       </div>
       <div>
-        <% current_tenant.initial_settings['search_apps'].each do |key,value| %>
+        <% GlobalInitialSetting['search_apps'].each do |key, value| %>
         <% if value['condition_js'] %>
         <div class="sub_condition" id="<%= key -%>_conditions" style="display:<%= params[:target_aid]==key ? 'block' : 'none' -%>;">
           <script type="text/javascript" src='<%= "#{value['condition_js']}?target_aid=#{h(params[:target_aid])}&target_contents=#{h(params[:target_contents])}" -%>' ></script>

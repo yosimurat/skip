@@ -15,6 +15,7 @@
 
 class Group < ActiveRecord::Base
   include SkipEmbedded::LogicalDestroyable
+  include Search::Indexable
 
   belongs_to :tenant
   belongs_to :group_category
@@ -165,6 +166,24 @@ class Group < ActiveRecord::Base
 
   def to_s
     return 'id:' + id.to_s + ', name:' + name.to_s
+  end
+
+  def to_draft uri
+    body_lines = []
+    body_lines << ERB::Util.h(self.name)
+    body_lines << ERB::Util.h(self.description)
+
+<<-DRAFT
+@uri=#{uri}
+@title=#{ERB::Util.h(self.name)}
+@cdate=#{self.created_on.rfc822}
+@mdate=#{self.updated_on.rfc822}
+@aid=skip
+@object_type=#{self.class.table_name.singularize}
+@object_id=#{self.id}
+
+#{body_lines.join("\n")}
+DRAFT
   end
 
 end

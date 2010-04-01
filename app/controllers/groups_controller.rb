@@ -62,6 +62,7 @@ class GroupsController < ApplicationController
     @group.group_participations.build(:user_id => current_user.id, :owned => true)
 
     if @group.save
+      @group.create_index
       flash[:notice] = _('Group was created successfully.')
       redirect_to [current_tenant, @group]
     else
@@ -76,6 +77,7 @@ class GroupsController < ApplicationController
   def update
     @group = current_target_group
     if @group.update_attributes(params[:group])
+      @group.update_index
       flash[:notice] = _('Group information was successfully updated.')
       redirect_to [current_tenant, @group]
     else
@@ -90,6 +92,7 @@ class GroupsController < ApplicationController
       redirect_to [current_tenant, @group]
     else
       @group.logical_destroy
+      @group.destroy_index
       flash[:notice] = _('Group was successfully deleted.')
       redirect_to tenant_groups_url(current_tenant)
     end

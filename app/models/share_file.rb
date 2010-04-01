@@ -19,6 +19,7 @@ class ShareFile < ActiveRecord::Base
   include ::QuotaValidation
   include ::SkipEmbedded::ValidationsFile
   include ::SkipEmbedded::Types::ContentType
+  include Search::Indexable
 
   attr_accessor :file
 
@@ -338,6 +339,40 @@ class ShareFile < ActiveRecord::Base
 
   def extname
     File.extname(file_name).sub(/\A\./,'').downcase
+  end
+
+  # FIXME platform判定(Linux Only)が必要
+  # FIXME 対象コマンドインストール済み判定が必要
+  def to_draft uri
+    contents =
+      case self.content_type
+      when 'text/plain'
+        File.open(self.full_path) { |f| f.read }
+      when 'application/pdf'
+        `pdftotext -enc UTF-8 -htmlmeta #{self.full_path} -`
+      when 'application/msword'
+        Sanitize.clean(`wvWare --charset=UTF-8 --nographics #{self.full_path}`)
+      when 'application/vnd.ms-excel'
+        Sanitize.clean(`xlhtml #{self.full_path}`)
+      when 'application/vnd.ms-powerpoint'
+        Sanitize.clean(`ppthtml #{self.full_path}`)
+      else
+        ''
+      end
+
+<<-DRAFT
+@uri=#{uri}
+@title=#{ERB::Util.h(self.file_name)}
+@auther=#{ERB::Util.h(self.user.name)}
+@cdate=#{self.created_at.rfc822}
+@mdate=#{self.updated_at.rfc822}
+@aid=skip
+@object_type=#{self.class.table_name.singularize}
+@object_id=#{self.id}
+
+#{self.file_name}
+#{contents}
+DRAFT
   end
 
   private

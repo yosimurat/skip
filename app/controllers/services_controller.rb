@@ -40,10 +40,13 @@ class ServicesController < ActionController::Base
 
   def search_conditions
     @contents = [ { :type => "",            :icon => 'asterisk_orange', :name => _("All") },
-                  { :type => "entry",       :icon => 'report',          :name => _("Blogs / Forums") },
+                  { :type => "board_entry", :icon => 'report',          :name => _("Blogs / Forums") },
                   { :type => "user",        :icon => 'user_suit',       :name => _("Users") },
                   { :type => "group",       :icon => 'group',           :name => _("Groups") },
-                  { :type => "share_file", :icon => 'disk_multiple',   :name => _("Files") } ]
+                  { :type => "share_file",  :icon => 'disk_multiple',   :name => _("Files") } ]
+    respond_to do |format|
+      format.js { render }
+    end
   end
 
   def new_users

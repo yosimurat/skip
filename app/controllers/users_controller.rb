@@ -70,6 +70,7 @@ class UsersController < ApplicationController
     User.transaction do
       @user.save!
       @profiles.each{|profile| profile.save!}
+      @user.update_index
     end
     flash[:notice] = _('User information was successfully updated.')
     redirect_to [current_tenant, @user]
@@ -98,6 +99,7 @@ class UsersController < ApplicationController
         @user.created_on = Time.now
         @user.status = 'ACTIVE'
         @user.save!
+        @user.create_index
 
         UserAccess.create!(:user_id => @user.id, :last_access => Time.now, :access_count => 0)
         UserMailer::Smtp.deliver_sent_signup_confirm(@user.email, @user, root_url)

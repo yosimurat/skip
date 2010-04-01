@@ -103,6 +103,7 @@ class BoardEntriesController < ApplicationController
         @board_entry.send_trackbacks!(current_user, params[:trackbacks])
         @board_entry.send_contact_mails
         @board_entry.reflect_user_readings
+        @board_entry.create_index
         respond_to do |format|
           format.html do
             flash[:notice] = _('Created successfully.')
@@ -135,6 +136,7 @@ class BoardEntriesController < ApplicationController
       @board_entry.send_trackbacks!(current_user, params[:trackbacks])
       @board_entry.send_contact_mails
       @board_entry.reflect_user_readings
+      @board_entry.update_index
       respond_to do |format|
         format.html do
           flash[:notice] = _('Entry was successfully updated.')
@@ -159,6 +161,7 @@ class BoardEntriesController < ApplicationController
 
   def destroy
     @board_entry.destroy
+    @board_entry.destroy_index
     respond_to do |format|
       format.html do
         flash[:notice] = _('Deletion complete.')

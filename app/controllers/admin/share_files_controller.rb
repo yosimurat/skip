@@ -20,4 +20,16 @@ class Admin::ShareFilesController < Admin::ApplicationController
     share_file = current_tenant.share_files.find(params[:id])
     send_file(share_file.full_path, :filename => share_file.file_name, :type => share_file.content_type || Types::ContentType::DEFAULT_CONTENT_TYPE , :stream => false, :disposition => 'attachment')
   end
+
+  def destroy
+    @share_file = current_tenant.share_files.find(params[:id])
+    @share_file.destroy
+    @share_file.destroy_index
+
+    respond_to do |format|
+      flash[:notice] = _("%{model} was successfully deleted.") % {:model => _('share file')}
+      format.html { redirect_to(index_url) }
+      format.xml  { head :ok }
+    end
+  end
 end

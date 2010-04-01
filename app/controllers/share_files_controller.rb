@@ -121,6 +121,7 @@ class ShareFilesController < ApplicationController
     required_full_accessible(@share_file) do
       ShareFile.transaction do
         @share_file.save!
+        @share_file.create_index
         respond_to do |format|
           format.html do
             flash[:notice] = _('File was successfully uploaded.')
@@ -146,6 +147,7 @@ class ShareFilesController < ApplicationController
 
   def update
     if @share_file.update_attributes(params[:share_file])
+      @share_file.update_index
       respond_to do |format|
         format.html do
           flash[:notice] = _('Updated.')
@@ -163,6 +165,7 @@ class ShareFilesController < ApplicationController
 
   def destroy
     @share_file.destroy
+    @share_file.destroy_index
     respond_to do |format|
       format.html do
         flash[:notice] = _("File was successfully deleted.")

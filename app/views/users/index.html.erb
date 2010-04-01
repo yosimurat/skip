@@ -14,7 +14,7 @@
           <%= text_field_tag 'profile_value', params[:profile_value], :size => '30' %>
         </td>
       </tr>
-      <%= render :partial => 'search/tag_search', :locals => {:tags => @tags} %>
+      <%= render :partial => 'searches/tag_search', :locals => {:tags => @tags} %>
     </table>
     <div class="submit">
       <%= f.submit _('Search') %>

@@ -104,7 +104,7 @@ class PlatformsController < ApplicationController
   def activate
     unless enable_activate?
       flash[:error] = _('%{function} currently unavailable.') % {:function => _('Activation email')}
-      return redirect_to [current_tenant, :platform]
+      return redirect_to([current_tenant, :platform])
     end
     return unless request.post?
     email = params[:email]
@@ -130,12 +130,12 @@ class PlatformsController < ApplicationController
   def signup
     unless enable_signup?
       flash[:error] = _('%{function} currently unavailable.') % {:function => _('User registration')}
-      return redirect_to platform_url
+      return redirect_to(platform_url)
     end
     if @user = User.find_by_activation_token(params[:code])
       if @user.within_time_limit_of_activation_token?
         self.current_user = @user
-        redirect_to new_tenant_user_url(current_tenant)
+        redirect_to new_tenant_user_url(@user.tenant)
       else
         flash[:error] = _("The URL for registration has already expired.")
         redirect_to platform_url

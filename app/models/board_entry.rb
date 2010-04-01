@@ -17,6 +17,7 @@ class BoardEntry < ActiveRecord::Base
 
   include Publication
   include ActionController::UrlWriter
+  include Search::Indexable
 
   belongs_to :tenant
   belongs_to :user
@@ -587,6 +588,39 @@ class BoardEntry < ActiveRecord::Base
       user_reading.attributes = params
       user_reading.save
     end
+  end
+
+  def to_draft uri
+    body_lines = []
+    body_lines << ERB::Util.h(self.title)
+    body_lines << ERB::Util.h(self.category)
+    body_lines << ERB::Util.h(self.user.name)
+    body_lines << (self.editor_mode == 'hiki' ? convert_hiki_to_html(self.contents) : self.contents)
+
+    self.board_entry_comments.each do|comment|
+      body_lines << ERB::Util.h(comment.user.name)
+      body_lines << convert_hiki_to_html(comment.contents)
+    end
+    self.entry_trackbacks.each do |trackback|
+      body_lines << ERB::Util.h(trackback.tb_entry.user.name)
+      body_lines << trackback.tb_entry.title
+    end
+<<-DRAFT
+@uri=#{uri}
+@title=#{ERB::Util.h(self.title)}
+@auther=#{ERB::Util.h(self.user.name)}
+@cdate=#{self.created_on.rfc822}
+@mdate=#{self.last_updated.rfc822}
+@aid=skip
+@object_type=#{self.class.table_name.singularize}
+@object_id=#{self.id}
+
+#{body_lines.join("\n")}
+DRAFT
+  end
+
+  def convert_hiki_to_html hiki_text
+    HikiDoc.new((hiki_text || ''), '').to_html
   end
 
 private

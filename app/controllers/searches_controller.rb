@@ -13,7 +13,9 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class SearchController < ApplicationController
+class SearchesController < ApplicationController
+  N_("Please input search query.")
+  N_("Access denied by search node. Please contact system owner.")
 
   #全文検索
   def full_text_search
@@ -24,15 +26,13 @@ class SearchController < ApplicationController
     params[:per_page] = 10
     params[:offset] ||= 0
 
-    search = Search.new(params, current_user.belong_symbols)
-    if search.error.blank?
+    @search = Search::HyperEstraier.search(params, current_user)
+
+    if @search.error.blank?
       # TODO: インスタンス変数に代入することなく@searchで画面表示
-      @invisible_count = search.invisible_count
-      make_instance_variables search.result
+      @invisible_count = @search.invisible_count || 0
+      make_instance_variables @search.result
     else
-      # Searchクラスのメッセージの国際化
-      N_("Please input search query.")
-      N_("Access denied by search node. Please contact system owner.")
       @error_message = search.error
     end
   end

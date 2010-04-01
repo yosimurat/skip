@@ -30,6 +30,7 @@ class Admin::UserProfilesController < Admin::ApplicationController
     begin
       Admin::UserProfileValue.transaction do
         @profiles.each{|profile| profile.save!}
+        user.update_index
       end
 
       flash[:notice] = _("%{model} was successfully updated.") % {:model => _('user profile') }

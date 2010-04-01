@@ -29,7 +29,7 @@
           <%= f.radio_button :order_sort_type, "point" %><%= f.label :order_sort_type_point, _('[Sort by %s]') % Admin::Setting.point_button(current_tenant) %>
         </td>
       </tr>
-      <%= render :partial => 'search/tag_search', :locals => {:tags => @tags} %>
+      <%= render :partial => 'searches/tag_search', :locals => {:tags => @tags} %>
       <tr>
         <td><%= f.submit _('Search'), :disable_with => _('Searching...') %></td>
       </tr>

@@ -74,6 +74,7 @@ class Admin::UsersController < Admin::ApplicationController
     end
     @user.trial_num = 0 unless @user.locked
     @user.save!
+    @user.update_index
     flash[:notice] = _('Updated.')
     redirect_to :action => "edit"
   rescue ActiveRecord::RecordNotFound => e
@@ -89,6 +90,7 @@ class Admin::UsersController < Admin::ApplicationController
     @user = Admin::User.tenant_id_is(current_tenant.id).find(params[:id])
     if @user.unused?
       @user.destroy
+      @user.destroy_index
       flash[:notice] = _('User was successfuly deleted.')
     else
       flash[:notice] = _("You cannot delete user who is not unused.")
