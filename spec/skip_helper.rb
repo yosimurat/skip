@@ -211,3 +211,10 @@ def stub_flash_now
   controller.instance_eval{flash.stub!(:sweep)}
 end
 
+class GlobalInitialSetting
+  # テストの時のみ値の入れ替えを可能にしたいので。
+  def self.[]=(key, val)
+    instance.instance_variable_set(:@config, instance.instance_variable_get(:@config).dup)
+    instance.instance_variable_get(:@config)[key] = val
+  end
+end

@@ -19,7 +19,7 @@ module Search
     NO_QUERY_ERROR_MSG = "Please input search query."
     ACCESS_DENIED_ERROR_MSG = "Access denied by search node. Please contact system owner."
 
-    attr_reader :invisible_count, :result, :error
+    attr_reader :invisible_count, :result, :error, :per_page, :offset
 
     def self.search params, current_user
       instance = new
@@ -46,7 +46,7 @@ module Search
           @result[:elements] = get_result_hash_elements(nres, current_user)
         else
           # ノードにアクセスできない場合のみ nres は nil
-          ActiveRecord::Base.logger.error "[HyperEstraier Error] Connection not found to #{t.node.instance_variable_get('@url')}"
+          ActiveRecord::Base.logger.error "[HyperEstraier Error] Connection not found to #{current_user.tenant.node.instance_variable_get('@url')}"
           @error = ACCESS_DENIED_ERROR_MSG
         end
       end
@@ -64,6 +64,7 @@ module Search
       cond
     end
 
+    private
     def get_result_hash_header(count)
       {
         :count => count,
@@ -75,6 +76,7 @@ module Search
       }
     end
 
+    # TODO 回帰テストを書く
     def get_result_hash_elements(nres, current_user)
       (@offset...@result[:header][:end_count]).map do |i|
         rdoc = nres.get_doc(i)

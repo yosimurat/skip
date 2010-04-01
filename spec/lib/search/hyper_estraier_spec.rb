@@ -15,41 +15,53 @@
 
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe Search::HyperEstraier, "#initialize" do
+describe Search::HyperEstraier, "#search" do
   before do
     @node = mock('node')
     @node.stub!(:search)
-    Search::HyperEstraier.stub!(:get_node).and_return(@node)
+    @tenant = create_tenant
+    @tenant.stub!(:node).and_return(@node)
+    @user = create_user(:tenant => @tenant)
   end
-  it "per_page, offsetを設定すること" do
-    he = Search::HyperEstraier.new({})
-    he.per_page.should == 10
-    he.offset.should == 0
-  end
-  it "get_conditionにparamsが正しくわたること" do
-    Search::HyperEstraier.should_receive(:get_condition).with("query", "target_aid", "target_contents")
-    Search::HyperEstraier.new :query => "query", :target_aid => "target_aid", :target_contents => "target_contents"
-  end
-  describe "検索結果が返ってきたとき" do
-    before do
-      @nres = mock('nres', :hint => "5")
-      @node.stub!(:search).and_return(@nres)
-      Search::HyperEstraier.stub!(:get_result_hash_header).and_return("result_header")
-      Search::HyperEstraier.stub!(:get_result_hash_elements).and_return("result_elements")
-    end
-    it "result_hashが登録されていること" do
-      result = Search::HyperEstraier.new({})
-      result.result_hash[:header].should == "result_header"
-      result.result_hash[:elements].should == "result_elements"
-    end
-    it "@errorが設定されていないこと" do
-
+  describe "検索クエリが入力されていない場合" do
+    subject {
+      Search::HyperEstraier.search({:query => ''}, @user)
+    }
+    it "エラーが投げられること" do
+      subject.error.should == "Please input search query."
     end
   end
-  describe "検索ノードにアクセスできないとき" do
-    it "@errorにメッセージが登録されていること" do
-      result = Search::HyperEstraier.new({})
-      result.error.should == Search::HyperEstraier::ACCESS_DENIED_ERROR_MSG
+  describe "検索クエリが入力されている場合" do
+    subject {
+      Search::HyperEstraier.search({:query => 'query'}, @user)
+    }
+    it "per_pageを設定すること" do
+      subject.per_page.should == 10
+    end
+    it "offsetを設定すること" do
+      subject.offset.should == 0
+    end
+    describe "HyperEstraierで検索結果がみつかった場合" do
+      subject {
+        Search::HyperEstraier.search({:query => 'query'}, @user)
+      }
+      it '結果のheaderが設定されること' do
+        subject.result[:header].should_not be_nil 
+      end
+      it '結果のelementesが設定されること' do
+        subject.result[:elements].should_not be_nil
+      end
+    end
+    describe "ノードにアクセス出来ない場合" do
+      before do
+        @node.should_receive(:search).and_return(nil)
+      end
+      subject {
+        Search::HyperEstraier.search({:query => 'query'}, @user)
+      }
+      it "エラーが投げられること" do
+        subject.error.should == "Access denied by search node. Please contact system owner."
+      end
     end
   end
 end
@@ -65,47 +77,17 @@ describe Search::HyperEstraier, ".get_condition" do
   end
   describe "target_aidが設定されている場合" do
     before do
-      tenant.initial_settings['search_apps'] = { "app" => { "cache" => "http://cache:3000/cache" } }
+      GlobalInitialSetting['search_apps'] = { "app" => {} }
     end
     it "正しいattrが設定されていること" do
       cond = Search::HyperEstraier.get_condition("query", "app")
-      cond.attrs.should == ["@uri STRBW http://cache:3000/cache"]
+      cond.attrs.should == ["@aid STREQ app"]
     end
     describe "target_contentsが設定されている場合" do
       it "正しいattrが設定されていること" do
         cond = Search::HyperEstraier.get_condition("query", "app", "contents")
-        cond.attrs.should == ["@uri STRBW http://cache:3000/cache/contents"]
+        cond.attrs.should == ["@aid STREQ app", "@object_type STREQ contents"]
       end
-    end
-  end
-end
-
-describe Search::HyperEstraier, ".get_node" do
-  it "nodeを返すこと" do
-    node = Search::HyperEstraier.get_node("node_url")
-    node.should be_is_a(Search::HyperEstraier::Node)
-  end
-end
-
-describe Search::HyperEstraier, ".get_result_hash_elements" do
-  before do
-    Search.stub!(:get_metadata).and_return(mock('result'))
-    @doc = mock('doc', :snippet => "snippet", :attr => "attr")
-    @nres = mock("nres", :get_doc => @doc)
-  end
-  describe "正しい結果がHyperEstraierから返ってきた場合" do
-    it "その件数を返すこと" do
-      result = Search::HyperEstraier.get_result_hash_elements(@nres, 20, 27)
-      result.size.should == 7
-    end
-  end
-  describe "件数が足りない場合" do
-    before do
-      @nres.should_receive(:get_doc).with(27).and_return(nil)
-    end
-    it "足りない分は、へらして返すこと" do
-      result = Search::HyperEstraier.get_result_hash_elements(@nres, 20, 28)
-      result.size.should == 7
     end
   end
 end
