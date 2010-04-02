@@ -294,7 +294,7 @@ class User < ActiveRecord::Base
   def self.find_by_openid_identifier openid_identifier
     return nil if openid_identifier.blank?
     id = openid_identifier.split('/').last
-    User.find id
+    User.find_by_id id
   end
 
   def joined? target_group
