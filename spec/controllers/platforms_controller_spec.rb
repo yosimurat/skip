@@ -15,7 +15,7 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe PlatformController, "#login(パスワードでのログイン)" do
+describe PlatformsController, "#login(パスワードでのログイン)" do
   before do
     @code = "111111"
     @password = "password"
@@ -65,7 +65,7 @@ describe PlatformController, "#login(パスワードでのログイン)" do
   end
 end
 
-describe PlatformController, "#login(OpenIDでのログイン)" do
+describe PlatformsController, "#login(OpenIDでのログイン)" do
   before do
     @registration = mock('registration')
     @registration_data = {'http://axschema.org/namePerson' => ['ほげ ふが'],
@@ -137,7 +137,7 @@ describe PlatformController, "#login(OpenIDでのログイン)" do
   end
 end
 
-describe PlatformController, "#require_not_login" do
+describe PlatformsController, "#require_not_login" do
   describe "未ログイン状態のとき" do
     before do
       get :index
@@ -172,7 +172,7 @@ describe PlatformController, "#require_not_login" do
   end
 end
 
-describe PlatformController, "#logout" do
+describe PlatformsController, "#logout" do
   before do
     user_login
   end
@@ -215,7 +215,7 @@ describe PlatformController, "#logout" do
   end
 end
 
-describe PlatformController, 'GET /forgot_password' do
+describe PlatformsController, 'GET /forgot_password' do
   describe 'パスワード再設定機能が有効な場合' do
     before do
       controller.stub!(:enable_forgot_password?).and_return(true)
@@ -236,7 +236,7 @@ describe PlatformController, 'GET /forgot_password' do
   end
 end
 
-describe PlatformController, 'POST /forgot_password' do
+describe PlatformsController, 'POST /forgot_password' do
   describe 'パスワード再設定機能が有効な場合' do
     before do
       User.stub!(:find_by_email)
@@ -315,7 +315,7 @@ describe PlatformController, 'POST /forgot_password' do
   end
 end
 
-describe PlatformController, 'GET /reset_password' do
+describe PlatformsController, 'GET /reset_password' do
   before do
     @expires_at = Time.local(2008, 11, 1)
     @user = stub_model(User, :reset_auth_token_expires_at => @expires_at)
@@ -356,7 +356,7 @@ describe PlatformController, 'GET /reset_password' do
   end
 end
 
-describe PlatformController, 'POST /reset_password' do
+describe PlatformsController, 'POST /reset_password' do
   before do
     @password = 'password'
     @password_confirmation = 'password'
@@ -416,7 +416,7 @@ describe PlatformController, 'POST /reset_password' do
   end
 end
 
-describe PlatformController, 'GET /activate' do
+describe PlatformsController, 'GET /activate' do
   before do
     controller.stub!(:enable_activate?).and_return(true)
   end
@@ -426,7 +426,7 @@ describe PlatformController, 'GET /activate' do
   end
 end
 
-describe PlatformController, 'POST /activate' do
+describe PlatformsController, 'POST /activate' do
   before do
     User.stub!(:find_without_retired_skip)
     controller.stub!(:enable_activate?).and_return(true)
@@ -492,7 +492,7 @@ describe PlatformController, 'POST /activate' do
   end
 end
 
-describe PlatformController, 'GET /signup' do
+describe PlatformsController, 'GET /signup' do
   before do
     @expires_at = Time.local(2008, 11, 1)
     @user = stub_model(User, :activation_token_expires_at => @expires_at)
@@ -533,7 +533,7 @@ describe PlatformController, 'GET /signup' do
   end
 end
 
-describe PlatformController, "#create_user_from" do
+describe PlatformsController, "#create_user_from" do
   before do
     @identity_url = "http://id.example.com/a_user/"
     @registration = mock('registration')
@@ -617,7 +617,7 @@ describe PlatformController, "#create_user_from" do
   end
 end
 
-describe PlatformController, "#create_user_params" do
+describe PlatformsController, "#create_user_params" do
   before do
     @registration = {
       "http://axschema.org/namePerson/friendly" => ["opuser"],
@@ -635,7 +635,7 @@ describe PlatformController, "#create_user_params" do
   end
 end
 
-describe PlatformController, "GET /forgot_openid" do
+describe PlatformsController, "GET /forgot_openid" do
   describe 'OpenID忘れ機能が有効な場合' do
     before do
       controller.should_receive(:enable_forgot_openid?).and_return(true)
@@ -656,7 +656,7 @@ describe PlatformController, "GET /forgot_openid" do
   end
 end
 
-describe PlatformController, "POST /forgot_openid" do
+describe PlatformsController, "POST /forgot_openid" do
   describe 'OpenID忘れ機能が有効な場合' do
     before do
       User.delete_all
@@ -729,7 +729,7 @@ describe PlatformController, "POST /forgot_openid" do
   end
 end
 
-describe PlatformController, "GET /reset_openid" do
+describe PlatformsController, "GET /reset_openid" do
   before do
     @reset_token = "reset_token"
     @identity_url = "http://openid.example.com/user/a_user"

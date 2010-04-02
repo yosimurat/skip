@@ -15,7 +15,7 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe SearchController, "GET /full_text_search" do
+describe SearchesController, "GET /full_text_search" do
   before do
     @current_user = user_login
     @current_user.stub!(:belong_symbols).and_return({})
