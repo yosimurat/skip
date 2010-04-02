@@ -20,8 +20,6 @@ class BatchBase
   default_url_options[:host] = GlobalInitialSetting['host_and_port']
   default_url_options[:protocol] = GlobalInitialSetting['protocol']
 
-  @@logger = Logger.new(GlobalInitialSetting['batch_log_path'])
-
   include GetText
   bindtextdomain("skip", { :path => File.join(RAILS_ROOT, "locale")})
   textdomain_to(ActionView::Base, "skip") if defined? ActionView::Base
@@ -55,4 +53,17 @@ class BatchBase
   def self.log_error msg
     @@logger.error msg
   end
+
+  def self.log_dir
+    path = ::Rails.logger.instance_eval do
+      File.dirname(@log.path) rescue File.dirname(@logdev.filename)
+    end rescue "#{::Rails.root}/log"
+    File.expand_path(path)
+  end
+
+  # バッチのログは、Railsのログと同じディレクトリ内にbatch.logとして出力される。
+  def self.log_path
+    File.join(log_dir, "batch.log")
+  end
+  @@logger = Logger.new(self.log_path)
 end
