@@ -24,9 +24,16 @@ module Search
       end
     end
 
+    def node
+      @node ||= tenant.node
+    end
+
     def create_index uri = polymorphic_url([self.tenant, self]), tenant = self.tenant
-      node = tenant.node
-      node.put_doc(Document.new(self.to_draft(uri)))
+      if node
+        node.put_doc(Document.new(self.to_draft(uri)))
+      else
+        logger.info "[Full text search] Failed to put document for full text search. To work full text search, setup HyperEstraier."
+      end
     end
 
     alias :update_index :create_index
