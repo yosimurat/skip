@@ -112,7 +112,7 @@ class Admin::UsersController < Admin::ApplicationController
             current_activation.update_attributes(:code => nil)
           end
           flash[:notice] = _('Registered.') + _('Log in again.')
-          redirect_to [current_tenant, :platform]
+          redirect_to :platform
         rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
           render :layout => 'not_logged_in'
         end
