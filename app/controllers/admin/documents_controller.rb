@@ -14,20 +14,79 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Admin::DocumentsController < Admin::ApplicationController
-  before_filter :check_params
+  before_filter :valid_document_name_required
 
-  CONTENT_NAMES = %w(about_this_site rules)
   N_('Admin::DocumentsController|about_this_site')
   N_('Admin::DocumentsController|about_this_site_description')
   N_('Admin::DocumentsController|rules')
   N_('Admin::DocumentsController|rules_description')
 
-  def index
-    @content_name = _(self.class.name + '|' + params[:target])
-    @document = ''
-    @document = open(RAILS_ROOT + "/public/custom/#{params[:target]}.html", 'r') { |f| s = f.read }
-    @topics = topics
-    @topics << @content_name
+  def edit
+    open_current_target_document do |doc|
+      @document = doc
+      @content_name = _(self.class.name + '|' + @document.name)
+      @topics = topics
+      @topics << @content_name
+      respond_to do |format|
+        format.html
+      end
+    end
+  end
+
+  def update
+    open_current_target_document do |doc|
+      @document = doc
+      @document.value = params[:admin_document][:value]
+      @content_name = _(self.class.name + '|' + @document.name)
+      @topics = topics
+      @topics << @content_name
+      if @document.save
+        respond_to do |format|
+          format.html { redirect_to edit_admin_tenant_document_path(current_tenant, @document.name) }
+        end
+      else
+        respond_to do |format|
+          format.html { render :edit }
+        end
+      end
+    end
+  end
+
+#  def revert
+#    begin_update do
+#      @topics = [_(self.class.name.to_s)]
+#      save_dir = "#{RAILS_ROOT}/public/custom"
+#      extentions = '.html'
+#      open("#{save_dir}/default_#{params[:target]}#{extentions}", 'r') do |default_file|
+#        open("#{save_dir}/#{params[:target]}#{extentions}", 'w') do |target_file|
+#          target_file.write(default_file.read)
+#        end
+#      end
+#    end
+#  end
+
+  private
+  def valid_document_name_required
+    unless Admin::Document::DOCUMENT_NAMES.include?(params[:id])
+      render_404
+      false
+    end
+  end
+
+  def open_current_target_document
+    document_name = params[:id]
+    document =
+      if d = Admin::Document.tenant_id_is(current_tenant.id).find_by_name(document_name)
+        d
+      else
+        Admin::Document.new({
+          :name => document_name,
+          :value => Admin::Document.default_document_value(document_name),
+          :tenant => current_tenant
+        })
+      end
+    yield document if block_given?
+    document
   rescue Errno::EACCES => e
     flash.now[:error] = _('Failed to open the content.')
     render :status => :forbidden
@@ -41,72 +100,7 @@ class Admin::DocumentsController < Admin::ApplicationController
     render :status => :internal_server_error
   end
 
-  HTML_WRAPPER = <<EOF
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="ja" xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
-<head xmlns="">
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-  <title>TITLE_STR</title>
-</head>
-<body style="padding: 10px;">
-BODY
-</body>
-</html>
-EOF
-
-  def update
-    begin_update do
-      document = params[:documents]["#{params[:target]}"]
-      document = HTML_WRAPPER.sub('BODY', document)
-      document = document.sub('TITLE_STR', ERB::Util.h(params[:target]).humanize)
-      open(RAILS_ROOT + "/public/custom/#{params[:target]}.html", 'w') { |f| f.write(document) }
-    end
-  end
-
-  def revert
-    begin_update do
-      @topics = [_(self.class.name.to_s)]
-      save_dir = "#{RAILS_ROOT}/public/custom"
-      extentions = '.html'
-      open("#{save_dir}/default_#{params[:target]}#{extentions}", 'r') do |default_file|
-        open("#{save_dir}/#{params[:target]}#{extentions}", 'w') do |target_file|
-          target_file.write(default_file.read)
-        end
-      end
-    end
-  end
-
-  private
-  def check_params
-    if params[:target].blank?
-      if action_name == 'index'
-        @topics = topics
-        render :action => :index
-      end
-    else
-      unless CONTENT_NAMES.include? params[:target]
-        redirect_to "#{root_url}404.html"
-      end
-    end
-  end
-
-  def begin_update(&block)
-    if request.get?
-      return redirect_to(admin_documents_path)
-    end
-    yield
-    flash[:notice] = _('%{target} was successfully saved.') % {:target => s_("Admin::DocumentsController|#{params[:target]}")}
-    redirect_to admin_documents_path(:target => params[:target])
-  rescue Errno::EACCES => e
-    flash.now[:error] = _('Failed to save the content.  Try again or contact administrator.')
-    render :action => :index, :target => params[:target], :status => :forbidden
-  rescue => e
-    flash.now[:error] = _('Unexpected error occured. Contact administrator.')
-    e.backtrace.each { |message| logger.error message }
-    render :action => :index, :target => params[:target], :status => :internal_server_error
-  end
-
   def topics
-    [[_('Admin::DocumentsController'), admin_documents_path]]
+    [[_('Admin::DocumentsController'), edit_admin_tenant_document_path(current_tenant, params[:id])]]
   end
 end

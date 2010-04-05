@@ -1,0 +1,29 @@
+<% content_for :topic_path do -%>
+<%= render :partial => '/admin/shared/topic_path' %>
+<% end -%>
+<% content_for :contents_right do -%>
+  <% form_for @document, :url => admin_tenant_document_path(current_tenant, params[:id]), :html => {:method => :put} do |f| -%>
+    <div class="box tabular">
+      <p><%= _("Admin::DocumentsController|#{params[:id]}_description") %></p>
+      <%= f.hidden_field :name %>
+      <p><%= f.text_area :value, :class => "invisible" %></p>
+      <%= f.submit _('Save'), :disable_with => _('Saving...') %>
+      <%= link_to '[' + _('Revert to default page') + ']', '#', :method => :post, :confirm => _('Current page will be overwritten.  Are you sure to continue?') %>
+    </div>
+  <% end -%>
+  <% ckeditor "admin_document_value", 'fullPage' => true %>
+<% end -%>
+
+<% content_for :contents_left do -%>
+<div class="box_space">
+  <div class="box_space_title"><%= _('Admin Menu')%></div>
+  <div class="box_space_body">
+    <ul>
+    <% Admin::Document::DOCUMENT_NAMES.each do |name| -%>
+      <%= generate_box_menu_link( s_("Admin::DocumentsController|#{name}"), edit_admin_tenant_document_path(current_tenant, name), request.url == edit_admin_tenant_document_url(current_tenant, name) ) %>
+    <% end -%>
+    </ul>
+  </div>
+  <div class="box_space_bottom"></div>
+</div><!-- box_space -->
+<% end -%>
