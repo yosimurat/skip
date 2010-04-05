@@ -21,6 +21,11 @@ module Search
         include ActionController::UrlWriter
         default_url_options[:host] = GlobalInitialSetting['host_and_port']
         default_url_options[:protocol] = GlobalInitialSetting['protocol']
+        if %w(production).include?(::Rails.env) && respond_to?(:handle_asynchronously)
+          handle_asynchronously :create_index
+          handle_asynchronously :update_index
+          handle_asynchronously :destroy_index
+        end
       end
     end
 
