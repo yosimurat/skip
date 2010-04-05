@@ -76,10 +76,7 @@ ActionController::Routing::Routes.draw do |map|
       tenant.settings_ado_feed_item 'settings/ado_feed_item', :controller => 'settings', :action => 'ado_feed_item'
       tenant.settings 'settings/:tab', :controller => 'settings', :action => 'index', :defaults => { :tab => '' }
 
-      #tenant.documents 'documents/:target', :controller => 'documents', :action => 'index', :defaults => { :target => '' }
-      #tenant.documents_update 'documents/:target/update', :controller => 'documents', :action => 'update'
-      #tenant.documents_revert 'documents/:target/revert', :controller => 'documents', :action => 'revert'
-      tenant.resources :documents, :only => %w(edit update)
+      tenant.resources :documents, :only => %w(edit update), :member => {:revert => :put}
 
       tenant.images 'images', :controller => 'images', :action => 'index'
       tenant.images_update 'images/:target/update', :controller => 'images', :action => 'update'

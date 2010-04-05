@@ -8,7 +8,7 @@
       <%= f.hidden_field :name %>
       <p><%= f.text_area :value, :class => "invisible" %></p>
       <%= f.submit _('Save'), :disable_with => _('Saving...') %>
-      <%= link_to '[' + _('Revert to default page') + ']', '#', :method => :post, :confirm => _('Current page will be overwritten.  Are you sure to continue?') %>
+      <%= link_to '[' + _('Revert to default page') + ']', revert_admin_tenant_document_path(current_tenant, params[:id]), :method => :put, :confirm => _('Current page will be overwritten.  Are you sure to continue?') %>
     </div>
   <% end -%>
   <% ckeditor "admin_document_value", 'fullPage' => true %>

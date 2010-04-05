@@ -52,18 +52,22 @@ class Admin::DocumentsController < Admin::ApplicationController
     end
   end
 
-#  def revert
-#    begin_update do
-#      @topics = [_(self.class.name.to_s)]
-#      save_dir = "#{RAILS_ROOT}/public/custom"
-#      extentions = '.html'
-#      open("#{save_dir}/default_#{params[:target]}#{extentions}", 'r') do |default_file|
-#        open("#{save_dir}/#{params[:target]}#{extentions}", 'w') do |target_file|
-#          target_file.write(default_file.read)
-#        end
-#      end
-#    end
-#  end
+  def revert
+    open_current_target_document do |doc|
+      unless doc.new_record?
+        doc.value = Admin::Document.default_document_value(doc.name)
+      end
+      @document = doc
+      @content_name = _(self.class.name + '|' + @document.name)
+      @topics = topics
+      @topics << @content_name
+      # ここではエラー起きない想定
+      @document.save
+      respond_to do |format|
+        format.html { redirect_to edit_admin_tenant_document_path(current_tenant, @document.name) }
+      end
+    end
+  end
 
   private
   def valid_document_name_required
