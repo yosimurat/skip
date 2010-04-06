@@ -26,6 +26,7 @@ class Notice < ActiveRecord::Base
     comment_count = BoardEntry.accessible(user).commented(user).unread(user).count
   end
 
+  # TODO: target が削除されている場合にエラーが発生する Ex) 参加したけどすぐ抜けた
   def unread_count user
     @unread_count ||= BoardEntry.accessible(user).owned(target).unread(user).count
   end
