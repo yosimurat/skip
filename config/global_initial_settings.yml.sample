@@ -73,6 +73,7 @@ default: &default
   # 通常のメール関連機能のための設定
   mail:
     enable_send_email_to_all_users: true                            # 全体へのメール送信機能を有効にするかどうか
+    show_mail_function: true
     smtp_settings:
       :address:    localhost
       :port:       25

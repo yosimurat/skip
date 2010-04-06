@@ -265,6 +265,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_activation_token(token)
+    return nil if token.blank?
     find_without_retired_skip(:first,
                               :conditions => { :activation_token => token })
   end

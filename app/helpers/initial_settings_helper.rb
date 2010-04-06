@@ -29,8 +29,8 @@ module InitialSettingsHelper
     login_mode?(:password, tenant) && !Admin::Setting.stop_new_user(tenant) && GlobalInitialSetting['mail']['show_mail_function']
   end
 
-  def enable_signup?
-    login_mode?(:password)
+  def enable_signup? tenant = current_tenant
+    login_mode?(:password, tenant)
   end
 
   def enable_forgot_password?

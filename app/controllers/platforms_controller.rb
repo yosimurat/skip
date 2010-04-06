@@ -102,23 +102,22 @@ class PlatformsController < ApplicationController
   end
 
   def activate
-    unless enable_activate?
-      flash[:error] = _('%{function} currently unavailable.') % {:function => _('Activation email')}
-      return redirect_to([current_tenant, :platform])
-    end
     return unless request.post?
     email = params[:email]
     if email.blank?
       flash.now[:error] = _('Email address is mandatory.')
-      return
-    end
-    if @user = User.scoped(:conditions => ['email = ?', email]).find_without_retired_skip(:first)
-      if  @user.unused?
+    elsif @user = User.scoped(:conditions => ['email = ?', email]).find_without_retired_skip(:first)
+      tenant = @user.tenant
+      debugger
+      if !enable_activate?(tenant)
+        flash[:error] = _('%{function} currently unavailable.') % {:function => _('Activation email')}
+        redirect_to :platform
+      elsif @user.unused?
         @user.issue_activation_code
         @user.save_without_validation!
-        UserMailer::Smtp.deliver_sent_activate(current_tenant, email, @user, signup_url(@user.activation_token))
+        UserMailer::Smtp.deliver_sent_activate(tenant, email, @user, signup_platform_url(:token => @user.activation_token))
         flash[:notice] = _("An email containing the URL for signup will be sent to %{email}.") % {:email => email}
-        redirect_to [current_tenant, :platform]
+        redirect_to :platform
       else
         flash.now[:error] =_("Email address %s has been registered in the site") % email
       end
@@ -128,12 +127,12 @@ class PlatformsController < ApplicationController
   end
 
   def signup
-    unless enable_signup?
-      flash[:error] = _('%{function} currently unavailable.') % {:function => _('User registration')}
-      return redirect_to(platform_url)
-    end
-    if @user = User.find_by_activation_token(params[:code])
-      if @user.within_time_limit_of_activation_token?
+    if @user = User.find_by_activation_token(params[:token])
+      tenant = @user.tenant
+      if !enable_signup?(tenant)
+        flash[:error] = _('%{function} currently unavailable.') % {:function => _('User registration')}
+        redirect_to platform_url
+      elsif @user.within_time_limit_of_activation_token?
         self.current_user = @user
         redirect_to new_tenant_user_url(@user.tenant)
       else
