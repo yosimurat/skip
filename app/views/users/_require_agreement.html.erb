@@ -6,5 +6,5 @@
 </div>
 
 <% content_for :javascript_initializers do -%>
-    $j('#rules').load(relative_url_root + '/custom/rules.html');
+  $j('#rules').load('<%= tenant_document_url(current_tenant, 'rules') %>');
 <% end -%>

@@ -48,6 +48,7 @@ ActionController::Routing::Routes.draw do |map|
     tenant.resources :ids, :only => :show
     tenant.resource :search, :only => [], :member => { :full_text_search => :get }
     tenant.logo '/logos/:id/:style/:basename.:extension', :controller => :logos, :action => :show
+    tenant.resources :documents, :only => %w(show)
   end
 
   map.namespace "admin" do |admin_map|
