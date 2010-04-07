@@ -97,7 +97,7 @@ module HikiHelper
   end
 
   def hiki_parse text, owner = nil
-    text = HikiDoc.new((text || ''), Regexp.new(current_tenant.initial_settings['not_blank_link_re'])).to_html
+    text = HikiDoc.new((text || ''), root_url).to_html
     parse_permalink(text, owner)
   end
 end

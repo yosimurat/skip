@@ -50,7 +50,18 @@ describe HikiDoc, :type => :helper do
       end
     end
   end
+
+  describe "別ウインドウで開く" do
+    it "自サイトの場合、target=_blankでないこと" do
+      text = "テスト http://www.example.com/platfrom/login ふが"
+      convert(text).should_not have_tag('a[target="_blank"]')
+    end
+    it "自サイトでない場合、target=_blankであること" do
+      text = "テスト http://www.other.com/platform/login おおお"
+      convert(text).should have_tag('a[target="_blank"]')
+    end
+  end
   def convert(text)
-    HikiDoc.new(text,Regexp.new("http://www.example.com/")).to_html
+    HikiDoc.new(text, "http://www.example.com/").to_html
   end
 end

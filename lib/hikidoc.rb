@@ -32,13 +32,12 @@ require 'uri'
 class HikiDoc < String
   Revision = %q$Rev$
 
-  # site_reには時サイトを表すURLの正規表現を記述する
+  # site_には自サイトのルートのURLを渡す
   # 自サイト以外は別ウィンドウへのリンクが生成される
-  # 正規表現の例 /https?:\/\/dev(.openskip.org)?\/.*/
-  def initialize( content, site_re, options = {} )
+  def initialize( content, site_url, options = {} )
     @level = options[:level] || 1
     @empty_element_suffix = options[:empty_element_suffix] || ' />'
-    @site_re = site_re
+    @site_url = site_url
     super( content )
   end
 
@@ -381,7 +380,7 @@ class HikiDoc < String
       title = parse_modifier( title )
       uri.sub!( /^(?:https?|ftp|file)+:/, '' ) if %r|://| !~ uri && /^mailto:/ !~ uri
       link_str = ''
-      if @site_re =~ uri
+      if uri.index(@site_url) == 0
         link_str = %Q|<a href="#{escape_quote( uri )}">#{title}</a>|
       elsif HEAD_URI_RE =~ uri
         link_str = %Q|<a href="#{escape_quote( uri )}" target='_blank'>#{title}</a>|
@@ -397,7 +396,7 @@ class HikiDoc < String
       if IMAGE_RE =~ uri
         link_str = %Q|<img src="#{uri}" alt="#{File.basename( uri )}"#{@empty_element_suffix}|
       else
-        if @site_re =~ uri
+        if uri.index(@site_url) == 0
           link_str = %Q|<a href="#{uri}">#{uri}</a>|
         else
           link_str = %Q|<a href="#{uri}" target='_blank'>#{uri}</a>|
