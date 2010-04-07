@@ -18,8 +18,7 @@ module Types::ContentType
     :jpg  => 'image/jpg,image/jpeg,image/pjpeg',
     :jpeg => 'image/jpg,image/jpeg,image/pjpeg',
     :png  => 'image/png,image/x-png',
-    :gif  => 'image/gif',
-    :bmp  => 'image/bmp'
+    :gif  => 'image/gif'
   }.freeze
 
   DEFAULT_CONTENT_TYPE = "application/octet-stream"

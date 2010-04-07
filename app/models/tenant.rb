@@ -9,6 +9,7 @@ class Tenant < ActiveRecord::Base
   has_many :user_profile_masters, :dependent => :destroy
   has_many :site_counts, :dependent => :destroy
   has_many :documents, :dependent => :destroy
+  has_one :logo, :dependent => :destroy
 
   serialize :initial_settings
 

@@ -1,0 +1,24 @@
+<div class="box"><%= _('Here you can set the favicon and background image of the login screen.<br />Modify as necessary.') %></div>
+<% content_for :topic_path do -%>
+<%= render :partial => '/admin/shared/topic_path' %>
+<% end -%>
+
+<div class="box tabular">
+  <h4><%= _('Logo image') %></h4>
+  <p><%= _('%{extension} formats are accepted.') % {:extension => Logo.valid_extensions.map(&:to_s).join(',')} %><%= _('Maximum file size is %{size}Kbytes.') % {:size => Logo.valid_max_size / 1.kilobyte} %></p>
+  <table>
+    <tr>
+      <td>
+      <% form_for Admin::Logo.new, :url => admin_tenant_logos_path(current_tenant), :html => {:method => :put, :multipart => true} do |f| -%>
+        <%= f.label :logo %>
+        <%= f.file_field :logo, :size => 40 %>
+        <%= f.submit _('Upload'), :disable_with => _('Uploading...') %>
+      <% end -%>
+    </td>
+    <td>
+      <%= link_to _('Show current image'), @logo.logo.url, :popup => true %>
+      <%= link_to _('Revert to default image'), admin_tenant_logos_path(current_tenant), :method => :delete, :confirm => _('Current image will be overwritten.  Are you sure to continue?') %>
+    </td>
+  </tr>
+  </table>
+</div>

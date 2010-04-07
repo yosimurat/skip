@@ -47,6 +47,7 @@ ActionController::Routing::Routes.draw do |map|
     tenant.resource :statistics, :only => %w(show), :member => { :load_calendar => :get, :ado_current_statistics => :get, :ado_statistics_history => :get }
     tenant.resources :ids, :only => :show
     tenant.resource :search, :only => [], :member => { :full_text_search => :get }
+    tenant.logo '/logos/:id/:style/:basename.:extension', :controller => :logos, :action => :show
   end
 
   map.namespace "admin" do |admin_map|
@@ -78,9 +79,8 @@ ActionController::Routing::Routes.draw do |map|
 
       tenant.resources :documents, :only => %w(edit update), :member => {:revert => :put}
 
-      tenant.images 'images', :controller => 'images', :action => 'index'
-      tenant.images_update 'images/:target/update', :controller => 'images', :action => 'update'
-      tenant.images_revert 'images/:target/revert', :controller => 'images', :action => 'revert'
+      tenant.resources :images, :only => %w(index)
+      tenant.resource :logos, :only => %w(update destroy)
     end
   end
 
