@@ -108,7 +108,6 @@ class PlatformsController < ApplicationController
       flash.now[:error] = _('Email address is mandatory.')
     elsif @user = User.scoped(:conditions => ['email = ?', email]).find_without_retired_skip(:first)
       tenant = @user.tenant
-      debugger
       if !enable_activate?(tenant)
         flash[:error] = _('%{function} currently unavailable.') % {:function => _('Activation email')}
         redirect_to :platform
