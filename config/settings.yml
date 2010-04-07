@@ -49,6 +49,13 @@ contact_mail_contain_contents:
   format: boolean
   default: false
 
+default_send_mail_of_question:                            # 質問記事のメール送信チェックボックスのデフォルト値
+  format: boolean
+  default: false
+
+enable_send_email_to_all_users:                           # 全体へのメール送信機能を有効にするかどうか
+  format: boolean
+  defalut: true
 # ブログへの埋め込みタグ
 # --------------------------------------------------------------------------------------------------
 youtube:

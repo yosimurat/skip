@@ -386,7 +386,7 @@ class BoardEntry < ActiveRecord::Base
   def send_contact_mails
     return unless self.send_mail?
     return if diary? && private?
-    return if !tenant.initial_settings['mail']['enable_send_email_to_all_users'] && public?
+    return if !Admin::Setting.enable_send_email_to_all_users(tenant) && public?
 
     users = publication_users
     users.each do |u|

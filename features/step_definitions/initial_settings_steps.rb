@@ -29,9 +29,8 @@ end
 
 Given /^質問の告知方法の既定値をメール送信にする機能を"([^\"]*)"にする$/ do |str|
   if str == '有効'
-    tenant.initial_settings['mail']['default_send_mail_of_question'] = true
+    Admin::Setting.[]=(tenant, "default_send_mail_of_questiontenant", true)
   else
-    tenant.initial_settings['mail']['default_send_mail_of_question'] = false
+    Admin::Setting.[]=(tenant, "default_send_mail_of_questiontenant", false)
   end
-  tenant.save
 end

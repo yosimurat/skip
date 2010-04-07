@@ -154,7 +154,7 @@ div.input_line textarea {
       return(str);
   }
 
-  <% unless current_tenant.initial_settings['mail']['enable_send_email_to_all_users'] -%>
+  <% unless Admin::Setting.enable_send_email_to_all_users(current_tenant) -%>
   // メール送信チェックボックスの表示制御
   var toggleSendMail = function() {
   <% if form.object.diary? -%>
@@ -171,7 +171,7 @@ div.input_line textarea {
   <% end -%>
 
   $j('#board_entry_publiation_type_public, #board_entry_publiation_type_private').live('click', function(){
-    <% unless current_tenant.initial_settings['mail']['enable_send_email_to_all_users'] -%>
+    <% unless Admin::Setting.enable_send_email_to_all_users(current_tenant) -%>
       toggleSendMail();
     <% end -%>
   });
