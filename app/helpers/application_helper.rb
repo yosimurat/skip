@@ -147,7 +147,8 @@ module ApplicationHelper
   end
 
   def header_logo_link(url = root_url)
-    "<div id=\"logo\">" + link_to(image_tag("/custom/images/header_logo.png", :alt => h(app_title), :height => "45"), url) + "</div>"
+    image_url = current_user ? (current_user.tenant.logo || current_user.tenant.build_logo).logo.url : "/custom/images/header_logo.png"
+    "<div id=\"logo\">" + link_to(image_tag(image_url, :alt => h(app_title), :height => "45"), url) + "</div>"
   end
 
   def app_title(tenant = current_tenant)
