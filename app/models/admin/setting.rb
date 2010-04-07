@@ -176,16 +176,20 @@ class Admin::Setting < ActiveRecord::Base
 
   # Returns the value of the setting named name
   def self.[](tenant, name)
-    v = @cached_settings[name]
-    v ? v : (@cached_settings[name] = find_or_default(tenant, name).value)
+    v = tenant_setting_cache(tenant)[name]
+    v ? v : (tenant_setting_cache(tenant)[name] = find_or_default(tenant, name).value)
   end
 
   def self.[]=(tenant, name, v)
     setting = find_or_default(tenant, name)
     setting.value = (v ? v : "")
-    @cached_settings[name] = nil
+    tenant_setting_cache(tenant)[name] = nil
     setting.save
     setting
+  end
+
+  def self.tenant_setting_cache(tenant)
+    @cached_settings[tenant.id] ||= {}
   end
 
   # Defines getter and setter for each setting

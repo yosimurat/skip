@@ -45,7 +45,7 @@ describe Admin::Setting, 'validate' do
       end
       describe '入力がない場合' do
         before do
-          @setting = Admin::Setting.[]=('custom_password_strength_regex', '')
+          @setting = Admin::Setting.[]=(current_tenant, 'custom_password_strength_regex', '')
         end
         it '必須エラーとなること' do
           @setting.errors['value'].should_not be_nil
@@ -53,7 +53,7 @@ describe Admin::Setting, 'validate' do
       end
       describe '入力がある場合' do
         before do
-          @setting = Admin::Setting.[]=('custom_password_strength_regex', 'skip')
+          @setting = Admin::Setting.[]=(current_tenant, 'custom_password_strength_regex', 'skip')
         end
         it '必須エラーとならないこと' do
           @setting.errors['value'].should be_nil
@@ -66,7 +66,7 @@ describe Admin::Setting, 'validate' do
       end
       describe '入力がない場合' do
         before do
-          @setting = Admin::Setting.[]=('custom_password_strength_regex', '')
+          @setting = Admin::Setting.[]=(current_tenant, 'custom_password_strength_regex', '')
         end
         it '必須エラーとならないこと' do
           @setting.errors['value'].should be_nil
@@ -82,7 +82,7 @@ describe Admin::Setting, 'validate' do
       end
       describe '入力がない場合' do
         before do
-          @setting = Admin::Setting.[]=('custom_password_strength_validation_message', '')
+          @setting = Admin::Setting.[]=(current_tenant, 'custom_password_strength_validation_message', '')
         end
         it '必須エラーとなること' do
           @setting.errors['value'].should_not be_nil
@@ -90,7 +90,7 @@ describe Admin::Setting, 'validate' do
       end
       describe '入力がある場合' do
         before do
-          @setting = Admin::Setting.[]=('custom_password_strength_validation_message', 'error')
+          @setting = Admin::Setting.[]=(current_tenant, 'custom_password_strength_validation_message', 'error')
         end
         it '必須エラーとならないこと' do
           @setting.errors['value'].should be_nil
@@ -109,7 +109,7 @@ describe Admin::Setting, 'validate' do
       end
       describe '正規表現として妥当な値が設定されている場合' do
         before do
-          @setting = Admin::Setting.[]=('regex_setting', 'skip')
+          @setting = Admin::Setting.[]=(current_tenant, 'regex_setting', 'skip')
         end
         it '正規表現が不正なエラーが設定されないこと' do
           @setting.errors['value'].should be_nil
@@ -117,32 +117,13 @@ describe Admin::Setting, 'validate' do
       end
       describe '正規表現として不正な値が設定されている場合' do
         before do
-          @setting = Admin::Setting.[]=('regex_setting', '++')
+          @setting = Admin::Setting.[]=(current_tenant, 'regex_setting', '++')
         end
         it '正規表現が不正なエラーが設定されること' do
           @setting.errors['value'].should_not be_nil
         end
       end
     end
-  end
-end
-
-describe Admin::Setting, '.[]' do
-  describe '引数に一致する値がキャッシュされている場合' do
-    before do
-      @cached_key = 'hoge'
-      @val = 'hogeval'
-      Admin::Setting.cached_settings = {@cached_key => @val}
-    end
-    it { Admin::Setting[@cached_key].should == @val }
-  end
-  describe '引数に一致する値がキャッシュされていない場合' do
-    before do
-      Admin::Setting.cached_settings = {}
-      @setting = mock_model(Admin::Setting, :value => 'value')
-      Admin::Setting.should_receive(:find_or_default).and_return(@setting)
-    end
-    it { Admin::Setting['hige'].should == @setting.value }
   end
 end
 
@@ -159,7 +140,32 @@ describe Admin::Setting, '.[]=' do
       @value = mock('hoge')
     end
     it 'Admin::Settingのオブジェクトが返却されること' do
-      Admin::Setting.[]=(:hoge, @value).should == @setting
+      Admin::Setting.[]=(current_tenant, :hoge, @value).should == @setting
+    end
+  end
+end
+
+describe Admin::Setting, '.[]' do
+  before do
+    @other_tenant = create_tenant
+    @cached_key = 'hoge'
+    @val = 'hogeval'
+    @other_val = "fuga"
+    Admin::Setting.cached_settings = { @other_tenant.id => { @cached_key => @other_val }, current_tenant.id => { @cached_key => @val } }
+  end
+  describe '引数に一致する値がキャッシュされている場合' do
+    it { Admin::Setting[current_tenant, @cached_key].should == @val }
+  end
+  describe '引数に一致する値がキャッシュされていない場合' do
+    before do
+      @setting = mock_model(Admin::Setting, :value => 'value')
+      Admin::Setting.should_receive(:find_or_default).and_return(@setting)
+    end
+    it { Admin::Setting[current_tenant, 'hige'].should == @setting.value }
+  end
+  describe "別のテナントにキャッシュされている場合" do
+    it "値が得られないこと" do
+      Admin::Setting[current_tenant, @cached_key].should_not == @other_val
     end
   end
 end
@@ -206,7 +212,7 @@ describe Admin::Setting, '.password_strength_regex' do
       Admin::Setting.should_receive(:password_strength).and_return('low')
     end
     it '英数字記号6桁以上の入力を受け入れる正規表現を返すこと' do
-      Admin::Setting.password_strength_regex.should == /^[a-zA-Z0-9!@#\$%\^&\*\?_~]{6,}$/
+      Admin::Setting.password_strength_regex(current_tenant).should == /^[a-zA-Z0-9!@#\$%\^&\*\?_~]{6,}$/
     end
   end
   describe 'パスワード強度がmiddleの場合' do
@@ -214,7 +220,7 @@ describe Admin::Setting, '.password_strength_regex' do
       Admin::Setting.should_receive(:password_strength).and_return('middle')
     end
     it '英数字記号8桁以上(小文字、大文字、数字が1文字ずつ含まれる)を受け入れる正規表現を返すこと' do
-      Admin::Setting.password_strength_regex.should == /(?!^[^a-z]*$)(?!^[^A-Z]*$)(?!^[^0-9]*$)^[a-zA-Z0-9!@#\$%\^&\*\?_~]{8,}$/
+      Admin::Setting.password_strength_regex(current_tenant).should == /(?!^[^a-z]*$)(?!^[^A-Z]*$)(?!^[^0-9]*$)^[a-zA-Z0-9!@#\$%\^&\*\?_~]{8,}$/
     end
   end
   describe 'パスワード強度がhighの場合' do
@@ -222,7 +228,7 @@ describe Admin::Setting, '.password_strength_regex' do
       Admin::Setting.should_receive(:password_strength).and_return('high')
     end
     it '英数字記号8桁以上(小文字、大文字、数字、記号が1文字ずつ含まれる)を受け入れる正規表現を返すこと' do
-      Admin::Setting.password_strength_regex.should == /(?!^[^!@#\$%\^&\*\?_~]*$)(?!^[^a-z]*$)(?!^[^A-Z]*$)(?!^[^0-9]*$)^[a-zA-Z0-9!@#\$%\^&\*\?_~]{8,}$/
+      Admin::Setting.password_strength_regex(current_tenant).should == /(?!^[^!@#\$%\^&\*\?_~]*$)(?!^[^a-z]*$)(?!^[^A-Z]*$)(?!^[^0-9]*$)^[a-zA-Z0-9!@#\$%\^&\*\?_~]{8,}$/
     end
   end
   describe 'パスワード強度がcustomの場合' do
@@ -231,7 +237,7 @@ describe Admin::Setting, '.password_strength_regex' do
       Admin::Setting.should_receive(:custom_password_strength_regex).and_return('custom_password_strength_regex')
     end
     it 'ユーザ定義のパスワード強度の正規表現を返すこと' do
-      Admin::Setting.password_strength_regex.should == /custom_password_strength_regex/
+      Admin::Setting.password_strength_regex(current_tenant).should == /custom_password_strength_regex/
     end
   end
   describe 'パスワード強度が不明の場合' do
@@ -239,7 +245,7 @@ describe Admin::Setting, '.password_strength_regex' do
       Admin::Setting.should_receive(:password_strength).and_return(nil)
     end
     it '英数字記号8桁以上(小文字、大文字、数字が1文字ずつ含まれる)を受け入れる正規表現を返すこと' do
-      Admin::Setting.password_strength_regex.should == /(?!^[^a-z]*$)(?!^[^A-Z]*$)(?!^[^0-9]*$)^[a-zA-Z0-9!@#\$%\^&\*\?_~]{8,}$/
+      Admin::Setting.password_strength_regex(current_tenant).should == /(?!^[^a-z]*$)(?!^[^A-Z]*$)(?!^[^0-9]*$)^[a-zA-Z0-9!@#\$%\^&\*\?_~]{8,}$/
     end
   end
 end
@@ -251,7 +257,7 @@ describe Admin::Setting, '.find_or_default' do
     end
     it '例外が送出されること' do
       lambda do
-        Admin::Setting.send(:find_or_default, 'hoge')
+        Admin::Setting.send(:find_or_default, current_tenant, 'hoge')
       end.should raise_error
     end
   end
@@ -262,30 +268,34 @@ describe Admin::Setting, '.find_or_default' do
     describe 'dbにデータがある場合' do
       before do
         @setting = mock_model(Admin::Setting)
-        Admin::Setting.should_receive(:find_by_name).and_return(@setting)
+        Admin::Setting.should_receive(:find_by_tenant_id_and_name).and_return(@setting)
       end
       it 'dbのデータが返ること' do
-        Admin::Setting.send(:find_or_default, 'hoge').should == @setting
+        Admin::Setting.send(:find_or_default, current_tenant, 'hoge').should == @setting
       end
     end
     describe 'dbにデータがない場合' do
       before do
         @key = 'hoge'
         Admin::Setting.available_settings[@key] = {}
-        Admin::Setting.should_receive(:find_by_name).and_return(nil)
+        Admin::Setting.should_receive(:find_by_tenant_id_and_name).and_return(nil)
         Admin::Setting.stub!(:new).and_return({})
       end
       it 'newが呼ばれること' do
         Admin::Setting.should_receive(:new)
-        Admin::Setting.send(:find_or_default, @key)
+        Admin::Setting.send(:find_or_default, current_tenant, @key)
       end
       it 'newの戻り値が返ること' do
-        Admin::Setting.send(:find_or_default, @key)
+        Admin::Setting.send(:find_or_default, current_tenant, @key)
       end
       it 'newの戻り値のvalueが@@available_settingsのdefault値になっていること' do
-        Admin::Setting.should_receive(:new).with({:name => @key, :value => Admin::Setting.available_settings[@key]['default']})
-        Admin::Setting.send(:find_or_default, @key)
+        Admin::Setting.should_receive(:new).with(:tenant_id => current_tenant.id, :name => @key, :value => Admin::Setting.available_settings[@key]['default'])
+        Admin::Setting.send(:find_or_default, current_tenant, @key)
       end
     end
   end
+end
+
+def current_tenant
+  @tenant ||= create_tenant
 end
