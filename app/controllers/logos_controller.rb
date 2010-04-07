@@ -1,4 +1,5 @@
 class LogosController < ApplicationController
+  skip_before_filter :prepare_session, :only => :show
   def show
     if logo = current_tenant.logo
       if stale?(:etag => logo, :last_modified => logo.logo_updated_at)
