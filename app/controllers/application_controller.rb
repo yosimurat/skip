@@ -35,45 +35,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  before_filter :sso, :login_required, :prepare_session, :valid_tenant_required
+  before_filter :sso, :login_required, :valid_tenant_required
 
   init_gettext "skip" if defined? GetText
 
   helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_target_owner, :current_participation, :notice_entry_enabled?, :event_enabled?, :current_tenant, :root_url
 protected
   include InitialSettingsHelper
-  # アプリケーションで利用するセッションの準備をする
-  # フィルタで毎アクセスごとに確認し、セッションが未準備なら初期値をいれる
-  def prepare_session
-    user = current_user
-
-    # プロフィール情報が登録されていない場合、platformに戻す
-    unless user.active?
-      redirect_to user.retired? ? logout_platform_url(:message => 'retired') : new_tenant_user_url(current_tenant)
-      return
-    end
-
-    # ログのリクエスト情報に、ユーザ情報を加える（情報漏えい事故発生時のトレーサビリティを確保)
-    logger.info(user.to_s_log('[Log for inspection]'))
-
-    unless controller_name == 'pictures' && action_name == 'picture'
-      UserAccess.update_all(["last_access = ? ", Time.now ], ["user_id = ? ", user.id ])
-      @site_count = SiteCount.find(:first, :order => "created_on desc") || SiteCount.new
-    end
-
-    # Settingのキャッシュをチェックする
-    Admin::Setting.check_cache
-
-    # mypage/welcome を表示した際は、セッション情報を最新にするため
-    session[:prepared] = nil if controller_name == 'mypage' && action_name == 'welcome'
-    return true if session[:prepared]
-
-    session[:prepared] = true
-    session[:user_id] = user.id
-    session[:load_time] = Time.now
-
-    return true
-  end
 
   def remove_system_message
     if params[:system_message_id] && sm = current_user.system_messages.find_by_id(params[:system_message_id])
@@ -147,7 +115,8 @@ protected
     @current_tenant ||= Tenant.find_by_id(params[:tenant_id])
   end
 
-  def login_required
+  def login_required options = {}
+    options = {:allow_unused_user => false, :trace_access => true}.merge!(options)
     unless logged_in?
       if request.env['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'
         render :text => _('Session expired. You need to log in again.'), :status => :bad_request
@@ -160,7 +129,21 @@ protected
       end
       false
     else
-      true
+      if current_user.active? || options[:allow_unused_user]
+        if options[:trace_access]
+          # ログのリクエスト情報に、ユーザ情報を加える（情報漏えい事故発生時のトレーサビリティを確保)
+          logger.info(current_user.to_s_log('[Log for inspection]'))
+          if access = current_user.user_access
+            access.update_attribute(:last_access, Time.now)
+          end
+        end
+        # Settingのキャッシュをチェックする
+        Admin::Setting.check_cache
+        true
+      else
+        redirect_to current_user.retired? ? logout_platform_url(:message => 'retired') : new_tenant_user_url(current_tenant)
+        false
+      end
     end
   end
 

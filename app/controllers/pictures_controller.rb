@@ -15,6 +15,10 @@
 
 class PicturesController < ApplicationController
   before_filter :target_user_required, :only => %w(show)
+  skip_before_filter :login_required, :only => :show
+  before_filter :only => :show do |c|
+    c.send(:login_required, {:trace_access => false})
+  end
 
   def show
     @picture = current_target_user.pictures.find(params[:id])

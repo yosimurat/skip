@@ -127,49 +127,6 @@ describe ApplicationController, "#current_user=" do
   end
 end
 
-describe ApplicationController, '#prepare_session' do
-  before do
-    controller.stub!(:controller_name).and_return('mypage')
-    @session = mock('hash')
-    @session.stub!('[]')
-    @session.stub!('[]').with(:prepared).and_return(true)
-    controller.stub!(:session).and_return(@session)
-  end
-  describe 'アクティブなユーザでない場合' do
-    before do
-      @user = stub_model(User)
-      @user.stub!(:active?).and_return(false)
-      controller.should_receive(:current_user).and_return(@user)
-    end
-    describe "退職済みユーザの場合" do
-      before do
-        @user.stub!(:retired?).and_return(true)
-      end
-      it "ログアウトにリダイレクトされること" do
-        controller.should_receive(:redirect_to).with({ :controller => '/platform', :action => :logout, :message => 'retired' })
-        controller.send(:prepare_session)
-      end
-    end
-    describe "未登録ユーザの場合" do
-      before do
-        @user.stub!(:retired?).and_return(false)
-      end
-      it 'ユーザ登録画面にリダイレクトされること' do
-        controller.should_receive(:redirect_to).with({ :controller => '/portal' })
-        controller.send(:prepare_session)
-      end
-    end
-  end
-  describe 'アクティブなユーザの場合' do
-    before do
-      @user = stub_model(User)
-      @user.stub!(:active?).and_return(true)
-      controller.should_receive(:current_user).and_return(@user)
-    end
-    it { controller.send(:prepare_session).should be_true }
-  end
-end
-
 describe ApplicationController, '#login_required' do
   describe 'ログイン中の場合' do
     before do

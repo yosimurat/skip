@@ -1,5 +1,9 @@
 class DocumentsController < ApplicationController
-  skip_before_filter :prepare_session, :only => :show
+  skip_before_filter :login_required, :only => :show
+  before_filter :only => :show do |c|
+    c.send(:login_required, {:allow_unused_user => true})
+  end
+
   def show
     if Document::DOCUMENT_NAMES.include?(params[:id])
       document = current_tenant.documents.find_by_id(params[:id])

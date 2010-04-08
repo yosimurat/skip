@@ -16,7 +16,6 @@
 class IdsController < ApplicationController
   skip_before_filter :sso, :only => %w(show)
   skip_before_filter :login_required, :only => %w(show)
-  skip_before_filter :prepare_session, :only => %w(show)
   skip_before_filter :valid_tenant_required, :only => %w(show)
   skip_before_filter :verify_authenticity_token, :only => %w(create update)
 

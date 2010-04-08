@@ -14,7 +14,6 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class UsersController < ApplicationController
-  skip_before_filter :prepare_session, :only => %w(agreement new update_active)
   skip_before_filter :sso, :only => %w(agreement new update_active)
   skip_before_filter :login_required, :only => %w(agreement new update_active)
   before_filter :target_user_required, :only => %w(show edit update)

@@ -1,0 +1,11 @@
+<% if site_count = SiteCount.descend_by_created_on.first || SiteCount.new -%>
+<div id="statusbar">
+  <span><%= icon_tag 'table'              -%> <%= _("Registered Users: %s users") % h(site_count.total_user_count)%></span>
+  <span><%= icon_tag 'table_lightning'    -%> <%= _("Today's Access: %s access") % h(site_count.today_user_count)%></span>
+  <span><%= icon_tag 'database'           -%> <%= _("Total Entries: %s entries") % h(site_count.total_blog_count) %></span>
+  <span><%= icon_tag 'database_lightning' -%> <%= _("Today's Entries: %s entries") % h(site_count.today_blog_count) %></span>
+  <span><%= icon_tag 'chart_curve'        -%> <%= link_to(_("Site Information"), tenant_statistics_path(current_tenant)) -%></span>
+</div>
+<% end -%>
+
+
