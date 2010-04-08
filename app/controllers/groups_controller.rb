@@ -62,6 +62,7 @@ class GroupsController < ApplicationController
     @group.group_participations.build(:user_id => current_user.id, :owned => true)
 
     if @group.save
+      current_user.notices.create(:target => @group)
       @group.create_index
       flash[:notice] = _('Group was created successfully.')
       redirect_to [current_tenant, @group]

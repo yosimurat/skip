@@ -65,7 +65,7 @@ class GroupParticipation < ActiveRecord::Base
     self.waiting = (!options[:force] && self.group.protected?)
     if self.new_record?
       self.save!
-      self.user.notices.create!(:target => self) unless self.user.notices.find_by_target_id(self.group.id)
+      self.user.notices.create!(:target => self.group) unless self.user.notices.find_by_target_id(self.group.id)
       unless self.waiting?
         if self.user.id == current_user.id
           self.group.group_participations.only_owned.each do |owner_participation|
