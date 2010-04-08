@@ -27,6 +27,13 @@ class UserReading < ActiveRecord::Base
     user_reading
   end
 
+  def toggle_read
+    self.read = !self.read
+    self.checked_on = self.read ? Time.now : nil
+    self.notice_type = 'notice' if  self.board_entry.is_notice?
+    self.save
+  end
+
   def self.be_read_too_old_entries options = {}
     options = {:month_before => 3}.merge!(options)
     entry_ids = BoardEntry.updated_on_lte(Time.now.ago(options[:month_before].to_i.month)).all(:select => 'board_entries.id').map(&:id)

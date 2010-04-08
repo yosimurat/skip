@@ -22,8 +22,6 @@ class MypagesController < ApplicationController
   before_filter :setup_layout
   before_filter :load_user
 
-  verify :method => :post, :only => [ :change_read_state], :redirect_to => { :action => :index }
-
   helper_method :recent_day
 
   # ================================================================================
@@ -86,15 +84,7 @@ class MypagesController < ApplicationController
     @antenna_entry.title = antenna_entry_title(@antenna_entry)
     if @antenna_entry.need_search?
       @entries = @antenna_entry.scope.order_new.paginate(:page => params[:page], :per_page => 20)
-      @user_unreadings = unread_entry_id_hash_with_user_reading(@entries.map {|entry| entry.id}, params[:target_type])
     end
-  end
-
-  # ajax_action
-  # 未読・既読を変更する
-  def change_read_state
-    ur = UserReading.create_or_update(session[:user_id], params[:board_entry_id], params[:read])
-    render :text => ur.read? ? _('Entry was successfully marked read.') : _('Entry was successfully marked unread.')
   end
 
   # ajax_action
@@ -362,26 +352,6 @@ class MypagesController < ApplicationController
         _('List of unread entries')
       end
     end
-  end
-
-  # TODO UserReadingに移動する
-  # TODO SystemAntennaEntry等の記事取得の際に一緒に取得するようなロジックに出来ないか?
-  #   => target_typeの判定ロジックが複数箇所に現れるのをなくしたい
-  # 指定した記事idのをキーとした未読状態のUserReadingのハッシュを取得
-  def unread_entry_id_hash_with_user_reading(entry_ids, target_type)
-    result = {}
-    if entry_ids && entry_ids.size > 0
-      user_readings_conditions =
-        # readがmysqlの予約語なのでバッククォートで括らないとエラー
-        if target_type == 'message'
-          ["user_id = ? AND board_entry_id in (?) AND `read` = ? AND notice_type = ?", current_user.id, entry_ids, false, 'notice']
-        else
-          ["user_id = ? AND board_entry_id in (?) AND `read` = ?", current_user.id, entry_ids, false]
-        end
-      user_readings = UserReading.find(:all, :conditions => user_readings_conditions)
-      user_readings.map { |user_reading| result[user_reading.board_entry_id] = user_reading }
-    end
-    result
   end
 
   # TODO mypageのcontroller及びviewで@userを使うのをやめてcurrent_target_userにしてなくしたい。

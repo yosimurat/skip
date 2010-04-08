@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
         :entries_by_antenna => :get
       }
     tenant.resources :users, :new => {:agreement => :get}, :member => {:update_active => :put} do |user|
-      user.resources :board_entries, :member => {:print => :get, :toggle_hide => :put}, :collection => {:preview => :post} do |board_entry|
+      user.resources :board_entries, :member => {:print => :get, :toggle_hide => :put, :toggle_read => :put}, :collection => {:preview => :post} do |board_entry|
         board_entry.resources :entry_trackbacks, :only => %w(destroy)
         board_entry.resource :board_entry_point, :only => [], :member => {:pointup => :put}
         board_entry.resources :board_entry_comments, :only => %w(create edit update destroy)
@@ -34,7 +34,7 @@ ActionController::Routing::Routes.draw do |map|
       group.resources :users, :only => [] do |user|
         user.resources :group_participations, :only => %w(create)
       end
-      group.resources :board_entries, :member => {:print => :get, :toggle_hide => :put}, :collection => {:preview => :post} do |board_entry|
+      group.resources :board_entries, :member => {:print => :get, :toggle_hide => :put, :toggle_read => :put}, :collection => {:preview => :post} do |board_entry|
         board_entry.resources :entry_trackbacks, :only => %w(destroy)
         board_entry.resource :board_entry_point, :only => [], :member => {:pointup => :put}
         board_entry.resources :board_entry_comments, :only => %w(create edit update destroy)

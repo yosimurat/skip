@@ -2,7 +2,6 @@
 <% entries ||= [] -%>
 <% last_updated_desc ||= false -%>
 <% width_date = last_updated_desc ? "200" : "75" -%>
-<% user_unreadings ||= [] -%>
 <% show_owner_link ||= false -%>
 <% with_checkable_read ||= false -%>
 
@@ -23,7 +22,9 @@
           <% entry_infos = get_entry_infos(entry) -%>
           <tr class="<%= detect_entry_gb_class entry -%>">
             <% if with_checkable_read -%>
-            <td class="read_state"><%= check_box_tag("message_#{entry.id}", "true", !user_unreadings[entry.id], {:class => "read_state_checkbox"}) %></td>
+              <td class="read_state">
+                <%= toggle_read_check_box entry -%>
+              </td>
             <% end -%>
             <td class="publication_state"><%= get_publication_type_icon(entry) %></td>
             <td class="entry_outline">
@@ -56,12 +57,6 @@
 </div>
 <% if with_checkable_read -%>
   <% content_for :javascript_initializers do -%>
-  // チェックボックスをクリックすると既読未読が変更される
-  $j('.read_state_checkbox').live('click', function(){
-    entryId = this.id.split('_')[1];
-    changeReadState(entryId, this.checked, $j('input[name=authenticity_token]').val());
-  });
-
   <%# 呼び出し元で#check_all_linkというdom要素があれば動作 -%>
   <%# FIXME Issue:811 1リクエストで未読既読の変更が出来るようにする -%>
   // チェックされていない記事をすべて既読にする

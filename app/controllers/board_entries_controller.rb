@@ -18,7 +18,7 @@ class BoardEntriesController < ApplicationController
 
   before_filter :owner_required, :only => %w(edit update destroy)
   before_filter :required_full_accessible_entry, :only => %w(edit update destroy)
-  before_filter :required_accessible_entry, :only => %w(show print toggle_hide)
+  before_filter :required_accessible_entry, :only => %w(show print toggle_hide toggle_read)
   after_filter :remove_system_message, :only => %w(show)
 
   def index
@@ -53,6 +53,7 @@ class BoardEntriesController < ApplicationController
     unless current_target_owner
       @current_target_owner = current_target_entry.owner
     end
+    @board_entry.accessed(current_user.id)
   end
 
   def new
@@ -198,6 +199,14 @@ class BoardEntriesController < ApplicationController
       render :text => _("Entry was successfully set to %{operation}.") % { :operation => _("BoardEntry|Open|#{!@board_entry.hide}") }
     else
       render :text => _('Failed to update status.') + " : " + @board_entry.errors.full_messages.to_s, :status => :bad_request
+    end
+  end
+
+  def toggle_read
+    if ur = @board_entry.user_readings.find_by_user_id(current_user.id) and ur.toggle_read
+      render :text => ur.read? ? _('Entry was successfully marked read.') : _('Entry was successfully marked unread.')
+    else
+      render :text => _('Failed to update status.'), :status => :bad_request
     end
   end
 

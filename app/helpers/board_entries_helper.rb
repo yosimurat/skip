@@ -148,4 +148,23 @@ module BoardEntriesHelper
     output << n_("Access(%s)", "Accesses(%s)", entry.state.access_count) % h(entry.state.access_count.to_s) if entry.state.access_count > 0
     output.size > 0 ? "#{output.join('-')}" : '&nbsp;'
   end
+
+  def toggle_read_check_box entry, user_reading = nil
+    user_reading ||= (entry.user_readings.find_by_user_id(current_user.id) || entry.user_readings.build)
+    entry = user_reading.board_entry
+    onclick_function = <<-EOS
+$j.ajax({
+  type: 'POST',
+  url: '#{polymorphic_url([entry.tenant, entry.owner, entry], :action => :toggle_read, :format => :js)}',
+  data: { authenticity_token: '#{form_authenticity_token}', _method: 'put' },
+  success: function(msg) {
+    $j('#flash_message').trigger('notice', msg);
+  },
+  error: function(msg) {
+    $j('#flash_message').trigger('error', msg);
+  }
+});
+    EOS
+    check_box_tag 'toggle_read', 'true', !!user_reading.read, :title => _('Mark read'), :onclick => onclick_function
+  end
 end
