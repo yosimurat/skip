@@ -165,6 +165,6 @@ $j.ajax({
   }
 });
     EOS
-    check_box_tag 'toggle_read', 'true', !!user_reading.read, :title => _('Mark read'), :onclick => onclick_function
+    check_box_tag "board_entry_#{entry.id}_toggle_read", 'true', !!user_reading.read, :title => _('Mark read'), :class => 'toggle_read', :onclick => onclick_function
   end
 end

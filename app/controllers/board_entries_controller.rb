@@ -206,7 +206,30 @@ class BoardEntriesController < ApplicationController
     if ur = @board_entry.user_readings.find_by_user_id(current_user.id) and ur.toggle_read
       render :text => ur.read? ? _('Entry was successfully marked read.') : _('Entry was successfully marked unread.')
     else
+      @board_entry.user_readings.create!({
+        :user => current_user,
+        :read => true,
+        :notice_type => (@board_entry.is_notice? ? 'notice' : nil)
+      })
       render :text => _('Failed to update status.'), :status => :bad_request
+    end
+  end
+
+  def be_read
+    if entry_ids = params[:entry_ids]
+      current_user.user_readings.board_entry_id_is(entry_ids).update_all([
+        'user_readings.read = ?, user_readings.checked_on = ?', true, Time.now
+      ])
+      render :text => _('Entry was successfully marked read.')
+    end
+  end
+
+  def be_unread
+    if entry_ids = params[:entry_ids]
+      current_user.user_readings.board_entry_id_is(entry_ids).update_all([
+        'user_readings.read = ?, user_readings.checked_on = ?', false, nil
+      ])
+      render :text => _('Entry was successfully marked unread.')
     end
   end
 

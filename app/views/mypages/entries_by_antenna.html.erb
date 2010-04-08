@@ -7,8 +7,18 @@
 
   <div id="antenna_navi">
     <div class="operation_left">
-      <a href="#" id="check_all_link"><%= _('[Set entries in the page as read]')%></a>
-      <a href="#" id="uncheck_all_link"><%= _('[Set entries in the page as unread]')%></a>
+      <% form_tag polymorphic_path([current_tenant, :board_entries], :action => :be_read) do -%>
+        <% @entries.each do |entry| -%>
+          <%= hidden_field_tag 'entry_ids[]', entry.id %>
+        <% end -%>
+        <%= link_to _('[Set entries in the page as read]'), '#', :id => 'check_all_link' %>
+      <% end -%>
+      <% form_tag polymorphic_path([current_tenant, :board_entries], :action => :be_unread) do -%>
+        <% @entries.each do |entry| -%>
+          <%= hidden_field_tag 'entry_ids[]', entry.id %>
+        <% end -%>
+        <%= link_to _('[Set entries in the page as unread]'), '#', :id => 'uncheck_all_link' %>
+      <% end -%>
     </div>
     <div class="operation_right">
       <span class="item">

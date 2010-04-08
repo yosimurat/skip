@@ -43,7 +43,7 @@ ActionController::Routing::Routes.draw do |map|
       group.resources :share_files, :member => {:download_history_as_csv => :get, :clear_download_history => :delete}
     end
     tenant.resources :share_files, :only => %w(index show)
-    tenant.resources :board_entries, :only => %w(index show)
+    tenant.resources :board_entries, :only => %w(index show), :collection => {:be_read => :post, :be_unread => :post}
     tenant.resource :statistics, :only => %w(show), :member => { :load_calendar => :get, :ado_current_statistics => :get, :ado_statistics_history => :get }
     tenant.resources :ids, :only => :show
     tenant.resource :search, :only => [], :member => { :full_text_search => :get }
