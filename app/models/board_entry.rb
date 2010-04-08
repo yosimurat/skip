@@ -138,7 +138,7 @@ class BoardEntry < ActiveRecord::Base
     condition_params = []
     words = tag_words.split(',')
     words.each do |word|
-      condition_str << (word == words.last ? ' entries.category like ?' : " entries.category like ? #{tag_select}")
+      condition_str << (word == words.last ? ' board_entries.category like ?' : " board_entries.category like ? #{tag_select}")
       condition_params << SkipUtil.to_like_query_string(word)
     end
     { :conditions => [condition_str, condition_params].flatten }
