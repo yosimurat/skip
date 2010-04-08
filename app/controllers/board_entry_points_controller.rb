@@ -7,7 +7,7 @@ class BoardEntryPointsController < ApplicationController
     @board_entry.state.increment!(:point)
     respond_to do |format|
       format.html { render :partial => 'pointup' }
-      format.js { render :text => "#{@board_entry.state.point} #{ERB::Util.html_escape(Admin::Setting.point_button)}" }
+      format.js { render :text => "#{@board_entry.state.point} #{ERB::Util.html_escape(Admin::Setting.point_button(current_tenant))}" }
     end
   rescue ActiveRecord::RecordNotFound => ex
     respond_to do |format|
