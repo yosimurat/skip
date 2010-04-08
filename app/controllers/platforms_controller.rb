@@ -16,7 +16,6 @@
 class PlatformsController < ApplicationController
   layout 'not_logged_in'
   skip_before_filter :sso, :login_required, :valid_tenant_required, :active_user_required
-  skip_before_filter :verify_authenticity_token, :only => :reset_openid
 
   before_filter :require_not_login, :except => [:logout]
 
@@ -67,7 +66,7 @@ class PlatformsController < ApplicationController
       if @user.active?
         @user.issue_reset_auth_token
         @user.save_without_validation!
-        UserMailer::Smtp.deliver_sent_forgot_password(@user.tenant, email, reset_password_url(@user.reset_auth_token))
+        UserMailer::Smtp.deliver_sent_forgot_password(@user.tenant, email, reset_password_platform_url(:token => @user.reset_auth_token))
         flash[:notice] = _("An email contains the URL for resetting the password has been sent to %s.") % email
         redirect_to :platform
       else
@@ -79,7 +78,7 @@ class PlatformsController < ApplicationController
   end
 
   def reset_password
-    if @user = User.find_by_reset_auth_token(params[:code])
+    if token = params[:token] and @user = User.find_by_reset_auth_token(token)
       if Time.now <= @user.reset_auth_token_expires_at
         return unless request.post?
         @user.crypted_password = nil
@@ -88,8 +87,6 @@ class PlatformsController < ApplicationController
         if @user.save
           flash[:notice] = _("Password was successfully reset.")
           redirect_to :platform
-        else
-          flash.now[:error] = _("Failed to reset password.")
         end
       else
         flash[:error] = _("The URL for resetting password has already expired.")
@@ -144,38 +141,6 @@ class PlatformsController < ApplicationController
     end
   end
 
-  def reset_openid
-    if user = User.find_by_reset_auth_token(params[:code])
-      if Time.now <= user.reset_auth_token_expires_at
-        @identifier = user.openid_identifiers.first || user.openid_identifiers.build
-        if using_open_id?
-          begin
-            authenticate_with_open_id do |result, identity_url|
-              if result.successful?
-                @identifier.url = identity_url
-                if @identifier.save
-                  user.determination_reset_auth_token
-                  flash[:notice] = _("%{function} completed.")%{:function => _('Resetting OpenID URL')} + _("Enter the previously set URL to log in.")
-                  redirect_to :platform
-                end
-              else
-                flash.now[:error] = _("OpenID processing aborted due to user cancellation or system errors.")
-              end
-            end
-          rescue OpenIdAuthentication::InvalidOpenId
-            flash.now[:error] = _("OpenID format invalid.")
-          end
-        end
-      else
-        flash[:error] = _("The URL for %{function} has expired.")%{:function => _('resetting OpenID URL')}
-        redirect_to :platform
-      end
-    else
-      flash[:error] = _("The URL for %{function} invalid. Try again or contact system administrator.")%{:function => _('resetting OpenID URL')}
-      redirect_to :platform
-    end
-  end
-
   private
   def require_not_login
     if logged_in?
@@ -203,7 +168,7 @@ class PlatformsController < ApplicationController
             request_token = session[:request_token]
             reset_session
             session[:request_token] = request_token
-            # TODO: 該当するOpenIDのユーザを探すときに、テナント内のユーザであるというチェックが必要か？
+
             self.current_user = identifier.user_with_unused
             redirect_to_return_to_or_root(return_to)
           end
