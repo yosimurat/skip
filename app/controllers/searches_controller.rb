@@ -33,7 +33,7 @@ class SearchesController < ApplicationController
       @invisible_count = @search.invisible_count || 0
       make_instance_variables @search.result
     else
-      @error_message = search.error
+      @error_message = @search.error
     end
   end
 

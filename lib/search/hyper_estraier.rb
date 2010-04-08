@@ -40,12 +40,18 @@ module Search
         @invisible_count = 0
 
         node = current_user.tenant.node
+        unless node
+          # ノードにアクセスできない場合
+          ActiveRecord::Base.logger.error "[HyperEstraier Error] Failed to access node. To work, setup HyperEstraier."
+          @error = ACCESS_DENIED_ERROR_MSG
+          return
+        end
         cond = self.class.get_condition(params[:query], params[:target_aid], params[:target_contents])
         if nres = node.search(cond, 1)
           @result[:header] = get_result_hash_header(nres.hint('HIT').to_i)
           @result[:elements] = get_result_hash_elements(nres, current_user)
         else
-          # ノードにアクセスできない場合のみ nres は nil
+          # レスポンスがない場合
           ActiveRecord::Base.logger.error "[HyperEstraier Error] Connection not found to #{current_user.tenant.node.instance_variable_get('@url')}"
           @error = ACCESS_DENIED_ERROR_MSG
         end
