@@ -25,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
       user.resource :customize, :only => %w(update)
       user.resources :chains, :collection => {:against => :get}
       user.resources :system_messages, :only => [:destroy]
-      user.resources :notices
+      user.resources :notices, :only => %w(create destroy)
       # ユーザの参加グループ一覧のため
       user.resources :groups, :only => %w(index)
     end
@@ -41,6 +41,7 @@ ActionController::Routing::Routes.draw do |map|
         board_entry.resources :entry_hide_operations, :only => %w(index)
       end
       group.resources :share_files, :member => {:download_history_as_csv => :get, :clear_download_history => :delete}
+      group.resources :notices, :only => %w(create destroy)
     end
     tenant.resources :share_files, :only => %w(index show)
     tenant.resources :board_entries, :only => %w(index show), :collection => {:be_read => :post, :be_unread => :post}

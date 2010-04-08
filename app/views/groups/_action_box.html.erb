@@ -5,7 +5,7 @@
       <% if notice = current_user.notices.find_by_target_id_and_target_type(current_target_group.id, current_target_group.class.name) -%>
         <li><%= link_to(content_tag('span', _('Stop a notification')), [current_tenant, current_target_group, notice], {:class => "rounded", :method => :delete, :confirm => _('Are you sure?')}) %></li>
       <% else -%>
-        <li><%= link_to(content_tag('span', _('Notify new posts')), [current_tenant, current_target_group, notice], {:class => "rounded", :method => :post}) %></li>
+        <li><%= link_to(content_tag('span', _('Notify new posts')), [current_tenant, current_target_group, :notices], {:class => "rounded", :method => :post}) %></li>
       <% end -%>
     <% else -%>
       <% if current_participation.waiting? -%>
