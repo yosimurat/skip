@@ -38,19 +38,6 @@ default: &default
   # ================================================================================================
   white_list:
     - http://localhost:3333/consumer
-  ax_props:
-    -
-      - email
-      - http://axschema.org/contact/email
-      - email
-    -
-      - fullname
-      - http://axschema.org/namePerson
-      - name
-    -
-      - code
-      - http://axschema.org/namePerson/friendly
-      - code
 
   belong_info_apps:                                                  # 所属情報を外部のアプリケーションのAPIを利用して設定する
 #     wiki:

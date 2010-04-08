@@ -172,7 +172,7 @@ class ServerController < ApplicationController
     []
   end
 
-  def convert_ax_props(user, from = current_user.tenant.initial_settings['ax_props'])
+  def convert_ax_props(user, from = GlobalInitialSetting['ax_props'])
     hash = {}
     from.each do |i|
       hash["type.#{i[0]}"] = i[1]

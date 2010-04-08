@@ -66,6 +66,19 @@ default: &default
     :code: "http://axschema.org/namePerson/friendly"
     :first_name: "http://axschema.org/namePerson/first"
     :last_name: "http://axschema.org/namePerson/last"
+  ax_props:
+    -
+      - email
+      - http://axschema.org/contact/email
+      - email
+    -
+      - fullname
+      - http://axschema.org/namePerson
+      - name
+    -
+      - code
+      - http://axschema.org/namePerson/friendly
+      - code
 
   # ================================================================================================
   # メールに関する設定
