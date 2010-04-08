@@ -60,7 +60,7 @@ class ServerController < ApplicationController
   # to the decision page.
   def proceed
     identity = identifier(current_user)
-    if current_user.tenant.initial_settings['white_list'].include?(checkid_request.trust_root)
+    if Admin::Setting.acceptable_hosts_to_provide_openid_account(current_user.tenant).include?(checkid_request.trust_root)
       resp = checkid_request.answer(true, nil, identity)
       resp = add_ax(resp, convert_ax_props(current_user)) if ax_fetch_request
       render_response(resp)

@@ -28,8 +28,6 @@ class UserCustom < ActiveRecord::Base
 
   def initialize(attr = {})
     super(attr)
-    # TODO: テナント毎の初期設定
-    # u = user || User.find_without_retired_skip(user_id)
-    # self.theme = u.tenant.initial_settings['default_theme'] || "silver"
+    self.theme = (tenant = self.user.try(:tenant)) ? Admin::Setting.default_theme(tenant) : "silver"
   end
 end

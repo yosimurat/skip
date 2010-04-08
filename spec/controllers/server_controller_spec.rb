@@ -95,7 +95,7 @@ describe ServerController, "#proceed" do
   end
   describe "ホワイトリストのアプリケーションの場合" do
     before do
-      tenant.initial_settings['white_list'] = ["http://test.com/"]
+      Admin::Setting[tenant, :acceptable_hosts_to_provide_openid_account] = ["http://test.com/"]
       GlobalInitialSetting['protocol'] = "http://"
 
       openid_params = checkid_request_params.merge('openid.identity' => @id_url, 'openid.claimed_id' => @id_url)
@@ -121,7 +121,7 @@ describe ServerController, "#proceed" do
 
   describe "ホワイトリストのアプリケーションでない場合" do
     before do
-      tenant.initial_settings['white_list'] = ["http://127.0.0.1/"]
+      Admin::Setting[tenant, :acceptable_hosts_to_provide_openid_account] = ["http://127.0.0.1/"]
       GlobalInitialSetting['protocol'] = "http://"
       GlobalInitialSetting['host_and_port'] = "localhost:3100"
 

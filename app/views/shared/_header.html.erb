@@ -12,7 +12,7 @@
         what_new_url = h(GlobalInitialSetting['what_new']['url'])
 
         links << link_to(what_new_message, what_new_url, :target => "_blank", :class => "attention_underline_link") unless what_new_url.blank?
-        links << link_to(_('Invite a user'), new_user_invitation_url(current_user), :title => _('Invite a user')) if current_tenant and current_tenant.initial_settings['invitation'] and current_tenant.initial_settings['invitation']['enable']
+        links << link_to(_('Invite a user'), new_tenant_invitations_url(current_tenant), :title => _('Invite a user')) if current_tenant and Admin::Setting.enable_invitation_feature(current_tenant)
         links << link_to(_("My Account"), edit_tenant_user_url(current_tenant, current_user), :class => "underline_link")
         links << link_to(_("System Administration"), admin_tenant_root_url(current_tenant), :title => _("Administration of the site."), :class => "underline_link") if current_user.admin? and current_tenant
         links << link_to(_('Help'), help_url, :target => "_blank", :class => "underline_link") unless help_url.blank?
@@ -34,7 +34,7 @@
           other_links_tag = content_tag :div, other_links.join(''), :id => 'other_links', :class => 'invisible'
         end
 
-        links << link_to(_("Sign out"), logout_platform_url, :class => "underline_link") unless current_tenant and current_tenant.initial_settings['hide_header_logout_link']
+        links << link_to(_("Sign out"), logout_platform_url, :class => "underline_link") unless current_tenant and Admin::Setting.hide_header_logout_link(current_tenant)
       -%>
 
       <div id="menu">
@@ -47,7 +47,7 @@
   <div class="banner"></div>
 
   <% if current_user -%>
-    <% if current_tenant and current_tenant.initial_settings['full_text_search_setting'] && current_user.active? -%>
+    <% if GlobalInitialSetting['full_text_search_setting'] && current_user.active? -%>
       <div id="search" class="ui-corner-all">
         <% form_tag(polymorphic_url([current_tenant, :search], :action => :full_text_search),{:method => 'get'}) do -%>
           <%= text_field_tag "full_text_query", search_label, :class => "labeled-field" %>

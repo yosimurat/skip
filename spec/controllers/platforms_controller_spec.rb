@@ -178,8 +178,7 @@ describe PlatformsController, "#logout" do
   end
   describe "固定OP利用RPモードの場合" do
     before do
-      tenant.initial_settings['login_mode'] = "rp"
-      tenant.initial_settings['fixed_op_url'] = 'http://skipop.url/'
+      tenant.update_attribute :op_url, 'http://skipop.url/'
     end
     it 'セッションとクッキーがクリアされること' do
       controller.should_receive(:logout_killing_session!)
@@ -187,12 +186,12 @@ describe PlatformsController, "#logout" do
     end
     it "OPのログアウトにリダイレクトすること" do
       get :logout
-      response.should redirect_to("#{tenant.initial_settings['fixed_op_url']}logout")
+      response.should redirect_to("#{tenant.op_url}logout")
     end
   end
   describe "その他のモードの場合" do
     before do
-      tenant.initial_settings['login_mode'] = "password"
+      tenant.update_attribute :op_url, nil
     end
     describe "通常のログアウト" do
       before do
@@ -541,8 +540,7 @@ describe PlatformsController, "#create_user_from" do
 
   describe "専用OPモードの場合" do
     before do
-      tenant.initial_settings['login_mode'] = "rp"
-      tenant.initial_settings['fixed_op_url'] = "http://skipop.url/"
+      tenant.update_attribute :op_url, "http://skipop.url/"
     end
     describe "identity_urlが適切な場合" do
       before do
@@ -581,30 +579,9 @@ describe PlatformsController, "#create_user_from" do
       end
     end
   end
-  describe "フリーOPモードの場合" do
-    before do
-      tenant.initial_settings['login_mode'] = "rp"
-      tenant.initial_settings['fixed_op_url'] = nil
-
-      @session = {}
-      @session.stub!(:[]=).with(:identity_url, @identity_url)
-      controller.stub!(:session).and_return(@session)
-
-      controller.stub!(:create_user_params)
-      @user = stub_model(User)
-      User.stub!(:new_with_identity_url).and_return(@user)
-
-      controller.should_receive(:redirect_to).with(:controller => :portal, :action => :index)
-    end
-    it "session[:identity_url]にOPから取得したOpenID identifierを保存する" do
-      @session.should_receive(:[]=).with(:identity_url, @identity_url)
-
-      call_create_user_from
-    end
-  end
   describe "OP専用モードでない場合" do
     before do
-      tenant.initial_settings['login_mode'] = "password"
+      tenant.update_attribute :op_url, nil
     end
     it "ログイン画面に遷移して、エラーメッセージを表示すること" do
       controller.should_receive(:set_error_message_not_create_new_user_and_redirect)
@@ -624,7 +601,7 @@ describe PlatformsController, "#create_user_params" do
       "http://axschema.org/namePerson" => ["ほげ ふが"],
       "http://axschema.org/contact/email" => ["hoge@hoge.host"]
     }
-    tenant.initial_settings['ax_fetchrequest'] = {
+    GlobalInitialSetting['ax_fetchrequest'] = {
       :name => "http://axschema.org/namePerson",
       :email => "http://axschema.org/contact/email",
       :code => "http://axschema.org/namePerson/friendly"

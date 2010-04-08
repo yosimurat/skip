@@ -44,6 +44,7 @@ ActionController::Routing::Routes.draw do |map|
     end
     tenant.resources :share_files, :only => %w(index show)
     tenant.resources :board_entries, :only => %w(index show), :collection => {:be_read => :post, :be_unread => :post}
+    tenant.resource :invitations, :only => %w(new create)
     tenant.resource :statistics, :only => %w(show), :member => { :load_calendar => :get, :ado_current_statistics => :get, :ado_statistics_history => :get }
     tenant.resources :ids, :only => :show
     tenant.resource :search, :only => [], :member => { :full_text_search => :get }

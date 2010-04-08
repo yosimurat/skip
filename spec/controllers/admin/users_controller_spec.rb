@@ -31,7 +31,7 @@ describe Admin::UsersController, 'POST /create' do
     @user = stub_model(Admin::User)
     @user.stub!(:save!)
     Admin::User.stub!(:make_new_user).and_return(@user)
-    tenant.initial_settings['login_mode'] = 'password'
+    tenant.update_attribute :op_url, nil
   end
   describe 'ユーザの登録に成功する場合' do
     it 'Admin::Userが作成されること' do

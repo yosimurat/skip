@@ -1,5 +1,4 @@
 config/database.yml
-config/initial_settings.yml
 config/global_initial_settings.yml
 config/common_menus.yml
 db/schema.rb

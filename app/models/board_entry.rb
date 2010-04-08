@@ -42,8 +42,7 @@ class BoardEntry < ActiveRecord::Base
 
   validates_length_of   :title, :maximum => 100
 
-  AIM_TYPES = %w(entry question notice).freeze
-  ANTENNA_AIM_TYPES = %w(notice).freeze
+  AIM_TYPES = %w(entry question).freeze
   HIDABLE_AIM_TYPES = %w(question).freeze
   TIMLINE_AIM_TYPES = %w(entry).freeze
   validates_inclusion_of :aim_type, :in => AIM_TYPES
@@ -99,7 +98,6 @@ class BoardEntry < ActiveRecord::Base
   }
 
   named_scope :question, proc { { :conditions => ['board_entries.aim_type = \'question\''] } }
-  named_scope :notice, proc { { :conditions => ['board_entries.aim_type = \'notice\''] } }
   named_scope :timeline, proc { { :conditions => ['board_entries.aim_type = \'entry\''] } }
   named_scope :visible, proc { { :conditions => ['board_entries.hide = ?', false] } }
 
@@ -203,10 +201,8 @@ class BoardEntry < ActiveRecord::Base
   N_('BoardEntry|Entry type|GROUP_BBS')
   ns_('BoardEntry|Aim type|entry', 'entries', 1)
   ns_('BoardEntry|Aim type|question', 'questions', 1)
-  ns_('BoardEntry|Aim type|notices', 'notices', 1)
   N_('BoardEntry|Aim type|Desc|entry')
   N_('BoardEntry|Aim type|Desc|question')
-  N_('BoardEntry|Aim type|Desc|notice')
   N_('BoardEntry|Open|true')
   N_('BoardEntry|Open|false')
   DIARY = 'DIARY'
@@ -542,11 +538,7 @@ class BoardEntry < ActiveRecord::Base
   end
 
   def self.enable_aim_types tenant
-    if tenant.initial_settings['notice_entry'] && tenant.initial_settings['notice_entry']['enable']
-      AIM_TYPES
-    else
-      AIM_TYPES - ['notice']
-    end
+    AIM_TYPES
   end
 
   def be_close!
@@ -562,19 +554,13 @@ class BoardEntry < ActiveRecord::Base
   end
 
   def reflect_user_readings
-    if self.is_notice?
-      self.publication_users.each do |user|
-        reflect_user_reading(user)
-      end
-    else
-      user_ids = []
-      Notice.subscribed(owner).each { |notice| user_ids << notice.user_id }
-      if self.owner_is_group?
-        owner.group_participations.active.each { |gp| user_ids << gp.id }
-      end
-      User.id_is(user_ids.uniq).each do |user|
-        reflect_user_reading(user)
-      end
+    user_ids = []
+    Notice.subscribed(owner).each { |notice| user_ids << notice.user_id }
+    if self.owner_is_group?
+      owner.group_participations.active.each { |gp| user_ids << gp.id }
+    end
+    User.id_is(user_ids.uniq).each do |user|
+      reflect_user_reading(user)
     end
   end
 
@@ -584,7 +570,6 @@ class BoardEntry < ActiveRecord::Base
 
     if user_reading = self.user_readings.checked_on_lt(self.last_updated).find_or_initialize_by_user_id(notice_user.id)
       params = {:read => false, :checked_on => nil, :notice_type => nil}
-      params.merge!(:notice_type => 'notice') if self.is_notice?
       user_reading.attributes = params
       user_reading.save
     end

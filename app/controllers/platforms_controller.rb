@@ -67,9 +67,9 @@ class PlatformsController < ApplicationController
       if @user.active?
         @user.issue_reset_auth_token
         @user.save_without_validation!
-        UserMailer::Smtp.deliver_sent_forgot_password(current_tenant, email, reset_password_url(@user.reset_auth_token))
+        UserMailer::Smtp.deliver_sent_forgot_password(@user.tenant, email, reset_password_url(@user.reset_auth_token))
         flash[:notice] = _("An email contains the URL for resetting the password has been sent to %s.") % email
-        redirect_to [current_tenant, :platform]
+        redirect_to :platform
       else
         flash.now[:error] = _('User has entered email address %s is not in use. Please start with the site.') % email
       end
@@ -87,17 +87,17 @@ class PlatformsController < ApplicationController
         @user.password_confirmation = params[:user][:password_confirmation]
         if @user.save
           flash[:notice] = _("Password was successfully reset.")
-          redirect_to [current_tenant, :platform]
+          redirect_to :platform
         else
           flash.now[:error] = _("Failed to reset password.")
         end
       else
         flash[:error] = _("The URL for resetting password has already expired.")
-        redirect_to [current_tenant, :platform]
+        redirect_to :platform
       end
     else
       flash[:error] = _("Invalid password reset URL. Try again or contact system administrator.")
-      redirect_to [current_tenant, :platform]
+      redirect_to :platform
     end
   end
 
@@ -156,7 +156,7 @@ class PlatformsController < ApplicationController
                 if @identifier.save
                   user.determination_reset_auth_token
                   flash[:notice] = _("%{function} completed.")%{:function => _('Resetting OpenID URL')} + _("Enter the previously set URL to log in.")
-                  redirect_to [current_tenant, :platform]
+                  redirect_to :platform
                 end
               else
                 flash.now[:error] = _("OpenID processing aborted due to user cancellation or system errors.")
@@ -168,11 +168,11 @@ class PlatformsController < ApplicationController
         end
       else
         flash[:error] = _("The URL for %{function} has expired.")%{:function => _('resetting OpenID URL')}
-        redirect_to [current_tenant, :platform]
+        redirect_to :platform
       end
     else
       flash[:error] = _("The URL for %{function} invalid. Try again or contact system administrator.")%{:function => _('resetting OpenID URL')}
-      redirect_to [current_tenant, :platform]
+      redirect_to :platform
     end
   end
 
@@ -182,7 +182,7 @@ class PlatformsController < ApplicationController
       unless current_user.unused?
         redirect_to_return_to_or_root
       else
-        redirect_to new_polymorphic_url([current_tenant, :user])
+        redirect_to new_polymorphic_url([current_user.tenant, :user])
       end
     end
   end
@@ -306,7 +306,7 @@ class PlatformsController < ApplicationController
     else
       logger.info("[Login failed with password] by bad_request")
       flash[:error] = _("Log in failed.")
-      redirect_to (request.env['HTTP_REFERER'] ? :back : polymorphic_url([current_tenant, :platform], :action => :login))
+      redirect_to (request.env['HTTP_REFERER'] ? :back : polymorphic_url(:platform, :action => :login))
     end
   end
 

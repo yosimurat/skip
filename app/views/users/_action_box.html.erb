@@ -2,9 +2,6 @@
   <ul class="no_style">
   <% if current_user == current_target_user -%>
     <li><%= link_to(content_tag('span', _('Write a blog entry')) , new_polymorphic_path([current_tenant, current_user, :board_entry]), :title => _('Write a blog entry'), :class => 'rounded') %></li>
-    <% if notice_entry_enabled? -%>
-      <li><%= link_to(content_tag('span', _('Write a notice')), new_polymorphic_path([current_tenant, current_user, :board_entry], :board_entry => {:aim_type => 'notice'}), :title => _('Write a notice'), :class => 'rounded') %></li>
-    <% end -%>
     <li><%= link_to(content_tag('span', _('Write a question')), new_polymorphic_path([current_tenant, current_user, :board_entry], :board_entry => {:aim_type => 'question'}), :title => _('Write a question'), :class => 'rounded') %></li>
     <li><%= link_to(content_tag('span', _('Upload a file')), new_polymorphic_path([current_tenant, current_user, :share_file]), :title => _('Upload a file'), :class => 'rounded') %></li>
   <% else -%>

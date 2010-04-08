@@ -231,7 +231,7 @@ end
 
 describe User, "#before_save" do
   before do
-    tenant.initial_settings['login_mode'] = 'password'
+    tenant.update_attribute :op_url, nil
     GlobalInitialSetting['sha1_digest_key'] = "digest_key"
   end
   describe '新規の場合' do
@@ -407,7 +407,7 @@ end
 
 describe User, '#change_password' do
   before do
-    tenant.initial_settings['login_mode'] = 'password'
+    tenant.update_attribute :op_url, nil
     GlobalInitialSetting['sha1_digest_key'] = 'digest_key'
     @user = create_user(:user_options => {:password => 'Password1'})
     @old_password = 'Password1'
@@ -1000,7 +1000,7 @@ describe User, 'password_required?' do
   end
   describe 'パスワードモードの場合' do
     before do
-      tenant.initial_settings['login_mode'] = 'password'
+      tenant.update_attribute :op_url, nil
     end
     describe 'パスワードが空の場合' do
       before do
@@ -1047,7 +1047,7 @@ describe User, 'password_required?' do
   end
   describe 'パスワードモード以外の場合' do
     before do
-      tenant.initial_settings['login_mode'] = 'rp'
+      tenant.update_attribute :op_url, "http://localhost:3333/"
     end
     it '必要ではない(false)と判定されること' do
       @user.send(:password_required?).should be_false

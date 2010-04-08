@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   init_gettext "skip" if defined? GetText
 
-  helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_target_owner, :current_participation, :notice_entry_enabled?, :event_enabled?, :current_tenant, :root_url
+  helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_target_owner, :current_participation, :event_enabled?, :current_tenant, :root_url
 protected
   include InitialSettingsHelper
 
@@ -124,7 +124,7 @@ protected
         if request.url == root_url
           redirect_to [current_tenant, :platform]
         else
-          redirect_to polymorphic_url([current_tenant, :platform], :action => :require_login, :return_to => URI.decode(request.url))
+          redirect_to polymorphic_url(:platform, :action => :require_login, :return_to => URI.decode(request.url))
         end
       end
       false
@@ -304,18 +304,8 @@ protected
     openid_url.gsub(identifier(''), '')
   end
 
-  def notice_entry_enabled?
-    current_tenant.initial_settings['notice_entry'] && current_tenant.initial_settings['notice_entry']['enable']
-  end
-
   def event_enabled?
-    current_tenant.initial_settings['simple_apps'] && current_tenant.initial_settings['simple_apps']['event'] && current_tenant.initial_settings['simple_apps']['event']['enable']
-  end
-
-  def require_wiki_enabled
-    if !current_tenant.initial_settings['wiki'] or !current_tenant.initial_settings['wiki']['use']
-      redirect_to root_url
-    end
+    (simple_apps = Admin::Setting.simple_apps(current_tenant)) && simple_apps['event'] && simple_apps['event']['enable']
   end
 
   def root_url_with_logged_in

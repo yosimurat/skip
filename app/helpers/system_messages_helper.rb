@@ -133,6 +133,6 @@ module SystemMessagesHelper
   end
 
   def enable_enquete?
-    GetText.locale.to_s == 'ja' && !(current_tenant.initial_settings['enable_enquete_for_oss'] == "lovelyskip" || cookies[enquete_cookie_key] == 'true')
+    GetText.locale.to_s == 'ja' && !(GlobalInitialSetting['enable_enquete_for_oss'] == "lovelyskip" || cookies[enquete_cookie_key] == 'true')
   end
 end

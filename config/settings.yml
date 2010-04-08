@@ -49,13 +49,6 @@ contact_mail_contain_contents:
   format: boolean
   default: false
 
-default_send_mail_of_question:                            # 質問記事のメール送信チェックボックスのデフォルト値[画面なし]
-  format: boolean
-  default: false
-
-enable_send_email_to_all_users:                           # 全体へのメール送信機能を有効にするかどうか[画面なし]
-  format: boolean
-  defalut: true
 # ブログへの埋め込みタグ
 # --------------------------------------------------------------------------------------------------
 youtube:
@@ -149,4 +142,40 @@ user_cleaning_notification_interval:
 enable_single_session:
   format: boolean
   default: true
+
+# ==================================================================================================
+# 画面なし
+# ==================================================================================================
+default_send_mail_of_question:                            # 質問記事のメール送信チェックボックスのデフォルト値[画面なし]
+  format: boolean
+  default: true
+
+enable_send_email_to_all_users:                           # 全体へのメール送信機能を有効にするかどうか[画面なし]
+  format: boolean
+  defalut: true
+
+acceptable_hosts_to_provide_openid_account:               # OpenID認証でプロバイダーとしてIDを発行するホストのホワイトリスト
+  serialized: true
+  default: ["http://localhost:3333/consumer"]
+
+enable_invitation_feature:                                # 招待機能の有効化
+  format: boolean
+  default: false
+
+simple_apps:                                              # オープンソース版では利用できません
+  serialized: true
+  default:
+    url: "http://localhost:4000/"
+    event:
+      enable: true
+
+default_theme:                                            # 既定のテーマ
+  default: silver
+
+hide_header_logout_link:                                  # ヘッダのログアウトリンクの表示/非表示切り替え
+  format: boolean
+  default: false
+
+footer_image_link_tag:
+  string: ""
 

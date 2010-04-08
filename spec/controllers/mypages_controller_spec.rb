@@ -404,7 +404,7 @@ describe MypagesController, 'mypage > manage(管理) 関連' do
 
   describe MypagesController, "POST #apply_password" do
     before do
-      tenant.initial_settings['login_mode'] = "password"
+      tenant.update_attribute :op_url, nil
 
       @user = user_login
       @user.should_receive(:change_password)
@@ -434,9 +434,7 @@ describe MypagesController, 'mypage > manage(管理) 関連' do
   describe MypagesController, "POST #apply_ident_url" do
     before do
       @user = user_login
-      tenant.initial_settings['login_mode'] = "rp"
-      tenant.initial_settings['fixed_op_url'] = nil
-      tenant.initial_settings['password_edit_setting'] = true
+      tenant.update_attribute :op_url, "http://localhost:3333/"
       @openid_url = "http://id.example.com/a_user"
     end
     describe '認証を開始した場合' do

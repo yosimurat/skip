@@ -20,9 +20,6 @@ module NavigationHelpers
     when /グローバルのグループ一覧ページ/
       '/groups/'
 
-    when /Wikiトップページ/
-      wiki_path('トップページ')
-
     when /プロフィール画像一覧/
       admin_pictures_path
 

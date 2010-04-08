@@ -17,16 +17,6 @@ Given /^メール機能を有効にする$/ do
   GlobalInitialSetting['mail']['show_mail_function'] = true
 end
 
-Given /^お知らせ機能を有効にする$/ do
-  tenant.initial_settings['notice_entry']['enable'] = true
-  tenant.save
-end
-
-Given /^Wiki機能を有効にする$/ do
-  tenant.initial_settings['wiki']['use'] = true
-  tenant.save
-end
-
 Given /^質問の告知方法の既定値をメール送信にする機能を"([^\"]*)"にする$/ do |str|
   if str == '有効'
     Admin::Setting.[]=(tenant, "default_send_mail_of_questiontenant", true)

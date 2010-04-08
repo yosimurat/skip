@@ -86,7 +86,6 @@ default: &default
   raise_delivery_errors: false                                      # メール送信に失敗した場合のエラー処理を行なうか
   # 通常のメール関連機能のための設定
   mail:
-    enable_send_email_to_all_users: true                            # 全体へのメール送信機能を有効にするかどうか
     show_mail_function: true
     smtp_settings:
       :address:    localhost
