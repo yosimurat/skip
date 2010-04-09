@@ -208,7 +208,43 @@ describe GroupParticipation, '#join!' do
 end
 
 describe GroupParticipation, '#leave' do
-  it { pending '後で書く' }
+  before do
+    @group = create_group
+    @alice = create_user :name => 'Alice', :admin => false
+    @bob = create_user :name => 'Bob', :admin => false
+    @group_participation = @group.group_participations.create(:user => @alice)
+    @alice.notices.create(:target => @group)
+  end
+  it '新着が削除されること' do
+    lambda do
+      @group_participation.leave(@alice)
+    end.should change(Notice, :count).by(-1)
+  end
+  it '参加レコードが削除されること' do
+    lambda do
+      @group_participation.leave(@alice)
+    end.should change(GroupParticipation, :count).by(-1)
+  end
+  it '退会に対するシステムメッセージ作成が行われること' do
+    @group_participation.should_receive(:create_leave_system_message, @alice)
+    @group_participation.leave(@alice)
+  end
+  describe 'ログインユーザで自分を退会させる場合' do
+    it '成功すること(グループから退会)' do
+      @group_participation.leave(@alice) do |result, object, messages|
+        result.should be_true
+        messages.should == [ 'Successfully left the group.' ]
+      end
+    end
+  end
+  describe 'ログインユーザで他者を退会させる場合' do
+    it '成功すること(グループから強制退会)' do
+      @group_participation.leave(@bob) do |result, object, messages|
+        result.should be_true
+        messages.should == [ "Removed Alice from members of the group." ]
+      end
+    end
+  end
 end
 
 describe GroupParticipation, '#full_accessible?' do
@@ -236,14 +272,14 @@ describe GroupParticipation, '#create_join_system_message' do
   end
   describe '承認待ち以外の場合' do
     before do
-      # 新たな参加者はAlice
-      @group_participation = @group.group_participations.build(:user => @alice)
       # Tomは管理者
       @group.group_participations.create(:user => create_user(:name => 'Tom', :admin => false), :owned => true)
       # Kateは管理者
       @group.group_participations.create(:user => create_user(:name => 'Kate', :admin => false), :owned => true)
       # Mikeは参加者
       @group.group_participations.create(:user => create_user(:name => 'Mike', :admin => false), :owned => false)
+      # 新たな参加者はAlice
+      @group_participation = @group.group_participations.build(:user => @alice)
     end
     describe 'ログインユーザで自分を参加させた場合' do
       subject do
@@ -253,7 +289,7 @@ describe GroupParticipation, '#create_join_system_message' do
         should have(2).items
       end
       it 'JOINタイプのメッセージであること' do
-        subject.map(&:message_type).all? {|mt| mt == 'JOIN' }
+        subject.map(&:message_type).all? {|mt| mt == 'JOIN' }.should be_true
       end
     end
     describe 'ログインユーザで他者を参加させた場合' do
@@ -264,8 +300,46 @@ describe GroupParticipation, '#create_join_system_message' do
         should have(1).items
       end
       it 'FORCED_JOINタイプのメッセージであること' do
-        subject.map(&:message_type).all? {|mt| mt == 'FORCED_JOIN' }
+        subject.map(&:message_type).all? {|mt| mt == 'FORCED_JOIN' }.should be_true
       end
+    end
+  end
+end
+
+describe GroupParticipation, '#create_leave_system_message' do
+  before do
+    @alice = create_user :name => 'Alice', :admin => false
+    @bob = create_user :name => 'Bob', :admin => false
+    @group = create_group
+    # Tomは管理者
+    @group.group_participations.create(:user => create_user(:name => 'Tom', :admin => false), :owned => true)
+    # Kateは管理者
+    @group.group_participations.create(:user => create_user(:name => 'Kate', :admin => false), :owned => true)
+    # Mikeは参加者
+    @group.group_participations.create(:user => create_user(:name => 'Mike', :admin => false), :owned => false)
+    # 退会するのはAlice
+    @group_participation = @group.group_participations.create(:user => @alice)
+  end
+  describe 'ログインユーザで自分を退会させた場合' do
+    subject do
+      @group_participation.send(:create_leave_system_message, @alice)
+    end
+    it '退会したグループの管理者全員にメッセージが作成されること' do
+      should have(2).items
+    end
+    it 'LEAVEタイプのメッセージであること' do
+      subject.map(&:message_type).all? {|mt| mt == 'LEAVE' }.should be_true
+    end
+  end
+  describe 'ログインユーザで他者を退会させた場合' do
+    subject do
+      @group_participation.send(:create_leave_system_message, @bob)
+    end
+    it '退会させたユーザにメッセージが作成されること' do
+      should have(1).items
+    end
+    it 'FORCED_LEAVEタイプのメッセージであること' do
+      subject.map(&:message_type).all? {|mt| mt == 'FORCED_LEAVE' }.should be_true
     end
   end
 end

@@ -26,28 +26,32 @@ class GroupParticipationsController < ApplicationController
           flash[:error] = messages
         end
       end
-      if current_target_user.id == current_user.id
-        redirect_to [current_tenant, group]
-      else
-        redirect_to new_polymorphic_path([current_tenant, group, :group_participation])
+      respond_to do |format|
+        format.html do
+          if current_target_user.id == current_user.id
+            redirect_to [current_tenant, group]
+          else
+            redirect_to new_polymorphic_path([current_tenant, group, :group_participation])
+          end
+        end
       end
     end
   end
 
   def destroy
     group = current_target_group
-    current_target_group_participation.leave
+    current_target_group_participation.leave(current_user) do |result, participation, messages|
+      if result
+        flash[:notice] = messages
+      else
+        flash[:error] = messages
+      end
+    end
     respond_to do |format|
       format.html do
-        if current_user == current_target_group_participation.user
-          group.group_participations.only_owned.each do |owner_participation|
-            SystemMessage.create_message :message_type => 'LEAVE', :user_id => owner_participation.user_id, :message_hash => {:user_id => current_user.id, :group_id => group.id}
-          end
-          flash[:notice] = _('Successfully left the group.')
+        if current_target_group_participation.user.id == current_user.id
           redirect_to [current_tenant, group]
         else
-          SystemMessage.create_message :message_type => 'FORCED_LEAVE', :user_id => current_target_group_participation.user.id, :message_hash => {:group_id => group.id}
-          flash[:notice] = _("Removed %s from members of the group.") % current_target_group_participation.user.name
           redirect_to polymorphic_url([current_tenant, group, :group_participations], :action => :manage_members)
         end
       end

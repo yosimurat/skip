@@ -66,7 +66,6 @@ class GroupParticipation < ActiveRecord::Base
       # FIXME Controllerで制限をかけているが、ここでも本人もしくはグループ管理者のみに絞るvalidationをかけるべき
       self.save!
       self.user.notices.create!(:target => self.group) unless self.user.notices.find_by_target_id(self.group.id)
-      # TODO 別メソッド化する
       create_join_system_message(current_user)
       if block_given?
         messages =
@@ -103,13 +102,24 @@ class GroupParticipation < ActiveRecord::Base
   end
 
   # TODO 回帰テストを書く
-  def leave
+  def leave current_user
     Group.transaction do
       if notice = self.user.notices.find_by_target_id(self.group.id)
         notice.destroy
       end
       self.destroy
-      true
+      create_leave_system_message(current_user)
+      if block_given?
+        messages =
+          if current_user.id == self.user.id
+            [ _('Successfully left the group.') ]
+          else
+            [ _("Removed %s from members of the group.") % self.user.name ]
+          end
+        yield true, self, messages
+      else
+        true
+      end
     end
   end
 
@@ -133,6 +143,18 @@ class GroupParticipation < ActiveRecord::Base
       else
         messages << SystemMessage.create_message(:message_type => 'FORCED_JOIN', :user_id => self.user.id, :message_hash => {:group_id => self.group.id})
       end
+    end
+    messages
+  end
+
+  def create_leave_system_message current_user
+    messages = []
+    if self.user.id == current_user.id
+      self.group.group_participations.only_owned.each do |owner_participation|
+        messages << SystemMessage.create_message(:message_type => 'LEAVE', :user_id => owner_participation.user_id, :message_hash => {:user_id => current_user.id, :group_id => group.id})
+      end
+    else
+      messages << SystemMessage.create_message(:message_type => 'FORCED_LEAVE', :user_id => self.user.id, :message_hash => {:group_id => group.id})
     end
     messages
   end
