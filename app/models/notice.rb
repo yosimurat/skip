@@ -28,6 +28,6 @@ class Notice < ActiveRecord::Base
 
   # TODO: target が削除されている場合にエラーが発生する Ex) 参加したけどすぐ抜けた
   def unread_count user
-    @unread_count ||= BoardEntry.accessible(user).owned(target).unread(user).count
+    @unread_count ||= (target ? BoardEntry.accessible(user).owned(target).unread(user).count : 0)
   end
 end
