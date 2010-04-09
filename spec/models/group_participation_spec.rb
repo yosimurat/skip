@@ -37,43 +37,235 @@ end
 
 describe GroupParticipation, '#after_save' do
   before do
-    @bob = create_user :user_options => {:name => 'ボブ', :admin => false}
+    @bob = create_user :name => 'ボブ', :admin => false
     Group.record_timestamps = false
-    @vim_group = create_group :name => 'Vim勉強会', :gid => 'vim_study', :updated_on => Time.now.yesterday, :created_on => Time.now.yesterday
-    Group.record_timestamps = true
+    @before_updated_on = Time.now.yesterday
+    @vim_group = create_group :name => 'Vim勉強会', :gid => 'vim_study', :updated_on => @before_updated_on, :created_on => @before_updated_on
   end
   describe '参加待ちの場合' do
-    it '所属するグループのupdate_onが変わらないこと' do
-      before_updated_on = @vim_group.updated_on
+    before do
       @vim_group.group_participations.create(:user_id => @bob.id, :waiting => true)
-      @vim_group.reload
-      before_updated_on.tv_sec.should == @vim_group.updated_on.tv_sec
+    end
+    subject do
+      @vim_group.reload.updated_on.to_i
+    end
+    it '対象ユーザの所属グループの更新日が変わらないこと' do
+      should == @before_updated_on.to_i
     end
   end
   describe '参加中の場合' do
-    it '所属するグループの更新日が更新されること' do
-      before_updated_on = @vim_group.updated_on
+    before do
       @vim_group.group_participations.create(:user_id => @bob.id, :waiting => false)
-      @vim_group.reload
-      before_updated_on.tv_sec.should_not == @vim_group.updated_on.tv_sec
     end
+    subject do
+      @vim_group.reload.updated_on.to_i
+    end
+    it '対象ユーザの所属グループの更新日が変わること' do
+      should_not == @before_updated_on.to_i
+    end
+  end
+  after do
+    Group.record_timestamps = true
   end
 end
 
 describe GroupParticipation, '#after_destroy' do
   before do
-    bob = create_user :user_options => {:name => 'ボブ', :admin => false}
+    bob = create_user :name => 'ボブ', :admin => false
     Group.record_timestamps = false
     @vim_group = create_group :name => 'Vim勉強会', :gid => 'vim_study' do |g|
-      @group_participation = g.group_participations.build(:user_id => bob.id, :owned => true)
+      @group_participation = g.group_participations.build(:user => bob, :owned => true)
     end
-    @vim_group.update_attributes(:updated_on => Time.now.yesterday, :created_on => Time.now.yesterday)
+    @before_updated_on = Time.now.yesterday
+    @vim_group.update_attributes(:updated_on => @before_updated_on, :created_on => @before_updated_on)
+  end
+  subject do
+    @group_participation.destroy
+    @vim_group.reload.updated_on.to_i
+  end
+  it '対象ユーザの所属グループの更新日が更新されること' do
+    should_not == @before_updated_on.to_i
+  end
+  after do
     Group.record_timestamps = true
   end
-  it '所属するグループのupdated_onが更新されること' do
-    before_updated_on = @vim_group.reload.updated_on
-    @group_participation.destroy
-    @vim_group.reload
-    before_updated_on.tv_sec.should_not == @vim_group.updated_on.tv_sec
+end
+
+describe GroupParticipation, '.joined?' do
+  it { pending '後で書く' }
+end
+
+describe GroupParticipation, '.owned?' do
+  it { pending '後で書く' }
+end
+
+describe GroupParticipation, '#join!' do
+  before do
+    @unprotected_group = create_group(:gid => 'unprotected')
+    @protected_group = create_group(:gid => 'protected', :protected => true)
+  end
+  describe 'まだレコードが存在しない場合' do
+    before do
+      @alice = create_user :name => 'Alice', :admin => false
+      @bob = create_user :name => 'Bob', :admin => false
+      @group_participation = @unprotected_group.group_participations.build(:user => @alice)
+    end
+    describe '保存に成功する場合' do
+      describe '新着通知が既に存在する場合' do
+        before do
+          @alice.notices.create!(:target => @unprotected_group)
+        end
+        it 'このグループに対する対象ユーザの新着通知が作成されないこと' do
+          lambda do
+            @group_participation.join!(@alice)
+          end.should_not change(Notice, :count)
+        end
+      end
+      describe '新着通知がまだ存在しない場合' do
+        it 'このグループに対する対象ユーザの新着通知が作成されること' do
+          lambda do
+            @group_participation.join!(@alice)
+          end.should change(Notice, :count).by(1)
+        end
+      end
+      it '参加に対するシステムメッセージ作成が行われること' do
+        @group_participation.should_receive(:create_join_system_message, @alice)
+        @group_participation.join!(@alice)
+      end
+      describe '承認が必要なグループの場合' do
+        describe 'ログインユーザで自分を参加させる場合' do
+          before do
+            @group_participation = @protected_group.group_participations.build(:user => @bob)
+          end
+          it '成功すること(対象ユーザは承認待ち状態)' do
+            @group_participation.join!(@bob) do |result, object, messages|
+              result.should be_true
+              messages.should == [ 'Request sent. Please wait for the approval.' ]
+            end
+          end
+        end
+        describe 'ログインユーザで他者を参加させる場合' do
+          before do
+            @group_participation = @protected_group.group_participations.build(:user => @alice)
+          end
+          it '成功すること(グループへ強制参加)' do
+            @group_participation.join!(@bob) do |result, object, messages|
+              result.should be_true
+              messages.should == [ "Added Alice as a member." ]
+            end
+          end
+        end
+      end
+      describe '承認が不要なグループの場合' do
+        describe 'ログインユーザで自分を参加させる場合' do
+          before do
+            @group_participation = @unprotected_group.group_participations.build(:user => @bob)
+          end
+          it '成功すること(グループへ参加)' do
+            @group_participation.join!(@bob) do |result, object, messages|
+              result.should be_true
+              messages.should == [ 'Joined the group successfully.' ]
+            end
+          end
+        end
+        describe 'ログインユーザで他者を参加させる場合' do
+          before do
+            @group_participation = @unprotected_group.group_participations.build(:user => @alice)
+          end
+          it '成功すること(グループへ強制参加)' do
+            @group_participation.join!(@bob) do |result, object, messages|
+              result.should be_true
+              messages.should == [ "Added Alice as a member." ]
+            end
+          end
+        end
+      end
+    end
+    describe '保存に失敗する場合' do
+      before do
+        @group_participation.should_receive('save!').and_raise(mock_record_invalid)
+      end
+      it '失敗すること(Validation Error)' do
+        @group_participation.join!(@alice) do |result, object, messages|
+          result.should be_false
+          messages.should == ["Joined the group failed."]
+        end
+      end
+    end
+  end
+  describe '既にレコードが存在する場合' do
+    before do
+      @alice = create_user :name => 'Alice', :admin => false
+      @group_participation = GroupParticipation.create!(:user => @alice, :group => @unprotected_group)
+    end
+    it '失敗すること(既に参加済み、または承認待ち)' do
+      @group_participation.join!(@alice) do |result, object, messages|
+        result.should be_false
+        messages.should == ["Alice has already joined / applied to join this group."]
+      end
+    end
+  end
+end
+
+describe GroupParticipation, '#leave' do
+  it { pending '後で書く' }
+end
+
+describe GroupParticipation, '#full_accessible?' do
+  it { pending '後で書く' }
+end
+
+# ------------------------------------------------------------
+# privateメソッドのテスト
+# ------------------------------------------------------------
+describe GroupParticipation, '#create_join_system_message' do
+  before do
+    @alice = create_user :name => 'Alice', :admin => false
+    @bob = create_user :name => 'Bob', :admin => false
+    @group = create_group
+  end
+  describe '承認待ちの場合' do
+    before do
+      @group_participation = @group.group_participations.build(:user => @alice, :waiting => true)
+    end
+    it 'メッセージが何も作成されないこと' do
+      lambda do
+        @group_participation.send(:create_join_system_message, @bob)
+      end.should_not change(SystemMessage, :count)
+    end
+  end
+  describe '承認待ち以外の場合' do
+    before do
+      # 新たな参加者はAlice
+      @group_participation = @group.group_participations.build(:user => @alice)
+      # Tomは管理者
+      @group.group_participations.create(:user => create_user(:name => 'Tom', :admin => false), :owned => true)
+      # Kateは管理者
+      @group.group_participations.create(:user => create_user(:name => 'Kate', :admin => false), :owned => true)
+      # Mikeは参加者
+      @group.group_participations.create(:user => create_user(:name => 'Mike', :admin => false), :owned => false)
+    end
+    describe 'ログインユーザで自分を参加させた場合' do
+      subject do
+        @group_participation.send(:create_join_system_message, @alice)
+      end
+      it '参加したグループの管理者全員にメッセージが作成されること' do
+        should have(2).items
+      end
+      it 'JOINタイプのメッセージであること' do
+        subject.map(&:message_type).all? {|mt| mt == 'JOIN' }
+      end
+    end
+    describe 'ログインユーザで他者を参加させた場合' do
+      subject do
+        @group_participation.send(:create_join_system_message, @bob)
+      end
+      it '参加させたユーザにメッセージが作成されること' do
+        should have(1).items
+      end
+      it 'FORCED_JOINタイプのメッセージであること' do
+        subject.map(&:message_type).all? {|mt| mt == 'FORCED_JOIN' }
+      end
+    end
   end
 end

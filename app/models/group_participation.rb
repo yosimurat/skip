@@ -60,38 +60,43 @@ class GroupParticipation < ActiveRecord::Base
     !!find_by_user_id_and_group_id_and_waiting_and_owned(target_user, target_group, false, true)
   end
 
-  # TODO 回帰テストを書く
   def join! current_user, options = {}
-    self.waiting = (!options[:force] && self.group.protected?)
     if self.new_record?
+      self.waiting = self.group.protected? && (self.user.id == current_user.id)
+      # FIXME Controllerで制限をかけているが、ここでも本人もしくはグループ管理者のみに絞るvalidationをかけるべき
       self.save!
       self.user.notices.create!(:target => self.group) unless self.user.notices.find_by_target_id(self.group.id)
-      unless self.waiting?
-        if self.user.id == current_user.id
-          self.group.group_participations.only_owned.each do |owner_participation|
-            SystemMessage.create_message :message_type => 'JOIN', :user_id => owner_participation.user_id, :message_hash => {:group_id => group.id}
-          end
-        else
-          SystemMessage.create_message :message_type => 'FORCED_JOIN', :user_id => self.user.id, :message_hash => {:group_id => self.group.id}
-        end
-      end
+      # TODO 別メソッド化する
+      create_join_system_message(current_user)
       if block_given?
-        yield true, self
+        messages =
+          if self.waiting?
+            [ _('Request sent. Please wait for the approval.') ]
+          else
+            if current_user.id == self.user.id
+              [ _('Joined the group successfully.') ]
+            else
+              [ _("Added %s as a member.") % self.user.name ]
+            end
+          end
+        yield true, self, messages
       else
         true
       end
     else
-      self.errors.add_to_base _("%s has already joined / applied to join this group.") % self.user.name
+      messages = [_("%s has already joined / applied to join this group.") % self.user.name]
+      self.errors.add_to_base messages.first
       if block_given?
-        yield false, self
+        yield false, self, messages
       else
         false
       end
     end
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
-    self.errors.add_to_base _('Joined the group failed.')
+    messages = [_('Joined the group failed.')]
+    self.errors.add_to_base messages.first
     if block_given?
-      yield false, self
+      yield false, self, messages
     else
       false
     end
@@ -108,11 +113,27 @@ class GroupParticipation < ActiveRecord::Base
     end
   end
 
+  # TODO 回帰テストを書く
   def full_accessible? target_user = self.user
     (target_user == self.user || self.group.owned?(target_user))
   end
 
   def to_s
     return '[id:' + id.to_s + ', user_id:' + user_id.to_s + ', group_id:' + group_id.to_s + ']'
+  end
+
+  private
+  def create_join_system_message current_user
+    messages = []
+    unless self.waiting?
+      if self.user.id == current_user.id
+        self.group.group_participations.only_owned.each do |owner_participation|
+          messages << SystemMessage.create_message(:message_type => 'JOIN', :user_id => owner_participation.user_id, :message_hash => {:group_id => group.id})
+        end
+      else
+        messages << SystemMessage.create_message(:message_type => 'FORCED_JOIN', :user_id => self.user.id, :message_hash => {:group_id => self.group.id})
+      end
+    end
+    messages
   end
 end

@@ -19,19 +19,11 @@ class GroupParticipationsController < ApplicationController
     group_participation.user = current_target_user
 
     required_full_accessible_group_participation(group_participation) do
-      group_participation.join!(current_user) do |result, participation|
+      group_participation.join!(current_user) do |result, participation, messages|
         if result
-          if participation.waiting?
-            flash[:notice] = _('Request sent. Please wait for the approval.')
-          else
-            if current_target_user.id == current_user.id
-              flash[:notice] = _('Joined the group successfully.')
-            else
-              flash[:notice] = _("Added %s as a member.") % current_target_user.name
-            end
-          end
+          flash[:notice] = messages
         else
-          flash[:error] = group_participation.errors.full_messages
+          flash[:error] = messages
         end
       end
       if current_target_user.id == current_user.id

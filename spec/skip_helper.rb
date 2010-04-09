@@ -94,14 +94,15 @@ def valid_group_category
 end
 
 def create_group_category(options = {})
-  group_category = valid_group_category
-  group_category.attributes = options
+  tenant = options[:tenant] || create_tenant
+  group_category = tenant.group_categories.build(valid_group_category.attributes.merge(options))
   group_category.save!
   group_category
 end
 
 def create_group(options = {})
-  group = Group.new({:name => 'SKIP開発', :description => 'SKIP開発中', :protected => false, :gid => 'skip_dev', :deleted_at => nil}.merge(options))
+  tenant = options[:tenant] || create_tenant
+  group = tenant.groups.build({:name => 'SKIP開発', :description => 'SKIP開発中', :protected => false, :gid => 'skip_dev', :deleted_at => nil}.merge(options))
   group.deleted_at = options[:deleted_at]
   group.group_category_id = create_group_category(:initial_selected => true).id if group.group_category_id == 0
   yield group if block_given?
