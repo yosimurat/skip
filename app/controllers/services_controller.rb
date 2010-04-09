@@ -18,7 +18,7 @@ class ServicesController < ActionController::Base
   caches_page :skip_reflect_customized
 
   include SkipEmbedded::WebServiceUtil::Server
-  before_filter :check_secret_key, :except => [:search_conditions, :skip_reflect_customized]
+  before_filter :check_secret_key, :except => [:search_conditions]
   after_filter :change_charset
 
   init_gettext "skip" if defined? GetText
@@ -55,9 +55,6 @@ class ServicesController < ActionController::Base
 
   def retired_users
     render :text => diff_users('retired',params[:from_date])
-  end
-
-  def skip_reflect_customized
   end
 
 private

@@ -26,10 +26,6 @@ module SkipHelper
     javascript_include_tag("/javascripts/skip/#{source}")
   end
 
-  def skip_reflect_customized_javascript_include_tag
-    javascript_include_tag(url_for(:controller => '/services', :action => 'skip_reflect_customized.js'))
-  end
-
   def skip_jquery_include_tag source
     javascript_include_tag skip_jquery_path(source)
   end
