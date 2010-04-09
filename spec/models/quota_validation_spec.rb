@@ -1,71 +1,42 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-class ValidateFileClass
-  include QuotaValidation
-
-  attr_accessor :file
-end
-
 describe QuotaValidation do
   before do
-    @vf = mock_model_class
+    @share_file = ShareFile.new
     @muf = mock_uploaed_file
   end
-  describe "#valid_size_of_file" do
+  describe "#validates_size_per_file" do
+    subject do
+      @share_file.validates_size_per_file(@muf)
+      @share_file.errors.full_messages
+    end
     describe "ファイルサイズが0の場合" do
-      it "エラーが追加されること" do
+      before do
         @muf.stub!(:size).and_return(0)
-        @vf.errors.should_receive(:add_to_base).with('Nonexistent or empty files are not accepted for uploading.')
-        @vf.valid_size_of_file(@muf)
       end
+      it { should == ['Nonexistent or empty files are not accepted for uploading.'] }
     end
     describe "ファイルサイズが最大値を超えている場合" do
-      it "エラーが追加されること" do
-        @muf.stub!(:size).and_return(GlobalInitialSetting['max_share_file_size'].to_i + 100)
-        @vf.errors.should_receive(:add_to_base).with("Files larger than #{GlobalInitialSetting['max_share_file_size'].to_i/1.megabyte}MBytes are not permitted.")
-        @vf.valid_size_of_file(@muf)
+      before do
+        @muf.stub!(:size).and_return(GlobalInitialSetting['max_share_file_size'].to_i + 1)
       end
+      it { should == ["Files larger than #{GlobalInitialSetting['max_share_file_size'].to_i/1.megabyte}MBytes are not permitted."] }
     end
   end
 
-  describe "#valid_max_size_of_system_of_file" do
+  describe "#validates_size_per_tenant" do
+    subject do
+      @share_file.validates_size_per_tenant(@muf)
+      @share_file.errors.full_messages
+    end
     describe "ファイルサイズがオーナーの最大許可容量を超えている場合" do
-      it "エラーが追加されること" do
-        @muf.stub!(:size).and_return(101)
-        QuotaValidation::FileSizeCounter.should_receive(:per_system).and_return(GlobalInitialSetting['max_share_file_size_of_system'].to_i - 100)
-        @vf.errors.should_receive(:add_to_base).with('Upload denied due to excess of system wide shared files disk capacity.')
-        @vf.valid_max_size_of_system_of_file(@muf)
-      end
-    end
-  end
-  describe QuotaValidation::FileSizeCounter do
-    describe ".per_owner" do
       before do
-        ShareFile.should_receive(:total_share_file_size).and_return(100)
+        tenant = create_tenant
+        tenant.should_receive(:total_file_size).and_return(Admin::Setting.max_total_file_size_per_tenant(tenant).to_i)
+        @share_file.tenant = tenant
+        @muf.stub!(:size).and_return(1)
       end
-      it "ファイルサイズを返す" do
-        QuotaValidation::FileSizeCounter.per_owner(@owner_symbol).should == 100
-      end
+      it { should == ['Upload denied due to excess of system wide shared files disk capacity.'] }
     end
-    describe ".per_system" do
-      before do
-        Dir.should_receive(:glob).with("#{GlobalInitialSetting['share_file_path']}/**/*").and_return(["a", "a"])
-        file = mock('file')
-        file.stub!(:size).and_return(100)
-        File.should_receive(:stat).with('a').at_least(:once).and_return(file)
-      end
-      it "ファイルサイズを返す" do
-        QuotaValidation::FileSizeCounter.per_system.should == 200
-      end
-    end
-  end
-
-  def mock_model_class
-    errors = mock('errors')
-    errors.stub!(:add_to_base)
-
-    vf = ValidateFileClass.new
-    vf.stub!(:errors).and_return(errors)
-    vf
   end
 end

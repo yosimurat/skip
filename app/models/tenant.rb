@@ -33,4 +33,13 @@ class Tenant < ActiveRecord::Base
     self.share_files.each { |s| s.create_index }
     true
   end
+
+  def total_file_size
+    total_share_file_size
+  end
+
+  private
+  def total_share_file_size
+    self.share_files.map(&:file_size).delete_if{ |fs| fs == -1 }.sum
+  end
 end

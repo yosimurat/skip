@@ -177,5 +177,8 @@ hide_header_logout_link:                                  # ヘッダのログ�
   default: false
 
 footer_image_link_tag:
-  string: ""
+  default: ""
 
+max_total_file_size_per_tenant:                           # テナント毎のファイルサイズ最大値
+  format: int
+  default: 1073741824

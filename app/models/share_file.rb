@@ -38,10 +38,6 @@ class ShareFile < ActiveRecord::Base
   validates_presence_of :owner
   validates_uniqueness_of :file_name, :scope => :owner_id, :message =>_('File with the same name already uploaded.')
 
-  named_scope :owned, proc { |owner|
-    { :conditions => ['owner_symbol = ?', owner.symbol] }
-  }
-
   # TODO 回帰テストを書く
   named_scope :accessible, proc { |user|
     if joined_group_ids = Group.active.participating(user).map(&:id) and !joined_group_ids.empty?
@@ -86,8 +82,8 @@ class ShareFile < ActiveRecord::Base
 
     valid_extension_of_file file
     valid_content_type_of_file file
-    valid_size_of_file file
-    valid_max_size_of_system_of_file file
+    validates_size_per_file file
+    validates_size_per_tenant file
   end
 
   def after_save
@@ -292,25 +288,14 @@ class ShareFile < ActiveRecord::Base
   def dir_path
     File.join(GlobalInitialSetting['share_file_path'], tenant.id.to_s, owner_type.downcase, owner_id.to_s)
   end
-#
-#  def self.total_share_file_size symbol
-#    sum = 0
-#    Dir.glob("#{ShareFile.dir_path(symbol)}/**/*").each do |f|
-#      sum += File.stat(f).size
-#    end
-#    sum
-#  end
-#
-#  def total_share_file_size
-#    self.class.total_share_file_size self.owner_symbol
-#  end
-#
+
+  def self.total_file_size_per_owner owner
+    owner.owner_share_files.map(&:file_size).delete_if{ |fs| fs == -1 }.sum
+  end
+
   def file_size
-    if File.exist? self.full_path
-      File.size self.full_path
-    else
-      -1
-    end
+    path = self.full_path
+    File.exist?(path) ?  File.stat(path).size : -1
   end
 
   def file_size_with_unit

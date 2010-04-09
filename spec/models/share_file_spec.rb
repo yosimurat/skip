@@ -217,19 +217,6 @@ describe ShareFile, '#owner_id' do
   end
 end
 
-describe ShareFile, ".total_share_file_size" do
-  before do
-    ShareFile.stub!(:dir_path)
-    Dir.should_receive(:glob).and_return(["a"])
-    file = mock('file')
-    file.stub!(:size).and_return(100)
-    File.should_receive(:stat).with('a').and_return(file)
-  end
-  it "ファイルの合計サイズを返す" do
-    ShareFile.total_share_file_size("uid:hoge").should == 100
-  end
-end
-
 describe ShareFile, '#uncheck_authenticity?' do
   before do
     @share_file = stub_model(ShareFile)

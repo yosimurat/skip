@@ -44,12 +44,12 @@ module Admin::ApplicationHelper
   end
 
   def system_summary
-    "#{QuotaValidation::FileSizeCounter.per_system/1.megabyte}" + " / " + "#{GlobalInitialSetting['max_share_file_size_of_system']/1.megabyte}"
+    "#{current_tenant.total_file_size/1.megabyte}" + " / " + "#{Admin::Setting.max_total_file_size_per_tenant(current_tenant)/1.megabyte}"
   end
 
   def warning_size
-    file_size = "#{QuotaValidation::FileSizeCounter.per_system/1.megabyte}".to_f
-    max_system_size = "#{GlobalInitialSetting['max_share_file_size_of_system']/1.megabyte}".to_f
+    file_size = "#{current_tenant.total_file_size/1.megabyte}".to_f
+    max_system_size = "#{Admin::Setting.max_total_file_size_per_tenant(current_tenant)/1.megabyte}".to_f
     (file_size / max_system_size) > 0.80
   end
 
