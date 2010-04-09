@@ -161,6 +161,13 @@ default: &default
     message:
     url:
   mypage_entry_search_limit: 1000
+  footer:
+    first: >-
+      <b><a onclick="open_site(); return false;" href="#">このサイトについて</a> - <a onclick="open_rule(); return false;" href="#">利用規約</a></b>
+    second: >-
+      お問い合わせはこちら | Since 2008 SKIP
+    image_link_url: >-
+      http://www.openskip.org/
 
 ####################################################################################################
 # 以下設定不要

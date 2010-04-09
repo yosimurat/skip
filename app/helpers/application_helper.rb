@@ -172,15 +172,23 @@ module ApplicationHelper
 
   def footer_link
     returning str = "" do |s|
-      s << content_tag(:div, :class => "info") do
-        content_tag(:div, Admin::Setting.footer_first(current_tenant), :class => "first") +
-          content_tag(:div, Admin::Setting.footer_second(current_tenant), :class => "second")
-      end if current_tenant
-      unless (footer_image_link_tag = Admin::Setting.footer_image_link_tag(current_tenant)).blank?
-        s << content_tag(:div, footer_image_link_tag, :class => "powered_by")
+      if current_tenant
+        s << content_tag(:div, :class => "info") do
+          content_tag(:div, Admin::Setting.footer_first(current_tenant), :class => "first") +
+            content_tag(:div, Admin::Setting.footer_second(current_tenant), :class => "second")
+        end
+        unless (footer_image_link_tag = Admin::Setting.footer_image_link_tag(current_tenant)).blank?
+          s << content_tag(:div, footer_image_link_tag, :class => "powered_by")
+        else
+          s << content_tag(:div, ("powered_by"+link_to(image_tag("/custom/images/footer_logo.png"), h(Admin::Setting.footer_image_link_url(current_tenant)))), :class => "powered_by")
+        end
       else
-        s << content_tag(:div, ("powered_by"+link_to(image_tag("/custom/images/footer_logo.png"), h(Admin::Setting.footer_image_link_url(current_tenant)))), :class => "powered_by") if current_tenant
-      end if current_tenant
+        s << content_tag(:div, :class => "info") do
+          content_tag(:div, GlobalInitialSetting["footer"]["first"], :class => "first") +
+            content_tag(:div, GlobalInitialSetting["footer"]["second"], :class => "second")
+        end
+        s << content_tag(:div, ("powered_by"+link_to(image_tag("/custom/images/footer_logo.png"), h(GlobalInitialSetting["image_link_url"]))), :class => "powered_by") if current_tenant
+      end
     end
   end
 
