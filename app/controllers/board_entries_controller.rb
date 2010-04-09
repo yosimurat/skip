@@ -208,8 +208,7 @@ class BoardEntriesController < ApplicationController
     else
       @board_entry.user_readings.create!({
         :user => current_user,
-        :read => true,
-        :notice_type => (@board_entry.is_notice? ? 'notice' : nil)
+        :read => true
       })
       render :text => _('Failed to update status.'), :status => :bad_request
     end

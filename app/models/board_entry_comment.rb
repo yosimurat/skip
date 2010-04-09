@@ -96,7 +96,7 @@ class BoardEntryComment < ActiveRecord::Base
     return unless self.board_entry.accessible?(commented_user)
 
     if user_reading = self.board_entry.user_readings.checked_on_lt(self.updated_on).find_or_initialize_by_user_id(commented_user.id)
-      params = {:read => false, :checked_on => nil, :notice_type => nil}
+      params = {:read => false, :checked_on => nil}
       user_reading.attributes = params
       user_reading.save
     end

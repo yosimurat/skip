@@ -108,13 +108,6 @@ class BoardEntry < ActiveRecord::Base
     }
   }
 
-  named_scope :unread_only_notice, proc { |user|
-    {
-      :conditions => ['user_readings.read = ? AND user_readings.user_id = ? AND user_readings.notice_type = "notice"', false, user.id],
-      :include => [:user_readings]
-    }
-  }
-
   named_scope :commented, proc { |user|
     {
       :conditions => ['board_entry_comments.user_id = ?', user.id],
@@ -569,7 +562,7 @@ class BoardEntry < ActiveRecord::Base
     return unless self.accessible?(notice_user)
 
     if user_reading = self.user_readings.checked_on_lt(self.last_updated).find_or_initialize_by_user_id(notice_user.id)
-      params = {:read => false, :checked_on => nil, :notice_type => nil}
+      params = {:read => false, :checked_on => nil}
       user_reading.attributes = params
       user_reading.save
     end

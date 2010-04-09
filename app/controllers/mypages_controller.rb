@@ -145,7 +145,7 @@ class MypagesController < ApplicationController
           raise ActiveRecord::RecordNotFound
         end
       else
-        if %w(message comment joined_group).include?(key)
+        if %w(comment joined_group).include?(key)
           SystemAntennaEntry.new(current_user, key, read)
         else
           raise ActiveRecord::RecordNotFound
@@ -185,18 +185,11 @@ class MypagesController < ApplicationController
 
     def scope
       scope = case
-              when @key == 'message'  then BoardEntry.accessible(@current_user).notice
               when @key == 'comment'  then BoardEntry.accessible(@current_user).commented(@current_user)
               when @key == 'joined_group'    then Group.active.participating(@current_user).owner_entries.accessible(@current_user)
               end
 
-      unless @read
-        if @key == 'message'
-          scope = scope.unread_only_notice(@current_user)
-        else
-          scope = scope.unread(@current_user)
-        end
-      end
+      scope = scope.unread(@current_user) unless @read
       scope
     end
 
@@ -345,7 +338,6 @@ class MypagesController < ApplicationController
     else
       key = antenna_entry.key
       case
-      when key == 'message'  then _("Notices for you")
       when key == 'comment'  then _("Entries you have made comments")
       when key == 'joined_group'    then _("Posts in the groups joined")
       else

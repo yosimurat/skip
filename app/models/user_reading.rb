@@ -22,7 +22,6 @@ class UserReading < ActiveRecord::Base
     user_reading ||= UserReading.new(:user_id => user_id, :board_entry_id => board_entry_id)
     user_reading.read = read
     user_reading.checked_on = read ? Time.now : nil
-    user_reading.notice_type = 'notice' if BoardEntry.find(board_entry_id).is_notice?
     user_reading.save
     user_reading
   end
@@ -30,7 +29,6 @@ class UserReading < ActiveRecord::Base
   def toggle_read
     self.read = !self.read
     self.checked_on = self.read ? Time.now : nil
-    self.notice_type = 'notice' if  self.board_entry.is_notice?
     self.save
   end
 

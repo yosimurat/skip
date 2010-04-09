@@ -35,7 +35,6 @@ describe MypagesController, 'mypage > home 関連' do
       @current_user_info = {:using_day => 1}
       @current_user.stub!(:info).and_return(@current_user_info)
       controller.stub!(:recent_day).and_return(7)
-      controller.stub!(:mail_your_messages)
       controller.stub!(:find_questions_as_locals)
       controller.stub!(:find_access_blogs_as_locals)
       controller.stub!(:find_recent_blogs_as_locals)
@@ -404,7 +403,7 @@ describe MypagesController, 'mypage > manage(管理) 関連' do
 
   describe MypagesController, "POST #apply_password" do
     before do
-      tenant.update_attribute :op_url, nil
+      tenant.initial_settings['login_mode'] = "password"
 
       @user = user_login
       @user.should_receive(:change_password)
@@ -434,7 +433,9 @@ describe MypagesController, 'mypage > manage(管理) 関連' do
   describe MypagesController, "POST #apply_ident_url" do
     before do
       @user = user_login
-      tenant.update_attribute :op_url, "http://localhost:3333/"
+      tenant.initial_settings['login_mode'] = "rp"
+      tenant.initial_settings['fixed_op_url'] = nil
+      tenant.initial_settings['password_edit_setting'] = true
       @openid_url = "http://id.example.com/a_user"
     end
     describe '認証を開始した場合' do
