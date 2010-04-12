@@ -1,9 +1,10 @@
 <ul id="nav">
+  <%# FIXME 初期状態で隠したいというためだけに毎回SQLを発行して件数を取得している。少しでもデータが出来るとまったく無駄な処理なのでなんとかならないか %>
   <li class="home_link"><%= link_to_unless_current(icon_tag('house', :title => _('My Page')) + _('My Page'), root_url) %></li>
-  <li><%= link_to_unless_current(icon_tag('report', :title => _('Entries')) + _('Entries'), polymorphic_url([current_tenant, :board_entries])) if BoardEntry.count > 0 %></li>
-  <li><%= link_to_unless_current(icon_tag('disk_multiple', :title => _('Files')) + _('Files'), polymorphic_url([current_tenant, :share_files])) if ShareFile.count > 0 %></li>
-  <li><%= link_to_unless_current(icon_tag('user_suit', :title => _('Users')) + _('Users'), polymorphic_url([current_tenant, :users])) if User.count > 1 %></li>
-  <li><%= link_to_unless_current(icon_tag('group', :title => _('Groups')) + _('Groups'), polymorphic_url([current_tenant, :groups])) if Group.count > 0 %></li>
+  <li><%= link_to_unless_current(icon_tag('report', :title => _('Entries')) + _('Entries'), polymorphic_url([current_tenant, :board_entries])) if current_tenant.board_entries.count > 0 %></li>
+  <li><%= link_to_unless_current(icon_tag('disk_multiple', :title => _('Files')) + _('Files'), polymorphic_url([current_tenant, :share_files])) if current_tenant.share_files.count > 0 %></li>
+  <li><%= link_to_unless_current(icon_tag('user_suit', :title => _('Users')) + _('Users'), polymorphic_url([current_tenant, :users])) if current_tenant.users.count > 1 %></li>
+  <li><%= link_to_unless_current(icon_tag('group', :title => _('Groups')) + _('Groups'), polymorphic_url([current_tenant, :groups])) if current_tenant.groups.count > 0 %></li>
   <% if event_enabled? -%>
   <li><%= link_to(icon_tag('flag_blue', :title => _('Events')) + _('Events'), apps_events_path) %></li>
   <% end -%>
