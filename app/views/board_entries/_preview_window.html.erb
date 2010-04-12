@@ -33,11 +33,6 @@
   <p class="s10" style="text-align:right;"><%= _('It is a behavior by design of IE that this area gets overlapped by select boxes.')%></p>
 </div></div>
 
-<% content_for :javascript_includes do -%>
-<%= skip_jquery_include_tag 'ui.core' %>
-<%= skip_jquery_include_tag 'ui.draggable' %>
-<% end -%>
-
 <% content_for :javascript_initializers do -%>
     $j("#preview-win").draggable();
 

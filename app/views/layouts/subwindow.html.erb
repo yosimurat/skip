@@ -5,11 +5,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <title><%= h Admin::Setting.abbr_app_title(current_tenant) -%> - <%= _('Subwindow')%></title>
-  <%= skip_stylesheet_link_tag 'jquery.autocomplete.css' %>
-  <%= skip_stylesheet_link_tag "jquery.cluetip.css" %>
-  <%= skip_stylesheet_link_tag "themes/cupertino/ui.theme.css" %>
-  <%= stylesheet_link_tag :skip_embedded_sprites %>
-  <%= all_stylesheet_link_tag "style" %>
+
+  <%= stylesheet_link_merged :base %>
   <%= yield :stylesheet %>
 </head>
 
@@ -21,13 +18,12 @@
 
 </body>
 
-<%= all_javascript_include_tag 'jquery' %>
+<%= javascript_include_merged :jquery %>
 <% javascript_tag do -%>
 $j = jQuery.noConflict();
 var relative_url_root = '<%= relative_url_root %>';
 <% end -%>
-<%= javascript_include_tag 'application' %>
-<%= javascript_include_tag :skip_embedded, :cache => "skip_embedded" %>
+<%= javascript_include_merged :base %>
 <%= yield :javascript_includes %>
 
 <% javascript_tag do -%>

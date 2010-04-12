@@ -26,10 +26,7 @@
 <% end -%>
 
 <% content_for :javascript_includes do -%>
-<%= skip_stylesheet_link_tag "themes/cupertino/ui.theme.css" %>
-<%= skip_stylesheet_link_tag "themes/cupertino/ui.datepicker.css" %>
-<%= skip_jquery_include_tag 'ui.datepicker' %>
-<%= skip_javascript_include_tag "jquery/ui/i18n/ui.datepicker-ja.js" %>
+<%= javascript_include_tag "skip/jquery/ui/i18n/ui.datepicker-#{GetText.locale.language}.js" %>
 <% end -%>
 
 <%= ckeditor '.min_ckeditor', {'toolbar' => 'Simple'} %>
@@ -44,7 +41,7 @@
 
     $j('.datepicker').datepicker(
         $j.extend({},
-            $j.datepicker.regional['<%= GetText.locale.to_s %>'],
+            $j.datepicker.regional['<%= GetText.locale.language %>'],
             { duration: '',
               yearRange: '-80:10',
               showOn: 'both',

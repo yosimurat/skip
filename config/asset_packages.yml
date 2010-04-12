@@ -1,0 +1,40 @@
+---
+javascripts:
+- jquery:
+  - skip/jquery/jquery
+  - skip/jquery/plugins/jquery.cookie
+  - skip/jquery/plugins/jquery.color
+  - skip/jquery/plugins/jquery.bgiframe
+  - skip/jquery/plugins/jquery.autocomplete
+  - skip/jquery/plugins/jquery.jTagging
+  - skip/jquery/plugins/jquery.jgrow
+  - skip/jquery/plugins/jquery.cluetip
+  - skip/jquery/plugins/jquery.fitimage
+  - skip/jquery/plugins/jquery.iphone-style-checkboxes
+  - skip/jquery/plugins/jquery.jeditable
+  - skip/jquery/plugins/jquery.tablesorter
+  - skip/jquery/plugins/jquery.columnmanager
+  - skip/jquery/ui/ui.core
+  - skip/jquery/ui/ui.tabs
+  - skip/jquery/ui/ui.dialog
+  - skip/jquery/ui/ui.draggable
+  - skip/jquery/ui/ui.datepicker
+- base:
+  - application
+  - skip_embedded/dropdown_navigation
+  - skip_embedded/labeled_text_field
+  - skip_embedded/flash_message
+  - skip_embedded/iframe_upload
+stylesheets:
+- base:
+  - application
+  - skins-base
+  - skip_embedded/sprites
+  - skip/themes/cupertino/ui.core
+  - skip/themes/cupertino/ui.theme
+  - skip/themes/cupertino/ui.dialog
+  - skip/themes/cupertino/ui.tabs
+  - skip/themes/cupertino/ui.datepicker
+  - skip/jquery.autocomplete
+  - skip/jquery.iphone-style-checkboxes
+  - skip/jquery.cluetip

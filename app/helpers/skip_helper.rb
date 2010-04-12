@@ -21,43 +21,6 @@ module SkipHelper
     return options[:only_url] ? url : image_tag(url, options)
   end
 
-  # （javascripts/skip以下に格納されている）JavaScriptを参照する
-  def skip_javascript_include_tag source
-    javascript_include_tag("/javascripts/skip/#{source}")
-  end
-
-  def skip_jquery_include_tag source
-    javascript_include_tag skip_jquery_path(source)
-  end
-
-  def skip_jquery_path source
-    jquery_base_dir = '/javascripts/skip/jquery'
-    if source == 'jquery'
-      if ENV['RAILS_ENV'] == 'production'
-        "#{jquery_base_dir}/#{source}.min.js"
-      else
-        "#{jquery_base_dir}/#{source}.js"
-      end
-    elsif ( (source =~ /^ui\./) == 0 || (source =~ /^effects\./) == 0 )
-      if ENV['RAILS_ENV'] == 'production'
-        "#{jquery_base_dir}/ui/minified/#{source}.min.js"
-      else
-        "#{jquery_base_dir}/ui/#{source}.js"
-      end
-    else
-      if ENV['RAILS_ENV'] == 'production'
-        "#{jquery_base_dir}/plugins/minified/#{source}.min.js"
-      else
-        "#{jquery_base_dir}/plugins/#{source}.js"
-      end
-    end
-  end
-
-  # （stylesheets/skip以下に格納されている）スタイルシートを参照する
-  def skip_stylesheet_link_tag source
-    stylesheet_link_tag("/stylesheets/skip/#{source}")
-  end
-
   def link_to_hiki_help
     sub_window_script = get_subwindow_script "#{tenant_root_url(tenant_root_url)}hiki.html", 500, 600
     link_to _('[Hints on writing entries]'), "javascript:void(0)", :onclick => "#{sub_window_script}"

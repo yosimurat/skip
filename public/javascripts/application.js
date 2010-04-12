@@ -245,5 +245,10 @@ $j(function(){
         return $j.getUrlVars(url_or_href)[name];
       }
     });
+
+    $j('.zoomable').zoomable();
+
+    // 管理画面用
+    $j('table.sortable').tablesorter();
 });
 
