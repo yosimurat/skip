@@ -6,13 +6,14 @@ module Cucumber
         include Spec::Rails::Skip::ModelHelpers
       end
       module FormSubmissionHelpers
-        def fill_in_login_form(user_name)
-          user = User.find_by_name(user_name)
+        def fill_in_login_form(email)
+          user = User.find_by_email(email)
           Given %!"ログインページ"にアクセスする!
           Given %!"#{"ログインID"}"に"#{user.email}"と入力する!
           Given %!"#{"パスワード"}"に"#{"Password1"}"と入力する!
           Given %!"#{"ログイン"}"ボタンをクリックする!
-          user
+          @current_user = user
+          @current_tenant = user.tenant
         end
       end
     end

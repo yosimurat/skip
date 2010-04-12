@@ -17,6 +17,10 @@ module NavigationHelpers
     when /^(.*)テナントのマイページ$/
       tenant_root_path(Tenant.find_by_name($1))
 
+    when /^(.*)のプロフィールページ$/
+      u = @current_tenant.users.find_by_email($1)
+      polymorphic_url([@current_tenant, u])
+
     when /管理ページ/
       '/admin/'
 
@@ -25,9 +29,6 @@ module NavigationHelpers
 
     when /プロフィール画像一覧/
       admin_pictures_path
-
-    when /^(.*)ユーザのプロフィールページ$/
-      url_for(:controller => "/user", :action => "show", :uid => $1)
 
     when /グループの新規作成ページ/
       url_for(:controller => 'groups', :action => 'new')

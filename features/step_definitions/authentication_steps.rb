@@ -18,6 +18,19 @@
 #  @user = create_user(:email => id, :password => password)
 #end
 
+Given /^"(.*)"でログインする$/ do |email|
+  if @current_user
+    if @current_user.email != email
+      Given "ログアウトする"
+      fill_in_login_form(email)
+    else
+      Given %!"マイページ"にアクセスする!
+    end
+  else
+    fill_in_login_form(email)
+  end
+end
+
 Given /^"([^\"]*)"がユーザ登録する$/ do |user_id|
   create_user(user_id, 'Password1')
 end
@@ -30,19 +43,6 @@ end
 
 Given /^ログアウトする$/ do
   visit logout_path
-end
-
-Given /^"(.*)"でログインする$/ do |user_name|
-  if @login_user
-    if @login_user.name != user_name
-      Given "ログアウトする"
-      @login_user = fill_in_login_form(user_name)
-    else
-      Given %!"マイページ"にアクセスする!
-    end
-  else
-    @login_user = fill_in_login_form(user_name)
-  end
 end
 
 # TODO Spec::Rails::Skip::ModelHelpers#create_userを使うように置き換えていって無くす

@@ -111,6 +111,7 @@ module Spec
           user = tenant.users.build({ :name => 'ほげ ほげ', :password => 'Password1', :password_confirmation => 'Password1', :reset_auth_token => nil, :email => SkipFaker.email, :section => 'Programmer'}.merge(options))
           user.status = options[:status] || 'ACTIVE'
           user.admin = options[:admin] || false
+          user.build_user_access(:last_access => Time.now, :access_count => 0)
           user.save!
           yield user if block_given?
           user
