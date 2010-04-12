@@ -10,5 +10,5 @@
 </div>
 
 <% links = [] -%>
-<% links << link_to(_('Editing %{model}') % {:model => _('user profile')}, admin_user_user_profile_path(@user)) if UserProfileMaster.count > 0 %>
+<% links << link_to(_('Editing %{model}') % {:model => _('user profile')}, admin_tenant_user_user_profile_path(current_tenant, @user)) if current_tenant.user_profile_masters.count > 0 %>
 <%= links.join(' | ') %>

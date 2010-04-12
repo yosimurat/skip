@@ -4,10 +4,11 @@
 
 <%= render(:partial => "system/error_messages_for", :locals => { :messages => @error_msg }) if @error_msg %>
 <div class="box">
-  <% form_tag({:action => :update}, {:method => :put}) do %>
-  <%= render :partial => "portal/profile_form" %>
+  <% form_for(@user, :url => admin_tenant_user_user_profile_path(current_tenant, @user), :html => {:method => :put}) do |f| %>
+  <% tabindex = 0 -%>
+  <%= render :partial => "users/form", :locals => {:form => f, :tabindex => tabindex} %>
   <p>
-    <%= submit_tag _('Update'), :disable_with => _('Now Updating...') %>
+    <%= f.submit _('Update'), :disable_with => _('Now Updating...') %>
   </p>
   <% end %>
 </div>

@@ -422,7 +422,7 @@ class User < ActiveRecord::Base
   end
 
   def find_or_initialize_profiles(params)
-    UserProfileMaster.all.map do |master|
+    tenant.user_profile_masters.all.map do |master|
       profile_value = user_profile_values.find_or_initialize_by_user_profile_master_id(master.id)
       profile_value.value = params[master.id.to_s] || ""
       profile_value
