@@ -14,8 +14,8 @@ module NavigationHelpers
     when /ログインページ/
       platform_url
 
-    when /マイページ/
-      '/'
+    when /^(.*)テナントのマイページ$/
+      tenant_root_path(Tenant.find_by_name($1))
 
     when /管理ページ/
       '/admin/'

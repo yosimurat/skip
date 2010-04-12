@@ -142,7 +142,7 @@ Then /^"([^\"]*)"がチェックされていないこと$/ do |label|
   Then %Q(the "#{label}" checkbox should not be checked)
 end
 
-Then /^"([^\"]*)"ページを表示していること$/ do |page_name|
+Then /^"([^\"]*)"を表示していること$/ do |page_name|
   Then %Q(I should be on #{page_name})
 end
 

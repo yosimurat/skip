@@ -13,9 +13,10 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Given /^ログインIDが"(.*)"でパスワードが"(.*)"のあるユーザを作成する$/ do |id, password|
-  @user = create_user(:email => id, :password => password)
-end
+# TODO 使っている箇所を徐々に"以下のユーザを作成する"に置き換えていって無くす
+#Given /^ログインIDが"(.*)"でパスワードが"(.*)"のあるユーザを作成する$/ do |id, password|
+#  @user = create_user(:email => id, :password => password)
+#end
 
 Given /^"([^\"]*)"がユーザ登録する$/ do |user_id|
   create_user(user_id, 'Password1')
@@ -27,11 +28,6 @@ Given /^"([^\"]*)"が退職する$/ do |user_id|
   u.save
 end
 
-Given /^あるユーザはロックされている$/ do
-  @user.locked = true
-  @user.save
-end
-
 Given /^ログアウトする$/ do
   visit logout_path
 end
@@ -40,33 +36,24 @@ Given /^"(.*)"でログインする$/ do |user_name|
   if @login_user
     if @login_user.name != user_name
       Given "ログアウトする"
-      @login_user = perform_login(user_name)
+      @login_user = fill_in_login_form(user_name)
     else
       Given %!"マイページ"にアクセスする!
     end
   else
-    @login_user = perform_login(user_name)
+    @login_user = fill_in_login_form(user_name)
   end
 end
 
-def create_user(id, password)
-  uid = UserUid.find_by_uid(id)
-  uid.destroy if uid
-  u = User.new({ :name => id, :password => password, :password_confirmation => password, :reset_auth_token => nil, :email => "example#{id}@example.com" })
-  u.user_uids.build(:uid => id, :uid_type => 'MASTER')
-  u.build_user_access(:last_access => Time.now, :access_count => 0)
-  u.save!
-  u.status = "ACTIVE"
-  u.save!
-  u
-end
-
-def perform_login(user_name)
-  user = User.find_by_name(user_name)
-  Given %!"ログインページ"にアクセスする!
-  Given %!"#{"ログインID"}"に"#{user.email}"と入力する!
-  Given %!"#{"パスワード"}"に"#{"Password1"}"と入力する!
-  Given %!"#{"ログイン"}"ボタンをクリックする!
-  user
-end
-
+# TODO Spec::Rails::Skip::ModelHelpers#create_userを使うように置き換えていって無くす
+#def create_user(id, password)
+#  uid = UserUid.find_by_uid(id)
+#  uid.destroy if uid
+#  u = User.new({ :name => id, :password => password, :password_confirmation => password, :reset_auth_token => nil, :email => "example#{id}@example.com" })
+#  u.user_uids.build(:uid => id, :uid_type => 'MASTER')
+#  u.build_user_access(:last_access => Time.now, :access_count => 0)
+#  u.save!
+#  u.status = "ACTIVE"
+#  u.save!
+#  u
+#end

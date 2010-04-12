@@ -17,41 +17,43 @@ Feature: パスワードでログインする
   あるユーザとして、SKIPにログインしたい
 
   Background:
-    Given   言語は"ja-JP"
-    And     最初のテナントを作る
+    Given 言語は"ja-JP"
+    And 以下のテナントを作成する
+      |name   |
+      |skip   |
+      |sg     |
+    And 以下のユーザを作成する
+      |name    |email           |password   |tenant_name  |
+      |alice   |alice@test.com  |Password1  |skip         |
+      |jack    |jack@test.com   |Password1  |sg           |
 
   Scenario: ログイン画面を表示する
-    Given   "ログインページ"にアクセスする
+    When "ログインページ"にアクセスする
+    Then "ログイン"と表示されていること
 
-    Then    "ログイン"と表示されていること
+  Scenario: skipテナントへのログインに成功する
+    When "ログインページ"にアクセスする
+    And  "ログインID"に"alice@test.com"と入力する
+    And  "パスワード"に"Password1"と入力する
+    And  "ログイン"ボタンをクリックする
 
-  Scenario: ログインに成功する
-    Given   ログインIDが"111111"でパスワードが"Password1"のあるユーザを作成する
-    And     "ログインページ"にアクセスする
-
-    When    "ログインID"に"111111"と入力する
-    And     "パスワード"に"Password1"と入力する
-    And     "ログイン"ボタンをクリックする
-
-    Then    "マイページ"と表示されていること
+    Then "skipテナントのマイページ"を表示していること
+    And "マイページ"と表示されていること
 
   Scenario: パスワード間違いによりログインに失敗する
-    Given   ログインIDが"111111"でパスワードが"Password1"のあるユーザを作成する
-    And     "ログインページ"にアクセスする
+    When "ログインページ"にアクセスする
+    And "ログインID"に"alice@test.com"と入力する
+    And "パスワード"に"hogehoge"と入力する
+    And "ログイン"ボタンをクリックする
 
-    When    "ログインID"に"111111"と入力する
-    And     "パスワード"に"hogehoge"と入力する
-    And     "ログイン"ボタンをクリックする
-
-    Then    flashメッセージに"ログインに失敗しました。"と表示されていること
+    Then flashメッセージに"ログインに失敗しました。"と表示されていること
 
   Scenario: アカウントがロックされていることによりログインに失敗する
-    Given   ログインIDが"111111"でパスワードが"Password1"のあるユーザを作成する
-    And     あるユーザはロックされている
-    And     "ログインページ"にアクセスする
+    Given "alice@test.com"をロックする
 
-    When    "ログインID"に"111111"と入力する
-    And     "パスワード"に"Password1"と入力する
-    And     "ログイン"ボタンをクリックする
+    When "ログインページ"にアクセスする
+    And "ログインID"に"alice@test.com"と入力する
+    And "パスワード"に"Password1"と入力する
+    And "ログイン"ボタンをクリックする
 
-    Then    flashメッセージに"ログインIDがロックされています。パスワード再設定を行って下さい。"と表示されていること
+    Then flashメッセージに"ログインIDがロックされています。パスワード再設定を行って下さい。"と表示されていること

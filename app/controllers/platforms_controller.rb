@@ -252,8 +252,8 @@ class PlatformsController < ApplicationController
         else
           if user
             if user.locked?
-              reason = _("%s is locked. Please reset password.") % Admin::Setting.login_account(current_tenant)
-              redirect_to_url = forgot_password_url
+              reason = _("%s is locked. Please reset password.") % Admin::Setting.login_account(user.tenant)
+              redirect_to_url = forgot_password_platform_url
             elsif !user.within_time_limit_of_password?
               reason = _("Password is expired. Please reset password.")
               redirect_to_url = forgot_password_url
