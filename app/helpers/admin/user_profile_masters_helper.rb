@@ -16,7 +16,7 @@ module Admin::UserProfileMastersHelper
   include HelpIconHelper
 
   def category_options
-    UserProfileMasterCategory.all.collect { |category| [category.name, category.id] }
+    current_tenant.user_profile_master_categories.all.collect { |category| [category.name, category.id] }
   end
 
   def option_values_help_icon_hash_as_json

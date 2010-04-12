@@ -81,7 +81,7 @@ class UserProfileMaster < ActiveRecord::Base
 
   private
   def validates_presence_of_category
-    unless category = UserProfileMasterCategory.find_by_id(self.user_profile_master_category_id)
+    unless category = tenant.user_profile_master_categories.find_by_id(self.user_profile_master_category_id)
       errors.add(:user_profile_master_category_id, _('does not exist in profile categories.'))
       return false
     end

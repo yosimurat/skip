@@ -1,6 +1,6 @@
 <h3 class="topics"><%= _('Profile Items') %></h3>
 <div class="box tabular">
-  <%= link_to_if UserProfileMasterCategory.count > 0, _('New %{model}') % {:model => _('user profile master')}, new_admin_tenant_user_profile_master_path(current_tenant) %>
+  <%= link_to_if current_tenant.user_profile_master_categories.count > 0, _('New %{model}') % {:model => _('user profile master')}, new_admin_tenant_user_profile_master_path(current_tenant) %>
   <%= render :partial => '/admin/shared/list_table',
              :locals => {
                :columns => %w[user_profile_master_category_id name input_type required description option_values sort_order],

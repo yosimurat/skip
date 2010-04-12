@@ -54,7 +54,7 @@
 
     <% profiles = current_target_user.user_profile_values
        profile_hash = profiles.index_by(&:user_profile_master_id)
-       UserProfileMasterCategory.all.each do |category| -%>
+       current_tenant.user_profile_master_categories.all.each do |category| -%>
       <% unless category.user_profile_masters.empty? -%>
       <h2 class="subtitle"><%=h category.name %></h2>
       <table class="normal user_info show">
