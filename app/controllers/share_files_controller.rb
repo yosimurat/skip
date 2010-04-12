@@ -18,7 +18,7 @@ class ShareFilesController < ApplicationController
   include UsersHelper
   include EmbedHelper
 
-  before_filter :owner_required, :only => [:show, :edit, :update, :destroy]
+  before_filter :owner_required, :only => [:edit, :update, :destroy]
   before_filter :required_full_accessible, :only => [:edit, :update, :destroy, :download_history_as_csv, :clear_download_history]
   before_filter :required_accessible, :only => [:show]
 

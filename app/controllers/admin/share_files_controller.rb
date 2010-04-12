@@ -24,7 +24,7 @@ class Admin::ShareFilesController < Admin::ApplicationController
   def destroy
     @share_file = current_tenant.share_files.find(params[:id])
     @share_file.destroy
-    @share_file.destroy_index
+    @share_file.destroy_index tenant_share_file_url(current_tenant, @share_file)
 
     respond_to do |format|
       flash[:notice] = _("%{model} was successfully deleted.") % {:model => _('share file')}

@@ -50,7 +50,7 @@ module Search
         # 恐らくestraierpure.rbのバグ
         # 一応回避は出来るが、、、
         # node.out_doc(doc.id)
-        node.out_doc(doc.attr('@id'))
+        node.out_doc(doc.attr('@id')) if doc
       else
         logger.info "[Full text search] Failed to delete document for full text search. To work full text search, setup HyperEstraier."
       end
