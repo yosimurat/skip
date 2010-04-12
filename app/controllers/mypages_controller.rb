@@ -219,7 +219,7 @@ class MypagesController < ApplicationController
   end
 
   def find_as_locals target, options
-    group_categories = GroupCategory.all.map{ |gc| gc.code.downcase }
+    group_categories = current_tenant.group_categories.all.map{ |gc| gc.code.downcase }
     case
     when target == 'questions'             then find_questions_as_locals options
     when target == 'access_blogs'          then find_access_blogs_as_locals options
@@ -286,7 +286,7 @@ class MypagesController < ApplicationController
 
   # BBS記事一覧を取得するメソッドを動的に生成(partial用のオプションを返す)
   def find_recent_bbs_as_locals code, options = {}
-    category = GroupCategory.find_by_code(code)
+    category = current_tenant.group_categories.find_by_code(code)
     id_name = category.code.downcase
     pages = BoardEntry.from_recents.accessible(current_user).entry_type_is(BoardEntry::GROUP_BBS).timeline.scoped(:include => [ :user, :state ]).order_new.paginate(:page => target_page(id_name), :per_page => options[:per_page])
 
@@ -302,7 +302,7 @@ class MypagesController < ApplicationController
   def recent_bbs
     recent_bbs = []
     gid_by_category = Group.gid_by_category
-    GroupCategory.ascend_by_sort_order.each do |category|
+    current_tenant.group_categories.ascend_by_sort_order.each do |category|
       options = { :group_symbols => gid_by_category[category.id], :per_page => per_page }
       recent_bbs << find_recent_bbs_as_locals(category.code.downcase, options)
     end
@@ -327,7 +327,7 @@ class MypagesController < ApplicationController
   end
 
   def valid_list_types
-    %w(questions access_blogs recent_blogs) | GroupCategory.all.map{ |gc| gc.code.downcase }
+    %w(questions access_blogs recent_blogs) | current_tenant.group_categories.all.map{ |gc| gc.code.downcase }
   end
 
   # TODO helperへ移動する

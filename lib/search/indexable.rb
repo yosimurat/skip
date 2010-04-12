@@ -44,13 +44,16 @@ module Search
     alias :update_index :create_index
 
     def destroy_index uri = polymorphic_url([self.tenant, self]), tenant = self.tenant
-      node = tenant.node
-      doc = node.get_doc_by_uri(uri)
-      # Node#get_doc, get_doc_by_uriした後のDocument#idが-1になってしまう。
-      # 恐らくestraierpure.rbのバグ
-      # 一応回避は出来るが、、、
-      # node.out_doc(doc.id)
-      node.out_doc(doc.attr('@id'))
+      if node
+        doc = node.get_doc_by_uri(uri)
+        # Node#get_doc, get_doc_by_uriした後のDocument#idが-1になってしまう。
+        # 恐らくestraierpure.rbのバグ
+        # 一応回避は出来るが、、、
+        # node.out_doc(doc.id)
+        node.out_doc(doc.attr('@id'))
+      else
+        logger.info "[Full text search] Failed to delete document for full text search. To work full text search, setup HyperEstraier."
+      end
     end
   end
 end

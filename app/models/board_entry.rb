@@ -65,13 +65,6 @@ class BoardEntry < ActiveRecord::Base
     { :conditions => ['category not like :category', { :category => "%[#{category}]%" }] }
   }
 
-  named_scope :group_category_eq, proc { |category_code|
-    category = GroupCategory.find_by_code(category_code)
-    return {} unless category
-    group_symbols = Group.active.categorized(category.id).all.map(&:symbol)
-    { :conditions => ['board_entries.symbol IN (?)', group_symbols] }
-  }
-
   named_scope :recent, proc { |milliseconds|
     return {} if milliseconds.blank?
     { :conditions => ['last_updated > :date', { :date => Time.now.ago(milliseconds) }] }

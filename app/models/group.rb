@@ -106,16 +106,13 @@ class Group < ActiveRecord::Base
   N_('Group|Protected|true')
   N_('Group|Protected|false')
 
-  alias initialize_old initialize
-
-  def initialize(attributes = nil)
-    attributes = {} if attributes.nil?
-    if attributes[:group_category_id].nil?
-      if gc = GroupCategory.find_by_initial_selected(true)
-        attributes[:group_category_id] = gc.id
+  # TODO これだとfind等のたびに評価される。GroupsController#new, create等の時のみ個別に対応する方がいいかも
+  def after_initialize
+    unless group_category_id
+      if gc = tenant.group_categories.find_by_initial_selected(true)
+        group_category_id = gc.id
       end
     end
-    initialize_old(attributes)
   end
 
   def after_save
@@ -131,7 +128,7 @@ class Group < ActiveRecord::Base
   end
 
   def validate
-    unless GroupCategory.find_by_id(self.group_category_id)
+    unless tenant.group_categories.find_by_id(self.group_category_id)
       errors.add(:group_category_id, _('Category not selected or value invalid.'))
     end
   end

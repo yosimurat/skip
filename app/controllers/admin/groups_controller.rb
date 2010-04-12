@@ -19,11 +19,11 @@ class Admin::GroupsController < Admin::ApplicationController
   def destroy
     @group = Admin::Group.find_by_tenant_id_and_id!(current_tenant.id, params[:id])
     @group.logical_destroy
-    @group.destroy_index
+    @group.destroy_index tenant_group_url(current_tenant, @group)
 
     respond_to do |format|
       flash[:notice] = _("%{model} was successfully deleted.") % {:model => _('group')}
-      format.html { redirect_to(admin_groups_url) }
+      format.html { redirect_to(admin_tenant_groups_url(current_tenant)) }
       format.xml  { head :ok }
     end
   end

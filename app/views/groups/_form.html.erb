@@ -18,7 +18,7 @@
   <div class="input_value">
     <table style="margin-left:3px;border:0;">
     <tr><th width="100px"></th><th></th></tr>
-<% GroupCategory.all.each do |category| -%>
+<% current_tenant.group_categories.all.each do |category| -%>
     <tr>
       <td>
         <%= form.radio_button :group_category_id, category.id, :class => "category_radio_button" %>
