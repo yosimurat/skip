@@ -15,7 +15,6 @@
 
 module ApplicationHelper
   include InitialSettingsHelper
-  include CacheHelper
   include SkipHelper
   include HelpIconHelper
 
