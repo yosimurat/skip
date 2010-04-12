@@ -11,6 +11,9 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /ログインページ/
+      platform_url
+
     when /マイページ/
       '/'
 
@@ -25,9 +28,6 @@ module NavigationHelpers
 
     when /^(.*)ユーザのプロフィールページ$/
       url_for(:controller => "/user", :action => "show", :uid => $1)
-
-    when /ログインページ/
-      "/platform"
 
     when /グループの新規作成ページ/
       url_for(:controller => 'groups', :action => 'new')

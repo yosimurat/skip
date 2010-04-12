@@ -1,7 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 a_share_file:
   file_name: <%= SkipFaker.rand_char %>
-  owner_symbol: <%= SkipFaker.owner_symbol %> 
   description: <%= SkipFaker.rand_char %>
   date: <%= SkipFaker.today %>
   user: a_user

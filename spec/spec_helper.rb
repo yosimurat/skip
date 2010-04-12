@@ -4,6 +4,7 @@ ENV["RAILS_ENV"] = 'test'
 require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environment'))
 require 'spec/autorun'
 require 'spec/rails'
+require File.expand_path('skip_helper', File.dirname(__FILE__))
 
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
@@ -19,6 +20,8 @@ Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = true
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+  config.include Spec::Rails::Skip::ControllerHelpers
+  config.include Spec::Rails::Skip::ModelHelpers
 
   # == Fixtures
   #
@@ -51,16 +54,13 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
-  require File.expand_path('skip_helper', File.dirname(__FILE__))
 end
 
-module SkipEmbedded
-  class InitialSettings
-    # テストの時のみ値の入れ替えを可能にしたいので。
-    def self.[]=(key, val)
-      instance.instance_variable_set(:@config, instance.instance_variable_get(:@config).dup)
-      instance.instance_variable_get(:@config)[key] = val
-    end
+class GlobalInitialSetting
+  # テストの時のみ値の入れ替えを可能にしたいので。
+  def self.[]=(key, val)
+    instance.instance_variable_set(:@config, instance.instance_variable_get(:@config).dup)
+    instance.instance_variable_get(:@config)[key] = val
   end
 end
 

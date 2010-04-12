@@ -16,7 +16,6 @@ a_entry:
   last_updated: <%= SkipFaker.yesterday %>
   user_entry_no: <%= user_entry_no %>
   board_entry_comments_count: 0
-  symbol: uid:a_user
   editor_mode: hiki
   lock_version: 0
   publication_type: public
@@ -36,7 +35,6 @@ a_trackback_entry:
   last_updated: <%= SkipFaker.yesterday %>
   user_entry_no: <%= user_entry_no + 1 %>
   board_entry_comments_count: 0
-  symbol: uid:a_user
   editor_mode: hiki
   lock_version: 0
   publication_type: public
@@ -56,7 +54,6 @@ a_private_entry:
   last_updated: <%= SkipFaker.yesterday %>
   user_entry_no: <%= user_entry_no + 1 %>
   board_entry_comments_count: 0
-  symbol: uid:a_user
   editor_mode: hiki
   lock_version: 0
   publication_type: private

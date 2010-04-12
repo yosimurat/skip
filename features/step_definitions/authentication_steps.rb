@@ -14,7 +14,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Given /^ログインIDが"(.*)"でパスワードが"(.*)"のあるユーザを作成する$/ do |id, password|
-  @user = create_user(id,password)
+  @user = create_user(:email => id, :password => password)
 end
 
 Given /^"([^\"]*)"がユーザ登録する$/ do |user_id|

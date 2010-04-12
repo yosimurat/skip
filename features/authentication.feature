@@ -18,6 +18,7 @@ Feature: パスワードでログインする
 
   Background:
     Given   言語は"ja-JP"
+    And     最初のテナントを作る
 
   Scenario: ログイン画面を表示する
     Given   "ログインページ"にアクセスする
