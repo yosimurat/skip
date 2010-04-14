@@ -20,6 +20,8 @@ class Tag < ActiveRecord::Base
   has_many :chain_tags
   has_many :share_files, :through => :share_file_tags
   has_many :share_file_tags
+  has_many :bookmark_comments, :through => :bookmark_comment_tags
+  has_many :bookmark_comment_tags
 
   named_scope :follow_chains_by, proc { |user|
     { :conditions => ['chains.from_user_id = ?', user.id], :joins => [:chains], :group => 'tags.id' }
@@ -39,6 +41,10 @@ class Tag < ActiveRecord::Base
 
   named_scope :entries_owned_by, proc { |owner|
     { :conditions => ['board_entries.owner_id = ?', owner.id], :joins => [:board_entries], :group => 'tags.id' }
+  }
+
+  named_scope :commented_to, proc { |bookmark|
+    { :conditions => ['bookmark_comments.id IN (?)', bookmark.bookmark_comments.map(&:id)], :joins => [:bookmark_comments], :group => 'tags.id'}
   }
 
   named_scope :uniq_by_entry_ids, proc { |entry_ids|

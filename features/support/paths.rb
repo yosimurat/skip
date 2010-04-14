@@ -19,7 +19,13 @@ module NavigationHelpers
 
     when /^(.*)のプロフィールページ$/
       u = @current_tenant.users.find_by_email($1)
-      polymorphic_url([@current_tenant, u])
+      polymorphic_path([@current_tenant, u])
+
+    when /^ブックマークのURL入力ページ$/
+      polymorphic_path([@current_tenant, :bookmarks], :action => :new_url)
+
+    when /^ブックマークの新規作成ページ$/
+      new_polymorphic_path([@current_tenant, :bookmark])
 
     when /管理ページ/
       '/admin/'
