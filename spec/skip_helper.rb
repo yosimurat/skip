@@ -216,6 +216,11 @@ module Spec
           user_message_unsubscribe = user.user_message_unsubscribes.create!({:message_type => 'MESSAGE'}.merge!(options))
           user_message_unsubscribe
         end
+
+        def create_bookmark(options = {})
+          tenant = options[:tenant] || create_tenant
+          tenant.bookmarks.create!(options)
+        end
       end
     end
   end

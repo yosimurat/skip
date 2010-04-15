@@ -25,7 +25,8 @@
       </span>
     </td>
   </tr>
-  <% form.fields_for :bookmark_comments do |bc_form| -%>
+  <% bookmark_comments = [form.object.bookmark_comments.find_by_user_id(current_user.id) || form.object.bookmark_comments.build] -%>
+  <% form.fields_for :bookmark_comments, bookmark_comments do |bc_form| -%>
     <%= bc_form.hidden_field :user_id, :value => current_user.id %>
     <tr>
       <th><%= _('Public' ) %></th>

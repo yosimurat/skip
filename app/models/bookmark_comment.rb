@@ -4,7 +4,8 @@ class BookmarkComment < ActiveRecord::Base
   has_many :bookmark_comment_tags, :dependent => :destroy
   has_many :tags, :through => :bookmark_comment_tags
 
-  #validates_uniqueness_of :user, :scope => :bookmark_id
+  validates_presence_of :user
+  validates_uniqueness_of :user_id, :scope => :bookmark_id
 
   N_('BookmarkComment|Public|true')
   N_('BookmarkComment|Public|false')
@@ -77,22 +78,20 @@ class BookmarkComment < ActiveRecord::Base
     end
     return tags.uniq.first(20)
   end
-#
-#  # 他の人からみた・・・のタグクラウド用タグ一覧を返す
-#  # TODO まだ数ヶ所残ってるが無くせそうな気がするので見直したい
-#  def self.get_tagcloud_tags postit_url
-#    join_state =  "inner join bookmark_comment_tags on bookmark_comment_tags.tag_id = tags.id "
-#    join_state << "inner join bookmark_comments on bookmark_comments.id = bookmark_comment_tags.bookmark_comment_id "
-#    join_state << "inner join bookmarks on bookmarks.id = bookmark_comments.bookmark_id "
-#
-#    Tag.find(:all,
-#             :select => "tags.name, count(tags.id) as count",
-#             :conditions => ["bookmarks.url = ? ", postit_url],
-#             :order => "bookmark_comments.created_on DESC",
-#             :group => "bookmark_comment_tags.tag_id",
-#             :joins => join_state)
-#  end
-#
+
+  def self.get_tagcloud_tags url
+    join_state =  "inner join bookmark_comment_tags on bookmark_comment_tags.tag_id = tags.id "
+    join_state << "inner join bookmark_comments on bookmark_comments.id = bookmark_comment_tags.bookmark_comment_id "
+    join_state << "inner join bookmarks on bookmarks.id = bookmark_comments.bookmark_id "
+
+    Tag.find(:all,
+             :select => "tags.name, count(tags.id) as count",
+             :conditions => ["bookmarks.url = ? ", url],
+             :order => "bookmark_comments.created_at DESC",
+             :group => "bookmark_comment_tags.tag_id",
+             :joins => join_state)
+  end
+
 #  def self.get_bookmark_tags
 #    join_state =  "inner join bookmark_comment_tags on bookmark_comment_tags.tag_id = tags.id "
 #    join_state << "inner join bookmark_comments on bookmark_comments.id = bookmark_comment_tags.bookmark_comment_id "
@@ -114,7 +113,7 @@ class BookmarkComment < ActiveRecord::Base
 #    Tag.find(:all,
 #             :select => "tags.name, count(tags.id) as count",
 #             :conditions => ["bookmark_comments.user_id = ?", user_id],
-#             :order => "bookmark_comments.created_on DESC",
+#             :order => "bookmark_comments.created_at DESC",
 #             :group => "bookmark_comment_tags.tag_id",
 #             :limit => limit,
 #             :joins => join_state)

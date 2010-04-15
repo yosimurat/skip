@@ -21,11 +21,22 @@ module NavigationHelpers
       u = @current_tenant.users.find_by_email($1)
       polymorphic_path([@current_tenant, u])
 
+    when /^ブックマーク一覧ページ$/
+      polymorphic_path([@current_tenant, :bookmarks])
+
     when /^ブックマークのURL入力ページ$/
       polymorphic_path([@current_tenant, :bookmarks], :action => :new_url)
 
     when /^ブックマークの新規作成ページ$/
       new_polymorphic_path([@current_tenant, :bookmark])
+
+    when /^(.*)のブックマークの編集ページ$/
+      b = @current_tenant.bookmarks.find_by_url($1)
+      edit_polymorphic_path([@current_tenant, b])
+
+    when /^(.*)のブックマークの表示ページ$/
+      b = @current_tenant.bookmarks.find_by_url($1)
+      polymorphic_path([@current_tenant, b])
 
     when /管理ページ/
       '/admin/'

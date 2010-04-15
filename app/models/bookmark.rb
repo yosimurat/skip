@@ -7,7 +7,7 @@ class Bookmark < ActiveRecord::Base
 
   validates_presence_of :url
   validates_length_of :url, :maximum => 255
-  #validates_uniqueness_of :url, :scope => :tenant_id
+  validates_uniqueness_of :url, :scope => :tenant_id
   validates_format_of :url, :message =>_('needs to be in "http(or https)://..." format.'), :with => URI.regexp, :if => :is_type_internet?
 
   validates_presence_of :title
@@ -52,13 +52,13 @@ class Bookmark < ActiveRecord::Base
 #    { :conditions => ["bookmarks.updated_on > ?", Time.now.ago(day_count.to_i.day)] }
 #  }
 #
-#  named_scope :publicated, proc {
-#    {
-#      :select => 'distinct bookmarks.*',
-#      :conditions => ['bookmark_comments.public = ?', true],
-#      :include => [:bookmark_comments]
-#    }
-#  }
+  named_scope :publicated, proc {
+    {
+      :select => 'distinct bookmarks.*',
+      :conditions => ['bookmark_comments.public = ?', true],
+      :include => [:bookmark_comments]
+    }
+  }
 #
 #  named_scope :order_new, proc { { :order => "bookmarks.updated_on DESC" } }
 #

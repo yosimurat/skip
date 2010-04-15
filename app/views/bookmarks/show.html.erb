@@ -1,0 +1,53 @@
+<% content_for :contents_left do -%>
+  <% if @bookmark.bookmark_comments.all?{|bc| bc.user_id != current_user.id } -%>
+    <div class="action_buttons ui-corner-all">
+      <ul class="no_style">
+        <li>
+          <%= link_to(content_tag(:span, _('Add a comment')), new_polymorphic_path([current_tenant, :bookmark], :bookmark => {:url => @bookmark.escaped_url}), {:class => "rounded"}) %>
+        </li>
+      </ul>
+    </div>
+  <% end -%>
+  <% unless @tags.blank? -%>
+    <div class="box_space">
+      <div class="box_space_title"><%= icon_tag 'tag_blue' -%><%= _('Tags')%></div>
+      <div class="box_space_body tag_cloud">
+        <% tag_cloud @tags do |name, count, css_class| -%>
+          <%=
+             link_to_unless_current h(name), polymorphic_path([current_tenant, :bookmarks], :tag_words => h(name)), :class => "tag #{css_class}" do
+               content_tag :span, h(name), :class => "tag #{css_class}"
+             end
+             %>
+          <span class="count">(<%= h count %>)</span>
+        <% end -%>
+      </div>
+      <div class="box_space_bottom"></div>
+    </div><!-- box_space -->
+  <% end -%>
+<% end -%>
+<% content_for :contents_right do -%>
+  <table id="bookmark_comments">
+    <col class="col125" />
+    <col class="" />
+     <col class="col75" />
+    <% @bookmark.bookmark_comments.reverse.each do |bookmark_comment| -%>
+      <tr class="<%= (bookmark_comment.user_id == current_user.id) ? "self" : "" %>">
+        <% if bookmark_comment.user_id == @current_user.id || bookmark_comment.public? -%>
+          <td class="owner"><%= user_link_to bookmark_comment.user, :image_on => true %></td>
+          <td>
+            <%= bookmark_comment_tag_search_links_tag bookmark_comment.tag_strings %>
+            &nbsp;
+            <span class="small_text"><%=h bookmark_comment.comment %></span>
+            <% if bookmark_comment.user.id == @current_user.id -%>
+              &nbsp;
+              <%= icon_tag('key', :title => _('Private')) unless bookmark_comment.public %>
+              <%= link_to(icon_tag('tag_blue_edit', :title => _('Edit')), edit_polymorphic_path([current_tenant, @bookmark], :bookmark => {:url => @bookmark.escaped_url})) %>
+              <%= link_to icon_tag('tag_blue_delete', :title => _('Delete')), [current_tenant, @bookmark, bookmark_comment], :method => :delete %>
+            <% end -%>
+          </td>
+          <td class="date"><%= bookmark_comment.updated_at.strftime(_('%B %d %Y')) if bookmark_comment.updated_at %></td>
+        <% end -%>
+      </tr>
+    <% end -%>
+  </table>
+<% end -%>

@@ -1,8 +1,9 @@
 class BookmarksController < ApplicationController
+  include AccessibleBookmarkComment
   def index
     search_params = params[:search] || {}
     search_params[:bookmark_comments_count_gt] = 0
-    search_params[:bookmark_comments_public_is] = true
+    search_params[:publicated] = true
     search_params[:order_sort_type] ||= 'date_desc'
     search_params[:bookmark_type] ||= 'all'
     @search = current_tenant.bookmarks.tagged(params[:tag_words], params[:tag_select]).search(search_params)
@@ -29,7 +30,6 @@ class BookmarksController < ApplicationController
         @bookmark = current_tenant.bookmarks.build(params[:bookmark])
         @bookmark.title = SkipUtil.toutf8_without_ascii_encoding(@bookmark.title)
         @title = _('Bookmark Comment')
-        @bookmark.bookmark_comments = [@bookmark.bookmark_comments.find_or_initialize_by_user_id(current_user.id)]
         respond_to do |format|
           format.html
         end
@@ -47,7 +47,7 @@ class BookmarksController < ApplicationController
   def create
     @bookmark = current_tenant.bookmarks.build(params[:bookmark])
     @bookmark.url = Bookmark.unescaped_url(params[:bookmark][:escaped_url])
-    required_full_accessible_bookmark_comment(@bookmark.bookmark_comments.first) do
+    required_full_accessible_bookmark_comment(@bookmark.bookmark_comments.last) do
       @bookmark.save!
       respond_to do |format|
         flash[:notice] = _('Bookmark was successfully created.')
@@ -65,21 +65,43 @@ class BookmarksController < ApplicationController
     end
   end
 
-  private
-
-  def current_target_bookmark
-    @bookmark ||= current_tenant.bookmarks.find(params[:id])
+  def edit
+    @bookmark = current_tenant.bookmarks.find(params[:id])
+    @bookmark.title = SkipUtil.toutf8_without_ascii_encoding(@bookmark.title)
+    @title = _('Bookmark Comment')
+    respond_to do |format|
+      format.html { render :new }
+    end
   end
 
-  def required_full_accessible_bookmark_comment bookmark_comment = current_target_bookmark.bookmark_comments.first
-    if result = bookmark_comment.full_accessible?(current_user)
-      yield if block_given?
-    else
+  def update
+    @bookmark = current_tenant.bookmarks.find(params[:id])
+    @bookmark.attributes = params[:bookmark]
+    @bookmark.url = Bookmark.unescaped_url(params[:bookmark][:escaped_url])
+    required_full_accessible_bookmark_comment(@bookmark.bookmark_comments.last) do
+      @bookmark.save!
       respond_to do |format|
-        format.html { redirect_to_with_deny_auth }
-        format.js { render :text => _('Operation unauthorized.'), :status => :forbidden }
+        flash[:notice] = _('Bookmark was successfully updated.')
+        format.html { redirect_to [current_tenant, :bookmarks] }
       end
     end
-    result
+  rescue ActiveRecord::RecordInvalid => ex
+    respond_to do |format|
+      format.html { render :new }
+    end
+  rescue Bookmark::InvalidMultiByteURIError => e
+    respond_to do |format|
+      flash.now[:error] = _('URL format invalid.')
+      format.html { render :new }
+    end
+  end
+
+  def show
+    @bookmark = current_tenant.bookmarks.find(params[:id], :include => :bookmark_comments)
+    @main_menu = _('Bookmarks')
+    @tags = BookmarkComment.get_tagcloud_tags @bookmark.url
+    respond_to do |format|
+      format.html { render }
+    end
   end
 end
