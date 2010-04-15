@@ -6,9 +6,13 @@ class BookmarksController < ApplicationController
   def index
     search_params = params[:search] || {}
     search_params[:bookmark_comments_count_gt] = 0
-    search_params[:publicated] = true
     search_params[:order_sort_type] ||= 'date_desc'
     search_params[:bookmark_type] ||= 'all'
+    if current_target_user
+      search_params[:bookmark_comments_user_id_is] = current_user.id
+    else
+      search_params[:publicated] = true
+    end
     @search = current_tenant.bookmarks.tagged(params[:tag_words], params[:tag_select]).search(search_params)
     @bookmarks = @search.paginate(:include => :bookmark_comments, :page => params[:page], :per_page => 25)
 

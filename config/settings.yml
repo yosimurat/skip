@@ -164,7 +164,7 @@ enable_invitation_feature:                                # 招待機能の有�
 
 enable_bookmark_feature:                                  # ブックマーク機能の有効化
   format :boolean
-  default: false
+  default: true
 
 simple_apps:                                              # オープンソース版では利用できません
   serialized: true

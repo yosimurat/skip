@@ -16,4 +16,7 @@
   <% if Group.first -%>
     <li><%= link_to_unless_current_tab content_tag(:span, _('Groups Joined')), [current_tenant, current_target_user, :groups] %></li>
   <% end -%>
+  <% if bookmark_enabled? && current_user.bookmark_comments.first -%>
+    <li><%= link_to_unless_current_tab content_tag(:span, _('Bookmarks')), [current_tenant, current_target_user, :bookmarks] %></li>
+  <% end -%>
 </ul>

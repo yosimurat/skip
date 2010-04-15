@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   has_many :owner_share_files, :class_name => 'ShareFile', :as => :owner
 
   has_many :user_readings, :dependent => :destroy
+  has_many :bookmark_comments, :dependent => :destroy
 
   validates_presence_of :name
   validates_length_of :name, :maximum => 60

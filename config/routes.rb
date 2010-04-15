@@ -28,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
       user.resources :notices, :only => %w(create destroy)
       # ユーザの参加グループ一覧のため
       user.resources :groups, :only => %w(index)
+      user.resources :bookmarks, :only => %w(index)
     end
     tenant.resources :groups, :member => {:members => :get} do |group|
       group.resources :group_participations, :only => %w(new destroy), :collection => { :manage_members => :get, :manage_waiting_members => :get }, :member => { :add_admin_control => :put, :remove_admin_control => :put, :approve => :put, :disapprove => :delete }
