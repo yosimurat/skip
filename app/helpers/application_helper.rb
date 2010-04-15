@@ -212,7 +212,7 @@ module ApplicationHelper
 
   # リッチテキストの表示
   def render_richtext(text, owner_symbol = nil)
-    content = parse_permalink(text, owner_symbol)
+    content = replace_plain_url(parse_permalink(text, owner_symbol))
     "<div class='rich_style ui-corner-all'>#{sanitize_and_unescape_for_richtext(content)}</div>"
   end
 
@@ -391,6 +391,15 @@ private
     split_mark =  "&gt;"
     procs.each { |value| text = BoardEntry.replace_symbol_link(text, value.first, value.last, split_mark) }
     return text
+  end
+
+  # 元々aタグのものは置換しない。aタグになっていないURLっぽいものをaタグに置換
+  def replace_plain_url text
+    regex = /<a\s.*?\/>|<a\s.*?>.*?<\/a>|((?:https?|ftp):\/\/[\wA-Za-z0-9;\/?:@&=+$,\-_.!~*\'()#%]+)/m
+    ret = text
+    ret.gsub!(regex) do |str|
+      $1 ? "<a href=\"#{$1}\" target=\"_blank\">#{$1}</a>" : $&
+    end
   end
 
   def link_to_bookmark_url(bookmark, options = {})
