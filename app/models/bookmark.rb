@@ -66,7 +66,7 @@ class Bookmark < ActiveRecord::Base
 #
 #  named_scope :order_new, proc { { :order => "bookmarks.updated_on DESC" } }
 #
-#  named_scope :limit, proc { |num| { :limit => num } }
+  named_scope :limit, proc { |num| { :limit => num } }
 #
 #  SORT_TYPES = [
 #    [ N_("Sort by Registered Dates (Descending)"), "bookmarks.updated_on DESC" ],
@@ -80,7 +80,6 @@ class Bookmark < ActiveRecord::Base
 
 #
   def self.get_title_from_url url
-    debugger
     begin
       timeout(GET_TITLE_TIMEOUT) do
         open(url, :proxy => GlobalInitialSetting['proxy_url']) do |f|

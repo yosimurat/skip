@@ -87,6 +87,16 @@
     <%= render :partial => "publicated_entries_#{current_user.custom.display_entries_format}" %>
 
     <%# ============================================================ -%>
+    <%#  main area bookmarks -%>
+    <%# ============================================================ -%>
+    <% if bookmark_enabled? and !@bookmarks.empty? -%>
+      <%= show_title_bar("tag_blue", _("New bookmarks"), polymorphic_path([current_tenant, :bookmarks])) %>
+      <div class="topix_body" id="bookmark_body">
+        <%= render :partial => 'bookmarks/topix_bookmarks', :locals => { :bookmarks => @bookmarks } %>
+      </div>
+    <% end -%>
+
+    <%# ============================================================ -%>
     <%#  main area recent users -%>
     <%# ============================================================ -%>
     <% unless @recent_users.empty? -%>

@@ -53,6 +53,10 @@ class MypagesController < ApplicationController
     @timelines = find_timelines_as_locals({:per_page => per_page}) if current_user.custom.display_entries_format == 'tabs'
     @recent_bbs = recent_bbs
 
+    # ============================================================
+    #  main area bookmarks
+    # ============================================================
+    @bookmarks = current_tenant.bookmarks.updated_at_gt(Time.now.ago(10.day)).descend_by_updated_at.publicated.limit(5)
   end
 
   # mypage > trace(足跡)

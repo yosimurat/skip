@@ -5,6 +5,7 @@
   <li><%= link_to_unless_current(icon_tag('disk_multiple', :title => _('Files')) + _('Files'), polymorphic_url([current_tenant, :share_files])) if current_tenant.share_files.count > 0 %></li>
   <li><%= link_to_unless_current(icon_tag('user_suit', :title => _('Users')) + _('Users'), polymorphic_url([current_tenant, :users])) if current_tenant.users.count > 1 %></li>
   <li><%= link_to_unless_current(icon_tag('group', :title => _('Groups')) + _('Groups'), polymorphic_url([current_tenant, :groups])) if current_tenant.groups.count > 0 %></li>
+  <li><%= link_to_unless_current(icon_tag('tag_blue', :title => _('Bookmarks')) + _('Bookmarks'), polymorphic_url([current_tenant, :bookmarks])) if bookmark_enabled? && current_tenant.bookmarks.count > 0 %></li>
   <% if event_enabled? -%>
   <li><%= link_to(icon_tag('flag_blue', :title => _('Events')) + _('Events'), apps_events_path) %></li>
   <% end -%>

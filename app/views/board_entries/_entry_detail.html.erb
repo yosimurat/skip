@@ -230,6 +230,9 @@
         <a href="#" id="source_style_button"><%= icon_tag('page_white_code', :title => _('View Source')) %></a>
         <%= _('Action:') %>
         <%= link_to(icon_tag('page_edit', :title => _('Edit')), edit_polymorphic_path([current_tenant, current_target_owner, entry])) if entry.full_accessible?(current_user) %>
+        <% if bookmark_enabled? -%>
+          <%= link_to(icon_tag('tag_blue_add', :title => _('Bookmark this')), polymorphic_path([current_tenant, :bookmarks], :action => :new_without_bookmarklet, :bookmark => {:url => polymorphic_path([current_tenant, entry]), :title => h(entry.title)}), :target => '_blank') %>
+        <% end -%>
         <%= link_to(icon_tag('zoom', :title => _('Maximize!')), polymorphic_path([current_tenant, current_target_owner, entry], :action => :print), :target=>"_blank") %>
         <%= _('Read/Unread:') %>
         <%= toggle_read_check_box entry %>

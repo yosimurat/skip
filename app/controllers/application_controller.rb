@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   init_gettext "skip" if defined? GetText
 
-  helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_target_owner, :current_participation, :event_enabled?, :current_tenant, :root_url, :current_target_bookmark
+  helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_target_owner, :current_participation, :event_enabled?, :current_tenant, :root_url, :current_target_bookmark, :bookmark_enabled?
 protected
   include InitialSettingsHelper
 
@@ -320,6 +320,14 @@ protected
     end
   end
   alias_method_chain :root_url, :logged_in
+
+  def bookmark_enabled?
+    Admin::Setting.enable_bookmark_feature(current_tenant)
+  end
+
+  def require_bookmark_enabled
+    redirect_to root_url unless bookmark_enabled?
+  end
 
   private
   def sso

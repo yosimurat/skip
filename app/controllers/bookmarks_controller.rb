@@ -1,6 +1,7 @@
 class BookmarksController < ApplicationController
   include AccessibleBookmarkComment
   layout :select_layout
+  before_filter :require_bookmark_enabled
 
   def index
     search_params = params[:search] || {}
