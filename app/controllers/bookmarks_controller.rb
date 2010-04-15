@@ -1,5 +1,7 @@
 class BookmarksController < ApplicationController
   include AccessibleBookmarkComment
+  layout :select_layout
+
   def index
     search_params = params[:search] || {}
     search_params[:bookmark_comments_count_gt] = 0
@@ -24,25 +26,33 @@ class BookmarksController < ApplicationController
     if params[:bookmark]
       if bookmark = current_tenant.bookmarks.find_by_url(Bookmark.unescaped_url(params[:bookmark][:url]))
         respond_to do |format|
-          format.html { redirect_to edit_polymorphic_url([current_tenant, bookmark]) }
+          format.html do
+            if @bookmarklet
+              redirect_to edit_polymorphic_url([current_tenant, bookmark])
+            else
+              redirect_to polymorphic_url([current_tenant, bookmark], :action => :edit_without_bookmarklet)
+            end
+          end
         end
       else
         @bookmark = current_tenant.bookmarks.build(params[:bookmark])
         @bookmark.title = SkipUtil.toutf8_without_ascii_encoding(@bookmark.title)
         @title = _('Bookmark Comment')
         respond_to do |format|
-          format.html
+          format.html { render :new }
         end
       end
     end
-#    @bookmark_comment = unless @bookmark.new_record?
-#                          @bookmark.bookmark_comments.find_by_user_id(current_user.id)
-#                        end || BookmarkComment.new(:public => true)
-#    render :new, :layout => 'subwindow'
   rescue Bookmark::InvalidMultiByteURIError => e
     flash[:error] = _('URL format invalid.')
     render :new_url
   end
+
+  def new_with_bookmarklet
+    params[:bookmarklet] = true
+    new_without_bookmarklet
+  end
+  alias_method_chain :new, :bookmarklet
 
   def create
     @bookmark = current_tenant.bookmarks.build(params[:bookmark])
@@ -50,8 +60,14 @@ class BookmarksController < ApplicationController
     required_full_accessible_bookmark_comment(@bookmark.bookmark_comments.last) do
       @bookmark.save!
       respond_to do |format|
-        flash[:notice] = _('Bookmark was successfully created.')
-        format.html { redirect_to [current_tenant, :bookmarks] }
+        format.html do
+          if params[:bookmarklet]
+            render :text => "<script type='text/javascript'>location.href='#{@bookmark.url}';</script>"
+          else
+            flash[:notice] = _('Bookmark was successfully created.')
+            redirect_to [current_tenant, :bookmarks]
+          end
+        end
       end
     end
   rescue ActiveRecord::RecordInvalid => ex
@@ -74,6 +90,12 @@ class BookmarksController < ApplicationController
     end
   end
 
+  def edit_with_bookmarklet
+    params[:bookmarklet] = true
+    edit_without_bookmarklet
+  end
+  alias_method_chain :edit, :bookmarklet
+
   def update
     @bookmark = current_tenant.bookmarks.find(params[:id])
     @bookmark.attributes = params[:bookmark]
@@ -81,8 +103,14 @@ class BookmarksController < ApplicationController
     required_full_accessible_bookmark_comment(@bookmark.bookmark_comments.last) do
       @bookmark.save!
       respond_to do |format|
-        flash[:notice] = _('Bookmark was successfully updated.')
-        format.html { redirect_to [current_tenant, :bookmarks] }
+        format.html do
+          if params[:bookmarklet]
+            render :text => "<script type='text/javascript'>location.href='#{@bookmark.url}';</script>"
+          else
+            flash[:notice] = _('Bookmark was successfully updated.')
+            redirect_to [current_tenant, :bookmarks]
+          end
+        end
       end
     end
   rescue ActiveRecord::RecordInvalid => ex
@@ -101,7 +129,7 @@ class BookmarksController < ApplicationController
     @main_menu = _('Bookmarks')
     @tags = BookmarkComment.get_tagcloud_tags @bookmark.url
     respond_to do |format|
-      format.html { render }
+      format.html
     end
   end
 
@@ -109,5 +137,10 @@ class BookmarksController < ApplicationController
     render :text => Bookmark.get_title_from_url(Bookmark.unescaped_url(params[:url]))
   rescue Bookmark::InvalidMultiByteURIError => e
     render :text => _('URL format invalid.'), :status => :bad_request
+  end
+
+  private
+  def select_layout
+    params[:bookmarklet] ? 'subwindow' : 'layout'
   end
 end

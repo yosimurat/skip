@@ -45,7 +45,7 @@ ActionController::Routing::Routes.draw do |map|
     end
     tenant.resources :share_files, :only => %w(index show)
     tenant.resources :board_entries, :only => %w(index show), :collection => {:be_read => :post, :be_unread => :post}
-    tenant.resources :bookmarks, :only => %w(index show new create edit update), :collection => {:new_url => :get, :load_title => :get} do |bookmark|
+    tenant.resources :bookmarks, :only => %w(index show new create edit update), :collection => {:new_without_bookmarklet => :get, :new_url => :get, :load_title => :get}, :member => {:edit_without_bookmarklet => :get} do |bookmark|
       bookmark.resources :bookmark_comments, :only => %w(destroy)
     end
     tenant.resource :invitations, :only => %w(new create)

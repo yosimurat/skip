@@ -1,3 +1,6 @@
+<% if params[:bookmarklet] -%>
+  <%= hidden_field :bookmarklet, true %>
+<% end -%>
 <%= template_error_messages_for 'bookmark' %>
 <table>
   <tr>

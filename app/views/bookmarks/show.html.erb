@@ -3,7 +3,7 @@
     <div class="action_buttons ui-corner-all">
       <ul class="no_style">
         <li>
-          <%= link_to(content_tag(:span, _('Add a comment')), new_polymorphic_path([current_tenant, :bookmark], :bookmark => {:url => @bookmark.escaped_url}), {:class => "rounded"}) %>
+        <%= link_to(content_tag(:span, _('Add a comment')), polymorphic_path([current_tenant, :bookmarks], :action => :new_without_bookmarklet, :bookmark => {:url => @bookmark.escaped_url}), {:class => "rounded"}) %>
         </li>
       </ul>
     </div>

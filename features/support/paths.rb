@@ -28,11 +28,11 @@ module NavigationHelpers
       polymorphic_path([@current_tenant, :bookmarks], :action => :new_url)
 
     when /^ブックマークの新規作成ページ$/
-      new_polymorphic_path([@current_tenant, :bookmark])
+      polymorphic_path([@current_tenant, :bookmarks], :action => :new_without_bookmarklet)
 
     when /^(.*)のブックマークの編集ページ$/
       b = @current_tenant.bookmarks.find_by_url($1)
-      edit_polymorphic_path([@current_tenant, b])
+      polymorphic_path([@current_tenant, b], :action => :edit_without_bookmarklet)
 
     when /^(.*)のブックマークの表示ページ$/
       b = @current_tenant.bookmarks.find_by_url($1)

@@ -1,7 +1,7 @@
 <% content_for :contents_left do -%>
   <div class="action_buttons ui-corner-all">
     <ul class="no_style">
-      <li><%= link_to(content_tag('span', _('Bookmark a URL')), new_polymorphic_path([current_tenant, :bookmark]), :title => _('Bookmark URL'), :class => 'rounded') %></li>
+      <li><%= link_to(content_tag('span', _('Bookmark a URL')), polymorphic_path([current_tenant, :bookmarks], :action => :new_url), :title => _('Bookmark URL'), :class => 'rounded') %></li>
     </ul>
   </div>
 <% end -%>
