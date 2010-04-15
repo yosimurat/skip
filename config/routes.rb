@@ -45,6 +45,9 @@ ActionController::Routing::Routes.draw do |map|
     end
     tenant.resources :share_files, :only => %w(index show)
     tenant.resources :board_entries, :only => %w(index show), :collection => {:be_read => :post, :be_unread => :post}
+    tenant.resources :bookmarks, :only => %w(index show new create edit update), :collection => {:new_url => :get, :load_title => :get} do |bookmark|
+      bookmark.resources :bookmark_comments, :only => %w(destroy)
+    end
     tenant.resource :invitations, :only => %w(new create)
     tenant.resource :statistics, :only => %w(show), :member => { :load_calendar => :get, :ado_current_statistics => :get, :ado_statistics_history => :get }
     tenant.resources :ids, :only => :show
@@ -60,9 +63,9 @@ ActionController::Routing::Routes.draw do |map|
         board_entry.resources :board_entry_comments, :only => [:index, :destroy]
       end
       tenant.resources :share_files, :only => [:index, :destroy], :member => [:download]
-  #      tenant.resources :bookmarks, :only => [:index, :show, :destroy] do |bookmark|
-  #        bookmark.resources :bookmark_comments, :only => [:index, :destroy]
-  #      end
+      tenant.resources :bookmarks, :only => [:index, :show, :destroy] do |bookmark|
+        bookmark.resources :bookmark_comments, :only => [:index, :destroy]
+      end
       tenant.resources :users, :new => [:import, :import_confirmation, :first], :member => [:change_uid, :create_uid, :issue_activation_code, :issue_password_reset_code], :collection => [:lock_actives, :reset_all_password_expiration_periods, :issue_activation_codes] do |user|
   #        user.resources :openid_identifiers, :only => [:edit, :update, :destroy]
         user.resource :user_profile

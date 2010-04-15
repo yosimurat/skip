@@ -1,0 +1,48 @@
+<% content_for :contents_left do -%>
+  <div class="action_buttons ui-corner-all">
+    <ul class="no_style">
+      <li><%= link_to(content_tag('span', _('Bookmark a URL')), new_polymorphic_path([current_tenant, :bookmark]), :title => _('Bookmark URL'), :class => 'rounded') %></li>
+    </ul>
+  </div>
+<% end -%>
+
+<% content_for :contents_right do -%>
+  <div class="search_cond_space ui-corner-all">
+    <% form_for @search do |f| -%>
+      <table class="search_cond_box">
+        <tr>
+          <th><%= f.label :title %></th>
+          <td><%= f.text_field :title, :size => '60' %></td>
+        </tr>
+        <tr>
+          <th><%= _('Display Order') %></th>
+          <td>
+            <%= f.radio_button :order_sort_type, "date_desc" %><%= f.label :order_sort_type_date_desc, _("Sort by Registered Dates (Descending)") %>
+            <%= f.radio_button :order_sort_type, "date_asc" %><%= f.label :order_sort_type_date_asc, _("Sort by Registered Dates (Ascending)") %>
+            <%= f.radio_button :order_sort_type, "bookmark_comment_count" %><%= f.label :order_sort_type_bookmark_comment_count, _("Sort by number of users") %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= _('Search Range') %></th>
+          <td>
+            <%= f.radio_button :bookmark_type, 'all' %><%= f.label :bookmark_type_all, _('All') %>
+            <%= f.radio_button :bookmark_type, 'board_entry' %><%= f.label :bookmark_type_board_entry, _('Entries') %>
+            <%= f.radio_button :bookmark_type, 'internet' %><%= f.label :bookmark_type_internet, _('Internet') %>
+          </td>
+        </tr>
+        <%= render :partial => 'searches/tag_search', :locals => {:tags => @tags} %>
+        <tr>
+          <td><%= f.submit _('Search'), :disable_with => _('Searching...') %></td>
+        <tr>
+      </table>
+    <% end -%>
+  </div>
+
+  <div class="search_result_space">
+  <% unless @bookmarks.empty? -%>
+    <%= i18n_will_paginate_with_container_wrapper @bookmarks %>
+    <%= render :partial => "topix_bookmarks", :locals => { :bookmarks => @bookmarks, :title => _('Search result') } %>
+    <%= i18n_will_paginate_with_container_wrapper @bookmarks %>
+  <% end -%>
+  </div>
+<% end -%>

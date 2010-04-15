@@ -24,7 +24,7 @@ Given /^"(.*)"でログインする$/ do |email|
       Given "ログアウトする"
       fill_in_login_form(email)
     else
-      Given %!"マイページ"にアクセスする!
+      Given %!"#{@current_user.tenant.name}テナントのマイページ"にアクセスする!
     end
   else
     fill_in_login_form(email)
@@ -42,7 +42,7 @@ Given /^"([^\"]*)"が退職する$/ do |user_id|
 end
 
 Given /^ログアウトする$/ do
-  visit logout_path
+  visit logout_platform_path
 end
 
 # TODO Spec::Rails::Skip::ModelHelpers#create_userを使うように置き換えていって無くす

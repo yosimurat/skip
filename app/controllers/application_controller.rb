@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   init_gettext "skip" if defined? GetText
 
-  helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_target_owner, :current_participation, :event_enabled?, :current_tenant, :root_url
+  helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_target_owner, :current_participation, :event_enabled?, :current_tenant, :root_url, :current_target_bookmark
 protected
   include InitialSettingsHelper
 
@@ -113,6 +113,10 @@ protected
 
   def current_tenant
     @current_tenant ||= Tenant.find_by_id(params[:tenant_id])
+  end
+
+  def current_target_bookmark
+    @current_target_bookmark ||= Bookmark.find_by_tenant_id_and_id(current_tenant, (params[:controller] == 'bookmarks' ? params[:id] : params[:bookmark_id]))
   end
 
   def login_required options = {}

@@ -1,0 +1,35 @@
+<%= render :partial => '/admin/data_menu_box' %>
+<% content_for :topic_path do -%>
+<%= render :partial => '/admin/shared/topic_path' %>
+<% end -%>
+<% content_for :contents_right do -%>
+
+<div class="box tabular">
+  <%= render :partial => '/admin/shared/sortable_table',
+             :locals => {
+               :columns => %w[user comment public tag_strings stared],
+               :disp_columns_proc => lambda do |object,column|
+      case column
+      when "user"
+        object.user.name
+      when "comment"
+        object.comment[/.{1,100}/]
+      when "public"
+        _("BookmarkComment|Public|#{object.public}")
+      when "stared"
+        _("BookmarkComment|Stared|#{object.stared}")
+      else
+        object.send(column.to_sym)
+      end
+    end,
+               :objects => @bookmark_comments,
+               :class_name => 'Admin::BookmarkComment',
+               :link_elem_size => 1,
+               :link_elem_proc => lambda { |object|
+      result = ""
+      result << content_tag(:td, link_to(_("Destroy"), admin_tenant_bookmark_bookmark_comment_path(current_tenant, @bookmark, object),{:confirm => _('Are you sure?'), :method => :delete}) )
+    }
+             }
+  -%>
+</div>
+<% end -%>

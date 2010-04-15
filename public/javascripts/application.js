@@ -165,35 +165,6 @@ $j(function(){
     };
 
     /*
-     * ブックマークのタイトルを取得する
-     */
-    reloadTitle = function(url, target_id) {
-        $j('#refresher').hide();
-        $j('#indicator').show();
-        var ado_get_title_url = relative_url_root + "/bookmark/ado_get_title";
-        $j.ajax({
-            type: "POST",
-            url: ado_get_title_url,
-            data: { url:url, authenticity_token: $j('#authenticity_token').val() },
-            success: function(request){
-                if(request == ""){
-                    alert("タイトルの取得ができませんでした");
-                    return;
-                }else{
-                    $j('#'+target_id).val(request);
-                }
-            },
-            complete: function(request){
-                $j('#indicator').hide();
-                $j('#refresher').show();
-            },
-            error: function(request){
-                alert(request.responseText);
-            }
-        });
-    };
-
-    /*
      * jTaggingで利用するタグリストを生成して返す。引数のtagsはタグの配列
      */
     createTagsLink = function(tags) {
