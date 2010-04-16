@@ -15,21 +15,6 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe ShareFile do
-fixtures :share_files
-  def test_owner_symbol_type
-    @a_share_file.owner_symbol = 'uid:hoge'
-    assert_equal 'user', @a_share_file.owner_symbol_type
-    @a_share_file.owner_symbol = 'gid:hoge'
-    assert_equal 'group', @a_share_file.owner_symbol_type
-  end
-
-  def test_owner_symbol_id
-    @a_share_file.owner_symbol = 'uid:hoge'
-    assert_equal 'hoge', @a_share_file.owner_symbol_id
-  end
-end
-
 describe ShareFile, '.new' do
   describe 'オーナーがユーザの場合' do
     before do

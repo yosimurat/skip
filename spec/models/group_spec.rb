@@ -160,7 +160,6 @@ describe Group do
       @board_entry.save!
       @board_entry.board_entry_comments.create! :contents => 'contents', :user => create_user
 
-      @share_file.owner_symbol = @group.symbol
       @share_file.stub!(:updatable?).and_return(true)
       @share_file.save!
       File.stub!(:delete)

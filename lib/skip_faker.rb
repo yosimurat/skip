@@ -39,21 +39,6 @@ module SkipFaker
     "#{name}#{rand_num}@openskip.org"
   end
 
-  # テスト用のuidを生成
-  def self.uid
-    "uid:#{name}"
-  end
-
-  # テスト用のgidを生成
-  def self.gid
-    "gid:#{rand_char}"
-  end
-
-  # テスト用シンボルを生成
-  def self.owner_symbol options = {}
-    "#{uid}"
-  end
-
   # テスト用タグ(カテゴリ)を生成
   # タグをfixturesに書き込む場合は""で括らないとyamlのフロースタイルと見なされてしまうので注意
   def self.tag(digit = 10)

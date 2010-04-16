@@ -282,10 +282,6 @@ class BoardEntry < ActiveRecord::Base
     text.gsub(/<a[^>]*href=[\'\"](.*?)[\'\"]>/){ CGI.unescapeHTML($&) } if text
   end
 
-#  def permalink
-#    '/page/' + id.to_s
-#  end
-
   def diary?
     entry_type == DIARY
   end
@@ -382,39 +378,6 @@ class BoardEntry < ActiveRecord::Base
     true if send_mail == "1"
   end
 
-#  # 権限チェック
-#  # この記事が編集可能かどうかを判断する
-#  def editable?(login_user_symbols, login_user_id, login_user_symbol, login_user_groups)
-#    # 所有者がマイユーザ
-#    return true if login_user_symbol == symbol
-#
-#    #  マイユーザ/マイグループが公開範囲指定対象で、編集可能
-#    return true if publicate?(login_user_symbols) && edit?(login_user_symbols)
-#
-#    # 所有者がマイグループ AND 作成者がマイユーザ
-#    if login_user_groups.include?(symbol)
-#      return true if login_user_id == user_id
-#      #  AND グループ管理者がマイユーザ
-#      group = Symbol.get_item_by_symbol(symbol)
-#      return true if publicate?(login_user_symbols) && group.owners.any?{|user| user.id == login_user_id}
-#    end
-#    return false
-#  end
-#
-#  # FIXME:editable?へのマージと、edit?の廃止
-#  def will_editable?(login_user)
-#    editable?(login_user.belong_symbols, login_user.id, login_user.symbol, login_user.group_symbols)
-#  end
-
-#  def publicate? login_user_symbols
-#    entry_publications.any? {|publication| login_user_symbols.include?(publication.symbol) || "sid:allusers" == publication.symbol}
-#  end
-#
-#  # TODO editable?とどちらかにしたい。
-#  def edit? login_user_symbols
-#    entry_editors.any? {|editor| login_user_symbols.include? editor.symbol }
-#  end
-
   # アクセスしたことを示す（アクセス履歴）
   def accessed(login_user_id)
     unless writer?(login_user_id)
@@ -475,25 +438,6 @@ class BoardEntry < ActiveRecord::Base
   def root_comments
     board_entry_comments.find(:all, :conditions => ["parent_id is NULL"], :order => "created_on")
   end
-#
-#  # TODO Symbol.get_item_by_symbolとかぶってる。こちらを生かしたい
-#  # TODO ShareFileと統合したい
-#  def self.owner symbol
-#    return nil if symbol.blank?
-#    symbol_type, symbol_id = SkipUtil::split_symbol symbol
-#    if symbol_type == "uid"
-#      User.find_by_uid(symbol_id)
-#    elsif symbol_type == "gid"
-#      Group.active.find_by_gid(symbol_id)
-#    else
-#      nil
-#    end
-#  end
-#
-#  # TODO ShareFileと統合したい, ownerにしたい
-#  def load_owner
-#    @owner = self.class.owner self.symbol
-#  end
 
   def toggle_hide(user)
     unless BoardEntry::HIDABLE_AIM_TYPES.include? self.aim_type

@@ -155,55 +155,6 @@ class ShareFile < ActiveRecord::Base
     owner.is_a?(Group)
   end
 
-#  # TODO owner_symbol_typeのみにしてなくしたい, BoardEntryと統合したい
-#  def symbol_type
-#    owner_symbol.split(':').first
-#  end
-#
-#  # TODO owner_symbol_idのみにしてなくしたい, BoardEntryと統合したい
-#  def symbol_id
-#    owner_symbol.split(':')[1]
-#  end
-#
-#  # TODO BoardEntryと統合したい
-#  def owner_symbol_type
-#    { 'uid' => 'user', 'gid' => 'group' }[symbol_type]
-#  end
-#
-#  # TODO BoardEntryと統合したい
-#  def owner_symbol_id
-#    owner_symbol.split(':').last
-#  end
-#
-#  # TODO BoardEntryと統合したい
-#  def owner_symbol_name
-#    owner = Symbol.get_item_by_symbol(self.owner_symbol)
-#    owner ? owner.name : ''
-#  end
-#
-#  # TODO BoardEntryと統合したい
-#  def owner_id
-#    self.class.owner_id owner_symbol
-#  end
-#
-#  # TODO BoardEntryと統合したい
-#  def self.owner_id owner_symbol
-#    owner(owner_symbol).id
-#  end
-#
-#  # TODO BoardEntryと統合したい
-#  def owner
-#    self.class.owner owner_symbol
-#  end
-
-#  # TODO BoardEntryと統合したい
-#  def self.owner owner_symbol
-#    symbol_type = owner_symbol.split(":").first
-#    symbol_id = owner_symbol.split(":").last
-#    owner = (symbol_type == User.symbol_type.to_s) ? User.find_by_uid(symbol_id) : Group.active.find_by_gid(symbol_id)
-#  end
-#
-#
   def self.categories_hash user
     accessible_share_files = ShareFile.accessible(user).descend_by_updated_at
     accessible_share_file_ids = accessible_share_files.map(&:id)
