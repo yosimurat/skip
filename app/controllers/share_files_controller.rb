@@ -174,57 +174,6 @@ class ShareFilesController < ApplicationController
     end
   end
 
-  # TODO 以下はindexに統合して消す
-#  def list
-#    # TODO: インスタンス変数の数を減らす
-#    owner = current_target_user || current_target_group
-#    unless owner
-#      flash[:warn] = _("Specified share file owner does not exist.")
-#      redirect_to root_url
-#      return
-#    end
-#
-#    @search = ShareFile.accessible(current_user).owned(owner)
-#    @search = @search.tagged(params[:category], "AND") if params[:category]
-#    @search =
-#      if params[:sort_type] == "file_name"
-#        @search.descend_by_file_name.search(params[:search])
-#      else
-#        @search.descend_by_date.search(params[:search])
-#      end
-#    @share_files = @search.paginate(:page => params[:page], :per_page => 10)
-#
-#    respond_to do |format|
-#      format.html do
-#        if owner.is_a? User
-#          @main_menu = user_main_menu(owner)
-#          @title = user_title(owner)
-#          @tab_menu_option = user_menu_option(owner)
-#        elsif owner.is_a? Group
-#          @main_menu = _('Groups')
-#          @title = owner.name
-#          @tab_menu_option = { :gid => owner.gid }
-#        end
-#        @owner_name = owner.name
-#        params[:sort_type] ||= "date"
-#        flash.now[:notice] = _('No matching shared files found.') if @share_files.empty?
-#        render :layout => 'layout'
-#      end
-#      format.js {
-#        render :json => {
-#          :pages => {
-#            :first => 1,
-#            :previous => @share_files.previous_page,
-#            :next => @share_files.next_page,
-#            :last => @share_files.total_pages,
-#            :current => @share_files.current_page,
-#            :item_count => @share_files.total_entries },
-#          :share_files => @share_files.map{|s| share_file_to_json(s) }
-#        }
-#      }
-#    end
-#  end
-
   def downloadable?(authenticity_token, share_file)
     return true if share_file.uncheck_authenticity?
     authenticity_token == form_authenticity_token ? true : false
