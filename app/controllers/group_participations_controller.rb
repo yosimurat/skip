@@ -7,7 +7,10 @@ class GroupParticipationsController < ApplicationController
 
   def new
     search_params = params[:search] ||= {}
-    @search = current_tenant.users.descend_by_user_access_last_access.search(params[:search])
+    if group = current_tenant.groups.find_by_id(params[:joined_group_id])
+      search_params[:id_equals_any] = group.group_participations.active.map(&:user_id)
+    end
+    @search = current_tenant.users.descend_by_user_access_last_access.search(search_params)
     @search.exclude_retired = '1'
 
     @users = @search.paginate({:include => %w(user_access), :page => params[:page]})
@@ -33,6 +36,49 @@ class GroupParticipationsController < ApplicationController
           else
             redirect_to new_polymorphic_path([current_tenant, group, :group_participation])
           end
+        end
+      end
+    end
+  end
+
+  def multi_create
+    group = current_target_group
+    if params[:user_ids] && params[:user_ids].is_a?(Array)
+      group_participations = current_tenant.users.id_is(params[:user_ids]).map do |target_user|
+        group_participation = GroupParticipation.find_or_initialize_by_group_id_and_user_id(group.id, target_user.id)
+        group_participation.user = target_user
+        unless group_participation.full_accessible?(current_user)
+          respond_to do |format|
+            format.html { redirect_to_with_deny_auth }
+            format.js { render :text => _('Operation unauthorized.'), :status => :forbidden }
+            return
+          end
+        end
+        group_participation
+      end
+      success_messages = []
+      fail_messages = []
+      group_participations.each do |group_participation|
+        group_participation.join!(current_user) do |result, participation, messages|
+          if result
+            success_messages << messages
+          else
+            fail_messages << messages
+          end
+        end
+      end
+      flash[:notice] = success_messages.join("\n") unless success_messages.empty?
+      flash[:error] = fail_messages.join("\n") unless fail_messages.empty?
+      respond_to do |format|
+        format.html do
+          redirect_to new_polymorphic_path([current_tenant, group, :group_participation])
+        end
+      end
+    else
+      flash[:error] = _("Invalid parameter(s) detected.")
+      respond_to do |format|
+        format.html do
+          redirect_to new_polymorphic_path([current_tenant, group, :group_participation])
         end
       end
     end

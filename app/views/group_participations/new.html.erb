@@ -15,6 +15,10 @@
         <td><%= f.text_field :name_like %></td>
       </tr>
       <tr>
+        <th><%= label :joined_group_id, _('Group') %></th>
+        <td><%= select_tag :joined_group_id, options_for_select(current_tenant.groups.active.map {|g| [g.name, g.id]}.unshift(['', ''])) %></td>
+      </tr>
+      <tr>
     </table>
     <div class="submit">
       <%= f.submit _('Search') %>
@@ -23,12 +27,26 @@
   <div class="search_result_space">
   <% unless @users.empty? -%>
     <%= i18n_will_paginate_with_container_wrapper @users %>
+    <% unjoined_user_ids = [] %>
     <% @users.each do |user| -%>
       <% action_links = [] %>
-      <% action_links << (user.joined?(current_target_group) ? _('Joined') : link_to(_('Add as Member'), [current_tenant, current_target_group, user, :group_participations], :method => :post)) %>
+      <% if user.joined?(current_target_group) -%>
+        <% action_links <<  _('Joined') %>
+      <% else -%>
+        <% action_links << link_to(_('Add as Member'), [current_tenant, current_target_group, user, :group_participations], :method => :post) %>
+        <% unjoined_user_ids << user.id %>
+      <% end -%>
       <%= render :partial => 'users/user', :locals => {:user => user, :action_links => action_links} %>
     <% end -%>
     <div class="clear_left"></div>
+    <% unless unjoined_user_ids.empty? %>
+      <% form_tag polymorphic_path([current_tenant, current_target_group, :group_participations], :action => :multi_create) do -%>
+        <% unjoined_user_ids.each do |unjoined_user_id| %>
+          <%= hidden_field_tag 'user_ids[]', unjoined_user_id %>
+        <% end -%>
+        <%= submit_tag _('Add all users as member in this search result.') %>
+      <% end -%>
+    <% end -%>
     <%= i18n_will_paginate_with_container_wrapper @users %>
   <% end -%>
   </div>

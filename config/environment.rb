@@ -58,7 +58,7 @@ Rails::Initializer.run do |config|
   config.gem 'gettext_activerecord', :version => '2.0.4'
   config.gem 'gettext_rails', :version => '2.0.4'
   config.gem "feed-normalizer", :version => '1.5.2'
-  config.gem "searchlogic", :version => '2.4.7'
+  config.gem "searchlogic", :version => '2.4.19'
   config.gem "nokogiri", :version => '1.4.1'
   config.gem "sanitize", :version => '1.2.0'
   config.gem 'diff-lcs', :lib => 'diff/lcs', :version => '1.1.2'
