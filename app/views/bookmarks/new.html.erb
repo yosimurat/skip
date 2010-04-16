@@ -1,6 +1,6 @@
-<div class="edit_form_space bookmark edit">
+<div class="form_space bookmark">
   <div class="desc ui-corner-all"><%= _("You can put tags and comment on the bookmark.<br/>(It is recommended to bookmark users and entries in %s from the links within the respective pages.)") % h(Admin::Setting.abbr_app_title(current_tenant)) %></div>
-  <div class="update_form_wrapper">
+  <div class="form_wrapper">
     <div id="update_body"></div>
     <% form_for [current_tenant, @bookmark] do |f| -%>
       <%= render f %>

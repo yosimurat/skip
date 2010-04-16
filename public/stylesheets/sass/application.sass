@@ -1374,6 +1374,31 @@ div.topix_entries_wrapper, div.topix_share_files_wrapper, div.topix_bookmarks_wr
           :vertical-align bottom
           :color #808080
 
+// 新規作成,編集フォーム(共有ファイル、ブックマーク)
+// ------------------------------------------------------------
+// 新規,編集
+div.form_space
+  :border none
+  :margin 5px
+  div.form_wrapper
+    :margin-top 5px
+    table
+      :table-layout auto
+      :width 100%
+      th
+        :background-color #f0f0ff
+        :font-weight bold
+        :font-size 12px
+        :padding 1px 5px
+        :border = !base_border
+      td
+        :padding 5px 0
+        :border = !base_border
+        &.operation
+          :text-align center
+
+// イベント
+// ------------------------------------------------------------
 div.event_info_space
   :margin-bottom 10px
   :width 100%
@@ -1432,24 +1457,24 @@ div.bookmark_space
     :height 16px
 
 // 新規,編集
-div.edit_form_space.bookmark.edit
-  :border none
-  :margin 5px
-  div.update_form_wrapper
-    :margin-top 5px
-    table
-      :table-layout auto
-      :width 100%
-      th
-        :background-color #f0f0ff
-        :font-weight bold
-        :font-size 12px
-        :padding 1px 5px
-        :border = !base_border
-      td
-        :border = !base_border
-        &.operation
-          :text-align center
+//div.edit_form_space.bookmark.edit
+//  :border none
+//  :margin 5px
+//  div.update_form_wrapper
+//    :margin-top 5px
+//    table
+//      :table-layout auto
+//      :width 100%
+//      th
+//        :background-color #f0f0ff
+//        :font-weight bold
+//        :font-size 12px
+//        :padding 1px 5px
+//        :border = !base_border
+//      td
+//        :border = !base_border
+//        &.operation
+//          :text-align center
 
 // 表示
 table#bookmark_comments
@@ -1466,15 +1491,15 @@ table#bookmark_comments
 
 // 共有ファイル
 // ------------------------------------------------------------
-// 新規
-div.error_files
-  :color gray
-  :font-size 10px
-  :margin-top 5px
-
-div.error_messages
-  :margin-left 20px
-  :width 350px
+//// 新規
+//div.error_files
+//  :color gray
+//  :font-size 10px
+//  :margin-top 5px
+//
+//div.error_messages
+//  :margin-left 20px
+//  :width 350px
 
 // 共有ファイルアップローダー
 // ------------------------------------------------------------
@@ -1552,64 +1577,64 @@ div#share_file_uploader.enabled
 
 // ランキング > 月次ランキング/総合ランキング
 // ------------------------------------------------------------
-h1#ranking_title
-  :color #0033CC
-  :font-size 14px
-  :font-weight bold
-  :margin-left 5px
-  :vertical-align middle
-div.ranking_aggregate
-  :margin 0 0 10px 0
-  :width 100%
-  :float left
-  p
-    :margin-bottom 20px
+//h1#ranking_title
+//  :color #0033CC
+//  :font-size 14px
+//  :font-weight bold
+//  :margin-left 5px
+//  :vertical-align middle
+//div.ranking_aggregate
+//  :margin 0 0 10px 0
+//  :width 100%
+//  :float left
+//  p
+//    :margin-bottom 20px
+//
+//div.ranking_wrapper
+//  :margin 10px 1% 10px 0
+//  :float left
+//  :width 31%
+//  table.ranking_square
+//    :text-align left
+//    :table-layout fixed
+//    :width 100%
+//    :background-color #f0f0ff
+//    :border = !base_border
+//    tr
+//      :background-color #ffffff
+//      th, td
+//        :padding 3px
+//      th
+//        :font-size 12px
+//        :background-color #f8f8ff
+//        :text-align left
+//        &.point
+//          :text-align center
+//      th.title
+//        :padding 5px
+//        :background-color #f0f0ff
+//        :font-weight bold
+//        :color #77778C
+//        :text-align center
+//      td.caption
+//        :overflow hidden
+//      td.rank
+//        :text-align center
+//      td.column_title
+//        :overflow hidden
+//      td.point
+//        :text-align center
+//
+//div.ranking_menu
+//  :margin-bottom 20px
+//
+//div.ranking_data
+//  :margin-top 10px
+//
+//div.ranking_menu_title
+//  :margin-bottom 10px
 
-div.ranking_wrapper
-  :margin 10px 1% 10px 0
-  :float left
-  :width 31%
-  table.ranking_square
-    :text-align left
-    :table-layout fixed
-    :width 100%
-    :background-color #f0f0ff
-    :border = !base_border
-    tr
-      :background-color #ffffff
-      th, td
-        :padding 3px
-      th
-        :font-size 12px
-        :background-color #f8f8ff
-        :text-align left
-        &.point
-          :text-align center
-      th.title
-        :padding 5px
-        :background-color #f0f0ff
-        :font-weight bold
-        :color #77778C
-        :text-align center
-      td.caption
-        :overflow hidden
-      td.rank
-        :text-align center
-      td.column_title
-        :overflow hidden
-      td.point
-        :text-align center
-
-div.ranking_menu
-  :margin-bottom 20px
-
-div.ranking_data
-  :margin-top 10px
-
-div.ranking_menu_title
-  :margin-bottom 10px
-
-// ランキング > サイト情報
+// サイト情報
 // ------------------------------------------------------------
 div.statistics_history
   :margin-top 20px

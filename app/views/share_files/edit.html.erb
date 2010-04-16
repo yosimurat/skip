@@ -1,4 +1,8 @@
-<% form_for [current_tenant, current_target_owner, @share_file], :html => { :class => 'share_file_form' } do |f| -%>
-  <%= render f %>
-  <%= f.submit _("Update") %>
-<% end -%>
+<div class="form_space share_file">
+  <div class="form_wrapper">
+    <% form_for [current_tenant, current_target_owner, @share_file], :html => { :class => 'share_file_form' } do |f| -%>
+      <%= render f %>
+      <%= f.submit _("Update") %>
+    <% end -%>
+  </div>
+</div>

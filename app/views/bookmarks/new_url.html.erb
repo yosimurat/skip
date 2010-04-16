@@ -1,8 +1,8 @@
-<div class="edit_form_space bookmark edit">
+<div class="form_space bookmark">
   <div class="desc ui-corner-all">
     <p><%=h _('You can save an URL you are interested in with a comment to a bookmark. You can also share it with other users by publishing it. Enter a URL below and click the "Next" button to start with.') %></p>
   </div>
-  <div class="update_form_wrapper">
+  <div class="form_wrapper">
     <% form_for Bookmark.new, :url => polymorphic_path([current_tenant, :bookmarks], :action => :new_without_bookmarklet), :html => {:method => :get} do |f| -%>
       <table>
         <tr>
