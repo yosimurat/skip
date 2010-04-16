@@ -1,19 +1,18 @@
 xml.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
 xml.rss('version' => '2.0') do
   xml.channel do
-    xml.title "#{h(@title)} - #{h(Admin::Setting.abbr_app_title)} "
+    xml.title "#{h(@title)} - #{h(Admin::Setting.abbr_app_title(current_tenant))} "
     xml.link(request.url)
     xml.description(h(@title))
     xml.language GetText.locale.language
     xml.ttl "40"
     xml.pubDate(@entries.first.created_on.rfc822)
     @entries.each do |post|
-      post_url = polymorphic_url([post.owner.tenant, post.owner, post])
       xml.item do
         xml.title(h(post.title))
-        xml.link(post_url)
+        xml.link(url_for(:controller => '/board_entries', :action => 'forward', :id => post.id, :only_path => false))
         xml.description(show_contents(post))
-        xml.guid(post_url)
+        xml.guid(url_for(:controller => '/board_entries', :action => 'forward', :id => post.id, :only_path => false))
         xml.pubDate(post.last_updated.rfc822)
         xml.author h("#{post.user.email} (#{post.user.name})")
       end

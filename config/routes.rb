@@ -98,6 +98,13 @@ ActionController::Routing::Routes.draw do |map|
     app.resource :javascripts, :only => [], :member => {:application => :get}
   end
 
+  map.namespace "feed" do |feed_map|
+    feed_map.resources :tenants, :only => [] do |tenant|
+      tenant.resources :board_entries, :only => %w(index), :collection => {:questions => :get, :timelines => :get, :popular_blogs => :get}
+      tenant.resources :bookmarks, :only => %w(index)
+    end
+  end
+
   map.resource :platform, :only => %(show), :member => {
     :login => :any,
     :logout => :any,

@@ -164,7 +164,7 @@ enable_invitation_feature:                                # 招待機能の有�
 
 enable_bookmark_feature:                                  # ブックマーク機能の有効化
   format :boolean
-  default: true
+  default: false
 
 simple_apps:                                              # オープンソース版では利用できません
   serialized: true
@@ -186,3 +186,7 @@ footer_image_link_tag:
 max_total_file_size_per_tenant:                           # テナント毎のファイルサイズ最大値
   format: int
   default: 1073741824
+
+publicize_feeds_without_login:                            # テナント毎の公開フィードをログインせずに取得可能にする
+  format: boolean
+  default: false
