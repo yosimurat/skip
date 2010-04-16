@@ -10,9 +10,9 @@ xml.rss('version' => '2.0') do
     @entries.each do |post|
       xml.item do
         xml.title(h(post.title))
-        xml.link(url_for(:controller => '/board_entries', :action => 'forward', :id => post.id, :only_path => false))
+        xml.link(polymorphic_url([current_tenant, post]))
         xml.description(show_contents(post))
-        xml.guid(url_for(:controller => '/board_entries', :action => 'forward', :id => post.id, :only_path => false))
+        xml.guid(polymorphic_url([current_tenant, post]))
         xml.pubDate(post.last_updated.rfc822)
         xml.author h("#{post.user.email} (#{post.user.name})")
       end

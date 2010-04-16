@@ -6,7 +6,7 @@ atom_feed(:root_url => root_url, :url => request.url, :id => root_url) do |feed|
     @entries.each do |post|
       feed.entry(
         post,
-        :url => url_for(:controller => '/board_entries', :action => 'forward', :id => post.id, :only_path => false),
+        :url => polymorphic_url([current_tenant, post]),
         :published => post.created_on,
         :updated => post.last_updated
       ) do |entry|
