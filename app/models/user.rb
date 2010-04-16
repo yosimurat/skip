@@ -61,6 +61,8 @@ class User < ActiveRecord::Base
   validates_format_of :email, :message =>_('requires proper format.'), :with => Authentication.email_regex
   validates_uniqueness_of :email, :case_sensitive => false
 
+  validates_uniqueness_of :login, :scope => :tenant_id
+
   named_scope :recent, proc { |day_count|
     { :conditions => ['created_on > ?', Time.now.ago(day_count.to_i.day)] }
   }

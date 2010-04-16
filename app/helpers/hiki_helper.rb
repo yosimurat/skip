@@ -22,8 +22,12 @@ module HikiHelper
     return '' unless text
 
     user_proc = proc { |cymbol, link_str|
-      link_url = polymorphic_url([current_tenant, :user], :id => cymbol.split(':').last)
-      link_to link_str, link_url
+      user = current_tenant.users.find_by_login(cymbol.split(':').last)
+      if user
+        link_to link_str, polymorphic_url([current_tenant, user])
+      else
+        _("[Link does not exist...%s>]") % cymbol
+      end
     }
 
     group_proc = proc { |cymbol, link_str|
