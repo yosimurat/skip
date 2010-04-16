@@ -1,7 +1,7 @@
 <div class="form_space share_file">
   <div class="form_wrapper">
-    <% form_for [current_tenant, current_target_owner, @share_file], :html => {:multipart => true, :class => 'share_file_form'} do |f| -%>
-      <%= render f %>
+    <% form_for @share_file, :url => polymorphic_path([current_tenant, current_target_owner, :share_files], :action => :multi_create), :html => {:multipart => true, :class => 'share_file_form'} do |f| -%>
+      <%= render :partial => 'form', :locals => {:form => f, :is_multi => true}%>
       <%= submit_tag _("Create"), :id => "submit_button" %>
     <% end -%>
   </div>

@@ -142,6 +142,64 @@ class ShareFilesController < ApplicationController
     end
   end
 
+  def multi_create
+    if params[:multi_file] && params[:multi_file].is_a?(Array)
+      share_files = params[:multi_file].map do |f|
+        share_file = current_target_owner.owner_share_files.build(params[:share_file])
+        share_file.tenant = current_tenant
+        share_file.user = current_user
+        share_file.file = f
+        share_file
+      end
+      @share_file = share_files.first
+      required_full_accessible(@share_file) do
+        @error_messages = []
+        share_files.each do |share_file|
+          begin
+            ShareFile.transaction do
+              share_file.save!
+              share_file.create_index
+            end
+          rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
+            @error_messages = share_files.map do |s|
+              s.errors.full_messages.map { |message| "#{s.file_name} : #{message}" }
+            end.flatten
+          end
+        end
+        respond_to do |format|
+          format.html do
+            if @error_messages.empty?
+              flash[:notice] = _('File was successfully uploaded.')
+              if ajax_upload?
+                render(:text => {:status => '200', :messages => [_('File was successfully uploaded.')]}.to_json)
+              else
+                redirect_to [current_tenant, current_target_owner, :share_files]
+              end
+            else
+              if ajax_upload?
+                render(:text => {:status => '400', :messages => @error_messages}.to_json)
+              else
+                render(:action => "new")
+              end
+            end
+          end
+        end
+      end
+    else
+      @share_file = current_target_owner.owner_share_files.build(params[:share_file])
+      @error_messages = [_("%{name} is mandatory.") % {:name => _('File')}]
+      respond_to do |format|
+        format.html do
+          if ajax_upload?
+            render(:text => {:status => '400', :messages => @error_messages.to_json})
+          else
+            render(:action => "new")
+          end
+        end
+      end
+    end
+  end
+
   def edit
   end
 

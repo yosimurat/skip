@@ -1,4 +1,5 @@
-<%= template_error_messages_for 'share_file' %>
+<% is_multi ||= false -%>
+<%= template_error_messages_for (@error_messages || @share_file.errors.full_messages) %>
 
 <table style="width: 600px">
   <col class="col200"></col>
@@ -14,14 +15,37 @@
       </div>
     </td>
   </tr>
+  <% unless form.object.new_record? -%>
+    <tr>
+      <th><%= form.label :file, _('File') %></th>
+      <td><%= h(form.object.file_name) %></td>
+    </tr>
+  <% else -%>
+    <% if is_multi -%>
+      <% max = 5 -%>
+      <% (1..max).each do |i| -%>
+        <tr>
+          <% if i == 1 -%>
+            <th rowspan="<%= max %>"><%= label_tag 'multi_file[]', _('File') %></th>
+          <% end -%>
+          <td><%= file_field_tag('multi_file[]', :size => 60) %></td>
+        </tr>
+      <% end -%>
+    <% else -%>
+      <tr>
+        <th><%= form.label :file, _('File') %></th>
+        <td><%= form.file_field(:file, :size => 60) %></td>
+      </tr>
+    <% end -%>
+  <% end -%>
   <tr>
-    <th><%= form.label :file, _('File') %></th>
-    <td><%= form.object.new_record? ? form.file_field(:file, :size => 60) : h(form.object.file_name) %></td>
-  </tr>
-  <tr>
-    <th><%= form.label :date_1i, _('Publish Date')%></th>
+    <th rowspan="2"><%= form.label :date_1i, _('Publish Date')%></th>
     <td>
       <%= form.datetime_select :date, :use_month_numbers => true %>
+    </td>
+  </tr>
+  <tr>
+    <td>
       <a href="#" onclick="setCurrentDatetime('share_file', 'date');return false;"><%= _('[Set current time]')%></a>
     </td>
   </tr>

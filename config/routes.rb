@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
         board_entry.resources :board_entry_comments, :only => %w(create edit update destroy)
         board_entry.resources :entry_hide_operations, :only => %w(index)
       end
-      user.resources :share_files, :member => {:download_history_as_csv => :get, :clear_download_history => :delete}
+      user.resources :share_files, :member => {:download_history_as_csv => :get, :clear_download_history => :delete}, :collection => {:multi_create => :post}
       user.resources :pictures, :only => %w(show new create update destroy)
       user.resource :password, :only => %w(edit update)
       user.resource :applied_email, :only => %w(new create update), :member => {:complete => :get}
@@ -41,7 +41,7 @@ ActionController::Routing::Routes.draw do |map|
         board_entry.resources :board_entry_comments, :only => %w(create edit update destroy)
         board_entry.resources :entry_hide_operations, :only => %w(index)
       end
-      group.resources :share_files, :member => {:download_history_as_csv => :get, :clear_download_history => :delete}
+      group.resources :share_files, :member => {:download_history_as_csv => :get, :clear_download_history => :delete}, :collection => {:multi_create => :post}
       group.resources :notices, :only => %w(create destroy)
     end
     tenant.resources :share_files, :only => %w(index show)

@@ -32,14 +32,18 @@ module SkipHelper
 
   # バリデーションエラーメッセージのテンプレートを置換する
   # app/views/system/_error_messages_for.rhtml が存在する前提
-  def template_error_messages_for (object_name, options = {})
-    #------------ 元のメソッドの内容そのまま
+  def template_error_messages_for (object_name_or_messages, options = {})
     options = options.symbolize_keys
-    object = instance_variable_get("@#{object_name}")
-    # ----------- ここまで
-    unless object.errors.empty?
+    messages =
+      if object_name_or_messages.is_a?(Array)
+        object_name_or_messages
+      elsif object_name_or_messages.is_a?(String)
+        instance = instance_variable_get("@#{object_name_or_messages}")
+        instance.errors.full_messages
+      end || []
+    unless messages.empty?
       render :partial => "system/error_messages_for",
-      :locals=> { :messages=>object.errors.full_messages, :object=>object }
+      :locals=> { :messages=> messages }
     end
   end
 
