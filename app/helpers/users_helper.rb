@@ -20,7 +20,7 @@ module UsersHelper
     output_text << icon_tag('user_suit') if options[:image_on]
     output_text << title = h(user.name)
 
-    link = link_to(output_text, [current_tenant, user], {:title => title})
+    link = link_to(output_text, polymorphic_url([current_tenant, user]), {:title => title})
     if options[:with_prefix]
       "by #{link}"
     else
