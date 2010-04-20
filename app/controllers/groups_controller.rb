@@ -25,12 +25,12 @@ class GroupsController < ApplicationController
     search_params[:group_category_id_is] ||= 'all'
     @search =
       if current_target_user
-        current_target_user.groups.active.order_active
+        current_target_user.groups.order_active
       else
         if search_params[:unjoin]
           search_params[:unjoin] = search_params[:unjoin] == 'false' ?  nil : current_user.id
         end
-        Group.active.tenant_id_is(current_tenant.id).order_active
+        Group.tenant_id_is(current_tenant.id).order_active
       end
     @search = @search.search(search_params)
     # paginteの検索条件にgroup byが含まれる場合、countでgroup by が考慮されないので
@@ -92,7 +92,7 @@ class GroupsController < ApplicationController
       flash[:warn] = _('Failed to delete since there are still other users in the group.')
       redirect_to [current_tenant, @group]
     else
-      @group.logical_destroy
+      @group.destroy
       @group.destroy_index
       flash[:notice] = _('Group was successfully deleted.')
       redirect_to tenant_groups_url(current_tenant)

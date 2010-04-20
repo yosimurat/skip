@@ -24,9 +24,9 @@ describe GroupParticipation, '#group' do
   it '一件のグループが取得できること' do
     @group_participation.group.should_not be_nil
   end
-  describe 'グループを論理削除された場合' do
+  describe 'グループを削除された場合' do
     before do
-      @group.logical_destroy
+      @group.destroy
     end
     it 'グループが取得できないこと' do
       @group_participation.reload

@@ -18,7 +18,7 @@ class Admin::GroupsController < Admin::ApplicationController
 
   def destroy
     @group = Admin::Group.find_by_tenant_id_and_id!(current_tenant.id, params[:id])
-    @group.logical_destroy
+    @group.destroy
     @group.destroy_index tenant_group_url(current_tenant, @group)
 
     respond_to do |format|

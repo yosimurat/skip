@@ -16,7 +16,7 @@
 class GroupCategory < ActiveRecord::Base
   include Search::Indexable
   belongs_to :tenant
-  has_many :groups, :conditions => 'groups.deleted_at IS NULL'
+  has_many :groups
 
   N_('GroupCategory|Initial selected|true')
   N_('GroupCategory|Initial selected|false')
@@ -61,11 +61,10 @@ class GroupCategory < ActiveRecord::Base
 
   named_scope :with_groups_count, proc { |user|
     if user
-      { :conditions => ['group_participations.user_id = ? AND groups.deleted_at IS NULL', user.id],
+      { :conditions => ['group_participations.user_id = ?', user.id],
         :joins => 'LEFT JOIN groups ON group_categories.id = groups.group_category_id LEFT JOIN group_participations ON groups.id = group_participations.group_id' }
     else
-      { :conditions => ['groups.deleted_at IS NULL'],
-        :joins => 'LEFT JOIN groups ON group_categories.id = groups.group_category_id' }
+      { :joins => 'LEFT JOIN groups ON group_categories.id = groups.group_category_id' }
     end.merge(:select => 'group_categories.*, count(distinct(groups.id)) as count',
               :group => 'groups.group_category_id' )
   }

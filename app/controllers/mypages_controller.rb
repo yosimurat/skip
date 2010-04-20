@@ -34,7 +34,7 @@ class MypagesController < ApplicationController
     #  right side area
     # ============================================================
     @year, @month, @day = parse_date
-    @recent_groups = current_tenant.groups.active.recent(recent_day).order_recent.limit(5)
+    @recent_groups = current_tenant.groups.recent(recent_day).order_recent.limit(5)
     @recent_users = current_tenant.users.active.recent(recent_day).order_recent.limit(5) - [current_user]
 
     # ============================================================
@@ -190,7 +190,7 @@ class MypagesController < ApplicationController
     def scope
       scope = case
               when @key == 'comment'  then BoardEntry.accessible(@current_user).commented(@current_user)
-              when @key == 'joined_group'    then Group.active.participating(@current_user).owner_entries.accessible(@current_user)
+              when @key == 'joined_group'    then Group.participating(@current_user).owner_entries.accessible(@current_user)
               end
 
       scope = scope.unread(@current_user) unless @read

@@ -14,7 +14,6 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Group < ActiveRecord::Base
-  include SkipEmbedded::LogicalDestroyable
   include Search::Indexable
 
   belongs_to :tenant
@@ -110,20 +109,10 @@ class Group < ActiveRecord::Base
     end
   end
 
-  # グループに関連する情報の削除
-  def after_logical_destroy
-    owner_entries.destroy_all
-    owner_share_files.destroy_all
-  end
-
   def validate
     unless tenant.group_categories.find_by_id(self.group_category_id)
       errors.add(:group_category_id, _('Category not selected or value invalid.'))
     end
-  end
-
-  def self.has_waiting_for_approval owner
-    Group.active.owned(owner) & Group.active.has_waiting_for_approval
   end
 
   def joined? target_user

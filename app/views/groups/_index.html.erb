@@ -9,7 +9,7 @@
         <th><%= f.label :group_category_id, _('Category') %></th>
         <td>
           <%= f.radio_button :group_category_id_is, :all %>
-          <%= f.label :group_category_id_is_all, icon_tag("asterisk_orange", :margin => true) + _("All (%{num})") % {:num => Group.active.count} %>
+          <%= f.label :group_category_id_is_all, icon_tag("asterisk_orange", :margin => true) + _("All (%{num})") % {:num => current_tenant.groups.size} %>
           <% current_tenant.group_categories.with_groups_count.each do |category| -%>
             <%= f.radio_button :group_category_id_is, category.id %>
             <%= f.label "group_category_id_is_#{category.id}", "#{get_group_icon(category, :margin => true)}#{h(category.name)}(#{category.count})" %>

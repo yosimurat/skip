@@ -192,7 +192,7 @@ module ApplicationHelper
     return if !current_user || current_user.groups.participating(current_user).empty?
     option_tags = [content_tag(:option, _('Move to groups joined ...'), :value => polymorphic_url([current_tenant, current_user, :groups]))]
 
-    if groups = Group.active.participating(current_user).order_participate_recent.all(:include => :group_category) and !groups.empty?
+    if groups = Group.participating(current_user).order_participate_recent.all(:include => :group_category) and !groups.empty?
       groups.group_by(&:group_category).sort_by{|c, g| c.sort_order}.each do |category, groups_by_category|
         option_tags << content_tag(:option, "[#{h(category.name)}]", :disabled => 'disabled', :style => 'color: gray')
         groups_by_category.each do |group|

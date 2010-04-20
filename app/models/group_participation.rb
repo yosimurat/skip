@@ -15,7 +15,7 @@
 
 class GroupParticipation < ActiveRecord::Base
   belongs_to :user
-  belongs_to :group, :conditions => 'groups.deleted_at IS NULL'
+  belongs_to :group
 
   named_scope :active, proc {
     { :conditions => { :waiting => false } }

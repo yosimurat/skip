@@ -29,7 +29,7 @@ class Tenant < ActiveRecord::Base
   def reflesh_node
     self.node.clear
     self.users.active.each { |u| u.create_index }
-    self.groups.active.each { |g| g.create_index }
+    self.groups.each { |g| g.create_index }
     self.board_entries.each { |b| b.create_index }
     self.share_files.each { |s| s.create_index }
     true

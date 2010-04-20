@@ -79,7 +79,7 @@ protected
   end
 
   def current_target_group
-    @current_target_group ||= Group.active.find_by_tenant_id_and_id(current_tenant, (params[:controller] == 'groups' ? params[:id] : params[:group_id]))
+    @current_target_group ||= Group.find_by_tenant_id_and_id(current_tenant, (params[:controller] == 'groups' ? params[:id] : params[:group_id]))
   end
 
   def current_target_owner

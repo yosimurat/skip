@@ -16,7 +16,7 @@
       </tr>
       <tr>
         <th><%= label :joined_group_id, _('Group') %></th>
-        <td><%= select_tag :joined_group_id, options_for_select(current_tenant.groups.active.map {|g| [g.name, g.id]}.unshift(['', ''])) %></td>
+        <td><%= select_tag :joined_group_id, options_for_select(current_tenant.groups.map {|g| [g.name, g.id]}.unshift(['', ''])) %></td>
       </tr>
       <tr>
     </table>

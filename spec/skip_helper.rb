@@ -137,8 +137,7 @@ module Spec
 
         def create_group(options = {})
           tenant = options[:tenant] || create_tenant
-          group = tenant.groups.build({:name => 'SKIP開発', :description => 'SKIP開発中', :protected => false, :deleted_at => nil}.merge(options))
-          group.deleted_at = options[:deleted_at]
+          group = tenant.groups.build({:name => 'SKIP開発', :description => 'SKIP開発中', :protected => false}.merge(options))
           group.group_category_id = create_group_category(:initial_selected => true, :tenant => tenant).id if group.group_category_id == 0
           yield group if block_given?
           group.save!

@@ -29,7 +29,7 @@ class ServicesController < ActionController::Base
     result = {}
     if user = User.find_id(params[:user_id])
       group_hash = {}
-      Group.active.participating(user).each do |group|
+      Group.participating(user).each do |group|
         group_hash["group:#{group.id}"] = group.name
       end
       result = { :group_symbols => group_hash }

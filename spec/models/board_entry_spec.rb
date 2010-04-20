@@ -200,9 +200,9 @@ describe BoardEntry, '#send_contact_mails' do
           @entry.send_contact_mails
         end.should change(Email, :count).by(2)
       end
-      describe '記事を所有するグループが論理削除された場合' do
+      describe '記事を所有するグループが削除された場合' do
         before do
-          @group.logical_destroy
+          @group.destroy
         end
         it 'Emailに送信予定のレコードが作成されないこと' do
           lambda do
@@ -263,9 +263,9 @@ describe BoardEntry, '#publication_users' do
       it '公開されているユーザの配列が返ること' do
         @entry.publication_users.should == [@alice, @mike]
       end
-      describe '記事を所有するグループが論理削除された場合' do
+      describe '記事を所有するグループが削除された場合' do
         before do
-          @group.logical_destroy
+          @group.destroy
         end
         it '公開されているユーザの配列が返ること' do
           @entry.publication_users.should == [@mike]

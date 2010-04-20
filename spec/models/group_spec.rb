@@ -106,9 +106,9 @@ describe Group do
       it '指定したユーザに対する承認待ちのグループが取得できること' do
         Group.has_waiting_for_approval(@alice).first.should == @group
       end
-      describe '承認待ちになっているグループが論理削除された場合' do
+      describe '承認待ちになっているグループが削除された場合' do
         before do
-          @group.logical_destroy
+          @group.destroy
         end
         it '対象のグループが取得できないこと' do
           Group.has_waiting_for_approval(@alice).should be_empty
@@ -130,28 +130,6 @@ describe Group do
     it "管理者ユーザが返る" do
       @group.owners.should == [@alice]
     end
-  end
-
-  describe Group, "#logical_after_destroy グループに掲示板、掲示板コメント、共有ファイルがある場合" do
-    fixtures :groups, :board_entries, :share_files, :users, :user_uids
-    before(:each) do
-      @group = groups(:a_protected_group1)
-      @board_entry = board_entries(:a_entry)
-      @share_file = share_files(:a_share_file)
-      @board_entry.symbol = @group.symbol
-      @board_entry.entry_type = BoardEntry::GROUP_BBS
-      @board_entry.category = ''
-      @board_entry.save!
-      @board_entry.board_entry_comments.create! :contents => 'contents', :user => create_user
-
-      @share_file.stub!(:updatable?).and_return(true)
-      @share_file.save!
-      File.stub!(:delete)
-    end
-
-    it { lambda { @group.logical_destroy }.should change(BoardEntry, :count).by(-1) }
-    it { lambda { @group.logical_destroy }.should change(ShareFile, :count).by(-1) }
-    it { lambda { @group.logical_destroy }.should change(BoardEntryComment, :count).by(-1) }
   end
 
   describe "#join" do

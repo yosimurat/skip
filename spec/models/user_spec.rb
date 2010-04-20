@@ -24,9 +24,9 @@ describe User, '#groups' do
   it '一件のグループが取得できること' do
     @user.groups.size.should == 1
   end
-  describe 'グループを論理削除された場合' do
+  describe 'グループを削除された場合' do
     before do
-      @group.logical_destroy
+      @group.destroy
     end
     it 'グループが取得できないこと' do
       @user.groups.size.should == 0

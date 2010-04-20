@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   has_one  :user_custom, :dependent => :destroy
   has_many :user_message_unsubscribes, :dependent => :destroy
 
-  has_many :groups, :through => :group_participations, :conditions => 'groups.deleted_at IS NULL'
+  has_many :groups, :through => :group_participations
 
   has_many :openid_identifiers
 
@@ -505,7 +505,7 @@ class User < ActiveRecord::Base
   # ユーザが所属するグループのシンボルを配列で返す
   # TODO 使用箇所を潰した上で廃止
   def group_symbols
-    @group_symbols ||= Group.active.participating(self).map(&:symbol)
+    @group_symbols ||= Group.participating(self).map(&:symbol)
   end
 
   # ユーザが所属するシンボル(本人 + 本人の所属するグループ)のシンボルを配列で返す
