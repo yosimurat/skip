@@ -29,6 +29,7 @@ class ServicesController < ActionController::Base
     if user = User.find_by_uid(params[:user_code])
       group_hash = {}
       user.group_participations.find(:all, :conditions => ["waiting = ?", false]).each do |p|
+        next if p.group.nil?
         group_hash[p.group.gid] = p.group.name
       end
       result = { :user_uid => user.uid, :group_symbols => group_hash }
