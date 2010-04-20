@@ -195,21 +195,6 @@ class BoardEntry < ActiveRecord::Base
   GROUP_BBS = 'GROUP_BBS'
 
   def validate
-#    symbol_type, symbol_id = SkipUtil.split_symbol self.symbol
-#    if self.entry_type == DIARY
-#      if symbol_type == "uid"
-#        errors.add_to_base(_("User does not exist.")) unless User.find_by_uid(symbol_id)
-#      else
-#        errors.add_to_base(_("Invalid user detected."))
-#      end
-#    elsif self.entry_type == GROUP_BBS
-#      if symbol_type == "gid"
-#        errors.add_to_base(_("Group does not exist.")) unless Group.active.find_by_gid(symbol_id)
-#      else
-#        errors.add_to_base(_("Invalid group detected."))
-#      end
-#    end
-
     Tag.validate_tags(category).each{ |error| errors.add(:category, error) }
   end
 

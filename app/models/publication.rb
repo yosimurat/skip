@@ -17,14 +17,14 @@ module Publication
   def publication_type_name
     if self.publication_type == 'private'
       if self.owner_is_user?
-        _("Publication type|private|uid")
+        _('Owner Only')
       elsif self.owner_is_group?
-        _("Publication type|private|gid")
+        _('Members Only')
       else
         ""
       end
     else
-      _("Publication type|#{self.publication_type}")
+      _('Open to All')
     end
   end
   # 全公開かどうか

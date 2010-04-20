@@ -1,6 +1,6 @@
 module HikiHelper
   # 第一引数textに含まれるsymbol_linkを置換する（[uid:fujiwara>namae]）
-  # ２つ目の引数で、対象とするsymbolのtype（uid,gid...）を指定
+  # ２つ目の引数で、対象とするsymbolのtype（uid,...）を指定
   # ３つ目の引数で、置換する文字列を生成する関数を指定
   # ４つ目の引数で、symbol_link内の表示文字列指定との区切り文字を指定（'>' or '&gt;'）
   def replace_symbol_link text, symbol_type, replace_str_proc, split_mark
@@ -30,11 +30,6 @@ module HikiHelper
       end
     }
 
-    group_proc = proc { |cymbol, link_str|
-      link_url = polymorphic_url([current_tenant, :group], :id => cymbol.split(':').last)
-      link_to link_str, link_url
-    }
-
     entry_proc = proc { |cymbol, link_str|
       link_url = polymorphic_url([current_tenant, :board_entry], :id => cymbol.split(':').last)
       link_to link_str, link_url
@@ -52,7 +47,7 @@ module HikiHelper
       end
     }
 
-    procs = [["uid", user_proc], ["gid", group_proc], ["page", entry_proc]]
+    procs = [["uid", user_proc], ["page", entry_proc]]
     procs << ["file",file_proc] if owner
 
     split_mark =  "&gt;"

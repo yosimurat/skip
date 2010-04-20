@@ -65,4 +65,14 @@ Spec::Rake::SpecTask.new("spec:recent") do |t|
   t.spec_files = recent_specs(Time.now - 600) # 10 min.
 end
 
+def last_spec(touched_since)
+  recent_specs(touched_since).sort_by { |path| File.mtime(path) }.first
+end
+
+desc 'Run last specs'
+Spec::Rake::SpecTask.new("spec:last") do |t|
+  t.spec_opts = ["--format","specdoc","--color"]
+  t.spec_files = last_spec(Time.now - 600) # 10 min.
+end
+
 end

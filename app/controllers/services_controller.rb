@@ -24,12 +24,13 @@ class ServicesController < ActionController::Base
   init_gettext "skip" if defined? GetText
 
   # ユーザに関連する情報を取得する
+  # TODO 従来と仕様が変わっているので再度検討が必要か。そもそもOAuth等で連携するようにして無くしたい
   def user_info
     result = {}
     if user = User.find_id(params[:user_id])
       group_hash = {}
-      user.group_participations.find(:all, :conditions => ["waiting = ?", false]).each do |p|
-        group_hash[p.group.gid] = p.group.name
+      Group.active.participating(user).each do |group|
+        group_hash["group:#{group.id}"] = group.name
       end
       result = { :group_symbols => group_hash }
     else

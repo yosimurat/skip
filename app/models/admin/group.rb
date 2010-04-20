@@ -26,7 +26,7 @@ class Admin::Group < Group
   N_('Admin::Group|Deleted at')
 
   def self.search_columns
-    %w(name gid description)
+    %w(name description)
   end
 
   def topic_title

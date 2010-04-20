@@ -1,13 +1,4 @@
 <%= template_error_messages_for 'group' %>
-<% if @group && @group.new_record? -%>
-  <div class="input_line">
-    <div class="input_label"><%= form.label :gid, _('Group ID') %></div>
-    <div class="input_value"><%= form.text_field :gid, :size => 40 %></div>
-    <div class="param_desc" style="font-size:10px; color:gray;">
-    <%= _("*A group ID consists of 4 or more letters of alphabets, numbers, \"-\" and \"_\".<br>\n  *Group ID is used in many situations e.g. URLs to identify the group so choose a understandable one.")%>
-    </div>
-  </div>
-<% end -%>
 <div class="input_line">
   <div class="input_label"><%= form.label :name, _('Name of Group') %></div>
   <div class="input_value"><%= form.text_field :name, :size => 40 %></div>

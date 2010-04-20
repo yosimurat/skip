@@ -305,9 +305,8 @@ class MypagesController < ApplicationController
 
   def recent_bbs
     recent_bbs = []
-    gid_by_category = Group.gid_by_category
     current_tenant.group_categories.ascend_by_sort_order.each do |category|
-      options = { :group_symbols => gid_by_category[category.id], :per_page => per_page }
+      options = { :per_page => per_page }
       recent_bbs << find_recent_bbs_as_locals(category.code.downcase, options)
     end
     recent_bbs

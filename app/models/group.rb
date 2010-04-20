@@ -24,19 +24,8 @@ class Group < ActiveRecord::Base
   has_many :owner_entries, :class_name => 'BoardEntry', :as => :owner, :dependent => :destroy
   has_many :owner_share_files, :class_name => 'ShareFile', :as => :owner, :dependent => :destroy
 
-  validates_presence_of :name, :description, :gid, :tenant_id
-  validates_uniqueness_of :gid, :case_sensitive => false
-  validates_length_of :gid, :within => 4..50
-  validates_format_of :gid, :message => _("accepts numbers, alphabets, hiphens(\"-\") and underscores(\"_\")."), :with => /^[a-zA-Z0-9\-_]*$/
+  validates_presence_of :name, :description, :tenant_id
   validates_inclusion_of :default_publication_type, :in => ['public', 'private']
-
-  named_scope :partial_match_gid, proc {|word|
-    {:conditions => ["gid LIKE ?", SkipUtil.to_lqs(word)]}
-  }
-
-  named_scope :partial_match_gid_or_name, proc {|word|
-    {:conditions => ["gid LIKE ? OR name LIKE ?", SkipUtil.to_lqs(word), SkipUtil.to_lqs(word)]}
-  }
 
   named_scope :partial_match_name_or_description, proc {|word|
     return {} if word.blank?
@@ -135,14 +124,6 @@ class Group < ActiveRecord::Base
 
   def self.has_waiting_for_approval owner
     Group.active.owned(owner) & Group.active.has_waiting_for_approval
-  end
-
-  # グループのカテゴリごとのgidの配列を返す(SQL発行あり)
-  #   { "BIZ" => ["gid:swat","gid:qms"], "LIFE" => [] ... }
-  def self.gid_by_category
-    group_by_category = Hash.new{|h, key| h[key] = []}
-    active(:select => "group_category_id, gid").each{ |group| group_by_category[group.group_category_id] << "gid:#{group.gid}" }
-    group_by_category
   end
 
   def joined? target_user

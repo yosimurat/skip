@@ -119,7 +119,7 @@ module Spec
 
         def valid_group_category
           group_category = GroupCategory.new({
-            :code => 'DEPT',
+            :code => SkipFaker.rand_alpha,
             :name => '部署',
             :icon => 'group_gear',
             :description => '部署用のグループカテゴリ',
@@ -137,9 +137,9 @@ module Spec
 
         def create_group(options = {})
           tenant = options[:tenant] || create_tenant
-          group = tenant.groups.build({:name => 'SKIP開発', :description => 'SKIP開発中', :protected => false, :gid => 'skip_dev', :deleted_at => nil}.merge(options))
+          group = tenant.groups.build({:name => 'SKIP開発', :description => 'SKIP開発中', :protected => false, :deleted_at => nil}.merge(options))
           group.deleted_at = options[:deleted_at]
-          group.group_category_id = create_group_category(:initial_selected => true).id if group.group_category_id == 0
+          group.group_category_id = create_group_category(:initial_selected => true, :tenant => tenant).id if group.group_category_id == 0
           yield group if block_given?
           group.save!
           group

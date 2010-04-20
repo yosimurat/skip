@@ -132,22 +132,6 @@ describe Group do
     end
   end
 
-  describe Group, '.gid_by_category' do
-    before do
-      Group.delete_all
-      @group_category = create_group_category
-      @vim_group = create_group :gid => 'vim_group', :group_category_id => @group_category.id
-      @emacs_group = create_group :gid => 'emacs_group', :group_category_id => @group_category.id
-    end
-    it '対象のカテゴリに対するgidのハッシュが返ること' do
-      Group.gid_by_category.should == {@group_category.id => ['gid:vim_group', 'gid:emacs_group']}
-    end
-    it '論理削除されたグループのgidは含まれないこと' do
-      @vim_group.logical_destroy
-      Group.gid_by_category.should == {@group_category.id => ['gid:emacs_group']}
-    end
-  end
-
   describe Group, "#logical_after_destroy グループに掲示板、掲示板コメント、共有ファイルがある場合" do
     fixtures :groups, :board_entries, :share_files, :users, :user_uids
     before(:each) do

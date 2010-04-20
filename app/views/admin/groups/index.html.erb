@@ -9,7 +9,7 @@
   <%= render :partial => '/admin/search_box', :locals => { :class_name => 'Admin::Group' } %>
   <%= render :partial => '/admin/shared/sortable_table',
              :locals => {
-               :columns => %w[name gid description protected group_category_id deleted_at],
+               :columns => %w[name description protected group_category_id deleted_at],
                :disp_columns_proc => lambda do |object,column|
       case column
       when "protected"

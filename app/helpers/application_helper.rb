@@ -94,28 +94,25 @@ module ApplicationHelper
 
   # TODO Publicationクラス辺りに移したい
   def get_publication_type_icon(entry_or_share_file)
-    icon_name = ''
-    view_name = ''
-
     case entry_or_share_file.publication_type
     when 'public'
-      if entry_or_share_file.owner_is_group? and entry_or_share_file.public?
-        group = Group.active.find_by_gid(entry_or_share_file.owner.gid)
+      if entry_or_share_file.owner_is_group?
+        group = entry_or_share_file.owner
         category = group ? group.group_category : nil
         icon_name = category.blank? ? "group" : category.icon
       else
         icon_name = 'user_suit'
       end
-      view_name = _("Open to All")
-    when 'protected'
-      visibility, visibility_color = entry_or_share_file.visibility
-      icon_name = 'link'
-      view_name = _("Specify Directly") + visibility
+      icon_tag(icon_name, :title => _("Open to All"))
     when 'private'
-      icon_name = entry_or_share_file.owner_is_user? ? 'pencil' : 'key'
-      view_name = entry_or_share_file.owner_is_user? ? _("Owner Only") : _("Members Only")
+      if entry_or_share_file.owner_is_group?
+        icon_tag 'key', _('Members Only')
+      else
+        icon_tag 'pencil', _('Owner Only')
+      end
+    else
+      ''
     end
-    icon_tag(icon_name, :title => view_name)
   end
 
   def get_menu_items menus, selected_menu, action
