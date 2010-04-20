@@ -86,9 +86,7 @@ class MypagesController < ApplicationController
   def entries_by_antenna
     @antenna_entry = antenna_entry(params[:target_type], params[:target_id], params[:read])
     @antenna_entry.title = antenna_entry_title(@antenna_entry)
-    if @antenna_entry.need_search?
-      @entries = @antenna_entry.scope.order_new.paginate(:page => params[:page], :per_page => 20)
-    end
+    @entries = @antenna_entry.scope.order_new.paginate(:page => params[:page], :per_page => 20)
   end
 
   # ajax_action
@@ -149,7 +147,7 @@ class MypagesController < ApplicationController
           raise ActiveRecord::RecordNotFound
         end
       else
-        if %w(comment joined_group).include?(key)
+        if %w(comment).include?(key)
           SystemAntennaEntry.new(current_user, key, read)
         else
           raise ActiveRecord::RecordNotFound
@@ -174,10 +172,6 @@ class MypagesController < ApplicationController
       scope = scope.unread(@current_user) unless @read
       scope
     end
-
-    def need_search?
-      true
-    end
   end
 
   class SystemAntennaEntry < AntennaEntry
@@ -190,15 +184,10 @@ class MypagesController < ApplicationController
     def scope
       scope = case
               when @key == 'comment'  then BoardEntry.accessible(@current_user).commented(@current_user)
-              when @key == 'joined_group'    then Group.participating(@current_user).owner_entries.accessible(@current_user)
               end
 
       scope = scope.unread(@current_user) unless @read
       scope
-    end
-
-    def need_search?
-      !(@key == 'group' && @current_user.group_symbols.size == 0)
     end
   end
 
@@ -215,10 +204,6 @@ class MypagesController < ApplicationController
       scope = BoardEntry.accessible(@current_user).owned(@owner)
       scope = scope.unread(@current_user) unless @read
       scope
-    end
-
-    def need_search?
-      true
     end
   end
 

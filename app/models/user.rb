@@ -502,18 +502,6 @@ class User < ActiveRecord::Base
     self.find_by_email(code)
   end
 
-  # ユーザが所属するグループのシンボルを配列で返す
-  # TODO 使用箇所を潰した上で廃止
-  def group_symbols
-    @group_symbols ||= Group.participating(self).map(&:symbol)
-  end
-
-  # ユーザが所属するシンボル(本人 + 本人の所属するグループ)のシンボルを配列で返す
-  # TODO 使用箇所を潰した上で廃止
-  def belong_symbols
-    @belong_symbols ||= self.group_symbols
-  end
-
   def to_draft uri
     body_lines = []
     body_lines << ERB::Util.h(self.name)

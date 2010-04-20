@@ -829,45 +829,6 @@ describe User, "#find_or_initialize_profiles" do
   end
 end
 
-describe User, '#group_symbols' do
-  before do
-    @user = create_user
-    @group = create_group(:gid => 'skip_dev') do |g|
-      g.group_participations.build(:user_id => @user.id, :owned => true)
-    end
-    @group_symbols = ['gid:skip_dev']
-  end
-  describe '1度だけ呼ぶ場合' do
-    it 'ユーザの所属するグループのシンボル配列を返すこと' do
-      @user.group_symbols.should == @group_symbols
-    end
-  end
-  describe '2度呼ぶ場合' do
-    it 'ユーザの所属するグループのシンボル配列を返すこと(2回目はキャッシュされた結果になること)' do
-      @user.group_symbols
-      @user.group_symbols.should == @group_symbols
-    end
-  end
-end
-
-describe User, '#belong_symbols' do
-  before do
-    @user = stub_model(User, :symbol => 'uid:skipuser')
-    @user.should_receive(:group_symbols).once.and_return(['gid:skip_dev'])
-  end
-  describe '1度だけ呼ぶ場合' do
-    it 'ユーザ自身のシンボルとユーザの所属するグループのシンボルを配列で返すこと' do
-      @user.belong_symbols.should == ['uid:skipuser', 'gid:skip_dev']
-    end
-  end
-  describe '2度呼ぶ場合' do
-    it 'ユーザ自身のシンボルとユーザの所属するグループのシンボルを配列で返すこと(2回目はキャッシュされた結果になること' do
-      @user.belong_symbols
-      @user.belong_symbols.should == ['uid:skipuser', 'gid:skip_dev']
-    end
-  end
-end
-
 describe User, "#openid_identifier" do
   before do
     GlobalInitialSetting['host_and_port'] = 'test.host'

@@ -18,7 +18,6 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe SearchesController, "GET /full_text_search" do
   before do
     @current_user = user_login
-    @current_user.stub!(:belong_symbols).and_return({})
     @params = {}
   end
   describe "検索クエリが投げられている場合" do

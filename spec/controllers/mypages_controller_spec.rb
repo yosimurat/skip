@@ -296,37 +296,6 @@ describe MypagesController, 'mypage > home 関連' do
       @current_user = stub_model(User)
       @antenna_entry = MypagesController::SystemAntennaEntry.new(@current_user, 'message')
     end
-    describe '#need_search?' do
-      describe 'keyがgroupの場合' do
-        before do
-          @antenna_entry = MypagesController::SystemAntennaEntry.new(@current_user, 'group')
-        end
-        describe '指定ユーザがグループに所属している場合' do
-          before do
-            @current_user.should_receive(:group_symbols).and_return([:skip_dev])
-          end
-          it 'trueが返ること' do
-            @antenna_entry.need_search?.should be_true
-          end
-        end
-        describe '指定ユーザがグループに所属していない場合' do
-          before do
-            @current_user.should_receive(:group_symbols).and_return([])
-          end
-          it 'falseが返ること' do
-            @antenna_entry.need_search?.should be_false
-          end
-        end
-      end
-      describe 'keyがgroup以外の場合' do
-        before do
-          @antenna_entry = MypagesController::SystemAntennaEntry.new(@current_user, 'message')
-        end
-        it 'trueが返ること' do
-          @antenna_entry.need_search?.should be_true
-        end
-      end
-    end
   end
 end
 
