@@ -155,6 +155,7 @@ class Group < ActiveRecord::Base
     BoardEntryComment.destroy_all(['board_entry_id in (?)', board_entry_ids])
     BoardEntry.destroy_all(["id in (?)", board_entry_ids])
     ShareFile.destroy_all(["owner_symbol = ?", self.symbol])
+    GroupParticipation.destroy_all(['group_id = ?', self.id])
   end
 
   def after_save
