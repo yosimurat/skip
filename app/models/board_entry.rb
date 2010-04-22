@@ -527,7 +527,6 @@ class BoardEntry < ActiveRecord::Base
 
     users = publication_users
     users.each do |u|
-      next if u.id == self.user_id
       owner = load_owner
       UserMailer::AR.deliver_sent_contact(u.email, owner, self)
     end
