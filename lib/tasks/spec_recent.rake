@@ -66,7 +66,7 @@ Spec::Rake::SpecTask.new("spec:recent") do |t|
 end
 
 def last_spec(touched_since)
-  recent_specs(touched_since).sort_by { |path| File.mtime(path) }.first
+  recent_specs(touched_since).sort_by { |path| File.mtime(path) }.last
 end
 
 desc 'Run last specs'
