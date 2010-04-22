@@ -139,6 +139,16 @@ class BoardEntry < ActiveRecord::Base
     owner_type_is_group == '1' ? owner_type_is('Group') : scoped({})
   }
 
+  alias_scope :date_year_and_month, proc { |date_hash|
+    return scoped({}) if !date_hash || !date_hash[:year]
+    year = date_hash[:year]
+    start_month = date_hash[:month] || '1'
+    end_month = date_hash[:month] || '12'
+    start_date = Time.local(year, start_month).beginning_of_month
+    end_date = Time.local(year, end_month).end_of_month
+    date_gte(start_date).date_lte(end_date)
+  }
+
   named_scope :from_recents, proc {
     num = GlobalInitialSetting['mypage_entry_search_limit'] || 1000
     { :from => "(SELECT * FROM board_entries ORDER BY board_entries.last_updated DESC LIMIT #{num}) AS board_entries" }

@@ -1,3 +1,4 @@
+<% unless @search.conditions[:date_year_and_month] -%>
 <div class="search_cond_space ui-corner-all">
   <% form_for @search do |f| %>
     <table class="search_cond_box">
@@ -37,6 +38,7 @@
     </table>
   <% end -%>
 </div>
+<% end -%>
 
 <div class="search_result_space">
 <% unless @entries.empty? -%>

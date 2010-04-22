@@ -1,7 +1,7 @@
 <%
   # FIXME 要リファクタ
   month_archives =
-    BoardEntry.accessible(current_user).find(
+    BoardEntry.accessible(current_user).owned(current_target_owner).find(
       :all,
       :select => "YEAR(date) as year, MONTH(date) as month, count(distinct board_entries.id) as count",
       :group => "year, month",
@@ -14,8 +14,7 @@
   <ul style="list-style-position: inside; list-style-type: disc;">
   <% month_archives.each do |archive| -%>
     <% link_text =  _("%{month}/%{year} (%{count})") % {:year => archive.year, :month => archive.month, :count => archive.count} -%>
-    <%# FIXME ある年月に投稿されたものに絞り込めるようにしないといけない %>
-    <li><%= link_to link_text, :archive => "all", :year => archive.year, :month => archive.month -%></li>
+    <li><%= link_to link_text, polymorphic_path([current_tenant, current_target_owner, :board_entries], :search => {:date_year_and_month => {:year => archive.year, :month => archive.month}}) %></li>
   <% end -%>
   </ul>
   <br style="display: none; clear:left;" />
