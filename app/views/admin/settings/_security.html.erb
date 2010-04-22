@@ -1,5 +1,5 @@
 <div class="box"><%= _('Here you can set security options to make using SKIP safer.<br />They are set to recommended settings by default.<br />It may compromise the security level of SKIP if you moderate from default settings.') %></div>
-<% @revert_columns = %w(enable_user_lock user_lock_trial_limit enable_password_periodic_change password_change_interval password_strength custom_password_strength_regex custom_password_strength_validation_message enable_login_keyphrase login_keyphrase enable_user_cleaning_notification user_cleaning_notification_interval enable_single_session) -%>
+<% @revert_columns = %w(enable_user_lock user_lock_trial_limit enable_password_periodic_change password_change_interval password_strength custom_password_strength_regex custom_password_strength_validation_message enable_user_cleaning_notification user_cleaning_notification_interval enable_single_session) -%>
 <h3><%= _('Lock accounts by unsuccessful log in attempts') %></h3>
 <div class="box tabular">
   <p><%= settings_label_with_check_box_tag :enable_user_lock %></p>
@@ -26,11 +26,6 @@
     <p><%= settings_label_with_text_field_tag :custom_password_strength_regex, :size => 40, :disabled => 'disabled' %></p>
     <p><%= settings_label_with_text_field_tag :custom_password_strength_validation_message, :size => 40, :disabled => 'disabled' %></p>
   </span>
-</div>
-<h3><%= _('Login keyphrase') %></h3>
-<div class="box tabular">
-  <p><%= settings_label_with_check_box_tag :enable_login_keyphrase %></p>
-  <p><%= settings_label_with_text_field_tag :login_keyphrase %></p>
 </div>
 <h3><%= _('Prompt for user data cleaning by email') %></h3>
 <div class="box tabular">
@@ -73,9 +68,6 @@
             $j('#custom_password_strength label').css('color',  '#999');
         }
     };
-    var toggleLoginKeyPhrase = function() {
-        toggleByCheckbox('setting_enable_login_keyphrase');
-    };
     var toggleCleaningNotificationInterval = function() {
         toggleByCheckbox('setting_enable_user_cleaning_notification');
     };
@@ -83,7 +75,6 @@
         toggleLoginTrialLimit();
         togglePasswordChangeInterval();
         toggleCustomPasswordStrength();
-        toggleLoginKeyPhrase();
         toggleCleaningNotificationInterval();
     };
     $j('#setting_enable_user_lock')
@@ -101,10 +92,6 @@
     })
     .change(function(){
         toggleCustomPasswordStrength();
-    });
-    $j('#setting_enable_login_keyphrase')
-    .click(function() {
-        toggleLoginKeyPhrase();
     });
     $j('#setting_enable_user_cleaning_notification')
     .click(function() {

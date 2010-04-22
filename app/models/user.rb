@@ -218,8 +218,8 @@ class User < ActiveRecord::Base
     alias_method_chain :find, :retired_skip
   end
 
-  def self.auth(code_or_email, password, key_phrase = nil)
-    unless user = User.find_by_code_or_email_with_key_phrase(code_or_email, key_phrase)
+  def self.auth(code_or_email, password)
+    unless user = User.find_by_email(code_or_email)
       result, result_user = false, nil
     else
       if user.unused?
@@ -539,18 +539,6 @@ private
     self.class.encrypt(password)
   end
 
-  def self.find_by_code_or_email(code_or_email)
-    find_by_email(code_or_email)
-  end
-
-  def self.find_by_code_or_email_with_key_phrase(code_or_email, key_phrase)
-    # if Admin::Setting.enable_login_keyphrase(tenant)
-    #   find_by_code_or_email(code_or_email) if Admin::Setting.login_keyphrase(tenant) == key_phrase
-    # else
-      find_by_code_or_email(code_or_email)
-    # end
-  end
-
   def self.auth_successed user
     unless user.locked?
       user.last_authenticated_at = Time.now
@@ -574,5 +562,5 @@ private
     nil
   end
 
-  private_class_method :find_by_code_or_email, :auth_successed, :auth_failed
+  private_class_method :auth_successed, :auth_failed
 end

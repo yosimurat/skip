@@ -242,7 +242,7 @@ class PlatformsController < ApplicationController
   def login_with_password
     logout_killing_session!([:request_token])
     if params[:login]
-      User.auth(params[:login][:key], params[:login][:password], params[:login][:keyphrase]) do |result, user|
+      User.auth(params[:login][:key], params[:login][:password]) do |result, user|
         if result
           self.current_user = user
           logger.info(current_user.to_s_log('[Login successful with password]'))

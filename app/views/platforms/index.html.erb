@@ -8,7 +8,7 @@
 <% end -%>
 
 <div id="platform_main_wrapper">
-  <div id="platform_main" class="<%# TODO login keyphrase が動作しない = Admin::Setting.enable_login_keyphrase(current_tenant) ? 'with_keyphrase' : "without_keyphrase" %>">
+  <div id="platform_main">
     <div class="col">
       <div class="login-box ui-corner-all">
         <p><%= _('Signup') %></p>
@@ -26,7 +26,7 @@
 </div>
 
 <% content_for :header_form do -%>
-  <div id="login_container" class="<%# TODO login keyphrase が動作しない = Admin::Setting.enable_login_keyphrase(current_tenant) ? 'with_keyphrase' : "without_keyphrase" %> ui-corner-all">
+  <div id="login_container" class="ui-corner-all">
     <%= render :partial => 'shared/login_form' %>
   </div>
 <% end -%>
