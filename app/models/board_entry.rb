@@ -48,12 +48,11 @@ class BoardEntry < ActiveRecord::Base
   validates_inclusion_of :aim_type, :in => AIM_TYPES
   validates_inclusion_of :publication_type, :in => %w(private public)
 
-  # TODO 回帰テストを書く
   named_scope :accessible, proc { |user|
     if joined_group_ids = Group.participating(user).map(&:id) and !joined_group_ids.empty?
-      { :conditions => ['board_entries.tenant_id = ? AND publication_type = "public" OR owner_id IN (?)', user.tenant_id, joined_group_ids] }
+      { :conditions => ['board_entries.tenant_id = ? AND (publication_type = "public" OR (owner_type = "User" AND owner_id = ?) OR (owner_type = "Group" AND owner_id IN (?)))', user.tenant_id, user.id, joined_group_ids] }
     else
-      { :conditions => ['board_entries.tenant_id = ? AND publication_type = "public"', user.tenant_id] }
+      { :conditions => ['board_entries.tenant_id = ? AND (publication_type = "public" OR (owner_type = "User" AND owner_id = ?))', user.tenant_id, user.id] }
     end
   }
 

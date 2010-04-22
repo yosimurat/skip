@@ -15,6 +15,85 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
+describe BoardEntry, '.accessible' do
+  before do
+    @sg = create_tenant(:name => 'SonicGarden')
+    @sg_alice = create_user(:tenant => @sg)
+    @sg_dave = create_user(:tenant => @sg_dave)
+    @sug = create_tenant(:name => 'SKIPUserGroup')
+    @sug_carol = create_user(:tenant => @sug_carol)
+  end
+  subject do
+    BoardEntry.accessible(@sg_alice)
+  end
+  context '公開されている記事' do
+    before do
+      @sg_public_entry = create_board_entry(:tenant => @sg, :publication_type => 'public')
+      @sug_public_entry = create_board_entry(:tenant => @sug, :publication_type => 'public')
+    end
+    it '全体に公開されている記事が取得出来ること' do
+      should be_include(@sg_public_entry)
+    end
+    it '別のテナントの全体公開の記事が取得出来ないこと' do
+      should_not be_include(@sug_public_entry)
+    end
+    context '参加グループのIDと一致するIDを持つ別のテナントのユーザの公開されている記事' do
+      before do
+        @sg_group = create_group(:tenant => @sg)
+        @sg_group.group_participations.build(:user => @sg_alice).join!(@sg_alice)
+        @sug_carol.stub(:id).and_return(@sg_group.id)
+        @sug_carol_public_entry = create_board_entry(:tenant => @sug, :publication_type => 'public', :owner => @sug_carol)
+      end
+      it '別のテナントの全体公開の記事が取得出来ないこと' do
+        should_not be_include(@sug_carol_public_entry)
+      end
+    end
+  end
+  context '下書き記事' do
+    before do
+      with_options(:publication_type => 'private') do |me|
+        @sg_alice_private_entry = me.create_board_entry(:tenant => @sg, :owner => @sg_alice)
+        @sg_dave_private_entry = me.create_board_entry(:tenant => @sg, :owner => @sg_dave)
+        @sug_carol_private_entry = me.create_board_entry(:tenant => @sug, :owner => @sug_carol)
+      end
+    end
+    it '自分の下書き記事を取得出来ること' do
+      should be_include(@sg_alice_private_entry)
+    end
+    it '他人の下書き記事を取得出来ないこと' do
+      should_not be_include(@sg_dave_private_entry)
+    end
+    it '別のテナントの下書き記事を取得出来ないこと' do
+      should_not be_include(@sug_carol_private_entry)
+    end
+  end
+  context 'フォーラム記事' do
+    before do
+      @sg_group = create_group(:tenant => @sg)
+      @sg_group.group_participations.build(:user => @sg_alice).join!(@sg_alice)
+      @sg_group.group_participations.build(:user => @sg_dave).join!(@sg_dave)
+      with_options(:tenant => @sg, :publication_type => 'private', :owner => @sg_group) do |me|
+        @sg_group_alice_private_entry = me.create_board_entry(:user => @sg_alice)
+        @sg_group_dave_private_entry = me.create_board_entry(:user => @sg_dave)
+      end
+      @sg_another_group = create_group(:tenant => @sg)
+      @sg_another_group.group_participations.build(:user => @sg_dave).join!(@sg_dave)
+      with_options(:tenant => @sg, :publication_type => 'private', :owner => @sg_another_group) do |me|
+        @sg_another_group_dave_private_entry = me.create_board_entry(:user => @sg_dave)
+      end
+    end
+    it '参加グループの自分の記事が取得出来ること' do
+      should be_include(@sg_group_alice_private_entry)
+    end
+    it '参加グループの他人の記事が取得出来ること' do
+      should be_include(@sg_group_dave_private_entry)
+    end
+    it '未参加グループの記事が取得出来ないこと' do
+      should_not be_include(@sg_another_group_dave_private_entry)
+    end
+  end
+end
+
 describe BoardEntry, "valid?" do
   describe '正しい値が設定されていない場合' do
     subject {
