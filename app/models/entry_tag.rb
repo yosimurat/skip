@@ -16,4 +16,9 @@
 class EntryTag < ActiveRecord::Base
   belongs_to :board_entry
   belongs_to :tag
+
+  named_scope :tenant_is, proc { |tenant|
+    # 指定したtenantに直接紐づいてないのでEXISTS句を利用して対象テナントに存在するレコードのみを検索対象にしている
+    {:conditions => "EXISTS (SELECT * FROM board_entries WHERE board_entries.tenant_id = #{tenant.id} AND entry_tags.board_entry_id = board_entries.id)" }
+  }
 end

@@ -283,14 +283,13 @@ class BoardEntry < ActiveRecord::Base
   end
 
   # TODO Tagのnamed_scopeにしてなくしたい
-  # FIXME Tenant毎になってない
-  def self.get_popular_tag_words()
+  def self.get_popular_tag_words tenant
     options = { :select => 'tags.name',
                 :joins => 'JOIN tags ON entry_tags.tag_id = tags.id',
                 :group => 'entry_tags.tag_id',
                 :order => 'count(entry_tags.tag_id) DESC'}
 
-    entry_tags = EntryTag.find(:all, options)
+    entry_tags = EntryTag.tenant_is(tenant).find(:all, options)
     tags = []
     entry_tags.each do |tag|
       tags << tag.name

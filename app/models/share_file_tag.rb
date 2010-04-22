@@ -16,4 +16,9 @@
 class ShareFileTag < ActiveRecord::Base
   belongs_to :share_file
   belongs_to :tag
+
+  named_scope :tenant_is, proc { |tenant|
+    # 指定したtenantに直接紐づいてないのでEXISTS句を利用して対象テナントに存在するレコードのみを検索対象にしている
+    {:conditions => "EXISTS (SELECT * FROM share_files WHERE share_files.tenant_id = #{tenant.id} AND share_file_tags.share_file_id = share_files.id)" }
+  }
 end

@@ -189,20 +189,6 @@ EOF
 end
 
 describe BoardEntry, '.get_popular_tag_words' do
-  describe "複数タグが見つかったとき" do
-    before(:each) do
-      @tag1 = mock_model(EntryTag)
-      @tag1.stub!(:name).and_return('z')
-      @tag2 = mock_model(EntryTag)
-      @tag2.stub!(:name).and_return('a')
-      @tag3 = mock_model(EntryTag)
-      @tag3.stub!(:name).and_return('z')
-      EntryTag.should_receive(:find).and_return([@tag1,@tag2,@tag3])
-    end
-    it "タグの名前をユニークして返す" do
-      BoardEntry.get_popular_tag_words.should == ['z','a']
-    end
-  end
 end
 
 describe BoardEntry, '.categories_hash' do

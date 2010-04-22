@@ -43,7 +43,7 @@ class ShareFilesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        @tags = ShareFile.get_popular_tag_words
+        @tags = ShareFile.get_popular_tag_words(current_tenant)
         if @share_files.empty?
           flash.now[:notice] = _('No matching data found.')
         end

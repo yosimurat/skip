@@ -40,7 +40,7 @@ class BoardEntriesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        @tags = BoardEntry.get_popular_tag_words
+        @tags = BoardEntry.get_popular_tag_words(current_tenant)
         if @entries.empty?
           flash.now[:notice] = _('No matching data found.')
         end

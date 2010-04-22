@@ -169,14 +169,13 @@ class ShareFile < ActiveRecord::Base
   end
 
   # TODO Tagのnamed_scopeにしてなくしたい
-  # FIXME Tenant毎になってない
-  def self.get_popular_tag_words()
+  def self.get_popular_tag_words tenant
     options = { :select => 'tags.name',
                 :joins => 'JOIN tags ON share_file_tags.tag_id = tags.id',
                 :group => 'share_file_tags.tag_id',
                 :order => 'count(share_file_tags.tag_id) DESC'}
 
-    comment_tags = ShareFileTag.find(:all, options)
+    comment_tags = ShareFileTag.tenant_is(tenant).find(:all, options)
     tags = []
     comment_tags.each do |tag|
       tags << tag.name
