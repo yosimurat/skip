@@ -147,7 +147,7 @@ default_send_mail_of_question:                            # 質問記事のメ�
 
 enable_send_email_to_all_users:                           # 全体へのメール送信機能を有効にするかどうか[画面なし]
   format: boolean
-  defalut: true
+  default: true
 
 acceptable_hosts_to_provide_openid_account:               # OpenID認証でプロバイダーとしてIDを発行するホストのホワイトリスト
   serialized: true
@@ -185,3 +185,7 @@ max_total_file_size_per_tenant:                           # テナント毎の�
 publicize_feeds_without_login:                            # テナント毎の公開フィードをログインせずに取得可能にする
   format: boolean
   default: false
+
+user_code_minimum_length:
+  format: int
+  default: 4

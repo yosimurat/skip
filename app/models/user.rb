@@ -61,7 +61,19 @@ class User < ActiveRecord::Base
   validates_format_of :email, :message =>_('requires proper format.'), :with => Authentication.email_regex
   validates_uniqueness_of :email, :case_sensitive => false
 
-  validates_uniqueness_of :login, :scope => :tenant_id
+  validates_presence_of :tenant
+
+  validates_uniqueness_of :login, :case_sensitive => false, :scope => :tenant_id, :allow_nil => true
+  validates_each :login, :allow_nil => true do |record, attr, value|
+    min = record.tenant ? Admin::Setting.user_code_minimum_length(record.tenant) : 4
+    range = (min..30)
+    if value.nil? or value.size < range.begin
+      record.errors.add(attr, :too_short, :count => range.begin)
+    elsif value.size > range.end
+      record.errors.add(attr, :too_long, :count => range.end)
+    end
+  end
+  validates_format_of :login, :with => /^[a-zA-Z0-9\-_\.]*$/, :message => _("accepts numbers, alphapets, hiphens(\"-\"), underscores(\"_\") and dot(\".\")."), :allow_nil => true
 
   named_scope :recent, proc { |day_count|
     { :conditions => ['created_on > ?', Time.now.ago(day_count.to_i.day)] }
