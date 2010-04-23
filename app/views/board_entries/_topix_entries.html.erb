@@ -1,6 +1,6 @@
 <% title ||= "" %>
 <% entries ||= [] -%>
-<% last_updated_desc ||= false -%>
+<% last_updated_desc ||= current_target_owner -%>
 <% width_date = last_updated_desc ? "200" : "75" -%>
 <% show_owner_link ||= false -%>
 <% with_checkable_read ||= false -%>
