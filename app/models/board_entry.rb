@@ -284,12 +284,14 @@ class BoardEntry < ActiveRecord::Base
     editor_mode == 'hiki'
   end
 
-  def prev_accessible target_user
-    BoardEntry.accessible(target_user).last_updated_lt(self.last_updated).id_lt(self.id).order_new.first
+  def prev_accessible target_user, target_owner = nil
+    scope = target_owner ? BoardEntry.owned(target_owner) : BoardEntry
+    scope.accessible(target_user).last_updated_lt(self.last_updated).id_lt(self.id).order_new.first
   end
 
-  def next_accessible target_user
-    BoardEntry.accessible(target_user).last_updated_gt(self.last_updated).id_gt(self.id).order_old.first
+  def next_accessible target_user, target_owner = nil
+    scope = target_owner ? BoardEntry.owned(target_owner) : BoardEntry
+    scope.accessible(target_user).last_updated_gt(self.last_updated).id_gt(self.id).order_old.first
   end
 
   # TODO Tagのnamed_scopeにしてなくしたい

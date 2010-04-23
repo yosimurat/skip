@@ -194,10 +194,10 @@
   </style>
 <% end -%>
 <div class="move_navi">
-  <% if prev_entry = entry.prev_accessible(current_user) -%>
+  <% if prev_entry = entry.prev_accessible(current_user, current_target_owner) -%>
   <span class="prev_entry">&lt;&nbsp;<%= entry_link_to(prev_entry, {:truncate => 20}) %></span>
   <% end -%>
-  <% if next_entry = entry.next_accessible(current_user) -%>
+  <% if next_entry = entry.next_accessible(current_user, current_target_owner) -%>
   <span class="next_entry"><%= entry_link_to(next_entry, {:truncate => 20}) %>&nbsp;&gt;</span>
   <% end -%>
   <a id="page_top" href="#page_bottom"><%= _('[Bottom of page]')%></a>
