@@ -7,7 +7,8 @@ ActionController::Routing::Routes.draw do |map|
         :trace => :get,
         :entries => :get,
         :load_entries => :get,
-        :entries_by_antenna => :get
+        :entries_by_antenna => :get,
+        :load_rss_feed => :get
       }
     tenant.resources :users, :new => {:agreement => :get}, :member => {:update_active => :put} do |user|
       user.resources :board_entries, :member => {:print => :get, :toggle_hide => :put, :toggle_read => :put}, :collection => {:preview => :post} do |board_entry|
