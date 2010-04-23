@@ -174,6 +174,8 @@ class Admin::Setting < ActiveRecord::Base
 
   def self.[]=(tenant, name, v)
     setting = find_or_default(tenant, name)
+    # vがfalseの場合、空文字が設定されてしまう。ブラウザからは文字列のfalseが
+    # 送られてくるため問題にならないがRSpecで直接falseを設定するとハマるのえ注意
     setting.value = (v ? v : "")
     tenant_setting_cache(tenant)[name] = nil
     setting.save

@@ -56,25 +56,9 @@ class BoardEntry < ActiveRecord::Base
     end
   }
 
-  named_scope :category_like, proc { |category|
-    { :conditions => ['category like :category', { :category => "%[#{category}]%" }] }
-  }
-
-  named_scope :category_not_like, proc { |category|
-    { :conditions => ['category not like :category', { :category => "%[#{category}]%" }] }
-  }
-
   named_scope :recent, proc { |milliseconds|
     return {} if milliseconds.blank?
     { :conditions => ['last_updated > :date', { :date => Time.now.ago(milliseconds) }] }
-  }
-
-  named_scope :recent_with_comments, proc { |milliseconds|
-    return {} if milliseconds.blank?
-    {
-      :conditions => ['last_updated > :date OR board_entry_comments.updated_on > :date', { :date => Time.now.ago(milliseconds) }],
-      :include => :board_entry_comments
-    }
   }
 
   named_scope :diary, proc {
@@ -356,7 +340,6 @@ class BoardEntry < ActiveRecord::Base
     [text, color]
   end
 
-  # TODO もはやprepareじゃない。sent_contact_mailsなどにリネームする
   def send_contact_mails
     return unless self.send_mail?
     return if diary? && private?

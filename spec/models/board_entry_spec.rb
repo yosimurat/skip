@@ -220,7 +220,7 @@ describe BoardEntry, '#send_contact_mails' do
       end
       describe '全体へのメール送信が有効の場合' do
         before do
-          Admin::Setting.[]=(@tenant, "enable_send_email_to_all_users", false)
+          Admin::Setting.set_enable_send_email_to_all_users(@tenant, true)
         end
         it 'テナント内のアクティブなユーザ全員分(自分以外)のEmailが出来ていること' do
           lambda do
@@ -230,7 +230,7 @@ describe BoardEntry, '#send_contact_mails' do
       end
       describe '全体へのメール送信が無効の場合' do
         before do
-          Admin::Setting.[]=(@tenant, "enable_send_email_to_all_users", false)
+          Admin::Setting.set_enable_send_email_to_all_users(@tenant, 'false')
         end
         it 'Emailが作られないこと' do
           lambda do
