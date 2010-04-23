@@ -277,7 +277,7 @@ class MypagesController < ApplicationController
   def find_recent_bbs_as_locals code, options = {}
     category = current_tenant.group_categories.find_by_code(code)
     id_name = category.code.downcase
-    pages = BoardEntry.from_recents.accessible(current_user).entry_type_is(BoardEntry::GROUP_BBS).timeline.scoped(:include => [ :user, :state ]).order_new.paginate(:page => target_page(id_name), :per_page => options[:per_page])
+    pages = BoardEntry.from_recents.accessible(current_user).owner_type_is('Group').owner_id_is(category.groups.map(&:id)).timeline.scoped(:include => [ :user, :state ]).order_new.paginate(:page => target_page(id_name), :per_page => options[:per_page])
 
     locals = {
       :id_name => id_name,
