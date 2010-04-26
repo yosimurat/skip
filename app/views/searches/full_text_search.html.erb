@@ -17,7 +17,8 @@
       <div style="margin-top: 5px;">
         <% orderd_search_apps = GlobalInitialSetting['search_apps'].sort_by{|key, value| value["order"]}.unshift(['all' , {'title' => _('all')}]) %>
         <% orderd_search_apps.each do |app| %>
-        <%= radio_button_tag "target_aid", app.first, params[:target_aid] == app.first, {:id => "target_aid_#{app.first}", :class => "condition_radio_button"} %><%= label_tag "target_aid_#{app.first}", _("Search from %s&nbsp;") % h(app.last['title']) -%>
+          <%= radio_button_tag "target_aid", app.first, params[:target_aid] == app.first, {:id => "target_aid_#{app.first}", :class => "condition_radio_button"} %>
+          <%= label_tag "target_aid_#{app.first}", search_app_label(app.first, app.last['title']) -%>
         <% end # each %>
       </div>
       <div>
