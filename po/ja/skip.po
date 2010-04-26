@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.7.0\n"
-"POT-Creation-Date: 2010-03-24 14:16+0900\n"
+"POT-Creation-Date: 2010-04-26 10:14+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,7 +90,7 @@ msgstr "%Y/%m/%d %H:%M"
 msgid "%s Only"
 msgstr "%sのみ"
 
-#: app/models/group.rb:187
+#: app/models/group.rb:188
 msgid "%s has already joined / applied to join this group."
 msgstr "%sさんは既に参加済み/参加申請済みです。"
 
@@ -1730,7 +1730,7 @@ msgstr ""
 "た、変更したユーザは、再ログインが要求されます。（管理者ご自身の場合も例外で"
 "はありません）"
 
-#: app/controllers/services_controller.rb:42
+#: app/controllers/services_controller.rb:43
 #: app/views/bookmarks/index.html.erb:25
 msgid "All"
 msgstr "全て"
@@ -2002,7 +2002,7 @@ msgstr "ブログ表示"
 msgid "Blogs"
 msgstr "ブログ"
 
-#: app/controllers/services_controller.rb:43
+#: app/controllers/services_controller.rb:44
 msgid "Blogs / Forums"
 msgstr "ブログ/BBS"
 
@@ -2294,7 +2294,7 @@ msgstr ""
 msgid "Bookmarklet"
 msgstr "ブックマークレット"
 
-#: app/helpers/user_helper.rb:44 app/controllers/services_controller.rb:44
+#: app/helpers/user_helper.rb:44 app/controllers/services_controller.rb:45
 #: app/controllers/bookmark_controller.rb:102
 #: app/controllers/bookmarks_controller.rb:42
 #: app/views/shared/_global_navigation.html.erb:7
@@ -3350,7 +3350,7 @@ msgstr[0] "ファイルのアップロードに成功しました。"
 msgid "File with the same name already uploaded."
 msgstr "が同一のファイルが既に登録されています"
 
-#: app/controllers/services_controller.rb:47
+#: app/controllers/services_controller.rb:48
 #: app/controllers/search_controller.rb:72
 #: app/views/shared/_global_navigation.html.erb:4
 #: app/views/share_file/new.html.erb:9 app/views/share_file/edit.html.erb:9
@@ -3361,7 +3361,7 @@ msgstr "ファイル"
 msgid "Files larger than %sMBytes are not permitted."
 msgstr "%sMバイト以上のファイルはアップロードできません。"
 
-#: app/views/board_entries/_embed_dialog.html.erb:243
+#: app/views/board_entries/_embed_dialog.html.erb:249
 #: app/views/chapters/_page_content.html.erb:183
 msgid "First page"
 msgstr "[最初へ]"
@@ -3553,7 +3553,7 @@ msgid "GroupParticipation|Waiting|true"
 msgstr "はい"
 
 #: app/controllers/groups_controller.rb:62
-#: app/controllers/services_controller.rb:46
+#: app/controllers/services_controller.rb:47
 #: app/controllers/group_controller.rb:339
 #: app/controllers/share_file_controller.rb:182
 #: app/controllers/edit_controller.rb:280
@@ -3788,7 +3788,7 @@ msgstr "お問い合わせ"
 
 #: app/views/board_entries/_embed_dialog.html.erb:7
 #: app/views/board_entries/_embed_dialog.html.erb:35
-#: app/views/board_entries/_embed_dialog.html.erb:205
+#: app/views/board_entries/_embed_dialog.html.erb:208
 #: app/views/chapters/_embed_dialog.html.erb:7
 #: app/views/chapters/_page_content.html.erb:209
 msgid "Insert embed"
@@ -3896,7 +3896,7 @@ msgstr "フォーマットが不正です。uid:xxxxxxのような形で入力�
 #: app/controllers/monta_controller.rb:22
 #: app/controllers/monta_controller.rb:33
 #: app/controllers/board_entries_controller.rb:26
-#: app/models/board_entry.rb:695
+#: app/models/board_entry.rb:694
 msgid "Invalid operation."
 msgstr "不正な操作です"
 
@@ -4017,7 +4017,7 @@ msgstr "鈴木 次郎"
 msgid "Join this group"
 msgstr "参加する"
 
-#: app/models/group.rb:193
+#: app/models/group.rb:194
 msgid "Joined the group failed."
 msgstr ""
 
@@ -4058,7 +4058,7 @@ msgstr "最近の投稿"
 msgid "Last comment (%s) :"
 msgstr "最終コメント (%s)："
 
-#: app/views/board_entries/_embed_dialog.html.erb:260
+#: app/views/board_entries/_embed_dialog.html.erb:266
 #: app/views/chapters/_page_content.html.erb:200
 msgid "Last page"
 msgstr "[最後へ]"
@@ -4437,7 +4437,7 @@ msgid "Next diff"
 msgstr "次との差分"
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:255
+#: app/views/board_entries/_embed_dialog.html.erb:261
 #: app/views/chapters/_page_content.html.erb:195
 msgid "Next »"
 msgstr "次 »"
@@ -4502,7 +4502,7 @@ msgstr "該当する共有ファイルはありませんでした。"
 msgid "No messages for you"
 msgstr "お知らせはありません"
 
-#: app/controllers/services_controller.rb:36
+#: app/controllers/services_controller.rb:37
 msgid "No user information registered in %s."
 msgstr "%sにユーザ情報が登録されていません。"
 
@@ -5461,9 +5461,9 @@ msgstr "検索結果ページ:"
 msgid "Search does not show more than 1000 search results."
 msgstr "1000 件以上の検索結果は表示しておりません "
 
-#: app/views/search/full_text_search.html.erb:20
-msgid "Search from %s&nbsp;"
-msgstr "%sから検索&nbsp;"
+#: app/helpers/search_helper.rb:37
+msgid "Search from all"
+msgstr "検索対象全て"
 
 #: app/views/search/full_text_search.html.erb:15
 msgid "Search in Internet"
@@ -5506,6 +5506,14 @@ msgstr "選択する"
 #: app/views/admin/documents/index.html.erb:22
 msgid "Select a page to edit from the menu on left."
 msgstr "左のメニューから編集したいページを選択して下さい。"
+
+#: app/helpers/search_helper.rb:38
+msgid "Select a search target"
+msgstr "検索対象を選択する"
+
+#: app/helpers/search_helper.rb:40
+msgid "Select a search target from %s"
+msgstr "%sから検索対象を選択する"
 
 #: app/views/pictures/_pictures.html.erb:20
 msgid "Selected"
@@ -6840,7 +6848,7 @@ msgid "UserUid|User"
 msgstr "ユーザ"
 
 #: app/helpers/user_helper.rb:53 app/controllers/users_controller.rb:66
-#: app/controllers/services_controller.rb:45
+#: app/controllers/services_controller.rb:46
 #: app/views/shared/_global_navigation.html.erb:5
 msgid "Users"
 msgstr "ユーザ"
@@ -7466,7 +7474,7 @@ msgstr "[既に読んだ記事を隠す]"
 msgid "[Hints on writing entries]"
 msgstr "【本文の書き方に関するヒント】"
 
-#: app/models/board_entry.rb:790
+#: app/models/board_entry.rb:789
 msgid "[Link does not exist...%s>]"
 msgstr "[リンク先が存在しません...%s>]"
 
@@ -8142,7 +8150,7 @@ msgstr ""
 "必須になります。"
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:248
+#: app/views/board_entries/_embed_dialog.html.erb:254
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr "« 前"
@@ -8169,6 +8177,9 @@ msgstr ""
 
 #~ msgid "List of Groups"
 #~ msgstr "グループ一覧"
+
+#~ msgid "Search from %s&nbsp;"
+#~ msgstr "%sから検索&nbsp;"
 
 #~ msgid "Themes"
 #~ msgstr "テーマ"

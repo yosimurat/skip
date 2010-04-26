@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.7.0\n"
-"POT-Creation-Date: 2010-03-24 14:16+0900\n"
+"POT-Creation-Date: 2010-04-26 10:14+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,7 +88,7 @@ msgstr ""
 msgid "%s Only"
 msgstr ""
 
-#: app/models/group.rb:187
+#: app/models/group.rb:188
 msgid "%s has already joined / applied to join this group."
 msgstr ""
 
@@ -1692,7 +1692,7 @@ msgstr ""
 "takes time and may slow down the response of the site.<br />The user will be "
 "required to login again (same if you do it with your own account)."
 
-#: app/controllers/services_controller.rb:42
+#: app/controllers/services_controller.rb:43
 #: app/views/bookmarks/index.html.erb:25
 msgid "All"
 msgstr ""
@@ -1958,7 +1958,7 @@ msgstr ""
 msgid "Blogs"
 msgstr ""
 
-#: app/controllers/services_controller.rb:43
+#: app/controllers/services_controller.rb:44
 msgid "Blogs / Forums"
 msgstr ""
 
@@ -2251,7 +2251,7 @@ msgstr ""
 msgid "Bookmarklet"
 msgstr ""
 
-#: app/helpers/user_helper.rb:44 app/controllers/services_controller.rb:44
+#: app/helpers/user_helper.rb:44 app/controllers/services_controller.rb:45
 #: app/controllers/bookmark_controller.rb:102
 #: app/controllers/bookmarks_controller.rb:42
 #: app/views/shared/_global_navigation.html.erb:7
@@ -3276,7 +3276,7 @@ msgstr[0] ""
 msgid "File with the same name already uploaded."
 msgstr ""
 
-#: app/controllers/services_controller.rb:47
+#: app/controllers/services_controller.rb:48
 #: app/controllers/search_controller.rb:72
 #: app/views/shared/_global_navigation.html.erb:4
 #: app/views/share_file/new.html.erb:9 app/views/share_file/edit.html.erb:9
@@ -3287,7 +3287,7 @@ msgstr ""
 msgid "Files larger than %sMBytes are not permitted."
 msgstr ""
 
-#: app/views/board_entries/_embed_dialog.html.erb:243
+#: app/views/board_entries/_embed_dialog.html.erb:249
 #: app/views/chapters/_page_content.html.erb:183
 msgid "First page"
 msgstr ""
@@ -3479,7 +3479,7 @@ msgid "GroupParticipation|Waiting|true"
 msgstr ""
 
 #: app/controllers/groups_controller.rb:62
-#: app/controllers/services_controller.rb:46
+#: app/controllers/services_controller.rb:47
 #: app/controllers/group_controller.rb:339
 #: app/controllers/share_file_controller.rb:182
 #: app/controllers/edit_controller.rb:280
@@ -3698,7 +3698,7 @@ msgstr ""
 
 #: app/views/board_entries/_embed_dialog.html.erb:7
 #: app/views/board_entries/_embed_dialog.html.erb:35
-#: app/views/board_entries/_embed_dialog.html.erb:205
+#: app/views/board_entries/_embed_dialog.html.erb:208
 #: app/views/chapters/_embed_dialog.html.erb:7
 #: app/views/chapters/_page_content.html.erb:209
 msgid "Insert embed"
@@ -3804,7 +3804,7 @@ msgstr ""
 #: app/controllers/monta_controller.rb:22
 #: app/controllers/monta_controller.rb:33
 #: app/controllers/board_entries_controller.rb:26
-#: app/models/board_entry.rb:695
+#: app/models/board_entry.rb:694
 msgid "Invalid operation."
 msgstr ""
 
@@ -3917,7 +3917,7 @@ msgstr ""
 msgid "Join this group"
 msgstr ""
 
-#: app/models/group.rb:193
+#: app/models/group.rb:194
 msgid "Joined the group failed."
 msgstr ""
 
@@ -3958,7 +3958,7 @@ msgstr ""
 msgid "Last comment (%s) :"
 msgstr ""
 
-#: app/views/board_entries/_embed_dialog.html.erb:260
+#: app/views/board_entries/_embed_dialog.html.erb:266
 #: app/views/chapters/_page_content.html.erb:200
 msgid "Last page"
 msgstr ""
@@ -4328,7 +4328,7 @@ msgid "Next diff"
 msgstr ""
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:255
+#: app/views/board_entries/_embed_dialog.html.erb:261
 #: app/views/chapters/_page_content.html.erb:195
 msgid "Next »"
 msgstr ""
@@ -4393,7 +4393,7 @@ msgstr ""
 msgid "No messages for you"
 msgstr ""
 
-#: app/controllers/services_controller.rb:36
+#: app/controllers/services_controller.rb:37
 msgid "No user information registered in %s."
 msgstr ""
 
@@ -5337,8 +5337,8 @@ msgstr ""
 msgid "Search does not show more than 1000 search results."
 msgstr ""
 
-#: app/views/search/full_text_search.html.erb:20
-msgid "Search from %s&nbsp;"
+#: app/helpers/search_helper.rb:37
+msgid "Search from all"
 msgstr ""
 
 #: app/views/search/full_text_search.html.erb:15
@@ -5381,6 +5381,14 @@ msgstr ""
 
 #: app/views/admin/documents/index.html.erb:22
 msgid "Select a page to edit from the menu on left."
+msgstr ""
+
+#: app/helpers/search_helper.rb:38
+msgid "Select a search target"
+msgstr ""
+
+#: app/helpers/search_helper.rb:40
+msgid "Select a search target from %s"
 msgstr ""
 
 #: app/views/pictures/_pictures.html.erb:20
@@ -6683,7 +6691,7 @@ msgid "UserUid|User"
 msgstr ""
 
 #: app/helpers/user_helper.rb:53 app/controllers/users_controller.rb:66
-#: app/controllers/services_controller.rb:45
+#: app/controllers/services_controller.rb:46
 #: app/views/shared/_global_navigation.html.erb:5
 msgid "Users"
 msgstr ""
@@ -7288,7 +7296,7 @@ msgstr ""
 msgid "[Hints on writing entries]"
 msgstr ""
 
-#: app/models/board_entry.rb:790
+#: app/models/board_entry.rb:789
 msgid "[Link does not exist...%s>]"
 msgstr ""
 
@@ -7954,7 +7962,7 @@ msgid ""
 msgstr ""
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:248
+#: app/views/board_entries/_embed_dialog.html.erb:254
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr ""
