@@ -16,6 +16,8 @@
 <% content_for :contents_left do -%>
   <%= hidden_field_tag("authenticity_token", form_authenticity_token) %>
 
+  <%= render :partial => 'share_file/action_box' %>
+
   <% form_for @search, :url => {:action => 'list'}, :id => :sharefile_search_form do |f| %>
     <div class="box_space">
       <div class="box_space_title"><%= icon_tag 'find' %><%= _('Search')%></div>
