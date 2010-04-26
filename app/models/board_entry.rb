@@ -219,7 +219,7 @@ class BoardEntry < ActiveRecord::Base
   def accessible? target_user = self.user
     case
     when self.owner_is_user? then self.public? || self.writer?(target_user)
-    when self.owner_is_group? then self.public? || owner.joind?(target_user)
+    when self.owner_is_group? then self.public? || owner.joined?(target_user)
     else
       false
     end

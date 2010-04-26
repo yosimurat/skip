@@ -106,9 +106,9 @@ module ApplicationHelper
       icon_tag(icon_name, :title => _("Open to All"))
     when 'private'
       if entry_or_share_file.owner_is_group?
-        icon_tag 'key', _('Members Only')
+        icon_tag 'key', :title => _('Members Only')
       else
-        icon_tag 'pencil', _('Owner Only')
+        icon_tag 'pencil', :title => _('Owner Only')
       end
     else
       ''
