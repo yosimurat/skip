@@ -11,6 +11,7 @@ class Tenant < ActiveRecord::Base
   has_many :documents, :dependent => :destroy
   has_one :logo, :dependent => :destroy
   has_many :bookmarks, :dependent => :destroy
+  has_many :rankings, :dependent => :destroy
 
   def self.find_by_op_endpoint(endpoint)
     if endpoint.match(/^https:\/\/www\.google\.com\/a\/(.*)\/o8\/ud\?be=o8$/)

@@ -220,6 +220,21 @@ module Spec
           tenant = options[:tenant] || create_tenant
           tenant.bookmarks.create!(options)
         end
+
+        def create_board_entry_point options = {}
+          board_entry_point = BoardEntryPoint.new({:board_entry_id => 1}.merge(options))
+          board_entry_point.save!
+          board_entry_point
+        end
+
+        def create_user_access options = {}
+          user = options[:user] || create_user
+          user_access = UserAccess.new({:user_id => user.id,
+                                        :last_access => @exec_date,
+                                        :access_count => 0}.merge(options))
+          user_access.save!
+          user_access
+        end
       end
     end
   end
