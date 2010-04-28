@@ -38,6 +38,18 @@ module NavigationHelpers
       b = @current_tenant.bookmarks.find_by_url($1)
       polymorphic_path([@current_tenant, b])
 
+    when /^(.*)の記事の表示ページ$/
+      e = @current_tenant.board_entries.find_by_title($1)
+      polymorphic_path([@current_tenant, e])
+
+    when /^(.*)ランキングの(.*)分ページ$/
+      content_type = $1
+      year, month = $2.split("-")
+      polymorphic_path([@current_tenant, :rankings], :action => :data, :content_type => content_type, :year => year, :month => month)
+
+    when /(.*)ランキングの総合ページ/
+      polymorphic_path([@current_tenant, :rankings], :action => :data, :content_type => $1, :year => '', :month => '')
+
     when /管理ページ/
       '/admin/'
 
