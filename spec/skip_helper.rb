@@ -235,6 +235,18 @@ module Spec
           user_access.save!
           user_access
         end
+
+        def create_ranking(options = {})
+          tenant = options[:tenant] || create_tenant
+          ranking = tenant.rankings.create!({
+            :url => 'http://example.com/',
+            :title => 'example',
+            :extracted_on => Date.today,
+            :amount => 1,
+            :contents_type => 'entry_access'
+          }.merge(options))
+          ranking
+        end
       end
     end
   end
