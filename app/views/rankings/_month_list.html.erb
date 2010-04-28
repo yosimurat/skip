@@ -1,0 +1,9 @@
+<div class="box_space">
+  <div class="box_space_title"><%= _('Monthly') %></div>
+  <div class="box_space_body">
+    <%= link_to_unless_current _('All Term'), polymorphic_path([current_tenant, :rankings], :action => 'all') %><br>
+    <% ranking_list_of_month(@dates).each do |date_and_url| -%>
+      <%= link_to_unless_current date_and_url[0], date_and_url[1] %><br>
+    <% end -%>
+  </div>
+</div><!-- box_space -->
