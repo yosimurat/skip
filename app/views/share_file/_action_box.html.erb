@@ -1,0 +1,10 @@
+<% if owner = current_target_user || current_target_group -%>
+  <% if ShareFile.new(:user_id => current_user.id, :owner_symbol => owner.symbol).updatable?(current_user) %>
+  <div class="action_buttons ui-corner-all">
+    <ul class="no_style">
+      <% new_share_file_url_hash = {:controller => '/share_file', :action => :new, :owner_symbol => h(owner.symbol), :owner_name => h(owner.name)} -%>
+      <li><%= link_to(content_tag('span', _('Upload a file')), new_share_file_url_hash, :title => _('Upload a file'), :class => 'rounded', :onclick => "sub_window_open('#{url_for(new_share_file_url_hash)}', 'subwindow', 550, 400); return false;") %></li>
+    </ul>
+  </div>
+  <% end -%>
+<% end -%>
