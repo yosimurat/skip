@@ -7644,7 +7644,7 @@ msgstr "[この記事を「話題」にして、フォーラムに新しい記�
 
 #: app/views/entries/_entry_detail.html.erb:337
 msgid "[Write my new blog entry]"
-msgstr "自分もブログを書く"
+msgstr "[自分もブログを書く]"
 
 #: app/views/group/_manage_info.html.erb:22
 msgid "[[Delete]]"
