@@ -65,6 +65,6 @@ CKEDITOR.editorConfig = function( config )
     config.shiftEnterMode = CKEDITOR.ENTER_BR;
     config.enterMode = CKEDITOR.ENTER_BR;
 
-    config.height = '500px';
+    config.height = '350px';
     config.resize_enabled = false;
 };
