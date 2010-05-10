@@ -15,7 +15,7 @@ CKEDITOR.editorConfig = function( config )
         ['NumberedList','BulletedList'],
         ['JustifyLeft','JustifyCenter','JustifyRight'],
         ['TextColor','BGColor'],
-        ['Table','HorizontalRule','Smiley', 'MobilePictogram'],
+        ['Table','HorizontalRule','MobilePictogram'],
         '/',
         ['Styles','Format','Font','FontSize'],
         ['Link','Unlink'],
@@ -28,8 +28,7 @@ CKEDITOR.editorConfig = function( config )
         ['NumberedList','BulletedList'],
         ['JustifyLeft','JustifyCenter','JustifyRight'],
         ['TextColor','BGColor'],
-        ['Table','Smiley', 'MobilePictogram'],
-        '/',
+        ['Table','MobilePictogram'],
         ['Format','FontSize'],
         ['Link'],
         ['Source'],
@@ -39,7 +38,7 @@ CKEDITOR.editorConfig = function( config )
     config.toolbar_Simple = [
         ['Undo','Redo'],
         ['Bold','Italic','Underline','Strike','RemoveFormat'],
-        ['TextColor','BGColor','Smiley', 'MobilePictogram'],
+        ['TextColor','BGColor','MobilePictogram'],
         '/',
         ['Font','Format','FontSize']           // No comma for the last row.
     ];
