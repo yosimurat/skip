@@ -1,4 +1,11 @@
 <% content_for :contents_left do -%>
+  <% if current_participation && !current_participation.waiting? -%>
+    <div class="action_buttons ui-corner-all">
+      <ul class="no_style">
+        <%= render :partial => 'group/new_forum_links' %>
+      </ul>
+    </div>
+  <% end -%>
   <% form_tag({}, {:method => 'get'}) do -%>
     <%= render(:partial => 'entries/search_box') %>
     <%= render(:partial => 'entries/tag_cloud_box') %>

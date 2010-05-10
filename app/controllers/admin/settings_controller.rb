@@ -57,9 +57,6 @@ class Admin::SettingsController < Admin::ApplicationController
       flash[:notice] = _('Settings were saved successfully.')
       redirect_to :action => 'index'
     else
-      if params[:tab] == 'main'
-        @system_infos = system_infos
-      end
       render :action => 'index'
     end
   end

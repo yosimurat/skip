@@ -1,0 +1,5 @@
+<li><%= link_to(content_tag('span', _('New Posts')), {:controller => 'group', :action => 'new'}, :class => 'rounded', :title => _('New Posts')) %></li>
+<% if notice_entry_enabled? -%>
+  <li><%= link_to(content_tag('span', _('Write a notice')), {:controller => 'group', :action => 'new_notice'}, :title => _('Write a notice'), :class => 'rounded') %></li>
+<% end -%>
+<li><%= link_to(content_tag('span', _('Write a question')), {:controller => 'group', :action => 'new_question'}, :title => _('Write a question'), :class => 'rounded') %></li>

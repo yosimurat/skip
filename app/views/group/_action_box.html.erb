@@ -11,11 +11,7 @@
       <% if current_participation.waiting? -%>
         <%= participation_state current_target_group, current_user.id %>
       <% else -%>
-        <li><%= link_to(content_tag('span', _('New Posts')), {:controller => 'group', :action => 'new'}, :class => 'rounded', :title => _('New Posts')) %></li>
-        <% if notice_entry_enabled? -%>
-          <li><%= link_to(content_tag('span', _('Write a notice')), {:controller => 'group', :action => 'new_notice'}, :title => _('Write a notice'), :class => 'rounded') %></li>
-        <% end -%>
-        <li><%= link_to(content_tag('span', _('Write a question')), {:controller => 'group', :action => 'new_question'}, :title => _('Write a question'), :class => 'rounded') %></li>
+        <%= render :partial => 'group/new_forum_links' %>
         <% url_hash = {:controller => '/share_file', :action => :new, :owner_symbol => h(current_target_group.symbol), :owner_name => h(current_target_group.name)} -%>
         <li><%= link_to(content_tag('span', _('Upload a file')), url_hash, :title => _('Upload a file'), :class => 'rounded', :onclick => "sub_window_open('#{url_for(url_hash)}', 'subwindow', 550, 400); return false;") %></li>
         <% unless current_participation.owned? -%>

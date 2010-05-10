@@ -524,7 +524,7 @@ class MypageController < ApplicationController
     find_params = BoardEntry.make_conditions(current_user.belong_symbols, {:publication_type => 'public'})
     pages = BoardEntry.scoped(
       :conditions => find_params[:conditions],
-      :order => "board_entry_points.access_count DESC, board_entries.last_updated DESC, board_entries.id DESC",
+      :order => "board_entry_points.today_access_count DESC, board_entry_points.access_count DESC, board_entries.last_updated DESC, board_entries.id DESC",
       :include => find_params[:include] | [ :user, :state ]
     ).timeline.diary.recent(recent_day.day).paginate(:page => params[:page], :per_page => options[:per_page])
 

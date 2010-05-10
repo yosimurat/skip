@@ -1,0 +1,5 @@
+<li><%= link_to(content_tag('span', _('Write a blog entry')) , {:controller => '/edit', :action => :index, :uid => current_user.uid}, :title => _('Write a blog entry'), :class => 'rounded') %></li>
+<% if notice_entry_enabled? -%>
+  <li><%= link_to(content_tag('span', _('Write a notice')), {:controller => '/edit', :action => :index, :aim_type => 'notice', :uid => current_user.uid}, :title => _('Write a notice'), :class => 'rounded') %></li>
+<% end -%>
+<li><%= link_to(content_tag('span', _('Write a question')), {:controller => '/edit', :action => :index, :aim_type => 'question', :uid => current_user.uid}, :title => _('Write a question'), :class => 'rounded') %></li>

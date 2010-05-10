@@ -30,4 +30,14 @@ module SearchHelper
             :target_aid => params[:target_aid],
             :searcher => params[:searcher])
   end
+
+  def search_app_label target_aid, target_app_title = nil
+    return '' unless target_aid
+    case target_aid
+    when 'all' then _('Search from all')
+    when 'skip' then _('Select a search target')
+    else
+      _('Select a search target from %s') % (target_app_title || target_aid)
+    end
+  end
 end

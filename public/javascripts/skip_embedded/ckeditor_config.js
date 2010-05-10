@@ -6,6 +6,7 @@
 CKEDITOR.editorConfig = function( config )
 {
     config.contentsCss = CKEDITOR.getUrl( '/stylesheets/skip_embedded/ckeditor_area.css' );
+    config.extraPlugins = 'mobilepictogram';
 
     config.toolbar_Entry = [
         ['Cut','Copy','Paste','PasteText','PasteFromWord'],
@@ -14,7 +15,7 @@ CKEDITOR.editorConfig = function( config )
         ['NumberedList','BulletedList'],
         ['JustifyLeft','JustifyCenter','JustifyRight'],
         ['TextColor','BGColor'],
-        ['Table','HorizontalRule','Smiley'],
+        ['Table','HorizontalRule','MobilePictogram'],
         '/',
         ['Styles','Format','Font','FontSize'],
         ['Link','Unlink'],
@@ -22,10 +23,22 @@ CKEDITOR.editorConfig = function( config )
         ['Maximize', 'ShowBlocks','-','About']
     ];
 
+    config.toolbar_EntrySimple = [
+        ['Bold','Italic','Underline','Strike'],
+        ['NumberedList','BulletedList'],
+        ['JustifyLeft','JustifyCenter','JustifyRight'],
+        ['TextColor','BGColor'],
+        ['Table','MobilePictogram'],
+        ['Format','FontSize'],
+        ['Link'],
+        ['Source'],
+        ['Maximize']
+    ];
+
     config.toolbar_Simple = [
         ['Undo','Redo'],
         ['Bold','Italic','Underline','Strike','RemoveFormat'],
-        ['TextColor','BGColor','Smiley'],
+        ['TextColor','BGColor','MobilePictogram'],
         '/',
         ['Font','Format','FontSize']           // No comma for the last row.
     ];
@@ -51,4 +64,7 @@ CKEDITOR.editorConfig = function( config )
 
     config.shiftEnterMode = CKEDITOR.ENTER_BR;
     config.enterMode = CKEDITOR.ENTER_BR;
+
+    config.height = '500px';
+    config.resize_enabled = false;
 };
