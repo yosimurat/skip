@@ -130,7 +130,13 @@
     <%#  main area bookmarks -%>
     <%# ============================================================ -%>
     <% if bookmark_enabled? and !@bookmarks.empty? -%>
-      <%= show_title_bar("tag_blue", _("New bookmarks"), url_for(:controller => "bookmarks", :action => "index")) %>
+      <%# この場所にブックマーク作成を置くことでどれくらいブックマークが増えるか検証するための一時対応 %>
+      <%# TODO 改善効果が見られない場合は元に戻す %>
+      <%#= show_title_bar("tag_blue", _("New bookmarks"), url_for(:controller => "bookmarks", :action => "index")) %>
+      <div style="position: relative; _width: 100%">
+        <h2 class="topix_title"><%= icon_tag('tag_blue') + link_to(_('New bookmarks'), url_for(:controller => '/bookmarks', :action => 'index')) %></h2>
+        <span style="position: absolute; right: 2px; top: 5px"><%= link_to(_('Create my new bookmark'), url_for(:controller => '/bookmark', :action => :new_url, :from => 'mypage'), :target => '_blank') %></span>
+      </div>
       <div class="topix_body" id="bookmark_body">
         <%= render :partial => 'bookmarks/topix_bookmarks', :locals => { :bookmarks => @bookmarks } %>
       </div>
