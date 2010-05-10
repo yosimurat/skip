@@ -6,6 +6,7 @@
 CKEDITOR.editorConfig = function( config )
 {
     config.contentsCss = CKEDITOR.getUrl( '/stylesheets/skip_embedded/ckeditor_area.css' );
+    config.extraPlugins = 'mobilepictogram';
 
     config.toolbar_Entry = [
         ['Cut','Copy','Paste','PasteText','PasteFromWord'],
@@ -14,7 +15,7 @@ CKEDITOR.editorConfig = function( config )
         ['NumberedList','BulletedList'],
         ['JustifyLeft','JustifyCenter','JustifyRight'],
         ['TextColor','BGColor'],
-        ['Table','HorizontalRule','Smiley'],
+        ['Table','HorizontalRule','Smiley', 'MobilePictogram'],
         '/',
         ['Styles','Format','Font','FontSize'],
         ['Link','Unlink'],
@@ -27,7 +28,7 @@ CKEDITOR.editorConfig = function( config )
         ['NumberedList','BulletedList'],
         ['JustifyLeft','JustifyCenter','JustifyRight'],
         ['TextColor','BGColor'],
-        ['Table','Smiley'],
+        ['Table','Smiley', 'MobilePictogram'],
         '/',
         ['Format','FontSize'],
         ['Link'],
@@ -38,7 +39,7 @@ CKEDITOR.editorConfig = function( config )
     config.toolbar_Simple = [
         ['Undo','Redo'],
         ['Bold','Italic','Underline','Strike','RemoveFormat'],
-        ['TextColor','BGColor','Smiley'],
+        ['TextColor','BGColor','Smiley', 'MobilePictogram'],
         '/',
         ['Font','Format','FontSize']           // No comma for the last row.
     ];
