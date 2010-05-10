@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.7.0\n"
-"POT-Creation-Date: 2010-04-26 11:39+0900\n"
+"POT-Creation-Date: 2010-05-10 17:54+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,11 +40,11 @@ msgstr ""
 #: app/controllers/rankings_controller.rb:105 app/models/board_entry.rb:422
 #: app/views/entries/_topix_entries.html.erb:46
 #: app/views/entries/_topix_entries.html.erb:48
-#: app/views/bookmarks/_topix_bookmarks.html.erb:31
+#: app/views/bookmarks/_topix_bookmarks.html.erb:34
 #: app/views/groups/_group_list.html.erb:24
 #: app/views/mypage/entries_by_date.html.erb:13
 #: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:71
-#: app/views/mypage/index.html.erb:153 app/views/mypage/index.html.erb:170
+#: app/views/mypage/index.html.erb:157 app/views/mypage/index.html.erb:174
 #: app/views/share_file/_topix_share_files.html.erb:39
 #: app/views/bookmark/list.html.erb:42 app/views/bookmark/show.html.erb:51
 #: app/views/rankings/bookmark.html.erb:2
@@ -124,7 +124,7 @@ msgstr[0] "%{count}件"
 msgstr[1] "%{count}件"
 
 #: app/views/statistics/index.html.erb:36
-#: app/views/bookmarks/_topix_bookmarks.html.erb:20
+#: app/views/bookmarks/_topix_bookmarks.html.erb:19
 #: app/views/layouts/layout.html.erb:35 app/views/layouts/layout.html.erb:50
 msgid "%{count} user"
 msgid_plural "%{count} users"
@@ -2211,6 +2211,7 @@ msgid "Bookmark a URL"
 msgstr "ブックマークする"
 
 #: app/views/entries/_entry_detail.html.erb:238
+#: app/views/bookmarks/_topix_bookmarks.html.erb:25
 msgid "Bookmark this"
 msgstr "ブックマークする"
 
@@ -2553,7 +2554,7 @@ msgstr "非公開"
 msgid "Comics"
 msgstr "漫画"
 
-#: app/views/share_file/_form.html.erb:59 app/views/bookmark/new.html.erb:53
+#: app/views/share_file/_form.html.erb:59 app/views/bookmark/new.html.erb:49
 msgid "Comment"
 msgstr "コメント"
 
@@ -2704,6 +2705,10 @@ msgstr "管理者ユーザの作成"
 msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr "記事の公開範囲によらず全体公開のブログとして新しい記事を作成します。"
+
+#: app/views/mypage/index.html.erb:136
+msgid "Create my new bookmark"
+msgstr "自分も新しくブックマークする"
 
 #: app/controllers/edit_controller.rb:100
 msgid "Created successfully."
@@ -3361,7 +3366,7 @@ msgstr "ファイル"
 msgid "Files larger than %sMBytes are not permitted."
 msgstr "%sMバイト以上のファイルはアップロードできません。"
 
-#: app/views/board_entries/_embed_dialog.html.erb:249
+#: app/views/board_entries/_embed_dialog.html.erb:256
 #: app/views/chapters/_page_content.html.erb:183
 msgid "First page"
 msgstr "[最初へ]"
@@ -3788,7 +3793,7 @@ msgstr "お問い合わせ"
 
 #: app/views/board_entries/_embed_dialog.html.erb:7
 #: app/views/board_entries/_embed_dialog.html.erb:35
-#: app/views/board_entries/_embed_dialog.html.erb:208
+#: app/views/board_entries/_embed_dialog.html.erb:211
 #: app/views/chapters/_embed_dialog.html.erb:7
 #: app/views/chapters/_page_content.html.erb:209
 msgid "Insert embed"
@@ -3837,7 +3842,7 @@ msgstr "想定外のエラーが発生しました。管理者にお問い合わ
 msgid "Internet"
 msgstr "インターネット"
 
-#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:150
+#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:154
 msgid "Introduce"
 msgstr "みんなに紹介する"
 
@@ -4058,7 +4063,7 @@ msgstr "最近の投稿"
 msgid "Last comment (%s) :"
 msgstr "最終コメント (%s)："
 
-#: app/views/board_entries/_embed_dialog.html.erb:266
+#: app/views/board_entries/_embed_dialog.html.erb:273
 #: app/views/chapters/_page_content.html.erb:200
 msgid "Last page"
 msgstr "[最後へ]"
@@ -4317,7 +4322,7 @@ msgstr "%s さん"
 
 #: app/views/chains/_form.html.erb:19
 #: app/views/board_entries/_form.html.erb:35
-#: app/views/share_file/_form.html.erb:50 app/views/bookmark/new.html.erb:45
+#: app/views/share_file/_form.html.erb:50 app/views/bookmark/new.html.erb:41
 msgid "Multiple values can be given in foo,bar format"
 msgstr "foo,barの形で複数指定できます"
 
@@ -4389,7 +4394,7 @@ msgid "New Posts"
 msgstr "記事を書く"
 
 #: app/controllers/feed/bookmarks_controller.rb:8
-#: app/views/mypage/index.html.erb:133
+#: app/views/mypage/index.html.erb:135
 msgid "New bookmarks"
 msgstr "新着ブックマーク"
 
@@ -4424,6 +4429,7 @@ msgstr "ユーザのCSVアップロード"
 msgid "News"
 msgstr "ニュース"
 
+#: app/views/search/_page_navi.html.erb:19
 #: app/views/bookmark/new_url.html.erb:10
 msgid "Next"
 msgstr "次へ"
@@ -4438,7 +4444,7 @@ msgid "Next diff"
 msgstr "次との差分"
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:261
+#: app/views/board_entries/_embed_dialog.html.erb:268
 #: app/views/chapters/_page_content.html.erb:195
 msgid "Next »"
 msgstr "次 »"
@@ -5056,7 +5062,7 @@ msgstr "参加中のグループのフォーラムの書き込み"
 msgid "Prepare for activation"
 msgstr "利用開始待ちにする"
 
-#: app/views/search/_page_navi.html.erb:7
+#: app/views/search/_page_navi.html.erb:6
 msgid "Prev"
 msgstr "前へ"
 
@@ -5112,7 +5118,7 @@ msgstr ""
 msgid "Prompt for user data cleaning by email"
 msgstr "クリーニング依頼メール"
 
-#: app/views/bookmark/new.html.erb:37
+#: app/views/bookmark/new.html.erb:53
 msgid "Public"
 msgstr "公開"
 
@@ -5234,7 +5240,7 @@ msgstr "読書"
 msgid "Recent Entries"
 msgstr "新着記事"
 
-#: app/views/mypage/index.html.erb:163
+#: app/views/mypage/index.html.erb:167
 msgid "Recent Groups"
 msgstr "新着グループ"
 
@@ -5248,7 +5254,7 @@ msgstr "最近の人気ブログ"
 msgid "Recent Questions"
 msgstr "みんなからの質問!"
 
-#: app/views/mypage/index.html.erb:143
+#: app/views/mypage/index.html.erb:147
 msgid "Recent Users"
 msgstr "新着ユーザ"
 
@@ -5453,10 +5459,6 @@ msgstr "検索"
 #: app/views/search/entry_search.html.erb:5
 msgid "Search Range"
 msgstr "検索範囲"
-
-#: app/views/search/_page_navi.html.erb:5
-msgid "Search Result Pages: "
-msgstr "検索結果ページ:"
 
 #: app/views/search/_full_text_search.html.erb:19
 msgid "Search does not show more than 1000 search results."
@@ -6071,15 +6073,15 @@ msgstr "テレビ"
 #: app/views/share_file/_form.html.erb:47
 #: app/views/search/_tag_search.html.erb:3
 #: app/views/bookmark/_tag_cloud_box.html.erb:4
-#: app/views/bookmark/new.html.erb:41 app/views/bookmark/show.html.erb:14
+#: app/views/bookmark/new.html.erb:37 app/views/bookmark/show.html.erb:14
 msgid "Tags"
 msgstr "タグ"
 
-#: app/views/chains/_form.html.erb:20 app/views/bookmark/new.html.erb:46
+#: app/views/chains/_form.html.erb:20 app/views/bookmark/new.html.erb:42
 msgid "Tags marked by others: "
 msgstr "みんながつけたタグ："
 
-#: app/views/chains/_form.html.erb:22 app/views/bookmark/new.html.erb:48
+#: app/views/chains/_form.html.erb:22 app/views/bookmark/new.html.erb:44
 msgid "Tags you used before (top 20): "
 msgstr "あなたが使ったタグ（よく使う20件）："
 
@@ -6343,7 +6345,7 @@ msgstr "やりすぎ！"
 msgid "Top"
 msgstr "トップ"
 
-#: app/views/chains/_form.html.erb:21 app/views/bookmark/new.html.erb:47
+#: app/views/chains/_form.html.erb:21 app/views/bookmark/new.html.erb:43
 msgid "Top 10 tags: "
 msgstr "みんながよく使うタグ（人気の10件）："
 
@@ -7494,7 +7496,6 @@ msgid "[Next month]"
 msgstr "[次月]"
 
 #: app/views/search/_result_info.html.erb:4
-#: app/views/search/_page_navi.html.erb:20
 msgid "[Next]"
 msgstr "[次へ]"
 
@@ -8156,7 +8157,7 @@ msgstr ""
 "必須になります。"
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:254
+#: app/views/board_entries/_embed_dialog.html.erb:261
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr "« 前"
@@ -8183,6 +8184,9 @@ msgstr ""
 
 #~ msgid "List of Groups"
 #~ msgstr "グループ一覧"
+
+#~ msgid "Search Result Pages: "
+#~ msgstr "検索結果ページ:"
 
 #~ msgid "Search from %s&nbsp;"
 #~ msgstr "%sから検索&nbsp;"
