@@ -3804,7 +3804,7 @@ msgstr "ファイルを本文に挿入"
 #: app/views/chapters/_embed_dialog.html.erb:1
 #: app/views/chapters/_page_content.html.erb:20
 msgid "Insert file or embed in text body"
-msgstr "ファイルや埋め込みタグを本文に挿入"
+msgstr "画像やファイル、地図・動画などを本文に挿入"
 
 #: app/views/board_entries/_embed_dialog.html.erb:194
 #: app/views/chapters/_page_content.html.erb:218
