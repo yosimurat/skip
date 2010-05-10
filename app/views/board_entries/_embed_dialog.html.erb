@@ -225,12 +225,16 @@
     if($j.inArray(extension, <%= ShareFile::CONTENT_TYPE_IMAGES.keys.to_json %>) >= 0) {
       var src = data['src'];
       if(src){
-        var img = $j("<img></img>").attr({src: src, alt: filename}).addClass('pointer').css('border', '0 none');
-        if (img.get(0).width > 240 )
-         img.attr('width', '240');
-        return img.clone().attr({'height': '72', 'width': '72'}).addClass('fit_image').click(function(){
+        var img = new Image();
+        $j(img).load(function() {
+          if (this.width > 240 ) {
+            $j(this).attr('width', '240').removeAttr('height');
+          }
+        }).attr({src: src, alt: filename}).addClass('pointer').css('border', '0 none');
+
+        return $j(img).clone().attr({'height': '72', 'width': '72'}).addClass('fit_image').click(function(){
           if($j('#editor_mode_richtext:checked').length > 0){
-            var a_img = $j("<a></a>").attr({href: src + '&inline=true', target: '_blank'}).append(img);
+            var a_img = $j("<a></a>").attr({href: src + '&inline=true', target: '_blank'}).append($j(img));
             insertToRichEditor($j("<p></p>").append(a_img));
           } else if($j('#editor_mode_hiki:checked').length > 0) {
             insertToHikiEditor('\n{{' + filename + ',240,}}');
