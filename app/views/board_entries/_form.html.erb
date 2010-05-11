@@ -104,7 +104,7 @@ div.input_line textarea {
   <div style="clear: left"></div>
 </div>
 
-<% ckeditor 'board_entry_contents_richtext', 'toolbar' => "Entry" %>
+<% ckeditor 'board_entry_contents_richtext', 'toolbar' => "EntrySimple" %>
 <% content_for :javascript_initializers do -%>
   <% categories_hash = BoardEntry.categories_hash(current_user) -%>
   var setupTagComplete = function() {

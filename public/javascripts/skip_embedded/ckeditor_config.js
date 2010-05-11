@@ -22,6 +22,19 @@ CKEDITOR.editorConfig = function( config )
         ['Maximize', 'ShowBlocks','-','About']
     ];
 
+    config.toolbar_EntrySimple = [
+        ['Bold','Italic','Underline','Strike'],
+        ['NumberedList','BulletedList'],
+        ['JustifyLeft','JustifyCenter','JustifyRight'],
+        ['TextColor','BGColor'],
+        ['Table','Smiley'],
+        '/',
+        ['Format','FontSize'],
+        ['Link'],
+        ['Source'],
+        ['Maximize']
+    ];
+
     config.toolbar_Simple = [
         ['Undo','Redo'],
         ['Bold','Italic','Underline','Strike','RemoveFormat'],
@@ -51,4 +64,7 @@ CKEDITOR.editorConfig = function( config )
 
     config.shiftEnterMode = CKEDITOR.ENTER_BR;
     config.enterMode = CKEDITOR.ENTER_BR;
+
+    config.height = '500px';
+    config.resize_enabled = false;
 };
