@@ -94,28 +94,28 @@ module SystemMessagesHelper
       when 'APPROVAL_OF_JOIN'
         group = Group.active.find(message.message_hash[:group_id])
         {
-          :message => _("You were approved join of the group %s.") % group.name,
+          :message => _("You are approved to join the group %s.") % group.name,
           :icon => 'group_add',
           :url => url_for({:controller => 'group', :action => 'show', :gid => group.gid, :system_message_id => message.id})
         }
       when 'DISAPPROVAL_OF_JOIN'
         group = Group.active.find(message.message_hash[:group_id])
         {
-          :message => _("You were disapproved join of the group %s.") % group.name,
+          :message => _("You are disapproved to join the group %s.") % group.name,
           :icon => 'group_delete',
           :url => url_for({:controller => 'group', :action => 'show', :gid => group.gid, :system_message_id => message.id})
         }
       when 'FORCED_JOIN'
         group = Group.active.find(message.message_hash[:group_id])
         {
-          :message => _("Forced to join the group [%s].") % group.name,
+          :message => _("You are now member of the group [%s].") % group.name,
           :icon => 'group_add',
           :url => url_for({:controller => 'group', :action => 'show', :gid => group.gid, :system_message_id => message.id})
         }
       when 'FORCED_LEAVE'
         group = Group.active.find(message.message_hash[:group_id])
         {
-          :message => _("You forced to leave the group [%s].") % group.name,
+          :message => _("You are forced to leave the group [%s].") % group.name,
           :icon => 'group_delete',
           :url => url_for({:controller => 'group', :action => 'show', :gid => group.gid, :system_message_id => message.id})
         }

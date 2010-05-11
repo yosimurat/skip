@@ -3252,7 +3252,7 @@ msgid "File size exceeded the limit."
 msgstr ""
 
 #: app/views/layouts/admin/application.html.erb:19
-msgid "File size is over soon"
+msgid "Disk usage is close to its limit."
 msgstr ""
 
 #: app/models/picture.rb:52
@@ -3275,7 +3275,7 @@ msgid_plural "Files were successfully uploaded."
 msgstr[0] ""
 
 #: app/models/share_file.rb:36
-msgid "File with the same name already uploaded."
+msgid "overlaps with an existing file."
 msgstr ""
 
 #: app/controllers/services_controller.rb:48
@@ -3315,7 +3315,7 @@ msgid "For questions regarding this email, please contact:"
 msgstr ""
 
 #: app/helpers/system_messages_helper.rb:111
-msgid "Forced to join the group [%s]."
+msgid "You are now member of the group [%s]."
 msgstr ""
 
 #: app/views/shared/_password_login_form.html.erb:47
@@ -7109,7 +7109,7 @@ msgid "You cannot delete user who is not unused."
 msgstr ""
 
 #: app/helpers/system_messages_helper.rb:118
-msgid "You forced to leave the group [%s]."
+msgid "You are forced to leave the group [%s]."
 msgstr ""
 
 #: app/controllers/platform_controller.rb:51
@@ -7137,11 +7137,11 @@ msgid "You recieved a comment on your entry [%s]!"
 msgstr ""
 
 #: app/helpers/system_messages_helper.rb:97
-msgid "You were approved join of the group %s."
+msgid "You are approved to join the group %s."
 msgstr ""
 
 #: app/helpers/system_messages_helper.rb:104
-msgid "You were disapproved join of the group %s."
+msgid "You are disapproved to join the group %s."
 msgstr ""
 
 #: app/views/user_mailer/smtp/sent_signup_confirm.html.erb:4
