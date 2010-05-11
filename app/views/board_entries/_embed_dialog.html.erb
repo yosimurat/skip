@@ -191,11 +191,14 @@
     var src = data['src'];
     return $j("<span></span>").text('<%= _('Insert image') %>').addClass("insert_link link pointer").click(function(){
       if($j('#board_entry_editor_mode_richtext:checked').length > 0){
-        var img = $j("<img></img>").attr({src: src, alt: filename}).addClass('pointer').css('border', '0 none');
-        if (img.get(0).width > 240 )
-          img.attr('width', '240');
-        var a_img = $j("<a></a>").attr({href: src + '&inline=true', target: '_blank'}).append(img);
-        insertToRichEditor($j("<p></p>").append(a_img));
+        var img = new Image();
+        $j(img).load(function() {
+          if (this.width > 240 ) {
+            $j(this).attr('width', '240').removeAttr('height');
+          }
+          var a_img = $j("<a></a>").attr({href: src + '&inline=true', target: '_blank'}).append($j(this));
+          insertToRichEditor($j("<p></p>").append(a_img));
+        }).attr({src: src, alt: filename}).addClass('pointer').css('border', '0 none');
       } else if($j('#board_entry_editor_mode_hiki:checked').length > 0) {
         insertToHikiEditor('\n{{' + filename + ',240,}}');
       }
