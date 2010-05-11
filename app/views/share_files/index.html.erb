@@ -1,5 +1,14 @@
 <% if current_target_owner -%>
   <% content_for :contents_left do -%>
+    <% if current_user == current_target_user -%>
+      <ul class="no_style">
+        <li><%= link_to(content_tag('span', _('Upload a file')), new_polymorphic_path([current_tenant, current_target_user, :share_file]), :title => _('Upload a file'), :class => 'rounded') %></li>
+      </ul>
+    <% elsif current_participation && !current_participation.waiting? -%>
+      <ul class="no_style">
+        <li><%= link_to(content_tag('span', _('Upload a file')), new_polymorphic_path([current_tenant, current_target_group, :share_file]), :title => _('Upload a file'), :class => 'rounded') %></li>
+      </ul>
+    <% end -%>
     <%= render :partial => 'tag_cloud_box' %>
   <% end -%>
 

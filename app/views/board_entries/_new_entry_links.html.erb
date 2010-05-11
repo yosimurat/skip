@@ -1,0 +1,10 @@
+<% wrap_by_ul ||= false -%>
+<%= '<ul class="no_style">' if wrap_by_ul %>
+<% if current_target_group -%>
+  <li><%= link_to(content_tag('span', _('New Posts')), new_polymorphic_path([current_tenant, current_target_group, :board_entry]), :class => 'rounded', :title => _('New Posts')) %></li>
+  <li><%= link_to(content_tag('span', _('Write a question')), new_polymorphic_path([current_tenant, current_target_group, :board_entry], :board_entry => {:aim_type => 'question'}), :title => _('Write a question'), :class => 'rounded') %></li>
+<% else -%>
+  <li><%= link_to(content_tag('span', _('Write a blog entry')) , new_polymorphic_path([current_tenant, current_target_user, :board_entry]), :title => _('Write a blog entry'), :class => 'rounded') %></li>
+  <li><%= link_to(content_tag('span', _('Write a question')), new_polymorphic_path([current_tenant, current_target_user, :board_entry], :board_entry => {:aim_type => 'question'}), :title => _('Write a question'), :class => 'rounded') %></li>
+<% end -%>
+<%= '</ul>' if wrap_by_ul %>
