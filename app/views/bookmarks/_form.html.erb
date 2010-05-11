@@ -20,7 +20,7 @@
         <%= form.text_field :title, :size => 100 %>
         <span id="refresher"><%= icon_tag 'arrow_rotate_clockwise', :title => _("Reacquire the title") %></span>
         <span id="indicator" style="display:none;font-size:10px;"><%= skip_image_tag 'indicator.gif' %><%= _('Updating...')%></span>
-        <br/><span style="font-size: 10px; color: green;"><%= _('The titles are shared among all users so be careful upon updating.')%></span>
+        <br/><span style="font-size: 10px; font-weight: normal;"><%= _('The titles are shared among all users so be careful upon updating.')%></span>
       <% else -%>
         <%= h(form.object.title) -%>
         <%= form.hidden_field :title -%>
@@ -31,13 +31,6 @@
   <% bookmark_comments = [form.object.bookmark_comments.find_by_user_id(current_user.id) || form.object.bookmark_comments.build] -%>
   <% form.fields_for :bookmark_comments, bookmark_comments do |bc_form| -%>
     <%= bc_form.hidden_field :user_id, :value => current_user.id %>
-    <tr>
-      <th><%= _('Public' ) %></th>
-      <td>
-        <%= bc_form.radio_button :public, true %><%= bc_form.label :public_true, _('Publish') %>
-        <%= bc_form.radio_button :public, false %><%= bc_form.label :public_false, _('Closed') %>
-      </td>
-    </tr>
     <tr>
       <th><%= bc_form.label :tag_strings, _('Tags') %></th>
       <td>
@@ -54,14 +47,21 @@
       <th><%= bc_form.label :comment, _('Comment') %></th>
       <td><%= bc_form.text_field :comment, :size => 100 %></td>
     </tr>
+    <tr>
+      <th><%= _('Public' ) %></th>
+      <td>
+        <%= bc_form.radio_button :public, true %><%= bc_form.label :public_true, _('Publish') %>
+        <%= bc_form.radio_button :public, false %><%= bc_form.label :public_false, _('Closed') %>
+      </td>
+    </tr>
   <% end -%>
+  <% if form.object.is_type_internet? && @bookmarklet -%>
   <tr>
     <td colspan="2" class="operation">
-      <% if form.object.is_type_internet? && @bookmarklet -%>
-        <input type="button" value=<%= _('Back') %> onclick="location.href='<%= form.object.escaped_url %>'"></input>
-      <% end -%>
+      <input type="button" value=<%= _('Back') %> onclick="location.href='<%= form.object.escaped_url %>'"></input>
     </td>
   </tr>
+  <% end -%>
 </table>
 
 <% content_for :javascript_initializers do -%>
