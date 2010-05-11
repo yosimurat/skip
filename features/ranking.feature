@@ -575,7 +575,6 @@ Feature: ランキング
 
     And 現在時刻を元に戻す
 
-  @now
   Scenario: ブログ投稿数ランキングを集計して、表示する
     Given 現在時刻の定義を一旦退避する
     And 現在時刻を2009-01-01とする
@@ -731,116 +730,171 @@ Feature: ランキング
 
     And 現在時刻を元に戻す
 
-#  Scenario: コメント投稿数ランキングを集計して、表示する
-#    Given   言語は"ja-JP"
-#    And     現在時刻の定義を一旦退避する
-#    And     現在時刻を2009-01-01とする
-#    And     "a_user"でブログを書く
-#
-#    When    ログインIDが"comment1"でパスワードが"Password1"のあるユーザを作成する
-#    And     "comment1"でコメントを"3"回書く
-#    And     ランキングのバッチで"create_commentator_ranking"の"2009-01-01"分を実行する
-#
-#    Then    "commentator"ランキングの"2009-01"分を表示する
-#    And     ランキングの"1"位が"comment1"のユーザであること
-#    And     ランキングの"1"位の数が"3"であること
-#
-#    Then    "commentatorランキングの総合ページ"にアクセスする
-#    And     ランキングの"1"位が"comment1"のユーザであること
-#    And     ランキングの"1"位の数が"3"であること
-#
-#    Given   現在時刻を2009-01-02とする
-#
-#    When    ログインIDが"comment2"でパスワードが"Password1"のあるユーザを作成する
-#    And     "comment1"でコメントを"3"回書く
-#    And     "comment2"でコメントを"5"回書く
-#    And     ランキングのバッチで"create_commentator_ranking"の"2009-01-02"分を実行する
-#
-#    Then    "commentator"ランキングの"2009-01"分を表示する
-#    And     ランキングの"1"位が"comment1"のユーザであること
-#    And     ランキングの"1"位の数が"6"であること
-#    And     ランキングの"2"位が"comment2"のユーザであること
-#    And     ランキングの"2"位の数が"5"であること
-#
-#    Then    "commentatorランキングの総合ページ"にアクセスする
-#    And     ランキングの"1"位が"comment1"のユーザであること
-#    And     ランキングの"1"位の数が"6"であること
-#    And     ランキングの"2"位が"comment2"のユーザであること
-#    And     ランキングの"2"位の数が"5"であること
-#
-#    Given   現在時刻を2009-02-01とする
-#
-#    When    ログインIDが"comment3"でパスワードが"Password1"のあるユーザを作成する
-#    And     "comment1"でコメントを"3"回書く
-#    And     "comment3"でコメントを"5"回書く
-#    And     ランキングのバッチで"create_commentator_ranking"の"2009-02-01"分を実行する
-#
-#    Then    "commentator"ランキングの"2009-02"分を表示する
-#    And     ランキングの"1"位が"comment3"のユーザであること
-#    And     ランキングの"1"位の数が"5"であること
-#    And     ランキングの"2"位が"comment1"のユーザであること
-#    And     ランキングの"2"位の数が"3"であること
-#
-#    Then    "commentatorランキングの総合ページ"にアクセスする
-#    And     ランキングの"1"位が"comment1"のユーザであること
-#    And     ランキングの"1"位の数が"9"であること
-#    And     ランキングの"2"位が"comment2"のユーザであること
-#    And     ランキングの"2"位の数が"5"であること
-#    And     ランキングの"3"位が"comment3"のユーザであること
-#    And     ランキングの"3"位の数が"5"であること
-#
-#    Given   現在時刻を2009-03-01とする
-#
-#    When    ログインIDが"comment4"でパスワードが"Password1"のあるユーザを作成する
-#    And     "comment1"でコメントを"3"回書く
-#    And     "comment4"でコメントを"5"回書く
-#    And     ランキングのバッチで"create_commentator_ranking"の"2009-03-01"分を実行する
-#
-#    Then    "commentator"ランキングの"2009-03"分を表示する
-#    And     ランキングの"1"位が"comment4"のユーザであること
-#    And     ランキングの"1"位の数が"5"であること
-#    And     ランキングの"2"位が"comment1"のユーザであること
-#    And     ランキングの"2"位の数が"3"であること
-#
-#    Then    "commentatorランキングの総合ページ"にアクセスする
-#    And     ランキングの"1"位が"comment1"のユーザであること
-#    And     ランキングの"1"位の数が"12"であること
-#    And     ランキングの"2"位が"comment2"のユーザであること
-#    And     ランキングの"2"位の数が"5"であること
-#    And     ランキングの"3"位が"comment3"のユーザであること
-#    And     ランキングの"3"位の数が"5"であること
-#    And     ランキングの"4"位が"comment4"のユーザであること
-#    And     ランキングの"4"位の数が"5"であること
-#
-#    Given   現在時刻を2009-03-02とする
-#
-#    When    "comment1"でコメントを"3"回書く
-#    And     "comment4"でコメントを"2"回書く
-#    And     "comment2"でコメントを"8"回書く
-#    And     ランキングのバッチで"create_commentator_ranking"の"2009-03-02"分を実行する
-#
-#    Then    "commentator"ランキングの"2009-03"分を表示する
-#    And     ランキングの"1"位が"comment2"のユーザであること
-#    And     ランキングの"1"位の数が"8"であること
-#    And     ランキングの"2"位が"comment4"のユーザであること
-#    And     ランキングの"2"位の数が"7"であること
-#    And     ランキングの"3"位が"comment1"のユーザであること
-#    And     ランキングの"3"位の数が"6"であること
-#
-#    Then    "commentatorランキングの総合ページ"にアクセスする
-#    And     ランキングの"1"位が"comment1"のユーザであること
-#    And     ランキングの"1"位の数が"15"であること
-#    And     ランキングの"2"位が"comment2"のユーザであること
-#    And     ランキングの"2"位の数が"13"であること
-#    And     ランキングの"3"位が"comment4"のユーザであること
-#    And     ランキングの"3"位の数が"7"であること
-#    And     ランキングの"4"位が"comment3"のユーザであること
-#    And     ランキングの"4"位の数が"5"であること
-#
-#    Then    "commentator"ランキングの"2009-01"分を表示する
-#    And     ランキングの"1"位が"comment1"のユーザであること
-#    And     ランキングの"1"位の数が"6"であること
-#    And     ランキングの"2"位が"comment2"のユーザであること
-#    And     ランキングの"2"位の数が"5"であること
-#
-#    And     現在時刻を元に戻す
+  Scenario: コメント投稿数ランキングを集計して、表示する
+    Given     現在時刻の定義を一旦退避する
+    And     現在時刻を2009-01-01とする
+    And 以下のユーザを作成する
+      |name       |email              |password   |tenant_name  |
+      |comment1   |comment1@test.com  |Password1  |skip         |
+      |comment2   |comment2@test.com  |Password1  |skip         |
+      |comment3   |comment3@test.com  |Password1  |skip         |
+      |comment4   |comment4@test.com  |Password1  |skip         |
+
+    When 以下のブログを書く:
+      |tenant_name   |user   |title            |
+      |skip          |alice  |2009-01-01の日記 |
+    And 以下の記事コメントを書く:
+      |entry_title      |contents       |user         |
+      |2009-01-01の日記 |test1          |comment1     |
+      |2009-01-01の日記 |test2          |comment1     |
+      |2009-01-01の日記 |test3          |comment1     |
+    And ランキングのバッチで"create_commentator_ranking"の"2009-01-01"分を実行する
+
+    Then "commentatorランキングの2009-01分ページ"にアクセスする
+    And ランキングの"1"位が"comment1"のユーザであること
+    And ランキングの"1"位の数が"3"であること
+
+    Then "commentatorランキングの総合ページ"にアクセスする
+    And ランキングの"1"位が"comment1"のユーザであること
+    And ランキングの"1"位の数が"3"であること
+
+    Given 現在時刻を2009-01-02とする
+
+    When 以下のブログを書く:
+      |tenant_name   |user   |title            |
+      |skip          |alice  |2009-01-02の日記 |
+    And 以下の記事コメントを書く:
+      |entry_title      |contents       |user         |
+      |2009-01-02の日記 |test1          |comment1     |
+      |2009-01-02の日記 |test2          |comment1     |
+      |2009-01-02の日記 |test3          |comment1     |
+      |2009-01-02の日記 |test1          |comment2     |
+      |2009-01-02の日記 |test2          |comment2     |
+      |2009-01-02の日記 |test3          |comment2     |
+      |2009-01-02の日記 |test4          |comment2     |
+      |2009-01-02の日記 |test5          |comment2     |
+    And ランキングのバッチで"create_commentator_ranking"の"2009-01-02"分を実行する
+
+    Then "commentatorランキングの2009-01分ページ"にアクセスする
+    And ランキングの"1"位が"comment1"のユーザであること
+    And ランキングの"1"位の数が"6"であること
+    And ランキングの"2"位が"comment2"のユーザであること
+    And ランキングの"2"位の数が"5"であること
+
+    Then "commentatorランキングの総合ページ"にアクセスする
+    And ランキングの"1"位が"comment1"のユーザであること
+    And ランキングの"1"位の数が"6"であること
+    And ランキングの"2"位が"comment2"のユーザであること
+    And ランキングの"2"位の数が"5"であること
+
+    Given   現在時刻を2009-02-01とする
+
+    When 以下のブログを書く:
+      |tenant_name   |user   |title            |
+      |skip          |alice  |2009-02-01の日記 |
+    And 以下の記事コメントを書く:
+      |entry_title      |contents       |user         |
+      |2009-02-01の日記 |test1          |comment1     |
+      |2009-02-01の日記 |test2          |comment1     |
+      |2009-02-01の日記 |test3          |comment1     |
+      |2009-02-01の日記 |test1          |comment3     |
+      |2009-02-01の日記 |test2          |comment3     |
+      |2009-02-01の日記 |test3          |comment3     |
+      |2009-02-01の日記 |test4          |comment3     |
+      |2009-02-01の日記 |test5          |comment3     |
+    And ランキングのバッチで"create_commentator_ranking"の"2009-02-01"分を実行する
+
+    Then "commentatorランキングの2009-02分ページ"にアクセスする
+    And ランキングの"1"位が"comment3"のユーザであること
+    And ランキングの"1"位の数が"5"であること
+    And ランキングの"2"位が"comment1"のユーザであること
+    And ランキングの"2"位の数が"3"であること
+
+    Then "commentatorランキングの総合ページ"にアクセスする
+    And ランキングの"1"位が"comment1"のユーザであること
+    And ランキングの"1"位の数が"9"であること
+    And ランキングの"2"位が"comment2"のユーザであること
+    And ランキングの"2"位の数が"5"であること
+    And ランキングの"3"位が"comment3"のユーザであること
+    And ランキングの"3"位の数が"5"であること
+
+    Given   現在時刻を2009-03-01とする
+
+    When 以下のブログを書く:
+      |tenant_name   |user   |title            |
+      |skip          |alice  |2009-03-01の日記 |
+    And 以下の記事コメントを書く:
+      |entry_title      |contents       |user         |
+      |2009-03-01の日記 |test1          |comment1     |
+      |2009-03-01の日記 |test2          |comment1     |
+      |2009-03-01の日記 |test3          |comment1     |
+      |2009-03-01の日記 |test1          |comment4     |
+      |2009-03-01の日記 |test2          |comment4     |
+      |2009-03-01の日記 |test3          |comment4     |
+      |2009-03-01の日記 |test4          |comment4     |
+      |2009-03-01の日記 |test5          |comment4     |
+    And ランキングのバッチで"create_commentator_ranking"の"2009-03-01"分を実行する
+
+    Then "commentatorランキングの2009-03分ページ"にアクセスする
+    And ランキングの"1"位が"comment4"のユーザであること
+    And ランキングの"1"位の数が"5"であること
+    And ランキングの"2"位が"comment1"のユーザであること
+    And ランキングの"2"位の数が"3"であること
+
+    Then "commentatorランキングの総合ページ"にアクセスする
+    And ランキングの"1"位が"comment1"のユーザであること
+    And ランキングの"1"位の数が"12"であること
+    And ランキングの"2"位が"comment2"のユーザであること
+    And ランキングの"2"位の数が"5"であること
+    And ランキングの"3"位が"comment3"のユーザであること
+    And ランキングの"3"位の数が"5"であること
+    And ランキングの"4"位が"comment4"のユーザであること
+    And ランキングの"4"位の数が"5"であること
+
+    Given   現在時刻を2009-03-02とする
+
+    When 以下のブログを書く:
+      |tenant_name   |user   |title            |
+      |skip          |alice  |2009-03-02の日記 |
+    And 以下の記事コメントを書く:
+      |entry_title      |contents       |user         |
+      |2009-03-02の日記 |test1          |comment1     |
+      |2009-03-02の日記 |test2          |comment1     |
+      |2009-03-02の日記 |test3          |comment1     |
+      |2009-03-02の日記 |test1          |comment4     |
+      |2009-03-02の日記 |test2          |comment4     |
+      |2009-03-02の日記 |test1          |comment2     |
+      |2009-03-02の日記 |test2          |comment2     |
+      |2009-03-02の日記 |test3          |comment2     |
+      |2009-03-02の日記 |test4          |comment2     |
+      |2009-03-02の日記 |test5          |comment2     |
+      |2009-03-02の日記 |test6          |comment2     |
+      |2009-03-02の日記 |test7          |comment2     |
+      |2009-03-02の日記 |test8          |comment2     |
+    And ランキングのバッチで"create_commentator_ranking"の"2009-03-02"分を実行する
+
+    Then "commentatorランキングの2009-03分ページ"にアクセスする
+    And ランキングの"1"位が"comment2"のユーザであること
+    And ランキングの"1"位の数が"8"であること
+    And ランキングの"2"位が"comment4"のユーザであること
+    And ランキングの"2"位の数が"7"であること
+    And ランキングの"3"位が"comment1"のユーザであること
+    And ランキングの"3"位の数が"6"であること
+
+    Then "commentatorランキングの総合ページ"にアクセスする
+    And ランキングの"1"位が"comment1"のユーザであること
+    And ランキングの"1"位の数が"15"であること
+    And ランキングの"2"位が"comment2"のユーザであること
+    And ランキングの"2"位の数が"13"であること
+    And ランキングの"3"位が"comment4"のユーザであること
+    And ランキングの"3"位の数が"7"であること
+    And ランキングの"4"位が"comment3"のユーザであること
+    And ランキングの"4"位の数が"5"であること
+
+    Then "commentatorランキングの2009-01分ページ"にアクセスする
+    And ランキングの"1"位が"comment1"のユーザであること
+    And ランキングの"1"位の数が"6"であること
+    And ランキングの"2"位が"comment2"のユーザであること
+    And ランキングの"2"位の数が"5"であること
+
+    And 現在時刻を元に戻す
