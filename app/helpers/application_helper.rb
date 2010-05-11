@@ -89,7 +89,7 @@ module ApplicationHelper
 
   # リッチテキストの表示
   def render_richtext(text, owner = nil)
-    content = parse_permalink(text, owner)
+    content = replace_plain_url(parse_permalink(text, owner))
     "<div class='rich_style ui-corner-all'>#{sanitize_and_unescape_for_richtext(content)}</div>"
   end
 
