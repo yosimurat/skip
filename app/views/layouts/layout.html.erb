@@ -9,7 +9,7 @@
 <%= render :partial => "shared/header" %>
 <%= render :partial => "shared/flash_message" %>
 
-<% if params[:controller].split('/').first == "apps" -%>
+<% if (params[:controller] && params[:controller].split('/').first == "apps") -%>
   <%= yield %>
 <% else -%>
 <div id="main">
@@ -115,7 +115,7 @@ $j = jQuery.noConflict();
 var relative_url_root = '<%= relative_url_root %>';
 <% end -%>
 <%= javascript_include_merged :base %>
-<% if params[:controller].split('/').first == "apps" -%>
+<% if (params[:controller] && params[:controller].split('/').first == "apps") -%>
   <%= simple_apps_application_javascript_include_tag %>
 <% end -%>
 <%= yield :javascript_includes %>
