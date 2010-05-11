@@ -222,10 +222,10 @@ describe BoardEntry, '#send_contact_mails' do
         before do
           Admin::Setting.set_enable_send_email_to_all_users(@tenant, true)
         end
-        it 'テナント内のアクティブなユーザ全員分(自分以外)のEmailが出来ていること' do
+        it 'アクティブなユーザ全員分のEmailが出来ていること' do
           lambda do
             @entry.send_contact_mails
-          end.should change(Email, :count).by(@tenant.users.active.count - 1)
+          end.should change(Email, :count).by(@tenant.users.active.count)
         end
       end
       describe '全体へのメール送信が無効の場合' do
@@ -244,10 +244,10 @@ describe BoardEntry, '#send_contact_mails' do
         @entry = create_board_entry(:tenant => @tenant, :owner => @alice, :publication_type => 'private', :user => @alice)
         @entry.send_mail = '1'
       end
-      it 'Emailが作られないこと' do
+      it '自分宛のEmailが作られること' do
         lambda do
           @entry.send_contact_mails
-        end.should change(Email, :count).by(0)
+        end.should change(Email, :count).by(1)
       end
     end
     describe '公開範囲が参加者のみのフォーラムの場合' do
@@ -260,10 +260,10 @@ describe BoardEntry, '#send_contact_mails' do
         @entry = create_board_entry(:symbol => @group.symbol, :publication_type => 'private', :user_id => @alice.id, :publication_symbols_value => @group.symbol)
         @entry.send_mail = '1'
       end
-      it '参加者全員分(自分以外)のEmailが出来ていること' do
+      it '参加者全員分のEmailが出来ていること' do
         lambda do
           @entry.send_contact_mails
-        end.should change(Email, :count).by(2)
+        end.should change(Email, :count).by(3)
       end
       describe '記事を所有するグループが削除された場合' do
         before do
