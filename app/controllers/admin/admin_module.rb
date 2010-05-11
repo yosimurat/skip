@@ -97,7 +97,7 @@ module Admin::AdminModule
       set_singularize_instance_val object
 
       @topics = [[_('Listing %{model}') % {:model => _(controller_name.gsub('_', ' ').capitalize)}, index_url],
-                 _('%{model} Show') % {:model => object.topic_title}]
+                 _('Show %{model}') % {:model => object.topic_title}]
 
       respond_to do |format|
         format.html # show.html.erb
@@ -187,7 +187,7 @@ module Admin::AdminModule
       set_pluralize_instance_val objects
 
       @topics = [[_('Listing %{model}') % {:model => _(object_name_without_admin(load_parent).gsub('_', ' '))}, parent_index_path],
-                 [_('%{model} Show') % {:model => load_parent.topic_title}, parent_show_path],
+                 [_('Show %{model}') % {:model => load_parent.topic_title}, parent_show_path],
                  _('Listing %{model}') % {:model => _(controller_name.gsub('_', ' ').capitalize)}]
 
       respond_to do |format|
@@ -201,9 +201,9 @@ module Admin::AdminModule
       set_singularize_instance_val object
 
       @topics = [[_('Listing %{model}') % {:model => _(object_name_without_admin(load_parent).gsub('_', ' '))}, parent_index_path],
-                 [_('%{model} Show') % {:model => load_parent.topic_title}, parent_show_path],
+                 [_('Show %{model}') % {:model => load_parent.topic_title}, parent_show_path],
                  [_('Listing %{model}') % {:model => _(controller_name.gsub('_', ' ').capitalize)}, { :action => :index }],
-                 _('%{model} Show') % {:model => object.topic_title}]
+                 _('Show %{model}') % {:model => object.topic_title}]
 
       respond_to do |format|
         format.html # show.html.erb
@@ -216,7 +216,7 @@ module Admin::AdminModule
       set_singularize_instance_val object
 
       @topics = [[_('Listing %{model}') % {:model => _(object_name_without_admin(load_parent).gsub('_', ' '))}, parent_index_path],
-                 [_('%{model} Show') % {:model => load_parent.topic_title}, parent_show_path],
+                 [_('Show %{model}') % {:model => load_parent.topic_title}, parent_show_path],
                  [_('Listing %{model}') % {:model => _(controller_name.gsub('_', ' ').capitalize)}, { :action => :index }],
                  _('New %{model}') % {:model => object.topic_title}]
 
@@ -231,7 +231,7 @@ module Admin::AdminModule
       set_singularize_instance_val object
 
       @topics = [[_('Listing %{model}') % {:model => _(object_name_without_admin(load_parent).gsub('_', ' '))}, parent_index_path],
-                 [_('%{model} Show') % {:model => load_parent.topic_title}, parent_show_path],
+                 [_('Show %{model}') % {:model => load_parent.topic_title}, parent_show_path],
                  [_('Listing %{model}') % {:model => _(controller_name.gsub('_', ' ').capitalize)}, { :action => :index }],
                  _('Editing %{model}') % {:model => object.topic_title}]
     end
@@ -241,7 +241,7 @@ module Admin::AdminModule
       set_singularize_instance_val object
 
       @topics = [[_('Listing %{model}') % {:model => _(object_name_without_admin(load_parent).gsub('_', ' '))}, parent_index_path],
-                 [_('%{model} Show') % {:model => load_parent.topic_title}, parent_show_path],
+                 [_('Show %{model}') % {:model => load_parent.topic_title}, parent_show_path],
                  [_('Listing %{model}') % {:model => _(controller_name.gsub('_', ' ').capitalize)}, { :action => :index }],
                  _('New %{model}') % {:model => object.topic_title}]
 
@@ -263,7 +263,7 @@ module Admin::AdminModule
       set_singularize_instance_val object
 
       @topics = [[_('Listing %{model}') % {:model => _(object_name_without_admin(load_parent).gsub('_', ' '))}, parent_index_path],
-                 [_('%{model} Show') % {:model => load_parent.topic_title}, parent_show_path],
+                 [_('Show %{model}') % {:model => load_parent.topic_title}, parent_show_path],
                  [_('Listing %{model}') % {:model => _(controller_name.gsub('_', ' ').capitalize)}, { :action => :index }],
                  _('Editing %{model}') % {:model => object.topic_title}]
 
