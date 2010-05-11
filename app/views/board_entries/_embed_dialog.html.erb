@@ -179,7 +179,7 @@
     var src = data['src'];
     return $j("<span></span>").text('<%= _('Insert link') %>').addClass("insert_link link pointer").click(function(){
       if($j('#board_entry_editor_mode_richtext:checked').length > 0){
-        insertToRichEditor($j("<a></a>").text(filename).attr("href", src));
+        insertToRichEditor($j("<a>&nbsp;</a>").text(filename).attr("href", src));
       } else if($j('#board_entry_editor_mode_hiki:checked').length > 0) {
         insertToHikiEditor('\n[file:' + filename + ']');
       }
@@ -196,7 +196,7 @@
           if (this.width > 240 ) {
             $j(this).attr('width', '240').removeAttr('height');
           }
-          var a_img = $j("<a></a>").attr({href: src + '&inline=true', target: '_blank'}).append($j(this));
+          var a_img = $j("<a>&nbsp;</a>").attr({href: src + '&inline=true', target: '_blank'}).append($j(this));
           insertToRichEditor($j("<p></p>").append(a_img));
         }).attr({src: src, alt: filename}).addClass('pointer').css('border', '0 none');
       } else if($j('#board_entry_editor_mode_hiki:checked').length > 0) {
@@ -232,7 +232,7 @@
 
         return $j(img).clone().attr({'height': '72', 'width': '72'}).addClass('fit_image').click(function(){
           if($j('#board_entry_editor_mode_richtext:checked').length > 0){
-            var a_img = $j("<a></a>").attr({href: src + '&inline=true', target: '_blank'}).append($j(img));
+            var a_img = $j("<a>&nbsp;</a>").attr({href: src + '&inline=true', target: '_blank'}).append($j(img));
             insertToRichEditor($j("<p></p>").append(a_img));
           } else if($j('#board_entry_editor_mode_hiki:checked').length > 0) {
             insertToHikiEditor('\n{{' + filename + ',240,}}');
