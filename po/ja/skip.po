@@ -391,14 +391,14 @@ msgid "Access Log"
 msgstr "アクセス履歴"
 
 #: app/controllers/search_controller.rb:95
-msgid "Access denied by search node. Please contact system owner."
+msgid "Access denied by search node. Please contact system administrator."
 msgstr ""
 "検索エンジンにアクセスできませんでした。システム管理者に連絡してください。"
 
 #: app/views/user_mailer/smtp/sent_activate.html.erb:9
 msgid ""
 "Access the URL below and click on the link [Register your profile and start "
-"using %s]."
+"using %s] in case the above link has expired."
 msgstr ""
 "無効になってしまった場合、以下のURLにアクセスし、[ユーザ登録して%sの利用を開"
 "始する]リンクをクリックして下さい。"

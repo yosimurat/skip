@@ -15,7 +15,7 @@
 
 class SearchesController < ApplicationController
   N_("Please input search query.")
-  N_("Access denied by search node. Please contact system owner.")
+  N_("Access denied by search node. Please contact system administrator.")
 
   #全文検索
   def full_text_search
