@@ -1,4 +1,5 @@
 class RankingsController < ApplicationController
+  before_filter :require_ranking_enabled
   before_filter :setup_layout
 
   def index

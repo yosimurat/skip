@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   init_gettext "skip" if defined? GetText
 
-  helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_target_owner, :current_participation, :event_enabled?, :current_tenant, :root_url, :current_target_bookmark, :bookmark_enabled?
+  helper_method :scheme, :endpoint_url, :identifier, :checkid_request, :extract_login_from_identifier, :logged_in?, :current_user, :current_target_user, :current_target_group, :current_target_owner, :current_participation, :event_enabled?, :current_tenant, :root_url, :current_target_bookmark, :bookmark_enabled?, :ranking_enabled?
 protected
   include InitialSettingsHelper
 
@@ -330,6 +330,14 @@ protected
 
   def require_bookmark_enabled
     redirect_to root_url unless bookmark_enabled?
+  end
+
+  def ranking_enabled?
+    Admin::Setting.enable_ranking_feature(current_tenant)
+  end
+
+  def require_ranking_enabled
+    redirect_to root_url unless ranking_enabled?
   end
 
   private

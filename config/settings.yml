@@ -161,6 +161,10 @@ enable_bookmark_feature:                                  # ブックマーク�
   format :boolean
   default: false
 
+enable_ranking_feature:                                   # ランキング機能の有効化
+  format :boolean
+  default: false
+
 simple_apps:                                              # オープンソース版では利用できません
   serialized: true
   default:

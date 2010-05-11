@@ -53,7 +53,7 @@
           <%= text_field_tag "full_text_query", search_label, :class => "labeled-field" %>
           <%= submit_tag _('Search') -%>
         <% end -%>
-        <span class="other_links"><%= link_to( _('Rankings'), [current_tenant, :rankings] ) %></span>
+        <span class="other_links"><%= link_to( _('Rankings'), [current_tenant, :rankings] ) if ranking_enabled? %></span>
         <span class="other_links"><%= link_to( _('Site Information'), [current_tenant, :statistics]) %></span>
         <%= shortcut_menus %>
       </div>
