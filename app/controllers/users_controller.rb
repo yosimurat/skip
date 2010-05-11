@@ -39,6 +39,15 @@ class UsersController < ApplicationController
   def show
     # 紹介してくれた人一覧
     @against_chains = current_target_user.against_chains.order_new.limit(5)
+    respond_to do |format|
+      format.html do
+        if current_target_user.retired?
+          render :show_retired
+        else
+          render
+        end
+      end
+    end
   end
 
   def new
