@@ -37,6 +37,12 @@ class SearchesController < ApplicationController
     end
   end
 
+  # ログ解析のために全文検索の結果URLクリックでの遷移をログに残すためのAction
+  # 全文検索の結果URLクリック時に非同期でリクエストされる
+  def touch_full_text_search
+    render :text => '', :layout => false
+  end
+
 private
   # 全文検索の各画面用に@変数を作成するメソッド
   def make_instance_variables search_result

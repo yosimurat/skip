@@ -47,13 +47,13 @@ ActionController::Routing::Routes.draw do |map|
     end
     tenant.resources :share_files, :only => %w(index show)
     tenant.resources :board_entries, :only => %w(index show), :collection => {:be_read => :post, :be_unread => :post}
-    tenant.resources :bookmarks, :only => %w(index show new create edit update), :collection => {:new_without_bookmarklet => :get, :new_url => :get, :load_title => :get}, :member => {:edit_without_bookmarklet => :get} do |bookmark|
+    tenant.resources :bookmarks, :only => %w(index show new create edit update), :collection => {:new_without_bookmarklet => :get, :new_url => :get, :load_title => :get, :touch_bookmark_url => :get}, :member => {:edit_without_bookmarklet => :get} do |bookmark|
       bookmark.resources :bookmark_comments, :only => %w(destroy)
     end
     tenant.resource :invitations, :only => %w(new create)
     tenant.resource :statistics, :only => %w(show), :member => { :load_calendar => :get, :ado_current_statistics => :get, :ado_statistics_history => :get }
     tenant.resources :ids, :only => :show
-    tenant.resource :search, :only => [], :member => { :full_text_search => :get }
+    tenant.resource :search, :only => [], :member => { :full_text_search => :get, :touch_full_text_search => :get }
     tenant.logo '/logos/:id/:style/:basename.:extension', :controller => :logos, :action => :show
     tenant.resources :documents, :only => %w(show)
     tenant.resources :rankings, :only => %w(index), :collection => {:monthly => :get, :data => :get, :all => :get}

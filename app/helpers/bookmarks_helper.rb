@@ -20,12 +20,13 @@ module BookmarksHelper
   def link_to_bookmark_url(bookmark, options = {})
     title = options[:title] || bookmark.title
 
+    onclick_function = "$j.ajax({ type: 'GET', url: '#{polymorphic_url([current_tenant, :bookmarks], :action => :touch_bookmark_url)}', data: {target_url: this.href}, success: function() {}, error: function() {}, complete: function() {} });"
     if bookmark.is_type_page?
       prefix = options[:without_icon] ? "" : icon_tag('user')
-      link_to "#{prefix} #{h title}", "#{relative_url_root}#{bookmark.escaped_url}", :title => title
+      link_to "#{prefix} #{h title}", "#{relative_url_root}#{bookmark.escaped_url}", :title => title, :onclick => onclick_function
     else
       prefix = options[:without_icon] ? "" : icon_tag('world')
-      link_to "#{prefix} #{h truncate(title, :length => 115)}", bookmark.escaped_url, :title => title
+      link_to "#{prefix} #{h truncate(title, :length => 115)}", bookmark.escaped_url, :title => title, :onclick => onclick_function
     end
   end
 

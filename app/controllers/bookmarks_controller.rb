@@ -144,6 +144,12 @@ class BookmarksController < ApplicationController
     render :text => _('URL format invalid.'), :status => :bad_request
   end
 
+  # ログ解析のためにブックマーククリックでの遷移をログに残すためのAction
+  # ブックマークのURLクリック時に非同期でリクエストされる
+  def touch_bookmark_url
+    render :text => '', :layout => false
+  end
+
   private
   def select_layout
     params[:bookmarklet] ? 'subwindow' : 'layout'
