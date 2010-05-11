@@ -275,7 +275,7 @@ msgid "(The search targets are titles and comments)"
 msgstr ""
 
 #: app/views/share_file/confirm_download.html.erb:12
-msgid "(This screen is to avoid security risks ralated to direct downloading)"
+msgid "(This screen is to avoid security risks related to direct downloading)"
 msgstr ""
 
 #: app/views/bookmark/new.html.erb:17
