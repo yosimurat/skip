@@ -1,13 +1,13 @@
-#Given /^"(.*)"ユーザのプロフィールページに"(.*)"回アクセスする$/ do |user, num|
-#  num.to_i.times do
-#    Given %!"#{user}ユーザのプロフィールページ"にアクセスする!
-#  end
-#end
-#
-#Given /^ランキングの"(.*)"位が"(.*)"のユーザであること$/ do |rank,uid|
-#  Nokogiri::HTML(response.body).search("table.ranking_square tbody tr:nth(#{rank}) td.column_title a.ranking_author").text.should == uid
-#end
-#
+Given /^"(.*)"に"(.*)"回アクセスする$/ do |page, num|
+  num.to_i.times do
+    Given %!"#{page}"にアクセスする!
+  end
+end
+
+Given /^ランキングの"(.*)"位が"(.*)"のユーザであること$/ do |rank, user_name|
+  Nokogiri::HTML(response.body).search("table.ranking_square tbody tr:nth(#{rank}) td.column_title a.ranking_author").text.should == user_name
+end
+
 Given /^"(.*)"回再読み込みする$/ do |num|
   num.to_i.times do |i|
     Given "再読み込みする"
