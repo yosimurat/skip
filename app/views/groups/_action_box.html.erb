@@ -15,7 +15,7 @@
         <li><%= link_to(content_tag('span', _('Write a question')), new_polymorphic_path([current_tenant, current_target_group, :board_entry], :board_entry => {:aim_type => 'question'}), :title => _('Write a question'), :class => 'rounded') %></li>
         <li><%= link_to(content_tag('span', _('Upload a file')), new_polymorphic_path([current_tenant, current_target_group, :share_file]), :title => _('Upload a file'), :class => 'rounded') %></li>
         <% unless current_participation.owned? -%>
-          <li><%= link_to(content_tag('span', _('Leave the group')), [current_tenant, current_target_group, current_participation], :confirm => _('Are you sure leave the group?'), :method => :delete, :class => "rounded") %></li>
+          <li><%= link_to(content_tag('span', _('Leave the group')), [current_tenant, current_target_group, current_participation], :confirm => _('Are you sure to leave the group?'), :method => :delete, :class => "rounded") %></li>
         <% end -%>
       <% end -%>
     <% end -%>
