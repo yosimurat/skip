@@ -237,7 +237,7 @@ class MypagesController < ApplicationController
   # 最近の人気記事一覧を取得する（partial用のオプションを返す）
   def find_access_blogs_as_locals options
     pages = BoardEntry.accessible(current_user).scoped(
-      :order => "board_entry_points.access_count DESC, board_entries.last_updated DESC, board_entries.id DESC",
+      :order => "board_entry_points.today_access_count DESC, board_entry_points.access_count DESC, board_entries.last_updated DESC, board_entries.id DESC",
       :include => [ :user, :state ]
     ).timeline.diary.recent(recent_day.day).paginate(:page => params[:page], :per_page => options[:per_page])
 
