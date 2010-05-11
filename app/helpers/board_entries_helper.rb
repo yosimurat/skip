@@ -168,9 +168,9 @@ $j.ajax({
     check_box_tag "board_entry_#{entry.id}_toggle_read", 'true', !!user_reading.read, :title => _('Mark read'), :class => 'toggle_read', :onclick => onclick_function
   end
 
-  # 元々aタグのものは置換しない。aタグになっていないURLっぽいものをaタグに置換
+  # 元々aタグ,imgタグ(iconの変換を防ぐ)のものは置換しない。aタグ,imgタグになっていないURLっぽいものをaタグに置換
   def replace_plain_url text
-    regex = /<a\s.*?\/>|<a\s.*?>.*?<\/a>|((?:https?|ftp):\/\/[\wA-Za-z0-9;\/?:@&=+$,\-_.!~*\'()#%]+)/m
+    regex = /<(?:a|img)\s.*?\/>|<(?:a|img)\s.*?>.*?<\/(?:a|img)>|((?:https?|ftp):\/\/[\wA-Za-z0-9;\/?:@&=+$,\-_.!~*\'()#%]+)/m
     ret = text
     ret.gsub!(regex) do |str|
       $1 ? "<a href=\"#{$1}\" target=\"_blank\">#{$1}</a>" : $&
