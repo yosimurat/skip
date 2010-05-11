@@ -291,17 +291,17 @@ class GroupController < ApplicationController
           target_participations.each do |participation|
             SystemMessage.create_message :message_type => 'APPROVAL_OF_JOIN', :user_id => participation.user.id, :message_hash => {:group_id => @group.id}
           end
-          flash[:notice] = _("Succeeded to Approve.")
+          flash[:notice] = _("Succeeded to approve.")
         end
       rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
-        flash[:notice] = _("Failed to Approve.")
+        flash[:notice] = _("Failed to approve.")
       end
     else
       target_participations.each do |participation|
         participation.destroy
         SystemMessage.create_message :message_type => 'DISAPPROVAL_OF_JOIN', :user_id => participation.user.id, :message_hash => {:group_id => @group.id}
       end
-      flash[:notice] = _("Succeeded to Disapprove.")
+      flash[:notice] = _("Succeeded to disapprove.")
     end
     redirect_to :action => 'manage', :menu => 'manage_permit'
   end

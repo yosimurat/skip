@@ -4,7 +4,7 @@ module HistoriesHelper
       "-"
     else
       pos = histories.index(a_history)
-      link_to(_("次"), diff_url(page, histories[pos - 1], a_history))
+      link_to(s_("HistoriesHelper|Next"), diff_url(page, histories[pos - 1], a_history))
     end
   end
 
@@ -13,7 +13,7 @@ module HistoriesHelper
       "-"
     else
       pos = histories.index(a_history)
-      link_to(_("前"), diff_url(page, histories[pos + 1], a_history))
+      link_to(s_("HistoriesHelper|Prev"), diff_url(page, histories[pos + 1], a_history))
     end
   end
 
