@@ -30,6 +30,27 @@ module ApplicationHelper
     end
   end
 
+  # see WillPaginate::ViewHelpers#page_entries_info
+  def i18n_page_entries_info(collection, options = {})
+    entry_name = options[:entry_name] ||
+      (collection.empty?? 'entry' : collection.first.class.name.underscore.sub('_', ' '))
+
+    if collection.total_pages < 2
+      case collection.size
+      when 0; _("No matching %s found.") % _(entry_name.pluralize)
+      when 1; _("Displaying <b>1</b> %s.") % _(entry_name)
+      else;   _("Displaying <b>all %d</b> %s.") % [collection.size, _(entry_name.pluralize)]
+      end
+    else
+      _("Displaying %{entry_name} <b>%{start}&nbsp;-&nbsp;%{end}</b> of <b>%{max}</b> in total.") % {
+        :entry_name => _(entry_name.pluralize),
+        :start => collection.offset + 1,
+        :end => collection.offset + collection.length,
+        :max => collection.total_entries
+      }
+    end
+  end
+
   # 複数のラジオボタンで値を選択するHTMLを生成する
   def radio_buttons(object, method, choices, options = {})
     output = ""

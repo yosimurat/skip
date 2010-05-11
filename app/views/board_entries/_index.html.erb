@@ -42,6 +42,7 @@
 
 <div class="search_result_space">
 <% unless @entries.empty? -%>
+  <%= i18n_page_entries_info @entries, :entry_name => 'Entry' %>
   <%= i18n_will_paginate_with_container_wrapper @entries %>
   <%= render :partial => "topix_entries", :locals => { :entries => @entries, :title => _('Search result'), :show_owner_link => true } %>
   <%= i18n_will_paginate_with_container_wrapper @entries %>

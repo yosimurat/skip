@@ -22,6 +22,7 @@
 
 <div class="search_result_space">
 <% unless @share_files.empty? -%>
+  <%= i18n_page_entries_info @share_files, :entry_name => 'Share File' %>
   <%= i18n_will_paginate_with_container_wrapper @share_files %>
   <%= render :partial => "share_files/topix_share_files", :locals => { :share_files => @share_files, :title => _('Search result'), :show_owner_link => true } %>
   <%= i18n_will_paginate_with_container_wrapper @share_files %>
