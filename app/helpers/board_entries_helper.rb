@@ -172,7 +172,7 @@ $j.ajax({
   def replace_plain_url text
     regex = /<(?:a|img|object|embed|iframe)\s.*?\/>|<(?:a|img|object|embed|iframe)\s.*?>.*?<\/(?:a|img|object|embed|iframe)>|((?:https?|ftp):\/\/[\wA-Za-z0-9;\/?:@&=+$,\-_.!~*\'()#%]+)/m
     ret = text
-    ret.gsub!(regex) do |str|
+    ret.gsub(regex) do |str|
       $1 ? "<a href=\"#{$1}\" target=\"_blank\">#{$1}</a>" : $&
     end
   end
