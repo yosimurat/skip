@@ -67,4 +67,6 @@ CKEDITOR.editorConfig = function( config )
 
     config.height = '350px';
     config.resize_enabled = false;
+
+    config.ignoreEmptyParagraph = false;
 };
