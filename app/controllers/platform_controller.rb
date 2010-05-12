@@ -61,7 +61,7 @@ class PlatformController < ApplicationController
     return unless request.post?
     email = params[:email]
     if email.blank?
-      flash.now[:error] = _('Email is mandatory.')
+      flash.now[:error] = _('Email address is mandatory.')
       return
     end
     if @user = User.find_by_email(email)

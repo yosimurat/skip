@@ -276,7 +276,7 @@ msgstr ""
 "ています）"
 
 #: app/views/invitations/new.html.erb:18
-msgid "(When the email send, the body template append to the body.)"
+msgid "(The body template is appended to the body when the email is sent.)"
 msgstr "(メール送信時、本文に本文下部のテンプレートが連結されます。)"
 
 #: app/views/bookmark/new.html.erb:17
@@ -1975,7 +1975,7 @@ msgid "Basic Information"
 msgstr "基本情報"
 
 #: app/views/histories/index.html.erb:14
-msgid "Before diff"
+msgid "Diff from prev"
 msgstr "前との差分"
 
 #: app/views/share_file/_share_file_box.html.erb:23
@@ -2849,7 +2849,7 @@ msgid "Display Order"
 msgstr "表示順"
 
 #: app/views/histories/diff.html.erb:7
-msgid "Display change part from rev.%{from} to rev.%{to}"
+msgid "Changes between rev.%{from} and rev.%{to}"
 msgstr "リビジョン%{from}からリビジョン%{to}への変更点"
 
 #: app/views/chapters/_page_content.html.erb:29
@@ -2857,7 +2857,7 @@ msgid "Display page"
 msgstr "ページを表示する"
 
 #: app/views/histories/index.html.erb:20
-msgid "Display rev.%{revision}"
+msgid "Show rev.%{revision}"
 msgstr "リビジョン%{revision}を表示"
 
 #: app/views/entries/_entry_detail.html.erb:228
@@ -2866,18 +2866,18 @@ msgstr "表示: "
 
 #: app/helpers/application_helper.rb:62
 msgid ""
-"Displaying %{entry_name} <b>%{start}&nbsp;-&nbsp;%{end}</b> of <b>%{max}</b> "
+"Showing %{entry_name} <b>%{start}&nbsp;-&nbsp;%{end}</b> of <b>%{max}</b> "
 "in total."
 msgstr ""
 "全<b>%{max}</b>件中 <b>%{start}&nbsp;-&nbsp;%{end}</b>件目の%{entry_name}を表"
 "示しています。"
 
 #: app/helpers/application_helper.rb:58
-msgid "Displaying <b>1</b> %s."
+msgid "Showing <b>1</b> %s."
 msgstr "<b>1</b>件の%sを表示しています。"
 
 #: app/helpers/application_helper.rb:59
-msgid "Displaying <b>all %d</b> %s."
+msgid "Showing <b>all %d</b> %s."
 msgstr "全<b>%d</b>件の%sを表示しています。"
 
 #: app/views/user_mailer/smtp/sent_cleaning_notification.html.erb:3
@@ -2996,6 +2996,7 @@ msgid_plural "%{num} emails have been registered in the site"
 msgstr[0] "指定された%{email}というメールアドレスは既に利用登録済みです。"
 msgstr[1] "指定されたうち%{num}個のメールアドレスは既に利用登録済みです。"
 
+#: app/controllers/platform_controller.rb:64
 #: app/controllers/platform_controller.rb:113
 #: app/controllers/platform_controller.rb:157
 msgid "Email address is mandatory."
@@ -3008,10 +3009,6 @@ msgstr "メールアドレスが正しく更新されました。"
 #: app/views/admin/users/issue_password_reset_code.html.erb:7
 msgid "Email for resetting your password"
 msgstr "パスワード再設定のメールです"
-
-#: app/controllers/platform_controller.rb:64
-msgid "Email is mandatory."
-msgstr "メールアドレスは必須です"
 
 #: app/models/email.rb:-
 msgid "Email|Created on"
@@ -3215,7 +3212,7 @@ msgid "Excluding retired users"
 msgstr "利用中のユーザのみ（退職者などを含めない）"
 
 #: app/controllers/group_controller.rb:297
-msgid "Failed to Approve."
+msgid "Failed to approve."
 msgstr "承認に失敗しました。"
 
 #: app/controllers/group_controller.rb:248
@@ -3284,7 +3281,7 @@ msgid_plural "Failed to upload the following files."
 msgstr[0] "以下のファイルの登録に失敗しました。"
 
 #: app/controllers/wiki_controller.rb:69
-msgid "Failure delete '%{page}'."
+msgid "Failed to delete '%{page}'."
 msgstr "'%{page}'の削除に失敗しました。"
 
 #: app/controllers/share_file_controller.rb:88
@@ -3329,7 +3326,7 @@ msgid "File size exceeded the limit."
 msgstr "ファイルサイズが上限を超えています。"
 
 #: app/views/layouts/admin/application.html.erb:19
-msgid "File size is over soon"
+msgid "Disk usage is close to its limit."
 msgstr "もうすぐ利用可能容量が上限に達します。"
 
 #: app/models/picture.rb:52
@@ -3352,7 +3349,7 @@ msgid_plural "Files were successfully uploaded."
 msgstr[0] "ファイルのアップロードに成功しました。"
 
 #: app/models/share_file.rb:36
-msgid "File with the same name already uploaded."
+msgid "overlaps with an existing file."
 msgstr "が同一のファイルが既に登録されています"
 
 #: app/controllers/services_controller.rb:48
@@ -3392,7 +3389,7 @@ msgid "For questions regarding this email, please contact:"
 msgstr "本メールに関するお問い合わせはこちらへ"
 
 #: app/helpers/system_messages_helper.rb:111
-msgid "Forced to join the group [%s]."
+msgid "You are now member of the group [%s]."
 msgstr "[%s]に参加することになりました。"
 
 #: app/views/shared/_password_login_form.html.erb:47
@@ -4440,7 +4437,7 @@ msgid "Next Day (%s)"
 msgstr "次の日(%s)"
 
 #: app/views/histories/index.html.erb:13
-msgid "Next diff"
+msgid "Diff from next"
 msgstr "次との差分"
 
 #: app/helpers/application_helper.rb:39
@@ -5965,11 +5962,11 @@ msgid "Subwindow"
 msgstr "サブウィンドウ"
 
 #: app/controllers/group_controller.rb:294
-msgid "Succeeded to Approve."
+msgid "Succeeded to approve."
 msgstr "承認に成功しました。"
 
 #: app/controllers/group_controller.rb:304
-msgid "Succeeded to Disapprove."
+msgid "Succeeded to disapprove."
 msgstr "棄却に成功しました。"
 
 #: app/controllers/invitations_controller.rb:16
@@ -5981,15 +5978,15 @@ msgid "Successfully added/updated users from CSV file."
 msgstr "CSVファイルからのユーザ登録/更新に成功しました。"
 
 #: app/controllers/wiki_controller.rb:45
-msgid "Successfully create '%{page}'."
+msgid "Succeded to create '%{page}'."
 msgstr "'%{page}'が作成されました。"
 
 #: app/controllers/wiki_controller.rb:66
-msgid "Successfully delete '%{page}'."
+msgid "Succeded to delete '%{page}'."
 msgstr "'%{page}'の削除が完了しました。"
 
 #: app/controllers/chapters_controller.rb:97
-msgid "Successfully delete chapter."
+msgid "Succeded to delete chapter."
 msgstr "セクションを削除しました。"
 
 #: app/controllers/group_controller.rb:213
@@ -5997,17 +5994,17 @@ msgid "Successfully left the group."
 msgstr "退会しました。"
 
 #: app/controllers/wiki_controller.rb:57
-msgid "Successfully restore '%{page}'."
+msgid "Succeded to restore '%{page}'."
 msgstr "'%{page}'の復旧が完了しました。"
 
 #: app/controllers/chapters_controller.rb:57
 #: app/controllers/chapters_controller.rb:80
 #: app/controllers/wiki_controller.rb:29
-msgid "Successfully update '%{page}'."
+msgid "Succeded to update '%{page}'."
 msgstr "'%{page}'が更新されました。"
 
 #: app/views/group/_manage_participations.html.erb:104
-msgid "Successfully update administrator."
+msgid "Successfully updated administrator."
 msgstr "管理者を更新しました"
 
 #: lib/skip_util.rb:18
@@ -7291,7 +7288,7 @@ msgid "You cannot delete user who is not unused."
 msgstr "未使用のユーザ以外削除できません。"
 
 #: app/helpers/system_messages_helper.rb:118
-msgid "You forced to leave the group [%s]."
+msgid "You are forced to leave the group [%s]."
 msgstr "[%s]を強制退会しました。"
 
 #: app/controllers/platform_controller.rb:51
@@ -7319,11 +7316,11 @@ msgid "You recieved a comment on your entry [%s]!"
 msgstr "あなたの記事[%s]に新着コメントがあります！"
 
 #: app/helpers/system_messages_helper.rb:97
-msgid "You were approved join of the group %s."
+msgid "You are approved to join the group %s."
 msgstr "[%s]への参加が承認されました。"
 
 #: app/helpers/system_messages_helper.rb:104
-msgid "You were disapproved join of the group %s."
+msgid "You are disapproved to join the group %s."
 msgstr "[%s]への参加が棄却されました。"
 
 #: app/views/user_mailer/smtp/sent_signup_confirm.html.erb:4
@@ -8163,12 +8160,12 @@ msgid "« Previous"
 msgstr "« 前"
 
 #: app/helpers/histories_helper.rb:16
-msgid "前"
-msgstr ""
+msgid "HistoriesHelper|Prev"
+msgstr "前"
 
 #: app/helpers/histories_helper.rb:7
-msgid "次"
-msgstr ""
+msgid "HistoriesHelper|Next"
+msgstr "次"
 
 #~ msgid "(Unknown topic entry found. However, this has been ignored)"
 #~ msgstr "（話題元の記事が不明でしたが無視しました）"

@@ -33,7 +33,7 @@ class ShareFile < ActiveRecord::Base
   validates_presence_of :file_name
   validates_presence_of :date
   validates_presence_of :user_id
-  validates_uniqueness_of :file_name, :scope => :owner_symbol, :message =>_('File with the same name already uploaded.')
+  validates_uniqueness_of :file_name, :scope => :owner_symbol, :message =>_('overlaps with an existing file.')
 
   named_scope :owned, proc { |owner|
     { :conditions => ['owner_symbol = ?', owner.symbol] }
