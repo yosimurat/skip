@@ -15,7 +15,7 @@
 <%= render :partial => 'board_entries/embed_dialog', :locals => {:board_entry => @board_entry} %>
 
 <div class="desc ui-corner-all" style="margin-top: 10px;">
-  <% form_tag({:action => 'destroy', :id => @board_entry}, :onclick => 'return confirmDestroy(event)') do -%>
+  <% form_tag({:action => 'destroy', :id => @board_entry}, :onsubmit => 'return confirmDestroy(event)') do -%>
     <%= submit_tag _('Delete') %>
   <% end -%>
 </div>
