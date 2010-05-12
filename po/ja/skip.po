@@ -2708,7 +2708,7 @@ msgstr "記事の公開範囲によらず全体公開のブログとして新し
 
 #: app/views/mypage/index.html.erb:136
 msgid "Create my new bookmark"
-msgstr "自分も新しくブックマークする"
+msgstr "自分もブックマークする"
 
 #: app/controllers/edit_controller.rb:100
 msgid "Created successfully."
