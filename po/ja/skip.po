@@ -5463,7 +5463,7 @@ msgstr "1000 件以上の検索結果は表示しておりません "
 
 #: app/helpers/search_helper.rb:37
 msgid "Search from all"
-msgstr "検索対象全て"
+msgstr "全て"
 
 #: app/views/search/full_text_search.html.erb:15
 msgid "Search in Internet"
@@ -5509,7 +5509,7 @@ msgstr "左のメニューから編集したいページを選択して下さい
 
 #: app/helpers/search_helper.rb:38
 msgid "Select a search target"
-msgstr "検索対象を選択する"
+msgstr "検索対象を絞り込む"
 
 #: app/helpers/search_helper.rb:40
 msgid "Select a search target from %s"
