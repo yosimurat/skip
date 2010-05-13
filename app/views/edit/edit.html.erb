@@ -5,7 +5,7 @@
   <%= render :partial => 'board_entries/form' %>
   <% if @conflicted %>
   <div class="desc ui-corner-all"><%= _("*Click on &quot;Reset&quot; to reset the edit or &quot;Update&quot; to overwrite other's edit.")%></div>
-　<% edit_url = url_for(:action => 'edit', :id => @board_entry.id) %>
+  <% edit_url = url_for(:action => 'edit', :id => @board_entry.id) %>
   <%= button_to_function(_("Reset"), "if(confirm('" + _('All changes will be discarded. Are you sure to proceed?') + "')){window.location.href='#{edit_url}' }") %>
   <% end %>
   <%= submit_tag _("Update"), :id => 'submit_button' %>

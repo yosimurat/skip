@@ -194,10 +194,12 @@ div.input_line textarea {
         $j('span.send_mail_field').show();
       } else {
         $j('span.send_mail_field').hide();
+        $j('#board_entry_send_mail').attr('checked', false);
       }
     <% else -%>
       if ($j('#publication_type_public:checked').length > 0) {
         $j('span.send_mail_field').hide();
+        $j('#board_entry_send_mail').attr('checked', false);
       } else {
         $j('span.send_mail_field').show();
       }
