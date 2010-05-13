@@ -13,13 +13,13 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Given /^ログインIDが"(.*)"でパスワードが"(.*)"のあるユーザでログインする$/ do |id, password|
-  @user = create_user(id, password)
-  visit "/platform"
-  fill_in("ログインID", :with => id)
-  fill_in("パスワード", :with => password)
-  click_button("ログイン")
-end
+#Given /^ログインIDが"(.*)"でパスワードが"(.*)"のあるユーザでログインする$/ do |id, password|
+#  @user = create_user(id, password)
+#  visit "/platform"
+#  fill_in("ログインID", :with => id)
+#  fill_in("パスワード", :with => password)
+#  click_button("ログイン")
+#end
 
 Then /^メールが"([^\"]*)"宛に送信されていること$/ do |arg1|
   pending
