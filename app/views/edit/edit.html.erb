@@ -8,7 +8,7 @@
   <% edit_url = url_for(:action => 'edit', :id => @board_entry.id) %>
   <%= button_to_function(_("Reset"), "if(confirm('" + _('All changes will be discarded. Are you sure to proceed?') + "')){window.location.href='#{edit_url}' }") %>
   <% end %>
-  <div class="publication_status_wrapper">選択されている公開範囲<span id="publication_status"></span></div>
+  <div class="publication_status_wrapper"><%= _('Selected publication type') %><span id="publication_status"></span></div>
   <%= submit_tag _("Update"), :id => 'submit_button' %>
   <%= check_box_tag("non_update", "true") %><%= _('Minor update')%>
   <%= send_mail_check_box_tag %>
