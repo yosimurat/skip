@@ -61,7 +61,7 @@ class BoardEntriesController < ApplicationController
     @board_entry.user = current_user
     required_full_accessible_entry(@board_entry) do
       @board_entry.entry_type = @board_entry.owner.is_a?(User) ? BoardEntry::DIARY : BoardEntry::GROUP_BBS
-      @board_entry.publication_type ||= 'public'
+      @board_entry.publication_type ||= (@board_entry.owner.is_a?(Group) ? @board_entry.owner.default_publication_type : 'public')
       @board_entry.editor_mode ||= current_user.custom.editor_mode
       if @board_entry.owner.is_a?(Group)
         @board_entry.send_mail = (@board_entry.is_question? && Admin::Setting.default_send_mail_of_question(current_tenant)) || @board_entry.owner.default_send_mail

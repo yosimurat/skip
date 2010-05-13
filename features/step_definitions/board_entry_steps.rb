@@ -11,7 +11,6 @@ Given /^以下のブログを書く:$/ do |entries_table|
     Given %!"#{hash[:publication_type]}"を選択する! if hash[:publication_type]
     Given %!"種類"から"#{hash[:aim_type]}"を選択する! if hash[:aim_type]
     Given %!"作成"ボタンをクリックする!
-    entry = BoardEntry.last
   end
 end
 
@@ -26,26 +25,24 @@ end
 #  visit url_for(:controller => "user", :entry_id => entry[:id], :action => "blog", :uid => entry[:uid])
 #end
 #
-#Given /^以下のフォーラムを書く:$/ do |entries_table|
-#  @entries ||= []
-#  entries_table.hashes.each do |hash|
-#    Given %!"#{hash[:user]}"でログインする!
-#    unless Group.find_by_gid(hash[:group])
-#      Given %!"#{hash[:user]}"で"#{hash[:group]}"というグループを作成する!
-#    else
-#       Given %!"#{hash[:group]}グループのトップページ"にアクセスする!
-#    end
-#    Given %!"記事を書く"リンクをクリックする!
-#    Given %!"#{"board_entry[title]"}"に"#{hash[:title]}"と入力する!
-#    Given %!"タグ"に"#{hash[:tag]}"と入力する!
-#    Given %!"#{"editor_mode_hiki"}"を選択する!
-#    Given %!"#{"contents_hiki"}"に"#{"test"}"と入力する!
-#    Given %!"#{hash[:publication_type]}"を選択する!
-#    Given %!"#{"作成"}"ボタンをクリックする!
-#    entry = BoardEntry.last
-#    @entries << { :id => entry.id, :uid => entry.symbol.split(":").last }
-#  end
-#end
+Given /^以下のフォーラムを書く:$/ do |entries_table|
+  @entries ||= []
+  entries_table.hashes.each do |hash|
+    tenant = Tenant.find_by_name(hash[:tenant_name]) || create_tenant(:name => hash[:tenant_name])
+    user = tenant.users.find_by_name!(hash[:user])
+    Given %!"#{user.email}"でログインする!
+    group = Group.find_by_name!(hash[:group])
+    Given %!"#{hash[:group]}グループのトップページ"にアクセスする!
+    Given %!"記事を書く"リンクをクリックする!
+    Given %!"タイトル"に"#{hash[:title]||"forum_title"}"と入力する!
+    Given %!"タグ"に"#{hash[:tag]}"と入力する!
+    Given %!"Wikiテキスト"を選択する!
+    Given %!"board_entry_contents_hiki"に"#{hash[:content]||"test"}"と入力する!
+    Given %!"#{hash[:publication_type]}"を選択する! if hash[:publication_type]
+    Given %!"種類"から"#{hash[:aim_type]}"を選択する! if hash[:aim_type]
+    Given %!"作成"ボタンをクリックする!
+  end
+end
 #
 #Given /^"([^\"]*)"で"([^\"]*)"を直接指定したブログを書く$/ do |user, publication_symbol|
 #  @entries ||= []

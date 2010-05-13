@@ -60,10 +60,11 @@ module NavigationHelpers
       admin_pictures_path
 
     when /グループの新規作成ページ/
-      url_for(:controller => 'groups', :action => 'new')
+      new_polymorphic_path([@current_tenant, :group])
 
     when /^(.*)グループのトップページ$/
-      url_for(:controller => "/group", :action => "show", :gid => $1)
+      group = Group.find_by_name($1)
+      polymorphic_path([@current_tenant, group])
 
     when /管理画面のユーザ一覧/
       admin_users_path

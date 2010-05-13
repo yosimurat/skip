@@ -36,6 +36,8 @@ class GroupCategory < ActiveRecord::Base
 
   validates_length_of :description, :maximum => 255
 
+  validates_presence_of :tenant
+
   def before_save
     if self.initial_selected
       if initial_selected_group_category = self.class.find_by_initial_selected(true)
