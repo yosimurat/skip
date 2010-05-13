@@ -526,10 +526,10 @@ class MypageController < ApplicationController
       :conditions => find_params[:conditions],
       :order => "board_entry_points.today_access_count DESC, board_entry_points.access_count DESC, board_entries.last_updated DESC, board_entries.id DESC",
       :include => find_params[:include] | [ :user, :state ]
-    ).timeline.diary.recent(recent_day.day).paginate(:page => params[:page], :per_page => options[:per_page])
+    ).timeline.recent(recent_day.day).paginate(:page => params[:page], :per_page => options[:per_page])
 
     locals = {
-      :title_name => _('Recent Popular Blogs'),
+      :title_name => _('Recent Popular Entries'),
       :per_page => options[:per_page],
       :pages => pages
     }
