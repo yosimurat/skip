@@ -183,6 +183,17 @@ div.input_line textarea {
                 $j('#editor_symbols_space').show();
             }
         }
+        $j('#publication_status').css('color', '#555');
+        if ($j('#publication_type_protected:checked').length > 0)
+          $j('#publication_status').text($j('label[for=publication_type_protected]').text());
+        if ($j('#publication_type_private:checked').length > 0)
+          $j('#publication_status').text($j('label[for=publication_type_private]').text());
+        if ($j('#publication_type_public:checked').length > 0) {
+          $j('#publication_status').text($j('label[for=publication_type_public]').text());
+          <% if @board_entry.owner_is_group? && @board_entry.load_owner.default_publication_type == 'private' -%>
+            $j('#publication_status').css('color', 'red');
+          <% end -%>
+        }
     };
     changePublicationType();
 
