@@ -104,6 +104,7 @@ class ShareFilesController < ApplicationController
     @share_file = current_target_owner.owner_share_files.build(params[:share_file])
     @share_file.user = current_user
     required_full_accessible(@share_file) do
+      @share_file.publication_type = (@share_file.owner_is_group? ? @share_file.owner.default_publication_type : 'public')
       respond_to do |format|
         format.html do
           ajax_upload? ? render(:template => 'share_files/new_ajax_upload', :layout => false) : render

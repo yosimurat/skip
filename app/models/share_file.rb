@@ -60,11 +60,6 @@ class ShareFile < ActiveRecord::Base
     { :conditions => [condition_str, condition_params].flatten }
   }
 
-  def initialize(attr ={})
-    super(attr)
-    self.publication_type = 'public' if self.publication_type.blank?
-  end
-
   def before_validation_on_create
     if self.file.is_a?(ActionController::UploadedFile)
       self.file_name = file.original_filename
@@ -147,12 +142,12 @@ class ShareFile < ActiveRecord::Base
 
   # TODO BoardEntryと統合したい
   def owner_is_user?
-    owner.is_a?(User)
+    owner_type == 'User'
   end
 
   # TODO BoardEntryと統合したい
   def owner_is_group?
-    owner.is_a?(Group)
+    owner_type == 'Group'
   end
 
   def self.categories_hash user

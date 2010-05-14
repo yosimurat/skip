@@ -9,6 +9,7 @@ Given /^以下のグループを作成する:$/ do |table|
     Given %!"#{"名称"}"に"#{hash[:name] ? hash[:name] : 'グループ'}"と入力する!
     Given %!"#{"説明"}"に"#{hash[:desc] ? hash[:desc] : '説明'}"と入力する!
     Given %!"#{"参加するのにオーナーの承認が必要ですか？"}"から"#{hash[:waiting] == 'true' ? 'はい' : 'いいえ'}"を選択する!
+    Given %!"#{hash[:default_publication_type]}"を選択する! if hash[:default_publication_type]
     Given %!"#{"作成"}"ボタンをクリックする!
   end
 end

@@ -248,12 +248,12 @@ class BoardEntry < ActiveRecord::Base
 
   # TODO ShareFileと統合したい
   def owner_is_user?
-    owner.is_a?(User)
+    owner_type == 'User'
   end
 
   # TODO ShareFileと統合したい
   def owner_is_group?
-    owner.is_a?(Group)
+    owner_type == 'Group'
   end
 
   def self.unescape_href text
