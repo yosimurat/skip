@@ -22,12 +22,6 @@ Given /^ランキングの"(.*)"位が"(.*)"というタイトルのブログで
   Nokogiri::HTML(response.body).search("table.ranking_square tbody tr:nth(#{rank}) td.column_title a.ranking_title").text.should == title
 end
 
-
-#Given /^"(.*)"ランキングの"(.*)"分を表示する$/ do |category, date|
-#  year, month = date.split("-")
-#  visit ranking_data_path(:content_type => category, :year => year, :month => month)
-#end
-
 Given /^ランキングのバッチで"(.*)"の"(.*)"分を実行する$/ do |method, date|
   @@bmr = BatchMakeRanking.new
   @@bmr.send(method.to_sym, Time.local(*date.split("-")))

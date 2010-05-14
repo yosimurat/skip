@@ -38,8 +38,7 @@ Feature: ユーザの初期プロフィール登録等
     When "パスワード"に"Password1"と入力する
     And "確認パスワード"に"Password1"と入力する
     And "ユーザ登録"ボタンをクリックする
-    And show me the page
-    Then "ようこそ"と表示されること
+    Then "ようこそ"と表示されていること
 
   Scenario: 初期登録URLからアクセスし利用規約に同意しない
     When "alice@test.comのユーザ初期登録ページ"にアクセスする

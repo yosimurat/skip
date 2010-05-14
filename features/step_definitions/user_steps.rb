@@ -14,3 +14,10 @@ end
 Given /^プロフィール項目が登録されていない$/ do
   UserProfileMaster.destroy_all
 end
+
+Given /^"([^\"]*)"が退職する$/ do |email|
+  u = User.find_by_email(email)
+  u.status = "RETIRED"
+  u.save
+end
+
