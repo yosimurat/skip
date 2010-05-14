@@ -10,6 +10,12 @@ When /"([^\"]*)"中の"([^\"]*)"リンクをクリックする$/ do |element, la
   click_link_within(element, label)
 end
 
+When /"([^\"]*)"中の"([^\"]*)"ボタンをクリックする$/ do |element, button|
+  within element do |scope|
+    scope.click_button(button)
+  end
+end
+
 When /^テーブル"([^\"]*)"の"([^\"]*)"行目の"([^\"]*)"リンクをクリックする$/ do |css, nth, label|
   selector = "table.#{css} tbody tr:nth(#{nth})"
   click_link_within(selector, label)

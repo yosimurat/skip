@@ -54,7 +54,7 @@ module NavigationHelpers
       '/admin/'
 
     when /グローバルのグループ一覧ページ/
-      '/groups/'
+      polymorphic_path([@current_tenant, :groups])
 
     when /プロフィール画像一覧/
       admin_pictures_path
