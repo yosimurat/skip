@@ -35,8 +35,8 @@ Given /^"([^\"]*)"がユーザ登録する$/ do |user_id|
   create_user(user_id, 'Password1')
 end
 
-Given /^"([^\"]*)"が退職する$/ do |user_id|
-  u = User.find_by_uid(user_id)
+Given /^"([^\"]*)"が退職する$/ do |email|
+  u = User.find_by_email(email)
   u.status = "RETIRED"
   u.save
 end
