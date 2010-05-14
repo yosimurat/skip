@@ -79,8 +79,8 @@ module NavigationHelpers
       group = Group.find_by_name($1)
       polymorphic_path([@current_tenant, group, :group_participations], :action => :manage_waiting_members)
 
-    when /管理画面のユーザ一覧/
-      admin_users_path
+    when /管理画面のユーザ一覧ページ/
+      admin_tenant_users_path(@current_tenant)
 
 
     # Add more mappings here.
