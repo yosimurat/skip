@@ -69,7 +69,7 @@ class ShareFile < ActiveRecord::Base
 
   def validate
     Tag.validate_tags(category).each{ |error| errors.add(:category, error) }
-    # errors.add_to_base _('Operation inexecutable.') unless full_accessible?
+    errors.add_to_base _('Operation inexecutable.') unless full_accessible?
   end
 
   def validate_on_create
@@ -178,6 +178,7 @@ class ShareFile < ActiveRecord::Base
     return tags.uniq.first(40)
   end
 
+# TODO 現状使ってないがhelperに移動してユーザや、グループ内の共有ファイル一覧の場合は出力すべきか
 #  def visibility
 #    text = color = ""
 #    if public?
@@ -198,13 +199,14 @@ class ShareFile < ActiveRecord::Base
 #    end
 #    return text, color
 #  end
-#
+
   def create_history login_user_id
     ShareFile.increment_counter("total_count", id)
     ShareFileAccess.create(:share_file_id => id,
                            :user_id => login_user_id)
   end
 
+  # TODO fastercsvを使った形に直す
   def get_accesses_as_csv
     share_file_accesses = ShareFileAccess.find(:all,
                                                :order => "created_at DESC",
@@ -222,6 +224,7 @@ class ShareFile < ActiveRecord::Base
     return buf, (file_name.gsub(/\./, '_') + '_history.csv')
   end
 
+  # TODO ファイルシステムへの保存だと分かる名前にすべき
   def upload_file src_file = self.file
     open(full_path, "w+b") { |f| f.write(src_file.read) }
   end
@@ -246,6 +249,7 @@ class ShareFile < ActiveRecord::Base
 
   def file_size_with_unit
     if (size = self.file_size) == -1
+      # FIXME 国際化する
       '不明'
     else
       unless (mega_size = size/1.megabyte) == 0
@@ -272,6 +276,7 @@ class ShareFile < ActiveRecord::Base
     File.extname(file_name).sub(/\A\./,'').downcase
   end
 
+  # HyperEstraierのdraft形式のテキストに変換する
   # FIXME platform判定(Linux Only)が必要
   # FIXME 対象コマンドインストール済み判定が必要
   def to_draft uri

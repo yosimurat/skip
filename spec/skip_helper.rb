@@ -247,6 +247,18 @@ module Spec
           }.merge(options))
           ranking
         end
+
+        def create_share_file options = {}
+          tenant = options[:tenant] || create_tenant
+          owner = options[:owner] || create_user
+          owner.owner_share_files.build({
+            :file_name => 'sample.csv',
+            :content_type => 'text/csv',
+            :date => Time.now,
+            :user => (options[:user] || create_user(:tenant => tenant)),
+            :owner => owner
+          }.merge(options))
+        end
       end
     end
   end
