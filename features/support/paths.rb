@@ -11,6 +11,12 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /^(.*)のユーザ初期登録ページ$/
+      u = User.email_is($1).find_without_retired_skip(:first)
+      u.issue_activation_code
+      u.save!
+      polymorphic_path([:platform], :action => :signup, :token => u.activation_token)
+
     when /ログインページ/
       platform_url
 
