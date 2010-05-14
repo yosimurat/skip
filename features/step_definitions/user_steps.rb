@@ -1,7 +1,7 @@
 Given /^以下のユーザを作成する$/ do |users_table|
   users_table.hashes.each do |user_hash|
     t = Tenant.find_by_name(user_hash[:tenant_name]) || create_tenant(:name => user_hash[:tenant_name])
-    create_user(:tenant => t, :name => user_hash[:name], :email => user_hash[:email], :password => user_hash[:password])
+    create_user(:tenant => t, :name => user_hash[:name], :email => user_hash[:email], :password => user_hash[:password], :admin => user_hash[:admin])
   end
 end
 

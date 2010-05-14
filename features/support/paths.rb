@@ -17,6 +17,9 @@ module NavigationHelpers
     when /^(.*)テナントのマイページ$/
       tenant_root_path(Tenant.find_by_name($1))
 
+    when /^マイページ$/
+      tenant_root_path(@current_tenant)
+
     when /^(.*)のプロフィールページ$/
       u = @current_tenant.users.find_by_email($1)
       polymorphic_path([@current_tenant, u])
