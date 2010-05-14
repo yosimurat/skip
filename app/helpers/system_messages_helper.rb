@@ -40,7 +40,7 @@ module SystemMessagesHelper
     end
 
     Group.has_waiting_for_approval.id_equals(Group.owned(current_user).map(&:id)).each do |group|
-      system_message_links << link_to(icon_tag('group_add') + _("New user is waiting for approval in %s.") % group.name, polymorphic_path([current_tenant, group], :action => :manage))
+      system_message_links << link_to(icon_tag('group_add') + _("New user is waiting for approval in %s.") % group.name, polymorphic_path([current_tenant, group, :group_participations], :action => :manage_waiting_members))
     end
     @system_message_links = system_message_links
   end

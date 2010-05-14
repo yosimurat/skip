@@ -92,12 +92,17 @@ end
 ##  Given %!"#{user}"でログインする!
 ##  Given %!URLが"/page/#{entry.id}"タイトルが"タイトル"コメントが"コメント"のブックマークを登録する!
 #end
-#
-#Given /^"([^\"]*)"という質問の公開状態を変更する$/ do |title|
-#  entry = BoardEntry.find_by_title(title)
-#  if entry
-#    visit(url_for(:controller => :board_entries, :action => :toggle_hide, :id => entry.id), :post)
-#  else
-#    raise ActiveRecord::RecordNotFound
-#  end
-#end
+Given /^"(.*)"で"(.*)"というタイトルのブログをブックマークする$/ do |email, title|
+  Given %!"#{email}"でログインする!
+  Given %!"#{title}の記事の表示ページ"にアクセスする!
+  Given %!"ブックマークする"リンクをクリックする!
+end
+
+Given /^"([^\"]*)"という質問の公開状態を変更する$/ do |title|
+  entry = BoardEntry.find_by_title(title)
+  if entry
+    visit(polymorphic_path([@current_tenant, entry.owner, entry], :action => :toggle_hide), :put)
+  else
+    raise ActiveRecord::RecordNotFound
+  end
+end
