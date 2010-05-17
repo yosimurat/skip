@@ -88,6 +88,7 @@
           </div>
         </div>
       <% end -%>
+      <%= link_to( _('他のランキングを見る'), :controller => '/rankings', :action => 'index') if ranking_enabled? %>
     <% end -%>
   </div>
 

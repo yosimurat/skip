@@ -72,7 +72,7 @@ div#global_links_wrapper
       li:hover li
         :display block
         :z-index 1
-  div#customize_design
+  div#global_shortcut
     :position absolute
     :right 10px
     :top 5px
@@ -773,7 +773,7 @@ div#statusbar
 
 div#header
   div#search
-    :background-color #E0E0FF
+    //:background-color #E0E0FF
     :padding 4px 4px
     select
       :margin 3px 0 0
@@ -784,6 +784,20 @@ div#header
       :padding 0px 1px
       :font-size 10px
       :font-weight normal
+    form
+      input.labeled-field
+        :height 20px
+        :font-size 14px
+        :border none
+      table
+        td
+          :border = !base_border
+        td.search_button_wrapper
+          :background #eee
+      .search_button
+        :border solid none
+        :background #eee
+        :font-size 14px
 div#tab_menu
   :margin-left 20px
 
@@ -1087,6 +1101,11 @@ div.panel_top
     :position absolute
     :bottom 0px
     :left 80px
+  div#customize_design
+    :position absolute
+    :right 10px
+    :top 5px
+    :padding-bottom 2px
 
 // ------------------------------------------------------------
 // ユーザ一覧、グループ参加者一覧の一行毎
