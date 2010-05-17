@@ -104,6 +104,7 @@ class UsersController < ApplicationController
 
       User.transaction do
         @profiles.each{|profile| profile.save!}
+        # 作成日時を更新しておかないとmypageの最近のユーザが正しく取得出来ないので
         @user.created_on = Time.now
         @user.status = 'ACTIVE'
         @user.save!
