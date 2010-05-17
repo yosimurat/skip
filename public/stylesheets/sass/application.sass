@@ -1306,6 +1306,28 @@ div#hide_message
     li.history
       :display none
 
+div#board_entry_control
+  :position relative
+  :height 2.0em
+  .actions
+    :position absolute
+    :left 3px
+    :top 0
+  .evaluation
+    :position absolute
+    :top 0
+    :right 0
+    .count1
+      :font-size = !base_font_size
+    .count2
+      :font-size = !base_font_size + 3px
+    .count3
+      :font-size = !base_font_size + 6px
+    .count4
+      :font-size = !base_font_size + 12px
+    .count5
+      :font-size = !base_font_size + 15px
+
 // 一覧(記事、共有ファイル, ブックマーク、イベント)
 // ------------------------------------------------------------
 div.topix_entries_wrapper, div.topix_share_files_wrapper, div.topix_bookmarks_wrapper, div.topix_events_wrapper

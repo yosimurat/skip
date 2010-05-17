@@ -15,4 +15,12 @@
 
 class BoardEntryPoint < ActiveRecord::Base
   belongs_to :board_entry
+
+  def rank
+    return 5 if point > 100
+    return 4 if point > 50
+    return 3 if point > 25
+    return 2 if point > 10
+    1
+  end
 end
