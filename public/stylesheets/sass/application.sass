@@ -159,6 +159,10 @@ table
     span.nowrap
       :white-space nowrap
 
+// アイコンの下が切れないように
+.ss_sprite
+  :font-size 14px
+
 // jquery.ui.tabsでタブ折り返し時にliがulをはみ出してしまう対策
 // ------------------------------------------------------------
 ul.ui-tabs-nav
@@ -760,7 +764,16 @@ table.diff
       :font-size 12px
 
 
+div#global_footer_links_wrapper
+  :height 18px
+  :border
+    :top = !base_border
+  :padding 2px 0 2px 16px
+  :font-size = !small_font_size
+  :background-color #f3f3f3
+
 div#statusbar
+  :height 18px
   :border
     :top = !base_border
     :bottom = !base_border
