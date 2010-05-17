@@ -62,7 +62,7 @@ class GroupParticipation < ActiveRecord::Base
 
   def join! current_user, options = {}
     if self.new_record?
-      self.waiting = self.group.protected? && (self.user.id == current_user.id)
+      self.waiting = (self.group.protected? && (self.user.id == current_user.id))
       # FIXME Controllerで制限をかけているが、ここでも本人もしくはグループ管理者のみに絞るvalidationをかけるべき
       self.save!
       self.user.notices.create!(:target => self.group) unless self.user.notices.find_by_target_id(self.group.id)

@@ -21,7 +21,7 @@ describe ShareFile do
     @sg_alice = create_user(:tenant => @sg)
     @sg_group = create_group(:tenant => @sg)
   end
-  describe ShareFile, '#accessible' do
+  describe ShareFile, '.accessible' do
     it { pending '[High]後で回帰テストを書く' }
   end
 

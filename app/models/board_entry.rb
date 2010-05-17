@@ -450,7 +450,7 @@ class BoardEntry < ActiveRecord::Base
   end
 
   def be_close!
-    return false unless diary?
+    return false unless self.owner_is_user?
     self.publication_type = 'private'
     self.save!
     true

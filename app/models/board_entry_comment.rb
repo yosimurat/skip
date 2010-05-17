@@ -64,11 +64,6 @@ class BoardEntryComment < ActiveRecord::Base
     end
   end
 
-  def comment_created_time
-    format = _("%B %d %Y %H:%M")
-    created_on.strftime(format)
-  end
-
   # TODO viewのネストレベル絡みのロジックはこれを使いたい
   def level
     @level ||= ancestors.size + 1
