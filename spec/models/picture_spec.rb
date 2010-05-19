@@ -15,30 +15,47 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe Picture, '#validate' do
-  include ActionController::TestProcess
-  describe 'プロフィール画像の変更権限がない場合は保存出来ない' do
-    before do
-      Admin::Setting.should_receive(:enable_change_picture).and_return(false)
-      @picture = Picture.new(:content_type => 'image/png')
+describe Picture do
+  before do
+    @sg = create_tenant(:name => 'SonicGarden')
+    @sg_alice = create_user(:tenant => @sg, :name => 'Alice')
+    @sg_jack = create_user(:tenant => @sg, :name => 'Jack')
+    @sug = create_tenant(:name => 'SKIPUserGroup')
+    @sug_carol = create_user(:tenant => @sug)
+  end
+
+  describe Picture, 'valid?' do
+    include ActionController::TestProcess
+    describe 'プロフィール画像の変更権限がない場合は保存出来ない' do
+      before do
+        Admin::Setting.set_enable_change_picture(@sg, 'false')
+        @picture = Picture.new(:content_type => 'image/png', :user => @sg_alice)
+      end
+      it 'プロフィール画像が変更出来ないエラーが設定されること' do
+        @picture.valid?
+        @picture.errors.full_messages.should == ['Picture could not be changed.']
+      end
+      it '保存に失敗すること' do
+        @picture.valid?.should be_false
+      end
+      after do
+        Admin::Setting.set_enable_change_picture(@sg, true)
+      end
     end
-    it 'プロフィール画像が変更出来ないエラーが設定されること' do
-      @picture.valid?
-      @picture.errors.full_messages.should == ['Picture could not be changed.']
-    end
-    it '保存に失敗すること' do
-      @picture.valid?.should be_false
+
+    describe "content_typeが空の場合" do
+      before do
+        @picture = Picture.new(:file => fixture_file_upload("data/profile.png", nil, true), :user => @sg_alice)
+      end
+      it "エラーが起らないこと" do
+        lambda do
+          @picture.save
+        end.should_not raise_error
+      end
     end
   end
 
-  describe "content_typeが空の場合" do
-    before do
-      @picture = Picture.new(:file => fixture_file_upload("data/profile.png", nil, true))
-    end
-    it "エラーが起らないこと" do
-      lambda do
-        @picture.save
-      end.should_not raise_error
-    end
+  describe Picture, 'activate!' do
+    it { pending '後で回帰テストを書く' }
   end
 end
