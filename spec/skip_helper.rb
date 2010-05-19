@@ -181,7 +181,9 @@ module Spec
         end
 
         def create_user_profile_master_category(options = {})
+          tenant = options[:tenant] || create_tenant
           profile_master_category = UserProfileMasterCategory.new({
+            :tenant => tenant, 
             :name => '基本情報',
             :description => '基本情報のカテゴリです'
           }.merge(options))
@@ -190,7 +192,9 @@ module Spec
         end
 
         def create_user_profile_master(options = {})
+          tenant = options[:tenant] || create_tenant
           profile_master = UserProfileMaster.new({
+            :tenant => tenant, 
             :user_profile_master_category_id => 1,
             :name => '自己紹介',
             :input_type => 'richtext'

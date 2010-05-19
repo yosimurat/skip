@@ -36,6 +36,7 @@ class UserProfileMaster < ActiveRecord::Base
   validates_presence_of :input_type
   validates_presence_of :sort_order
   validates_presence_of :user_profile_master_category_id
+  validates_presence_of :tenant
 
   default_scope :order => "user_profile_masters.sort_order"
 

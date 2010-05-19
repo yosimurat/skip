@@ -16,11 +16,19 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UserProfileMasterCategory do
+  before do
+    @sg = create_tenant(:name => 'SonicGarden')
+    @sg_alice = create_user(:tenant => @sg)
+    @sg_dave = create_user(:tenant => @sg)
+    @sg_mike = create_user(:tenant => @sg)
+    @sug = create_tenant(:name => 'SKIPUserGroup')
+    @sug_carol = create_user(:tenant => @sug)
+  end
   describe UserProfileMasterCategory, '#deletable?' do
     describe 'このカテゴリに紐付くプロフィール項目が登録されている場合' do
       before do
-        @user_profile_master_category = create_user_profile_master_category(:name => '業務')
-        @user_profile_master_category.user_profile_masters << UserProfileMaster.new(:name => '自己紹介', :input_type => 'richtext')
+        @user_profile_master_category = create_user_profile_master_category(:tenant => @sg, :name => '業務')
+        @user_profile_master_category.user_profile_masters << UserProfileMaster.new(:tenant => @sg, :name => '自己紹介', :input_type => 'richtext')
       end
       it '削除不可と判定されること' do
         @user_profile_master_category.deletable?.should be_false
@@ -33,7 +41,7 @@ describe UserProfileMasterCategory do
     end
     describe 'このカテゴリに紐付くプロフィール項目が登録されていない場合' do
       before do
-        @user_profile_master_category = create_user_profile_master_category(:name => 'プライベート')
+        @user_profile_master_category = create_user_profile_master_category(:tenant => @sg, :name => 'プライベート')
       end
       it '削除可と判定されること' do
         @user_profile_master_category.deletable?.should be_true

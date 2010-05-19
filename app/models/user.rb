@@ -50,7 +50,6 @@ class User < ActiveRecord::Base
   validates_length_of :name, :maximum => 60
 
   with_options(:if => :password_required?) do |me|
-    me.validates_presence_of :password
     me.validates_confirmation_of :password
     me.validates_length_of :password, :within => 6..40
     me.validates_presence_of :password_confirmation
@@ -180,6 +179,16 @@ class User < ActiveRecord::Base
 
   ACTIVATION_LIFETIME = 5
 
+  before_validation :build_name_with_divided_names
+
+  def build_name_with_divided_names
+    self.name = _("%{first_name} %{last_name}") % { :first_name => self.first_name, :last_name => self.last_name } if self.name.blank?
+  end
+
+  def before_create
+    self.issued_at = Time.now
+  end
+
   def before_save
     if password_required?
       self.crypted_password = encrypt(password)
@@ -197,16 +206,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  before_validation :build_name_with_divided_names
-
-  def build_name_with_divided_names
-    self.name = _("%{first_name} %{last_name}") % { :first_name => self.first_name, :last_name => self.last_name } if self.name.blank?
-  end
-
-  def before_create
-    self.issued_at = Time.now
-  end
-
   def after_save
     self.password = nil
     self.password_confirmation = nil
@@ -214,7 +213,7 @@ class User < ActiveRecord::Base
   end
 
   def validate
-    if password_required?
+    if password_required? && !password.blank?
       errors.add(:password, _('shall not be the same with login ID.')) if self.uid == self.password
       errors.add(:password, _('shall not be the same with the previous one.')) if self.crypted_password_was == encrypt(self.password)
       errors.add(:password, Admin::Setting.password_strength_validation_error_message(self.tenant)) unless Admin::Setting.password_strength_regex(self.tenant).match(self.password)

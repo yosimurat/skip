@@ -17,7 +17,7 @@ class UserProfileMasterCategory < ActiveRecord::Base
   belongs_to :tenant
   has_many :user_profile_masters
 
-  validates_presence_of :name
+  validates_presence_of :name, :tenant
   validates_presence_of :sort_order
 
   default_scope :order => "sort_order"
