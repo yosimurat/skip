@@ -60,6 +60,7 @@ class GroupParticipation < ActiveRecord::Base
     !!find_by_user_id_and_group_id_and_waiting_and_owned(target_user, target_group, false, true)
   end
 
+  # TODO 回帰テストを書く
   def join! current_user, options = {}
     if self.new_record?
       self.waiting = (self.group.protected? && (self.user.id == current_user.id))

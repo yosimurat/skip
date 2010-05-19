@@ -54,8 +54,8 @@ class GroupsController < ApplicationController
   def new
     @main_menu = @title = _('Create a new group')
     @group = current_tenant.groups.build(:default_publication_type => 'public')
-    if category = current_tenant.group_categories.first
-      @group.group_category_id = category.id
+    if gc = current_tenant.group_categories.find_by_initial_selected(true)
+      @group.group_category_id = gc.id
     end
   end
 

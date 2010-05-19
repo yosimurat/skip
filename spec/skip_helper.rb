@@ -123,7 +123,8 @@ module Spec
             :name => '部署',
             :icon => 'group_gear',
             :description => '部署用のグループカテゴリ',
-            :initial_selected => false
+            :initial_selected => false,
+            :tenant => create_tenant
           })
           group_category
         end

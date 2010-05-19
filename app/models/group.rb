@@ -94,15 +94,6 @@ class Group < ActiveRecord::Base
   N_('Group|Protected|true')
   N_('Group|Protected|false')
 
-  # TODO これだとfind等のたびに評価される。GroupsController#new, create等の時のみ個別に対応する方がいいかも
-  def after_initialize
-    unless group_category_id
-      if gc = tenant.group_categories.find_by_initial_selected(true)
-        group_category_id = gc.id
-      end
-    end
-  end
-
   def after_save
     if protected_was == true and protected == false
       self.group_participations.waiting.each{ |p| p.update_attributes(:waiting => false)}
@@ -110,7 +101,7 @@ class Group < ActiveRecord::Base
   end
 
   def validate
-    unless tenant.group_categories.find_by_id(self.group_category_id)
+    if tenant && !tenant.group_categories.find_by_id(self.group_category_id)
       errors.add(:group_category_id, _('Category not selected or value invalid.'))
     end
   end

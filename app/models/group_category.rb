@@ -38,6 +38,17 @@ class GroupCategory < ActiveRecord::Base
 
   validates_presence_of :tenant
 
+  named_scope :with_groups_count, proc { |user|
+    if user
+      { :conditions => ['group_participations.user_id = ?', user.id],
+        :joins => 'LEFT JOIN groups ON group_categories.id = groups.group_category_id LEFT JOIN group_participations ON groups.id = group_participations.group_id' }
+    else
+      { :joins => 'LEFT JOIN groups ON group_categories.id = groups.group_category_id' }
+    end.merge(:select => 'group_categories.*, count(distinct(groups.id)) as count',
+              :group => 'groups.group_category_id' )
+  }
+
+  # FIXME マルチテナントが考慮されていない。
   def before_save
     if self.initial_selected
       if initial_selected_group_category = self.class.find_by_initial_selected(true)
@@ -60,14 +71,4 @@ class GroupCategory < ActiveRecord::Base
     end
     true
   end
-
-  named_scope :with_groups_count, proc { |user|
-    if user
-      { :conditions => ['group_participations.user_id = ?', user.id],
-        :joins => 'LEFT JOIN groups ON group_categories.id = groups.group_category_id LEFT JOIN group_participations ON groups.id = group_participations.group_id' }
-    else
-      { :joins => 'LEFT JOIN groups ON group_categories.id = groups.group_category_id' }
-    end.merge(:select => 'group_categories.*, count(distinct(groups.id)) as count',
-              :group => 'groups.group_category_id' )
-  }
 end
