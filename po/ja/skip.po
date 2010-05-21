@@ -5243,8 +5243,8 @@ msgstr "新着グループ"
 
 #: app/controllers/mypage_controller.rb:532
 #: app/controllers/feed/board_entries_controller.rb:35
-msgid "Recent Popular Blogs"
-msgstr "最近の人気ブログ"
+msgid "Recent Popular Entries"
+msgstr "最近の人気記事"
 
 #: app/controllers/mypage_controller.rb:514
 #: app/controllers/feed/board_entries_controller.rb:8
