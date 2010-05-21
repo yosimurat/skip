@@ -26,28 +26,23 @@ SKIPを動かすにあたり以下の環境で検証を行っています。
 
 
 ================================================================================
-* SKIP バージョンアップ（version 1.5 -> version 1.6）
+* SKIP バージョンアップ（version 1.7 -> version 1.8）
 ================================================================================
 下記内容に従い旧バージョンから新バージョンにバージョンアップすることで、
 SKIPを動かすことができます。
 
-1. gemsのインストール
---------------------------------------------------------------------------------
-    $ sudo gem install rails --version 2.3.5
-    $ sudo gem install diff-lcs --version 1.1.2
-
-2. 設定ファイルの準備・編集（initial_settings.yml, database.yml, common_menus.yml）
+1. 設定ファイルの準備・編集（initial_settings.yml, database.yml, common_menus.yml）
 --------------------------------------------------------------------------------
     $ cp config/initial_settings.yml.sample config/initial_settings.yml
     $ cp config/database.yml.sample config/database.yml
     $ cp config/common_menus.yml.sample config/common_menus.yml
   （config/initial_settings.yml, config/database.yml, config/common_menus.ymlを適切に編集してください）
 
-3. データベースの更新（mysqlが起動済みであること）
+2. キャッシュファイルの削除）
 --------------------------------------------------------------------------------
-    $ RAILS_ENV=production rake db:migrate
-
-
+    $ rm public/javascripts/jquery.all.js
+    $ rm public/javascripts/skip_embedded.js
+    $ rm public/stylesheets/skip.style.css
 
 ================================================================================
 * SKIP セットアップ（新規構築）
