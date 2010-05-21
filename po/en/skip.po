@@ -2789,7 +2789,7 @@ msgid "Display Order"
 msgstr ""
 
 #: app/views/histories/diff.html.erb:7
-msgid "Display change part from rev.%{from} to rev.%{to}"
+msgid "Changes between rev.%{from} and rev.%{to}"
 msgstr ""
 
 #: app/views/chapters/_page_content.html.erb:29
