@@ -36,7 +36,7 @@ class ShareFile < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :tenant
   validates_presence_of :owner
-  validates_uniqueness_of :file_name, :scope => :owner_id, :message =>_('File with the same name already uploaded.')
+  validates_uniqueness_of :file_name, :scope => :owner_id, :message =>_('overlaps with an existing file.')
 
   # TODO 回帰テストを書く
   named_scope :accessible, proc { |user|

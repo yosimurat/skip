@@ -3326,7 +3326,7 @@ msgid "File size exceeded the limit."
 msgstr "ファイルサイズが上限を超えています。"
 
 #: app/views/layouts/admin/application.html.erb:19
-msgid "File size is over soon"
+msgid "Disk usage is close to its limit."
 msgstr "もうすぐ利用可能容量が上限に達します。"
 
 #: app/models/picture.rb:52
@@ -3349,7 +3349,7 @@ msgid_plural "Files were successfully uploaded."
 msgstr[0] "ファイルのアップロードに成功しました。"
 
 #: app/models/share_file.rb:36
-msgid "File with the same name already uploaded."
+msgid "overlaps with an existing file."
 msgstr "が同一のファイルが既に登録されています"
 
 #: app/controllers/services_controller.rb:48
@@ -3389,7 +3389,7 @@ msgid "For questions regarding this email, please contact:"
 msgstr "本メールに関するお問い合わせはこちらへ"
 
 #: app/helpers/system_messages_helper.rb:111
-msgid "Forced to join the group [%s]."
+msgid "You are now member of the group [%s]."
 msgstr "[%s]に参加することになりました。"
 
 #: app/views/shared/_password_login_form.html.erb:47
@@ -7288,7 +7288,7 @@ msgid "You cannot delete user who is not unused."
 msgstr "未使用のユーザ以外削除できません。"
 
 #: app/helpers/system_messages_helper.rb:118
-msgid "You forced to leave the group [%s]."
+msgid "You are forced to leave the group [%s]."
 msgstr "[%s]を強制退会しました。"
 
 #: app/controllers/platform_controller.rb:51
@@ -7316,11 +7316,11 @@ msgid "You recieved a comment on your entry [%s]!"
 msgstr "あなたの記事[%s]に新着コメントがあります！"
 
 #: app/helpers/system_messages_helper.rb:97
-msgid "You were approved join of the group %s."
+msgid "You are approved to join the group %s."
 msgstr "[%s]への参加が承認されました。"
 
 #: app/helpers/system_messages_helper.rb:104
-msgid "You were disapproved join of the group %s."
+msgid "You are disapproved to join the group %s."
 msgstr "[%s]への参加が棄却されました。"
 
 #: app/views/user_mailer/smtp/sent_signup_confirm.html.erb:4
