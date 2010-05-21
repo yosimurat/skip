@@ -3281,7 +3281,7 @@ msgid_plural "Failed to upload the following files."
 msgstr[0] "以下のファイルの登録に失敗しました。"
 
 #: app/controllers/wiki_controller.rb:69
-msgid "Failure delete '%{page}'."
+msgid "Failed to delete '%{page}'."
 msgstr "'%{page}'の削除に失敗しました。"
 
 #: app/controllers/share_file_controller.rb:88
@@ -5978,15 +5978,15 @@ msgid "Successfully added/updated users from CSV file."
 msgstr "CSVファイルからのユーザ登録/更新に成功しました。"
 
 #: app/controllers/wiki_controller.rb:45
-msgid "Successfully create '%{page}'."
+msgid "Succeded to create '%{page}'."
 msgstr "'%{page}'が作成されました。"
 
 #: app/controllers/wiki_controller.rb:66
-msgid "Successfully delete '%{page}'."
+msgid "Succeded to delete '%{page}'."
 msgstr "'%{page}'の削除が完了しました。"
 
 #: app/controllers/chapters_controller.rb:97
-msgid "Successfully delete chapter."
+msgid "Succeded to delete chapter."
 msgstr "セクションを削除しました。"
 
 #: app/controllers/group_controller.rb:213
@@ -5994,17 +5994,17 @@ msgid "Successfully left the group."
 msgstr "退会しました。"
 
 #: app/controllers/wiki_controller.rb:57
-msgid "Successfully restore '%{page}'."
+msgid "Succeded to restore '%{page}'."
 msgstr "'%{page}'の復旧が完了しました。"
 
 #: app/controllers/chapters_controller.rb:57
 #: app/controllers/chapters_controller.rb:80
 #: app/controllers/wiki_controller.rb:29
-msgid "Successfully update '%{page}'."
+msgid "Succeded to update '%{page}'."
 msgstr "'%{page}'が更新されました。"
 
 #: app/views/group/_manage_participations.html.erb:104
-msgid "Successfully update administrator."
+msgid "Successfully updated administrator."
 msgstr "管理者を更新しました"
 
 #: lib/skip_util.rb:18
