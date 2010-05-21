@@ -451,6 +451,7 @@ class User < ActiveRecord::Base
                 :using_day => ((Time.now - self.created_on) / (60*60*24)).to_i + 1 }
   end
 
+  # FIXME 動作していないが、修正する必要あるか?
   def openid_identifier
     identity_url(:user => self.code, :protocol => GlobalInitialSetting['protocol'], :host => GlobalInitialSetting['host_and_port'])
   end
@@ -572,6 +573,4 @@ private
     end
     nil
   end
-
-  private_class_method :auth_successed, :auth_failed
 end

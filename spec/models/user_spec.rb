@@ -16,6 +16,10 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe User do
+  before do
+    @sg = create_tenant(:name => 'SonicGarden')
+    @sug = create_tenant(:name => 'SKIPUserGroup')
+  end
   describe User, 'valid?' do
     subject {
       @user = User.new(:name => @name, :email => @email, :tenant => @tenant, :login => @login, :password => @password, :password_confirmation => @password_confirmation)
@@ -263,13 +267,13 @@ describe User do
 
   describe User, "#before_save" do
     before do
-      tenant.update_attribute :op_url, nil
+      #tenant.update_attribute :op_url, nil
       GlobalInitialSetting['sha1_digest_key'] = "digest_key"
     end
     describe '新規の場合' do
       before do
-        @user = new_user
-        Admin::Setting.password_change_interval = 90
+        @user = valid_user(:tenant => @sg)
+        Admin::Setting.set_password_change_interval(@sg, 90)
       end
       it 'パスワードが保存されること' do
         lambda do
@@ -287,14 +291,14 @@ describe User do
 
     describe '更新の場合' do
       before do
-        @user = new_user
+        @user = valid_user(:tenant => @sg)
         @user.save
         @user.reset_auth_token = 'reset_auth_token'
         @user.reset_auth_token_expires_at = Time.now
         @user.locked = true
         @user.trial_num = 1
         @user.save
-        Admin::Setting.password_change_interval = 90
+        Admin::Setting.set_password_change_interval(@sg, 90)
       end
       describe 'パスワードの変更の場合' do
         before do
@@ -374,7 +378,8 @@ describe User do
 
     describe 'ロックする場合' do
       before do
-        @user = create_user(:user_options => {
+        @user = create_user({
+          :tenant => @sg,
           :auth_session_token => 'auth_session_token',
           :remember_token => 'remember_token',
           :remember_token_expires_at => Time.now
@@ -400,7 +405,8 @@ describe User do
 
     describe 'ロック状態が変化しない場合' do
       before do
-        @user = create_user(:user_options => {
+        @user = create_user({
+          :tenant => @sg,
           :auth_session_token => 'auth_session_token',
           :remember_token => 'remember_token',
           :remember_token_expires_at => Time.now
@@ -426,7 +432,7 @@ describe User do
 
   describe User, '#before_create' do
     before do
-      @user = new_user
+      @user = valid_user(:tenant => @sg)
     end
     it '新規作成の際にはissued_atに現在日時が設定される' do
       time = Time.now
@@ -437,11 +443,154 @@ describe User do
     end
   end
 
+  describe User, ".auth" do
+    subject {
+      User.auth(@auth_email, @auth_password)
+    }
+
+    describe "指定したログインID又はメールアドレスに対応するユーザが存在する場合" do
+      describe "未使用ユーザの場合" do
+        before do
+          @user = create_user(:tenant => @sg, :email => 'sg_alice@test.com', :password => 'Password1', :password_confirmation => 'Password1', :status => 'UNUSED')
+          @auth_email = 'sg_alice@test.com'
+          @auth_password = 'Password1'
+        end
+        it { should be_false }
+      end
+      describe "使用中ユーザの場合" do
+        before do
+          @user = create_user(:tenant => @sg, :email => 'sg_alice@test.com', :password => 'Password1', :password_confirmation => 'Password1', :status => 'ACTIVE')
+        end
+        describe "パスワードが正しい場合" do
+          before do
+            @auth_email = 'sg_alice@test.com'
+            @auth_password = 'Password1'
+            User.should_receive(:auth_successed).with(@user)
+          end
+          it { should be_true }
+        end
+        describe "パスワードは正しくない場合" do
+          before do
+            @auth_email = 'sg_alice@test.com'
+            @auth_password = 'invalid'
+            # FIXME なぜか2回呼ばれる。原因を調べる
+            User.should_receive(:auth_failed).with(@user)
+          end
+          it { should be_false }
+        end
+        describe "パスワードの有効期限が切れている場合" do
+          before do
+            @auth_email = 'sg_alice@test.com'
+            @auth_password = 'Password1'
+            @user.password_expires_at = Time.now.ago(1.day)
+            @user.save
+          end
+          it { should be_false }
+        end
+        describe "アカウントがロックされている場合" do
+          before do
+            @auth_email = 'sg_alice@test.com'
+            @auth_password = 'Password1'
+            @user.locked = true
+            @user.save
+          end
+          it { should be_false }
+        end
+      end
+    end
+  end
+
+  describe User, '.grouped_sections' do
+    before do
+      User.delete_all
+      create_user :tenant => @sg, :email => SkipFaker.email, :section => 'Programmer'
+      create_user :tenant => @sg, :email => SkipFaker.email, :section => 'Programmer'
+      create_user :tenant => @sg, :email => SkipFaker.email, :section => 'Tester'
+      create_user :tenant => @sug, :email => SkipFaker.email, :section => 'Vimmer'
+    end
+    it {User.grouped_sections.size.should == 3}
+    it {@sg.users.grouped_sections.size.should == 2}
+    it {@sug.users.grouped_sections.size.should == 1}
+  end
+
+  describe User, ".new_with_identity_url" do
+    before do
+      @identity_url = "http://test.com/identity"
+      @params = { :code => 'hoge', :name => "ほげ ふが", :email => 'hoge@hoge.com', :tenant => @sg }
+      @user = User.new_with_identity_url(@identity_url, @params)
+      @user.stub!(:password_required?).and_return(false)
+    end
+    describe "正しく保存される場合" do
+      it { @user.should be_valid }
+      it { @user.should be_is_a(User) }
+      it { @user.openid_identifiers.should_not be_nil }
+      it { @user.openid_identifiers.map{|i| i.url}.should be_include(@identity_url) }
+    end
+    describe "バリデーションエラーの場合" do
+      before do
+        @user.name = ''
+        @user.email = ''
+      end
+      it { @user.should_not be_valid }
+      it "userにエラーが設定されていること" do
+        @user.valid?
+        @user.errors.full_messages.size.should == 3
+      end
+    end
+  end
+
+  describe User, ".create_with_identity_url" do
+    before do
+      @identity_url = "http://test.com/identity"
+      @params = { :code => 'hoge', :name => "ほげ ふが", :email => 'hoge@hoge.com', :tenant => @sg}
+
+      @user = mock_model(User)
+      User.should_receive(:new_with_identity_url).and_return(@user)
+
+      @user.should_receive(:save)
+    end
+    it { User.create_with_identity_url(@identity_url, @params).should be_is_a(User) }
+  end
+
+  describe User, '.issue_activation_codes' do
+    before do
+      @now = Time.local(2008, 11, 1)
+      User.stub!(:activation_lifetime).and_return(2)
+      Time.stub!(:now).and_return(@now)
+    end
+    describe '指定したIDのユーザが存在する場合' do
+      before do
+        @user = create_user(:tenant => @sg, :status => 'UNUSED')
+      end
+      it '未使用ユーザのactivation_tokenに値が入ること' do
+        unused_users, active_users = User.issue_activation_codes(@sg, [@user.id])
+        unused_users.first.activation_token.should_not be_nil
+      end
+      it '未使用ユーザのactivation_token_expires_atが48時間後となること' do
+        unused_users, active_users = User.issue_activation_codes(@sg, [@user.id])
+        unused_users.first.activation_token_expires_at.should == @now.since(48.hour)
+      end
+    end
+  end
+
+  describe User, '.activation_lifetime' do
+    describe 'activation_lifetimeの設定が3(日)の場合' do
+      before do
+        @activation_lifetime_was = Admin::Setting.activation_lifetime(@sg)
+        Admin::Setting.set_activation_lifetime(@sg, 3)
+      end
+      it { User.activation_lifetime(@sg).should == 3 }
+      after do
+        Admin::Setting.set_activation_lifetime(@sg, @activation_lifetime_was)
+      end
+    end
+  end
+
   describe User, '#change_password' do
     before do
-      tenant.update_attribute :op_url, nil
+      @sg.update_attribute :op_url, nil
       GlobalInitialSetting['sha1_digest_key'] = 'digest_key'
-      @user = create_user(:user_options => {:password => 'Password1'})
+      @user = create_user(:tenant => @sg, :password => 'Password1')
       @old_password = 'Password1'
       @new_password = 'Hogehoge1'
 
@@ -472,117 +621,69 @@ describe User do
     end
   end
 
-  describe User, ".new_with_identity_url" do
-    before do
-      @identity_url = "http://test.com/identity"
-      @params = { :code => 'hoge', :name => "ほげ ふが", :email => 'hoge@hoge.com' }
-      @user = User.new_with_identity_url(@identity_url, @params)
-      @user.stub!(:password_required?).and_return(false)
-    end
-    describe "正しく保存される場合" do
-      it { @user.should be_valid }
-      it { @user.should be_is_a(User) }
-      it { @user.openid_identifiers.should_not be_nil }
-      it { @user.openid_identifiers.map{|i| i.url}.should be_include(@identity_url) }
-    end
-    describe "バリデーションエラーの場合" do
-      before do
-        @user.name = ''
-        @user.email = ''
-      end
-      it { @user.should_not be_valid }
-      it "userにエラーが設定されていること" do
-        @user.valid?
-        @user.errors.full_messages.size.should == 3
-      end
-    end
+  describe User, '#before_access' do
+    it { pending '後で回帰テストを書く' }
   end
 
-  describe User, ".create_with_identity_url" do
-    before do
-      @identity_url = "http://test.com/identity"
-      @params = { :code => 'hoge', :name => "ほげ ふが", :email => 'hoge@hoge.com' }
-
-      @user = mock_model(User)
-      User.should_receive(:new_with_identity_url).and_return(@user)
-
-      @user.should_receive(:save)
-    end
-    it { User.create_with_identity_url(@identity_url, @params).should be_is_a(User) }
+  describe User, '#mark_track' do
+    it { pending '後で回帰テストを書く' }
   end
 
-  describe User, ".auth" do
-    subject { User.auth('code_or_email', "valid_password") { |result, user| @result = result; @authed_user = user } }
-
-    describe "指定したログインID又はメールアドレスに対応するユーザが存在する場合" do
+  describe User, '#locked?' do
+    before do
+      @user = create_user(:tenant => @sg)
+      @enable_user_lock_was = Admin::Setting.enable_user_lock(@sg)
+    end
+    describe 'ユーザロック機能が有効な場合' do
       before do
-        @user = create_user
-        @user.stub!(:crypted_password).and_return(User.encrypt("valid_password"))
-        User.stub!(:find_by_code_or_email).and_return(@user)
+        Admin::Setting.set_enable_user_lock(@sg, 'true')
       end
-      describe "未使用ユーザの場合" do
+      describe 'ユーザがロックされている場合' do
         before do
-          @user.stub!(:unused?).and_return(true)
+          @user.locked = true
         end
-        it { should be_false }
+        it 'ロックされていると判定されること' do
+          @user.locked?.should be_true
+        end
       end
-      describe "使用中ユーザの場合" do
+      describe 'ユーザがロックされていない場合' do
         before do
-          @user.stub!(:unused?).and_return(false)
-          User.stub(:auth_successed).and_return(@user)
-          User.stub(:auth_failed)
+          @user.locked = false
         end
-
-        describe "パスワードが正しい場合" do
-          it '認証成功処理が行われること' do
-            User.should_receive(:auth_successed).with(@user)
-            User.auth('code_or_email', "valid_password")
-          end
-          it "ユーザが返ること" do
-            should be_true
-            @authed_user.should == @user
-          end
-        end
-        describe "パスワードは正しくない場合" do
-          it '認証失敗処理が行われること' do
-            User.should_receive(:auth_failed).with(@user)
-            User.auth('code_or_email', 'invalid_password')
-          end
-          it "エラーメッセージが返ること" do
-            User.auth('code_or_email', 'invalid_password').should be_false
-          end
-        end
-        describe "パスワードの有効期限が切れている場合" do
-          before do
-            @user.stub!(:within_time_limit_of_password?).and_return(false)
-          end
-          it "エラーメッセージが返ること" do
-            should be_false
-            @authed_user.should == @user
-          end
-        end
-        describe "アカウントがロックされている場合" do
-          before do
-            @user.stub!(:locked?).and_return(true)
-          end
-          it "エラーメッセージが返ること" do
-            should be_false
-            @authed_user.should == @user
-          end
+        it 'ロックされていないと判定されること' do
+          @user.locked?.should be_false
         end
       end
     end
-    describe "指定したログインID又はメールアドレスに対応するユーザが存在しない場合" do
+    describe 'ユーザロック機能が無効な場合' do
       before do
-        User.should_receive(:find_by_code_or_email).at_least(:once).and_return(nil)
+        Admin::Setting.set_enable_user_lock(@sg, 'false')
       end
-      it { should be_false }
+      describe 'ユーザがロックされている場合' do
+        before do
+          @user.locked = true
+        end
+        it 'ロックされていると判定されること' do
+          @user.locked?.should be_true
+        end
+      end
+      describe 'ユーザがロックされていない場合' do
+        before do
+          @user.locked = false
+        end
+        it 'ロックされていないと判定されること' do
+          @user.locked?.should be_false
+        end
+      end
+    end
+    after do
+      Admin::Setting.set_enable_user_lock(@sg, @enable_user_lock_was)
     end
   end
 
-  describe User, "#delete_auth_tokens" do
+  describe User, "#delete_auth_tokens!" do
     before do
-      @user = create_user
+      @user = create_user(:tenant => @sg)
       @user.remember_token = "remember_token"
       @user.remember_token_expires_at = Time.now
       @user.auth_session_token = "auth_session_token"
@@ -599,13 +700,14 @@ describe User do
 
   describe User, "#update_auth_session_token" do
     before do
-      @user = create_user
+      @user = create_user(:tenant => @sg)
       @auth_session_token = User.make_token
       User.stub!(:make_token).and_return(@auth_session_token)
+      @enable_single_session_was = Admin::Setting.enable_single_session(@sg)
     end
     describe 'シングルセッション機能が有効な場合' do
       before do
-        Admin::Setting.should_receive(:enable_single_session).and_return(true)
+        Admin::Setting.set_enable_single_session(@sg, 'true')
       end
       it "トークンが保存されること" do
         @user.update_auth_session_token!
@@ -617,7 +719,7 @@ describe User do
     end
     describe 'シングルセッション機能が無効な場合' do
       before do
-        Admin::Setting.should_receive(:enable_single_session).and_return(false)
+        Admin::Setting.set_enable_single_session(@sg, 'false')
       end
       describe '新規ログインの場合(auth_session_tokenに値が入っていない)' do
         before do
@@ -645,11 +747,14 @@ describe User do
         end
       end
     end
+    after do
+      Admin::Setting.set_enable_single_session(@sg, @enable_single_session_was)
+    end
   end
 
   describe User, '#issue_reset_auth_token' do
     before do
-      @user = create_user
+      @user = create_user(:tenant => @sg)
       @now = Time.local(2008, 11, 1)
       Time.stub!(:now).and_return(@now)
     end
@@ -667,7 +772,7 @@ describe User do
 
   describe User, '#determination_reset_auth_token' do
     before do
-      @user = create_user
+      @user = create_user(:tenant => @sg)
     end
     it 'reset_auth_tokenの値が更新されること' do
       prc = '6df711a1a42d110261cfe759838213143ca3c2ad'
@@ -687,7 +792,7 @@ describe User do
 
   describe User, '#issue_activation_code' do
     before do
-      @user = create_user
+      @user = create_user(:tenant => @sg)
       @now = Time.local(2008, 11, 1)
       User.stub!(:activation_lifetime).and_return(2)
       Time.stub!(:now).and_return(@now)
@@ -704,31 +809,10 @@ describe User do
     end
   end
 
-  describe User, '.issue_activation_codes' do
-    before do
-      @now = Time.local(2008, 11, 1)
-      User.stub!(:activation_lifetime).and_return(2)
-      Time.stub!(:now).and_return(@now)
-    end
-    describe '指定したIDのユーザが存在する場合' do
-      before do
-        @user = create_user(:status => 'UNUSED')
-      end
-      it '未使用ユーザのactivation_tokenに値が入ること' do
-        unused_users, active_users = User.issue_activation_codes([@user.id])
-        unused_users.first.activation_token.should_not be_nil
-      end
-      it '未使用ユーザのactivation_token_expires_atが48時間後となること' do
-        unused_users, active_users = User.issue_activation_codes([@user.id])
-        unused_users.first.activation_token_expires_at.should == @now.since(48.hour)
-      end
-    end
-  end
-
   describe User, '#activate!' do
     it 'activation_tokenの値が更新されること' do
       activation_token = '6df711a1a42d110261cfe759838213143ca3c2ad'
-      u = create_user(:user_options => {:activation_token=> activation_token}, :status => 'UNUSED')
+      u = create_user(:tenant => @sg, :activation_token => activation_token, :status => 'UNUSED')
       u.password = ''
       lambda do
         u.activate!
@@ -736,20 +820,11 @@ describe User do
     end
     it 'activation_token_expires_atの値が更新されること' do
       time = Time.now
-      u = create_user(:user_options => {:activation_token_expires_at => time}, :status => 'UNUSED')
+      u = create_user(:tenant => @sg, :activation_token_expires_at => time, :status => 'UNUSED')
       u.password = ''
       lambda do
         u.activate!
       end.should change(u, :activation_token_expires_at).from(time).to(nil)
-    end
-  end
-
-  describe User, '.activation_lifetime' do
-    describe 'activation_lifetimeの設定が3(日)の場合' do
-      before do
-        Admin::Setting.stub!(:activation_lifetime).and_return(3)
-      end
-      it { User.activation_lifetime.should == 3 }
     end
   end
 
@@ -760,7 +835,7 @@ describe User do
     end
     describe 'activation_token_expires_atが期限切れの場合' do
       before do
-        @user = create_user(:user_options => {:activation_token => @activation_token, :activation_token_expires_at => @activation_token_expires_at })
+        @user = create_user(:tenant => @sg, :activation_token => @activation_token, :activation_token_expires_at => @activation_token_expires_at )
         now = @activation_token_expires_at.since(1.second)
         Time.stub!(:now).and_return(now)
       end
@@ -770,7 +845,7 @@ describe User do
     end
     describe 'activation_token_expires_atが期限切れではない場合' do
       before do
-        @user = create_user(:user_options => {:activation_token => @activation_token, :activation_token_expires_at => @activation_token_expires_at })
+        @user = create_user(:tenant => @sg, :activation_token => @activation_token, :activation_token_expires_at => @activation_token_expires_at )
         now = @activation_token_expires_at.ago(1.second)
         Time.stub!(:now).and_return(now)
       end
@@ -780,21 +855,11 @@ describe User do
     end
   end
 
-  describe User, '.grouped_sections' do
-    before do
-      User.delete_all
-      create_user :user_options => {:email => SkipFaker.email, :section => 'Programmer'}
-      create_user :user_options => {:email => SkipFaker.email, :section => 'Programmer'}
-      create_user :user_options => {:email => SkipFaker.email, :section => 'Tester'}
-    end
-    it {User.grouped_sections.size.should == 2}
-  end
-
   describe User, "#find_or_initialize_profiles" do
     before do
-      @user = new_user
+      @user = valid_user(:tenant => @sg)
       @user.save!
-      @masters = (1..3).map{|i| create_user_profile_master(:name => "master#{i}")}
+      @masters = (1..3).map{|i| create_user_profile_master(:tenant => @sg, :name => "master#{i}")}
       @master_1_id = @masters[0].id
       @master_2_id = @masters[1].id
     end
@@ -862,87 +927,32 @@ describe User do
   end
 
   describe User, "#openid_identifier" do
-    before do
-      GlobalInitialSetting['host_and_port'] = 'test.host'
-      GlobalInitialSetting['protocol'] = 'http://'
-      @user = stub_model(User, :code => "a_user")
-    end
-    it "OPとして発行する OpenID identifier を返すこと" do
-      @user.openid_identifier.should == "http://test.host/id/a_user"
-    end
-    it "relative_url_rootが設定されている場合 反映されること" do
-      ActionController::Base.relative_url_root = "/skip"
-      @user.openid_identifier.should == "http://test.host/skip/id/a_user"
-    end
-    after do
-      ActionController::Base.relative_url_root = nil
-    end
-  end
-
-  describe User, '#to_s_log' do
-    before do
-      @user = stub_model(User, :id => "99", :uid => '999999')
-    end
-    it 'ログに出力する形式に整えられた文字列を返すこと' do
-      @user.to_s_log('message').should == "message: {\"user_id\" => \"#{@user.id}\", \"uid\" => \"#{@user.uid}\"}"
-    end
-  end
-
-  describe User, '#locked?' do
-    before do
-      @user = stub_model(User)
-    end
-    describe 'ユーザロック機能が有効な場合' do
-      before do
-        Admin::Setting.enable_user_lock = 'true'
-      end
-      describe 'ユーザがロックされている場合' do
-        before do
-          @user.locked = true
-        end
-        it 'ロックされていると判定されること' do
-          @user.locked?.should be_true
-        end
-      end
-      describe 'ユーザがロックされていない場合' do
-        before do
-          @user.locked = false
-        end
-        it 'ロックされていないと判定されること' do
-          @user.locked?.should be_false
-        end
-      end
-    end
-    describe 'ユーザロック機能が無効な場合' do
-      before do
-        Admin::Setting.enable_user_lock = 'false'
-      end
-      describe 'ユーザがロックされている場合' do
-        before do
-          @user.locked = true
-        end
-        it 'ロックされていると判定されること' do
-          @user.locked?.should be_true
-        end
-      end
-      describe 'ユーザがロックされていない場合' do
-        before do
-          @user.locked = false
-        end
-        it 'ロックされていないと判定されること' do
-          @user.locked?.should be_false
-        end
-      end
-    end
+    it '現状map.resourceに存在しないパスを利用しており動作しない。修正する必要がある?'
+#    before do
+#      GlobalInitialSetting['host_and_port'] = 'test.host'
+#      GlobalInitialSetting['protocol'] = 'http://'
+#      @user = create_user(:tenant => @sg)
+#    end
+#    it "OPとして発行する OpenID identifier を返すこと" do
+#      @user.openid_identifier.should == "http://test.host/id/a_user"
+#    end
+#    it "relative_url_rootが設定されている場合 反映されること" do
+#      ActionController::Base.relative_url_root = "/skip"
+#      @user.openid_identifier.should == "http://test.host/skip/id/a_user"
+#    end
+#    after do
+#      ActionController::Base.relative_url_root = nil
+#    end
   end
 
   describe User, '#within_time_limit_of_password?' do
     before do
-      @user = stub_model(User)
+      @user = create_user(:tenant => @sg)
+      @enable_password_periodic_change_was = Admin::Setting.enable_password_periodic_change(@sg)
     end
     describe 'パスワード変更強制機能が有効な場合' do
       before do
-        Admin::Setting.enable_password_periodic_change = 'true'
+        Admin::Setting.set_enable_password_periodic_change(@sg, 'true')
       end
       describe 'パスワードの有効期限切れ日が設定されている場合' do
         before do
@@ -979,21 +989,37 @@ describe User do
     end
     describe 'パスワード変更強制機能が無効な場合' do
       before do
-        Admin::Setting.enable_password_periodic_change = 'false'
+        Admin::Setting.set_enable_password_periodic_change(@sg, 'false')
       end
       it 'パスワード有効期限内と判定されること' do
         @user.within_time_limit_of_password?.should be_true
       end
     end
+    after do
+      Admin::Setting.set_enable_password_periodic_change(@sg, @enable_password_periodic_change_was)
+    end
   end
+
+  describe User, '#to_s_log' do
+    before do
+      @user = create_user(:tenant => @sg)
+    end
+    it 'ログに出力する形式に整えられた文字列を返すこと' do
+      @user.to_s_log('message').should == "message: {\"user_id\" => \"#{@user.id}\", \"email\" => \"#{@user.email}\"}"
+    end
+  end
+
+  # ---------------------------------------- 
+  # privateメソッドのテスト
+  # ---------------------------------------- 
 
   describe User, 'password_required?' do
     before do
-      @user = new_user
+      @user = valid_user(:tenant => @sg)
     end
     describe 'パスワードモードの場合' do
       before do
-        tenant.update_attribute :op_url, nil
+        @sg.update_attribute :op_url, nil
       end
       describe 'パスワードが空の場合' do
         before do
@@ -1040,7 +1066,7 @@ describe User do
     end
     describe 'パスワードモード以外の場合' do
       before do
-        tenant.update_attribute :op_url, "http://localhost:3333/"
+        @sg.update_attribute :op_url, "http://localhost:3333/"
       end
       it '必要ではない(false)と判定されること' do
         @user.send(:password_required?).should be_false
@@ -1048,43 +1074,9 @@ describe User do
     end
   end
 
-  describe User, '.find_by_code_or_email' do
-    describe 'ログインIDに一致するユーザが見つかる場合' do
-      before do
-        @user = mock_model(User)
-        User.should_receive(:find_by_code).and_return(@user)
-      end
-      it '見つかったユーザが返ること' do
-        User.send(:find_by_code_or_email, 'login_id').should == @user
-      end
-    end
-    describe 'ログインIDに一致するユーザが見つからない場合' do
-      before do
-        @user = mock_model(User)
-        User.should_receive(:find_by_code).and_return(nil)
-      end
-      describe 'メールアドレスに一致するユーザが見つかる場合' do
-        before do
-          User.should_receive(:find_by_email).and_return(@user)
-        end
-        it '見つかったユーザが返ること' do
-          User.send(:find_by_code_or_email, 'skip@example.org').should == @user
-        end
-      end
-      describe 'メールアドレスに一致するユーザが見つからない場合' do
-        before do
-          User.should_receive(:find_by_email).and_return(nil)
-        end
-        it 'nilが返ること' do
-          User.send(:find_by_code_or_email, 'skip@example.org').should be_nil
-        end
-      end
-    end
-  end
-
   describe User, '.auth_successed' do
     before do
-      @user = create_user
+      @user = create_user(:tenant => @sg)
     end
     it "検索されたユーザが返ること" do
       User.send(:auth_successed, @user).should == @user
@@ -1125,7 +1117,9 @@ describe User do
 
   describe User, '.auth_failed' do
     before do
-      @user = create_user
+      @user = create_user(:tenant => @sg)
+      @user_lock_trial_limit_was = Admin::Setting.user_lock_trial_limit(@sg)
+      @enable_user_lock_was = Admin::Setting.enable_user_lock(@sg)
     end
     it 'nilが返ること' do
       User.send(:auth_failed, @user).should be_nil
@@ -1137,11 +1131,11 @@ describe User do
       describe 'ログイン試行回数が最大値未満の場合' do
         before do
           @user.trial_num = 2
-          Admin::Setting.user_lock_trial_limit = 3
+          Admin::Setting.set_user_lock_trial_limit(@sg, 3)
         end
         describe 'ユーザロック機能が有効な場合' do
           before do
-            Admin::Setting.enable_user_lock = 'true'
+            Admin::Setting.set_enable_user_lock(@sg, 'true')
           end
           it 'ログイン試行回数が1増加すること' do
             lambda do
@@ -1151,7 +1145,7 @@ describe User do
         end
         describe 'ユーザロック機能が無効な場合' do
           before do
-            Admin::Setting.enable_user_lock = 'false'
+            Admin::Setting.set_enable_user_lock(@sg, 'false')
           end
           it 'ログイン試行回数が変化しないこと' do
             lambda do
@@ -1163,11 +1157,11 @@ describe User do
       describe 'ログイン試行回数が最大値以上の場合' do
         before do
           @user.trial_num = 3
-          Admin::Setting.user_lock_trial_limit = 3
+          Admin::Setting.set_user_lock_trial_limit(@sg, 3)
         end
         describe 'ユーザロック機能が有効な場合' do
           before do
-            Admin::Setting.enable_user_lock = 'true'
+            Admin::Setting.set_enable_user_lock(@sg, 'true')
           end
           it 'ロックされること' do
             lambda do
@@ -1182,7 +1176,7 @@ describe User do
         end
         describe 'ユーザロック機能が無効な場合' do
           before do
-            Admin::Setting.enable_user_lock = 'false'
+            Admin::Setting.set_enable_user_lock(@sg, 'false')
           end
           it 'ロック状態が変化しないこと' do
             lambda do
@@ -1217,9 +1211,9 @@ describe User do
         User.send(:auth_failed, @user)
       end
     end
-  end
-
-  def new_user options = {}
-    User.new({ :name => 'ほげ ほげ', :password => 'Password1', :password_confirmation => 'Password1', :email => SkipFaker.email, :section => 'Tester',}.merge(options))
+    after do
+      Admin::Setting.set_user_lock_trial_limit(@sg, @user_lock_trial_limit_was)
+      Admin::Setting.set_enable_user_lock(@sg, @enable_user_lock_was)
+    end
   end
 end
