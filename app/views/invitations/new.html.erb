@@ -15,7 +15,7 @@
             <td><%= f.text_field :subject, :size => 60 %></td>
           </tr>
           <tr>
-            <th><%= f.label :body %><%= _('(When the email send, the body template append to the body.)') %></th>
+            <th><%= f.label :body %><%= _('(The body template is appended to the body when the email is sent.)') %></th>
             <td>
               <%= f.text_area :body, :size => '60x15' %>
               <pre><%= h(@invitation.body_template) %></pre>

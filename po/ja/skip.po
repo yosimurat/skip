@@ -276,7 +276,7 @@ msgstr ""
 "ています）"
 
 #: app/views/invitations/new.html.erb:18
-msgid "(When the email send, the body template append to the body.)"
+msgid "(The body template is appended to the body when the email is sent.)"
 msgstr "(メール送信時、本文に本文下部のテンプレートが連結されます。)"
 
 #: app/views/bookmark/new.html.erb:17
@@ -1975,7 +1975,7 @@ msgid "Basic Information"
 msgstr "基本情報"
 
 #: app/views/histories/index.html.erb:14
-msgid "Before diff"
+msgid "Diff from prev"
 msgstr "前との差分"
 
 #: app/views/share_file/_share_file_box.html.erb:23
@@ -4440,7 +4440,7 @@ msgid "Next Day (%s)"
 msgstr "次の日(%s)"
 
 #: app/views/histories/index.html.erb:13
-msgid "Next diff"
+msgid "Diff from next"
 msgstr "次との差分"
 
 #: app/helpers/application_helper.rb:39

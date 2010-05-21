@@ -268,7 +268,7 @@ msgid "(This screen is to avoid security risks related to direct downloading)"
 msgstr ""
 
 #: app/views/invitations/new.html.erb:18
-msgid "(When the email send, the body template append to the body.)"
+msgid "(The body template is appended to the body when the email is sent.)"
 msgstr ""
 
 #: app/views/bookmark/new.html.erb:17
