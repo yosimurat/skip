@@ -105,7 +105,7 @@ class Admin::UsersController < Admin::ApplicationController
       else
         begin
           Admin::User.transaction do
-            @user = Admin::User.make_user({:user => params[:user].merge(:tenant_id => current_tenant.id)}, true)
+            @user = Admin::User.make_new_user({:user => params[:user].merge(:tenant_id => current_tenant.id)}, true)
             @user.user_access = UserAccess.new :last_access => Time.now, :access_count => 0
             @user.save!
             current_activation.update_attributes(:code => nil)

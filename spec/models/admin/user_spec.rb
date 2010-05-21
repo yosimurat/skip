@@ -20,41 +20,9 @@ describe Admin::User, '.make_users' do
     @user = mock_model(Admin::User)
     FasterCSV.should_receive(:parse).and_return([['hoge']])
     Admin::User.stub!(:make_user_hash_from_csv_line).and_return({},{},{})
-    Admin::User.should_receive(:make_user).and_return(@user)
+    Admin::User.should_receive(:make_new_user).and_return(@user)
   end
   it { Admin::User.send(:make_users, mock('uplocaded_file'), mock('options')).should == ([@user]) }
-end
-
-describe Admin::User, '.make_user' do
-  describe '既存のレコードがある場合' do
-    describe "既存のユーザを更新する場合" do
-      before do
-        user = create_user :user_options => {:section => 'プログラマ', :email => SkipFaker.email}
-        @user_hash = user.attributes
-      end
-      it 'make_user_by_uidが呼ばれること' do
-        Admin::User.should_receive(:make_user_by_uid)
-        @user = Admin::User.make_user({:user => @user_hash}, false, false)
-      end
-    end
-    describe "既存のレコードを更新しない場合" do
-      before do
-        user_hash = {:section => 'プログラマ', :email => SkipFaker.email}
-        user = create_user :user_options => user_hash
-        @user_hash = user.attributes
-      end
-      it 'make_user_by_uidが属性なしで呼ばれること' do
-        Admin::User.should_receive(:make_user_by_uid).with({:user => {}}, false)
-        @use = Admin::User.make_user({:user => @user_hash}, false, true)
-      end
-    end
-  end
-  describe '既存のレコードがない場合' do
-    it 'make_new_userが呼ばれること' do
-      Admin::User.should_receive(:make_new_user)
-      @user = Admin::User.make_user({:user => {}})
-    end
-  end
 end
 
 describe Admin::User, '.make_new_user' do
@@ -97,7 +65,7 @@ describe Admin::User, '.make_new_user' do
   end
   describe '一般ユーザを作成する場合' do
     before do
-      @user = Admin::User.make_user({:user => @user_hash})
+      @user = Admin::User.make_new_user({:user => @user_hash})
     end
     it '管理者でないこと' do
       @user.admin.should be_false
@@ -106,37 +74,6 @@ describe Admin::User, '.make_new_user' do
       @user.status.should == :UNUSED.to_s
     end
   end
-end
-
-describe Admin::User, '.make_user_by_uid' do
-    before do
-      @uid = '999999'
-      @email = "yamada@example.com"
-      @password = "Password1"
-      @fullname = "山田 太郎"
-      @job_title = "経理"
-      @user_hash = {:name => @fullname, :password => @password, :password_confirmation => @password, :section => @job_title, :email => @email}
-      user = create_user :user_options => @user_hash
-      @user = Admin::User.make_user_by_uid({:user => @user_hash})
-    end
-    it '新規レコードではないこと' do
-      @user.new_record?.should_not be_true
-    end
-    it 'fullnameが設定されていること' do
-      @user.name.should == @fullname
-    end
-    it 'passwordが設定されていること' do
-      @user.password.should == @password
-    end
-    it 'password_confirmationが設定されていること' do
-      @user.password_confirmation == @password_confirmation
-    end
-    it 'sectionが設定されていること' do
-      @user.section.should == @job_title
-    end
-    it 'emailが設定されていること' do
-      @user.email.should == @email
-    end
 end
 
 describe Admin::User, '.make_user_by_id' do
@@ -183,18 +120,16 @@ describe Admin::User, ".make_user_hash_from_csv_line" do
       @options.merge!(:section => "1")
     end
     it "部署を含んだ配列を返す" do
-      Admin::User.send(:make_user_hash_from_csv_line, @line, @options).should == [{:name=>"山田太郎", :section=>"経理", :email=>"yamada@example.com"}, {:uid=>"111111"}]
+      Admin::User.send(:make_user_hash_from_csv_line, @line, @options).should == {:name=>"山田太郎", :section=>"経理", :email=>"yamada@example.com"}
     end
   end
   describe "部署をアップデートしない場合" do
     it "部署を含まない配列を返す" do
-      Admin::User.send(:make_user_hash_from_csv_line, @line, @options).should == [{:name=>"山田太郎", :email=>"yamada@example.com"}, {:uid=>"111111"}]
+      Admin::User.send(:make_user_hash_from_csv_line, @line, @options).should == {:name=>"山田太郎", :email=>"yamada@example.com"}
     end
   end
   describe "optionsがnilの場合" do
-    it "uidのみ入った配列を返す" do
-      Admin::User.send(:make_user_hash_from_csv_line, @line, nil).should == [{}, {:uid=>"111111"}]
-    end
+    it { Admin::User.send(:make_user_hash_from_csv_line, @line, nil).should == {} }
   end
   describe "emailのみアップデートしない場合" do
     before do
@@ -202,7 +137,7 @@ describe Admin::User, ".make_user_hash_from_csv_line" do
       @options = {:name => "1", :section => "1"}
     end
     it "emailのみが設定されていないこと" do
-      Admin::User.send(:make_user_hash_from_csv_line, @line, @options).should == [{:name=>"山田太郎", :section => "経理"}, {:uid=>"111111"}]
+      Admin::User.send(:make_user_hash_from_csv_line, @line, @options).should == {:name=>"山田太郎", :section => "経理"}
     end
   end
 end
@@ -214,9 +149,9 @@ describe Admin::User, '.lock_actives' do
       :remember_token => 'remember_token',
       :remember_token_expires_at => Time.now
     }
-    @active_user = create_user(:user_options  => user_options)
-    @admin_user = create_user(:user_options => user_options.merge!(:admin => true))
-    @unused_user = create_user(:user_options => user_options, :status => 'UNUSED')
+    @active_user = create_user(user_options)
+    @admin_user = create_user(user_options.merge!(:admin => true))
+    @unused_user = create_user(user_options.merge!(:status => 'UNUSED'))
   end
   describe '利用中ユーザ全てをロックできる場合' do
     before do

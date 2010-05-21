@@ -16,8 +16,4 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe UserMailer::Smtp do
-  def test_sent_apply_email_confirm
-    response = UserMailer::Smtp.create_sent_apply_email_confirm SkipFaker.email, SkipFaker.rand_char
-    assert_match /https?:\/\/.*\/$/m, response.body
-  end
 end

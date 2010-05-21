@@ -16,13 +16,4 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Admin::UserProfileMasterCategory do
-  before(:each) do
-    @valid_attributes = {
-      :name => "name"
-    }
-  end
-
-  it "should create a new instance given valid attributes" do
-    Admin::UserProfileMasterCategory.create!(@valid_attributes)
-  end
 end

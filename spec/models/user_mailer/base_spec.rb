@@ -16,6 +16,10 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe UserMailer::Base, "#smtp_settings" do
+  before do
+    @sg = create_tenant(:name => 'SonicGarden')
+    @sug = create_tenant(:name => 'SKIPUserGroup')
+  end
   before(:all) do
     GlobalInitialSetting['mail'] = {'show_mail_function' => true}
     @before_method = ActionMailer::Base.delivery_method
@@ -38,7 +42,7 @@ describe UserMailer::Base, "#smtp_settings" do
   end
   it "Net::SMTPメソッドで設定の内容を利用して送信すること" do
     @smtp.should_receive(:start).with("domain", "user_name", "password", :login, nil).and_yield(@smtp)
-    UserMailer::Smtp.deliver_sent_forgot_password("test@test.com", "password")
+    UserMailer::Smtp.deliver_sent_forgot_password(@sg, "test@test.com", "password")
   end
   after(:all) do
     ActionMailer::Base.delivery_method = @before_method

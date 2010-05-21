@@ -71,7 +71,7 @@ class Admin::User < User
     parsed_csv = FasterCSV.parse uploaded_file
     parsed_csv.each do |line|
       user_hash = make_user_hash_from_csv_line(line, options)
-      user = make_user({:user => user_hash}, false, create_only)
+      user = make_new_user({:user => user_hash}, false)
       users << user if user
     end
     users
@@ -94,18 +94,6 @@ class Admin::User < User
     end
     user.admin = params[:user][:admin]
     user
-  end
-
-  def self.make_user_by_uid(params, admin = false)
-    check_params_keys(params, [:user])
-    user = Admin::User.find_by_email(params[:user][:email])
-    user.attributes = params[:user]
-    user
-  end
-
-  def self.make_user(params, admin = false, create_only = false)
-    user = Admin::User.find_by_email(params[:user][:email])
-    make_new_user(params, admin)
   end
 
   def self.lock_actives
