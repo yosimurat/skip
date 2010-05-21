@@ -170,10 +170,27 @@ div.input_line textarea {
   toggleSendMail();
   <% end -%>
 
-  $j('#board_entry_publication_type_public, #board_entry_publication_type_private').live('click', function(){
+  var changePublicationType = function() {
     <% unless Admin::Setting.enable_send_email_to_all_users(current_tenant) -%>
       toggleSendMail();
     <% end -%>
+
+    $j('#publication_status').css('color', '#555');
+    if ($j('#board_entry_publication_type_protected:checked').length > 0)
+      $j('#publication_status').text($j('label[for=board_entry_publication_type_protected]').text());
+    if ($j('#board_entry_publication_type_private:checked').length > 0)
+      $j('#publication_status').text($j('label[for=board_entry_publication_type_private]').text());
+    if ($j('#board_entry_publication_type_public:checked').length > 0) {
+      $j('#publication_status').text($j('label[for=board_entry_publication_type_public]').text());
+      <% if @board_entry.owner_is_group? && @board_entry.owner.default_publication_type == 'private' -%>
+        $j('#publication_status').css('color', 'red');
+      <% end -%>
+    }
+  };
+  changePublicationType();
+
+  $j('#board_entry_publication_type_public, #board_entry_publication_type_private').live('click', function(){
+    changePublicationType();
   });
 
   // タグsuggestのスライド表示

@@ -2,6 +2,7 @@
 
 <% form_for [current_tenant, current_target_owner, @board_entry], :html => {:class => 'board_entry_form'} do |f| -%>
   <%= render f %>
+  <div class="publication_status_wrapper">選択されている公開範囲<span id="publication_status"></span></div>
   <%= submit_tag _("Create") , :id => 'submit_button' %>
   <%= send_mail_check_box_tag %>
 <% end -%>
