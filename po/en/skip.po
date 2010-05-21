@@ -2926,6 +2926,7 @@ msgid_plural "%{num} emails have been registered in the site"
 msgstr[0] ""
 msgstr[1] ""
 
+#: app/controllers/platform_controller.rb:64
 #: app/controllers/platform_controller.rb:113
 #: app/controllers/platform_controller.rb:157
 msgid "Email address is mandatory."
@@ -2937,10 +2938,6 @@ msgstr ""
 
 #: app/views/admin/users/issue_password_reset_code.html.erb:7
 msgid "Email for resetting your password"
-msgstr ""
-
-#: app/controllers/platform_controller.rb:64
-msgid "Email is mandatory."
 msgstr ""
 
 #: app/models/email.rb:-

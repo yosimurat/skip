@@ -138,7 +138,7 @@ class GroupParticipationsController < ApplicationController
     SystemMessage.create_message :message_type => 'APPROVAL_OF_JOIN', :user_id => current_target_group_participation.user.id, :message_hash => {:group_id => group.id}
     respond_to do |format|
       format.html do
-        flash[:notice] = _("Succeeded to Approve.")
+        flash[:notice] = _("Succeeded to approve.")
         redirect_to polymorphic_path([current_tenant, current_target_group, :group_participations], :action => :manage_waiting_members)
       end
     end
@@ -150,7 +150,7 @@ class GroupParticipationsController < ApplicationController
     SystemMessage.create_message :message_type => 'DISAPPROVAL_OF_JOIN', :user_id => current_target_group_participation.user.id, :message_hash => {:group_id => group.id}
     respond_to do |format|
       format.html do
-        flash[:notice] = _("Succeeded to Disapprove.")
+        flash[:notice] = _("Succeeded to disapprove.")
         redirect_to polymorphic_path([current_tenant, current_target_group, :group_participations], :action => :manage_waiting_members)
       end
     end

@@ -2996,6 +2996,7 @@ msgid_plural "%{num} emails have been registered in the site"
 msgstr[0] "指定された%{email}というメールアドレスは既に利用登録済みです。"
 msgstr[1] "指定されたうち%{num}個のメールアドレスは既に利用登録済みです。"
 
+#: app/controllers/platform_controller.rb:64
 #: app/controllers/platform_controller.rb:113
 #: app/controllers/platform_controller.rb:157
 msgid "Email address is mandatory."
@@ -3008,10 +3009,6 @@ msgstr "メールアドレスが正しく更新されました。"
 #: app/views/admin/users/issue_password_reset_code.html.erb:7
 msgid "Email for resetting your password"
 msgstr "パスワード再設定のメールです"
-
-#: app/controllers/platform_controller.rb:64
-msgid "Email is mandatory."
-msgstr "メールアドレスは必須です"
 
 #: app/models/email.rb:-
 msgid "Email|Created on"
@@ -3215,7 +3212,7 @@ msgid "Excluding retired users"
 msgstr "利用中のユーザのみ（退職者などを含めない）"
 
 #: app/controllers/group_controller.rb:297
-msgid "Failed to Approve."
+msgid "Failed to approve."
 msgstr "承認に失敗しました。"
 
 #: app/controllers/group_controller.rb:248
@@ -5965,11 +5962,11 @@ msgid "Subwindow"
 msgstr "サブウィンドウ"
 
 #: app/controllers/group_controller.rb:294
-msgid "Succeeded to Approve."
+msgid "Succeeded to approve."
 msgstr "承認に成功しました。"
 
 #: app/controllers/group_controller.rb:304
-msgid "Succeeded to Disapprove."
+msgid "Succeeded to disapprove."
 msgstr "棄却に成功しました。"
 
 #: app/controllers/invitations_controller.rb:16
@@ -8163,12 +8160,12 @@ msgid "« Previous"
 msgstr "« 前"
 
 #: app/helpers/histories_helper.rb:16
-msgid "前"
-msgstr ""
+msgid "HistoriesHelper|Prev"
+msgstr "前"
 
 #: app/helpers/histories_helper.rb:7
-msgid "次"
-msgstr ""
+msgid "HistoriesHelper|Next"
+msgstr "次"
 
 #~ msgid "(Unknown topic entry found. However, this has been ignored)"
 #~ msgstr "（話題元の記事が不明でしたが無視しました）"
