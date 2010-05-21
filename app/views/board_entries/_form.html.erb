@@ -139,7 +139,7 @@ div.input_line textarea {
       }
 
       if ($j('#board_entry_publication_type_public:checked').size() > 0 && $j('#board_entry_send_mail:checked').size() > 0) {
-          if (!confirm('<%= _('Are you sure to send email to all users?') %>'))
+          if (!confirm('<%= _('Are you sure to send email to all users? (%s users)') % current_tenant.users.count %>'))
               return false;
       }
 

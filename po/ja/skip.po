@@ -1885,8 +1885,8 @@ msgid "Are you sure to send activation email to target user?"
 msgstr "対象ユーザに利用開始通知メールを送信しますが宜しいですか?"
 
 #: app/views/board_entries/_form.html.erb:160
-msgid "Are you sure to send email to all users?"
-msgstr "利用者全体にメールが送信されますが、宜しいですか?"
+msgid "Are you sure to send email to all users? (%s users)"
+msgstr "全ユーザ(%s人)にメールが送信されますが、宜しいですか?"
 
 #: app/views/chains/edit.html.erb:8 app/views/pictures/_pictures.html.erb:28
 #: app/views/user/_action_box.html.erb:10
