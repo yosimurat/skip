@@ -21,7 +21,7 @@
     <%= _('This entry has not been accessed.')%>
 <% else %>
 <div class="desc ui-corner-all" style="font-size: 10px;">
-  <p><%=_("Showing total access count of this entry and recent visitors (max. 30).<br/>\nOnly the newest access is shown in case a user has visited multiple times in a day.")%></p>
+  <p><%=_("Showing total access count of this entry and recent visitors (max. %s).<br/>\nOnly the newest access is shown in case a user has visited multiple times in a day.") % Admin::Setting.access_record_limit %></p>
 </div>
 
 <div class="access_count ui-corner-all">
