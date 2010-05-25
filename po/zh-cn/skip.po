@@ -6,8 +6,8 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: skip 1.7.0\n"
-"POT-Creation-Date: 2010-05-13 15:50+0900\n"
+"Project-Id-Version: skip 1.8.0\n"
+"POT-Creation-Date: 2010-05-25 09:55+0900\n"
 "PO-Revision-Date: 2008-08-11 17:41+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1721,7 +1721,7 @@ msgid "Are you sure to send activation email to target user?"
 msgstr ""
 
 #: app/views/board_entries/_form.html.erb:160
-msgid "Are you sure to send email to all users?"
+msgid "Are you sure to send email to all users? (%s users)"
 msgstr ""
 
 #: app/views/chains/edit.html.erb:8 app/views/pictures/_pictures.html.erb:28
@@ -5502,7 +5502,7 @@ msgstr ""
 
 #: app/views/entries/_access.html.erb:24
 msgid ""
-"Showing total access count of this entry and recent visitors (max. 30).<br/"
+"Showing total access count of this entry and recent visitors (max. %s).<br/"
 ">\n"
 "Only the newest access is shown in case a user has visited multiple times in "
 "a day."
