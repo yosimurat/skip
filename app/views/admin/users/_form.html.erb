@@ -40,7 +40,7 @@
 <% if !GlobalInitialSetting['mail']['show_mail_function'] && @user.active? && login_mode?(:password) -%>
 <p>
   <%= label Admin::User.name, :password %>
-  : [<%= link_to _('"Show URL for resetting'), issue_password_reset_code_admin_tenant_user_path(current_tenant, @user), :id => 'issue_password_reset_code_link' %>]
+  : [<%= link_to _('"Show URL for resetting'), issue_password_reset_code_admin_tenant_user_url(current_tenant, @user), :id => 'issue_password_reset_code_link' %>]
   <%= help_icon_tag :content => _('This will show the URL for resetting the password. Send the URL shown by clicking the link to the user by email.') %>
 </p>
 <div id="show_password_reset_code">
@@ -51,7 +51,7 @@
   <%= label Admin::OpenidIdentifier.name, :url %>
   <% if @user.openid_identifiers and @user.openid_identifiers.first and !@user.openid_identifiers.first.url.blank? and !@user.openid_identifiers.first.new_record? %>
   :<%= h @user.openid_identifiers.first.url %>
-  [<%= link_to(_('Edit'), edit_admin_user_openid_identifier_path(@user, @user.openid_identifiers.first)) %>]
+  [<%= link_to(_('Edit'), edit_admin_tenant_user_openid_identifier_url(@current_tenant, @user, @user.openid_identifiers.first)) %>]
   <% else %>
     <%= text_field :openid_identifier, :url %>
   <% end -%>

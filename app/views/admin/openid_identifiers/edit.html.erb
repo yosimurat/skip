@@ -5,7 +5,7 @@
 <% content_for :contents_right do -%>
 
 <div class="box tabular">
-<% form_for(@openid_identifier, :url => admin_user_openid_identifier_url(@user, @openid_identifier), :method => :put) do |f| %>
+<% form_for(@openid_identifier, :url => admin_tenant_user_openid_identifier_url(@current_tenant, @user, @openid_identifier), :method => :put) do |f| %>
   <%= error_messages_for :openid_identifier %>
 
   <p>

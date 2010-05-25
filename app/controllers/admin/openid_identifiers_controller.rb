@@ -22,7 +22,7 @@ class Admin::OpenidIdentifiersController < Admin::ApplicationController
     set_singularize_instance_val object
 
     @topics = [[_('Listing %{model}') % {:model => _(object_name_without_admin(load_parent).gsub('_', ' '))}, parent_index_path],
-               [_('Editing %{model}') % {:model => load_parent.topic_title}, edit_admin_user_path(load_parent)],
+               [_('Editing %{model}') % {:model => load_parent.topic_title}, edit_admin_tenant_user_url(@current_tenant, load_parent)],
                _('Editing %{model}') % {:model => object.topic_title}]
   end
 
@@ -33,7 +33,7 @@ class Admin::OpenidIdentifiersController < Admin::ApplicationController
     respond_to do |format|
       if object.update_attributes(params[admin_params_sym])
         flash[:notice] = _('%{model} was successfully updated.') % {:model => _(singularize_name.gsub('_', ' '))}
-        format.html { redirect_to(edit_admin_user_path(@user)) }
+        format.html { redirect_to(edit_admin_tenant_user_path(@current_tenant, @user)) }
         format.xml  { head :ok }
       else
         @topics = [[_('Listing %{model}') % {:model => _(object_name_without_admin(load_parent).gsub('_', ' '))}, parent_index_path],

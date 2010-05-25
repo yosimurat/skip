@@ -70,7 +70,7 @@ ActionController::Routing::Routes.draw do |map|
         bookmark.resources :bookmark_comments, :only => [:index, :destroy]
       end
       tenant.resources :users, :new => [:import, :import_confirmation, :first], :member => [:change_uid, :create_uid, :issue_activation_code, :issue_password_reset_code], :collection => [:lock_actives, :reset_all_password_expiration_periods, :issue_activation_codes] do |user|
-  #        user.resources :openid_identifiers, :only => [:edit, :update, :destroy]
+        user.resources :openid_identifiers, :only => [:edit, :update] #destroyは利用していない？ため、一旦削除
         user.resource :user_profile
         user.resource :pictures, :only => %w(new create)
       end
