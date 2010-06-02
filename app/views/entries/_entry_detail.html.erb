@@ -210,16 +210,16 @@
       <% end -%>
       <div class="buttons" id="entry_buttons">
         <% if editable -%>
-          <a href="#" id="show_access_log"><%= icon_tag('group', :title => _("足跡を表示する")) %><%= _('足跡を表示する') %></a>
-          <a href="#" id="hide_access_log" class="invisible"><%= icon_tag('group', :title => _('足跡を隠す')) %><%= _('足跡を隠す') %></a>
+          <a href="#" id="show_access_log"><%= icon_tag('group', :title => _("Show traces")) %><%= _('Show traces') %></a>
+          <a href="#" id="hide_access_log" class="invisible"><%= icon_tag('group', :title => _('Hide traces')) %><%= _('Hide traces') %></a>
           <%= link_to(icon_tag('page_edit', :title => _('Edit')) + _('Edit'), :controller=> "edit", :action => "edit", :id => entry) %>
           |
         <% end -%>
         <% if bookmark_enabled? -%>
           <% new_bookmark_url_hash = {:controller => "bookmark", :action => "new_without_bookmarklet", :url => "/page/#{entry.id.to_s}", :title => entry.title} -%>
-          <%= link_to(icon_tag('tag_blue_add', :title => _('Bookmark this')), new_bookmark_url_hash, {:onclick => "sub_window_open('#{url_for(new_bookmark_url_hash)}', 'subwindow', 550, 400); return false;" }) %>
+          <%= link_to(icon_tag('tag_blue_add', :title => _('Bookmark this')) + _('Bookmark this'), new_bookmark_url_hash, {:onclick => "sub_window_open('#{url_for(new_bookmark_url_hash)}', 'subwindow', 550, 400); return false;" }) %>
         <% end -%>
-        <%= link_to(icon_tag('zoom', :title => _('Maximize!')), {:controller=> "board_entries", :action => "large", :id => entry}, :target=>"_blank") %>
+        <%= link_to(icon_tag('printer', :title => _('Print')) + _('Print'), {:controller=> "board_entries", :action => "large", :id => entry}, :target=>"_blank") %>
         <%= _('Read/Unread:') %>
         <%= check_box_tag 'read_state_check', 'true', true, :title => _('Mark read') %>
       </div>
