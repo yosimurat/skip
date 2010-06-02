@@ -68,6 +68,7 @@ CKEDITOR.editorConfig = function( config )
     config.resize_enabled = false;
 
     config.ignoreEmptyParagraph = false;
+    config.forcePasteAsPlainText = true;
 
     // ================================================================================
     // Plugins
