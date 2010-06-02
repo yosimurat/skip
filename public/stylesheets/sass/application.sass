@@ -764,25 +764,20 @@ table.diff
       :font-size 12px
 
 
-div#global_footer_links_wrapper
+div#global_footer_links_wrapper, div#statusbar
   :height 18px
   :border
     :top = !base_border
   :padding 2px 0 2px 16px
   :font-size = !small_font_size
   :background-color #f3f3f3
-
-div#statusbar
-  :height 18px
-  :border
-    :top = !base_border
-    :bottom = !base_border
-  :padding 2px 0 2px 10px
-  :font-size = !small_font_size
-  :background-color #f3f3f3
-  span
-    :margin 0 3px
+  span.item
+    :margin 0 0 0 5px
     :vertical-align middle
+div#global_footer_links_wrapper
+  :background-color #fff
+div#statusbar
+  :border-bottom = !base_border
 
 div#header
   div#search
