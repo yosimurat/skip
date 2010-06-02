@@ -70,6 +70,8 @@ CKEDITOR.editorConfig = function( config )
     config.ignoreEmptyParagraph = false;
     config.forcePasteAsPlainText = true;
 
+    config.scayt_autoStartup = false;
+
     // ================================================================================
     // Plugins
     // ================================================================================
