@@ -29,7 +29,7 @@ CKEDITOR.editorConfig = function( config )
         ['TextColor','BGColor'],
         ['Table','MobilePictogram'],
         ['Format','FontSize'],
-        ['Link'],
+        ['Link', 'Unlink'],
         ['Source'],
         ['Maximize']
     ];
