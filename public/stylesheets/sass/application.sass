@@ -211,11 +211,20 @@ div#tabs
 
 // ckeditor
 // ------------------------------------------------------------
-// 最大化ボタンのラベルを表示
 .cke_skin_kama
-  .cke_button_maximize, .cke_button_mobilepictogram
-    span.cke_label
-      :display inline
+  #cke_top_contents_richtext
+    // 最大化、絵文字のラベルを表示
+    .cke_button_maximize, .cke_button_mobilepictogram
+      span.cke_label
+        :display inline
+    // フォーマットのラベルが表示される幅に
+    .cke_rcombo
+      span.cke_text
+        :width 70px
+    // サイズのラベルが表示される幅に
+    .cke_fontSize
+      span.cke_text
+        :width 50px
 
 // button_toを2つ並べたときに縦に並ばないように
 // ------------------------------------------------------------
