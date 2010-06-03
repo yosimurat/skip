@@ -47,35 +47,37 @@
       </div>
     <% end -%>
   </div>
-  <%= header_logo_link %>
-  <div class="banner"></div>
-
-  <% if current_user -%>
-    <% if SkipEmbedded::InitialSettings['full_text_search_setting'] && current_user.active? -%>
-      <div id="search" class="ui-corner-all">
-        <% form_tag({:controller => '/search', :action => 'full_text_search'},{:method => 'get'}) do -%>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-          <%= text_field_tag "full_text_query", search_label, :class => "labeled-field" %>
-                </td>
-                <td class="search_button_wrapper">
-                  <%= submit_tag _('Search'), :class=> "search_button" -%>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <div id="global_middle">
+    <%= header_logo_link %>
+    <% if current_user -%>
+      <% if SkipEmbedded::InitialSettings['full_text_search_setting'] && current_user.active? -%>
+        <div id="search" class="ui-corner-all">
+          <% form_tag({:controller => '/search', :action => 'full_text_search'},{:method => 'get'}) do -%>
+            <table>
+              <col class="col300" />
+              <col class="col45" />
+              <tbody>
+                <tr>
+                  <td>
+            <%= text_field_tag "full_text_query", search_label, :class => "labeled-field" %>
+                  </td>
+                  <td class="search_button_wrapper">
+                    <%= submit_tag _('Search'), :class=> "search_button" -%>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <% end -%>
+        </div>
+        <% content_for :javascript_initializers do -%>
+          $j('input#full_text_query').labeledTextField(<%= {:message => search_label}.to_json %>);
         <% end -%>
-      </div>
-      <% content_for :javascript_initializers do -%>
-        $j('input#full_text_query').labeledTextField(<%= {:message => search_label}.to_json %>);
       <% end -%>
     <% end -%>
-  <% end -%>
-  <% if @content_for_header_form -%>
-    <%= yield :header_form %>
-  <% end -%>
+    <% if @content_for_header_form -%>
+      <%= yield :header_form %>
+    <% end -%>
+  </div>
 </div><!-- header -->
 <div id="global_links_wrapper">
   <% if current_user && current_user.active? -%>

@@ -14,8 +14,12 @@ div#header
       :color #c00
       :font-weight bold
       :text-decoration underline
+  div#global_middle
+    :position relative
+    :width 100%
   div#logo
     :margin 1px 0 0 20px
+    :_margin 1px 0 0 10px
 div#global_links_wrapper
   :border-bottom = !base_border
   :padding-top 5px
@@ -136,6 +140,8 @@ table
     :width 10px
   col.col25
     :width 25px
+  col.col45
+    :width 45px
   col.col50
     :width 50px
   col.col75
@@ -783,6 +789,10 @@ div#header
   div#search
     //:background-color #E0E0FF
     :padding 4px 4px
+    :position absolute
+    :top 0
+    :right 10
+    :width 345px
     select
       :margin 3px 0 0
       :font-size 10px
@@ -797,6 +807,7 @@ div#header
         :height 20px
         :font-size 14px
         :border none
+        :width 100%
       table
         td
           :border = !base_border
@@ -875,7 +886,7 @@ div#require_login_container_wrapper
 div#login_container
   :position absolute
   :right 10px
-  :top 22px
+  :top 2px
   :background #e0e0ff
   :padding 4px 0
   &.without_keyphrase
