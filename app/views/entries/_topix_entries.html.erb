@@ -15,7 +15,7 @@
       <% if with_checkable_read -%>
         <col class="col25" />
       <% end -%>
-      <col class="col25" />
+      <col class="col75" />
       <col />
       <col class="col<%= width_date -%>" />
       <tbody>
@@ -25,7 +25,12 @@
             <% if with_checkable_read -%>
             <td class="read_state"><%= check_box_tag("message_#{entry.id}", "true", !user_unreadings[entry.id], {:class => "read_state_checkbox"}) %></td>
             <% end -%>
-            <td class="publication_state"><%= get_publication_type_icon(entry) %></td>
+            <td class="good_job_wrapper">
+              <div class="good_job ui-corner-all">
+                <strong><%= h(entry.point.to_s) %></strong>
+                <div class="good_job_label"><%= h(Admin::Setting.point_button) %></div>
+              </div>
+            </td>
             <td class="entry_outline">
               <%= entry_link_to(entry, {}, {:title => entry_infos}) %>
               <%= content_tag :span, "["+_('Resolved')+"]", :class => 'question_state' if entry.hide %>
@@ -37,8 +42,7 @@
               <% if entry.owner_is_group? -%>
                 <span class="small_text infos"><%= user_link_to(entry.user, :with_prefix => true) %></span>
               <% end -%>
-              <br />
-              <span class="infos"><%= entry_infos -%></span>
+              <div class="infos"><%= entry_infos -%></div>
             </td>
             <td class="date">
               <% if last_updated_desc -%>

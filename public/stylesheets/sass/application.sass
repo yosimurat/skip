@@ -794,7 +794,7 @@ div#global_footer_links_wrapper
   :border = !base_border
   :margin 5px 0
   :width 480px
-div#statusbar
+div#statusbac
   :border-bottom = !base_border
 
 div#header
@@ -999,8 +999,7 @@ div#questions_wrapper
     :text-align center
   table
     :width 100%
-  div
-    :text-align center
+
 div#custom_display_wrapper
   :font-size 12px
   :_width 100%
@@ -1415,10 +1414,27 @@ div.topix_entries_wrapper, div.topix_share_files_wrapper, div.topix_bookmarks_wr
       td.date
         :text-align right
         :font-size = !small_font_size
-      span.infos
-        :font-size 8px
+      td.good_job_wrapper
+        :padding 3px 0 3px 2px
+        div.good_job
+          :text-align center
+          :background #E7EEF3 url(skip/themes/cupertino/images/ui-bg_highlight-soft_100_e7eef3_1x100.png) repeat-x scroll 50% 50%
+          :width 50px
+          :min-height 40px
+          :padding 3px 0
+          strong
+            :font
+              :size 16px
+          div.good_job_label
+            :font-size 10px
+      td.entry_outline
+        :font-size 115%
+      div.infos
+        :text-align left
+        :font-size 10px
         :vertical-align bottom
         :color #808080
+        :margin-top 3px
 
   table.topix_entries
     tr.all_protected
