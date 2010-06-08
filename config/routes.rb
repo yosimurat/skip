@@ -15,6 +15,10 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
 
+  map.resources :bookmarks, :only => %w(index) do |bookmark|
+    bookmark.resources :bookmark_comments, :only => %w(create)
+  end
+
   map.share_file  ':controller_name/:symbol_id/files/:file_name',
                   :controller => 'share_file',
                   :action => 'download',
