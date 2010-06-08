@@ -1,4 +1,10 @@
+<% content_for :contents_left do -%>
+  <% if extra_chain_enabled? -%>
+    <%= render :partial => 'chains/tag_cloud_box', :locals => {:tags => ChainTag.all_tags_with_count, :hide_all_link => true} %>
+  <% end -%>
+<% end -%>
 
+<% content_for :contents_right do -%>
 <div class="search_cond_space ui-corner-all">
   <% form_for @search do |f| %>
     <table class="search_cond_box">
@@ -41,3 +47,4 @@
   <%= i18n_will_paginate_with_container_wrapper @users %>
 <% end -%>
 </div>
+<% end -%>

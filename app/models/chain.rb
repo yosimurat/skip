@@ -19,8 +19,6 @@ class Chain < ActiveRecord::Base
   has_many :chain_tags, :dependent => :destroy
   has_many :tags, :through => :chain_tags
 
-  validates_presence_of :comment
-
   named_scope :order_new, proc { { :order => 'updated_on DESC' } }
 
   named_scope :limit, proc { |num| { :limit => num } }

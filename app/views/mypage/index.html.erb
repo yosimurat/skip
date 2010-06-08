@@ -86,9 +86,14 @@
               <% end -%>
             </table>
           </div>
+          <%= link_to( _('他のランキングを見る'), :controller => '/rankings', :action => 'index') if ranking_enabled? %>
         </div>
       <% end -%>
-      <%= link_to( _('他のランキングを見る'), :controller => '/rankings', :action => 'index') if ranking_enabled? %>
+    <% end -%>
+
+    <% if extra_chain_enabled? -%>
+      <%= render :partial => 'mypage/chain_tag_cloud_box' %>
+      <%= render :partial => 'users/recent_profile_box' %>
     <% end -%>
   </div>
 

@@ -32,7 +32,7 @@
 <%= skip_javascript_include_tag "jquery/ui/i18n/ui.datepicker-ja.js" %>
 <% end -%>
 
-<%= ckeditor '.min_ckeditor', {'toolbar' => 'Simple'} %>
+<%= ckeditor '.min_ckeditor', {'toolbar' => 'EntrySimple'} %>
 
 <% content_for :javascript_initializers do -%>
     $j('.cancel_radio')

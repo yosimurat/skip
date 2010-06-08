@@ -1,0 +1,15 @@
+<% recent_profiles ||= UserProfileValue.updated_at_gt(recent_day.day.ago).descend_by_updated_at.limit(10).all(:joins => [:user, :user_profile_master], :group => 'user_id') %>
+<% unless recent_profiles.empty? %>
+<div class="right_box ui-corner-all">
+  <h2 class="ui-corner-top"><%= _("最近のプロフィール") %></h2>
+  <ul class="no_style">
+    <% recent_profiles.each do |profile_value| -%>
+      <% user = profile_value.user -%>
+      <% profile_master = profile_value.user_profile_master -%>
+      <li>
+        <%= user_link_to(user) %>&nbsp;<span class="small_text"><%= "[#{h(profile_master.name)}]" %><%= h(truncate(strip_tags(profile_value.value), :length => 20)) %></span>
+      </li>
+    <% end -%>
+  </ul>
+</div>
+<% end -%>

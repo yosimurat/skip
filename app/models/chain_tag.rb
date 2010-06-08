@@ -34,4 +34,12 @@ class ChainTag < ActiveRecord::Base
   def self.popular_tag_names limit = 40
     Tag.on_chains.order_popular.limit(limit).map(&:name)
   end
+
+  def self.recent_tags_with_count limit = 20
+    Tag.descend_by_chain_tags_updated_at.limit(limit).all(:select => '*, count(tags.id) as count', :group => 'tags.id')
+  end
+
+  def self.all_tags_with_count
+    Tag.descend_by_chain_tags_updated_at.all(:select => '*, count(tags.id) as count', :group => 'tags.id')
+  end
 end

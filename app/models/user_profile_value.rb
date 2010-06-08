@@ -20,6 +20,8 @@ class UserProfileValue < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :user_profile_master_id
 
+  named_scope :limit, proc { |num| { :limit => num } }
+
   def validate
     if user_profile_master
       user_profile_master.input_type_processer.validate(self)
