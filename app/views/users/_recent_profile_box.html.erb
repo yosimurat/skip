@@ -1,14 +1,20 @@
-<% recent_profiles ||= UserProfileValue.updated_at_gt(recent_day.day.ago).descend_by_updated_at.limit(10).all(:joins => [:user, :user_profile_master], :group => 'user_id') %>
+<% recent_profiles ||= UserProfileValue.updated_at_gt(recent_day.day.ago).descend_by_updated_at.all(:joins => [:user, :user_profile_master]) %>
 <% unless recent_profiles.empty? %>
+  <% user_ids = recent_profiles.map(&:user_id).uniq -%>
+  <% recent_profiles_by_grouped_by_user = recent_profiles.group_by(&:user_id) -%>
 <div class="right_box ui-corner-all">
   <h2 class="ui-corner-top"><%= _("Recent Profiles") %></h2>
   <ul class="no_style">
-    <% recent_profiles.each do |profile_value| -%>
-      <% user = profile_value.user -%>
-      <% profile_master = profile_value.user_profile_master -%>
-      <li>
-        <%= user_link_to(user) %>&nbsp;<span class="small_text"><%= "[#{h(profile_master.name)}]" %><%= h(truncate(strip_tags(profile_value.value), :length => 20)) %></span>
-      </li>
+    <% user_ids.each do |user_id| -%>
+      <% profile_values = recent_profiles_by_grouped_by_user[user_id] -%>
+      <% user = profile_values.first.user -%>
+      <%# 新着ユーザのプロフィール更新は表示しない -%>
+      <% if user.created_on <= recent_day.day.ago -%>
+        <% profile_masters = profile_values.map(&:user_profile_master) -%>
+        <li>
+          <%= user_link_to(profile_values.first.user) %>&nbsp;<span class="small_text"><%= "[#{h(profile_masters.map(&:name).join(','))}]" %></span>
+        </li>
+      <% end -%>
     <% end -%>
   </ul>
 </div>
