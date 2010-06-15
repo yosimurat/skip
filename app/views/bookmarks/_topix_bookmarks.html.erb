@@ -27,8 +27,8 @@
               <% if bookmark.bookmark_comments.all?{|bc| bc.user_id != current_user.id } -%>
                 <% new_bookmark_url_hash = {:controller => '/bookmark', :action => "new_without_bookmarklet", :url => bookmark.url, :title => bookmark.title} -%>
                 <span class="bookmark_comment_form_wrapper">
-                  <span class="link add_bookmark_comment_trigger"><%= icon_tag('tag_blue_add') %><%= _('Write a comment') %></span>
-                  <div id="<%= "bookmark_comment_form_#{bookmark.id}"%>" class="bookmark_comment_form invisible", title="<%= _('ブックマークコメントの追加') %>">
+                  <span class="link add_bookmark_comment_trigger"><%= icon_tag('tag_blue_add') %><%= _('Add a comment') %></span>
+                  <div id="<%= "bookmark_comment_form_#{bookmark.id}"%>" class="bookmark_comment_form invisible", title="<%= _('Add a comment') %>">
                   <% form_for BookmarkComment.new, :url => [bookmark, :bookmark_comments] do |f| %>
                     <%= f.label :comment, _('Comment') %>
                     <%= f.text_field :comment %>

@@ -1,7 +1,7 @@
 <% recent_profiles ||= UserProfileValue.updated_at_gt(recent_day.day.ago).descend_by_updated_at.limit(10).all(:joins => [:user, :user_profile_master], :group => 'user_id') %>
 <% unless recent_profiles.empty? %>
 <div class="right_box ui-corner-all">
-  <h2 class="ui-corner-top"><%= _("最近のプロフィール") %></h2>
+  <h2 class="ui-corner-top"><%= _("Recent Profiles") %></h2>
   <ul class="no_style">
     <% recent_profiles.each do |profile_value| -%>
       <% user = profile_value.user -%>
