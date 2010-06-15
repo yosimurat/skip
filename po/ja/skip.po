@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.0\n"
-"POT-Creation-Date: 2010-06-02 15:46+0900\n"
+"POT-Creation-Date: 2010-06-15 14:00+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,11 +40,11 @@ msgstr ""
 #: app/controllers/rankings_controller.rb:105 app/models/board_entry.rb:422
 #: app/views/entries/_topix_entries.html.erb:46
 #: app/views/entries/_topix_entries.html.erb:48
-#: app/views/bookmarks/_topix_bookmarks.html.erb:34
+#: app/views/bookmarks/_topix_bookmarks.html.erb:47
 #: app/views/groups/_group_list.html.erb:24
 #: app/views/mypage/entries_by_date.html.erb:13
 #: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:71
-#: app/views/mypage/index.html.erb:160 app/views/mypage/index.html.erb:177
+#: app/views/mypage/index.html.erb:165 app/views/mypage/index.html.erb:182
 #: app/views/share_file/_topix_share_files.html.erb:39
 #: app/views/bookmark/list.html.erb:42 app/views/bookmark/show.html.erb:51
 #: app/views/rankings/bookmark.html.erb:2
@@ -124,7 +124,7 @@ msgstr[0] "%{count}件"
 msgstr[1] "%{count}件"
 
 #: app/views/statistics/index.html.erb:36
-#: app/views/bookmarks/_topix_bookmarks.html.erb:19
+#: app/views/bookmarks/_topix_bookmarks.html.erb:23
 #: app/views/layouts/layout.html.erb:35 app/views/layouts/layout.html.erb:57
 msgid "%{count} user"
 msgid_plural "%{count} users"
@@ -161,6 +161,7 @@ msgstr "%{icon} %{time}の推移を表示"
 #: app/controllers/admin/pictures_controller.rb:52
 #: app/controllers/admin/admin_module.rb:139
 #: app/controllers/admin/admin_module.rb:250
+#: app/controllers/bookmark_comments_controller.rb:12
 msgid "%{model} was successfully created."
 msgstr "%{model}の作成に成功しました。"
 
@@ -467,9 +468,11 @@ msgstr "更新日時"
 msgid "Active"
 msgstr "活性"
 
+#: app/views/bookmarks/_topix_bookmarks.html.erb:30
+#: app/views/bookmarks/_topix_bookmarks.html.erb:31
 #: app/views/bookmark/show.html.erb:7
 msgid "Add a comment"
-msgstr "コメントの追加"
+msgstr "コメントする"
 
 #: app/views/bookmark/new_url.html.erb:20
 #: app/views/bookmark/new_url.html.erb:22
@@ -1795,7 +1798,7 @@ msgstr ""
 "既にメールアドレスの変更を申請済みです。記入したメールアドレスで再申請しま"
 "す。"
 
-#: app/views/users/index.html.erb:16
+#: app/views/users/index.html.erb:22
 msgid "Any"
 msgstr "いずれか"
 
@@ -2180,16 +2183,15 @@ msgstr "書評"
 msgid "Bookmark Comment"
 msgstr "ブックマークコメント"
 
-#: app/views/bookmarks/index.html.erb:5 app/views/layouts/layout.html.erb:126
+#: app/views/bookmarks/index.html.erb:5 app/views/layouts/layout.html.erb:129
 msgid "Bookmark URL"
 msgstr ""
 
-#: app/views/bookmarks/index.html.erb:5 app/views/layouts/layout.html.erb:126
+#: app/views/bookmarks/index.html.erb:5 app/views/layouts/layout.html.erb:129
 msgid "Bookmark a URL"
 msgstr "ブックマークする"
 
 #: app/views/entries/_entry_detail.html.erb:220
-#: app/views/bookmarks/_topix_bookmarks.html.erb:25
 msgid "Bookmark this"
 msgstr "ブックマークする"
 
@@ -2536,6 +2538,7 @@ msgstr "非公開"
 msgid "Comics"
 msgstr "漫画"
 
+#: app/views/bookmarks/_topix_bookmarks.html.erb:33
 #: app/views/share_file/_form.html.erb:59 app/views/bookmark/new.html.erb:49
 msgid "Comment"
 msgstr "コメント"
@@ -2666,7 +2669,7 @@ msgstr "作成"
 msgid "Create %{name}"
 msgstr "%{name}作成"
 
-#: app/views/groups/index.html.erb:4 app/views/layouts/layout.html.erb:127
+#: app/views/groups/index.html.erb:4 app/views/layouts/layout.html.erb:132
 msgid "Create New Group"
 msgstr "グループの作成"
 
@@ -2688,7 +2691,7 @@ msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr "記事の公開範囲によらず全体公開のブログとして新しい記事を作成します。"
 
-#: app/views/mypage/index.html.erb:139
+#: app/views/mypage/index.html.erb:144
 msgid "Create my new bookmark"
 msgstr "自分もブックマークする"
 
@@ -3173,7 +3176,7 @@ msgstr "更新日時"
 msgid "Events"
 msgstr "イベント"
 
-#: app/views/users/index.html.erb:27
+#: app/views/users/index.html.erb:33
 msgid "Excluding retired users"
 msgstr "利用中のユーザのみ（退職者などを含めない）"
 
@@ -3805,7 +3808,7 @@ msgstr "想定外のエラーが発生しました。管理者にお問い合わ
 msgid "Internet"
 msgstr "インターネット"
 
-#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:157
+#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:162
 msgid "Introduce"
 msgstr "みんなに紹介する"
 
@@ -4030,6 +4033,10 @@ msgstr "最終コメント (%s)："
 #: app/views/chapters/_page_content.html.erb:200
 msgid "Last page"
 msgstr "[最後へ]"
+
+#: app/views/mypage/_chain_tag_cloud_box.html.erb:2
+msgid "Last tags of users"
+msgstr "最近の社員タグ"
 
 #: app/views/group/_action_box.html.erb:18
 msgid "Leave the group"
@@ -4348,12 +4355,12 @@ msgid "New Entries on Top"
 msgstr "新しい順に並べる"
 
 #: app/views/group/_new_forum_links.html.erb:1
-#: app/views/groups/index.html.erb:4 app/views/layouts/layout.html.erb:127
+#: app/views/groups/index.html.erb:4 app/views/layouts/layout.html.erb:132
 msgid "New Posts"
 msgstr "記事を書く"
 
 #: app/controllers/feed/bookmarks_controller.rb:8
-#: app/views/mypage/index.html.erb:138
+#: app/views/mypage/index.html.erb:143
 msgid "New bookmarks"
 msgstr "新着ブックマーク"
 
@@ -4447,7 +4454,7 @@ msgstr "該当する投稿はありませんでした。"
 msgid "No matching groups found."
 msgstr "該当するグループはありませんでした。"
 
-#: app/views/mypage/index.html.erb:105
+#: app/views/mypage/index.html.erb:110
 msgid "No matching questions."
 msgstr "みんなからの質問はありません"
 
@@ -5046,7 +5053,7 @@ msgid_plural "Problems found in following items: "
 msgstr[0] "次の項目に問題があります"
 
 #: app/helpers/user_helper.rb:38 app/views/user/show.html.erb:13
-#: app/views/user/show_retired.html.erb:3 app/views/users/index.html.erb:14
+#: app/views/user/show_retired.html.erb:3 app/views/users/index.html.erb:20
 msgid "Profile"
 msgstr "プロフィール"
 
@@ -5195,7 +5202,7 @@ msgstr "読書"
 msgid "Recent Entries"
 msgstr "新着記事"
 
-#: app/views/mypage/index.html.erb:170
+#: app/views/mypage/index.html.erb:175
 msgid "Recent Groups"
 msgstr "新着グループ"
 
@@ -5204,12 +5211,16 @@ msgstr "新着グループ"
 msgid "Recent Popular Entries"
 msgstr "最近の人気記事"
 
+#: app/views/users/_recent_profile_box.html.erb:4
+msgid "Recent Profiles"
+msgstr "最近のプロフィール"
+
 #: app/controllers/mypage_controller.rb:514
 #: app/controllers/feed/board_entries_controller.rb:8
 msgid "Recent Questions"
 msgstr "みんなからの質問!"
 
-#: app/views/mypage/index.html.erb:150
+#: app/views/mypage/index.html.erb:155
 msgid "Recent Users"
 msgstr "新着ユーザ"
 
@@ -5251,7 +5262,7 @@ msgstr "ユーザ登録して%sの利用を開始する"
 msgid "Registered Users"
 msgstr "登録ユーザ数"
 
-#: app/views/layouts/wiki.html.erb:75 app/views/layouts/layout.html.erb:132
+#: app/views/layouts/wiki.html.erb:75 app/views/layouts/layout.html.erb:141
 #: app/views/layouts/admin/application.html.erb:66
 msgid "Registered Users: %s users"
 msgstr "登録ユーザ数：%s人"
@@ -5383,6 +5394,7 @@ msgstr "土"
 #: app/views/entries/_entry_detail.html.erb:578
 #: app/views/board_entries/_board_entry_comment.html.erb:30
 #: app/views/portal/_registration_form.html.erb:74
+#: app/views/bookmarks/_topix_bookmarks.html.erb:35
 #: app/views/mypage/_manage_message.html.erb:28
 #: app/views/mypage/_manage_openid.html.erb:18
 #: app/views/mypage/_manage_password.html.erb:26
@@ -5394,6 +5406,7 @@ msgid "Save"
 msgstr "保存"
 
 #: app/views/portal/_registration_form.html.erb:75
+#: app/views/bookmarks/_topix_bookmarks.html.erb:35
 #: app/views/admin/settings/index.html.erb:9
 #: app/views/admin/oauth_providers/index.html.erb:18
 #: app/views/admin/documents/index.html.erb:10
@@ -5403,14 +5416,14 @@ msgstr "保存しています…"
 #: app/views/entries/_search_box.html.erb:7
 #: app/views/entries/_search_box.html.erb:11 app/views/user/group.html.erb:19
 #: app/views/user/group.html.erb:22 app/views/bookmarks/index.html.erb:32
-#: app/views/groups/index.html.erb:32 app/views/shared/_header.html.erb:64
+#: app/views/groups/index.html.erb:32 app/views/shared/_header.html.erb:65
 #: app/views/mypage/_record_post.html.erb:5
 #: app/views/mypage/_record_post.html.erb:11
 #: app/views/share_file/list.html.erb:23 app/views/share_file/list.html.erb:26
 #: app/views/search/share_file_search.html.erb:17
 #: app/views/search/entry_search.html.erb:26
 #: app/views/admin/_search_box.html.erb:5 app/views/bookmark/list.html.erb:3
-#: app/views/bookmark/list.html.erb:7 app/views/users/index.html.erb:24
+#: app/views/bookmark/list.html.erb:7 app/views/users/index.html.erb:30
 msgid "Search"
 msgstr "検索"
 
@@ -5535,7 +5548,7 @@ msgid "September"
 msgstr "9月"
 
 #: app/controllers/application_controller.rb:146
-#: app/controllers/application_controller.rb:348
+#: app/controllers/application_controller.rb:352
 msgid "Session expired. You need to log in again."
 msgstr "ログインが必要です。ログインし直して下さい。"
 
@@ -5678,6 +5691,10 @@ msgstr "現在の画像を表示"
 msgid "Show groups you have not joined only."
 msgstr "まだ参加していないグループのみ表示"
 
+#: app/views/mypage/index.html.erb:89
+msgid "Show other rankings"
+msgstr "他のランキングを見る"
+
 #: app/views/chapters/_page_content.html.erb:13
 msgid "Show preview"
 msgstr ""
@@ -5764,7 +5781,7 @@ msgid "Signup"
 msgstr "ユーザ登録"
 
 #: app/controllers/statistics_controller.rb:67
-#: app/views/layouts/wiki.html.erb:79 app/views/layouts/layout.html.erb:136
+#: app/views/layouts/wiki.html.erb:79 app/views/layouts/layout.html.erb:145
 #: app/views/layouts/admin/application.html.erb:70
 msgid "Site Information"
 msgstr "サイト情報"
@@ -5888,7 +5905,7 @@ msgstr "指定の話題のリンクを削除しました"
 msgid "Specify Directly"
 msgstr "直接指定"
 
-#: app/views/shared/_header.html.erb:94
+#: app/views/shared/_header.html.erb:96
 msgid "Sponsored link:"
 msgstr "スポンサードリンク:"
 
@@ -6045,7 +6062,7 @@ msgstr ""
 msgid "TV"
 msgstr "テレビ"
 
-#: app/views/chains/_tag_cloud_box.html.erb:4
+#: app/views/chains/_tag_cloud_box.html.erb:2
 #: app/views/entries/_tag_cloud_box.html.erb:8
 #: app/views/board_entries/_form.html.erb:32
 #: app/views/mypage/_record_post.html.erb:19
@@ -6301,7 +6318,7 @@ msgstr "利用開始待ち"
 msgid "Today's Access"
 msgstr "本日のアクセス数"
 
-#: app/views/layouts/wiki.html.erb:76 app/views/layouts/layout.html.erb:133
+#: app/views/layouts/wiki.html.erb:76 app/views/layouts/layout.html.erb:142
 #: app/views/layouts/admin/application.html.erb:67
 msgid "Today's Access: %s access"
 msgstr "本日のアクセス数：%s人"
@@ -6310,7 +6327,7 @@ msgstr "本日のアクセス数：%s人"
 msgid "Today's Entries"
 msgstr "本日の記事数"
 
-#: app/views/layouts/wiki.html.erb:78 app/views/layouts/layout.html.erb:135
+#: app/views/layouts/wiki.html.erb:78 app/views/layouts/layout.html.erb:144
 msgid "Today's Entries: %s entries"
 msgstr "本日の記事数：%s件"
 
@@ -6342,7 +6359,7 @@ msgstr "話題の記事："
 msgid "Total Entries"
 msgstr "総記事件数"
 
-#: app/views/layouts/wiki.html.erb:77 app/views/layouts/layout.html.erb:134
+#: app/views/layouts/wiki.html.erb:77 app/views/layouts/layout.html.erb:143
 #: app/views/layouts/admin/application.html.erb:68
 msgid "Total Entries: %s entries"
 msgstr "総記事件数：%s件"
@@ -6511,7 +6528,7 @@ msgstr "アップロード"
 #: app/views/group/_action_box.html.erb:16
 #: app/views/mypage/_action_box.html.erb:5
 #: app/views/share_file/_action_box.html.erb:6
-#: app/views/layouts/layout.html.erb:124
+#: app/views/layouts/layout.html.erb:125
 #: app/views/chapters/_embed_dialog.html.erb:5
 msgid "Upload a file"
 msgstr "ファイルをアップ"
@@ -6581,7 +6598,7 @@ msgstr "該当するユーザは存在しませんでした。"
 msgid "User profile master categories"
 msgstr "プロフィールカテゴリ"
 
-#: app/models/user_profile_value.rb:27
+#: app/models/user_profile_value.rb:29
 msgid "User profile master isn't assosiated"
 msgstr ""
 
@@ -6971,7 +6988,7 @@ msgstr " "
 msgid "User|Locked|true"
 msgstr "ロック"
 
-#: app/models/user.rb:- app/views/users/index.html.erb:6
+#: app/models/user.rb:- app/views/users/index.html.erb:12
 msgid "User|Name"
 msgstr "名前"
 
@@ -7012,7 +7029,7 @@ msgstr "認証再設定トークン有効期限"
 #: app/views/user/show.html.erb:46
 #: app/views/portal/_registration_form.html.erb:24
 #: app/views/shared/_symbol_autocomplete_field.html.erb:10
-#: app/views/admin/users/import.html.erb:9 app/views/users/index.html.erb:10
+#: app/views/admin/users/import.html.erb:9 app/views/users/index.html.erb:16
 msgid "User|Section"
 msgstr "所属"
 
@@ -7134,7 +7151,7 @@ msgid "Within a minute"
 msgstr "1分以内"
 
 #: app/views/user/_new_blog_links.html.erb:1
-#: app/views/layouts/layout.html.erb:121
+#: app/views/layouts/layout.html.erb:118
 msgid "Write a blog entry"
 msgstr "ブログを書く"
 
@@ -7149,7 +7166,7 @@ msgstr "お知らせを書く"
 
 #: app/views/user/_new_blog_links.html.erb:5
 #: app/views/group/_new_forum_links.html.erb:5
-#: app/views/layouts/layout.html.erb:122
+#: app/views/layouts/layout.html.erb:121
 msgid "Write a question"
 msgstr "質問を書く"
 
@@ -7356,6 +7373,7 @@ msgstr "[%s] パスワード再設定のメールです"
 msgid "[%s] User registration completed"
 msgstr "[%s] ユーザ登録が完了しました"
 
+#: app/views/chains/_tag_cloud_box.html.erb:15
 #: app/views/group/show.html.erb:61
 msgid "[...See all]"
 msgstr "[...全てを見る]"
@@ -7740,6 +7758,7 @@ msgstr "ポイント"
 msgid "bookmark"
 msgstr "ブックマーク"
 
+#: app/controllers/bookmark_comments_controller.rb:12
 #: app/models/bookmark_comment.rb:- app/views/admin/bookmarks/show.html.erb:19
 msgid "bookmark comment"
 msgstr "ブックマークコメント"
@@ -7774,11 +7793,11 @@ msgstr ""
 msgid "description"
 msgstr "説明"
 
-#: app/views/mypage/index.html.erb:115 app/views/mypage/index.html.erb:118
+#: app/views/mypage/index.html.erb:120 app/views/mypage/index.html.erb:123
 msgid "display flat"
 msgstr "並べて表示"
 
-#: app/views/mypage/index.html.erb:114 app/views/mypage/index.html.erb:117
+#: app/views/mypage/index.html.erb:119 app/views/mypage/index.html.erb:122
 msgid "display tabs"
 msgstr "タブで表示"
 
@@ -7843,7 +7862,7 @@ msgstr "の形式が間違っています。"
 msgid "history"
 msgstr ""
 
-#: app/views/users/index.html.erb:17
+#: app/views/users/index.html.erb:23
 msgid "include following characters"
 msgstr "に以下の文字を含む"
 
@@ -8141,10 +8160,6 @@ msgstr ""
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr "« 前"
-
-#: app/views/mypage/index.html.erb:91
-msgid "他のランキングを見る"
-msgstr ""
 
 #~ msgid "(Unknown topic entry found. However, this has been ignored)"
 #~ msgstr "（話題元の記事が不明でしたが無視しました）"
