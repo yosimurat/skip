@@ -799,30 +799,26 @@ div#statusbar
 
 div#header
   div#search
-    //:background-color #E0E0FF
-    :padding 4px 4px
+    :background-color #E0E0FF
+    :padding 5px 5px
     :position absolute
     :top 0
     :right 10
+    :height 30px
     :width 345px
-    select
-      :margin 3px 0 0
-      :font-size 10px
-    input
-      :font-size 10px
-    span.other_links
-      :padding 0px 1px
-      :font-size 10px
-      :font-weight normal
     form
+      input
+        :padding 2px 0
       input.labeled-field
         :height 20px
         :font-size 14px
         :border none
         :width 100%
       table
+        :border none
+        :table-layout auto
         td
-          :border = !base_border
+          :border none
         td.search_button_wrapper
           :background #eee
       .search_button
