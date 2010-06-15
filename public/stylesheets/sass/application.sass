@@ -780,21 +780,31 @@ table.diff
 
 
 div#global_footer_links_wrapper, div#statusbar
-  :height 18px
   :border
     :top = !base_border
-  :padding 2px 0 2px 16px
-  :font-size = !small_font_size
+  :padding 8px 0 8px 16px
+  :font-size = !base_font_size
   :background-color #f3f3f3
   span.item
-    :margin 0 0 0 5px
+    :margin 0 8px 0 2px
     :vertical-align middle
+  span.button
+    :padding 5px
+    :border = !base_border
+  span.out
+    :background #fff
+    a
+      :color #03c
+  span.over
+    :background #03c
+    a
+      :color #fff
 div#global_footer_links_wrapper
-  :background-color #fff
+  :background-color #f0f0ff
   :border = !base_border
   :margin 5px 0
-  :width 480px
 div#statusbar
+  :height 18px
   :border-bottom = !base_border
 
 div#header

@@ -1,0 +1,37 @@
+<div id="global_footer_links_wrapper" class="ui-corner-all">
+  <div id="global_footer_links">
+    <span class="item button ui-corner-all out">
+      <%= link_to(icon_tag('page_add', :title => _('Write a blog entry')) + _('Write a blog entry'), {:controller => '/edit', :action => :index, :uid => current_user.uid}, :title => _('Write a blog entry')) %>
+    </span>
+    <span class="item button ui-corner-all out">
+      <%= link_to(icon_tag('page_gear', :title => _('Write a question')) + _('Write a question'), {:controller => '/edit', :action => :index, :aim_type => 'question', :uid => current_user.uid}, :title => _('Write a question')) %>
+    </span>
+    <% new_share_file_url_hash = {:controller => '/share_file', :action => :new, :owner_symbol => h(current_user.symbol), :owner_name => h(current_user.name)} -%>
+    <span class="item button ui-corner-all out">
+      <%= link_to(icon_tag('attach', :title => _('Upload a file')) + _('Upload a file'), new_share_file_url_hash, :title => _('Upload a file'), :onclick => "sub_window_open('#{url_for(new_share_file_url_hash)}', 'subwindow', 550, 400); return false;") %>
+    </span>
+    <% new_bookmark_url_hash = {:controller => '/bookmark', :action => :new_url} -%>
+    <span class="item button ui-corner-all out">
+      <%= link_to(icon_tag('tag_blue_add', :title => _('Bookmark a URL')) + _('Bookmark a URL'), new_bookmark_url_hash, :title => _('Bookmark URL'), :onclick => "sub_window_open('#{url_for(new_bookmark_url_hash)}', 'subwindow', 550, 400); return false;" ) %>
+    </span>
+    <span class="item button ui-corner-all out">
+      <%= link_to(icon_tag('group_add', :title => _('Create New Group')) + _('Create New Group'), {:controller => 'groups', :action => 'new'}, :title => _('New Posts')) %>
+    </span>
+    <span class="item">
+      <%= shortcut_menus %>
+    </span>
+  </div>
+</div>
+
+<% content_for :javascript_initializers do -%>
+  $j('span.button').hover(
+    function(){
+      $j(this).removeClass('out');
+      $j(this).addClass('over');
+    },
+    function(){
+      $j(this).removeClass('over');
+      $j(this).addClass('out');
+    }
+  );
+<% end -%>
