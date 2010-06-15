@@ -157,11 +157,11 @@
 
   var shareFileToTableRow = function(data){
     var tr = $j("<tr></tr>");
-    tr.append($j("<td class='thumbnail'></td>").append(insertThumbnail(data)));
+    tr.append($j("<td class='thumbnail'></td>").append(insertByThumbnail(data)));
     var insertTd = $j("<td class='insert'></td>");
     insertTd.append(insertLink(data));
     if(data['file_type'] == 'image')
-      insertTd.append(insertImageLink(data));
+      insertTd.append(insertImageByLink(data));
     if(data['file_type'] == 'flv' || data['file_type'] == 'swf')
       insertTd.append(insertEmbedLink(data));
     tr.append(insertTd);
@@ -188,25 +188,29 @@
     });
   };
 
-  var insertImageLink = function(data){
+  var insertImage = function(data) {
     var filename = data['file_name'];
     var src = data['src'];
+    if($j('#editor_mode_richtext:checked').length > 0){
+      var img = new Image();
+      $j(img).load(function() {
+        if (this.width > 500 ) {
+          $j(this).attr('width', '500').removeAttr('height');
+        }
+        var a_img = $j("<div class='richtext_img_wrapper'></div>")
+          .append($j("<a></a>")
+          .attr({href: src + '&inline=true', target: '_blank', title: '<%= _('To change this size, right click and select the image property.') %>'})
+          .append($j(this)));
+        insertToRichEditor(a_img);
+      }).attr({src: src, alt: filename}).addClass('pointer').css('border', '0 none');
+    } else if($j('#editor_mode_hiki:checked').length > 0) {
+      insertToHikiEditor('\n{{' + filename + ',500,}}');
+    }
+  };
+
+  var insertImageByLink = function(data){
     return $j("<span></span>").text('<%= _('Insert image') %>').addClass("insert_link link pointer").click(function(){
-      if($j('#editor_mode_richtext:checked').length > 0){
-        var img = new Image();
-        $j(img).load(function() {
-          if (this.width > 400 ) {
-            $j(this).attr('width', '400').removeAttr('height');
-          }
-          var a_img = $j("<div class='richtext_img_wrapper'></div>")
-            .append($j("<a></a>")
-            .attr({href: src + '&inline=true', target: '_blank'})
-            .append($j(this)));
-          insertToRichEditor(a_img);
-        }).attr({src: src, alt: filename}).addClass('pointer').css('border', '0 none');
-      } else if($j('#editor_mode_hiki:checked').length > 0) {
-        insertToHikiEditor('\n{{' + filename + ',400,}}');
-      }
+      insertImage(data);
     });
   };
 
@@ -222,30 +226,14 @@
     });
   };
 
-  // insertImageLinkとDRYに出来ないか
-  var insertThumbnail = function(data){
+  var insertByThumbnail = function(data){
     var filename = data['file_name'];
     var extension = filename.toLowerCase().split('.')[1];
     if($j.inArray(extension, <%= ShareFile::CONTENT_TYPE_IMAGES.keys.to_json %>) >= 0) {
       var src = data['src'];
       if(src){
-        var img = new Image();
-        $j(img).load(function() {
-          if (this.width > 400 ) {
-            $j(this).attr('width', '400').removeAttr('height');
-          }
-        }).attr({src: src, alt: filename}).addClass('pointer').css('border', '0 none');
-
-        return $j(img).clone().attr({'height': '72', 'width': '72'}).addClass('fit_image').click(function(){
-          if($j('#editor_mode_richtext:checked').length > 0){
-            var a_img = $j("<div class='richtext_img_wrapper'></div>")
-              .append($j("<a></a>")
-              .attr({href: src + '&inline=true', target: '_blank'})
-              .append($j(img)));
-            insertToRichEditor(a_img);
-          } else if($j('#editor_mode_hiki:checked').length > 0) {
-            insertToHikiEditor('\n{{' + filename + ',400,}}');
-          }
+        return $j(new Image()).attr({src: src, alt: filename, height: '72', width: '72'}).addClass('fit_image').addClass('pointer').css('border', '0 none').click(function(){
+          insertImage(data);
         });
       }else{
         return $j("<span></span>").text(filename.substr(0,32));
