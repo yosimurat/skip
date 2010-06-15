@@ -6,7 +6,7 @@
   <h2 class="ui-corner-top"><%= h(title) %></h2>
   <div style="padding: 5px 0px;">
   <% tag_cloud tags do |name, count, css_class| -%>
-    <%= link_to(h(name), users_path(:tag_words => h(name)), :class => "tag #{css_class}") %>
+    <%= link_to(h(name), users_path(:tag_words => h(name)), :class => "tag tag1") %>
     <span class="count">(<%= h count %>)</span>
   <% end -%>
   </div>

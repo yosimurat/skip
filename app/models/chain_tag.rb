@@ -36,7 +36,7 @@ class ChainTag < ActiveRecord::Base
   end
 
   def self.recent_tags_with_count limit = 20
-    Tag.descend_by_chain_tags_updated_at.limit(limit).all(:select => '*, count(tags.id) as count', :group => 'tags.id')
+    Tag.id_is(ChainTag.created_at_gte(2.weeks.ago).map(&:tag_id)).descend_by_chain_tags_updated_at.limit(limit).all(:select => '*, count(tags.id) as count', :group => 'tags.id')
   end
 
   def self.all_tags_with_count
