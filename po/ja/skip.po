@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.0\n"
-"POT-Creation-Date: 2010-06-15 14:00+0900\n"
+"POT-Creation-Date: 2010-06-15 15:06+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3324,7 +3324,7 @@ msgstr "ファイル"
 msgid "Files larger than %sMBytes are not permitted."
 msgstr "%sMバイト以上のファイルはアップロードできません。"
 
-#: app/views/board_entries/_embed_dialog.html.erb:263
+#: app/views/board_entries/_embed_dialog.html.erb:251
 #: app/views/chapters/_page_content.html.erb:183
 msgid "First page"
 msgstr "[最初へ]"
@@ -3759,7 +3759,7 @@ msgstr "お問い合わせ"
 
 #: app/views/board_entries/_embed_dialog.html.erb:7
 #: app/views/board_entries/_embed_dialog.html.erb:35
-#: app/views/board_entries/_embed_dialog.html.erb:214
+#: app/views/board_entries/_embed_dialog.html.erb:218
 #: app/views/chapters/_embed_dialog.html.erb:7
 #: app/views/chapters/_page_content.html.erb:209
 msgid "Insert embed"
@@ -3777,7 +3777,7 @@ msgstr "ファイルを本文に挿入"
 msgid "Insert file or embed in text body"
 msgstr "画像やファイル、地図・動画などを本文に挿入"
 
-#: app/views/board_entries/_embed_dialog.html.erb:194
+#: app/views/board_entries/_embed_dialog.html.erb:212
 #: app/views/chapters/_page_content.html.erb:218
 msgid "Insert image"
 msgstr "画像を挿入する"
@@ -4029,7 +4029,7 @@ msgstr "最近の投稿"
 msgid "Last comment (%s) :"
 msgstr "最終コメント (%s)："
 
-#: app/views/board_entries/_embed_dialog.html.erb:280
+#: app/views/board_entries/_embed_dialog.html.erb:268
 #: app/views/chapters/_page_content.html.erb:200
 msgid "Last page"
 msgstr "[最後へ]"
@@ -4406,7 +4406,7 @@ msgid "Next Day (%s)"
 msgstr "次の日(%s)"
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:275
+#: app/views/board_entries/_embed_dialog.html.erb:263
 #: app/views/chapters/_page_content.html.erb:195
 msgid "Next »"
 msgstr "次 »"
@@ -6314,6 +6314,10 @@ msgstr "タイトル"
 msgid "To be activated"
 msgstr "利用開始待ち"
 
+#: app/views/board_entries/_embed_dialog.html.erb:202
+msgid "To change this size, right click and select the image property."
+msgstr "画像サイズを変更するには、右クリックしてイメージプロパティを選択して下さい。"
+
 #: app/models/site_count.rb:26
 msgid "Today's Access"
 msgstr "本日のアクセス数"
@@ -8156,7 +8160,7 @@ msgstr ""
 "必須になります。"
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:268
+#: app/views/board_entries/_embed_dialog.html.erb:256
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr "« 前"

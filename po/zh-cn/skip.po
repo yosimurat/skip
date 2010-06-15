@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.0\n"
-"POT-Creation-Date: 2010-06-15 14:00+0900\n"
+"POT-Creation-Date: 2010-06-15 15:06+0900\n"
 "PO-Revision-Date: 2008-08-11 17:41+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3132,7 +3132,7 @@ msgstr ""
 msgid "Files larger than %sMBytes are not permitted."
 msgstr ""
 
-#: app/views/board_entries/_embed_dialog.html.erb:263
+#: app/views/board_entries/_embed_dialog.html.erb:251
 #: app/views/chapters/_page_content.html.erb:183
 msgid "First page"
 msgstr ""
@@ -3551,7 +3551,7 @@ msgstr ""
 
 #: app/views/board_entries/_embed_dialog.html.erb:7
 #: app/views/board_entries/_embed_dialog.html.erb:35
-#: app/views/board_entries/_embed_dialog.html.erb:214
+#: app/views/board_entries/_embed_dialog.html.erb:218
 #: app/views/chapters/_embed_dialog.html.erb:7
 #: app/views/chapters/_page_content.html.erb:209
 msgid "Insert embed"
@@ -3569,7 +3569,7 @@ msgstr ""
 msgid "Insert file or embed in text body"
 msgstr ""
 
-#: app/views/board_entries/_embed_dialog.html.erb:194
+#: app/views/board_entries/_embed_dialog.html.erb:212
 #: app/views/chapters/_page_content.html.erb:218
 msgid "Insert image"
 msgstr ""
@@ -3811,7 +3811,7 @@ msgstr ""
 msgid "Last comment (%s) :"
 msgstr ""
 
-#: app/views/board_entries/_embed_dialog.html.erb:280
+#: app/views/board_entries/_embed_dialog.html.erb:268
 #: app/views/chapters/_page_content.html.erb:200
 msgid "Last page"
 msgstr ""
@@ -4179,7 +4179,7 @@ msgid "Next Day (%s)"
 msgstr ""
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:275
+#: app/views/board_entries/_embed_dialog.html.erb:263
 #: app/views/chapters/_page_content.html.erb:195
 msgid "Next »"
 msgstr ""
@@ -6042,6 +6042,10 @@ msgstr ""
 msgid "To be activated"
 msgstr ""
 
+#: app/views/board_entries/_embed_dialog.html.erb:202
+msgid "To change this size, right click and select the image property."
+msgstr ""
+
 #: app/models/site_count.rb:26
 msgid "Today's Access"
 msgstr ""
@@ -7849,7 +7853,7 @@ msgid ""
 msgstr ""
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:268
+#: app/views/board_entries/_embed_dialog.html.erb:256
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr ""
