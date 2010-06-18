@@ -814,7 +814,7 @@ div#statusbar
 
 div#header
   div#search
-    :padding 5px 5px
+    :padding 5px 0
     :position absolute
     :top 0
     :right 10
@@ -824,21 +824,20 @@ div#header
       input
         :padding 2px 0
       input.labeled-field
-        :background-color #f0f0ff
+        :background #f0f0ff
         :height 20px
+        :_height 26px
         :font-size 14px
         :width 100%
       table
         :border none
         :table-layout auto
-        td
-          :border none
         td.search_button_wrapper
           :background #eee
       .search_button
-        :border solid none
-        :background #eee
         :font-size 14px
+        :height 26px
+        :padding 0 3px
 div#tab_menu
   :margin-left 20px
 
