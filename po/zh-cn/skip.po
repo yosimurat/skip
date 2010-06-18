@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.0\n"
-"POT-Creation-Date: 2010-06-15 15:06+0900\n"
+"POT-Creation-Date: 2010-06-18 10:49+0900\n"
 "PO-Revision-Date: 2008-08-11 17:41+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/views/entries/_entry_detail.html.erb:305
+#: app/views/entries/_entry_detail.html.erb:302
 msgid " [Delete]"
 msgstr ""
 
@@ -42,7 +42,7 @@ msgstr ""
 #: app/views/groups/_group_list.html.erb:24
 #: app/views/mypage/entries_by_date.html.erb:13
 #: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:71
-#: app/views/mypage/index.html.erb:165 app/views/mypage/index.html.erb:182
+#: app/views/mypage/index.html.erb:168 app/views/mypage/index.html.erb:185
 #: app/views/share_file/_topix_share_files.html.erb:39
 #: app/views/bookmark/list.html.erb:42 app/views/bookmark/show.html.erb:51
 #: app/views/rankings/bookmark.html.erb:2
@@ -1695,7 +1695,7 @@ msgid "Are you sure destroing with nest comments?"
 msgstr ""
 
 #: app/helpers/share_file_helper.rb:26
-#: app/views/entries/_entry_detail.html.erb:305
+#: app/views/entries/_entry_detail.html.erb:302
 #: app/views/edit/edit.html.erb:28
 #: app/views/board_entries/_board_entry_comment.html.erb:14
 #: app/views/group/_manage_info.html.erb:22
@@ -1978,7 +1978,7 @@ msgstr ""
 msgid "BoardEntry|Lock version"
 msgstr ""
 
-#: app/models/board_entry.rb:185 app/views/entries/_entry_detail.html.erb:655
+#: app/models/board_entry.rb:185 app/views/entries/_entry_detail.html.erb:652
 msgid "BoardEntry|Open|false"
 msgstr ""
 
@@ -2022,15 +2022,17 @@ msgstr ""
 msgid "Bookmark Comment"
 msgstr ""
 
-#: app/views/bookmarks/index.html.erb:5 app/views/layouts/layout.html.erb:129
+#: app/views/bookmarks/index.html.erb:5
+#: app/views/shared/_global_footer_navigation.html.erb:15
 msgid "Bookmark URL"
 msgstr ""
 
-#: app/views/bookmarks/index.html.erb:5 app/views/layouts/layout.html.erb:129
+#: app/views/bookmarks/index.html.erb:5
+#: app/views/shared/_global_footer_navigation.html.erb:15
 msgid "Bookmark a URL"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:220
+#: app/views/entries/_entry_detail.html.erb:217
 msgid "Bookmark this"
 msgstr ""
 
@@ -2185,7 +2187,7 @@ msgstr ""
 msgid "CalendarHelper|Wed"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:609
+#: app/views/entries/_entry_detail.html.erb:606
 #: app/views/board_entries/_board_entry_comment.html.erb:31
 #: app/views/share_file/new.html.erb:32 app/views/share_file/edit.html.erb:15
 msgid "Cancel"
@@ -2491,11 +2493,12 @@ msgstr ""
 msgid "Create %{name}"
 msgstr ""
 
-#: app/views/groups/index.html.erb:4 app/views/layouts/layout.html.erb:132
+#: app/views/groups/index.html.erb:4
+#: app/views/shared/_global_footer_navigation.html.erb:18
 msgid "Create New Group"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:311
+#: app/views/entries/_entry_detail.html.erb:308
 msgid "Create a new forum entry inheriting the privacy setting."
 msgstr ""
 
@@ -2508,7 +2511,7 @@ msgstr ""
 msgid "Create administrative user"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:313
+#: app/views/entries/_entry_detail.html.erb:310
 msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr ""
@@ -2698,7 +2701,7 @@ msgstr ""
 msgid "Driving"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:215
+#: app/views/entries/_entry_detail.html.erb:212
 #: app/views/board_entries/_board_entry_comment.html.erb:13
 #: app/views/user/show.html.erb:16
 #: app/views/admin/openid_identifiers/index.html.erb:17
@@ -2880,7 +2883,7 @@ msgstr ""
 msgid "Entries most commented (public entries only)"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:299
+#: app/views/entries/_entry_detail.html.erb:296
 msgid "Entries talking about this entry:"
 msgstr ""
 
@@ -3132,7 +3135,7 @@ msgstr ""
 msgid "Files larger than %sMBytes are not permitted."
 msgstr ""
 
-#: app/views/board_entries/_embed_dialog.html.erb:251
+#: app/views/board_entries/_embed_dialog.html.erb:248
 #: app/views/chapters/_page_content.html.erb:183
 msgid "First page"
 msgstr ""
@@ -3182,6 +3185,7 @@ msgid "From others"
 msgstr ""
 
 #: app/controllers/search_controller.rb:80
+#: app/views/shared/_header.html.erb:65
 #: app/views/search/full_text_search.html.erb:14
 msgid "Full-text Search"
 msgstr ""
@@ -3442,7 +3446,7 @@ msgstr ""
 msgid "Hide preview"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:214
+#: app/views/entries/_entry_detail.html.erb:211
 msgid "Hide traces"
 msgstr ""
 
@@ -3551,7 +3555,7 @@ msgstr ""
 
 #: app/views/board_entries/_embed_dialog.html.erb:7
 #: app/views/board_entries/_embed_dialog.html.erb:35
-#: app/views/board_entries/_embed_dialog.html.erb:218
+#: app/views/board_entries/_embed_dialog.html.erb:215
 #: app/views/chapters/_embed_dialog.html.erb:7
 #: app/views/chapters/_page_content.html.erb:209
 msgid "Insert embed"
@@ -3569,7 +3573,7 @@ msgstr ""
 msgid "Insert file or embed in text body"
 msgstr ""
 
-#: app/views/board_entries/_embed_dialog.html.erb:212
+#: app/views/board_entries/_embed_dialog.html.erb:209
 #: app/views/chapters/_page_content.html.erb:218
 msgid "Insert image"
 msgstr ""
@@ -3598,7 +3602,7 @@ msgstr ""
 msgid "Internet"
 msgstr ""
 
-#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:162
+#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:165
 msgid "Introduce"
 msgstr ""
 
@@ -3811,7 +3815,7 @@ msgstr ""
 msgid "Last comment (%s) :"
 msgstr ""
 
-#: app/views/board_entries/_embed_dialog.html.erb:268
+#: app/views/board_entries/_embed_dialog.html.erb:265
 #: app/views/chapters/_page_content.html.erb:200
 msgid "Last page"
 msgstr ""
@@ -3984,7 +3988,7 @@ msgstr ""
 msgid "March"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:224
+#: app/views/entries/_entry_detail.html.erb:221
 msgid "Mark read"
 msgstr ""
 
@@ -4125,12 +4129,13 @@ msgstr ""
 msgid "New Email Address"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:278
+#: app/views/entries/_entry_detail.html.erb:275
 msgid "New Entries on Top"
 msgstr ""
 
 #: app/views/group/_new_forum_links.html.erb:1
-#: app/views/groups/index.html.erb:4 app/views/layouts/layout.html.erb:132
+#: app/views/groups/index.html.erb:4
+#: app/views/shared/_global_footer_navigation.html.erb:18
 msgid "New Posts"
 msgstr ""
 
@@ -4179,7 +4184,7 @@ msgid "Next Day (%s)"
 msgstr ""
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:263
+#: app/views/board_entries/_embed_dialog.html.erb:260
 #: app/views/chapters/_page_content.html.erb:195
 msgid "Next »"
 msgstr ""
@@ -4405,15 +4410,15 @@ msgstr ""
 msgid "Off-time"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:279
+#: app/views/entries/_entry_detail.html.erb:276
 msgid "Old Entries on Top"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:456
+#: app/views/entries/_entry_detail.html.erb:453
 msgid "One or more characters other than spaces required."
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:655
+#: app/views/entries/_entry_detail.html.erb:652
 msgid "Open"
 msgstr ""
 
@@ -4771,7 +4776,7 @@ msgstr ""
 msgid "PopularBookmark|Date"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:293
+#: app/views/entries/_entry_detail.html.erb:290
 msgid "Post"
 msgstr ""
 
@@ -4800,7 +4805,7 @@ msgstr ""
 msgid "Prev Day (%s)"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:222
+#: app/views/entries/_entry_detail.html.erb:219
 #: app/views/board_entries/large.html.erb:23
 msgid "Print"
 msgstr ""
@@ -4954,7 +4959,7 @@ msgstr ""
 msgid "Reacquire the title"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:223
+#: app/views/entries/_entry_detail.html.erb:220
 msgid "Read/Unread:"
 msgstr ""
 
@@ -4967,7 +4972,7 @@ msgstr ""
 msgid "Recent Entries"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:175
+#: app/views/mypage/index.html.erb:178
 msgid "Recent Groups"
 msgstr ""
 
@@ -4976,7 +4981,7 @@ msgstr ""
 msgid "Recent Popular Entries"
 msgstr ""
 
-#: app/views/users/_recent_profile_box.html.erb:4
+#: app/views/users/_recent_profile_box.html.erb:6
 msgid "Recent Profiles"
 msgstr ""
 
@@ -4985,7 +4990,7 @@ msgstr ""
 msgid "Recent Questions"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:155
+#: app/views/mypage/index.html.erb:158
 msgid "Recent Users"
 msgstr ""
 
@@ -5025,7 +5030,7 @@ msgstr ""
 msgid "Registered Users"
 msgstr ""
 
-#: app/views/layouts/wiki.html.erb:75 app/views/layouts/layout.html.erb:141
+#: app/views/layouts/wiki.html.erb:75 app/views/layouts/layout.html.erb:122
 #: app/views/layouts/admin/application.html.erb:66
 msgid "Registered Users: %s users"
 msgstr ""
@@ -5073,7 +5078,7 @@ msgstr ""
 msgid "Reply"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:561
+#: app/views/entries/_entry_detail.html.erb:558
 #: app/views/board_entries/_board_entry_comment.html.erb:16
 msgid "Reply to this comment"
 msgstr ""
@@ -5103,7 +5108,7 @@ msgstr ""
 msgid "Resolved"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:280
+#: app/views/entries/_entry_detail.html.erb:277
 msgid "Resume default order"
 msgstr ""
 
@@ -5149,7 +5154,7 @@ msgstr ""
 msgid "Sat"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:578
+#: app/views/entries/_entry_detail.html.erb:575
 #: app/views/board_entries/_board_entry_comment.html.erb:30
 #: app/views/portal/_registration_form.html.erb:74
 #: app/views/bookmarks/_topix_bookmarks.html.erb:35
@@ -5174,8 +5179,7 @@ msgstr ""
 #: app/views/entries/_search_box.html.erb:7
 #: app/views/entries/_search_box.html.erb:11 app/views/user/group.html.erb:19
 #: app/views/user/group.html.erb:22 app/views/bookmarks/index.html.erb:32
-#: app/views/groups/index.html.erb:32 app/views/shared/_header.html.erb:65
-#: app/views/mypage/_record_post.html.erb:5
+#: app/views/groups/index.html.erb:32 app/views/mypage/_record_post.html.erb:5
 #: app/views/mypage/_record_post.html.erb:11
 #: app/views/share_file/list.html.erb:23 app/views/share_file/list.html.erb:26
 #: app/views/search/share_file_search.html.erb:17
@@ -5460,7 +5464,7 @@ msgstr ""
 msgid "Show rev.%{revision}"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:213
+#: app/views/entries/_entry_detail.html.erb:210
 msgid "Show traces"
 msgstr ""
 
@@ -5526,7 +5530,7 @@ msgid "Signup"
 msgstr ""
 
 #: app/controllers/statistics_controller.rb:67
-#: app/views/layouts/wiki.html.erb:79 app/views/layouts/layout.html.erb:145
+#: app/views/layouts/wiki.html.erb:79 app/views/layouts/layout.html.erb:126
 #: app/views/layouts/admin/application.html.erb:70
 msgid "Site Information"
 msgstr ""
@@ -5987,7 +5991,7 @@ msgstr ""
 msgid "This page is deleted. You click '[Restore]' if you want to restore."
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:201
+#: app/views/entries/_entry_detail.html.erb:198
 msgid ""
 "This question will be hidden from all users' My Page after you set it to "
 "\"Closed\"."
@@ -6031,6 +6035,10 @@ msgstr ""
 msgid "Timeout while loading rss."
 msgstr ""
 
+#: app/views/mypage/index.html.erb:149
+msgid "Tips for using bookmarklet"
+msgstr ""
+
 #: app/views/board_entries/_form.html.erb:45
 #: app/views/bookmarks/index.html.erb:15
 #: app/views/mypage/_record_post.html.erb:45
@@ -6042,15 +6050,11 @@ msgstr ""
 msgid "To be activated"
 msgstr ""
 
-#: app/views/board_entries/_embed_dialog.html.erb:202
-msgid "To change this size, right click and select the image property."
-msgstr ""
-
 #: app/models/site_count.rb:26
 msgid "Today's Access"
 msgstr ""
 
-#: app/views/layouts/wiki.html.erb:76 app/views/layouts/layout.html.erb:142
+#: app/views/layouts/wiki.html.erb:76 app/views/layouts/layout.html.erb:123
 #: app/views/layouts/admin/application.html.erb:67
 msgid "Today's Access: %s access"
 msgstr ""
@@ -6059,7 +6063,7 @@ msgstr ""
 msgid "Today's Entries"
 msgstr ""
 
-#: app/views/layouts/wiki.html.erb:78 app/views/layouts/layout.html.erb:144
+#: app/views/layouts/wiki.html.erb:78 app/views/layouts/layout.html.erb:125
 msgid "Today's Entries: %s entries"
 msgstr ""
 
@@ -6067,7 +6071,7 @@ msgstr ""
 msgid "Today's Posts: %s posts"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:468
+#: app/views/entries/_entry_detail.html.erb:465
 msgid "Too many points!"
 msgstr ""
 
@@ -6083,7 +6087,7 @@ msgstr ""
 msgid "Topic Entry"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:238
+#: app/views/entries/_entry_detail.html.erb:235
 msgid "Topic Entry: "
 msgstr ""
 
@@ -6091,7 +6095,7 @@ msgstr ""
 msgid "Total Entries"
 msgstr ""
 
-#: app/views/layouts/wiki.html.erb:77 app/views/layouts/layout.html.erb:143
+#: app/views/layouts/wiki.html.erb:77 app/views/layouts/layout.html.erb:124
 #: app/views/layouts/admin/application.html.erb:68
 msgid "Total Entries: %s entries"
 msgstr ""
@@ -6259,9 +6263,9 @@ msgstr ""
 
 #: app/views/board_entries/_embed_dialog.html.erb:5
 #: app/views/group/_action_box.html.erb:16
+#: app/views/shared/_global_footer_navigation.html.erb:11
 #: app/views/mypage/_action_box.html.erb:5
 #: app/views/share_file/_action_box.html.erb:6
-#: app/views/layouts/layout.html.erb:125
 #: app/views/chapters/_embed_dialog.html.erb:5
 msgid "Upload a file"
 msgstr ""
@@ -6874,11 +6878,11 @@ msgid "Within a minute"
 msgstr ""
 
 #: app/views/user/_new_blog_links.html.erb:1
-#: app/views/layouts/layout.html.erb:118
+#: app/views/shared/_global_footer_navigation.html.erb:4
 msgid "Write a blog entry"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:291
+#: app/views/entries/_entry_detail.html.erb:288
 msgid "Write a comment"
 msgstr ""
 
@@ -6889,7 +6893,7 @@ msgstr ""
 
 #: app/views/user/_new_blog_links.html.erb:5
 #: app/views/group/_new_forum_links.html.erb:5
-#: app/views/layouts/layout.html.erb:121
+#: app/views/shared/_global_footer_navigation.html.erb:7
 msgid "Write a question"
 msgstr ""
 
@@ -7100,13 +7104,13 @@ msgstr ""
 msgid "[Back to the histories list]"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:266
+#: app/views/entries/_entry_detail.html.erb:263
 msgid "[Bookmarked by: %d member]"
 msgid_plural "[Bookmarked by: %d members]"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/views/entries/_entry_detail.html.erb:190
+#: app/views/entries/_entry_detail.html.erb:187
 msgid "[Bottom of page]"
 msgstr ""
 
@@ -7324,7 +7328,7 @@ msgstr ""
 msgid "[Today]"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:318
+#: app/views/entries/_entry_detail.html.erb:315
 msgid "[Top of page]"
 msgstr ""
 
@@ -7342,11 +7346,11 @@ msgstr ""
 msgid "[Unread]"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:313
+#: app/views/entries/_entry_detail.html.erb:310
 msgid "[Write a new blog entry with this as topic]"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:311
+#: app/views/entries/_entry_detail.html.erb:308
 msgid "[Write a new forum entry with this as topic]"
 msgstr ""
 
@@ -7374,7 +7378,7 @@ msgstr ""
 msgid "[追加する]"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:229
+#: app/views/entries/_entry_detail.html.erb:226
 msgid "]"
 msgstr ""
 
@@ -7853,7 +7857,7 @@ msgid ""
 msgstr ""
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:256
+#: app/views/board_entries/_embed_dialog.html.erb:253
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr ""

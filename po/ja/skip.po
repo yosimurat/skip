@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.0\n"
-"POT-Creation-Date: 2010-06-15 15:06+0900\n"
+"POT-Creation-Date: 2010-06-18 10:49+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/views/entries/_entry_detail.html.erb:305
+#: app/views/entries/_entry_detail.html.erb:302
 msgid " [Delete]"
 msgstr " [削除]"
 
@@ -44,7 +44,7 @@ msgstr ""
 #: app/views/groups/_group_list.html.erb:24
 #: app/views/mypage/entries_by_date.html.erb:13
 #: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:71
-#: app/views/mypage/index.html.erb:165 app/views/mypage/index.html.erb:182
+#: app/views/mypage/index.html.erb:168 app/views/mypage/index.html.erb:185
 #: app/views/share_file/_topix_share_files.html.erb:39
 #: app/views/bookmark/list.html.erb:42 app/views/bookmark/show.html.erb:51
 #: app/views/rankings/bookmark.html.erb:2
@@ -1859,7 +1859,7 @@ msgid "Are you sure destroing with nest comments?"
 msgstr "関連するコメントも一緒に削除されますが、よろしいですか？"
 
 #: app/helpers/share_file_helper.rb:26
-#: app/views/entries/_entry_detail.html.erb:305
+#: app/views/entries/_entry_detail.html.erb:302
 #: app/views/edit/edit.html.erb:28
 #: app/views/board_entries/_board_entry_comment.html.erb:14
 #: app/views/group/_manage_info.html.erb:22
@@ -2139,7 +2139,7 @@ msgstr "最終更新日"
 msgid "BoardEntry|Lock version"
 msgstr "ロックバージョン"
 
-#: app/models/board_entry.rb:185 app/views/entries/_entry_detail.html.erb:655
+#: app/models/board_entry.rb:185 app/views/entries/_entry_detail.html.erb:652
 msgid "BoardEntry|Open|false"
 msgstr "終了"
 
@@ -2183,15 +2183,17 @@ msgstr "書評"
 msgid "Bookmark Comment"
 msgstr "ブックマークコメント"
 
-#: app/views/bookmarks/index.html.erb:5 app/views/layouts/layout.html.erb:129
+#: app/views/bookmarks/index.html.erb:5
+#: app/views/shared/_global_footer_navigation.html.erb:15
 msgid "Bookmark URL"
 msgstr ""
 
-#: app/views/bookmarks/index.html.erb:5 app/views/layouts/layout.html.erb:129
+#: app/views/bookmarks/index.html.erb:5
+#: app/views/shared/_global_footer_navigation.html.erb:15
 msgid "Bookmark a URL"
 msgstr "ブックマークする"
 
-#: app/views/entries/_entry_detail.html.erb:220
+#: app/views/entries/_entry_detail.html.erb:217
 msgid "Bookmark this"
 msgstr "ブックマークする"
 
@@ -2348,7 +2350,7 @@ msgstr "火"
 msgid "CalendarHelper|Wed"
 msgstr "水"
 
-#: app/views/entries/_entry_detail.html.erb:609
+#: app/views/entries/_entry_detail.html.erb:606
 #: app/views/board_entries/_board_entry_comment.html.erb:31
 #: app/views/share_file/new.html.erb:32 app/views/share_file/edit.html.erb:15
 msgid "Cancel"
@@ -2669,11 +2671,12 @@ msgstr "作成"
 msgid "Create %{name}"
 msgstr "%{name}作成"
 
-#: app/views/groups/index.html.erb:4 app/views/layouts/layout.html.erb:132
+#: app/views/groups/index.html.erb:4
+#: app/views/shared/_global_footer_navigation.html.erb:18
 msgid "Create New Group"
 msgstr "グループの作成"
 
-#: app/views/entries/_entry_detail.html.erb:311
+#: app/views/entries/_entry_detail.html.erb:308
 msgid "Create a new forum entry inheriting the privacy setting."
 msgstr "記事の公開範囲を引き継いだフォーラムとして新しい記事を作成します。"
 
@@ -2686,7 +2689,7 @@ msgstr "グループを作る"
 msgid "Create administrative user"
 msgstr "管理者ユーザの作成"
 
-#: app/views/entries/_entry_detail.html.erb:313
+#: app/views/entries/_entry_detail.html.erb:310
 msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr "記事の公開範囲によらず全体公開のブログとして新しい記事を作成します。"
@@ -2886,7 +2889,7 @@ msgstr "お酒"
 msgid "Driving"
 msgstr "ドライブ"
 
-#: app/views/entries/_entry_detail.html.erb:215
+#: app/views/entries/_entry_detail.html.erb:212
 #: app/views/board_entries/_board_entry_comment.html.erb:13
 #: app/views/user/show.html.erb:16
 #: app/views/admin/openid_identifiers/index.html.erb:17
@@ -3068,7 +3071,7 @@ msgstr "記事数"
 msgid "Entries most commented (public entries only)"
 msgstr "みんなからコメントが活発に付いたブログです"
 
-#: app/views/entries/_entry_detail.html.erb:299
+#: app/views/entries/_entry_detail.html.erb:296
 msgid "Entries talking about this entry:"
 msgstr "この記事を話題にした記事："
 
@@ -3324,7 +3327,7 @@ msgstr "ファイル"
 msgid "Files larger than %sMBytes are not permitted."
 msgstr "%sMバイト以上のファイルはアップロードできません。"
 
-#: app/views/board_entries/_embed_dialog.html.erb:251
+#: app/views/board_entries/_embed_dialog.html.erb:248
 #: app/views/chapters/_page_content.html.erb:183
 msgid "First page"
 msgstr "[最初へ]"
@@ -3374,6 +3377,7 @@ msgid "From others"
 msgstr "みんなの情報"
 
 #: app/controllers/search_controller.rb:80
+#: app/views/shared/_header.html.erb:65
 #: app/views/search/full_text_search.html.erb:14
 msgid "Full-text Search"
 msgstr "全文検索"
@@ -3646,7 +3650,7 @@ msgstr "履歴を隠す"
 msgid "Hide preview"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:214
+#: app/views/entries/_entry_detail.html.erb:211
 msgid "Hide traces"
 msgstr "足跡を隠す"
 
@@ -3759,7 +3763,7 @@ msgstr "お問い合わせ"
 
 #: app/views/board_entries/_embed_dialog.html.erb:7
 #: app/views/board_entries/_embed_dialog.html.erb:35
-#: app/views/board_entries/_embed_dialog.html.erb:218
+#: app/views/board_entries/_embed_dialog.html.erb:215
 #: app/views/chapters/_embed_dialog.html.erb:7
 #: app/views/chapters/_page_content.html.erb:209
 msgid "Insert embed"
@@ -3777,7 +3781,7 @@ msgstr "ファイルを本文に挿入"
 msgid "Insert file or embed in text body"
 msgstr "画像やファイル、地図・動画などを本文に挿入"
 
-#: app/views/board_entries/_embed_dialog.html.erb:212
+#: app/views/board_entries/_embed_dialog.html.erb:209
 #: app/views/chapters/_page_content.html.erb:218
 msgid "Insert image"
 msgstr "画像を挿入する"
@@ -3808,7 +3812,7 @@ msgstr "想定外のエラーが発生しました。管理者にお問い合わ
 msgid "Internet"
 msgstr "インターネット"
 
-#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:162
+#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:165
 msgid "Introduce"
 msgstr "みんなに紹介する"
 
@@ -4029,7 +4033,7 @@ msgstr "最近の投稿"
 msgid "Last comment (%s) :"
 msgstr "最終コメント (%s)："
 
-#: app/views/board_entries/_embed_dialog.html.erb:268
+#: app/views/board_entries/_embed_dialog.html.erb:265
 #: app/views/chapters/_page_content.html.erb:200
 msgid "Last page"
 msgstr "[最後へ]"
@@ -4208,7 +4212,7 @@ msgstr "参加者管理"
 msgid "March"
 msgstr "3月"
 
-#: app/views/entries/_entry_detail.html.erb:224
+#: app/views/entries/_entry_detail.html.erb:221
 msgid "Mark read"
 msgstr "既読にする"
 
@@ -4350,12 +4354,13 @@ msgstr "新規%{model}の作成"
 msgid "New Email Address"
 msgstr "変更後メールアドレス"
 
-#: app/views/entries/_entry_detail.html.erb:278
+#: app/views/entries/_entry_detail.html.erb:275
 msgid "New Entries on Top"
 msgstr "新しい順に並べる"
 
 #: app/views/group/_new_forum_links.html.erb:1
-#: app/views/groups/index.html.erb:4 app/views/layouts/layout.html.erb:132
+#: app/views/groups/index.html.erb:4
+#: app/views/shared/_global_footer_navigation.html.erb:18
 msgid "New Posts"
 msgstr "記事を書く"
 
@@ -4406,7 +4411,7 @@ msgid "Next Day (%s)"
 msgstr "次の日(%s)"
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:263
+#: app/views/board_entries/_embed_dialog.html.erb:260
 #: app/views/chapters/_page_content.html.erb:195
 msgid "Next »"
 msgstr "次 »"
@@ -4634,15 +4639,15 @@ msgstr "オフ"
 msgid "Off-time"
 msgstr "業務以外"
 
-#: app/views/entries/_entry_detail.html.erb:279
+#: app/views/entries/_entry_detail.html.erb:276
 msgid "Old Entries on Top"
 msgstr "古い順に並べる"
 
-#: app/views/entries/_entry_detail.html.erb:456
+#: app/views/entries/_entry_detail.html.erb:453
 msgid "One or more characters other than spaces required."
 msgstr "空白以外で1文字以上入力してください。"
 
-#: app/views/entries/_entry_detail.html.erb:655
+#: app/views/entries/_entry_detail.html.erb:652
 msgid "Open"
 msgstr "質問中"
 
@@ -5004,7 +5009,7 @@ msgstr "作成日時"
 msgid "PopularBookmark|Date"
 msgstr "日時"
 
-#: app/views/entries/_entry_detail.html.erb:293
+#: app/views/entries/_entry_detail.html.erb:290
 msgid "Post"
 msgstr "書き込み"
 
@@ -5033,7 +5038,7 @@ msgstr "前へ"
 msgid "Prev Day (%s)"
 msgstr "前の日(%s)"
 
-#: app/views/entries/_entry_detail.html.erb:222
+#: app/views/entries/_entry_detail.html.erb:219
 #: app/views/board_entries/large.html.erb:23
 msgid "Print"
 msgstr "印刷する"
@@ -5189,7 +5194,7 @@ msgstr "URL"
 msgid "Reacquire the title"
 msgstr "タイトルを再取得する"
 
-#: app/views/entries/_entry_detail.html.erb:223
+#: app/views/entries/_entry_detail.html.erb:220
 msgid "Read/Unread:"
 msgstr "既読/未読:"
 
@@ -5202,7 +5207,7 @@ msgstr "読書"
 msgid "Recent Entries"
 msgstr "新着記事"
 
-#: app/views/mypage/index.html.erb:175
+#: app/views/mypage/index.html.erb:178
 msgid "Recent Groups"
 msgstr "新着グループ"
 
@@ -5211,7 +5216,7 @@ msgstr "新着グループ"
 msgid "Recent Popular Entries"
 msgstr "最近の人気記事"
 
-#: app/views/users/_recent_profile_box.html.erb:4
+#: app/views/users/_recent_profile_box.html.erb:6
 msgid "Recent Profiles"
 msgstr "最近のプロフィール"
 
@@ -5220,7 +5225,7 @@ msgstr "最近のプロフィール"
 msgid "Recent Questions"
 msgstr "みんなからの質問!"
 
-#: app/views/mypage/index.html.erb:155
+#: app/views/mypage/index.html.erb:158
 msgid "Recent Users"
 msgstr "新着ユーザ"
 
@@ -5262,7 +5267,7 @@ msgstr "ユーザ登録して%sの利用を開始する"
 msgid "Registered Users"
 msgstr "登録ユーザ数"
 
-#: app/views/layouts/wiki.html.erb:75 app/views/layouts/layout.html.erb:141
+#: app/views/layouts/wiki.html.erb:75 app/views/layouts/layout.html.erb:122
 #: app/views/layouts/admin/application.html.erb:66
 msgid "Registered Users: %s users"
 msgstr "登録ユーザ数：%s人"
@@ -5313,7 +5318,7 @@ msgstr "%sさんをこのグループの参加者から削除しました。"
 msgid "Reply"
 msgstr "返信"
 
-#: app/views/entries/_entry_detail.html.erb:561
+#: app/views/entries/_entry_detail.html.erb:558
 #: app/views/board_entries/_board_entry_comment.html.erb:16
 msgid "Reply to this comment"
 msgstr "このコメントに返信"
@@ -5343,7 +5348,7 @@ msgstr "OpenID URLの再設定"
 msgid "Resolved"
 msgstr "解決"
 
-#: app/views/entries/_entry_detail.html.erb:280
+#: app/views/entries/_entry_detail.html.erb:277
 msgid "Resume default order"
 msgstr "元の順に戻す"
 
@@ -5391,7 +5396,7 @@ msgstr "正しいCSVファイルの例"
 msgid "Sat"
 msgstr "土"
 
-#: app/views/entries/_entry_detail.html.erb:578
+#: app/views/entries/_entry_detail.html.erb:575
 #: app/views/board_entries/_board_entry_comment.html.erb:30
 #: app/views/portal/_registration_form.html.erb:74
 #: app/views/bookmarks/_topix_bookmarks.html.erb:35
@@ -5416,8 +5421,7 @@ msgstr "保存しています…"
 #: app/views/entries/_search_box.html.erb:7
 #: app/views/entries/_search_box.html.erb:11 app/views/user/group.html.erb:19
 #: app/views/user/group.html.erb:22 app/views/bookmarks/index.html.erb:32
-#: app/views/groups/index.html.erb:32 app/views/shared/_header.html.erb:65
-#: app/views/mypage/_record_post.html.erb:5
+#: app/views/groups/index.html.erb:32 app/views/mypage/_record_post.html.erb:5
 #: app/views/mypage/_record_post.html.erb:11
 #: app/views/share_file/list.html.erb:23 app/views/share_file/list.html.erb:26
 #: app/views/search/share_file_search.html.erb:17
@@ -5703,7 +5707,7 @@ msgstr ""
 msgid "Show rev.%{revision}"
 msgstr "リビジョン%{revision}を表示"
 
-#: app/views/entries/_entry_detail.html.erb:213
+#: app/views/entries/_entry_detail.html.erb:210
 msgid "Show traces"
 msgstr "足跡を表示する"
 
@@ -5781,7 +5785,7 @@ msgid "Signup"
 msgstr "ユーザ登録"
 
 #: app/controllers/statistics_controller.rb:67
-#: app/views/layouts/wiki.html.erb:79 app/views/layouts/layout.html.erb:145
+#: app/views/layouts/wiki.html.erb:79 app/views/layouts/layout.html.erb:126
 #: app/views/layouts/admin/application.html.erb:70
 msgid "Site Information"
 msgstr "サイト情報"
@@ -6254,7 +6258,7 @@ msgstr ""
 "このページは現在削除されています。復旧される場合は[復旧する]リンクを選択くだ"
 "さい。"
 
-#: app/views/entries/_entry_detail.html.erb:201
+#: app/views/entries/_entry_detail.html.erb:198
 msgid ""
 "This question will be hidden from all users' My Page after you set it to "
 "\"Closed\"."
@@ -6303,6 +6307,10 @@ msgstr "最終更新時間："
 msgid "Timeout while loading rss."
 msgstr "RSSのロード時にタイムアウトしました。"
 
+#: app/views/mypage/index.html.erb:149
+msgid "Tips for using bookmarklet"
+msgstr "便利なブックマークレットの使い方"
+
 #: app/views/board_entries/_form.html.erb:45
 #: app/views/bookmarks/index.html.erb:15
 #: app/views/mypage/_record_post.html.erb:45
@@ -6314,15 +6322,11 @@ msgstr "タイトル"
 msgid "To be activated"
 msgstr "利用開始待ち"
 
-#: app/views/board_entries/_embed_dialog.html.erb:202
-msgid "To change this size, right click and select the image property."
-msgstr "画像サイズを変更するには、右クリックしてイメージプロパティを選択して下さい。"
-
 #: app/models/site_count.rb:26
 msgid "Today's Access"
 msgstr "本日のアクセス数"
 
-#: app/views/layouts/wiki.html.erb:76 app/views/layouts/layout.html.erb:142
+#: app/views/layouts/wiki.html.erb:76 app/views/layouts/layout.html.erb:123
 #: app/views/layouts/admin/application.html.erb:67
 msgid "Today's Access: %s access"
 msgstr "本日のアクセス数：%s人"
@@ -6331,7 +6335,7 @@ msgstr "本日のアクセス数：%s人"
 msgid "Today's Entries"
 msgstr "本日の記事数"
 
-#: app/views/layouts/wiki.html.erb:78 app/views/layouts/layout.html.erb:144
+#: app/views/layouts/wiki.html.erb:78 app/views/layouts/layout.html.erb:125
 msgid "Today's Entries: %s entries"
 msgstr "本日の記事数：%s件"
 
@@ -6339,7 +6343,7 @@ msgstr "本日の記事数：%s件"
 msgid "Today's Posts: %s posts"
 msgstr "本日の記事数：%s件"
 
-#: app/views/entries/_entry_detail.html.erb:468
+#: app/views/entries/_entry_detail.html.erb:465
 msgid "Too many points!"
 msgstr "やりすぎ！"
 
@@ -6355,7 +6359,7 @@ msgstr "みんながよく使うタグ（人気の10件）："
 msgid "Topic Entry"
 msgstr "話題の記事"
 
-#: app/views/entries/_entry_detail.html.erb:238
+#: app/views/entries/_entry_detail.html.erb:235
 msgid "Topic Entry: "
 msgstr "話題の記事："
 
@@ -6363,7 +6367,7 @@ msgstr "話題の記事："
 msgid "Total Entries"
 msgstr "総記事件数"
 
-#: app/views/layouts/wiki.html.erb:77 app/views/layouts/layout.html.erb:143
+#: app/views/layouts/wiki.html.erb:77 app/views/layouts/layout.html.erb:124
 #: app/views/layouts/admin/application.html.erb:68
 msgid "Total Entries: %s entries"
 msgstr "総記事件数：%s件"
@@ -6530,9 +6534,9 @@ msgstr "アップロード"
 
 #: app/views/board_entries/_embed_dialog.html.erb:5
 #: app/views/group/_action_box.html.erb:16
+#: app/views/shared/_global_footer_navigation.html.erb:11
 #: app/views/mypage/_action_box.html.erb:5
 #: app/views/share_file/_action_box.html.erb:6
-#: app/views/layouts/layout.html.erb:125
 #: app/views/chapters/_embed_dialog.html.erb:5
 msgid "Upload a file"
 msgstr "ファイルをアップ"
@@ -7155,11 +7159,11 @@ msgid "Within a minute"
 msgstr "1分以内"
 
 #: app/views/user/_new_blog_links.html.erb:1
-#: app/views/layouts/layout.html.erb:118
+#: app/views/shared/_global_footer_navigation.html.erb:4
 msgid "Write a blog entry"
 msgstr "ブログを書く"
 
-#: app/views/entries/_entry_detail.html.erb:291
+#: app/views/entries/_entry_detail.html.erb:288
 msgid "Write a comment"
 msgstr "コメントを書く"
 
@@ -7170,7 +7174,7 @@ msgstr "お知らせを書く"
 
 #: app/views/user/_new_blog_links.html.erb:5
 #: app/views/group/_new_forum_links.html.erb:5
-#: app/views/layouts/layout.html.erb:121
+#: app/views/shared/_global_footer_navigation.html.erb:7
 msgid "Write a question"
 msgstr "質問を書く"
 
@@ -7398,12 +7402,12 @@ msgstr "【%{year}年%{month}月のアーカイブ】"
 msgid "[Back to the histories list]"
 msgstr "[履歴一覧に戻る]"
 
-#: app/views/entries/_entry_detail.html.erb:266
+#: app/views/entries/_entry_detail.html.erb:263
 msgid "[Bookmarked by: %d member]"
 msgid_plural "[Bookmarked by: %d members]"
 msgstr[0] "[被ブクマ:%d人]"
 
-#: app/views/entries/_entry_detail.html.erb:190
+#: app/views/entries/_entry_detail.html.erb:187
 msgid "[Bottom of page]"
 msgstr "[ページ末尾]"
 
@@ -7620,7 +7624,7 @@ msgstr "[今月]"
 msgid "[Today]"
 msgstr "[今日]"
 
-#: app/views/entries/_entry_detail.html.erb:318
+#: app/views/entries/_entry_detail.html.erb:315
 msgid "[Top of page]"
 msgstr "[ページ先頭]"
 
@@ -7637,11 +7641,11 @@ msgstr "[全てのチェックをはずす]"
 msgid "[Unread]"
 msgstr "[未読]"
 
-#: app/views/entries/_entry_detail.html.erb:313
+#: app/views/entries/_entry_detail.html.erb:310
 msgid "[Write a new blog entry with this as topic]"
 msgstr "[この記事を「話題」にして、新しいブログを書く]"
 
-#: app/views/entries/_entry_detail.html.erb:311
+#: app/views/entries/_entry_detail.html.erb:308
 msgid "[Write a new forum entry with this as topic]"
 msgstr "[この記事を「話題」にして、フォーラムに新しい記事を投稿する]"
 
@@ -7669,7 +7673,7 @@ msgstr "[質問]"
 msgid "[追加する]"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:229
+#: app/views/entries/_entry_detail.html.erb:226
 msgid "]"
 msgstr ""
 
@@ -8160,7 +8164,7 @@ msgstr ""
 "必須になります。"
 
 #: app/helpers/application_helper.rb:39
-#: app/views/board_entries/_embed_dialog.html.erb:256
+#: app/views/board_entries/_embed_dialog.html.erb:253
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr "« 前"
@@ -8228,6 +8232,11 @@ msgstr "« 前"
 
 #~ msgid "Themes"
 #~ msgstr "テーマ"
+
+#~ msgid "To change this size, right click and select the image property."
+#~ msgstr ""
+#~ "画像サイズを変更するには、右クリックしてイメージプロパティを選択して下さ"
+#~ "い。"
 
 #~ msgid "View Source"
 #~ msgstr "ソース表示"
