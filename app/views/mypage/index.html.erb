@@ -145,6 +145,9 @@
       </div>
       <div class="topix_body" id="bookmark_body">
         <%= render :partial => 'bookmarks/topix_bookmarks', :locals => { :bookmarks => @bookmarks } %>
+        <div class="topix_body_bottom">
+          <%= link_to _('Tips for using bookmarklet'), "http://help.skipaas.jp/guides/bookmarklet?skip_url=#{root_url.gsub(/\/$/, '')}&skip_name=#{h(Admin::Setting.abbr_app_title)}", :class => 'bookmarklet' %>
+        </div>
       </div>
     <% end -%>
 
