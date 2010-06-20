@@ -182,7 +182,7 @@ class Group < ActiveRecord::Base
         end
         if participation.new_record?
           participation.save!
-          target_user.notices.create!(:target => self) unless target_user.notices.find_by_target_id(self.id)
+          target_user.notices.create!(:target => self) if target_user.notices.subscribed(self).empty?
           participation
         else
           self.errors.add_to_base _("%s has already joined / applied to join this group.") % target_user.name
@@ -200,7 +200,7 @@ class Group < ActiveRecord::Base
     Group.transaction do
       if participation = self.group_participations.find_by_user_id(user.id)
         participation.destroy
-        if notice = user.notices.find_by_target_id(self.id)
+        if notice = user.notices.subscribed(self).first
           notice.destroy
         end
         if block_given?
