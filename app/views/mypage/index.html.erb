@@ -61,34 +61,11 @@
     <% end -%>
 
     <%= render :partial => 'rss_feed_box' %>
-
-    <% cache @access_blogs_cache_key do %>
-      <% unless @access_blogs[:pages].empty? -%>
-        <div class="right_box ui-corner-all" id="access_blogs">
-          <h2 class="ui-corner-top">
-            <%= h(@access_blogs[:title_name]) %><br />
-            <span class="desc">
-              (<%= Time.now.ago(recent_day.day).strftime(_('%B %d %Y')) %> - <%= Time.now.strftime(_('%B %d %Y')) %>)
-            </span>
-          </h2>
-          <div class="list">
-            <table>
-              <% @access_blogs[:pages].each_with_index do |entry, i| %>
-                <tr>
-                  <td class="left" width="40px">
-                    <div class="picture"><%= i+1 %>.<%= show_picture(entry.user, :width => 24, :height => 24) %></div>
-                  </td>
-                  <td class="right" width="138px">
-                    <div class="title"><%= link_to h(entry.title), entry.get_url_hash %><span class="small_text">(<%= h entry.state.today_access_count %>)</span></div>
-                    <div class="name">by <%= user_link_to entry.user %></div>
-                  </td>
-                </tr>
-              <% end -%>
-            </table>
-          </div>
-          <%= link_to( _('Show other rankings'), :controller => '/rankings', :action => 'index') if ranking_enabled? %>
-        </div>
-      <% end -%>
+    <% cache @today_popular_blogs_cache_key do %>
+      <%= render :partial => 'today_access_blogs_box', :locals => {:entries => @today_popular_blogs, :title => _('Today Popular Entries'), :type => :today } %>
+    <% end -%>
+    <% cache @recent_popular_blogs_cache_key do %>
+      <%= render :partial => 'today_access_blogs_box', :locals => {:entries => @recent_popular_blogs, :title => _('Recent Popular Entries'), :type => :recent } %>
     <% end -%>
 
     <% if extra_chain_enabled? -%>

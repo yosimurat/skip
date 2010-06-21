@@ -1,0 +1,33 @@
+<% entries ||= [] -%>
+<% title ||= '' -%>
+<% type ||= :today %>
+<% unless entries.empty? -%>
+  <div class="right_box ui-corner-all" id="access_blogs">
+    <h2 class="ui-corner-top">
+      <%= h(title) %><br />
+      <span class="desc">
+        (<%= Time.now.ago(recent_day.day).strftime(_('%B %d %Y')) %> - <%= Time.now.strftime(_('%B %d %Y')) %>)
+      </span>
+    </h2>
+    <div class="list">
+      <table>
+        <% entries.each_with_index do |entry, i| %>
+          <tr>
+            <td class="left" width="40px">
+              <div class="picture"><%= i+1 %>.<%= show_picture(entry.user, :width => 24, :height => 24) %></div>
+            </td>
+            <td class="right" width="138px">
+              <div class="title"><%= link_to h(entry.title), entry.get_url_hash %>
+                <span class="small_text">
+                  <%= (type == :recent) ? "(#{h(entry.state.access_count)})" : _('Today') + "(#{entry.state.today_access_count})" + '&nbsp;' + _('Total') + "(#{entry.state.access_count})" %>
+                </span>
+              </div>
+              <div class="name">by <%= user_link_to entry.user %></div>
+            </td>
+          </tr>
+        <% end -%>
+      </table>
+    </div>
+    <%= link_to( _('Show other rankings'), :controller => '/rankings', :action => 'index') if ranking_enabled? %>
+  </div>
+<% end -%>

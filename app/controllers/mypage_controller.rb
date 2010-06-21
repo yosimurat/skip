@@ -53,14 +53,31 @@ class MypageController < ApplicationController
     #  main area entries
     # ============================================================
     @questions = find_questions_as_locals({:recent_day => recent_day})
-    @access_blogs_cache_key = "access_blog_#{Time.now.strftime('%Y%m%d%H')}"
-    # access_blogの取得は複数tableのカラムを伴うソートをするため非常に重くなる
-    # mysqlの実行計画ではUsing temporaryになる最悪のパターン
-    # 毎回取得する必要性は低いため1時間に1度フラグメントキャッシュを用いてキャッシュしておくことにする
-    unless read_fragment(@access_blogs_cache_key)
-      expire_fragment_without_locale("access_blog_#{Time.now.ago(1.hour).strftime('%Y%m%d%H')}") # 古いcacheの除去
-      @access_blogs = find_access_blogs_as_locals({:per_page => 10})
+
+    # 複数tableのカラムを伴うソートをするため非常に重くなる(実行計画ではUsing temporary)のでキャッシュ(1回/h)
+    @today_popular_blogs_cache_key = "today_popular_blog_#{Time.now.strftime('%Y%m%d%H')}"
+    if SkipEmbedded::InitialSettings['mypage'] && SkipEmbedded::InitialSettings['mypage']['show_today_popular_blogs_box']
+      unless read_fragment(@today_popular_blogs_cache_key)
+        expire_fragment_without_locale("today_popular_blog_#{Time.now.ago(1.hour).strftime('%Y%m%d%H')}") # 古いcacheの除去
+        @today_popular_blogs = BoardEntry.accessible(current_user).scoped(
+          :conditions => "board_entry_points.today_access_count > 0",
+          :order => "board_entry_points.today_access_count DESC, board_entry_points.access_count DESC, board_entries.last_updated DESC, board_entries.id DESC",
+          :include => [ :user, :state ]
+        ).timeline.recent(recent_day.day).limit(10)
+      end
     end
+
+    @recent_popular_blogs_cache_key = "recent_popular_blog_#{Time.now.strftime('%Y%m%d%H')}"
+    if SkipEmbedded::InitialSettings['mypage'] && SkipEmbedded::InitialSettings['mypage']['show_recent_popular_blogs_box']
+      unless read_fragment(@recent_popular_blogs_cache_key)
+        expire_fragment_without_locale("recent_popular_blog_#{Time.now.ago(1.hour).strftime('%Y%m%d%H')}") # 古いcacheの除去
+        @recent_popular_blogs = BoardEntry.accessible(current_user).scoped(
+          :order => "board_entry_points.access_count DESC, board_entries.last_updated DESC, board_entries.id DESC",
+          :include => [ :user, :state ]
+        ).timeline.recent(recent_day.day).limit(10)
+      end
+    end
+
     @recent_blogs = find_recent_blogs_as_locals({:per_page => per_page})
     @timelines = find_timelines_as_locals({:per_page => per_page}) if current_user.custom.display_entries_format == 'tabs'
     @recent_bbs = recent_bbs
@@ -495,7 +512,6 @@ class MypageController < ApplicationController
     group_categories = GroupCategory.all.map{ |gc| gc.code.downcase }
     case
     when target == 'questions'             then find_questions_as_locals options
-    when target == 'access_blogs'          then find_access_blogs_as_locals options
     when target == 'recent_blogs'          then find_recent_blogs_as_locals options
     when target == 'timelines'             then find_timelines_as_locals options
     when group_categories.include?(target) then find_recent_bbs_as_locals target, options
@@ -516,22 +532,6 @@ class MypageController < ApplicationController
       :per_page => options[:per_page],
       :recent_day => options[:recent_day],
       :symbol2name_hash => BoardEntry.get_symbol2name_hash(pages)
-    }
-  end
-
-  # 最近の人気記事一覧を取得する（partial用のオプションを返す）
-  def find_access_blogs_as_locals options
-    find_params = BoardEntry.make_conditions(current_user.belong_symbols, {:publication_type => 'public'})
-    pages = BoardEntry.scoped(
-      :conditions => find_params[:conditions],
-      :order => "board_entry_points.today_access_count DESC, board_entry_points.access_count DESC, board_entries.last_updated DESC, board_entries.id DESC",
-      :include => find_params[:include] | [ :user, :state ]
-    ).timeline.recent(recent_day.day).paginate(:page => params[:page], :per_page => options[:per_page])
-
-    locals = {
-      :title_name => _('Recent Popular Entries'),
-      :per_page => options[:per_page],
-      :pages => pages
     }
   end
 
@@ -625,7 +625,7 @@ class MypageController < ApplicationController
   end
 
   def valid_list_types
-    %w(questions access_blogs recent_blogs) | GroupCategory.all.map{ |gc| gc.code.downcase }
+    %w(questions recent_blogs) | GroupCategory.all.map{ |gc| gc.code.downcase }
   end
 
   # TODO BoardEntryに移動する
