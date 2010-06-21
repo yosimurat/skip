@@ -1,17 +1,20 @@
+<% hide_tag_list ||= false -%>
 <% params[:tag] ||= {:words =>"", :select =>'AND'} -%>
-  <tr>
-    <th><%= label_tag 'tag_words', _('Tags') %></th>
-    <td><%= text_field_tag('tag_words', params[:tag_words], :size => '60') %>
-    <%= _('[Tag search mode]:&nbsp;AND&nbsp;%{radio_and}&nbsp;OR&nbsp;%{radio_or}') % {:radio_and => radio_button_tag('tag_select', 'AND', params[:tag_select]=='AND'), :radio_or => radio_button_tag('tag_select', 'OR', params[:tag_select]=='OR') } %>
-    </td>
-  </tr>
+<tr>
+  <th><%= label_tag 'tag_words', _('Tags') %></th>
+  <td><%= text_field_tag('tag_words', params[:tag_words], :size => '60') %>
+  <%= _('[Tag search mode]:&nbsp;AND&nbsp;%{radio_and}&nbsp;OR&nbsp;%{radio_or}') % {:radio_and => radio_button_tag('tag_select', 'AND', params[:tag_select]=='AND'), :radio_or => radio_button_tag('tag_select', 'OR', params[:tag_select]=='OR') } %>
+  </td>
+</tr>
+<% unless hide_tag_list -%>
   <tr><td colspan="2"><div id="tag_list"></div></td></tr>
   <tr><td colspan="2"><div style="font-size: 10px;"><%= n_("*Showing %s popular tag.", "*Showing %s popular tags.", tags.size) % h(tags.size) %></div></td></tr>
 
-<% content_for :javascript_initializers do -%>
-      $j('#tag_words').jTagging(
-          $j('#tag_list').append(
-              createTagsLink(new Array(<%= tags.map{|tag| ("'#{h tag}'")}.join(',') %>))
-          )
-      );
+  <% content_for :javascript_initializers do -%>
+  $j('#tag_words').jTagging(
+    $j('#tag_list').append(
+      createTagsLink(new Array(<%= tags.map{|tag| ("'#{h tag}'")}.join(',') %>))
+    )
+  );
+  <% end -%>
 <% end -%>

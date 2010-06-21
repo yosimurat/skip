@@ -1,3 +1,16 @@
+<% if extra_chain_enabled? -%>
+  <% content_for :stylesheet do -%>
+    <style type="text/css">
+      div#contents_container div#contents_left {
+        width: 200px;
+      }
+      div#contents_container div#contents_right {
+        margin-left: 215px;
+      }
+    </style>
+  <% end -%>
+<% end -%>
+
 <% content_for :contents_left do -%>
   <% if extra_chain_enabled? -%>
     <%= render :partial => 'chains/tag_cloud_box', :locals => {:tags => ChainTag.all_tags_with_count, :hide_all_link => true} %>
@@ -24,7 +37,7 @@
           <%= text_field_tag 'profile_value', params[:profile_value], :size => '30' %>
         </td>
       </tr>
-      <%= render :partial => 'search/tag_search', :locals => {:tags => @tags} %>
+      <%= render :partial => 'search/tag_search', :locals => {:tags => @tags, :hide_tag_list => extra_chain_enabled? } %>
     </table>
     <div class="submit">
       <%= f.submit _('Search') %>

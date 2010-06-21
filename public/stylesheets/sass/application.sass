@@ -509,19 +509,37 @@ div.topix_body
 
 // タグクラウド
 // ------------------------------------------------------------
-a.tag1, span.tag1
-  :font-size = !base_font_size
-a.tag2, span.tag2
-  :font-size = !base_font_size + 3px
-a.tag3, span.tag3
-  :font-size = !base_font_size + 6px
-a.tag4, span.tag4
-  :font-size = !base_font_size + 9px
-a.tag5, span.tag5
-  :font-size = !base_font_size + 12px
-a.tag6, span.tag6
-  :font-size = !base_font_size + 15px
 .tag_cloud
+  a.tag1, span.tag1
+    :font-size = !base_font_size
+  a.tag2, span.tag2
+    :font-size = !base_font_size + 3px
+  a.tag3, span.tag3
+    :font-size = !base_font_size + 6px
+  a.tag4, span.tag4
+    :font-size = !base_font_size + 9px
+  a.tag5, span.tag5
+    :font-size = !base_font_size + 12px
+  a.tag6, span.tag6
+    :font-size = !base_font_size + 15px
+  .count
+    :font
+      :size = !small_font_size
+    :color silver
+
+.no_tag_cloud
+  a.tag1, span.tag1
+    :font-size = !base_font_size
+  a.tag2, span.tag2
+    :font-size = !base_font_size
+  a.tag3, span.tag3
+    :font-size = !base_font_size
+  a.tag4, span.tag4
+    :font-size = !base_font_size
+  a.tag5, span.tag5
+    :font-size = !base_font_size
+  a.tag6, span.tag6
+    :font-size = !base_font_size
   .count
     :font
       :size = !small_font_size

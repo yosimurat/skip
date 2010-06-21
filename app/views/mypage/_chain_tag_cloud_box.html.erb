@@ -4,9 +4,9 @@
 <% if tags && !tags.empty? -%>
 <div class="right_box ui-corner-all">
   <h2 class="ui-corner-top"><%= h(title) %></h2>
-  <div class="tag_cloud" style="padding: 5px 0px;">
+  <div class="no_tag_cloud" style="padding: 5px 0px;">
   <% tag_cloud tags do |name, count, css_class| -%>
-    <%= link_to(h(name), users_path(:tag_words => h(name)), :class => "tag tag1") %>
+    <%= link_to(h(name), users_path(:tag_words => h(name)), :class => "tag #{css_class}") %>
     <span class="count">(<%= h count %>)</span>
   <% end -%>
   </div>
