@@ -57,7 +57,7 @@ SKIPを動かすことができます。
 1. gemsのインストール
 --------------------------------------------------------------------------------
     $ sudo gem sources -a http://gems.github.com/
-    $ sudo gem sources -a http://gemcutter.org/
+    $ sudo gem sources -a http://rubygems.org/
     $ sudo gem install rails --version 2.3.5
     $ sudo gem install openskip-skip_embedded --version 0.9.19
     $ sudo gem install will_paginate --version 2.3.12
