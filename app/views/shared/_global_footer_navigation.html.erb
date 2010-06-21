@@ -3,6 +3,11 @@
     <span class="item button ui-corner-all out">
       <%= link_to(icon_tag('page_add', :title => _('Write a blog entry')) + _('Write a blog entry'), {:controller => '/edit', :action => :index, :uid => current_user.uid}, :title => _('Write a blog entry')) %>
     </span>
+    <% if notice_entry_enabled? -%>
+      <span class="item button ui-corner-all out">
+        <%= link_to(icon_tag('page_gear', :title => _('Write a notice')) + _('Write a notice'), {:controller => '/edit', :action => :index, :aim_type => 'notice', :uid => current_user.uid}, :title => _('Write a notice')) %>
+      </span>
+    <% end -%>
     <span class="item button ui-corner-all out">
       <%= link_to(icon_tag('page_gear', :title => _('Write a question')) + _('Write a question'), {:controller => '/edit', :action => :index, :aim_type => 'question', :uid => current_user.uid}, :title => _('Write a question')) %>
     </span>
