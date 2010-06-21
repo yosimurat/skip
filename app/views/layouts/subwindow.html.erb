@@ -19,8 +19,6 @@
   <%= yield %>
 </div><!-- main -->
 
-</body>
-
 <%= all_javascript_include_tag 'jquery' %>
 <% javascript_tag do -%>
 $j = jQuery.noConflict();
@@ -35,4 +33,5 @@ $j(function(){
     <%= yield :javascript_initializers %>
 });
 <% end -%>
+</body>
 </html>
