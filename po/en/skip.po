@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.0\n"
-"POT-Creation-Date: 2010-06-18 10:49+0900\n"
+"POT-Creation-Date: 2010-06-21 14:07+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,8 +40,9 @@ msgstr ""
 #: app/views/bookmarks/_topix_bookmarks.html.erb:47
 #: app/views/groups/_group_list.html.erb:24
 #: app/views/mypage/entries_by_date.html.erb:13
-#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:71
-#: app/views/mypage/index.html.erb:168 app/views/mypage/index.html.erb:185
+#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:145
+#: app/views/mypage/index.html.erb:162
+#: app/views/mypage/_today_access_blogs_box.html.erb:9
 #: app/views/share_file/_topix_share_files.html.erb:39
 #: app/views/bookmark/list.html.erb:42 app/views/bookmark/show.html.erb:51
 #: app/views/rankings/bookmark.html.erb:2
@@ -2635,7 +2636,7 @@ msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr ""
 
-#: app/views/mypage/index.html.erb:144
+#: app/views/mypage/index.html.erb:121
 msgid "Create my new bookmark"
 msgstr ""
 
@@ -2905,7 +2906,7 @@ msgstr[1] ""
 msgid "Email address is mandatory."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:287
+#: app/controllers/mypage_controller.rb:304
 msgid "Email address was updated successfully."
 msgstr ""
 
@@ -3014,11 +3015,11 @@ msgstr ""
 msgid "Entries you posted to your blog and group BBSs."
 msgstr "Entries you posted to your blog and group forums."
 
-#: app/controllers/mypage_controller.rb:181
+#: app/controllers/mypage_controller.rb:198
 msgid "Entry was successfully marked read."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:181
+#: app/controllers/mypage_controller.rb:198
 msgid "Entry was successfully marked unread."
 msgstr ""
 
@@ -3130,7 +3131,7 @@ msgstr ""
 msgid "Failed to delete since there are still other users in the group."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:204
+#: app/controllers/mypage_controller.rb:221
 msgid "Failed to load rss."
 msgstr ""
 
@@ -3138,7 +3139,7 @@ msgstr ""
 msgid "Failed to open the content."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:273
+#: app/controllers/mypage_controller.rb:290
 msgid "Failed to process your request. Try resubmitting your request again."
 msgstr ""
 
@@ -3721,7 +3722,7 @@ msgstr ""
 msgid "Internet"
 msgstr ""
 
-#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:165
+#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:142
 msgid "Introduce"
 msgstr ""
 
@@ -3757,7 +3758,7 @@ msgstr ""
 msgid "Introductions"
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:322
+#: app/controllers/mypage_controller.rb:339
 msgid "Invalid OpenID URL format."
 msgstr ""
 
@@ -4203,7 +4204,7 @@ msgid "My Blog"
 msgstr ""
 
 #: app/helpers/user_helper.rb:53 app/helpers/user_helper.rb:57
-#: app/controllers/mypage_controller.rb:352
+#: app/controllers/mypage_controller.rb:369
 #: app/views/shared/_global_navigation.html.erb:2
 msgid "My Page"
 msgstr ""
@@ -4259,7 +4260,7 @@ msgid "New Posts"
 msgstr ""
 
 #: app/controllers/feed/bookmarks_controller.rb:8
-#: app/views/mypage/index.html.erb:143
+#: app/views/mypage/index.html.erb:120
 msgid "New bookmarks"
 msgstr ""
 
@@ -4351,7 +4352,7 @@ msgstr ""
 msgid "No matching groups found."
 msgstr ""
 
-#: app/views/mypage/index.html.erb:110
+#: app/views/mypage/index.html.erb:87
 msgid "No matching questions."
 msgstr ""
 
@@ -4389,7 +4390,7 @@ msgstr ""
 msgid "Not Accept"
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:488
+#: app/controllers/mypage_controller.rb:505
 #: app/controllers/mypage_controller.rb:679
 msgid "Notices for you"
 msgstr ""
@@ -4552,7 +4553,7 @@ msgstr ""
 msgid "OpenID URL"
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:310
+#: app/controllers/mypage_controller.rb:327
 msgid "OpenID URL was successfully set."
 msgstr ""
 
@@ -4575,7 +4576,7 @@ msgstr ""
 msgid "OpenID server not found. Please provide a correct OpenID URL."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:317
+#: app/controllers/mypage_controller.rb:334
 msgid "OpenId process is cancelled or failed."
 msgstr ""
 
@@ -4776,7 +4777,7 @@ msgstr ""
 msgid "Password was successfully reset."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:253
+#: app/controllers/mypage_controller.rb:270
 msgid "Password was successfully updated."
 msgstr ""
 
@@ -4854,7 +4855,7 @@ msgstr ""
 msgid "Playing Sports"
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:326
+#: app/controllers/mypage_controller.rb:343
 msgid "Please input OpenID URL."
 msgstr ""
 
@@ -5091,12 +5092,12 @@ msgstr ""
 msgid "Recent Entries"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:178
+#: app/views/mypage/index.html.erb:155
 msgid "Recent Groups"
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:532
 #: app/controllers/feed/board_entries_controller.rb:35
+#: app/views/mypage/index.html.erb:68
 msgid "Recent Popular Entries"
 msgstr ""
 
@@ -5104,12 +5105,12 @@ msgstr ""
 msgid "Recent Profiles"
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:514
+#: app/controllers/mypage_controller.rb:530
 #: app/controllers/feed/board_entries_controller.rb:8
 msgid "Recent Questions"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:158
+#: app/views/mypage/index.html.erb:135
 msgid "Recent Users"
 msgstr ""
 
@@ -5379,7 +5380,7 @@ msgstr ""
 msgid "Selected publication type"
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:113
+#: app/controllers/mypage_controller.rb:130
 msgid "Self Admin"
 msgstr ""
 
@@ -5571,7 +5572,7 @@ msgstr ""
 msgid "Show groups you have not joined only."
 msgstr ""
 
-#: app/views/mypage/index.html.erb:89
+#: app/views/mypage/_today_access_blogs_box.html.erb:31
 msgid "Show other rankings"
 msgstr ""
 
@@ -5755,7 +5756,7 @@ msgstr ""
 msgid "Specified page does not exist."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:296
+#: app/controllers/mypage_controller.rb:313
 msgid "Specified page not found."
 msgstr ""
 
@@ -6056,7 +6057,7 @@ msgstr ""
 msgid "The search targets are titles and comments"
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:292
+#: app/controllers/mypage_controller.rb:309
 msgid ""
 "The specified email address has already been registered. Try resubmitting "
 "the request with another address."
@@ -6150,11 +6151,11 @@ msgstr ""
 msgid "Time Last Updated: "
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:199
+#: app/controllers/mypage_controller.rb:216
 msgid "Timeout while loading rss."
 msgstr ""
 
-#: app/views/mypage/index.html.erb:149
+#: app/views/mypage/index.html.erb:126
 msgid "Tips for using bookmarklet"
 msgstr ""
 
@@ -6167,6 +6168,14 @@ msgstr ""
 
 #: app/views/admin/users/index.html.erb:31
 msgid "To be activated"
+msgstr ""
+
+#: app/views/mypage/_today_access_blogs_box.html.erb:22
+msgid "Today"
+msgstr ""
+
+#: app/views/mypage/index.html.erb:65
+msgid "Today Popular Entries"
 msgstr ""
 
 #: app/models/site_count.rb:26
@@ -6208,6 +6217,10 @@ msgstr ""
 
 #: app/views/entries/_entry_detail.html.erb:235
 msgid "Topic Entry: "
+msgstr ""
+
+#: app/views/mypage/_today_access_blogs_box.html.erb:22
+msgid "Total"
 msgstr ""
 
 #: app/models/site_count.rb:31
@@ -6347,11 +6360,11 @@ msgstr ""
 msgid "Updated %{count} records."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:243
+#: app/controllers/mypage_controller.rb:260
 msgid "Updated notification email settings."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:336
+#: app/controllers/mypage_controller.rb:353
 msgid "Updated successfully."
 msgstr ""
 
@@ -6429,7 +6442,7 @@ msgid ""
 "User has entered email address %s is not in use. Please start with the site."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:222
+#: app/controllers/mypage_controller.rb:239
 msgid "User information was successfully updated."
 msgstr ""
 
@@ -7176,7 +7189,7 @@ msgstr ""
 msgid "Your registration is complete."
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:271
+#: app/controllers/mypage_controller.rb:288
 msgid ""
 "Your request of changing email address accepted. Check your email to "
 "complete the process."
@@ -7619,11 +7632,11 @@ msgstr ""
 msgid "description"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:120 app/views/mypage/index.html.erb:123
+#: app/views/mypage/index.html.erb:97 app/views/mypage/index.html.erb:100
 msgid "display flat"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:119 app/views/mypage/index.html.erb:122
+#: app/views/mypage/index.html.erb:96 app/views/mypage/index.html.erb:99
 msgid "display tabs"
 msgstr ""
 

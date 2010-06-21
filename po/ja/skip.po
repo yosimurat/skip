@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.0\n"
-"POT-Creation-Date: 2010-06-18 10:49+0900\n"
+"POT-Creation-Date: 2010-06-21 14:07+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,8 +43,9 @@ msgstr ""
 #: app/views/bookmarks/_topix_bookmarks.html.erb:47
 #: app/views/groups/_group_list.html.erb:24
 #: app/views/mypage/entries_by_date.html.erb:13
-#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:71
-#: app/views/mypage/index.html.erb:168 app/views/mypage/index.html.erb:185
+#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:145
+#: app/views/mypage/index.html.erb:162
+#: app/views/mypage/_today_access_blogs_box.html.erb:9
 #: app/views/share_file/_topix_share_files.html.erb:39
 #: app/views/bookmark/list.html.erb:42 app/views/bookmark/show.html.erb:51
 #: app/views/rankings/bookmark.html.erb:2
@@ -2694,7 +2695,7 @@ msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr "記事の公開範囲によらず全体公開のブログとして新しい記事を作成します。"
 
-#: app/views/mypage/index.html.erb:144
+#: app/views/mypage/index.html.erb:121
 msgid "Create my new bookmark"
 msgstr "自分もブックマークする"
 
@@ -2974,7 +2975,7 @@ msgstr[1] "指定されたうち%{num}個のメールアドレスは既に利用
 msgid "Email address is mandatory."
 msgstr "メールアドレスは必須です。"
 
-#: app/controllers/mypage_controller.rb:287
+#: app/controllers/mypage_controller.rb:304
 msgid "Email address was updated successfully."
 msgstr "メールアドレスが正しく更新されました。"
 
@@ -3083,11 +3084,11 @@ msgstr "過去にあなたがコメントを残した記事"
 msgid "Entries you posted to your blog and group BBSs."
 msgstr "あなたが投稿した記事の一覧です。"
 
-#: app/controllers/mypage_controller.rb:181
+#: app/controllers/mypage_controller.rb:198
 msgid "Entry was successfully marked read."
 msgstr "記事を既読にしました。"
 
-#: app/controllers/mypage_controller.rb:181
+#: app/controllers/mypage_controller.rb:198
 msgid "Entry was successfully marked unread."
 msgstr "記事を未読にしました。"
 
@@ -3199,7 +3200,7 @@ msgstr "'%{page}'の削除に失敗しました。"
 msgid "Failed to delete since there are still other users in the group."
 msgstr "自分以外のユーザがまだ存在しています。削除できません。"
 
-#: app/controllers/mypage_controller.rb:204
+#: app/controllers/mypage_controller.rb:221
 msgid "Failed to load rss."
 msgstr "RSSの読み込みに失敗しました。"
 
@@ -3207,7 +3208,7 @@ msgstr "RSSの読み込みに失敗しました。"
 msgid "Failed to open the content."
 msgstr "対象のコンテンツを開くことが出来ませんでした。"
 
-#: app/controllers/mypage_controller.rb:273
+#: app/controllers/mypage_controller.rb:290
 msgid "Failed to process your request. Try resubmitting your request again."
 msgstr "処理に失敗しました。もう一度申請してください。"
 
@@ -3812,7 +3813,7 @@ msgstr "想定外のエラーが発生しました。管理者にお問い合わ
 msgid "Internet"
 msgstr "インターネット"
 
-#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:165
+#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:142
 msgid "Introduce"
 msgstr "みんなに紹介する"
 
@@ -3848,7 +3849,7 @@ msgstr "紹介文："
 msgid "Introductions"
 msgstr "紹介文"
 
-#: app/controllers/mypage_controller.rb:322
+#: app/controllers/mypage_controller.rb:339
 msgid "Invalid OpenID URL format."
 msgstr "不正な形式のOpenID URLです。"
 
@@ -4309,7 +4310,7 @@ msgid "My Blog"
 msgstr "マイブログ"
 
 #: app/helpers/user_helper.rb:53 app/helpers/user_helper.rb:57
-#: app/controllers/mypage_controller.rb:352
+#: app/controllers/mypage_controller.rb:369
 #: app/views/shared/_global_navigation.html.erb:2
 msgid "My Page"
 msgstr "マイページ"
@@ -4365,7 +4366,7 @@ msgid "New Posts"
 msgstr "記事を書く"
 
 #: app/controllers/feed/bookmarks_controller.rb:8
-#: app/views/mypage/index.html.erb:143
+#: app/views/mypage/index.html.erb:120
 msgid "New bookmarks"
 msgstr "新着ブックマーク"
 
@@ -4459,7 +4460,7 @@ msgstr "該当する投稿はありませんでした。"
 msgid "No matching groups found."
 msgstr "該当するグループはありませんでした。"
 
-#: app/views/mypage/index.html.erb:110
+#: app/views/mypage/index.html.erb:87
 msgid "No matching questions."
 msgstr "みんなからの質問はありません"
 
@@ -4499,7 +4500,7 @@ msgstr "存在しないもしくはサイズ０のファイルはアップロー
 msgid "Not Accept"
 msgstr "同意しない"
 
-#: app/controllers/mypage_controller.rb:488
+#: app/controllers/mypage_controller.rb:505
 #: app/controllers/mypage_controller.rb:679
 msgid "Notices for you"
 msgstr "あなたへのお知らせ"
@@ -4662,7 +4663,7 @@ msgstr "全体に公開"
 msgid "OpenID URL"
 msgstr ""
 
-#: app/controllers/mypage_controller.rb:310
+#: app/controllers/mypage_controller.rb:327
 msgid "OpenID URL was successfully set."
 msgstr "OpenID URLを設定しました。"
 
@@ -4685,7 +4686,7 @@ msgstr "OpenIDの処理の中でキャンセルされたか、失敗しました
 msgid "OpenID server not found. Please provide a correct OpenID URL."
 msgstr "正しいOpenID URLを入力してください。"
 
-#: app/controllers/mypage_controller.rb:317
+#: app/controllers/mypage_controller.rb:334
 msgid "OpenId process is cancelled or failed."
 msgstr ""
 
@@ -4890,7 +4891,7 @@ msgstr "パスワード強度"
 msgid "Password was successfully reset."
 msgstr "パスワードリセットが完了しました。"
 
-#: app/controllers/mypage_controller.rb:253
+#: app/controllers/mypage_controller.rb:270
 msgid "Password was successfully updated."
 msgstr "パスワードを変更しました。"
 
@@ -4968,7 +4969,7 @@ msgstr "ユーザ"
 msgid "Playing Sports"
 msgstr "スポーツ"
 
-#: app/controllers/mypage_controller.rb:326
+#: app/controllers/mypage_controller.rb:343
 msgid "Please input OpenID URL."
 msgstr "OpenID URLを入力してください。"
 
@@ -5207,12 +5208,12 @@ msgstr "読書"
 msgid "Recent Entries"
 msgstr "新着記事"
 
-#: app/views/mypage/index.html.erb:178
+#: app/views/mypage/index.html.erb:155
 msgid "Recent Groups"
 msgstr "新着グループ"
 
-#: app/controllers/mypage_controller.rb:532
 #: app/controllers/feed/board_entries_controller.rb:35
+#: app/views/mypage/index.html.erb:68
 msgid "Recent Popular Entries"
 msgstr "最近の人気記事"
 
@@ -5220,12 +5221,12 @@ msgstr "最近の人気記事"
 msgid "Recent Profiles"
 msgstr "最近のプロフィール"
 
-#: app/controllers/mypage_controller.rb:514
+#: app/controllers/mypage_controller.rb:530
 #: app/controllers/feed/board_entries_controller.rb:8
 msgid "Recent Questions"
 msgstr "みんなからの質問!"
 
-#: app/views/mypage/index.html.erb:158
+#: app/views/mypage/index.html.erb:135
 msgid "Recent Users"
 msgstr "新着ユーザ"
 
@@ -5502,7 +5503,7 @@ msgstr "選択中"
 msgid "Selected publication type"
 msgstr "選択されている公開範囲"
 
-#: app/controllers/mypage_controller.rb:113
+#: app/controllers/mypage_controller.rb:130
 msgid "Self Admin"
 msgstr "自分の管理"
 
@@ -5695,7 +5696,7 @@ msgstr "現在の画像を表示"
 msgid "Show groups you have not joined only."
 msgstr "まだ参加していないグループのみ表示"
 
-#: app/views/mypage/index.html.erb:89
+#: app/views/mypage/_today_access_blogs_box.html.erb:31
 msgid "Show other rankings"
 msgstr "他のランキングを見る"
 
@@ -5891,7 +5892,7 @@ msgstr "指定のグループは存在していません"
 msgid "Specified page does not exist."
 msgstr "指定のページは存在していません。"
 
-#: app/controllers/mypage_controller.rb:296
+#: app/controllers/mypage_controller.rb:313
 msgid "Specified page not found."
 msgstr "指定されたページは存在しません。"
 
@@ -6199,7 +6200,7 @@ msgstr "タグ、タイトル、本文が検索対象となります"
 msgid "The search targets are titles and comments"
 msgstr "タイトル、コメントが検索対象となります"
 
-#: app/controllers/mypage_controller.rb:292
+#: app/controllers/mypage_controller.rb:309
 msgid ""
 "The specified email address has already been registered. Try resubmitting "
 "the request with another address."
@@ -6303,11 +6304,11 @@ msgstr "サムネイル"
 msgid "Time Last Updated: "
 msgstr "最終更新時間："
 
-#: app/controllers/mypage_controller.rb:199
+#: app/controllers/mypage_controller.rb:216
 msgid "Timeout while loading rss."
 msgstr "RSSのロード時にタイムアウトしました。"
 
-#: app/views/mypage/index.html.erb:149
+#: app/views/mypage/index.html.erb:126
 msgid "Tips for using bookmarklet"
 msgstr "便利なブックマークレットの使い方"
 
@@ -6321,6 +6322,14 @@ msgstr "タイトル"
 #: app/views/admin/users/index.html.erb:31
 msgid "To be activated"
 msgstr "利用開始待ち"
+
+#: app/views/mypage/_today_access_blogs_box.html.erb:22
+msgid "Today"
+msgstr "今日"
+
+#: app/views/mypage/index.html.erb:65
+msgid "Today Popular Entries"
+msgstr "今日の人気記事"
 
 #: app/models/site_count.rb:26
 msgid "Today's Access"
@@ -6362,6 +6371,10 @@ msgstr "話題の記事"
 #: app/views/entries/_entry_detail.html.erb:235
 msgid "Topic Entry: "
 msgstr "話題の記事："
+
+#: app/views/mypage/_today_access_blogs_box.html.erb:22
+msgid "Total"
+msgstr "累計"
 
 #: app/models/site_count.rb:31
 msgid "Total Entries"
@@ -6499,11 +6512,11 @@ msgstr "更新日時"
 msgid "Updated %{count} records."
 msgstr "%{count}件更新しました。"
 
-#: app/controllers/mypage_controller.rb:243
+#: app/controllers/mypage_controller.rb:260
 msgid "Updated notification email settings."
 msgstr "お知らせメールの通知設定を更新しました。"
 
-#: app/controllers/mypage_controller.rb:336
+#: app/controllers/mypage_controller.rb:353
 msgid "Updated successfully."
 msgstr "正しく更新されました。"
 
@@ -6585,7 +6598,7 @@ msgstr ""
 "%sというメールアドレスのユーザは、利用開始していません。利用開始してくださ"
 "い。"
 
-#: app/controllers/mypage_controller.rb:222
+#: app/controllers/mypage_controller.rb:239
 msgid "User information was successfully updated."
 msgstr "ユーザ情報の更新に成功しました。"
 
@@ -7355,7 +7368,7 @@ msgstr "他の方から見たあなたのプロフィールはこちら ..."
 msgid "Your registration is complete."
 msgstr "ユーザ登録が完了しました"
 
-#: app/controllers/mypage_controller.rb:271
+#: app/controllers/mypage_controller.rb:288
 msgid ""
 "Your request of changing email address accepted. Check your email to "
 "complete the process."
@@ -7801,11 +7814,11 @@ msgstr ""
 msgid "description"
 msgstr "説明"
 
-#: app/views/mypage/index.html.erb:120 app/views/mypage/index.html.erb:123
+#: app/views/mypage/index.html.erb:97 app/views/mypage/index.html.erb:100
 msgid "display flat"
 msgstr "並べて表示"
 
-#: app/views/mypage/index.html.erb:119 app/views/mypage/index.html.erb:122
+#: app/views/mypage/index.html.erb:96 app/views/mypage/index.html.erb:99
 msgid "display tabs"
 msgstr "タブで表示"
 
