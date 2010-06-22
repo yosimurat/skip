@@ -17,7 +17,7 @@ class Apps::EventsController < Apps::ApplicationController
 
   before_filter :require_event_enabled
 
-  %w(index new create show edit update attend absent recent).each do |method_name|
+  %w(index new create show edit update attend absent recent member_information).each do |method_name|
     define_method method_name do
       proxy_request_to_simple_apps
     end
