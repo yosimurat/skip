@@ -139,7 +139,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :attachments
 
   map.namespace "apps" do |app|
-    app.resources :events, :member => {:attend => :post, :absent => :post}, :collection => { :recent => :get }, :except => [:destroy] do |event|
+    app.resources :events, :member => {:attend => :post, :absent => :post, :member_information => :get}, :collection => { :recent => :get }, :except => [:destroy] do |event|
       event.resources :attendees, :only => [:update]
     end
     app.resource :javascripts, :only => [], :member => {:application => :get}
