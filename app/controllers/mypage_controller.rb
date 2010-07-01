@@ -59,7 +59,7 @@ class MypageController < ApplicationController
     if SkipEmbedded::InitialSettings['mypage'] && SkipEmbedded::InitialSettings['mypage']['show_today_popular_blogs_box']
       unless read_fragment(@today_popular_blogs_cache_key)
         expire_fragment_without_locale("today_popular_blog_#{Time.now.ago(1.hour).strftime('%Y%m%d%H')}") # 古いcacheの除去
-        @today_popular_blogs = BoardEntry.accessible(current_user).scoped(
+        @today_popular_blogs = BoardEntry.publication_type_eq('public').scoped(
           :conditions => "board_entry_points.today_access_count > 0",
           :order => "board_entry_points.today_access_count DESC, board_entry_points.access_count DESC, board_entries.last_updated DESC, board_entries.id DESC",
           :include => [ :user, :state ]
@@ -71,7 +71,7 @@ class MypageController < ApplicationController
     if SkipEmbedded::InitialSettings['mypage'] && SkipEmbedded::InitialSettings['mypage']['show_recent_popular_blogs_box']
       unless read_fragment(@recent_popular_blogs_cache_key)
         expire_fragment_without_locale("recent_popular_blog_#{Time.now.ago(1.hour).strftime('%Y%m%d%H')}") # 古いcacheの除去
-        @recent_popular_blogs = BoardEntry.accessible(current_user).scoped(
+        @recent_popular_blogs = BoardEntry.publication_type_eq('public').scoped(
           :order => "board_entry_points.access_count DESC, board_entries.last_updated DESC, board_entries.id DESC",
           :include => [ :user, :state ]
         ).timeline.recent(recent_day.day).limit(10)
