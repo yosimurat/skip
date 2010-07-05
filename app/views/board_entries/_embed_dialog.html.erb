@@ -229,7 +229,7 @@
     if($j.inArray(extension, <%= ShareFile::CONTENT_TYPE_IMAGES.keys.to_json %>) >= 0) {
       var src = data['src'];
       if(src){
-        return $j(new Image()).attr({src: src, alt: filename, height: '72', width: '72'}).addClass('fit_image').addClass('pointer').css('border', '0 none').click(function(){
+        return $j('<img width="72", height="72"></img>').attr({src: src}).addClass('fit_image').addClass('pointer').css('border', '0 none').click(function(){
           insertImage(data);
         });
       }else{
