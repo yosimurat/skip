@@ -50,6 +50,8 @@ class GroupsController < ApplicationController
     @group.group_participations.build(:user_id => session[:user_id], :owned => true)
 
     if @group.save
+      User.find(session[:user_id]).notices.create!(:target => @group)
+
       flash[:notice] = _('Group was created successfully.')
       redirect_to :controller => 'group', :action => 'show', :gid => @group.gid
     else
