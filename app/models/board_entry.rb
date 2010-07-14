@@ -745,6 +745,7 @@ class BoardEntry < ActiveRecord::Base
     self.save!
     self.entry_publications.clear
     self.entry_editors.clear
+    self.entry_publications.create!(:symbol => self.symbol)
     true
   end
 
