@@ -104,8 +104,8 @@ class Tag < ActiveRecord::Base
   end
 
   def self.create_by_comma_tags comma_tags, middle_records
+    middle_records.clear
     unless comma_tags.blank?
-      middle_records.clear
       comma_tags.split(',').each do |tag_name|
         tag = find_by_name(tag_name) || create(:name => tag_name)
         middle_records.create(:tag_id => tag.id)
