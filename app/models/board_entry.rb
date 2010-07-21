@@ -749,6 +749,12 @@ class BoardEntry < ActiveRecord::Base
     true
   end
 
+  def self.unread_for_antenna user
+    list = BoardEntry.unread(user).accessible(user)
+    list_by_symbol = list.group_by(&:symbol).sort do |a, b| a[1].length <=> b[1].length end.reverse
+    list_by_type = list_by_symbol.group_by do |symbol, list| list[0].symbol_type end.sort
+  end
+
 private
   def generate_next_user_entry_no
     entry = BoardEntry.find(:first,

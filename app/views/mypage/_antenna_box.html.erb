@@ -7,15 +7,13 @@
       <li><%= link_to(icon_tag('comment') +  _('Trace Comments'), :action => 'entries_by_antenna', :target_type => 'comment') + "(#{Notice.trace_comments_count(current_user)})" %></li>
       <li><%= link_to(icon_tag('tag_blue') +  _('Track of Bookmarks'), :action => 'entries_by_antenna', :target_type => 'bookmark') + "(#{Notice.track_of_bookmarks_count(current_user)})" %></li>
     </ul>
-    <% notices_group_by_type = current_user.notices.all(:include => :target).group_by(&:target_type) -%>
-    <% notices_group_by_type.keys.each do |key| -%>
-      <% if sorted_notices = notices_group_by_type[key].sort_by{|n| n.unread_count(current_user)}.reverse.delete_if{|n| n.unread_count(current_user) == 0 } and !sorted_notices.empty? -%>
-        <% content_tag(:ul, :class => 'notices by_type') do -%>
-          <% sorted_notices.each do |notice| -%>
-            <% count_as_s = "(#{notice.unread_count(current_user).to_s})" -%>
-            <% icon_name = notice.target.is_a?(User) ? 'user_suit' : 'group' -%>
-            <li><%= link_to(icon_tag(icon_name) + truncate(h(notice.target.name), :length => 12), :action => 'entries_by_antenna', :target_type => notice.target.class.name.downcase, :target_id => notice.target.id) + count_as_s %></li>
-          <% end -%>
+    <% BoardEntry.unread_for_antenna(current_user).each do |type, list| -%>
+      <% content_tag(:ul, :class => 'notices by_type') do -%>
+        <% list.each do |symbol, list| -%>
+          <% entry = list[0] -%>
+          <% count_as_s = "(#{list.length.to_s})" -%>
+          <% icon_name = entry.owner_is_user? ? 'user_suit' : 'group' -%>
+          <li><%= link_to(icon_tag(icon_name) + truncate(h(entry.symbol_name), :length => 12), :action => 'entries_by_antenna', :target_type => entry.owner_is_user? ? 'user' : 'group', :target_id => entry.load_owner.id) + count_as_s %></li>
         <% end -%>
       <% end -%>
     <% end -%>
