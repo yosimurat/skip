@@ -5028,7 +5028,7 @@ msgstr "検索したいキーワードを入力してください"
 msgid ""
 "Please input the introduction of this stock entry. This is displayed on a "
 "top of group."
-msgstr "文書ライブラリの紹介文を入力してください。グループのトップに表示されます。"
+msgstr "文書ライブラリの紹介文を入力してください。グループのトップ画面に表示されます。"
 
 #: app/views/group/_manage_participations.html.erb:114
 msgid "Please input valid user or group"
