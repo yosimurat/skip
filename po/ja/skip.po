@@ -2094,7 +2094,6 @@ msgstr[0] "質問"
 msgid "BoardEntry|Aim type|stock_entry"
 msgid_plural "stock_entries"
 msgstr[0] "文書"
-msgstr[1] ""
 
 #: app/models/board_entry.rb:-
 msgid "BoardEntry|Board entry comments count"
@@ -3587,7 +3586,7 @@ msgstr ""
 
 #: app/models/group.rb:-
 msgid "Group|Default stock entry"
-msgstr ""
+msgstr "文書"
 
 #: app/models/group.rb:-
 msgid "Group|Deleted at"
