@@ -37,7 +37,7 @@ class GroupsController < ApplicationController
   # グループの新規作成画面の表示
   def new
     @main_menu = @title = _('Create a new group')
-    @group = Group.new(:default_publication_type => 'public')
+    @group = Group.new(:default_publication_type => 'public', :default_stock_entry => 'true')
     @group_categories = GroupCategory.all
   end
 

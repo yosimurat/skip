@@ -6,8 +6,8 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: skip 1.8.0\n"
-"POT-Creation-Date: 2010-06-21 14:07+0900\n"
+"Project-Id-Version: skip 1.8.2\n"
+"POT-Creation-Date: 2010-08-02 18:19+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/views/entries/_entry_detail.html.erb:302
+#: app/views/entries/_entry_detail.html.erb:316
 msgid " [Delete]"
 msgstr " [削除]"
 
@@ -37,25 +37,25 @@ msgstr ""
 "指定する際に使います。"
 
 #: app/helpers/system_messages_helper.rb:30
-#: app/controllers/rankings_controller.rb:105 app/models/board_entry.rb:422
-#: app/views/entries/_topix_entries.html.erb:46
-#: app/views/entries/_topix_entries.html.erb:48
-#: app/views/bookmarks/_topix_bookmarks.html.erb:47
+#: app/controllers/rankings_controller.rb:105 app/models/board_entry.rb:429
 #: app/views/groups/_group_list.html.erb:24
-#: app/views/mypage/entries_by_date.html.erb:13
-#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:145
-#: app/views/mypage/index.html.erb:162
-#: app/views/mypage/_today_access_blogs_box.html.erb:9
 #: app/views/share_file/_topix_share_files.html.erb:39
-#: app/views/bookmark/list.html.erb:42 app/views/bookmark/show.html.erb:51
 #: app/views/rankings/bookmark.html.erb:2
 #: app/views/rankings/bookmark.html.erb:4
 #: app/views/rankings/bookmark.html.erb:7
 #: app/views/rankings/bookmark.html.erb:10
+#: app/views/entries/_topix_entries.html.erb:46
+#: app/views/entries/_topix_entries.html.erb:48
+#: app/views/bookmark/list.html.erb:42 app/views/bookmark/show.html.erb:51
+#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:145
+#: app/views/mypage/index.html.erb:162
+#: app/views/mypage/entries_by_date.html.erb:13
+#: app/views/mypage/_today_access_blogs_box.html.erb:9
+#: app/views/bookmarks/_topix_bookmarks.html.erb:47
 msgid "%B %d %Y"
 msgstr "%Y/%m/%d"
 
-#: app/models/board_entry.rb:424 app/models/board_entry_comment.rb:47
+#: app/models/board_entry_comment.rb:47 app/models/board_entry.rb:431
 msgid "%B %d %Y %H:%M"
 msgstr "%Y年%m月%d日 %H:%M"
 
@@ -79,10 +79,10 @@ msgstr "%Y年%m月%d日 %H時%M分 - "
 msgid "%m/%Y"
 msgstr "%Y/%m"
 
-#: app/views/statistics/_current_statistics.html.erb:1
 #: app/views/share_file/_share_file_box.html.erb:30
-#: app/views/admin/users/index.html.erb:50
+#: app/views/statistics/_current_statistics.html.erb:1
 #: app/views/entry_hide_operations/_list.html.erb:6
+#: app/views/admin/users/index.html.erb:50
 msgid "%m/%d/%Y %H:%M"
 msgstr "%Y/%m/%d %H:%M"
 
@@ -99,8 +99,8 @@ msgstr "%sさんは既に参加済み/参加申請済みです。"
 msgid "%s is locked. Please reset password."
 msgstr "%sがロックされています。パスワード再設定を行って下さい。"
 
-#: app/controllers/group_controller.rb:215
 #: app/controllers/group_controller.rb:230
+#: app/controllers/group_controller.rb:245
 msgid "%s is not a member of the group."
 msgstr "%sさんはそのグループには参加していません。"
 
@@ -124,9 +124,9 @@ msgid_plural "%{count} entries"
 msgstr[0] "%{count}件"
 msgstr[1] "%{count}件"
 
-#: app/views/statistics/index.html.erb:36
+#: app/views/statistics/index.html.erb:36 app/views/layouts/layout.html.erb:35
+#: app/views/layouts/layout.html.erb:57
 #: app/views/bookmarks/_topix_bookmarks.html.erb:23
-#: app/views/layouts/layout.html.erb:35 app/views/layouts/layout.html.erb:57
 msgid "%{count} user"
 msgid_plural "%{count} users"
 msgstr[0] "%{count}人"
@@ -159,27 +159,27 @@ msgstr "%{function}は現在利用することが出来ません。"
 msgid "%{icon} Show history of %{time}"
 msgstr "%{icon} %{time}の推移を表示"
 
-#: app/controllers/admin/pictures_controller.rb:52
+#: app/controllers/bookmark_comments_controller.rb:12
 #: app/controllers/admin/admin_module.rb:139
 #: app/controllers/admin/admin_module.rb:250
-#: app/controllers/bookmark_comments_controller.rb:12
+#: app/controllers/admin/pictures_controller.rb:52
 msgid "%{model} was successfully created."
 msgstr "%{model}の作成に成功しました。"
 
-#: app/controllers/admin/groups_controller.rb:24
-#: app/controllers/admin/user_profile_master_categories_controller.rb:32
 #: app/controllers/admin/admin_module.rb:174
 #: app/controllers/admin/admin_module.rb:288
+#: app/controllers/admin/user_profile_master_categories_controller.rb:32
 #: app/controllers/admin/board_entries_controller.rb:28
+#: app/controllers/admin/groups_controller.rb:24
 msgid "%{model} was successfully deleted."
 msgstr "%{model}を削除しました。"
 
-#: app/controllers/admin/openid_identifiers_controller.rb:35
 #: app/controllers/admin/admin_module.rb:158
 #: app/controllers/admin/admin_module.rb:272
-#: app/controllers/admin/oauth_providers_controller.rb:25
-#: app/controllers/admin/board_entries_controller.rb:39
 #: app/controllers/admin/user_profiles_controller.rb:35
+#: app/controllers/admin/board_entries_controller.rb:39
+#: app/controllers/admin/openid_identifiers_controller.rb:35
+#: app/controllers/admin/oauth_providers_controller.rb:25
 msgid "%{model} was successfully updated."
 msgstr "%{model}の更新に成功しました。"
 
@@ -200,8 +200,8 @@ msgstr "%{name} は数字かハイフンで入力してください"
 msgid "%{name} contains value not in selectable options."
 msgstr "%{name} は選択される値以外のものが設定されています"
 
-#: app/controllers/attachments_controller.rb:58
 #: app/controllers/share_file_controller.rb:47
+#: app/controllers/attachments_controller.rb:58
 #: app/models/user_profile_master.rb:115 app/models/user_profile_master.rb:119
 #: app/models/user_profile_master.rb:143 app/models/user_profile_master.rb:180
 #: app/models/user_profile_master.rb:268 app/models/user_profile_master.rb:298
@@ -259,7 +259,7 @@ msgstr ""
 msgid "(Got %{point} %{point_button})"
 msgstr "(%{point} %{point_button} 頂きました)"
 
-#: app/views/board_entries/_form.html.erb:93
+#: app/views/board_entries/_form.html.erb:122
 msgid "(Provide page IDs in comma separated format. e.g. 1123,1124)"
 msgstr "（カンマ区切りでページのIDを入力してください。ex:1123,1234）"
 
@@ -267,7 +267,7 @@ msgstr "（カンマ区切りでページのIDを入力してください。ex:1
 msgid "(The body template is appended to the body when the email is sent.)"
 msgstr "(メール送信時、本文に本文下部のテンプレートが連結されます。)"
 
-#: app/views/search/entry_search.html.erb:22
+#: app/views/search/entry_search.html.erb:23
 msgid "(The search targets are tags, titles and bodies)"
 msgstr "（タグ、タイトル、本文が検索対象となります）"
 
@@ -317,7 +317,7 @@ msgstr ""
 msgid "*Jumps directly to the blog entry."
 msgstr "※ブログに直接遷移します。"
 
-#: app/views/search/_tag_search.html.erb:9
+#: app/views/search/_tag_search.html.erb:11
 msgid "*Showing %s popular tag."
 msgid_plural "*Showing %s popular tags."
 msgstr[0] "※人気のタグを%s件表示しています。"
@@ -356,6 +356,10 @@ msgstr "このサイトについて"
 #: app/views/user/_follow_chains_box.html.erb:3
 msgid "About Users"
 msgstr "紹介したユーザ"
+
+#: app/helpers/board_entries_helper.rb:167
+msgid "About stock entry"
+msgstr "文書とは？"
 
 #: app/views/mypage/welcome.html.erb:44
 msgid "About this site"
@@ -469,9 +473,9 @@ msgstr "更新日時"
 msgid "Active"
 msgstr "活性"
 
+#: app/views/bookmark/show.html.erb:7
 #: app/views/bookmarks/_topix_bookmarks.html.erb:30
 #: app/views/bookmarks/_topix_bookmarks.html.erb:31
-#: app/views/bookmark/show.html.erb:7
 msgid "Add a comment"
 msgstr "コメントする"
 
@@ -488,11 +492,11 @@ msgstr "参加者に追加"
 msgid "Add page"
 msgstr "ページを追加する"
 
-#: app/controllers/group_controller.rb:185
+#: app/controllers/group_controller.rb:200
 msgid "Added %s as a member."
 msgstr "%sさんを参加者に追加しました。"
 
-#: app/controllers/group_controller.rb:197
+#: app/controllers/group_controller.rb:212
 msgid "Added members of %s as members of the group"
 msgstr "%sの参加者をこのグループの参加者に追加しました。"
 
@@ -500,13 +504,13 @@ msgstr "%sの参加者をこのグループの参加者に追加しました。"
 msgid "Admin"
 msgstr "管理"
 
-#: app/views/group/_manage_info.html.erb:3
-#: app/views/group/_manage_permit.html.erb:3
 #: app/views/group/_manage_participations.html.erb:27
-#: app/views/mypage/_manage_menu.html.erb:2
+#: app/views/group/_manage_permit.html.erb:3
+#: app/views/group/_manage_info.html.erb:3
+#: app/views/admin/_master_data_menu_box.html.erb:3
 #: app/views/admin/documents/index.html.erb:33
 #: app/views/admin/_data_menu_box.html.erb:3
-#: app/views/admin/_master_data_menu_box.html.erb:3
+#: app/views/mypage/_manage_menu.html.erb:2
 msgid "Admin Menu"
 msgstr "管理対象"
 
@@ -1621,10 +1625,9 @@ msgstr ""
 "来ないようになります。チェックを解除するか、対象のユーザがパスワード再設定を"
 "行うことでログイン出来るようになります。"
 
-#: app/models/admin/user.rb:28 app/views/user/_account_information.html.erb:16
-#: app/views/user/show.html.erb:36
-#: app/views/portal/_registration_form.html.erb:16
-#: app/views/admin/users/import.html.erb:20
+#: app/models/admin/user.rb:28 app/views/portal/_registration_form.html.erb:16
+#: app/views/user/_account_information.html.erb:16
+#: app/views/user/show.html.erb:36 app/views/admin/users/import.html.erb:20
 msgid "Admin::User|Name"
 msgstr "名前"
 
@@ -1684,7 +1687,7 @@ msgstr "ログインID"
 msgid "Administration of the site."
 msgstr "このシステムの設定や管理を行います"
 
-#: app/controllers/group_controller.rb:361
+#: app/controllers/group_controller.rb:376
 msgid "Administrative privillage required for the action."
 msgstr "その操作は管理者権限が必要です。"
 
@@ -1696,10 +1699,10 @@ msgstr ""
 "既に管理者ユーザが登録済みです。ログインして下さい。ログイン出来ない場合は%"
 "{contact_link}下さい。"
 
-#: app/helpers/groups_helper.rb:22
+#: app/helpers/groups_helper.rb:22 app/views/users/_user.html.erb:6
 #: app/views/group/_manage_participations.html.erb:47
 #: app/views/group/_manage_participations.html.erb:58
-#: app/views/group/show.html.erb:40 app/views/users/_user.html.erb:6
+#: app/views/group/show.html.erb:40
 msgid "Administrator"
 msgstr "管理者"
 
@@ -1711,13 +1714,13 @@ msgstr ""
 "管理者は自分自身のステータス、管理権限、及びロック状態は変更できません。他の"
 "管理者アカウントから変更してください。"
 
-#: app/views/admin/users/create_uid.html.erb:6
 #: app/views/admin/users/change_uid.html.erb:6
+#: app/views/admin/users/create_uid.html.erb:6
 msgid "Admin|Create Change Uid|Caution"
 msgstr "注意！"
 
-#: app/views/admin/users/create_uid.html.erb:7
 #: app/views/admin/users/change_uid.html.erb:7
+#: app/views/admin/users/create_uid.html.erb:7
 msgid "Admin|Create Change Uid|Caution Description"
 msgstr ""
 "ユーザ名変更及び作成は様々な箇所に影響するため、どうしても変更が必要な場合の"
@@ -1731,7 +1734,7 @@ msgstr ""
 msgid "All"
 msgstr "全て"
 
-#: app/views/user/group.html.erb:8 app/views/groups/index.html.erb:23
+#: app/views/groups/index.html.erb:23 app/views/user/group.html.erb:8
 msgid "All (%{num})"
 msgstr "全て(%{num})"
 
@@ -1739,7 +1742,7 @@ msgstr "全て(%{num})"
 msgid "All Term"
 msgstr "全期間"
 
-#: app/views/board_entries/_form.html.erb:257
+#: app/views/board_entries/_form.html.erb:301
 msgid "All changes will be discarded if you navigate away from this page."
 msgstr "移動すると編集内容が破棄されます。"
 
@@ -1799,7 +1802,7 @@ msgstr ""
 "既にメールアドレスの変更を申請済みです。記入したメールアドレスで再申請しま"
 "す。"
 
-#: app/views/users/index.html.erb:22
+#: app/views/users/index.html.erb:35
 msgid "Any"
 msgstr "いずれか"
 
@@ -1859,12 +1862,11 @@ msgstr "4月"
 msgid "Are you sure destroing with nest comments?"
 msgstr "関連するコメントも一緒に削除されますが、よろしいですか？"
 
-#: app/helpers/share_file_helper.rb:26
-#: app/views/entries/_entry_detail.html.erb:302
-#: app/views/edit/edit.html.erb:28
-#: app/views/board_entries/_board_entry_comment.html.erb:14
+#: app/helpers/share_file_helper.rb:26 app/views/share_file/list.html.erb:62
 #: app/views/group/_manage_info.html.erb:22
-#: app/views/share_file/list.html.erb:62 app/views/bookmark/list.html.erb:58
+#: app/views/board_entries/_board_entry_comment.html.erb:14
+#: app/views/entries/_entry_detail.html.erb:316
+#: app/views/edit/edit.html.erb:36 app/views/bookmark/list.html.erb:58
 msgid "Are you sure to delete?"
 msgstr "本当に削除しますか?"
 
@@ -1880,29 +1882,29 @@ msgstr "グループを退会しますがよろしいですか?"
 msgid "Are you sure to send activation email to target user?"
 msgstr "対象ユーザに利用開始通知メールを送信しますが宜しいですか?"
 
-#: app/views/board_entries/_form.html.erb:160
+#: app/views/board_entries/_form.html.erb:189
 msgid "Are you sure to send email to all users? (%s users)"
 msgstr "全ユーザ(%s人)にメールが送信されますが、宜しいですか?"
 
-#: app/views/chains/edit.html.erb:8 app/views/pictures/_pictures.html.erb:28
-#: app/views/user/_action_box.html.erb:10
 #: app/views/group/_action_box.html.erb:6
-#: app/views/shared/_chapter_menu.html.erb:4 app/views/wiki/show.html.erb:17
-#: app/views/admin/pictures/index.html.erb:19
+#: app/views/pictures/_pictures.html.erb:28
+#: app/views/user/_action_box.html.erb:10 app/views/wiki/show.html.erb:17
+#: app/views/admin/group_categories/_index.html.erb:24
 #: app/views/admin/settings/_security.html.erb:12
+#: app/views/admin/users/change_uid.html.erb:29
+#: app/views/admin/users/index.html.erb:62
+#: app/views/admin/users/create_uid.html.erb:25
+#: app/views/admin/groups/index.html.erb:33
+#: app/views/admin/openid_identifiers/index.html.erb:18
+#: app/views/admin/pictures/index.html.erb:19
 #: app/views/admin/board_entries/index.html.erb:35
 #: app/views/admin/board_entries/index.html.erb:36
 #: app/views/admin/share_files/index.html.erb:36
-#: app/views/admin/bookmarks/index.html.erb:19
-#: app/views/admin/groups/index.html.erb:33
-#: app/views/admin/bookmark_comments/index.html.erb:30
-#: app/views/admin/openid_identifiers/index.html.erb:18
-#: app/views/admin/group_participations/index.html.erb:28
-#: app/views/admin/group_categories/_index.html.erb:24
 #: app/views/admin/user_profile_master_categories/_index.html.erb:14
-#: app/views/admin/users/create_uid.html.erb:25
-#: app/views/admin/users/change_uid.html.erb:29
-#: app/views/admin/users/index.html.erb:62
+#: app/views/admin/bookmark_comments/index.html.erb:30
+#: app/views/admin/group_participations/index.html.erb:28
+#: app/views/admin/bookmarks/index.html.erb:19
+#: app/views/chains/edit.html.erb:8 app/views/shared/_chapter_menu.html.erb:4
 msgid "Are you sure?"
 msgstr "本当に宜しいですか？"
 
@@ -2054,35 +2056,45 @@ msgstr "更新日時"
 msgid "BoardEntry|Aim type"
 msgstr "種類"
 
-#: app/models/board_entry.rb:181
+#: app/models/board_entry.rb:187
 msgid "BoardEntry|Aim type|Desc|entry"
 msgstr "記事 (マイページの「新着記事」に表示されます)"
 
-#: app/models/board_entry.rb:183
+#: app/models/board_entry.rb:189
 msgid "BoardEntry|Aim type|Desc|notice"
 msgstr "お知らせ (マイページの「あなたへのお知らせ」に表示されます)"
 
-#: app/models/board_entry.rb:182
+#: app/models/board_entry.rb:188
 msgid "BoardEntry|Aim type|Desc|question"
 msgstr "質問 (マイページの「みんなからの質問」に表示されます)"
 
-#: app/models/board_entry.rb:178 app/views/entries/_aim_type_box.html.erb:9
+#: app/models/board_entry.rb:190
+msgid "BoardEntry|Aim type|Desc|stock_entry"
+msgstr ""
+
+#: app/models/board_entry.rb:183 app/views/entries/_aim_type_box.html.erb:9
 #: app/views/search/entry_search.html.erb:15
 msgid "BoardEntry|Aim type|entry"
 msgid_plural "entries"
 msgstr[0] "記事"
 
-#: app/models/board_entry.rb:180 app/views/entries/_aim_type_box.html.erb:11
+#: app/models/board_entry.rb:185 app/views/entries/_aim_type_box.html.erb:11
 #: app/views/search/entry_search.html.erb:17
 msgid "BoardEntry|Aim type|notice"
 msgid_plural "notices"
 msgstr[0] "お知らせ"
 
-#: app/models/board_entry.rb:179 app/views/entries/_aim_type_box.html.erb:10
+#: app/models/board_entry.rb:184 app/views/entries/_aim_type_box.html.erb:10
 #: app/views/search/entry_search.html.erb:16
 msgid "BoardEntry|Aim type|question"
 msgid_plural "questions"
 msgstr[0] "質問"
+
+#: app/models/board_entry.rb:186 app/views/search/entry_search.html.erb:18
+msgid "BoardEntry|Aim type|stock_entry"
+msgid_plural "stock_entries"
+msgstr[0] "文書"
+msgstr[1] ""
 
 #: app/models/board_entry.rb:-
 msgid "BoardEntry|Board entry comments count"
@@ -2116,11 +2128,11 @@ msgstr "話題にした記事の数"
 msgid "BoardEntry|Entry type"
 msgstr "種別"
 
-#: app/models/board_entry.rb:176
+#: app/models/board_entry.rb:181
 msgid "BoardEntry|Entry type|DIARY"
 msgstr "ブログ"
 
-#: app/models/board_entry.rb:177
+#: app/models/board_entry.rb:182
 msgid "BoardEntry|Entry type|GROUP_BBS"
 msgstr "フォーラム"
 
@@ -2140,13 +2152,17 @@ msgstr "最終更新日"
 msgid "BoardEntry|Lock version"
 msgstr "ロックバージョン"
 
-#: app/models/board_entry.rb:185 app/views/entries/_entry_detail.html.erb:652
+#: app/models/board_entry.rb:192 app/views/entries/_entry_detail.html.erb:666
 msgid "BoardEntry|Open|false"
 msgstr "終了"
 
-#: app/models/board_entry.rb:184
+#: app/models/board_entry.rb:191
 msgid "BoardEntry|Open|true"
 msgstr "質問中"
+
+#: app/models/board_entry.rb:-
+msgid "BoardEntry|Parent"
+msgstr ""
 
 #: app/models/board_entry.rb:-
 msgid "BoardEntry|Publication symbols value"
@@ -2184,13 +2200,13 @@ msgstr "書評"
 msgid "Bookmark Comment"
 msgstr "ブックマークコメント"
 
+#: app/views/shared/_global_footer_navigation.html.erb:20
 #: app/views/bookmarks/index.html.erb:5
-#: app/views/shared/_global_footer_navigation.html.erb:15
 msgid "Bookmark URL"
 msgstr ""
 
+#: app/views/shared/_global_footer_navigation.html.erb:20
 #: app/views/bookmarks/index.html.erb:5
-#: app/views/shared/_global_footer_navigation.html.erb:15
 msgid "Bookmark a URL"
 msgstr "ブックマークする"
 
@@ -2279,10 +2295,10 @@ msgid "Bookmarklet"
 msgstr "ブックマークレット"
 
 #: app/helpers/user_helper.rb:44 app/controllers/services_controller.rb:45
-#: app/controllers/bookmark_controller.rb:102
 #: app/controllers/bookmarks_controller.rb:42
-#: app/views/shared/_global_navigation.html.erb:7
+#: app/controllers/bookmark_controller.rb:102
 #: app/views/admin/_data_menu_box.html.erb:8
+#: app/views/shared/_global_navigation.html.erb:7
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
@@ -2351,14 +2367,14 @@ msgstr "火"
 msgid "CalendarHelper|Wed"
 msgstr "水"
 
-#: app/views/entries/_entry_detail.html.erb:606
+#: app/views/share_file/edit.html.erb:15 app/views/share_file/new.html.erb:32
 #: app/views/board_entries/_board_entry_comment.html.erb:31
-#: app/views/share_file/new.html.erb:32 app/views/share_file/edit.html.erb:15
+#: app/views/entries/_entry_detail.html.erb:620
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: app/views/user/group.html.erb:4 app/views/group/_form.html.erb:17
-#: app/views/groups/index.html.erb:20 app/views/layouts/layout.html.erb:55
+#: app/views/groups/index.html.erb:20 app/views/group/_form.html.erb:17
+#: app/views/layouts/layout.html.erb:55 app/views/user/group.html.erb:4
 msgid "Category"
 msgstr "カテゴリ"
 
@@ -2450,7 +2466,7 @@ msgstr "ユーザ名変更"
 msgid "Change your profile picture!"
 msgstr "プロフィール画像を変更しましょう！"
 
-#: app/controllers/group_controller.rb:246
+#: app/controllers/group_controller.rb:261
 msgid "Changed."
 msgstr "変更しました。"
 
@@ -2541,8 +2557,8 @@ msgstr "非公開"
 msgid "Comics"
 msgstr "漫画"
 
-#: app/views/bookmarks/_topix_bookmarks.html.erb:33
 #: app/views/share_file/_form.html.erb:59 app/views/bookmark/new.html.erb:49
+#: app/views/bookmarks/_topix_bookmarks.html.erb:33
 msgid "Comment"
 msgstr "コメント"
 
@@ -2589,8 +2605,8 @@ msgstr ""
 msgid "Confirm"
 msgstr "確認"
 
-#: app/views/mypage/_manage_password.html.erb:22
 #: app/views/platform/reset_password.html.erb:12
+#: app/views/mypage/_manage_password.html.erb:22
 msgid "Confirm Password"
 msgstr "確認用パスワード"
 
@@ -2622,7 +2638,8 @@ msgstr "リビジョン%{from}の内容"
 msgid "Content of rev.%{to}"
 msgstr "リビジョン%{to}の内容"
 
-#: app/views/board_entries/_form.html.erb:51
+#: app/views/board_entries/_form.html.erb:73
+#: app/views/board_entries/_form.html.erb:78
 msgid "Contents"
 msgstr "内容"
 
@@ -2654,16 +2671,16 @@ msgstr ""
 "指定されたファイルの実体が存在しません。お手数ですが管理者にご連絡をお願いい"
 "たします。"
 
-#: app/views/chains/new.html.erb:6 app/views/edit/index.html.erb:7
 #: app/views/portal/account_registration.html.erb:30
 #: app/views/groups/new.html.erb:4 app/views/wiki/_navigation.html.erb:9
-#: app/views/admin/openid_identifiers/new.html.erb:17
 #: app/views/admin/group_categories/new.html.erb:8
+#: app/views/admin/users/first.html.erb:31
+#: app/views/admin/users/create_uid.html.erb:16
+#: app/views/admin/users/new.html.erb:9
+#: app/views/admin/openid_identifiers/new.html.erb:17
 #: app/views/admin/user_profile_master_categories/new.html.erb:8
 #: app/views/admin/user_profile_masters/new.html.erb:8
-#: app/views/admin/users/create_uid.html.erb:16
-#: app/views/admin/users/first.html.erb:31
-#: app/views/admin/users/new.html.erb:9
+#: app/views/chains/new.html.erb:6 app/views/edit/index.html.erb:10
 msgid "Create"
 msgstr "作成"
 
@@ -2673,11 +2690,11 @@ msgid "Create %{name}"
 msgstr "%{name}作成"
 
 #: app/views/groups/index.html.erb:4
-#: app/views/shared/_global_footer_navigation.html.erb:18
+#: app/views/shared/_global_footer_navigation.html.erb:23
 msgid "Create New Group"
 msgstr "グループの作成"
 
-#: app/views/entries/_entry_detail.html.erb:308
+#: app/views/entries/_entry_detail.html.erb:322
 msgid "Create a new forum entry inheriting the privacy setting."
 msgstr "記事の公開範囲を引き継いだフォーラムとして新しい記事を作成します。"
 
@@ -2690,7 +2707,7 @@ msgstr "グループを作る"
 msgid "Create administrative user"
 msgstr "管理者ユーザの作成"
 
-#: app/views/entries/_entry_detail.html.erb:310
+#: app/views/entries/_entry_detail.html.erb:324
 msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr "記事の公開範囲によらず全体公開のブログとして新しい記事を作成します。"
@@ -2699,18 +2716,28 @@ msgstr "記事の公開範囲によらず全体公開のブログとして新し
 msgid "Create my new bookmark"
 msgstr "自分もブックマークする"
 
-#: app/controllers/edit_controller.rb:100
+#: app/views/group/_stock_entry_of_top.html.erb:29
+msgid "Create stock entry"
+msgstr "目次を作る"
+
+#: app/helpers/board_entries_helper.rb:153
+#: app/views/group/_stock_entry_of_top.html.erb:19
+#: app/views/entries/_entry_detail.html.erb:280
+msgid "Create stock entry under the '%s'"
+msgstr "「%s」配下に文書を作る"
+
+#: app/controllers/edit_controller.rb:113
 msgid "Created successfully."
 msgstr "正しく作成されました。"
 
 #: app/views/groups/new.html.erb:4
-#: app/views/admin/openid_identifiers/new.html.erb:17
 #: app/views/admin/group_categories/new.html.erb:8
+#: app/views/admin/users/first.html.erb:31
+#: app/views/admin/users/create_uid.html.erb:26
+#: app/views/admin/users/new.html.erb:9
+#: app/views/admin/openid_identifiers/new.html.erb:17
 #: app/views/admin/user_profile_master_categories/new.html.erb:8
 #: app/views/admin/user_profile_masters/new.html.erb:8
-#: app/views/admin/users/create_uid.html.erb:26
-#: app/views/admin/users/first.html.erb:31
-#: app/views/admin/users/new.html.erb:9
 msgid "Creating..."
 msgstr "作成しています…"
 
@@ -2750,7 +2777,7 @@ msgstr "対象データが見つかりません。"
 msgid "Data of this month not available."
 msgstr "この月のデータはありません。"
 
-#: app/views/board_entries/_form.html.erb:56
+#: app/views/board_entries/_form.html.erb:85
 msgid "Date"
 msgstr "日付"
 
@@ -2778,9 +2805,13 @@ msgstr "既定の告知方法"
 msgid "Default Privacy Settings"
 msgstr "既定の公開範囲"
 
-#: app/views/edit/edit.html.erb:20 app/views/pictures/_pictures.html.erb:28
+#: app/views/group/_form.html.erb:63
+msgid "Default Usage of Stock Entry"
+msgstr "文書機能の利用"
+
+#: app/views/pictures/_pictures.html.erb:28
 #: app/views/board_entries/_board_entry_comment.html.erb:14
-#: app/views/admin/pictures/index.html.erb:19
+#: app/views/admin/pictures/index.html.erb:19 app/views/edit/edit.html.erb:25
 #: app/views/bookmark/list.html.erb:58 app/views/bookmark/show.html.erb:48
 msgid "Delete"
 msgstr "削除"
@@ -2792,7 +2823,7 @@ msgstr ""
 "て削除されている必要があります。"
 
 #: app/controllers/admin/group_categories_controller.rb:32
-#: app/controllers/edit_controller.rb:244
+#: app/controllers/edit_controller.rb:272
 msgid "Deletion complete."
 msgstr "削除しました。"
 
@@ -2800,18 +2831,22 @@ msgstr "削除しました。"
 msgid "Deletion completed."
 msgstr "削除しました。"
 
-#: app/views/admin/board_entries/index.html.erb:35
-#: app/views/admin/board_entry_comments/index.html.erb:26
-#: app/views/admin/share_files/index.html.erb:36
-#: app/views/admin/bookmarks/index.html.erb:19
-#: app/views/admin/groups/index.html.erb:33
-#: app/views/admin/bookmark_comments/index.html.erb:30
-#: app/views/admin/openid_identifiers/index.html.erb:18
-#: app/views/admin/group_participations/index.html.erb:28
+#: app/views/board_entries/_form.html.erb:75
+msgid "Description of index"
+msgstr "目次の説明文"
+
 #: app/views/admin/group_categories/_index.html.erb:24
+#: app/views/admin/users/index.html.erb:62
+#: app/views/admin/groups/index.html.erb:33
+#: app/views/admin/openid_identifiers/index.html.erb:18
+#: app/views/admin/board_entries/index.html.erb:35
+#: app/views/admin/share_files/index.html.erb:36
+#: app/views/admin/board_entry_comments/index.html.erb:26
 #: app/views/admin/user_profile_master_categories/_index.html.erb:14
 #: app/views/admin/user_profile_masters/_index.html.erb:25
-#: app/views/admin/users/index.html.erb:62
+#: app/views/admin/bookmark_comments/index.html.erb:30
+#: app/views/admin/group_participations/index.html.erb:28
+#: app/views/admin/bookmarks/index.html.erb:19
 msgid "Destroy"
 msgstr "削除"
 
@@ -2844,8 +2879,8 @@ msgstr "指定された形式のファイルはアップロード出来ません
 msgid "Disk usage is close to its limit."
 msgstr "もうすぐ利用可能容量が上限に達します。"
 
-#: app/views/bookmarks/index.html.erb:19
 #: app/views/search/share_file_search.html.erb:9
+#: app/views/bookmarks/index.html.erb:19
 msgid "Display Order"
 msgstr "表示順"
 
@@ -2890,16 +2925,17 @@ msgstr "お酒"
 msgid "Driving"
 msgstr "ドライブ"
 
-#: app/views/entries/_entry_detail.html.erb:212
-#: app/views/board_entries/_board_entry_comment.html.erb:13
+#: app/views/group/_stock_entry_of_top.html.erb:10
 #: app/views/user/show.html.erb:16
-#: app/views/admin/openid_identifiers/index.html.erb:17
+#: app/views/board_entries/_board_entry_comment.html.erb:13
 #: app/views/admin/group_categories/_index.html.erb:23
+#: app/views/admin/users/_form.html.erb:68
+#: app/views/admin/users/index.html.erb:60
+#: app/views/admin/openid_identifiers/index.html.erb:17
 #: app/views/admin/user_profile_master_categories/_index.html.erb:13
 #: app/views/admin/user_profile_masters/_index.html.erb:24
-#: app/views/admin/users/_form.html.erb:68
-#: app/views/admin/users/index.html.erb:60 app/views/bookmark/list.html.erb:57
-#: app/views/bookmark/show.html.erb:47
+#: app/views/entries/_entry_detail.html.erb:212
+#: app/views/bookmark/list.html.erb:57 app/views/bookmark/show.html.erb:47
 msgid "Edit"
 msgstr "編集"
 
@@ -2915,7 +2951,7 @@ msgstr "グループ情報変更"
 msgid "Edit Profile"
 msgstr "プロフィール変更"
 
-#: app/views/board_entries/_form.html.erb:80
+#: app/views/board_entries/_form.html.erb:109
 msgid "Edit by Members Allowed"
 msgstr "参加者の編集可"
 
@@ -2927,14 +2963,6 @@ msgstr "紹介文の変更"
 msgid "Editable"
 msgstr "編集可"
 
-#: app/controllers/admin/openid_identifiers_controller.rb:25
-#: app/controllers/admin/openid_identifiers_controller.rb:26
-#: app/controllers/admin/openid_identifiers_controller.rb:40
-#: app/controllers/admin/openid_identifiers_controller.rb:41
-#: app/controllers/admin/users_controller.rb:60
-#: app/controllers/admin/users_controller.rb:84
-#: app/controllers/admin/users_controller.rb:170
-#: app/controllers/admin/users_controller.rb:195
 #: app/controllers/admin/admin_module.rb:127
 #: app/controllers/admin/admin_module.rb:154
 #: app/controllers/admin/admin_module.rb:236
@@ -2943,6 +2971,14 @@ msgstr "編集可"
 #: app/controllers/admin/user_profiles_controller.rb:22
 #: app/controllers/admin/user_profiles_controller.rb:40
 #: app/controllers/admin/user_profiles_controller.rb:41
+#: app/controllers/admin/users_controller.rb:60
+#: app/controllers/admin/users_controller.rb:84
+#: app/controllers/admin/users_controller.rb:170
+#: app/controllers/admin/users_controller.rb:195
+#: app/controllers/admin/openid_identifiers_controller.rb:25
+#: app/controllers/admin/openid_identifiers_controller.rb:26
+#: app/controllers/admin/openid_identifiers_controller.rb:40
+#: app/controllers/admin/openid_identifiers_controller.rb:41
 #: app/views/admin/users/edit.html.erb:17
 msgid "Editing %{model}"
 msgstr "%{model}の更新"
@@ -3007,6 +3043,14 @@ msgstr ""
 msgid "Embeds"
 msgstr "埋め込みタグ"
 
+#: app/views/board_entries/_form.html.erb:261
+msgid "Enable group members"
+msgstr "参加者も編集可能"
+
+#: app/views/board_entries/_form.html.erb:263
+msgid "Enable owner only"
+msgstr "あなたのみ可能"
+
 #: app/controllers/monta_controller.rb:66
 msgid "End Monta"
 msgstr "おしまい"
@@ -3050,12 +3094,11 @@ msgstr "以下のフォームにOpenIDのURLを入力してください。"
 msgid "Entered email address %s has not been registered in the site."
 msgstr "入力された%sというメールアドレスは登録されていません。"
 
-#: app/controllers/search_controller.rb:20
 #: app/controllers/feed/board_entries_controller.rb:21
+#: app/controllers/search_controller.rb:20 app/views/user/blog.html.erb:33
 #: app/views/entries/_topix_entries_with_sortable_pagination.html.erb:1
-#: app/views/user/blog.html.erb:33 app/views/bookmarks/index.html.erb:26
 #: app/views/shared/_global_navigation.html.erb:3
-#: app/views/bookmark/list.html.erb:16
+#: app/views/bookmark/list.html.erb:16 app/views/bookmarks/index.html.erb:26
 msgid "Entries"
 msgstr "記事"
 
@@ -3072,7 +3115,7 @@ msgstr "記事数"
 msgid "Entries most commented (public entries only)"
 msgstr "みんなからコメントが活発に付いたブログです"
 
-#: app/views/entries/_entry_detail.html.erb:296
+#: app/views/entries/_entry_detail.html.erb:310
 msgid "Entries talking about this entry:"
 msgstr "この記事を話題にした記事："
 
@@ -3096,7 +3139,7 @@ msgstr "記事を未読にしました。"
 msgid "Entry was successfully set to %{operation}."
 msgstr "記事を%{operation}にしました。"
 
-#: app/controllers/edit_controller.rb:215
+#: app/controllers/edit_controller.rb:232
 msgid "Entry was successfully updated."
 msgstr "記事の更新に成功しました。"
 
@@ -3180,15 +3223,15 @@ msgstr "更新日時"
 msgid "Events"
 msgstr "イベント"
 
-#: app/views/users/index.html.erb:33
+#: app/views/users/index.html.erb:46
 msgid "Excluding retired users"
 msgstr "利用中のユーザのみ（退職者などを含めない）"
 
-#: app/controllers/group_controller.rb:297
+#: app/controllers/group_controller.rb:312
 msgid "Failed to approve."
 msgstr "承認に失敗しました。"
 
-#: app/controllers/group_controller.rb:248
+#: app/controllers/group_controller.rb:263
 msgid "Failed to change status."
 msgstr "権限変更に失敗しました。"
 
@@ -3196,7 +3239,7 @@ msgstr "権限変更に失敗しました。"
 msgid "Failed to delete '%{page}'."
 msgstr "'%{page}'の削除に失敗しました。"
 
-#: app/controllers/group_controller.rb:322
+#: app/controllers/group_controller.rb:337
 msgid "Failed to delete since there are still other users in the group."
 msgstr "自分以外のユーザがまだ存在しています。削除できません。"
 
@@ -3274,8 +3317,8 @@ msgstr "2月"
 msgid "Female"
 msgstr "女性"
 
-#: app/controllers/attachments_controller.rb:58
 #: app/controllers/share_file_controller.rb:47
+#: app/controllers/attachments_controller.rb:58
 #: app/views/attachments/new_ajax_upload.html.erb:12
 #: app/views/share_file/new_ajax_upload.html.erb:25
 #: app/views/share_file/new.html.erb:70
@@ -3311,16 +3354,16 @@ msgstr "ファイルサイズ: %s"
 msgid "File was successfully deleted."
 msgstr "ファイルの削除に成功しました。"
 
-#: app/controllers/attachments_controller.rb:64
 #: app/controllers/share_file_controller.rb:81
+#: app/controllers/attachments_controller.rb:64
 msgid "File was successfully uploaded."
 msgid_plural "Files were successfully uploaded."
 msgstr[0] "ファイルのアップロードに成功しました。"
 
 #: app/controllers/services_controller.rb:48
 #: app/controllers/search_controller.rb:72
+#: app/views/share_file/edit.html.erb:9 app/views/share_file/new.html.erb:9
 #: app/views/shared/_global_navigation.html.erb:4
-#: app/views/share_file/new.html.erb:9 app/views/share_file/edit.html.erb:9
 msgid "Files"
 msgstr "ファイル"
 
@@ -3399,8 +3442,8 @@ msgstr "アカウントの登録"
 msgid "Gourmet"
 msgstr "グルメ"
 
-#: app/views/admin/_master_data_menu_box.html.erb:6
 #: app/views/admin/group_categories/_index.html.erb:1
+#: app/views/admin/_master_data_menu_box.html.erb:6
 msgid "Group Categories"
 msgstr "グループカテゴリ"
 
@@ -3420,19 +3463,19 @@ msgstr "グループ名・説明文"
 msgid "Group categories"
 msgstr "グループカテゴリ"
 
-#: app/models/board_entry.rb:199
+#: app/models/board_entry.rb:206
 msgid "Group does not exist."
 msgstr "ご指定のグループは存在しません。"
 
-#: app/controllers/group_controller.rb:313
+#: app/controllers/group_controller.rb:328
 msgid "Group information was successfully updated."
 msgstr "グループ情報は正しく更新されました。"
 
-#: app/controllers/groups_controller.rb:53
+#: app/controllers/groups_controller.rb:55
 msgid "Group was created successfully."
 msgstr "グループが正しく作成されました。"
 
-#: app/controllers/group_controller.rb:326
+#: app/controllers/group_controller.rb:341
 msgid "Group was successfully deleted."
 msgstr "グループは削除されました。"
 
@@ -3516,13 +3559,13 @@ msgstr "いいえ"
 msgid "GroupParticipation|Waiting|true"
 msgstr "はい"
 
-#: app/controllers/groups_controller.rb:62
 #: app/controllers/services_controller.rb:47
-#: app/controllers/group_controller.rb:339
+#: app/controllers/group_controller.rb:354
 #: app/controllers/share_file_controller.rb:182
-#: app/controllers/edit_controller.rb:280
-#: app/views/shared/_global_navigation.html.erb:6
+#: app/controllers/groups_controller.rb:64
+#: app/controllers/edit_controller.rb:314
 #: app/views/admin/_data_menu_box.html.erb:6
+#: app/views/shared/_global_navigation.html.erb:6
 msgid "Groups"
 msgstr "グループ"
 
@@ -3540,6 +3583,10 @@ msgstr "既定の公開種別"
 
 #: app/models/group.rb:-
 msgid "Group|Default send mail"
+msgstr ""
+
+#: app/models/group.rb:-
+msgid "Group|Default stock entry"
 msgstr ""
 
 #: app/models/group.rb:-
@@ -3639,7 +3686,7 @@ msgstr ""
 "<br />運営担当者の方々が受信可能なメールアドレス(メーリングリスト等)を入力し"
 "てください。<br />その他は、必要に応じて変更してください。<br />"
 
-#: app/views/board_entries/_form.html.erb:60
+#: app/views/board_entries/_form.html.erb:89
 msgid "Hide Time"
 msgstr "時刻は表示しない"
 
@@ -3716,7 +3763,7 @@ msgstr "ホーム"
 msgid "Human Resources"
 msgstr "人事"
 
-#: app/views/board_entries/_form.html.erb:139
+#: app/views/board_entries/_form.html.erb:168
 msgid ""
 "Illegal format in \"Topic entry\". List the page IDs and separate each other "
 "by commas."
@@ -3765,8 +3812,8 @@ msgstr "お問い合わせ"
 #: app/views/board_entries/_embed_dialog.html.erb:7
 #: app/views/board_entries/_embed_dialog.html.erb:35
 #: app/views/board_entries/_embed_dialog.html.erb:215
-#: app/views/chapters/_embed_dialog.html.erb:7
 #: app/views/chapters/_page_content.html.erb:209
+#: app/views/chapters/_embed_dialog.html.erb:7
 msgid "Insert embed"
 msgstr "埋め込みを挿入"
 
@@ -3775,10 +3822,10 @@ msgstr "埋め込みを挿入"
 msgid "Insert file in text body"
 msgstr "ファイルを本文に挿入"
 
-#: app/views/board_entries/_embed_dialog.html.erb:1
 #: app/views/board_entries/_edit_contents.html.erb:14
-#: app/views/chapters/_embed_dialog.html.erb:1
+#: app/views/board_entries/_embed_dialog.html.erb:1
 #: app/views/chapters/_page_content.html.erb:20
+#: app/views/chapters/_embed_dialog.html.erb:1
 msgid "Insert file or embed in text body"
 msgstr "画像やファイル、地図・動画などを本文に挿入"
 
@@ -3808,8 +3855,8 @@ msgstr ""
 msgid "Internal error(s) occured. Contact administrator."
 msgstr "想定外のエラーが発生しました。管理者にお問い合わせ下さい。"
 
-#: app/views/bookmarks/index.html.erb:27 app/views/layouts/layout.html.erb:70
-#: app/views/bookmark/list.html.erb:17 lib/skip_default_data.rb:65
+#: app/views/layouts/layout.html.erb:70 app/views/bookmark/list.html.erb:17
+#: app/views/bookmarks/index.html.erb:27 lib/skip_default_data.rb:65
 msgid "Internet"
 msgstr "インターネット"
 
@@ -3817,7 +3864,7 @@ msgstr "インターネット"
 msgid "Introduce"
 msgstr "みんなに紹介する"
 
-#: app/views/chains/new.html.erb:2 app/views/chains/edit.html.erb:2
+#: app/views/chains/edit.html.erb:2 app/views/chains/new.html.erb:2
 msgid "Introduce %s to others!"
 msgstr "%sさんをみんなに紹介しましょう！"
 
@@ -3861,7 +3908,7 @@ msgstr "%{name} に不正な形式が設定されています"
 msgid "Invalid format. Please input like uid:xxxxx"
 msgstr "フォーマットが不正です。uid:xxxxxxのような形で入力してください。"
 
-#: app/models/board_entry.rb:201
+#: app/models/board_entry.rb:208
 msgid "Invalid group detected."
 msgstr "不正なグループです。"
 
@@ -3869,10 +3916,9 @@ msgstr "不正なグループです。"
 msgid "Invalid input format. Should be in uid:xxxxxx format."
 msgstr "フォーマットが不正です。uid:xxxxxxのような形で入力してください。"
 
-#: app/controllers/monta_controller.rb:22
-#: app/controllers/monta_controller.rb:33
 #: app/controllers/board_entries_controller.rb:26
-#: app/models/board_entry.rb:694
+#: app/controllers/monta_controller.rb:22
+#: app/controllers/monta_controller.rb:33 app/models/board_entry.rb:701
 msgid "Invalid operation."
 msgstr "不正な操作です"
 
@@ -3882,12 +3928,12 @@ msgid "Invalid parameter(s) detected."
 msgstr "不正なパラメタです。"
 
 #: app/controllers/edit_controller.rb:69
-#: app/controllers/edit_controller.rb:166
+#: app/controllers/edit_controller.rb:183
 msgid "Invalid parameter(s) found."
 msgstr "不正なパラメータがあります"
 
 #: app/controllers/share_file_controller.rb:282
-#: app/controllers/edit_controller.rb:300
+#: app/controllers/edit_controller.rb:334
 msgid "Invalid parameter(s)."
 msgstr "パラメータが不正です"
 
@@ -3897,8 +3943,8 @@ msgstr ""
 "パスワードリセットのためのURLが不正です。再度お試し頂くか、システム管理者にお"
 "問い合わせ下さい。"
 
-#: app/controllers/edit_controller.rb:310
-#: app/controllers/edit_controller.rb:316
+#: app/controllers/edit_controller.rb:344
+#: app/controllers/edit_controller.rb:350
 msgid "Invalid privacy setting."
 msgstr "公開範囲の指定が不正です"
 
@@ -3917,7 +3963,7 @@ msgstr "不正なリクエストです。"
 msgid "Invalid session. You need to log in again."
 msgstr "不正なセッションです。再度ログインし直して下さい。"
 
-#: app/models/board_entry.rb:195
+#: app/models/board_entry.rb:202
 msgid "Invalid user detected."
 msgstr "不正なユーザです。"
 
@@ -3997,7 +4043,7 @@ msgstr "参加する"
 msgid "Joined the group failed."
 msgstr ""
 
-#: app/controllers/group_controller.rb:168
+#: app/controllers/group_controller.rb:183
 msgid "Joined the group successfully."
 msgstr "グループに参加しました。"
 
@@ -4018,7 +4064,7 @@ msgid "Karaoke"
 msgstr "カラオケ"
 
 #: app/views/search/share_file_search.html.erb:5
-#: app/views/search/entry_search.html.erb:21
+#: app/views/search/entry_search.html.erb:22
 msgid "Keywords"
 msgstr "キーワード"
 
@@ -4079,19 +4125,7 @@ msgstr "連携アプリ一覧"
 msgid "List of unread entries"
 msgstr "未読記事の一覧"
 
-#: app/controllers/admin/openid_identifiers_controller.rb:24
-#: app/controllers/admin/openid_identifiers_controller.rb:39
-#: app/controllers/admin/pictures_controller.rb:22
-#: app/controllers/admin/pictures_controller.rb:37
-#: app/controllers/admin/pictures_controller.rb:48
-#: app/controllers/admin/users_controller.rb:29
-#: app/controllers/admin/users_controller.rb:50
-#: app/controllers/admin/users_controller.rb:59
-#: app/controllers/admin/users_controller.rb:83
-#: app/controllers/admin/users_controller.rb:134
-#: app/controllers/admin/users_controller.rb:151
-#: app/controllers/admin/users_controller.rb:169
-#: app/controllers/admin/users_controller.rb:194
+#: app/controllers/admin/user_profile_masters_controller.rb:23
 #: app/controllers/admin/admin_module.rb:87
 #: app/controllers/admin/admin_module.rb:99
 #: app/controllers/admin/admin_module.rb:113
@@ -4110,12 +4144,24 @@ msgstr "未読記事の一覧"
 #: app/controllers/admin/admin_module.rb:245
 #: app/controllers/admin/admin_module.rb:265
 #: app/controllers/admin/admin_module.rb:267
-#: app/controllers/admin/user_profile_masters_controller.rb:23
 #: app/controllers/admin/user_profiles_controller.rb:20
 #: app/controllers/admin/user_profiles_controller.rb:39
+#: app/controllers/admin/pictures_controller.rb:22
+#: app/controllers/admin/pictures_controller.rb:37
+#: app/controllers/admin/pictures_controller.rb:48
+#: app/controllers/admin/users_controller.rb:29
+#: app/controllers/admin/users_controller.rb:50
+#: app/controllers/admin/users_controller.rb:59
+#: app/controllers/admin/users_controller.rb:83
+#: app/controllers/admin/users_controller.rb:134
+#: app/controllers/admin/users_controller.rb:151
+#: app/controllers/admin/users_controller.rb:169
+#: app/controllers/admin/users_controller.rb:194
+#: app/controllers/admin/openid_identifiers_controller.rb:24
+#: app/controllers/admin/openid_identifiers_controller.rb:39
+#: app/views/admin/groups/show.html.erb:35
 #: app/views/admin/board_entries/show.html.erb:43
 #: app/views/admin/bookmarks/show.html.erb:19
-#: app/views/admin/groups/show.html.erb:35
 msgid "Listing %{model}"
 msgstr "%{model}一覧"
 
@@ -4150,8 +4196,8 @@ msgstr "ログインし直して下さい。"
 msgid "Log in failed."
 msgstr "ログインに失敗しました。"
 
-#: app/views/shared/_fixed_rp_login_form.html.erb:9
 #: app/views/shared/_password_login_form.html.erb:39
+#: app/views/shared/_fixed_rp_login_form.html.erb:9
 msgid "Login"
 msgstr "ログイン"
 
@@ -4171,8 +4217,8 @@ msgstr "ログインが必要です"
 msgid "Login automatically from next time"
 msgstr "ログインしたままにする"
 
-#: app/views/shared/_password_login_form.html.erb:18
 #: app/views/admin/settings/_security.html.erb:30
+#: app/views/shared/_password_login_form.html.erb:18
 msgid "Login keyphrase"
 msgstr "ログインキーフレーズ"
 
@@ -4234,8 +4280,8 @@ msgid "Members"
 msgstr "参加者"
 
 #: app/helpers/application_helper.rb:235 app/helpers/application_helper.rb:260
-#: app/helpers/share_file_helper.rb:19
-#: app/views/board_entries/_form.html.erb:76 app/views/group/_form.html.erb:51
+#: app/helpers/share_file_helper.rb:19 app/views/group/_form.html.erb:51
+#: app/views/board_entries/_form.html.erb:105
 msgid "Members Only"
 msgstr "参加者のみ"
 
@@ -4248,7 +4294,7 @@ msgstr "参加者数"
 msgid "Menu"
 msgstr "メニュー"
 
-#: app/views/edit/edit.html.erb:13
+#: app/views/edit/edit.html.erb:17
 msgid "Minor update"
 msgstr "ちょっとした更新"
 
@@ -4291,9 +4337,9 @@ msgstr "参加グループへ移動 ..."
 msgid "Mr./Ms. %s"
 msgstr "%s さん"
 
-#: app/views/chains/_form.html.erb:19
-#: app/views/board_entries/_form.html.erb:35
-#: app/views/share_file/_form.html.erb:50 app/views/bookmark/new.html.erb:41
+#: app/views/share_file/_form.html.erb:50
+#: app/views/board_entries/_form.html.erb:36
+#: app/views/chains/_form.html.erb:19 app/views/bookmark/new.html.erb:41
 msgid "Multiple values can be given in foo,bar format"
 msgstr "foo,barの形で複数指定できます"
 
@@ -4305,7 +4351,7 @@ msgstr "音楽鑑賞"
 msgid "My Account"
 msgstr "自分の管理"
 
-#: app/controllers/edit_controller.rb:280
+#: app/controllers/edit_controller.rb:314
 msgid "My Blog"
 msgstr "マイブログ"
 
@@ -4316,8 +4362,8 @@ msgid "My Page"
 msgstr "マイページ"
 
 #: app/views/portal/account_registration.html.erb:21
-#: app/views/group/_manage_permit.html.erb:30
 #: app/views/group/_manage_participations.html.erb:48
+#: app/views/group/_manage_permit.html.erb:30
 msgid "Name"
 msgstr "名前"
 
@@ -4334,20 +4380,20 @@ msgstr "名称・名前"
 msgid "Need approval of the Administrator."
 msgstr "管理者の承認が必要"
 
-#: app/controllers/admin/pictures_controller.rb:38
-#: app/controllers/admin/pictures_controller.rb:49
-#: app/controllers/admin/users_controller.rb:29
-#: app/controllers/admin/users_controller.rb:50
 #: app/controllers/admin/admin_module.rb:114
 #: app/controllers/admin/admin_module.rb:135
 #: app/controllers/admin/admin_module.rb:221
 #: app/controllers/admin/admin_module.rb:246
-#: app/views/admin/openid_identifiers/index.html.erb:23
+#: app/controllers/admin/pictures_controller.rb:38
+#: app/controllers/admin/pictures_controller.rb:49
+#: app/controllers/admin/users_controller.rb:29
+#: app/controllers/admin/users_controller.rb:50
 #: app/views/admin/group_categories/_index.html.erb:4
-#: app/views/admin/user_profile_master_categories/_index.html.erb:4
-#: app/views/admin/user_profile_masters/_index.html.erb:3
 #: app/views/admin/users/index.html.erb:5
 #: app/views/admin/users/index.html.erb:8
+#: app/views/admin/openid_identifiers/index.html.erb:23
+#: app/views/admin/user_profile_master_categories/_index.html.erb:4
+#: app/views/admin/user_profile_masters/_index.html.erb:3
 msgid "New %{model}"
 msgstr "新規%{model}の作成"
 
@@ -4355,13 +4401,13 @@ msgstr "新規%{model}の作成"
 msgid "New Email Address"
 msgstr "変更後メールアドレス"
 
-#: app/views/entries/_entry_detail.html.erb:275
+#: app/views/entries/_entry_detail.html.erb:288
 msgid "New Entries on Top"
 msgstr "新しい順に並べる"
 
-#: app/views/group/_new_forum_links.html.erb:1
 #: app/views/groups/index.html.erb:4
-#: app/views/shared/_global_footer_navigation.html.erb:18
+#: app/views/group/_new_forum_links.html.erb:1
+#: app/views/shared/_global_footer_navigation.html.erb:23
 msgid "New Posts"
 msgstr "記事を書く"
 
@@ -4401,8 +4447,8 @@ msgstr "ユーザのCSVアップロード"
 msgid "News"
 msgstr "ニュース"
 
-#: app/views/search/_page_navi.html.erb:19
 #: app/views/bookmark/new_url.html.erb:10
+#: app/views/search/_page_navi.html.erb:19
 msgid "Next"
 msgstr "次へ"
 
@@ -4417,12 +4463,12 @@ msgstr "次の日(%s)"
 msgid "Next »"
 msgstr "次 »"
 
-#: app/views/group/_form.html.erb:43
+#: app/views/group/_form.html.erb:43 app/views/group/_form.html.erb:66
 msgid "No"
 msgstr "いいえ"
 
-#: app/controllers/group_controller.rb:146
-#: app/controllers/group_controller.rb:258
+#: app/controllers/group_controller.rb:161
+#: app/controllers/group_controller.rb:273
 #: app/views/layouts/layout.html.erb:56
 msgid "No approval needed to join this group."
 msgstr "自由に参加できます"
@@ -4468,8 +4514,8 @@ msgstr "みんなからの質問はありません"
 msgid "No matching results found."
 msgstr "該当する検索結果がありませんでした。"
 
-#: app/controllers/search_controller.rb:75
 #: app/controllers/share_file_controller.rb:188
+#: app/controllers/search_controller.rb:75
 msgid "No matching shared files found."
 msgstr "該当する共有ファイルはありませんでした。"
 
@@ -4481,8 +4527,8 @@ msgstr "お知らせはありません"
 msgid "No user information registered in %s."
 msgstr "%sにユーザ情報が登録されていません。"
 
-#: app/views/board_entries/_form.html.erb:150
 #: app/views/share_file/_form.html.erb:82
+#: app/views/board_entries/_form.html.erb:179
 msgid "No user selected. Are you sure to make this open to all users?"
 msgstr ""
 "ユーザの指定がされていません。このままだと、「全体に公開」になりますがよろし"
@@ -4529,8 +4575,8 @@ msgstr ""
 msgid "Notify activation"
 msgstr "利用開始通知"
 
-#: app/views/user/_action_box.html.erb:12
 #: app/views/group/_action_box.html.erb:8
+#: app/views/user/_action_box.html.erb:12
 msgid "Notify new posts"
 msgstr "新着時に通知"
 
@@ -4578,11 +4624,11 @@ msgstr "グループから強制的に退会させられた時に通知する。
 msgid "November"
 msgstr "11月"
 
-#: app/views/admin/user_profiles/edit.html.erb:10
-#: app/views/admin/openid_identifiers/edit.html.erb:16
 #: app/views/admin/group_categories/edit.html.erb:9
 #: app/views/admin/users/change_uid.html.erb:30
 #: app/views/admin/users/edit.html.erb:8
+#: app/views/admin/openid_identifiers/edit.html.erb:16
+#: app/views/admin/user_profiles/edit.html.erb:10
 msgid "Now Updating..."
 msgstr "更新しています…"
 
@@ -4640,22 +4686,23 @@ msgstr "オフ"
 msgid "Off-time"
 msgstr "業務以外"
 
-#: app/views/entries/_entry_detail.html.erb:276
+#: app/views/entries/_entry_detail.html.erb:289
 msgid "Old Entries on Top"
 msgstr "古い順に並べる"
 
-#: app/views/entries/_entry_detail.html.erb:453
+#: app/views/entries/_entry_detail.html.erb:467
 msgid "One or more characters other than spaces required."
 msgstr "空白以外で1文字以上入力してください。"
 
-#: app/views/entries/_entry_detail.html.erb:652
+#: app/views/entries/_entry_detail.html.erb:666
 msgid "Open"
 msgstr "質問中"
 
 #: app/helpers/application_helper.rb:231 app/helpers/application_helper.rb:253
-#: app/views/board_entries/_form.html.erb:74 app/views/group/_form.html.erb:50
-#: app/views/share_file/new_ajax_upload.html.erb:19
 #: app/views/share_file/_form.html.erb:35
+#: app/views/share_file/new_ajax_upload.html.erb:19
+#: app/views/group/_form.html.erb:50
+#: app/views/board_entries/_form.html.erb:103
 msgid "Open to All"
 msgstr "全体に公開"
 
@@ -4690,39 +4737,39 @@ msgstr "正しいOpenID URLを入力してください。"
 msgid "OpenId process is cancelled or failed."
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "OpenIdAuthentication::Association|Assoc type"
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "OpenIdAuthentication::Association|Handle"
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "OpenIdAuthentication::Association|Issued"
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "OpenIdAuthentication::Association|Lifetime"
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "OpenIdAuthentication::Association|Secret"
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "OpenIdAuthentication::Association|Server url"
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "OpenIdAuthentication::Nonce|Salt"
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "OpenIdAuthentication::Nonce|Server url"
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "OpenIdAuthentication::Nonce|Timestamp"
 msgstr ""
 
@@ -4767,9 +4814,9 @@ msgid "Operation inexecutable."
 msgstr "ご指定の操作は実行できません。"
 
 #: app/controllers/application_controller.rb:161
+#: app/controllers/share_file_controller.rb:260
 #: app/controllers/board_entries_controller.rb:89
 #: app/controllers/board_entries_controller.rb:139
-#: app/controllers/share_file_controller.rb:260
 msgid "Operation unauthorized."
 msgstr "この操作は、許可されていません。"
 
@@ -4817,7 +4864,7 @@ msgstr "activation_codeを上書きしました。初期管理者登録用URLは
 
 #: app/helpers/application_helper.rb:235 app/helpers/application_helper.rb:260
 #: app/helpers/share_file_helper.rb:19
-#: app/views/board_entries/_form.html.erb:76
+#: app/views/board_entries/_form.html.erb:105
 msgid "Owner Only"
 msgstr "下書き"
 
@@ -4861,13 +4908,13 @@ msgstr "親コメントが存在しません。再読み込みして下さい。
 msgid "Parent page"
 msgstr "リンク元ページ"
 
-#: app/controllers/group_controller.rb:274
+#: app/controllers/group_controller.rb:289
 msgid "Part of the users are already members of this group."
 msgstr "このグループに参加済みのユーザが含まれています。"
 
+#: app/views/platform/reset_password.html.erb:8
 #: app/views/shared/_password_login_form.html.erb:14
 #: app/views/mypage/_manage_password.html.erb:18
-#: app/views/platform/reset_password.html.erb:8
 msgid "Password"
 msgstr "パスワード"
 
@@ -4977,6 +5024,13 @@ msgstr "OpenID URLを入力してください。"
 msgid "Please input search query."
 msgstr "検索したいキーワードを入力してください"
 
+#: app/views/board_entries/_edit_contents.html.erb:19
+#: app/views/board_entries/_edit_contents.html.erb:27
+msgid ""
+"Please input the introduction of this stock entry. This is displayed on a "
+"top of group."
+msgstr "文書管理の紹介文を入力してください。グループのトップに表示されます。"
+
 #: app/views/group/_manage_participations.html.erb:114
 msgid "Please input valid user or group"
 msgstr "正しいユーザ/グループを入力してください"
@@ -5010,7 +5064,7 @@ msgstr "作成日時"
 msgid "PopularBookmark|Date"
 msgstr "日時"
 
-#: app/views/entries/_entry_detail.html.erb:290
+#: app/views/entries/_entry_detail.html.erb:304
 msgid "Post"
 msgstr "書き込み"
 
@@ -5039,17 +5093,17 @@ msgstr "前へ"
 msgid "Prev Day (%s)"
 msgstr "前の日(%s)"
 
-#: app/views/entries/_entry_detail.html.erb:219
 #: app/views/board_entries/large.html.erb:23
+#: app/views/entries/_entry_detail.html.erb:219
 msgid "Print"
 msgstr "印刷する"
 
-#: app/views/board_entries/_form.html.erb:70
 #: app/views/share_file/_form.html.erb:31
+#: app/views/board_entries/_form.html.erb:99
 msgid "Privacy Settings"
 msgstr "公開範囲"
 
-#: app/views/bookmark/show.html.erb:45
+#: app/helpers/board_entries_helper.rb:160 app/views/bookmark/show.html.erb:45
 msgid "Private"
 msgstr "非公開"
 
@@ -5058,18 +5112,18 @@ msgid "Problem found in following item: "
 msgid_plural "Problems found in following items: "
 msgstr[0] "次の項目に問題があります"
 
-#: app/helpers/user_helper.rb:38 app/views/user/show.html.erb:13
-#: app/views/user/show_retired.html.erb:3 app/views/users/index.html.erb:20
+#: app/helpers/user_helper.rb:38 app/views/users/index.html.erb:33
+#: app/views/user/show_retired.html.erb:3 app/views/user/show.html.erb:13
 msgid "Profile"
 msgstr "プロフィール"
 
-#: app/views/admin/_master_data_menu_box.html.erb:7
 #: app/views/admin/user_profile_master_categories/_index.html.erb:1
+#: app/views/admin/_master_data_menu_box.html.erb:7
 msgid "Profile Categories"
 msgstr "プロフィールカテゴリ"
 
-#: app/views/admin/_master_data_menu_box.html.erb:8
 #: app/views/admin/user_profile_masters/_index.html.erb:1
+#: app/views/admin/_master_data_menu_box.html.erb:8
 msgid "Profile Items"
 msgstr "プロフィール項目"
 
@@ -5203,7 +5257,7 @@ msgstr "既読/未読:"
 msgid "Reading"
 msgstr "読書"
 
-#: app/views/group/show.html.erb:79
+#: app/views/group/show.html.erb:81
 #: app/views/mypage/_publicated_entries_tabs.html.erb:1
 msgid "Recent Entries"
 msgstr "新着記事"
@@ -5230,11 +5284,11 @@ msgstr "みんなからの質問!"
 msgid "Recent Users"
 msgstr "新着ユーザ"
 
-#: app/views/board_entries/_form.html.erb:38
+#: app/views/board_entries/_form.html.erb:39
 msgid "Recent tags of other users: "
 msgstr "他のユーザの最近のタグ："
 
-#: app/views/board_entries/_form.html.erb:37
+#: app/views/board_entries/_form.html.erb:38
 msgid "Recommended tags: "
 msgstr "オススメ・定番のタグ："
 
@@ -5268,8 +5322,9 @@ msgstr "ユーザ登録して%sの利用を開始する"
 msgid "Registered Users"
 msgstr "登録ユーザ数"
 
-#: app/views/layouts/wiki.html.erb:75 app/views/layouts/layout.html.erb:122
+#: app/views/layouts/wiki.html.erb:75
 #: app/views/layouts/admin/application.html.erb:66
+#: app/views/layouts/layout.html.erb:122
 msgid "Registered Users: %s users"
 msgstr "登録ユーザ数：%s人"
 
@@ -5311,7 +5366,7 @@ msgstr "関連ページ"
 msgid "Remember to clean up the user data periodically"
 msgstr "ユーザのクリーニングは行ってますか?"
 
-#: app/controllers/group_controller.rb:228
+#: app/controllers/group_controller.rb:243
 msgid "Removed %s from members of the group."
 msgstr "%sさんをこのグループの参加者から削除しました。"
 
@@ -5319,12 +5374,12 @@ msgstr "%sさんをこのグループの参加者から削除しました。"
 msgid "Reply"
 msgstr "返信"
 
-#: app/views/entries/_entry_detail.html.erb:558
 #: app/views/board_entries/_board_entry_comment.html.erb:16
+#: app/views/entries/_entry_detail.html.erb:572
 msgid "Reply to this comment"
 msgstr "このコメントに返信"
 
-#: app/controllers/group_controller.rb:163
+#: app/controllers/group_controller.rb:178
 msgid "Request sent. Please wait for the approval."
 msgstr "参加申し込みをしました。承認されるのをお待ちください。"
 
@@ -5349,7 +5404,7 @@ msgstr "OpenID URLの再設定"
 msgid "Resolved"
 msgstr "解決"
 
-#: app/views/entries/_entry_detail.html.erb:277
+#: app/views/entries/_entry_detail.html.erb:290
 msgid "Resume default order"
 msgstr "元の順に戻す"
 
@@ -5397,43 +5452,45 @@ msgstr "正しいCSVファイルの例"
 msgid "Sat"
 msgstr "土"
 
-#: app/views/entries/_entry_detail.html.erb:575
-#: app/views/board_entries/_board_entry_comment.html.erb:30
 #: app/views/portal/_registration_form.html.erb:74
-#: app/views/bookmarks/_topix_bookmarks.html.erb:35
+#: app/views/board_entries/_board_entry_comment.html.erb:30
+#: app/views/admin/settings/index.html.erb:9
+#: app/views/admin/documents/index.html.erb:10
+#: app/views/entries/_entry_detail.html.erb:589
+#: app/views/platform/reset_password.html.erb:16
+#: app/views/bookmark/new.html.erb:58
 #: app/views/mypage/_manage_message.html.erb:28
 #: app/views/mypage/_manage_openid.html.erb:18
 #: app/views/mypage/_manage_password.html.erb:26
-#: app/views/platform/reset_password.html.erb:16
-#: app/views/admin/settings/index.html.erb:9
-#: app/views/admin/documents/index.html.erb:10
-#: app/views/bookmark/new.html.erb:58
+#: app/views/bookmarks/_topix_bookmarks.html.erb:35
 msgid "Save"
 msgstr "保存"
 
 #: app/views/portal/_registration_form.html.erb:75
-#: app/views/bookmarks/_topix_bookmarks.html.erb:35
 #: app/views/admin/settings/index.html.erb:9
 #: app/views/admin/oauth_providers/index.html.erb:18
 #: app/views/admin/documents/index.html.erb:10
+#: app/views/bookmarks/_topix_bookmarks.html.erb:35
 msgid "Saving..."
 msgstr "保存しています…"
 
-#: app/views/entries/_search_box.html.erb:7
-#: app/views/entries/_search_box.html.erb:11 app/views/user/group.html.erb:19
-#: app/views/user/group.html.erb:22 app/views/bookmarks/index.html.erb:32
-#: app/views/groups/index.html.erb:32 app/views/mypage/_record_post.html.erb:5
-#: app/views/mypage/_record_post.html.erb:11
+#: app/views/users/index.html.erb:43 app/views/groups/index.html.erb:32
 #: app/views/share_file/list.html.erb:23 app/views/share_file/list.html.erb:26
+#: app/views/user/group.html.erb:19 app/views/user/group.html.erb:22
+#: app/views/admin/_search_box.html.erb:5
+#: app/views/entries/_search_box.html.erb:7
+#: app/views/entries/_search_box.html.erb:11
+#: app/views/bookmark/list.html.erb:3 app/views/bookmark/list.html.erb:7
 #: app/views/search/share_file_search.html.erb:17
-#: app/views/search/entry_search.html.erb:26
-#: app/views/admin/_search_box.html.erb:5 app/views/bookmark/list.html.erb:3
-#: app/views/bookmark/list.html.erb:7 app/views/users/index.html.erb:30
+#: app/views/search/entry_search.html.erb:27
+#: app/views/mypage/_record_post.html.erb:5
+#: app/views/mypage/_record_post.html.erb:11
+#: app/views/bookmarks/index.html.erb:32
 msgid "Search"
 msgstr "検索"
 
-#: app/views/bookmarks/index.html.erb:23
 #: app/views/search/entry_search.html.erb:5
+#: app/views/bookmarks/index.html.erb:23
 msgid "Search Range"
 msgstr "検索範囲"
 
@@ -5449,9 +5506,9 @@ msgstr "全て"
 msgid "Search in Internet"
 msgstr "インターネット検索"
 
-#: app/views/bookmarks/index.html.erb:38
 #: app/views/search/share_file_search.html.erb:23
-#: app/views/search/entry_search.html.erb:32
+#: app/views/search/entry_search.html.erb:33
+#: app/views/bookmarks/index.html.erb:38
 msgid "Search result"
 msgstr "検索結果"
 
@@ -5499,7 +5556,11 @@ msgstr "%sから検索対象を選択する"
 msgid "Selected"
 msgstr "選択中"
 
-#: app/views/edit/index.html.erb:6 app/views/edit/edit.html.erb:11
+#: app/views/edit/edit.html.erb:13 app/views/edit/index.html.erb:8
+msgid "Selected edit authority"
+msgstr "選択されている編集権限"
+
+#: app/views/edit/edit.html.erb:11 app/views/edit/index.html.erb:6
 msgid "Selected publication type"
 msgstr "選択されている公開範囲"
 
@@ -5511,8 +5572,8 @@ msgstr "自分の管理"
 msgid "Self Introduction"
 msgstr "自己紹介"
 
-#: app/views/platform/_mail_form.html.erb:7
 #: app/views/platform/reset_openid.html.erb:25
+#: app/views/platform/_mail_form.html.erb:7
 #: app/views/invitations/new.html.erb:26
 msgid "Send"
 msgstr "送信する"
@@ -5663,9 +5724,9 @@ msgstr "ファイル"
 msgid "Shopping"
 msgstr "ショッピング"
 
+#: app/views/admin/groups/index.html.erb:32
 #: app/views/admin/board_entries/index.html.erb:34
 #: app/views/admin/bookmarks/index.html.erb:18
-#: app/views/admin/groups/index.html.erb:32
 msgid "Show"
 msgstr "詳細"
 
@@ -5680,7 +5741,7 @@ msgstr "詳細"
 msgid "Show %{model}"
 msgstr "%{model}の詳細"
 
-#: app/views/board_entries/_form.html.erb:66
+#: app/views/board_entries/_form.html.erb:95
 msgid "Show Option"
 msgstr "[オプションを表示]"
 
@@ -5786,8 +5847,9 @@ msgid "Signup"
 msgstr "ユーザ登録"
 
 #: app/controllers/statistics_controller.rb:67
-#: app/views/layouts/wiki.html.erb:79 app/views/layouts/layout.html.erb:126
+#: app/views/layouts/wiki.html.erb:79
 #: app/views/layouts/admin/application.html.erb:70
+#: app/views/layouts/layout.html.erb:126
 msgid "Site Information"
 msgstr "サイト情報"
 
@@ -5879,12 +5941,12 @@ msgstr "登録日順"
 msgid "Sort by number of users"
 msgstr "ユーザ数順"
 
-#: app/views/entries/_topix_entries_with_sortable_pagination.html.erb:6
 #: app/views/share_file/list.html.erb:40
+#: app/views/entries/_topix_entries_with_sortable_pagination.html.erb:6
 msgid "Sort by: "
 msgstr "並び順:"
 
-#: app/controllers/group_controller.rb:352
+#: app/controllers/group_controller.rb:367
 msgid "Specified group does not exist."
 msgstr "指定のグループは存在していません"
 
@@ -5900,13 +5962,13 @@ msgstr "指定されたページは存在しません。"
 msgid "Specified share file owner does not exist."
 msgstr "指定のページは存在していません。"
 
-#: app/controllers/edit_controller.rb:264
+#: app/controllers/edit_controller.rb:298
 msgid "Specified trackback was deleted successfully."
 msgstr "指定の話題のリンクを削除しました"
 
 #: app/helpers/application_helper.rb:233 app/helpers/application_helper.rb:257
-#: app/views/board_entries/_form.html.erb:77
 #: app/views/share_file/_form.html.erb:38
+#: app/views/board_entries/_form.html.erb:106
 msgid "Specify Directly"
 msgstr "直接指定"
 
@@ -5942,8 +6004,8 @@ msgstr "状態"
 msgid "Stop"
 msgstr "停止"
 
-#: app/views/user/_action_box.html.erb:10
 #: app/views/group/_action_box.html.erb:6
+#: app/views/user/_action_box.html.erb:10
 msgid "Stop a notification"
 msgstr "新着通知を止める"
 
@@ -5989,11 +6051,11 @@ msgstr "'%{page}'の復旧が完了しました。"
 msgid "Succeded to update '%{page}'."
 msgstr "'%{page}'が更新されました。"
 
-#: app/controllers/group_controller.rb:294
+#: app/controllers/group_controller.rb:309
 msgid "Succeeded to approve."
 msgstr "承認に成功しました。"
 
-#: app/controllers/group_controller.rb:304
+#: app/controllers/group_controller.rb:319
 msgid "Succeeded to disapprove."
 msgstr "棄却に成功しました。"
 
@@ -6005,7 +6067,7 @@ msgstr "招待に成功しました。"
 msgid "Successfully added/updated users from CSV file."
 msgstr "CSVファイルからのユーザ登録/更新に成功しました。"
 
-#: app/controllers/group_controller.rb:213
+#: app/controllers/group_controller.rb:228
 msgid "Successfully left the group."
 msgstr "退会しました。"
 
@@ -6034,8 +6096,8 @@ msgid "Symbol|Type|user"
 msgstr "ユーザ"
 
 #: app/controllers/admin/application_controller.rb:28
-#: app/views/shared/_header.html.erb:20
 #: app/views/layouts/admin/application.html.erb:5
+#: app/views/shared/_header.html.erb:20
 msgid "System Administration"
 msgstr "システムの管理"
 
@@ -6067,16 +6129,16 @@ msgstr ""
 msgid "TV"
 msgstr "テレビ"
 
-#: app/views/chains/_tag_cloud_box.html.erb:2
+#: app/views/share_file/_form.html.erb:47
+#: app/views/share_file/_tag_cloud_box.html.erb:4
+#: app/views/board_entries/_form.html.erb:33
 #: app/views/entries/_tag_cloud_box.html.erb:8
-#: app/views/board_entries/_form.html.erb:32
+#: app/views/chains/_tag_cloud_box.html.erb:2
+#: app/views/bookmark/_tag_cloud_box.html.erb:4
+#: app/views/bookmark/show.html.erb:14 app/views/bookmark/new.html.erb:37
+#: app/views/search/_tag_search.html.erb:4
 #: app/views/mypage/_record_post.html.erb:19
 #: app/views/mypage/_record_post.html.erb:44
-#: app/views/share_file/_tag_cloud_box.html.erb:4
-#: app/views/share_file/_form.html.erb:47
-#: app/views/search/_tag_search.html.erb:3
-#: app/views/bookmark/_tag_cloud_box.html.erb:4
-#: app/views/bookmark/new.html.erb:37 app/views/bookmark/show.html.erb:14
 msgid "Tags"
 msgstr "タグ"
 
@@ -6140,8 +6202,8 @@ msgstr[1] ""
 "い。"
 
 #: app/views/user_mailer/smtp/sent_forgot_password.html.erb:4
-#: app/views/user_mailer/smtp/sent_apply_email_confirm.html.erb:4
 #: app/views/user_mailer/smtp/sent_forgot_openid.html.erb:4
+#: app/views/user_mailer/smtp/sent_apply_email_confirm.html.erb:4
 msgid "The URL below will be expired 24 hours after this email has been sent."
 msgstr ""
 "なお、本メール到着後24時間が経過すると、下記URLは無効となりますのでご注意くだ"
@@ -6188,6 +6250,10 @@ msgstr "記事の最終更新日"
 msgid "The file size is limited to %s kb."
 msgstr "画像サイズは %s kbまでです。"
 
+#: app/controllers/edit_controller.rb:91
+msgid "The parameter in the parents stock entry is illegal."
+msgstr "親文書のパラメータが不正です。"
+
 #: app/helpers/system_messages_helper.rb:30
 msgid "The password expiration date (%s) approaches"
 msgstr "パスワード有効期限(%s)が近づいています"
@@ -6207,6 +6273,10 @@ msgid ""
 msgstr ""
 "既に登録されているメールアドレスです。メールアドレスの変更をやり直してくださ"
 "い。"
+
+#: app/views/group/_stock_entry_of_top.html.erb:25
+msgid "The stock entry has not been registered yet."
+msgstr "まだ文書は登録されていません。"
 
 #: app/views/admin/documents/index.html.erb:18
 msgid "The system provides online document for inexperienced users.<br />"
@@ -6249,6 +6319,10 @@ msgstr "この記事には、まだアクセスがありません。"
 msgid "This is an OpenID server endpoint, not a human readable resource."
 msgstr "ここは、OpenIDのエンドポイントです。表示できるものはありません。"
 
+#: app/helpers/board_entries_helper.rb:153
+msgid "This is the top of stock entry."
+msgstr "この文書が最上位の文書です。"
+
 #: app/views/wiki/show.html.erb:12
 msgid "This page has not edited yet. Please edit this page!"
 msgstr "このページはまだ編集されていません。ご自由に編集してください!"
@@ -6269,7 +6343,11 @@ msgstr "質問を終了すると全ユーザのマイページから表示され
 msgid "This site is not allowed"
 msgstr "このサイトでは、OpenID認証が許可されていません。"
 
-#: app/views/layouts/layout.html.erb:28 app/views/users/_user.html.erb:11
+#: app/controllers/edit_controller.rb:260 app/views/edit/edit.html.erb:28
+msgid "This stock entry cannot be deleted since it has been nested."
+msgstr "この文書には子文書があるため、削除できません。"
+
+#: app/views/users/_user.html.erb:11 app/views/layouts/layout.html.erb:28
 msgid "This user has already left."
 msgstr "このIDは使われていません"
 
@@ -6312,10 +6390,10 @@ msgstr "RSSのロード時にタイムアウトしました。"
 msgid "Tips for using bookmarklet"
 msgstr "便利なブックマークレットの使い方"
 
-#: app/views/board_entries/_form.html.erb:45
-#: app/views/bookmarks/index.html.erb:15
-#: app/views/mypage/_record_post.html.erb:45
+#: app/views/board_entries/_form.html.erb:60
 #: app/views/wiki/_navigation.html.erb:6 app/views/bookmark/new.html.erb:21
+#: app/views/mypage/_record_post.html.erb:45
+#: app/views/bookmarks/index.html.erb:15
 msgid "Title"
 msgstr "タイトル"
 
@@ -6335,8 +6413,9 @@ msgstr "今日の人気記事"
 msgid "Today's Access"
 msgstr "本日のアクセス数"
 
-#: app/views/layouts/wiki.html.erb:76 app/views/layouts/layout.html.erb:123
+#: app/views/layouts/wiki.html.erb:76
 #: app/views/layouts/admin/application.html.erb:67
+#: app/views/layouts/layout.html.erb:123
 msgid "Today's Access: %s access"
 msgstr "本日のアクセス数：%s人"
 
@@ -6352,7 +6431,7 @@ msgstr "本日の記事数：%s件"
 msgid "Today's Posts: %s posts"
 msgstr "本日の記事数：%s件"
 
-#: app/views/entries/_entry_detail.html.erb:465
+#: app/views/entries/_entry_detail.html.erb:479
 msgid "Too many points!"
 msgstr "やりすぎ！"
 
@@ -6364,7 +6443,11 @@ msgstr "トップ"
 msgid "Top 10 tags: "
 msgstr "みんながよく使うタグ（人気の10件）："
 
-#: app/views/board_entries/_form.html.erb:89
+#: app/views/board_entries/_form.html.erb:65
+msgid "TopPage"
+msgstr "トップページ"
+
+#: app/views/board_entries/_form.html.erb:118
 msgid "Topic Entry"
 msgstr "話題の記事"
 
@@ -6380,8 +6463,9 @@ msgstr "累計"
 msgid "Total Entries"
 msgstr "総記事件数"
 
-#: app/views/layouts/wiki.html.erb:77 app/views/layouts/layout.html.erb:124
+#: app/views/layouts/wiki.html.erb:77
 #: app/views/layouts/admin/application.html.erb:68
+#: app/views/layouts/layout.html.erb:124
 msgid "Total Entries: %s entries"
 msgstr "総記事件数：%s件"
 
@@ -6426,9 +6510,9 @@ msgstr "火"
 msgid "Type: "
 msgstr "種類:"
 
-#: app/views/board_entries/_form.html.erb:25
-#: app/views/search/entry_search.html.erb:13
+#: app/views/board_entries/_form.html.erb:26
 #: app/views/bookmark/list.html.erb:20
+#: app/views/search/entry_search.html.erb:13
 msgid "Types"
 msgstr "種類"
 
@@ -6471,15 +6555,15 @@ msgstr "未参加"
 msgid "Unstar"
 msgstr "スターをはずす"
 
-#: app/views/chains/edit.html.erb:6 app/views/edit/edit.html.erb:12
 #: app/views/group/_manage_info.html.erb:19 app/views/layouts/wiki.html.erb:29
-#: app/views/admin/user_profiles/edit.html.erb:10
-#: app/views/admin/openid_identifiers/edit.html.erb:16
 #: app/views/admin/group_categories/edit.html.erb:9
-#: app/views/admin/user_profile_master_categories/edit.html.erb:9
-#: app/views/admin/user_profile_masters/edit.html.erb:8
 #: app/views/admin/users/change_uid.html.erb:20
 #: app/views/admin/users/edit.html.erb:8
+#: app/views/admin/openid_identifiers/edit.html.erb:16
+#: app/views/admin/user_profile_master_categories/edit.html.erb:9
+#: app/views/admin/user_profile_masters/edit.html.erb:8
+#: app/views/admin/user_profiles/edit.html.erb:10
+#: app/views/chains/edit.html.erb:6 app/views/edit/edit.html.erb:16
 msgid "Update"
 msgstr "更新"
 
@@ -6491,11 +6575,11 @@ msgstr "以下の属性を更新する"
 msgid "Update complete."
 msgstr "変更しました"
 
-#: app/controllers/edit_controller.rb:249
+#: app/controllers/edit_controller.rb:283
 msgid "Update on the same entry from other users detected. Please try again."
 msgstr "他の人によって同じ投稿に更新がかかっています。もう一度お試し下さい。"
 
-#: app/controllers/edit_controller.rb:223
+#: app/controllers/edit_controller.rb:245
 msgid "Update on the same entry from other users detected. Reset the edit?"
 msgstr "他の人によって同じ投稿に更新がかかっています。編集をやり直しますか？"
 
@@ -6520,8 +6604,8 @@ msgstr "お知らせメールの通知設定を更新しました。"
 msgid "Updated successfully."
 msgstr "正しく更新されました。"
 
-#: app/controllers/admin/users_controller.rb:77
 #: app/controllers/share_file_controller.rb:132
+#: app/controllers/admin/users_controller.rb:77
 msgid "Updated."
 msgstr "更新しました。"
 
@@ -6536,21 +6620,20 @@ msgstr "%{provider}の更新情報"
 msgid "Updating..."
 msgstr "更新中..."
 
-#: app/views/pictures/new.html.erb:16
 #: app/views/attachments/new_ajax_upload.html.erb:17
 #: app/views/share_file/new_ajax_upload.html.erb:35
-#: app/views/admin/pictures/new.html.erb:9
+#: app/views/pictures/new.html.erb:16 app/views/admin/users/import.html.erb:15
 #: app/views/admin/images/_form.html.erb:4
-#: app/views/admin/users/import.html.erb:15
+#: app/views/admin/pictures/new.html.erb:9
 msgid "Upload"
 msgstr "アップロード"
 
-#: app/views/board_entries/_embed_dialog.html.erb:5
-#: app/views/group/_action_box.html.erb:16
-#: app/views/shared/_global_footer_navigation.html.erb:11
-#: app/views/mypage/_action_box.html.erb:5
 #: app/views/share_file/_action_box.html.erb:6
+#: app/views/group/_action_box.html.erb:16
+#: app/views/board_entries/_embed_dialog.html.erb:5
 #: app/views/chapters/_embed_dialog.html.erb:5
+#: app/views/shared/_global_footer_navigation.html.erb:16
+#: app/views/mypage/_action_box.html.erb:5
 msgid "Upload a file"
 msgstr "ファイルをアップ"
 
@@ -6568,9 +6651,9 @@ msgstr ""
 msgid "Uploaded by: %s"
 msgstr "登録者：%s"
 
-#: app/views/admin/images/_form.html.erb:4
 #: app/views/admin/users/import.html.erb:15
 #: app/views/admin/users/import.html.erb:79
+#: app/views/admin/images/_form.html.erb:4
 msgid "Uploading..."
 msgstr "アップロードしています…"
 
@@ -6582,12 +6665,16 @@ msgstr "アップロードできるのは画像のみです"
 msgid "Usable."
 msgstr "登録可能です"
 
+#: app/views/group/_form.html.erb:65
+msgid "Use the Stock Entry Function ?"
+msgstr "文書機能を利用しますか？"
+
 #: app/controllers/admin/users_controller.rb:204
 msgid "User %{username} has already been registered."
 msgstr "既に%{username}が登録されています。"
 
 #: app/helpers/user_helper.rb:68 app/controllers/admin/users_controller.rb:62
-#: app/controllers/admin/users_controller.rb:80 app/models/board_entry.rb:193
+#: app/controllers/admin/users_controller.rb:80 app/models/board_entry.rb:200
 msgid "User does not exist."
 msgstr "ご指定のユーザは存在しません。"
 
@@ -6610,8 +6697,8 @@ msgstr "ユーザ管理"
 msgid "User name not found."
 msgstr "ユーザ名が見つかりませんでした。"
 
-#: app/controllers/users_controller.rb:28
 #: app/controllers/group_controller.rb:46
+#: app/controllers/users_controller.rb:28
 msgid "User not found."
 msgstr "該当するユーザは存在しませんでした。"
 
@@ -6871,13 +6958,13 @@ msgstr "タイプ"
 msgid "UserUid|User"
 msgstr "ユーザ"
 
-#: app/helpers/user_helper.rb:53 app/controllers/users_controller.rb:66
-#: app/controllers/services_controller.rb:46
+#: app/helpers/user_helper.rb:53 app/controllers/services_controller.rb:46
+#: app/controllers/users_controller.rb:66
 #: app/views/shared/_global_navigation.html.erb:5
 msgid "Users"
 msgstr "ユーザ"
 
-#: app/controllers/group_controller.rb:200
+#: app/controllers/group_controller.rb:215
 msgid "Users / groups selection invalid."
 msgstr "ユーザ・グループの選択が正しくありません。"
 
@@ -6975,11 +7062,10 @@ msgstr "非公開"
 msgid "User|Disclosure|true"
 msgstr "公開"
 
-#: app/models/user.rb:- app/views/user/_account_information.html.erb:21
-#: app/views/user/show.html.erb:41
-#: app/views/portal/_registration_form.html.erb:20
+#: app/models/user.rb:- app/views/portal/_registration_form.html.erb:20
+#: app/views/user/_account_information.html.erb:21
+#: app/views/user/show.html.erb:41 app/views/platform/_mail_form.html.erb:3
 #: app/views/shared/_password_login_form.html.erb:11
-#: app/views/platform/_mail_form.html.erb:3
 msgid "User|Email"
 msgstr "メールアドレス"
 
@@ -7009,7 +7095,7 @@ msgstr " "
 msgid "User|Locked|true"
 msgstr "ロック"
 
-#: app/models/user.rb:- app/views/users/index.html.erb:12
+#: app/models/user.rb:- app/views/users/index.html.erb:25
 msgid "User|Name"
 msgstr "名前"
 
@@ -7046,11 +7132,11 @@ msgstr "認証再設定トークン"
 msgid "User|Reset auth token expires at"
 msgstr "認証再設定トークン有効期限"
 
-#: app/models/user.rb:- app/views/user/_account_information.html.erb:26
-#: app/views/user/show.html.erb:46
-#: app/views/portal/_registration_form.html.erb:24
+#: app/models/user.rb:- app/views/portal/_registration_form.html.erb:24
+#: app/views/users/index.html.erb:29
+#: app/views/user/_account_information.html.erb:26
+#: app/views/user/show.html.erb:46 app/views/admin/users/import.html.erb:9
 #: app/views/shared/_symbol_autocomplete_field.html.erb:10
-#: app/views/admin/users/import.html.erb:9 app/views/users/index.html.erb:16
 msgid "User|Section"
 msgstr "所属"
 
@@ -7176,18 +7262,19 @@ msgstr "1分以内"
 msgid "Write a blog entry"
 msgstr "ブログを書く"
 
-#: app/views/entries/_entry_detail.html.erb:288
+#: app/views/entries/_entry_detail.html.erb:302
 msgid "Write a comment"
 msgstr "コメントを書く"
 
-#: app/views/user/_new_blog_links.html.erb:3
 #: app/views/group/_new_forum_links.html.erb:3
+#: app/views/user/_new_blog_links.html.erb:3
+#: app/views/shared/_global_footer_navigation.html.erb:8
 msgid "Write a notice"
 msgstr "お知らせを書く"
 
-#: app/views/user/_new_blog_links.html.erb:5
 #: app/views/group/_new_forum_links.html.erb:5
-#: app/views/shared/_global_footer_navigation.html.erb:7
+#: app/views/user/_new_blog_links.html.erb:5
+#: app/views/shared/_global_footer_navigation.html.erb:12
 msgid "Write a question"
 msgstr "質問を書く"
 
@@ -7196,7 +7283,7 @@ msgid "Write about your current and past jobs, your interests and concerns."
 msgstr ""
 "現在の業務や今までの仕事、興味や関心のある事柄などについて書いてください。"
 
-#: app/views/group/_form.html.erb:43
+#: app/views/group/_form.html.erb:43 app/views/group/_form.html.erb:66
 msgid "Yes"
 msgstr "はい"
 
@@ -7374,7 +7461,7 @@ msgid ""
 "complete the process."
 msgstr "メールアドレス変更の申請を受け付けました。メールをご確認ください。"
 
-#: app/views/board_entries/_form.html.erb:36
+#: app/views/board_entries/_form.html.erb:37
 msgid "Your tags: "
 msgstr "あなたのタグ："
 
@@ -7394,8 +7481,8 @@ msgstr "[%s] パスワード再設定のメールです"
 msgid "[%s] User registration completed"
 msgstr "[%s] ユーザ登録が完了しました"
 
-#: app/views/chains/_tag_cloud_box.html.erb:15
 #: app/views/group/show.html.erb:61
+#: app/views/chains/_tag_cloud_box.html.erb:15
 msgid "[...See all]"
 msgstr "[...全てを見る]"
 
@@ -7411,7 +7498,7 @@ msgstr "[更にファイルを追加]"
 msgid "[Archive of %{month}/%{year}]"
 msgstr "【%{year}年%{month}月のアーカイブ】"
 
-#: app/views/histories/show.html.erb:9 app/views/histories/diff.html.erb:41
+#: app/views/histories/diff.html.erb:41 app/views/histories/show.html.erb:9
 msgid "[Back to the histories list]"
 msgstr "[履歴一覧に戻る]"
 
@@ -7426,8 +7513,8 @@ msgstr "[ページ末尾]"
 
 #: app/views/share_file/_tag_cloud_box.html.erb:17
 #: app/views/share_file/_tag_cloud_box.html.erb:19
-#: app/views/bookmark/list.html.erb:30
 #: app/views/bookmark/_tag_cloud_box.html.erb:16
+#: app/views/bookmark/list.html.erb:30
 msgid "[Cancel selection]"
 msgstr "[選択をキャンセル]"
 
@@ -7459,8 +7546,8 @@ msgstr "[クリックでメッセージ消去]"
 msgid "[Delete feed field]"
 msgstr "[フィード欄を削除する]"
 
-#: app/helpers/share_file_helper.rb:26 app/views/chains/edit.html.erb:8
-#: app/views/shared/_chapter_menu.html.erb:4 app/views/wiki/show.html.erb:17
+#: app/helpers/share_file_helper.rb:26 app/views/wiki/show.html.erb:17
+#: app/views/chains/edit.html.erb:8 app/views/shared/_chapter_menu.html.erb:4
 msgid "[Delete]"
 msgstr "[削除]"
 
@@ -7473,7 +7560,7 @@ msgid "[Edit profile]"
 msgstr "[プロフィール変更]"
 
 #: app/helpers/share_file_helper.rb:25 app/views/user/show.html.erb:16
-#: app/views/shared/_chapter_menu.html.erb:6 app/views/wiki/show.html.erb:14
+#: app/views/wiki/show.html.erb:14 app/views/shared/_chapter_menu.html.erb:6
 msgid "[Edit]"
 msgstr "[編集]"
 
@@ -7485,7 +7572,7 @@ msgstr "[強制退会させる]"
 msgid "[Get download history in CSV]"
 msgstr "[ダウンロード履歴をCSVで取得]"
 
-#: app/models/share_file.rb:287 app/models/board_entry.rb:445
+#: app/models/share_file.rb:287 app/models/board_entry.rb:452
 msgid "[Group members only]"
 msgstr "[参加者のみ]"
 
@@ -7501,7 +7588,7 @@ msgstr "[既に読んだ記事を隠す]"
 msgid "[Hints on writing entries]"
 msgstr "【本文の書き方に関するヒント】"
 
-#: app/models/board_entry.rb:789
+#: app/models/board_entry.rb:797
 msgid "[Link does not exist...%s>]"
 msgstr "[リンク先が存在しません...%s>]"
 
@@ -7522,7 +7609,7 @@ msgstr "[次月]"
 msgid "[Next]"
 msgstr "[次へ]"
 
-#: app/models/share_file.rb:281 app/models/board_entry.rb:439
+#: app/models/share_file.rb:281 app/models/board_entry.rb:446
 msgid "[Open to all]"
 msgstr "[全体に公開]"
 
@@ -7530,7 +7617,7 @@ msgstr "[全体に公開]"
 msgid "[Other users: %{count} users]"
 msgstr "[他のユーザ:%{count}人]"
 
-#: app/models/share_file.rb:285 app/models/board_entry.rb:443
+#: app/models/share_file.rb:285 app/models/board_entry.rb:450
 msgid "[Owner only]"
 msgstr "[自分だけ]"
 
@@ -7571,17 +7658,17 @@ msgstr "[グループを探す]"
 msgid "[Search Users]"
 msgstr "[ユーザを探す]"
 
-#: app/views/user/_follow_chains_box.html.erb:11
 #: app/views/collaboration_app/_feeds.html.erb:14
+#: app/views/user/_follow_chains_box.html.erb:11
 msgid "[See all]"
 msgstr "[全てを見る]"
 
-#: app/views/board_entries/_edit_contents.html.erb:21
+#: app/views/board_entries/_edit_contents.html.erb:25
 msgid "[See preview]"
 msgstr "【プレビューで確認する】"
 
-#: app/views/board_entries/_form.html.erb:59
 #: app/views/share_file/_form.html.erb:19
+#: app/views/board_entries/_form.html.erb:88
 msgid "[Set current time]"
 msgstr "[現在時刻を設定]"
 
@@ -7625,7 +7712,7 @@ msgid "[Success:%{success} "
 msgid_plural "[Successes:%{success} "
 msgstr[0] "[成功:%{success} "
 
-#: app/views/search/_tag_search.html.erb:5
+#: app/views/search/_tag_search.html.erb:6
 msgid "[Tag search mode]:&nbsp;AND&nbsp;%{radio_and}&nbsp;OR&nbsp;%{radio_or}"
 msgstr "[タグ検索指定]:　AND %{radio_and} OR %{radio_or}"
 
@@ -7637,7 +7724,7 @@ msgstr "[今月]"
 msgid "[Today]"
 msgstr "[今日]"
 
-#: app/views/entries/_entry_detail.html.erb:315
+#: app/views/entries/_entry_detail.html.erb:329
 msgid "[Top of page]"
 msgstr "[ページ先頭]"
 
@@ -7654,11 +7741,11 @@ msgstr "[全てのチェックをはずす]"
 msgid "[Unread]"
 msgstr "[未読]"
 
-#: app/views/entries/_entry_detail.html.erb:310
+#: app/views/entries/_entry_detail.html.erb:324
 msgid "[Write a new blog entry with this as topic]"
 msgstr "[この記事を「話題」にして、新しいブログを書く]"
 
-#: app/views/entries/_entry_detail.html.erb:308
+#: app/views/entries/_entry_detail.html.erb:322
 msgid "[Write a new forum entry with this as topic]"
 msgstr "[この記事を「話題」にして、フォーラムに新しい記事を投稿する]"
 
@@ -7757,11 +7844,12 @@ msgstr ""
 msgid "before_uid"
 msgstr "現在のユーザ名"
 
-#: app/controllers/admin/board_entries_controller.rb:28
-#: app/controllers/admin/board_entries_controller.rb:39
 #: app/controllers/board_entries_controller.rb:44
 #: app/controllers/board_entries_controller.rb:74
-#: app/controllers/board_entries_controller.rb:94 app/models/board_entry.rb:-
+#: app/controllers/board_entries_controller.rb:94
+#: app/controllers/admin/board_entries_controller.rb:28
+#: app/controllers/admin/board_entries_controller.rb:39
+#: app/models/board_entry.rb:-
 msgid "board entry"
 msgstr "記事"
 
@@ -7808,9 +7896,9 @@ msgstr ""
 msgid "content"
 msgstr ""
 
-#: app/views/mypage/_manage_message.html.erb:18
-#: app/views/admin/oauth_providers/index.html.erb:9
 #: app/views/admin/groups/index.html.erb:18
+#: app/views/admin/oauth_providers/index.html.erb:9
+#: app/views/mypage/_manage_message.html.erb:18
 msgid "description"
 msgstr "説明"
 
@@ -7883,13 +7971,18 @@ msgstr "の形式が間違っています。"
 msgid "history"
 msgstr ""
 
-#: app/views/users/index.html.erb:23
+#: app/views/users/index.html.erb:36
 msgid "include following characters"
 msgstr "に以下の文字を含む"
 
 #: app/models/user.rb:305
 msgid "incorrect."
 msgstr "が間違っています。"
+
+#: app/views/group/_stock_entry_of_top.html.erb:8
+#: app/views/entries/_entry_detail.html.erb:276
+msgid "index"
+msgstr "目次"
 
 #: app/models/bookmark.rb:135
 msgid "invalid url"
@@ -7899,7 +7992,7 @@ msgstr "不正なURLです"
 msgid "invitation"
 msgstr ""
 
-#: app/models/user.rb:58 app/models/user_profile_master.rb:131
+#: app/models/user_profile_master.rb:131 app/models/user.rb:58
 msgid "is mandatory."
 msgstr "は必須です"
 
@@ -7907,11 +8000,15 @@ msgstr "は必須です"
 msgid "issued_atlast_authenticated_atpassword_expires_at"
 msgstr ""
 
+#: app/views/board_entries/_form.html.erb:47
+msgid "level"
+msgstr "階層"
+
 #: app/views/board_entries/_preview_window.html.erb:32
 msgid "loading..."
 msgstr "アップロードしています…"
 
-#: app/controllers/edit_controller.rb:322
+#: app/controllers/edit_controller.rb:356
 msgid "needs to be a valid date."
 msgstr "には存在する日付を指定してください"
 
@@ -7939,11 +8036,11 @@ msgstr ""
 msgid "oauth provider"
 msgstr "連携アプリ"
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "open id authentication association"
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "open id authentication nonce"
 msgstr ""
 
@@ -7956,11 +8053,11 @@ msgstr ""
 msgid "openid identifier"
 msgstr "OpenID"
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "openidauthentication::association"
 msgstr ""
 
-#: app/models/group.rb:-
+#: app/models/open_id_request.rb:-
 msgid "openidauthentication::nonce"
 msgstr ""
 
@@ -8004,8 +8101,8 @@ msgstr "必須"
 msgid "requires a valid regular expression."
 msgstr "は正しい正規表現で入力して下さい。"
 
-#: app/models/applied_email.rb:19 app/models/invitation.rb:5
-#: app/models/user.rb:60
+#: app/models/applied_email.rb:19 app/models/user.rb:60
+#: app/models/invitation.rb:5
 msgid "requires proper format."
 msgstr "は正しい形式で登録してください"
 
@@ -8074,6 +8171,8 @@ msgstr ""
 msgid "uncheck selected"
 msgstr "チェックを外す"
 
+#: app/controllers/admin/user_profiles_controller.rb:20
+#: app/controllers/admin/user_profiles_controller.rb:39
 #: app/controllers/admin/pictures_controller.rb:37
 #: app/controllers/admin/pictures_controller.rb:48
 #: app/controllers/admin/users_controller.rb:29
@@ -8083,9 +8182,7 @@ msgstr "チェックを外す"
 #: app/controllers/admin/users_controller.rb:134
 #: app/controllers/admin/users_controller.rb:151
 #: app/controllers/admin/users_controller.rb:169
-#: app/controllers/admin/users_controller.rb:194
-#: app/controllers/admin/user_profiles_controller.rb:20
-#: app/controllers/admin/user_profiles_controller.rb:39 app/models/user.rb:-
+#: app/controllers/admin/users_controller.rb:194 app/models/user.rb:-
 #: app/views/admin/users/index.html.erb:5
 #: app/views/admin/users/index.html.erb:8
 msgid "user"
@@ -8106,13 +8203,13 @@ msgstr ""
 #: app/helpers/initial_settings_helper.rb:43
 #: app/controllers/admin/users_controller.rb:196
 #: app/controllers/admin/users_controller.rb:204 app/models/share_file.rb:312
+#: app/views/portal/_registration_form.html.erb:42
 #: app/views/user/_account_information.html.erb:11
 #: app/views/user/show.html.erb:31
-#: app/views/portal/_registration_form.html.erb:42
-#: app/views/admin/users/create_uid.html.erb:12
-#: app/views/admin/users/create_uid.html.erb:25
 #: app/views/admin/users/change_uid.html.erb:29
 #: app/views/admin/users/edit.html.erb:15
+#: app/views/admin/users/create_uid.html.erb:12
+#: app/views/admin/users/create_uid.html.erb:25
 msgid "user name"
 msgstr "ユーザ名"
 
@@ -8181,6 +8278,9 @@ msgstr ""
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr "« 前"
+
+#~ msgid "(TopPage)"
+#~ msgstr " / トップページ"
 
 #~ msgid "(Unknown topic entry found. However, this has been ignored)"
 #~ msgstr "（話題元の記事が不明でしたが無視しました）"

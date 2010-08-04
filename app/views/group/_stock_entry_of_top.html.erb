@@ -1,0 +1,35 @@
+<div id="stock_entry_wrapper">
+  <% stock_entries = BoardEntry.owned(@group).stock_entry -%>
+  <% unless stock_entries.blank? -%>
+    <% root_stock_entry = BoardEntry.owned(@group).stock_entry.find_by_parent_id(nil) %>
+    <div id="stock_entry" class="ui-corner-all">
+      <div class="header">
+        <div>
+          <span style="margin: 2px; font-size: 15px; font-weight: bold;"><%= _('index') %></span>
+          <% if root_stock_entry.editable?(current_user.belong_symbols, session[:user_id], session[:user_symbol], current_user.group_symbols) -%>
+            <span style="position: absolute; right: 2px;"><%= link_to(icon_tag('page_edit', :title => _('Edit')) + _('Edit'), {:controller=> "edit", :action => "edit", :id => root_stock_entry.id })%></span>
+          <% end -%>
+        </div>
+      </div>
+      <div class="contents"><%= show_contents(root_stock_entry) if root_stock_entry %></div>
+      <%= render :partial => 'group/stock_entry_index', :locals => { :stock_entries => stock_entries } %>
+    </div>
+    <div class="button">
+      <% if current_user.participating_group?(@group) -%>
+        <%= link_to(content_tag('span', _("Create stock entry under the '%s'") % root_stock_entry.title ), {:controller => 'group', :action => "new_stock_entry", :parent_id => root_stock_entry.id}, {:class => "rounded", :method => :post}) %>
+      <% end -%>
+    </div>
+  <% else -%>
+    <div id="stock_entry" class="ui-corner-all">
+      <div class="index">
+        <p><%= _('The stock entry has not been registered yet.') %></p>
+        <% if current_user.participating_group?(@group) -%>
+          <%= link_to_what_is_stock_entry %>
+          <div class="button">
+            <%= link_to(content_tag('span', _('Create stock entry')), {:controller => 'group', :action => "new_stock_entry"}, {:class => "rounded", :method => :post}) %>
+          </div>
+        <% end -%>
+      </div>
+    </div>
+  <% end -%>
+</div>

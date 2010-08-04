@@ -42,6 +42,7 @@ class EditController < ApplicationController
     @board_entry.title = params[:title]
     @board_entry.category = params[:category]
     @board_entry.aim_type = params[:aim_type]
+    @board_entry.parent_id = params[:parent_id]
     if owner
       if owner.is_a?(Group)
         @board_entry.send_mail = (@board_entry.is_question? && SkipEmbedded::InitialSettings['mail']['default_send_mail_of_question']) || owner.default_send_mail
@@ -83,6 +84,19 @@ class EditController < ApplicationController
       redirect_to_with_deny_auth and return
     end
 
+    # 親文書チェック
+    if @board_entry.parent_id
+      parent_entry = BoardEntry.find(@board_entry.parent_id)
+      unless parent_entry.blank?
+        unless @board_entry.symbol == parent_entry.symbol
+          flash[:error] = _('The parameter in the parents stock entry is illegal.')
+          setup_layout @board_entry
+          render :action => 'index'
+          return
+        end
+      end
+    end
+
     if @board_entry.save
       target_symbols  = analyze_params(@board_entry)
       target_symbols.first.each do |target_symbol|
@@ -98,7 +112,11 @@ class EditController < ApplicationController
       @board_entry.send_contact_mails
 
       flash[:notice] = _('Created successfully.')
-      redirect_to @board_entry.get_url_hash
+      if @board_entry.is_root_stock_entry?
+        redirect_to :controller => 'group', :action => 'show', :gid => @board_entry.symbol_id
+      else
+        redirect_to @board_entry.get_url_hash
+      end
     else
       setup_layout @board_entry
       render :action => 'index'
@@ -213,7 +231,12 @@ class EditController < ApplicationController
     @board_entry.send_contact_mails
 
     flash[:notice] = _('Entry was successfully updated.')
-    redirect_to @board_entry.get_url_hash
+
+    if @board_entry.is_root_stock_entry?
+      redirect_to :controller => 'group', :action => 'show', :gid => @board_entry.symbol_id
+    else
+      redirect_to @board_entry.get_url_hash
+    end
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
     setup_layout @board_entry
     render :action => 'edit'
@@ -234,6 +257,12 @@ class EditController < ApplicationController
     # 権限チェック
     redirect_to_with_deny_auth and return unless authorize_to_edit_board_entry? @board_entry
 
+    if BoardEntry.children(@board_entry).aim_type('stock_entry').size != 0
+      flash[:warn] = _("This stock entry cannot be deleted since it has been nested.")
+      redirect_to :controller => 'group', :action => 'show', :gid => @board_entry.symbol_id
+      return
+    end
+
     # FIXME [#855][#907]Rails2.3.2のバグでcounter_cacheと:dependent => destoryを併用すると常にStaleObjectErrorとなる
     # SKIPではBoardEntryとBoardEntryCommentの関係が該当する。Rails2.3.5でFixされたら以下を修正すること
     # 詳細は http://dev.openskip.org/redmine/issues/show/855
@@ -242,9 +271,15 @@ class EditController < ApplicationController
 
     @board_entry.destroy
     flash[:notice] = _('Deletion complete.')
-    # そのユーザのブログ一覧画面に遷移する
-    # TODO: この部分をメソッド化した方がいいかも(by mat_aki)
-    redirect_to owner_entries_path(@board_entry)
+
+    if @board_entry.is_stock_entry?
+      redirect_to :controller => 'group', :action => 'show', :gid => @board_entry.symbol_id
+    else
+      # そのユーザのブログ一覧画面に遷移する
+      # TODO: この部分をメソッド化した方がいいかも(by mat_aki)
+      redirect_to owner_entries_path(@board_entry)
+    end
+
   rescue ActiveRecord::StaleObjectError => e
     flash[:warn] = _("Update on the same entry from other users detected. Please try again.")
     setup_layout @board_entry

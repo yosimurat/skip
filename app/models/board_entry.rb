@@ -52,7 +52,8 @@ class BoardEntry < ActiveRecord::Base
   ANTENNA_AIM_TYPES = %w(notice).freeze
   HIDABLE_AIM_TYPES = %w(question).freeze
   TIMLINE_AIM_TYPES = %w(entry).freeze
-  validates_inclusion_of :aim_type, :in => AIM_TYPES
+  # stock_entryについては、編集画面の種類に表示させたくないため
+  validates_inclusion_of :aim_type, :in => %w(entry question notice stock_entry)
 
   named_scope :accessible, proc { |user|
     { :conditions => ['entry_publications.symbol in (:publication_symbols)',
@@ -102,7 +103,8 @@ class BoardEntry < ActiveRecord::Base
 
   named_scope :question, proc { { :conditions => ['board_entries.aim_type = \'question\''] } }
   named_scope :notice, proc { { :conditions => ['board_entries.aim_type = \'notice\''] } }
-  named_scope :timeline, proc { { :conditions => ['board_entries.aim_type = \'entry\''] } }
+  named_scope :timeline, proc { { :conditions => ['board_entries.aim_type = \'entry\' or board_entries.aim_type = \'stock_entry\''] } }
+  named_scope :stock_entry, proc { { :conditions => ['board_entries.aim_type = \'stock_entry\''] } }
   named_scope :visible, proc { { :conditions => ['board_entries.hide = ?', false] } }
 
   named_scope :unread, proc { |user|
@@ -170,6 +172,10 @@ class BoardEntry < ActiveRecord::Base
 
   named_scope :limit, proc { |num| { :limit => num } }
 
+  named_scope :children, proc { |entry|
+    { :conditions => ['parent_id = ?', entry.id] }
+  }
+
   attr_reader :owner
   attr_accessor :send_mail
 
@@ -178,9 +184,11 @@ class BoardEntry < ActiveRecord::Base
   ns_('BoardEntry|Aim type|entry', 'entries', 1)
   ns_('BoardEntry|Aim type|question', 'questions', 1)
   ns_('BoardEntry|Aim type|notice', 'notices', 1)
+  ns_('BoardEntry|Aim type|stock_entry', 'stock_entries', 1)
   N_('BoardEntry|Aim type|Desc|entry')
   N_('BoardEntry|Aim type|Desc|question')
   N_('BoardEntry|Aim type|Desc|notice')
+  N_('BoardEntry|Aim type|Desc|stock_entry')
   N_('BoardEntry|Open|true')
   N_('BoardEntry|Open|false')
   DIARY = 'DIARY'
@@ -716,6 +724,14 @@ class BoardEntry < ActiveRecord::Base
       self.aim_type = type
       self.save!
     end
+  end
+
+  def is_stock_entry?
+    self.aim_type == "stock_entry"
+  end
+
+  def is_root_stock_entry?
+    ( self.is_stock_entry? and self.parent_id.blank? )
   end
 
   def self.enable_aim_types

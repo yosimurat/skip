@@ -15,11 +15,19 @@
   </div>
 
   <div id="contents_richtext_space" class="richtext" style="display: none;">
-    <%= text_area_tag 'contents_richtext', sanitize_and_unescape_for_richtext(params[:contents_richtext]), :cols => 90, :rows => 20 %>
+    <% if params[:contents_richtext].blank? and params[:aim_type] == "stock_entry" and params[:parent_id].blank? -%>
+      <%= text_area_tag 'contents_richtext', sanitize_and_unescape_for_richtext(_('Please input the introduction of this stock entry. This is displayed on a top of group.')), :cols => 90, :rows => 20 %>
+    <% else -%>
+      <%= text_area_tag 'contents_richtext', sanitize_and_unescape_for_richtext(params[:contents_richtext]), :cols => 90, :rows => 20 %>
+    <% end -%>
   </div>
   <div id="contents_hiki_space" style="display: none;">
     <%= link_to_hiki_help %> <a href="#" id="hiki_preview_link"><%= _('[See preview]')%></a>
-    <%= text_area_tag 'contents_hiki', params[:contents_hiki], :cols => 90, :rows => 20 %>
+    <% if params[:contents_hiki].blank? and params[:aim_type] == "stock_entry" and params[:parent_id].blank? -%>
+      <%= text_area_tag 'contents_hiki', _('Please input the introduction of this stock entry. This is displayed on a top of group.'), :cols => 90, :rows => 20 %>
+    <% else -%>
+      <%= text_area_tag 'contents_hiki', params[:contents_hiki], :cols => 90, :rows => 20 %>
+    <% end -%>
   </div>
 
 <% ckeditor 'contents_richtext', 'toolbar' => "EntrySimple" %>

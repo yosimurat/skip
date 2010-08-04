@@ -59,6 +59,15 @@
   </td></tr></table></div>
 </div>
 
+<div class="input_line">
+  <div class="input_label"><%= _('Default Usage of Stock Entry') %></div>
+  <div class="input_value">
+    <%= label :group, :default_stock_entry, _('Use the Stock Entry Function ?') %>
+    <%= select :group, :default_stock_entry, { _("No") => false, _("Yes") => true } %>
+    <%= link_to_what_is_stock_entry %>
+  </div>
+</div>
+
 <%= ckeditor "group_description" %>
 
 <% content_for :javascript_initializers do -%>

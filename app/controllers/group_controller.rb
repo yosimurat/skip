@@ -132,6 +132,21 @@ class GroupController < ApplicationController
                 :publication_type => @group.default_publication_type)
   end
 
+  def new_stock_entry
+    redirect_to_with_deny_auth and return unless current_user.group_symbols.include? @group.symbol
+
+    redirect_to(:controller => 'edit',
+                :action => 'index',
+                :gid => @group.gid,
+                :entry_type => BoardEntry::GROUP_BBS,
+                :aim_type => 'stock_entry',
+                :parent_id => params[:parent_id],
+                :send_mail => !!params[:send_mail],
+                :symbol => @group.symbol,
+                :editor_symbol => true,
+                :publication_type => @group.default_publication_type)
+  end
+
   # tab_menu
   def manage
     @menu = params[:menu] || "manage_info"

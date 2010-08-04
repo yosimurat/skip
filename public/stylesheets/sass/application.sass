@@ -1341,6 +1341,11 @@ div#embed_tag
   #publication_status
     :margin-left 10px
 
+.editor_status_wrapper
+  :margin 5px 0 15px 0
+  #editor_status
+    :margin-left 10px
+
 // 記事のコメント
 // ------------------------------------------------------------
 div#board_entry_comments
@@ -1404,6 +1409,35 @@ div#board_entry_control
       :font-size = !base_font_size + 12px
     .count5
       :font-size = !base_font_size + 15px
+
+div#stock_entry_wrapper
+  .button
+    :padding 10px 0 30px 0
+    a
+      :position absolute
+div#stock_entry
+  :margin-top 30px
+  :border 1px solid silver
+  :position relative
+  :_width 100%
+  .contents
+    :border-bottom 1px solid silver
+    :background-color #FFFFFF
+    :overflow-y visible
+    :overflow hidden
+    :padding 5px
+  .header
+    :border-bottom 1px solid silver
+    :background-color #f0f0f0
+  .index
+    :padding 5px
+    ul
+      :list-style-type disc
+      :margin 5px 25px
+    .button
+      :padding 10px 0 30px 0
+      a
+        :position absolute
 
 // 一覧(記事、共有ファイル, ブックマーク、イベント)
 // ------------------------------------------------------------

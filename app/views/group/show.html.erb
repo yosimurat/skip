@@ -73,6 +73,8 @@
     </div>
   </div><!-- group_info_space -->
 
+  <%= render :partial => 'stock_entry_of_top' if @group.default_stock_entry %>
+
   <% unless @recent_messages.blank? %>
     <%= render :partial => "entries/topix_entries",
       :locals => {

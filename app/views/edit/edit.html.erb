@@ -9,6 +9,10 @@
   <%= button_to_function(_("Reset"), "if(confirm('" + _('All changes will be discarded. Are you sure to proceed?') + "')){window.location.href='#{edit_url}' }") %>
   <% end %>
   <div class="publication_status_wrapper"><%= _('Selected publication type') %><span id="publication_status"></span></div>
+  <% if @board_entry.is_stock_entry? -%>
+    <div class="editor_status_wrapper"><%= _('Selected edit authority') %><span id="editor_status"></span></div>
+  <% end -%>
+
   <%= submit_tag _("Update"), :id => 'submit_button' %>
   <%= check_box_tag("non_update", "true") %><%= _('Minor update')%>
   <%= send_mail_check_box_tag %>
@@ -16,9 +20,13 @@
 <%= render :partial => 'board_entries/embed_dialog', :locals => {:board_entry => @board_entry} %>
 
 <div class="desc ui-corner-all" style="margin-top: 10px;">
+<% if BoardEntry.children(@board_entry).aim_type('stock_entry').blank? -%>
   <% form_tag({:action => 'destroy', :id => @board_entry}, :onsubmit => 'return confirmDestroy(event)') do -%>
     <%= submit_tag _('Delete') %>
   <% end -%>
+<% else -%>
+  <%= _('This stock entry cannot be deleted since it has been nested.') %>
+<% end -%>
 </div>
 
 <% content_for :javascript_initializers do -%>

@@ -148,4 +148,21 @@ module BoardEntriesHelper
     return view_str
   end
 
+  def parent_stock_entry_title parent_id
+    parent_entry = BoardEntry.accessible(current_user).find(parent_id)
+    parent_title = parent_entry ? _("Create stock entry under the '%s'") % parent_entry.title  : _('This is the top of stock entry.')
+    parent_title
+  end
+
+  def link_to_stock_entry stock_entry
+    if stock_entry.readable?(current_user)
+      link_to_unless_current h(stock_entry.title), stock_entry.get_url_hash do content_tag 'b', h(stock_entry.title) end
+    else
+      _('Private')
+    end
+  end
+
+  def link_to_what_is_stock_entry
+    link_to _('About stock entry'), "http://help.skipaas.jp/contents/60", :target => '_blank'
+  end
 end
