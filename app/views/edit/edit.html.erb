@@ -20,13 +20,12 @@
 <%= render :partial => 'board_entries/embed_dialog', :locals => {:board_entry => @board_entry} %>
 
 <div class="desc ui-corner-all" style="margin-top: 10px;">
-<% if BoardEntry.children(@board_entry).aim_type('stock_entry').blank? -%>
+  <% if @board_entry.is_stock_entry? && !BoardEntry.children(@board_entry).blank? -%>
+    <%= _('If you delete this, the nested one are deleted.') %>
+  <% end -%>
   <% form_tag({:action => 'destroy', :id => @board_entry}, :onsubmit => 'return confirmDestroy(event)') do -%>
     <%= submit_tag _('Delete') %>
   <% end -%>
-<% else -%>
-  <%= _('This stock entry cannot be deleted since it has been nested.') %>
-<% end -%>
 </div>
 
 <% content_for :javascript_initializers do -%>

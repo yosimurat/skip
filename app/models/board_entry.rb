@@ -38,6 +38,7 @@ class BoardEntry < ActiveRecord::Base
   has_one  :state, :class_name => "BoardEntryPoint", :dependent => :destroy
   has_many :entry_accesses, :dependent => :destroy
   has_many :user_readings, :dependent => :destroy
+  has_many :board_entries, :foreign_key => :parent_id, :dependent => :destroy
 
   before_create :generate_next_user_entry_no
 

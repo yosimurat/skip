@@ -257,12 +257,6 @@ class EditController < ApplicationController
     # 権限チェック
     redirect_to_with_deny_auth and return unless authorize_to_edit_board_entry? @board_entry
 
-    if BoardEntry.children(@board_entry).aim_type('stock_entry').size != 0
-      flash[:warn] = _("This stock entry cannot be deleted since it has been nested.")
-      redirect_to :controller => 'group', :action => 'show', :gid => @board_entry.symbol_id
-      return
-    end
-
     # FIXME [#855][#907]Rails2.3.2のバグでcounter_cacheと:dependent => destoryを併用すると常にStaleObjectErrorとなる
     # SKIPではBoardEntryとBoardEntryCommentの関係が該当する。Rails2.3.5でFixされたら以下を修正すること
     # 詳細は http://dev.openskip.org/redmine/issues/show/855
