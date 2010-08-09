@@ -273,7 +273,8 @@
     <% stock_entries = BoardEntry.owned(entry.load_owner).stock_entry -%>
     <div id="stock_entry" class="ui-corner-all">
       <div class="header">
-        <span style="margin: 2px; font-size: 15px; font-weight: bold;"><%= _('index') %></span>
+        <%- root_stock_entry = stock_entries.select{|s| s.parent_id.blank?}.first %>
+        <span style="margin: 2px; font-size: 15px; font-weight: bold;"><%= link_to_unless_current h(root_stock_entry.title), {:controller => 'group', :action => 'show', :gid => root_stock_entry.load_owner.gid} %></span>
       </div>
       <%= render :partial => 'group/stock_entry_index', :locals => { :stock_entries => stock_entries }  %>
     </div>

@@ -54,16 +54,11 @@ div.input_line textarea {
 <%= hidden_field 'board_entry', 'parent_id', 'value' => @board_entry.parent_id %>
 <% end -%>
 
-<% if @board_entry.is_root_stock_entry? -%>
-  <%= hidden_field 'board_entry', 'title', 'value' => (@board_entry.title || _('TopPage')) %>
-<% else -%>
 <div class="input_line">
   <div class="input_label"><%= label(:board_entry, :title, _('Title')) -%></div>
   <div class="input_value"><%= text_field 'board_entry', 'title', :size =>60 %></div>
   <div style="clear: left"></div>
 </div>
-<% end -%>
-
 
 <div class="input_line">
   <div class="input_label">
