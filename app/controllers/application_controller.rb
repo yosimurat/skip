@@ -172,8 +172,6 @@ protected
       logger.error ex
       ex.backtrace.each { |line| logger.error line}
 
-      render :template => "system/500" , :status => :internal_server_error
-
       if SkipEmbedded::InitialSettings['exception_notifier']['enable']
         deliverer = self.class.exception_data
         data = case deliverer
@@ -184,6 +182,8 @@ protected
 
         ExceptionNotifier.deliver_exception_notification(ex, self, request, data)
       end
+
+      render :template => "system/500" , :status => :internal_server_error
     end
   end
 
