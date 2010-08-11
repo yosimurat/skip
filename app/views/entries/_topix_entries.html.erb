@@ -13,7 +13,7 @@
       <% if include_search_form && !params[:gid].blank? -%>
         <span style="position: absolute; right: 10px;margin-top:-5px;">
           <% form_tag({:controller => "group", :action => "bbs", :gid => params[:gid] }, {:method => 'get'}) do -%>
-            <%= text_field_tag('keyword', params[:keyword], :size=>'10') %>
+            <%= text_field_tag('keyword', params[:keyword], :size=>'20') %>
             <%= hidden_field_tag "sort_type", h(params[:sort_type]) %>
             <%= submit_tag _('Search') %>
           <% end -%>
