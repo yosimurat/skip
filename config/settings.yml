@@ -142,4 +142,7 @@ user_cleaning_notification_interval:
 enable_single_session:
   format: boolean
   default: true
+enable_login_save:
+  format: boolean
+  default: true
 

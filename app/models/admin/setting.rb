@@ -115,6 +115,8 @@ class Admin::Setting < ActiveRecord::Base
   N_('Admin::Setting|User cleaning notification interval description')
   N_('Admin::Setting|Enable single session')
   N_('Admin::Setting|Enable single session description')
+  N_('Admin::Setting|Enable login save')
+  N_('Admin::Setting|Enable login save description')
 
   cattr_accessor :available_settings
   @@available_settings = YAML::load(File.open("#{File.dirname(__FILE__)}/../../../config/settings.yml"))

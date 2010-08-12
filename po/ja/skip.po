@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.2\n"
-"POT-Creation-Date: 2010-08-12 16:06+0900\n"
+"POT-Creation-Date: 2010-08-12 17:01+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1125,6 +1125,14 @@ msgstr ""
 "す。ログインID, パスワード、キーフレーズの3つが一致しない場合はログイン出来な"
 "いようになります。"
 
+#: app/models/admin/setting.rb:118
+msgid "Admin::Setting|Enable login save"
+msgstr "ログインしたままにを表示する"
+
+#: app/models/admin/setting.rb:119
+msgid "Admin::Setting|Enable login save description"
+msgstr "ログイン画面に表示されている'ログインしたままに'を表示するかどうかを選ぶことができます"
+
 #: app/models/admin/setting.rb:91
 msgid "Admin::Setting|Enable password periodic change"
 msgstr "パスワード定期変更機能を使う"
@@ -1308,7 +1316,7 @@ msgstr ""
 "上入力されていなければなりません。</p><p>ユーザ定義 : 独自のパスワード強度を"
 "正規表現で記述することが出来ます。</p>"
 
-#: app/models/admin/setting.rb:253
+#: app/models/admin/setting.rb:255
 msgid "Admin::Setting|Password strength|Validation message "
 msgstr " "
 
@@ -1322,7 +1330,7 @@ msgstr ""
 msgid "Admin::Setting|Password strength|Validation message low"
 msgstr "は6文字以上の半角英数字及び記号(!@#$%^&*?_~)で入力して下さい。"
 
-#: app/models/admin/setting.rb:100 app/models/admin/setting.rb:256
+#: app/models/admin/setting.rb:100 app/models/admin/setting.rb:258
 msgid "Admin::Setting|Password strength|Validation message middle"
 msgstr ""
 "は8文字以上の半角英数字及び記号(!@#$%^&*?_~)で入力して下さい。また、英字の大"
@@ -3415,7 +3423,7 @@ msgstr "趣味などざっくばらんな話題で利用する場合に選択し
 msgid "For questions regarding this email, please contact:"
 msgstr "本メールに関するお問い合わせはこちらへ"
 
-#: app/views/shared/_password_login_form.html.erb:47
+#: app/views/shared/_password_login_form.html.erb:49
 msgid "Forgot your password? Click here."
 msgstr "パスワードを忘れましたか?"
 
@@ -4221,7 +4229,7 @@ msgstr "ログインID: %s"
 msgid "Login Required"
 msgstr "ログインが必要です"
 
-#: app/views/shared/_password_login_form.html.erb:44
+#: app/views/shared/_password_login_form.html.erb:45
 msgid "Login automatically from next time"
 msgstr "ログインしたままにする"
 
@@ -7882,7 +7890,7 @@ msgstr "ブックマークコメント"
 msgid "bookmark comment tag"
 msgstr "ブックマークコメント"
 
-#: app/views/shared/_password_login_form.html.erb:53
+#: app/views/shared/_password_login_form.html.erb:55
 msgid "cancel this request"
 msgstr "認証をキャンセルする"
 
@@ -8098,7 +8106,7 @@ msgstr "ランキング"
 msgid "required"
 msgstr "必須"
 
-#: app/models/admin/setting.rb:152
+#: app/models/admin/setting.rb:154
 msgid "requires a valid regular expression."
 msgstr "は正しい正規表現で入力して下さい。"
 
@@ -8280,131 +8288,3 @@ msgstr ""
 msgid "« Previous"
 msgstr "« 前"
 
-#~ msgid "(TopPage)"
-#~ msgstr " / トップページ"
-
-#~ msgid "(Unknown topic entry found. However, this has been ignored)"
-#~ msgstr "（話題元の記事が不明でしたが無視しました）"
-
-#~ msgid "(stock: %s )"
-#~ msgstr "(文書:%s)"
-
-#~ msgid "(stock:'%s')"
-#~ msgstr "(文書:)"
-
-#~ msgid "Access Log"
-#~ msgstr "アクセス履歴"
-
-#~ msgid "Action:"
-#~ msgstr "アクション:"
-
-#~ msgid "Blog Entry View"
-#~ msgstr "ブログ表示"
-
-#~ msgid "Change"
-#~ msgstr "変更"
-
-#~ msgid "Create New Group"
-#~ msgstr "グループの作成"
-
-#~ msgid "Create a new group"
-#~ msgstr "グループを作る"
-
-#~ msgid "Customize"
-#~ msgstr "画面デザインの変更"
-
-#~ msgid "Display: "
-#~ msgstr "表示: "
-
-#~ msgid "Edit Group Information"
-#~ msgstr "グループ情報変更"
-
-#~ msgid "Forum entries of the group"
-#~ msgstr "グループの記事一覧"
-
-#~ msgid "Group Name"
-#~ msgstr "グループ名"
-
-#~ msgid "Group Name / Explanation"
-#~ msgstr "グループ名・説明文"
-
-#~ msgid "Group was created successfully."
-#~ msgstr "グループが正しく作成されました。"
-
-#~ msgid "Groups Joined"
-#~ msgstr "グループ"
-
-#~ msgid "Invitation from %s"
-#~ msgstr "%sへの招待です。"
-
-#~ msgid "List of Groups"
-#~ msgstr "グループ一覧"
-
-#~ msgid "Maximize!"
-#~ msgstr "最大化！"
-
-#~ msgid "Move to groups joined ..."
-#~ msgstr "参加グループへ移動 ..."
-
-#~ msgid "Search Result Pages: "
-#~ msgstr "検索結果ページ:"
-
-#~ msgid "Search from %s&nbsp;"
-#~ msgstr "%sから検索&nbsp;"
-
-#~ msgid "Show groups you have not joined only."
-#~ msgstr "まだ参加していないグループのみ表示"
-
-#~ msgid ""
-#~ "Showing total access count of all your pages and recent visitors (max. %"
-#~ "s).<br/>\n"
-#~ "Only the newest access is shown in case a user has visited multiple times "
-#~ "in a day."
-#~ msgstr ""
-#~ "最近の訪問ユーザを最大30件まで表示しています。<br/>\n"
-#~ "同じ日付に同一ユーザが複数回訪問している場合、最新の訪問時間のみを表示して"
-#~ "います。"
-
-#~ msgid ""
-#~ "Showing total access count of this entry and recent visitors (max. 30)."
-#~ "<br/>\n"
-#~ "Only the newest access is shown in case a user has visited multiple times "
-#~ "in a day."
-#~ msgstr ""
-#~ "この記事へのアクセス数と、最近の訪問ユーザを最大30件まで表示しています。"
-#~ "<br/>\n"
-#~ "\n"
-#~ "同じ日付に同一ユーザが複数回アクセスしている場合、最新のアクセス時間のみを"
-#~ "表示しています。"
-
-#~ msgid "Slide Show"
-#~ msgstr "スライドショー"
-
-#~ msgid "Themes"
-#~ msgstr "テーマ"
-
-#~ msgid "This stock entry cannot be deleted since it has been nested."
-#~ msgstr "この文書には子文書があるため、削除できません。"
-
-#~ msgid "To change this size, right click and select the image property."
-#~ msgstr ""
-#~ "画像サイズを変更するには、右クリックしてイメージプロパティを選択して下さ"
-#~ "い。"
-
-#~ msgid "TopPage"
-#~ msgstr "トップページ"
-
-#~ msgid "View Source"
-#~ msgstr "ソース表示"
-
-#~ msgid "You can customize the site environment."
-#~ msgstr "サイトの環境をカスタマイズすることが可能です。"
-
-#~ msgid "[Show source]"
-#~ msgstr "【ソース表示】"
-
-#~ msgid "[Write my new blog entry]"
-#~ msgstr "[自分もブログを書く]"
-
-#~ msgid "index"
-#~ msgstr "目次"

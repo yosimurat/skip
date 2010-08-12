@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.2\n"
-"POT-Creation-Date: 2010-08-12 16:06+0900\n"
+"POT-Creation-Date: 2010-08-12 17:01+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1100,6 +1100,14 @@ msgstr ""
 "Adds a login keyphrase to the login form. Login ID, password and login "
 "keyphrase must match for successful login."
 
+#: app/models/admin/setting.rb:118
+msgid "Admin::Setting|Enable login save"
+msgstr ""
+
+#: app/models/admin/setting.rb:119
+msgid "Admin::Setting|Enable login save description"
+msgstr ""
+
 #: app/models/admin/setting.rb:91
 msgid "Admin::Setting|Enable password periodic change"
 msgstr "Enable Fixed-term Passwords"
@@ -1278,7 +1286,7 @@ msgstr ""
 "letter and 1 number in the password.</p><p>Custom: You can define your own "
 "password strength definistion using regular expression.</p>"
 
-#: app/models/admin/setting.rb:253
+#: app/models/admin/setting.rb:255
 msgid "Admin::Setting|Password strength|Validation message "
 msgstr " "
 
@@ -1293,7 +1301,7 @@ msgstr ""
 msgid "Admin::Setting|Password strength|Validation message low"
 msgstr "needs 6 or more alpha-numericals and symbols (!@#$%^&*?_~)."
 
-#: app/models/admin/setting.rb:100 app/models/admin/setting.rb:256
+#: app/models/admin/setting.rb:100 app/models/admin/setting.rb:258
 msgid "Admin::Setting|Password strength|Validation message middle"
 msgstr ""
 "needs 8 or more alpha-numericals and symbols (!@#$%^&*?_~). There must also "
@@ -3342,7 +3350,7 @@ msgstr ""
 msgid "For questions regarding this email, please contact:"
 msgstr ""
 
-#: app/views/shared/_password_login_form.html.erb:47
+#: app/views/shared/_password_login_form.html.erb:49
 msgid "Forgot your password? Click here."
 msgstr ""
 
@@ -4117,7 +4125,7 @@ msgstr ""
 msgid "Login Required"
 msgstr ""
 
-#: app/views/shared/_password_login_form.html.erb:44
+#: app/views/shared/_password_login_form.html.erb:45
 msgid "Login automatically from next time"
 msgstr ""
 
@@ -7696,7 +7704,7 @@ msgstr ""
 msgid "bookmark comment tag"
 msgstr ""
 
-#: app/views/shared/_password_login_form.html.erb:53
+#: app/views/shared/_password_login_form.html.erb:55
 msgid "cancel this request"
 msgstr ""
 
@@ -7912,7 +7920,7 @@ msgstr ""
 msgid "required"
 msgstr ""
 
-#: app/models/admin/setting.rb:152
+#: app/models/admin/setting.rb:154
 msgid "requires a valid regular expression."
 msgstr ""
 
