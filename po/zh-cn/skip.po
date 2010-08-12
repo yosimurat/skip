@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.2\n"
-"POT-Creation-Date: 2010-08-09 17:34+0900\n"
+"POT-Creation-Date: 2010-08-12 13:42+0900\n"
 "PO-Revision-Date: 2008-08-11 17:41+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr ""
 
 #: app/helpers/system_messages_helper.rb:30
 #: app/controllers/rankings_controller.rb:105 app/models/board_entry.rb:431
-#: app/views/groups/_group_list.html.erb:24
+#: app/views/groups/_group_list.html.erb:29
 #: app/views/share_file/_topix_share_files.html.erb:39
 #: app/views/rankings/bookmark.html.erb:2
 #: app/views/rankings/bookmark.html.erb:4
@@ -277,7 +277,7 @@ msgstr ""
 msgid "(Will open as a new window)"
 msgstr ""
 
-#: app/views/groups/_group_list.html.erb:23
+#: app/views/groups/_group_list.html.erb:26
 msgid "(stock:%s)"
 msgstr ""
 
@@ -451,7 +451,7 @@ msgstr ""
 msgid "Activation|Updated at"
 msgstr ""
 
-#: app/views/groups/_group_list.html.erb:24
+#: app/views/groups/_group_list.html.erb:29
 msgid "Active"
 msgstr ""
 
@@ -2219,11 +2219,11 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: app/models/group_category.rb:53
+#: app/models/group_category.rb:55
 msgid "Category could not be deleted due to groups belonging to itself."
 msgstr ""
 
-#: app/models/group_category.rb:49
+#: app/models/group_category.rb:51
 msgid ""
 "Category could not be deleted since it is set to be selected by default upon "
 "group creation."
@@ -7471,6 +7471,10 @@ msgstr ""
 
 #: app/views/entries/_topix_entries_with_sortable_pagination.html.erb:20
 msgid "[question]"
+msgstr ""
+
+#: app/views/entries/_topix_entries_with_sortable_pagination.html.erb:22
+msgid "[stock entry]"
 msgstr ""
 
 #: app/views/shared/_chapter_menu.html.erb:2

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.2\n"
-"POT-Creation-Date: 2010-08-09 17:34+0900\n"
+"POT-Creation-Date: 2010-08-12 13:42+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: app/helpers/system_messages_helper.rb:30
 #: app/controllers/rankings_controller.rb:105 app/models/board_entry.rb:431
-#: app/views/groups/_group_list.html.erb:24
+#: app/views/groups/_group_list.html.erb:29
 #: app/views/share_file/_topix_share_files.html.erb:39
 #: app/views/rankings/bookmark.html.erb:2
 #: app/views/rankings/bookmark.html.erb:4
@@ -285,7 +285,7 @@ msgstr ""
 msgid "(Will open as a new window)"
 msgstr "（別ウィンドウで開きます）"
 
-#: app/views/groups/_group_list.html.erb:23
+#: app/views/groups/_group_list.html.erb:26
 msgid "(stock:%s)"
 msgstr "(文書:%s)"
 
@@ -473,7 +473,7 @@ msgstr "作成日時"
 msgid "Activation|Updated at"
 msgstr "更新日時"
 
-#: app/views/groups/_group_list.html.erb:24
+#: app/views/groups/_group_list.html.erb:29
 msgid "Active"
 msgstr "活性"
 
@@ -2381,11 +2381,11 @@ msgstr "キャンセル"
 msgid "Category"
 msgstr "カテゴリ"
 
-#: app/models/group_category.rb:53
+#: app/models/group_category.rb:55
 msgid "Category could not be deleted due to groups belonging to itself."
 msgstr "対象のカテゴリのグループが存在するため削除できません。"
 
-#: app/models/group_category.rb:49
+#: app/models/group_category.rb:51
 msgid ""
 "Category could not be deleted since it is set to be selected by default upon "
 "group creation."
@@ -3767,7 +3767,9 @@ msgstr "人事"
 
 #: app/views/edit/edit.html.erb:24
 msgid "If you delete this, the nested one are deleted."
-msgstr "この文書には子文書があります。本文書を削除すると、子文書も同時に削除されます。"
+msgstr ""
+"この文書には子文書があります。本文書を削除すると、子文書も同時に削除されま"
+"す。"
 
 #: app/views/board_entries/_form.html.erb:158
 msgid ""
@@ -7768,6 +7770,10 @@ msgstr "[お知らせ]"
 #: app/views/entries/_topix_entries_with_sortable_pagination.html.erb:20
 msgid "[question]"
 msgstr "[質問]"
+
+#: app/views/entries/_topix_entries_with_sortable_pagination.html.erb:22
+msgid "[stock entry]"
+msgstr "[文書]"
 
 #: app/views/shared/_chapter_menu.html.erb:2
 msgid "[追加する]"
