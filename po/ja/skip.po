@@ -2821,8 +2821,7 @@ msgstr "削除"
 #: app/views/admin/group_categories/_index.html.erb:3
 msgid "Delete all the groups under the group category before you delete it."
 msgstr ""
-"グループカテゴリを削除したい場合、対象のグループカテゴリに属するグループが全"
-"て削除されている必要があります。"
+"グループカテゴリを削除したい場合、対象のグループカテゴリに紐づいているグループ（グループ一覧の検索にて調べることができます）を、他のグループカテゴリに切り替えておく必要があります。(切り替えは、各グループの管理画面で行えます。)"
 
 #: app/controllers/admin/group_categories_controller.rb:32
 #: app/controllers/edit_controller.rb:267
