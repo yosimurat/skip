@@ -1,7 +1,7 @@
 <% content_for :contents_left do -%>
   <div class="action_buttons ui-corner-all">
     <ul class="no_style">
-      <li><%= link_to(content_tag('span', _('Create New Group')), {:controller => 'groups', :action => 'new'}, :class => 'rounded', :title => _('New Posts')) %></li>
+      <li><%= link_to(content_tag('span', _('Create New %{group}') % {:group => name_of_group}), {:controller => 'groups', :action => 'new'}, :class => 'rounded', :title => _('New Posts')) %></li>
     </ul>
   </div>
 <% end -%>
@@ -11,7 +11,7 @@
     <% form_tag({:action => 'index'}, :method => 'get') do -%>
       <table class="search_cond_box">
         <tr>
-          <th><%= _('Group Name / Explanation')%></th>
+          <th><%= _('%{group} Name / Explanation') % {:group => name_of_group} %></th>
           <td>
             <%= text_field_tag 'keyword' , params[:keyword], :size => 50 %><br/>
           </td>
@@ -33,7 +33,7 @@
         <span class="margin05em">
           <%= hidden_field_tag 'yet_participation', "false", :id => "hidden_yet_participation" %>
           <%= check_box_tag 'yet_participation', 'true', params[:yet_participation] == 'true' %>
-          <%= label_tag 'yet_participation', _('Show groups you have not joined only.') %>
+          <%= label_tag 'yet_participation', _('Show %{group} you have not joined only.') % {:group => name_of_group} %>
         </span>
       </div>
     <% end -%>

@@ -20,7 +20,7 @@
       <%= link_to(icon_tag('tag_blue_add', :title => _('Bookmark a URL')) + _('Bookmark a URL'), new_bookmark_url_hash, :title => _('Bookmark URL'), :onclick => "sub_window_open('#{url_for(new_bookmark_url_hash)}', 'subwindow', 550, 400); return false;" ) %>
     </span>
     <span class="item button ui-corner-all out">
-      <%= link_to(icon_tag('group_add', :title => _('Create New Group')) + _('Create New Group'), {:controller => 'groups', :action => 'new'}, :title => _('New Posts')) %>
+      <%= link_to(icon_tag('group_add', :title => _('Create New %{group}') % {:group => name_of_group}) + _('Create New %{group}') % {:group => name_of_group} , {:controller => 'groups', :action => 'new'}, :title => _('New Posts')) %>
     </span>
     <span class="item">
       <%= shortcut_menus %>

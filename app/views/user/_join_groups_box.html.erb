@@ -1,6 +1,6 @@
 <% if groups = user.groups.participating(user).order_participate_recent and !groups.empty? -%>
 <div class="box_space" id="groups">
-  <div class="box_space_title"><%= icon_tag('group') %><%= _('Groups Joined') %></div>
+  <div class="box_space_title"><%= icon_tag('group') %><%= _('%{group} Joined') % {:group => name_of_group}%></div>
   <div class="box_space_body">
   <ul>
   <% groups[0..9].each do |group| -%>

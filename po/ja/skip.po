@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.2\n"
-"POT-Creation-Date: 2010-08-12 13:42+0900\n"
+"POT-Creation-Date: 2010-08-12 16:06+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -154,6 +154,22 @@ msgstr "%{function}が完了しました。"
 #: app/controllers/platform_controller.rb:133
 msgid "%{function} currently unavailable."
 msgstr "%{function}は現在利用することが出来ません。"
+
+#: app/helpers/user_helper.rb:43 app/views/user/_join_groups_box.html.erb:3
+msgid "%{group} Joined"
+msgstr "%{group}"
+
+#: app/views/groups/_group_list.html.erb:12
+msgid "%{group} Name"
+msgstr "%{group}名"
+
+#: app/views/groups/index.html.erb:14
+msgid "%{group} Name / Explanation"
+msgstr "%{group}名・説明文"
+
+#: app/controllers/groups_controller.rb:55
+msgid "%{group} was created successfully."
+msgstr "%{group}が正しく作成されました。"
 
 #: app/views/statistics/_current_statistics.html.erb:8
 msgid "%{icon} Show history of %{time}"
@@ -2693,17 +2709,17 @@ msgstr "%{name}作成"
 
 #: app/views/groups/index.html.erb:4
 #: app/views/shared/_global_footer_navigation.html.erb:23
-msgid "Create New Group"
-msgstr "グループの作成"
+msgid "Create New %{group}"
+msgstr "%{group}の作成"
+
+#: app/controllers/groups_controller.rb:39
+#: app/controllers/groups_controller.rb:47
+msgid "Create a new %{group}"
+msgstr "%{group}を作る"
 
 #: app/views/entries/_entry_detail.html.erb:323
 msgid "Create a new forum entry inheriting the privacy setting."
 msgstr "記事の公開範囲を引き継いだフォーラムとして新しい記事を作成します。"
-
-#: app/controllers/groups_controller.rb:39
-#: app/controllers/groups_controller.rb:47
-msgid "Create a new group"
-msgstr "グループを作る"
 
 #: app/views/admin/users/first.html.erb:2
 msgid "Create administrative user"
@@ -2821,7 +2837,9 @@ msgstr "削除"
 #: app/views/admin/group_categories/_index.html.erb:3
 msgid "Delete all the groups under the group category before you delete it."
 msgstr ""
-"グループカテゴリを削除したい場合、対象のグループカテゴリに紐づいているグループ（グループ一覧の検索にて調べることができます）を、他のグループカテゴリに切り替えておく必要があります。(切り替えは、各グループの管理画面で行えます。)"
+"グループカテゴリを削除したい場合、対象のグループカテゴリに紐づいているグルー"
+"プ（グループ一覧の検索にて調べることができます）を、他のグループカテゴリに切"
+"り替えておく必要があります。(切り替えは、各グループの管理画面で行えます。)"
 
 #: app/controllers/admin/group_categories_controller.rb:32
 #: app/controllers/edit_controller.rb:267
@@ -2940,13 +2958,13 @@ msgstr "ドライブ"
 msgid "Edit"
 msgstr "編集"
 
+#: app/helpers/group_helper.rb:23
+msgid "Edit %{group} Information"
+msgstr "%{group}情報変更"
+
 #: app/views/board_entries/_board_entry_comment.html.erb:28
 msgid "Edit Comment"
 msgstr "コメントの編集"
-
-#: app/helpers/group_helper.rb:23
-msgid "Edit Group Information"
-msgstr "グループ情報変更"
 
 #: app/helpers/mypage_helper.rb:28
 msgid "Edit Profile"
@@ -3402,8 +3420,8 @@ msgid "Forgot your password? Click here."
 msgstr "パスワードを忘れましたか?"
 
 #: app/views/search/entry_search.html.erb:8
-msgid "Forum entries of the group"
-msgstr "グループの記事一覧"
+msgid "Forum entries of the %{group}"
+msgstr "%{group}の記事一覧"
 
 #: app/helpers/group_helper.rb:39
 msgid "Forums"
@@ -3452,14 +3470,6 @@ msgstr "グループカテゴリ"
 msgid "Group ID"
 msgstr "グループID"
 
-#: app/views/groups/_group_list.html.erb:12
-msgid "Group Name"
-msgstr "グループ名"
-
-#: app/views/groups/index.html.erb:14
-msgid "Group Name / Explanation"
-msgstr "グループ名・説明文"
-
 #: app/controllers/admin/admin_module.rb:74
 msgid "Group categories"
 msgstr "グループカテゴリ"
@@ -3471,10 +3481,6 @@ msgstr "ご指定のグループは存在しません。"
 #: app/controllers/group_controller.rb:328
 msgid "Group information was successfully updated."
 msgstr "グループ情報は正しく更新されました。"
-
-#: app/controllers/groups_controller.rb:55
-msgid "Group was created successfully."
-msgstr "グループが正しく作成されました。"
 
 #: app/controllers/group_controller.rb:341
 msgid "Group was successfully deleted."
@@ -3562,16 +3568,11 @@ msgstr "はい"
 
 #: app/controllers/services_controller.rb:47
 #: app/controllers/group_controller.rb:354
+#: app/controllers/application_controller.rb:349
 #: app/controllers/share_file_controller.rb:182
-#: app/controllers/groups_controller.rb:64
 #: app/controllers/edit_controller.rb:309
 #: app/views/admin/_data_menu_box.html.erb:6
-#: app/views/shared/_global_navigation.html.erb:6
 msgid "Groups"
-msgstr "グループ"
-
-#: app/helpers/user_helper.rb:43 app/views/user/_join_groups_box.html.erb:3
-msgid "Groups Joined"
 msgstr "グループ"
 
 #: app/models/group.rb:-
@@ -4337,8 +4338,8 @@ msgid "Most read blog / forum entries (public entries only)"
 msgstr "みんなによく読まれた記事です"
 
 #: app/helpers/application_helper.rb:350
-msgid "Move to groups joined ..."
-msgstr "参加グループへ移動 ..."
+msgid "Move to %{group} joined ..."
+msgstr "参加%{group}へ移動 ..."
 
 #: app/helpers/user_helper.rb:57
 msgid "Mr./Ms. %s"
@@ -5623,7 +5624,7 @@ msgid "September"
 msgstr "9月"
 
 #: app/controllers/application_controller.rb:146
-#: app/controllers/application_controller.rb:352
+#: app/controllers/application_controller.rb:356
 msgid "Session expired. You need to log in again."
 msgstr "ログインが必要です。ログインし直して下さい。"
 
@@ -5739,6 +5740,10 @@ msgstr "ショッピング"
 msgid "Show"
 msgstr "詳細"
 
+#: app/views/groups/index.html.erb:36
+msgid "Show %{group} you have not joined only."
+msgstr "まだ参加していない%{group}のみ表示"
+
 #: app/controllers/admin/admin_module.rb:100
 #: app/controllers/admin/admin_module.rb:190
 #: app/controllers/admin/admin_module.rb:204
@@ -5761,10 +5766,6 @@ msgstr "履歴を全て表示"
 #: app/views/admin/images/_form.html.erb:7
 msgid "Show current image"
 msgstr "現在の画像を表示"
-
-#: app/views/groups/index.html.erb:36
-msgid "Show groups you have not joined only."
-msgstr "まだ参加していないグループのみ表示"
 
 #: app/views/mypage/_today_access_blogs_box.html.erb:31
 msgid "Show other rankings"
@@ -8303,11 +8304,35 @@ msgstr "« 前"
 #~ msgid "Change"
 #~ msgstr "変更"
 
+#~ msgid "Create New Group"
+#~ msgstr "グループの作成"
+
+#~ msgid "Create a new group"
+#~ msgstr "グループを作る"
+
 #~ msgid "Customize"
 #~ msgstr "画面デザインの変更"
 
 #~ msgid "Display: "
 #~ msgstr "表示: "
+
+#~ msgid "Edit Group Information"
+#~ msgstr "グループ情報変更"
+
+#~ msgid "Forum entries of the group"
+#~ msgstr "グループの記事一覧"
+
+#~ msgid "Group Name"
+#~ msgstr "グループ名"
+
+#~ msgid "Group Name / Explanation"
+#~ msgstr "グループ名・説明文"
+
+#~ msgid "Group was created successfully."
+#~ msgstr "グループが正しく作成されました。"
+
+#~ msgid "Groups Joined"
+#~ msgstr "グループ"
 
 #~ msgid "Invitation from %s"
 #~ msgstr "%sへの招待です。"
@@ -8318,11 +8343,17 @@ msgstr "« 前"
 #~ msgid "Maximize!"
 #~ msgstr "最大化！"
 
+#~ msgid "Move to groups joined ..."
+#~ msgstr "参加グループへ移動 ..."
+
 #~ msgid "Search Result Pages: "
 #~ msgstr "検索結果ページ:"
 
 #~ msgid "Search from %s&nbsp;"
 #~ msgstr "%sから検索&nbsp;"
+
+#~ msgid "Show groups you have not joined only."
+#~ msgstr "まだ参加していないグループのみ表示"
 
 #~ msgid ""
 #~ "Showing total access count of all your pages and recent visitors (max. %"

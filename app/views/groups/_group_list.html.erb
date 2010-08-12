@@ -9,7 +9,7 @@
     <col class="col75" />
     <tbody>
       <tr>
-      <th><%= _('Group Name') + " - " + _('Members count')%></th>
+        <th><%= _('%{group} Name') % {:group => name_of_group} + " - " + _('Members count')%></th>
         <th class="count"><%= _('Entries count') %></th>
         <th><%= _("BoardEntry|Last updated") %></th>
         <th><%= _('Status') %></th>

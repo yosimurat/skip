@@ -3,7 +3,7 @@
   <li><%= link_to_unless_current(icon_tag('report', :title => _('Entries')) + _('Entries'), :controller => '/search', :action => 'entry_search') %></li>
   <li><%= link_to_unless_current(icon_tag('disk_multiple', :title => _('Files')) + _('Files'), :controller => '/search', :action => 'share_file_search') %></li>
   <li><%= link_to_unless_current(icon_tag('user_suit', :title => _('Users')) + _('Users'), :controller => '/users', :action => 'index') %></li>
-  <li><%= link_to_unless_current(icon_tag('group', :title => _('Groups')) + _('Groups'), :controller => '/groups', :action => 'index') %></li>
+  <li><%= link_to_unless_current(icon_tag('group', :title => name_of_group) + name_of_group, :controller => '/groups', :action => 'index') %></li>
   <li><%= link_to_unless_current(icon_tag('tag_blue', :title => _('Bookmarks')) + _('Bookmarks'), :controller => '/bookmarks', :action => 'index') if bookmark_enabled? %></li>
   <% if event_enabled? -%>
   <li><%= link_to(icon_tag('flag_blue', :title => _('Events')) + _('Events'), apps_events_path) %></li>

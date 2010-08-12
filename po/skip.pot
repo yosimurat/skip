@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.2\n"
-"POT-Creation-Date: 2010-08-12 13:42+0900\n"
+"POT-Creation-Date: 2010-08-12 16:06+0900\n"
 "PO-Revision-Date: 2008-08-11 17:41+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,6 +149,22 @@ msgstr ""
 #: app/controllers/platform_controller.rb:107
 #: app/controllers/platform_controller.rb:133
 msgid "%{function} currently unavailable."
+msgstr ""
+
+#: app/helpers/user_helper.rb:43 app/views/user/_join_groups_box.html.erb:3
+msgid "%{group} Joined"
+msgstr ""
+
+#: app/views/groups/_group_list.html.erb:12
+msgid "%{group} Name"
+msgstr ""
+
+#: app/views/groups/index.html.erb:14
+msgid "%{group} Name / Explanation"
+msgstr ""
+
+#: app/controllers/groups_controller.rb:55
+msgid "%{group} was created successfully."
 msgstr ""
 
 #: app/views/statistics/_current_statistics.html.erb:8
@@ -2516,16 +2532,16 @@ msgstr ""
 
 #: app/views/groups/index.html.erb:4
 #: app/views/shared/_global_footer_navigation.html.erb:23
-msgid "Create New Group"
-msgstr ""
-
-#: app/views/entries/_entry_detail.html.erb:323
-msgid "Create a new forum entry inheriting the privacy setting."
+msgid "Create New %{group}"
 msgstr ""
 
 #: app/controllers/groups_controller.rb:39
 #: app/controllers/groups_controller.rb:47
-msgid "Create a new group"
+msgid "Create a new %{group}"
+msgstr ""
+
+#: app/views/entries/_entry_detail.html.erb:323
+msgid "Create a new forum entry inheriting the privacy setting."
 msgstr ""
 
 #: app/views/admin/users/first.html.erb:2
@@ -2754,12 +2770,12 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: app/views/board_entries/_board_entry_comment.html.erb:28
-msgid "Edit Comment"
+#: app/helpers/group_helper.rb:23
+msgid "Edit %{group} Information"
 msgstr ""
 
-#: app/helpers/group_helper.rb:23
-msgid "Edit Group Information"
+#: app/views/board_entries/_board_entry_comment.html.erb:28
+msgid "Edit Comment"
 msgstr ""
 
 #: app/helpers/mypage_helper.rb:28
@@ -3212,7 +3228,7 @@ msgid "Forgot your password? Click here."
 msgstr ""
 
 #: app/views/search/entry_search.html.erb:8
-msgid "Forum entries of the group"
+msgid "Forum entries of the %{group}"
 msgstr ""
 
 #: app/helpers/group_helper.rb:39
@@ -3262,14 +3278,6 @@ msgstr ""
 msgid "Group ID"
 msgstr ""
 
-#: app/views/groups/_group_list.html.erb:12
-msgid "Group Name"
-msgstr ""
-
-#: app/views/groups/index.html.erb:14
-msgid "Group Name / Explanation"
-msgstr ""
-
 #: app/controllers/admin/admin_module.rb:74
 msgid "Group categories"
 msgstr ""
@@ -3280,10 +3288,6 @@ msgstr ""
 
 #: app/controllers/group_controller.rb:328
 msgid "Group information was successfully updated."
-msgstr ""
-
-#: app/controllers/groups_controller.rb:55
-msgid "Group was created successfully."
 msgstr ""
 
 #: app/controllers/group_controller.rb:341
@@ -3372,16 +3376,11 @@ msgstr ""
 
 #: app/controllers/services_controller.rb:47
 #: app/controllers/group_controller.rb:354
+#: app/controllers/application_controller.rb:349
 #: app/controllers/share_file_controller.rb:182
-#: app/controllers/groups_controller.rb:64
 #: app/controllers/edit_controller.rb:309
 #: app/views/admin/_data_menu_box.html.erb:6
-#: app/views/shared/_global_navigation.html.erb:6
 msgid "Groups"
-msgstr ""
-
-#: app/helpers/user_helper.rb:43 app/views/user/_join_groups_box.html.erb:3
-msgid "Groups Joined"
 msgstr ""
 
 #: app/models/group.rb:-
@@ -4112,7 +4111,7 @@ msgid "Most read blog / forum entries (public entries only)"
 msgstr ""
 
 #: app/helpers/application_helper.rb:350
-msgid "Move to groups joined ..."
+msgid "Move to %{group} joined ..."
 msgstr ""
 
 #: app/helpers/user_helper.rb:57
@@ -5378,7 +5377,7 @@ msgid "September"
 msgstr ""
 
 #: app/controllers/application_controller.rb:146
-#: app/controllers/application_controller.rb:352
+#: app/controllers/application_controller.rb:356
 msgid "Session expired. You need to log in again."
 msgstr ""
 
@@ -5494,6 +5493,10 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+#: app/views/groups/index.html.erb:36
+msgid "Show %{group} you have not joined only."
+msgstr ""
+
 #: app/controllers/admin/admin_module.rb:100
 #: app/controllers/admin/admin_module.rb:190
 #: app/controllers/admin/admin_module.rb:204
@@ -5515,10 +5518,6 @@ msgstr ""
 
 #: app/views/admin/images/_form.html.erb:7
 msgid "Show current image"
-msgstr ""
-
-#: app/views/groups/index.html.erb:36
-msgid "Show groups you have not joined only."
 msgstr ""
 
 #: app/views/mypage/_today_access_blogs_box.html.erb:31

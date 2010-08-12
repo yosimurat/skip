@@ -36,7 +36,7 @@ class GroupsController < ApplicationController
   # tab_menu
   # グループの新規作成画面の表示
   def new
-    @main_menu = @title = _('Create a new group')
+    @main_menu = @title = _('Create a new %{group}') % {:group => name_of_group}
     @group = Group.new(:default_publication_type => 'public', :default_stock_entry => 'true')
     @group_categories = GroupCategory.all
   end
@@ -44,7 +44,7 @@ class GroupsController < ApplicationController
   # post_action
   # グループの新規作成の処理
   def create
-    @main_menu = @title = _('Create a new group')
+    @main_menu = @title = _('Create a new %{group}') % {:group => name_of_group}
     @group = Group.new(params[:group])
     @group_categories = GroupCategory.all
     @group.group_participations.build(:user_id => session[:user_id], :owned => true)
@@ -52,7 +52,7 @@ class GroupsController < ApplicationController
     if @group.save
       current_user.notices.create!(:target => @group)
 
-      flash[:notice] = _('Group was created successfully.')
+      flash[:notice] = _('%{group} was created successfully.') % {:group => name_of_group}
       redirect_to :controller => 'group', :action => 'show', :gid => @group.gid
     else
       render :action => 'new'
@@ -61,6 +61,6 @@ class GroupsController < ApplicationController
 
 private
   def setup_layout
-    @main_menu = @title = _('Groups')
+    @main_menu = @title = name_of_group
   end
 end

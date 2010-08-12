@@ -20,7 +20,7 @@ module GroupHelper
 
   # 管理メニューの生成
   def get_group_manage_menu_items selected_menu
-    @@menus = [{:name => _("Edit Group Information"), :menu => "manage_info" },
+    @@menus = [{:name => _("Edit %{group} Information") % {:group => name_of_group} , :menu => "manage_info" },
                {:name => _("Manage Members"),       :menu => "manage_participations"} ]
     @@menus << {:name => _("Approve Member"),     :menu => "manage_permit" } if @group.protected?
 

@@ -5,7 +5,7 @@
         <th><%= _('Search Range')%></th>
         <td>
           <%= check_box_tag('user', "1", params[:user]) -%><%= label_tag("user", _("Users' Blogs")) %>
-          <%= check_box_tag('group', "1", params[:group]) -%><%= label_tag('group', _('Forum entries of the group')) %>
+          <%= check_box_tag('group', "1", params[:group]) -%><%= label_tag('group', _('Forum entries of the %{group}') % {:group => name_of_group}) %>
           <%= _('(Both will be searched if none checked)')%>
         </td>
       </tr>
