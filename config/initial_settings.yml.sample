@@ -250,6 +250,7 @@ default: &default
   advertisements_url:                                                # 広告領域に表示するデータのJSON又はJSONPを返すURL
 
   iskip: false                                                       # SKIPaaS専用ポータルサイトの利用
+  replace_name_of_group :
 
 ####################################################################################################
 # 以下設定不要
