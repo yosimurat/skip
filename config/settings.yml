@@ -87,6 +87,9 @@ entry_showed_tab_limit_per_page:
 close_question_limit:
   format: int
   default: 30
+generate_gid_auto:
+  format: boolean
+  default: false
 
 # ==================================================================================================
 # RSSフィードの設定
@@ -145,6 +148,4 @@ enable_single_session:
 enable_login_save:
   format: boolean
   default: true
-generate_gid_auto:
-  format: boolean
-  default: false
+
