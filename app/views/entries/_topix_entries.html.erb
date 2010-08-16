@@ -11,9 +11,9 @@
   <% unless title.blank? -%>
     <h2 class="title"><%= icon_tag('asterisk_orange') %><%= h title %>
       <% if include_search_form && !params[:gid].blank? -%>
-        <span style="position: absolute; right: 10px;margin-top:-5px;">
+        <span class="include_search_form_on_title_bar">
           <% form_tag({:controller => "group", :action => "bbs", :gid => params[:gid] }, {:method => 'get'}) do -%>
-            <%= text_field_tag('keyword', params[:keyword], :size=>'20') %>
+            <%= text_field_tag('keyword', params[:keyword], :size => '30') %>
             <%= hidden_field_tag "sort_type", h(params[:sort_type]) %>
             <%= submit_tag _('Search') %>
           <% end -%>
