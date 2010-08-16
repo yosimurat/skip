@@ -12,7 +12,7 @@
 <% if (params[:controller] && params[:controller].split('/').first == "apps") -%>
   <%= yield %>
 <% else -%>
-<div id="main">
+<div id="main" style="line-height:130%">
   <%= yield :contents_top %>
 
   <div id="panel" class="ui-corner-all">
