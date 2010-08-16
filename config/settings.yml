@@ -145,4 +145,6 @@ enable_single_session:
 enable_login_save:
   format: boolean
   default: true
-
+generate_gid_auto:
+  format: boolean
+  default: false

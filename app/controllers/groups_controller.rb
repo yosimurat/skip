@@ -49,12 +49,17 @@ class GroupsController < ApplicationController
     @group_categories = GroupCategory.all
     @group.group_participations.build(:user_id => session[:user_id], :owned => true)
 
+    if Admin::Setting.generate_gid_auto
+      @group.gid = Time.now.strftime("%y%m%d%H%M%S")
+    end
+
     if @group.save
       current_user.notices.create!(:target => @group)
 
       flash[:notice] = _('%{group} was created successfully.') % {:group => name_of_group}
       redirect_to :controller => 'group', :action => 'show', :gid => @group.gid
     else
+      flash[:error] = _("Please re-create the group again.")
       render :action => 'new'
     end
   end

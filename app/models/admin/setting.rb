@@ -66,6 +66,9 @@ class Admin::Setting < ActiveRecord::Base
   N_('Admin::Setting|Entry showed tab limit per page description')
   N_('Admin::Setting|Close question limit')
   N_('Admin::Setting|Close question limit description')
+  N_('Admin::Setting|Generate gid auto')
+  N_('Admin::Setting|Generate gid auto description')
+
 
   # ================================================================================================
   # RSSフィードの設定用
