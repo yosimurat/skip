@@ -112,8 +112,9 @@
   </div><!-- panel -->
   <div class="clear_left"></div>
 
-  <%= render :partial => "shared/global_footer_navigation" -%>
-
+  <% if current_target_user and !current_target_user.new_record? and !current_target_user.unused? -%>
+    <%= render :partial => "shared/global_footer_navigation" -%>
+  <% end -%>
 </div><!-- main -->
 <% end -%>
 
