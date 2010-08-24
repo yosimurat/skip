@@ -224,12 +224,12 @@ default: &default
     event:
       enable: false
 
-  extra_chain:
+  extra_chain:                                                       # mypageに紹介文などを表示する
     enable: false
 
   mypage:
-    show_today_popular_blogs_box: true
-    show_recent_popular_blogs_box: false
+    show_today_popular_blogs_box: true                               # 当日のデータを元にランキングを算出
+    show_recent_popular_blogs_box: false                             # 一定期間のデータを元にランキングを算出
 
   # ================================================================================================
   # その他
@@ -250,7 +250,7 @@ default: &default
   advertisements_url:                                                # 広告領域に表示するデータのJSON又はJSONPを返すURL
 
   iskip: false                                                       # SKIPaaS専用ポータルサイトの利用
-  replace_name_of_group :
+  replace_name_of_group :                                            # グループの名称を置き換える
 
 ####################################################################################################
 # 以下設定不要
