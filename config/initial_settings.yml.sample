@@ -251,6 +251,7 @@ default: &default
 
   iskip: false                                                       # SKIPaaS専用ポータルサイトの利用
   replace_name_of_group :                                            # グループの名称を置き換える
+  button_design_image: false
 
 ####################################################################################################
 # 以下設定不要
