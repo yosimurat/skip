@@ -39,7 +39,7 @@
           <br class="clear_left" />
         </div>
 
-        <div id="tab_menu"><%= generate_tab_menu(user_tab_menu_source(current_target_user)) %></div>
+        <div id="tab_menu"><%= generate_tab_menu(user_tab_menu_source(current_target_user)) %></div><div class="group_shortcut"><%= shortcut_menus %></div>
         <br class="clear_left" />
         <% if current_target_user.id == current_user.id && request.url == root_url -%>
         <div id="customize_design">
