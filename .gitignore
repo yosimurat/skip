@@ -4,7 +4,7 @@ config/common_menus.yml
 db/schema.rb
 log/*.log*
 public/custom/*.html
-#public/custom/*
+public/custom/*
 public/javascripts/jquery.all.js
 public/javascripts/skip_embedded.js
 public/services/skip_reflect_customized.js
