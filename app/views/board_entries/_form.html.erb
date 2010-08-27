@@ -97,8 +97,13 @@ div.input_line textarea {
     <span style="display:<%= display_type %>">
       <%= radio_button_tag("publication_type", "public", params[:publication_type] == "public", :id=>"publication_type_public") -%><%= label_tag("publication_type_public", _('Open to All')) %>
     </span>
-    <%= radio_button_tag("publication_type", "private", params[:publication_type] == "private", :id=>"publication_type_private") -%><%= label_tag("publication_type_private", @board_entry.diary? ? _("Owner Only") : _("Members Only")) %>
-    <%= radio_button_tag("publication_type", "protected", params[:publication_type] == "protected", :id=>"publication_type_protected") %><%= label_tag("publication_type_protected", _('Specify Directly')) %>
+    <% if @board_entry.diary? %>
+      <%= radio_button_tag("publication_type", "private", params[:publication_type] == "private", :id=>"publication_type_private") -%><%= label_tag("publication_type_private", _("Owner Only")) %>
+    <% else -%>
+      <%= radio_button_tag("publication_type", "protected", params[:publication_symbols_value] == current_user.symbol, :id=>"publication_type_owner_only") %><%= label_tag("publication_type_owner_only", _('Owner Only')) %>
+      <%= radio_button_tag("publication_type", "private", params[:publication_type] == "private", :id=>"publication_type_private") -%><%= label_tag("publication_type_private", _("Members Only")) %>
+    <% end -%>
+    <%= radio_button_tag("publication_type", "protected", (params[:publication_type] == "protected" && params[:publication_symbols_value] != current_user.symbol), :id=>"publication_type_protected") %><%= label_tag("publication_type_protected", _('Specify Directly')) %>
 
     <div id="editor_symbols_space" style="display: none; margin-top: 5px;">
       <%= check_box_tag 'editor_symbol', @board_entry.symbol, params[:editor_symbol] %><%= label_tag :editor_symbol, _('Edit by Members Allowed') %>
@@ -185,6 +190,10 @@ div.input_line textarea {
                 return false;
         }
 
+        if ($j('#publication_type_owner_only:checked').length > 0) {
+          $j('#publication_symbols_value').val('<%= current_user.symbol %>');
+        }
+
         // 作成or更新によるページ遷移は警告しない
         $j(window).unbind('beforeunload');
     });
@@ -218,6 +227,8 @@ div.input_line textarea {
             $j('#publication_status').css('color', 'red');
           <% end -%>
         }
+        if ($j('#publication_type_owner_only:checked').length > 0)
+          $j('#publication_status').text($j('label[for=publication_type_owner_only]').text());
     };
     changePublicationType();
 
@@ -243,7 +254,7 @@ div.input_line textarea {
     toggleSendMail();
     <% end -%>
 
-    $j('#publication_type_public, #publication_type_protected, #publication_type_private').live('click', function(){
+    $j('#publication_type_public, #publication_type_protected, #publication_type_private, #publication_type_owner_only').live('click', function(){
       <% unless SkipEmbedded::InitialSettings['mail']['enable_send_email_to_all_users'] -%>
         toggleSendMail();
       <% end -%>
