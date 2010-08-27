@@ -5,7 +5,8 @@
 
 <% if entry.point_incrementable?(@current_user) -%>
   <% form_tag url_for(:controller => :board_entries, :action => :ado_pointup, :id => entry.id), :id => 'entry_point_form' do -%>
-    <%= submit_tag "#{entry.point} #{h Admin::Setting.point_button}" %>
+    <%= submit_tag "#{h Admin::Setting.point_button}" %>
+    <span id="entry_point_number" style="padding-left:5px;"><%= entry.point %></span>&nbsp;<%= _("users said '%s'") % h(Admin::Setting.point_button) -%>
   <% end -%>
 <% else -%>
   <%= _("(Got %{point} %{point_button})") % {:point => "<span class=count#{entry.state.rank}>#{entry.point}</span>" , :point_button => h(Admin::Setting.point_button)}%>

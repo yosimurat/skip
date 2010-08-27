@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.2\n"
-"POT-Creation-Date: 2010-08-16 14:25+0900\n"
+"POT-Creation-Date: 2010-08-27 15:34+0900\n"
 "PO-Revision-Date: 2008-08-11 17:41+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: app/views/entries/_entry_detail.html.erb:317
+#: app/views/entries/_entry_detail.html.erb:331
 msgid " [Delete]"
 msgstr ""
 
@@ -265,11 +265,12 @@ msgid ""
 "g. Yamada, administration)"
 msgstr ""
 
-#: app/views/board_entries/_board_entry_point.html.erb:11
+#: app/views/board_entries/_board_entry_point_image.html.erb:11
+#: app/views/board_entries/_board_entry_point.html.erb:12
 msgid "(Got %{point} %{point_button})"
 msgstr ""
 
-#: app/views/board_entries/_form.html.erb:112
+#: app/views/board_entries/_form.html.erb:117
 msgid "(Provide page IDs in comma separated format. e.g. 1123,1124)"
 msgstr ""
 
@@ -1620,7 +1621,7 @@ msgstr ""
 msgid "All Term"
 msgstr ""
 
-#: app/views/board_entries/_form.html.erb:291
+#: app/views/board_entries/_form.html.erb:302
 msgid "All changes will be discarded if you navigate away from this page."
 msgstr ""
 
@@ -1737,7 +1738,7 @@ msgstr ""
 #: app/helpers/share_file_helper.rb:26 app/views/share_file/list.html.erb:62
 #: app/views/group/_manage_info.html.erb:22
 #: app/views/board_entries/_board_entry_comment.html.erb:14
-#: app/views/entries/_entry_detail.html.erb:317
+#: app/views/entries/_entry_detail.html.erb:331
 #: app/views/edit/edit.html.erb:35 app/views/bookmark/list.html.erb:58
 msgid "Are you sure to delete?"
 msgstr ""
@@ -1754,7 +1755,7 @@ msgstr ""
 msgid "Are you sure to send activation email to target user?"
 msgstr ""
 
-#: app/views/board_entries/_form.html.erb:179
+#: app/views/board_entries/_form.html.erb:184
 msgid "Are you sure to send email to all users? (%s users)"
 msgstr ""
 
@@ -2027,7 +2028,7 @@ msgstr ""
 msgid "BoardEntry|Lock version"
 msgstr ""
 
-#: app/models/board_entry.rb:194 app/views/entries/_entry_detail.html.erb:667
+#: app/models/board_entry.rb:194 app/views/entries/_entry_detail.html.erb:681
 msgid "BoardEntry|Open|false"
 msgstr ""
 
@@ -2242,7 +2243,7 @@ msgstr ""
 
 #: app/views/share_file/edit.html.erb:15 app/views/share_file/new.html.erb:32
 #: app/views/board_entries/_board_entry_comment.html.erb:31
-#: app/views/entries/_entry_detail.html.erb:621
+#: app/views/entries/_entry_detail.html.erb:635
 msgid "Cancel"
 msgstr ""
 
@@ -2556,7 +2557,7 @@ msgstr ""
 msgid "Create a new %{group}"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:323
+#: app/views/entries/_entry_detail.html.erb:337
 msgid "Create a new forum entry inheriting the privacy setting."
 msgstr ""
 
@@ -2564,7 +2565,7 @@ msgstr ""
 msgid "Create administrative user"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:325
+#: app/views/entries/_entry_detail.html.erb:339
 msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr ""
@@ -2579,7 +2580,7 @@ msgstr ""
 
 #: app/helpers/board_entries_helper.rb:153
 #: app/views/group/_stock_entry_of_top.html.erb:19
-#: app/views/entries/_entry_detail.html.erb:281
+#: app/views/entries/_entry_detail.html.erb:295
 msgid "Create stock entry under the '%s'"
 msgstr ""
 
@@ -2798,7 +2799,7 @@ msgstr ""
 msgid "Edit Profile"
 msgstr ""
 
-#: app/views/board_entries/_form.html.erb:99
+#: app/views/board_entries/_form.html.erb:104
 msgid "Edit by Members Allowed"
 msgstr ""
 
@@ -2890,11 +2891,11 @@ msgstr ""
 msgid "Embeds"
 msgstr ""
 
-#: app/views/board_entries/_form.html.erb:251
+#: app/views/board_entries/_form.html.erb:262
 msgid "Enable group members"
 msgstr ""
 
-#: app/views/board_entries/_form.html.erb:253
+#: app/views/board_entries/_form.html.erb:264
 msgid "Enable owner only"
 msgstr ""
 
@@ -2962,7 +2963,7 @@ msgstr ""
 msgid "Entries most commented (public entries only)"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:311
+#: app/views/entries/_entry_detail.html.erb:325
 msgid "Entries talking about this entry:"
 msgstr ""
 
@@ -3581,7 +3582,7 @@ msgstr ""
 msgid "If you delete this, the nested one are deleted."
 msgstr ""
 
-#: app/views/board_entries/_form.html.erb:158
+#: app/views/board_entries/_form.html.erb:163
 msgid ""
 "Illegal format in \"Topic entry\". List the page IDs and separate each other "
 "by commas."
@@ -4079,7 +4080,7 @@ msgstr ""
 
 #: app/helpers/application_helper.rb:235 app/helpers/application_helper.rb:260
 #: app/helpers/share_file_helper.rb:19 app/views/group/_form.html.erb:53
-#: app/views/board_entries/_form.html.erb:95
+#: app/views/board_entries/_form.html.erb:99
 msgid "Members Only"
 msgstr ""
 
@@ -4198,7 +4199,7 @@ msgstr ""
 msgid "New Email Address"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:289
+#: app/views/entries/_entry_detail.html.erb:303
 msgid "New Entries on Top"
 msgstr ""
 
@@ -4323,7 +4324,7 @@ msgid "No user information registered in %s."
 msgstr ""
 
 #: app/views/share_file/_form.html.erb:82
-#: app/views/board_entries/_form.html.erb:169
+#: app/views/board_entries/_form.html.erb:174
 msgid "No user selected. Are you sure to make this open to all users?"
 msgstr ""
 
@@ -4479,15 +4480,15 @@ msgstr ""
 msgid "Off-time"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:290
+#: app/views/entries/_entry_detail.html.erb:304
 msgid "Old Entries on Top"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:468
+#: app/views/entries/_entry_detail.html.erb:482
 msgid "One or more characters other than spaces required."
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:667
+#: app/views/entries/_entry_detail.html.erb:681
 msgid "Open"
 msgstr ""
 
@@ -4652,7 +4653,8 @@ msgstr ""
 
 #: app/helpers/application_helper.rb:235 app/helpers/application_helper.rb:260
 #: app/helpers/share_file_helper.rb:19
-#: app/views/board_entries/_form.html.erb:95
+#: app/views/board_entries/_form.html.erb:96
+#: app/views/board_entries/_form.html.erb:98
 msgid "Owner Only"
 msgstr ""
 
@@ -4856,7 +4858,7 @@ msgstr ""
 msgid "PopularBookmark|Date"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:305
+#: app/views/entries/_entry_detail.html.erb:319
 msgid "Post"
 msgstr ""
 
@@ -5112,7 +5114,7 @@ msgstr ""
 
 #: app/views/layouts/wiki.html.erb:75
 #: app/views/layouts/admin/application.html.erb:66
-#: app/views/layouts/layout.html.erb:122
+#: app/views/layouts/layout.html.erb:123
 msgid "Registered Users: %s users"
 msgstr ""
 
@@ -5160,7 +5162,7 @@ msgid "Reply"
 msgstr ""
 
 #: app/views/board_entries/_board_entry_comment.html.erb:16
-#: app/views/entries/_entry_detail.html.erb:573
+#: app/views/entries/_entry_detail.html.erb:587
 msgid "Reply to this comment"
 msgstr ""
 
@@ -5189,7 +5191,7 @@ msgstr ""
 msgid "Resolved"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:291
+#: app/views/entries/_entry_detail.html.erb:305
 msgid "Resume default order"
 msgstr ""
 
@@ -5239,7 +5241,7 @@ msgstr ""
 #: app/views/board_entries/_board_entry_comment.html.erb:30
 #: app/views/admin/settings/index.html.erb:9
 #: app/views/admin/documents/index.html.erb:10
-#: app/views/entries/_entry_detail.html.erb:590
+#: app/views/entries/_entry_detail.html.erb:604
 #: app/views/platform/reset_password.html.erb:16
 #: app/views/bookmark/new.html.erb:58
 #: app/views/mypage/_manage_message.html.erb:28
@@ -5620,7 +5622,7 @@ msgstr ""
 #: app/controllers/statistics_controller.rb:67
 #: app/views/layouts/wiki.html.erb:79
 #: app/views/layouts/admin/application.html.erb:70
-#: app/views/layouts/layout.html.erb:126
+#: app/views/layouts/layout.html.erb:127
 msgid "Site Information"
 msgstr ""
 
@@ -5739,7 +5741,7 @@ msgstr ""
 
 #: app/helpers/application_helper.rb:233 app/helpers/application_helper.rb:257
 #: app/views/share_file/_form.html.erb:38
-#: app/views/board_entries/_form.html.erb:96
+#: app/views/board_entries/_form.html.erb:101
 msgid "Specify Directly"
 msgstr ""
 
@@ -6165,7 +6167,7 @@ msgstr ""
 
 #: app/views/layouts/wiki.html.erb:76
 #: app/views/layouts/admin/application.html.erb:67
-#: app/views/layouts/layout.html.erb:123
+#: app/views/layouts/layout.html.erb:124
 msgid "Today's Access: %s access"
 msgstr ""
 
@@ -6173,7 +6175,7 @@ msgstr ""
 msgid "Today's Entries"
 msgstr ""
 
-#: app/views/layouts/wiki.html.erb:78 app/views/layouts/layout.html.erb:125
+#: app/views/layouts/wiki.html.erb:78 app/views/layouts/layout.html.erb:126
 msgid "Today's Entries: %s entries"
 msgstr ""
 
@@ -6181,7 +6183,7 @@ msgstr ""
 msgid "Today's Posts: %s posts"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:480
+#: app/views/entries/_entry_detail.html.erb:494
 msgid "Too many points!"
 msgstr ""
 
@@ -6193,7 +6195,7 @@ msgstr ""
 msgid "Top 10 tags: "
 msgstr ""
 
-#: app/views/board_entries/_form.html.erb:108
+#: app/views/board_entries/_form.html.erb:113
 msgid "Topic Entry"
 msgstr ""
 
@@ -6211,7 +6213,7 @@ msgstr ""
 
 #: app/views/layouts/wiki.html.erb:77
 #: app/views/layouts/admin/application.html.erb:68
-#: app/views/layouts/layout.html.erb:124
+#: app/views/layouts/layout.html.erb:125
 msgid "Total Entries: %s entries"
 msgstr ""
 
@@ -6999,7 +7001,7 @@ msgstr ""
 msgid "Write a blog entry"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:303
+#: app/views/entries/_entry_detail.html.erb:317
 msgid "Write a comment"
 msgstr ""
 
@@ -7222,7 +7224,8 @@ msgstr ""
 msgid "[Back to the histories list]"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:263
+#: app/views/entries/_entry_detail.html.erb:264
+#: app/views/entries/_entry_detail.html.erb:276
 msgid "[Bookmarked by: %d member]"
 msgid_plural "[Bookmarked by: %d members]"
 msgstr[0] ""
@@ -7446,7 +7449,7 @@ msgstr ""
 msgid "[Today]"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:330
+#: app/views/entries/_entry_detail.html.erb:344
 msgid "[Top of page]"
 msgstr ""
 
@@ -7464,11 +7467,11 @@ msgstr ""
 msgid "[Unread]"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:325
+#: app/views/entries/_entry_detail.html.erb:339
 msgid "[Write a new blog entry with this as topic]"
 msgstr ""
 
-#: app/views/entries/_entry_detail.html.erb:323
+#: app/views/entries/_entry_detail.html.erb:337
 msgid "[Write a new forum entry with this as topic]"
 msgstr ""
 
@@ -7967,6 +7970,10 @@ msgstr ""
 #: app/models/site_count.rb:22 app/models/site_count.rb:27
 #: app/models/site_count.rb:42 app/models/site_count.rb:47
 msgid "users"
+msgstr ""
+
+#: app/views/board_entries/_board_entry_point.html.erb:9
+msgid "users said '%s'"
 msgstr ""
 
 #: app/views/admin/users/import.html.erb:16

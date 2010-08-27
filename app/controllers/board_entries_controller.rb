@@ -89,7 +89,7 @@ class BoardEntriesController < ApplicationController
       render :text => _('Operation unauthorized.'), :status => :forbidden and return
     end
     board_entry.state.increment!(:point)
-    render :text => "#{board_entry.point} #{ERB::Util.html_escape(Admin::Setting.point_button)}"
+    render :text => "#{board_entry.point}"
   rescue ActiveRecord::RecordNotFound => ex
     render :text => _('Target %{target} inexistent.')%{:target => _('board entry')}, :status => :not_found and return
   end
