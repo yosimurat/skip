@@ -586,19 +586,21 @@ class BoardEntry < ActiveRecord::Base
   # アクセスしたことを示す（アクセス履歴）
   def accessed(login_user_id)
     unless writer?(login_user_id)
-      state.increment(:access_count)
-      state.increment(:today_access_count)
-      state.save
+      transaction do
+        state.increment(:access_count)
+        state.increment(:today_access_count)
+        state.save
 
-      if today_entry= EntryAccess.find(:first, :conditions =>["board_entry_id = ? and updated_on > ? and visitor_id = ?", id, Date.today, login_user_id])
-        today_entry.destroy
+        if today_entry= EntryAccess.find(:first, :conditions =>["board_entry_id = ? and updated_on > ? and visitor_id = ?", id, Date.today, login_user_id], :lock => true)
+          today_entry.destroy
+        end
+        # FIXME: 管理機能で足跡の件数を減らしたときに、これまでの最大数の足跡がついたものは、減らない
+        # レアケースなので、一旦PEND
+        if  EntryAccess.count(:conditions => ["board_entry_id = ?", id]) >= Admin::Setting.access_record_limit
+          EntryAccess.find(:first, :conditions => ["board_entry_id = ?", id], :order => "updated_on ASC").destroy
+        end
+        EntryAccess.create(:board_entry_id => id, :visitor_id => login_user_id)
       end
-      # FIXME: 管理機能で足跡の件数を減らしたときに、これまでの最大数の足跡がついたものは、減らない
-      # レアケースなので、一旦PEND
-      if  EntryAccess.count(:conditions => ["board_entry_id = ?", id]) >= Admin::Setting.access_record_limit
-        EntryAccess.find(:first, :conditions => ["board_entry_id = ?", id], :order => "updated_on ASC").destroy
-      end
-      EntryAccess.create(:board_entry_id => id, :visitor_id => login_user_id)
     end
     UserReading.create_or_update(login_user_id, self.id)
   end
