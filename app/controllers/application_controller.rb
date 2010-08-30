@@ -346,7 +346,7 @@ protected
   end
 
   def name_of_group
-    SkipEmbedded::InitialSettings['replace_name_of_group'] ? SkipEmbedded::InitialSettings['replace_name_of_group'] : _('Groups')
+    SkipEmbedded::InitialSettings['replace_name_of_group'] ? ERB::Util.html_escape(SkipEmbedded::InitialSettings['replace_name_of_group']) : _('Groups')
   end
 
   private
