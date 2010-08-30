@@ -59,7 +59,9 @@
     <% unless SkipEmbedded::InitialSettings['enable_ad_for_oss'] == "lovelyskip" -%>
       <%= render "ad_for_oss" %>
     <% end -%>
-
+    <% if content = open(RAILS_ROOT + "/public/custom/side_banner.html", 'r') { |f| s = f.read } and !content.blank? -%>
+      <iframe src="/custom/side_banner.html" frameborder="0" width="180"></iframe>
+    <% end -%>
     <%= render :partial => 'rss_feed_box' %>
     <% cache @today_popular_blogs_cache_key do %>
       <%= render :partial => 'today_access_blogs_box', :locals => {:entries => @today_popular_blogs, :title => _('Today Popular Entries'), :type => :today } %>
