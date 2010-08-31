@@ -84,9 +84,11 @@
     <div id="global_links">
       <%= render :partial => 'shared/global_navigation' %>
     </div>
+    <% if current_target_user != current_user -%>
     <div id="global_shortcut">
       <%= shortcut_menus %>
     </div>
+    <% end -%>
     <div class="clear_both"></div>
   <% end -%>
 
