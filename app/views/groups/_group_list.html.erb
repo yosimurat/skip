@@ -6,11 +6,13 @@
     <col />
     <col class="col100" />
     <col class="col100" />
+    <col class="col100" />
     <col class="col75" />
     <tbody>
       <tr>
         <th><%= _('%{group} Name') % {:group => name_of_group} + " - " + _('Members count')%></th>
         <th class="count"><%= _('Entries count') %></th>
+        <th class="count"><%= _("Stock Entries count") %></th>
         <th><%= _("BoardEntry|Last updated") %></th>
         <th><%= _('Status') %></th>
       </tr>
@@ -20,12 +22,9 @@
           <% entries = BoardEntry.owned(group) %>
 
           <td class="name"><span class="nowrap"><%= icon_tag(group.group_category.icon, :alt => category_name, :title => category_name) %><%= group_link_to group %><%= icon_tag('key', :alt => _('Need approval of the Administrator.'), :title => _('Need approval of the Administrator.')) if group.protected? %></span> - <span class="small_text"><%= group.group_participations.active.count %>人</span></td>
-          <td class="count"><%= entries.empty? ? "0" : entries.count %>
-            <% if entries.stock_entry.count != 0 -%>
-              <br />
-              <%= _("(stock:%s)") % entries.stock_entry.count %>
-            <% end -%>
-          </td>
+          <td class="count"><%= entries.empty? ? "0" : entries.count %></td>
+          <td class="count"><span class="nowrap"><%= entries.stock_entry.count %></span></td>
+
           <td class="date"><span class="nowrap"><%= entries.last.last_updated.strftime(_('%B %d %Y')) unless entries.empty? %><br /><%= content_tag("b", _('Active'), :class => "remarkable") if upsurge_frequency(entries) %></span></td>
           <td class="state"><span class="nowrap"><%= participation_state(group, user_id, :blank_unjoined => true) -%></span></td>
         </tr>
