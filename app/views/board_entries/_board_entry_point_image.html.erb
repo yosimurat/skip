@@ -1,11 +1,11 @@
 <% if entry.point_incrementable?(@current_user) -%>
   <div style="height:40px;">
     <p style="position:absolute;top:0px;right:0px;"><img src="/custom/images/button/fish_top.png"></p>
-  <div id="entry_point_number" style="position:absolute;top:15px;right:60px;font-weight:bold;"><%= entry.point %></div>
+  <div id="entry_point_number" style="position:absolute;top:15px;right:60px;font-weight:bold;font-size:14px;"><%= entry.point %></div>
   </div>
   <img src="/custom/images/button/fish_left.png">
   <% form_tag url_for(:controller => :board_entries, :action => :ado_pointup, :id => entry.id), :id => 'entry_point_form' do -%>
-    <%= submit_tag "#{h Admin::Setting.point_button}", :style => 'background:url("/custom/images/button/button.png");width:80px;height:31px;color:white;font-weight:bold;border:none;cursor:pointer;' %>
+    <%= submit_tag "#{h Admin::Setting.point_button}", :style => 'background:url("/custom/images/button/button.png");width:80px;height:31px;color:white;border:none;cursor:pointer;' %>
   <% end -%>
 <% else -%>
   <%= _("(Got %{point} %{point_button})") % {:point => "<span class=count#{entry.state.rank}>#{entry.point}</span>" , :point_button => h(Admin::Setting.point_button)}%>
