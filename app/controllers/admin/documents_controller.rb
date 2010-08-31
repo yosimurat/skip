@@ -16,7 +16,9 @@
 class Admin::DocumentsController < Admin::ApplicationController
   before_filter :check_params
 
-  CONTENT_NAMES = %w(about_this_site rules side_banner)
+  # FIXME Richtextでの編集でIE以外だとソース編集出来ないという問題があるため1.8.3では隠す
+  # CONTENT_NAMES = %w(about_this_site rules side_banner)
+  CONTENT_NAMES = %w(about_this_site rules)
   N_('Admin::DocumentsController|about_this_site')
   N_('Admin::DocumentsController|about_this_site_description')
   N_('Admin::DocumentsController|rules')
