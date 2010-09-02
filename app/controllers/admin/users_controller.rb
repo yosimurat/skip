@@ -136,7 +136,7 @@ class Admin::UsersController < Admin::ApplicationController
       @users = []
       return render(:action => :import)
     end
-    @users = Admin::User.make_users(params[:file], params[:options], params[:update_registered].blank?)
+    @users = Admin::User.make_users(params[:file], params[:options], !params[:update_registered].blank?)
     import!(@users)
     flash.now[:notice] = _('Verified content of CSV file.')
     render :action => :import
@@ -154,7 +154,7 @@ class Admin::UsersController < Admin::ApplicationController
       @users = []
       return
     end
-    @users = Admin::User.make_users(params[:file], params[:options], params[:update_registered].blank?)
+    @users = Admin::User.make_users(params[:file], params[:options], !params[:update_registered].blank?)
     import!(@users, false)
     flash[:notice] = _('Successfully added/updated users from CSV file.')
     redirect_to admin_users_path
