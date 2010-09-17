@@ -292,7 +292,9 @@
       </div>
       <%= render :partial => 'group/stock_entry_index', :locals => { :stock_entries => stock_entries }  %>
     </div>
-    <div class="button"><%= link_to(content_tag('span', _("Create stock entry under the '%s'") % entry.title ), {:controller => 'group', :action => "new_stock_entry", :parent_id => entry.id}, {:class => "rounded", :method => :post}) %></div>
+    <% if current_user.participating_group?(@group) -%>
+      <div class="button"><%= link_to(content_tag('span', _("Create stock entry under the '%s'") % entry.title ), {:controller => 'group', :action => "new_stock_entry", :parent_id => entry.id}, {:class => "rounded", :method => :post}) %></div>
+    <% end -%>
   </div>
 <% end -%>
 
