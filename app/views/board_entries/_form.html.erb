@@ -86,16 +86,32 @@ div.input_line textarea {
 </div>
 
 <div class="input_line input_option invisible">
+  <div class="input_label" style="height: 3em;"><%= label_tag("trackbacks", _('Topic Entry')) %></div>
+  <div class="input_value">
+    <div id="option_space">
+      <p><%= text_field_tag 'trackbacks', params[:trackbacks], {:size => 60} %></p>
+      <p><%= _('(Provide page IDs in comma separated format. e.g. 1123,1124)')%></p>
+    </div>
+  </div>
+  <div style="clear: left"></div>
+</div>
+
+<div class="input_line">
   <div class="input_label" style="height: 3em;" id="input_label_publication"><%= _('Privacy Settings')%></div>
   <div class="input_value" id="input_value_publication"><table><tr><td>
     <% display_type = (@board_entry.owner_is_public? ? "" : "none") %>
-    <span style="display:<%= display_type %>">
-      <%= radio_button_tag("publication_type", "public", params[:publication_type] == "public", :id=>"publication_type_public") -%><%= label_tag("publication_type_public", _('Open to All')) %>
-    </span>
     <% if @board_entry.diary? %>
       <%= radio_button_tag("publication_type", "private", params[:publication_type] == "private", :id=>"publication_type_private") -%><%= label_tag("publication_type_private", _("Owner Only")) %>
+      <%= "&nbsp;|&nbsp;" %>
+      <span style="display:<%= display_type %>">
+        <%= radio_button_tag("publication_type", "public", params[:publication_type] == "public", :id=>"publication_type_public") -%><%= label_tag("publication_type_public", _('Open to All')) %>
+      </span>
     <% else -%>
       <%= radio_button_tag("publication_type", "protected", params[:publication_symbols_value] == current_user.symbol, :id=>"publication_type_owner_only") %><%= label_tag("publication_type_owner_only", _('Owner Only')) %>
+      <%= "&nbsp;|&nbsp;" %>
+      <span style="display:<%= display_type %>">
+        <%= radio_button_tag("publication_type", "public", params[:publication_type] == "public", :id=>"publication_type_public") -%><%= label_tag("publication_type_public", _('Open to All')) %>
+      </span>
       <%= radio_button_tag("publication_type", "private", params[:publication_type] == "private", :id=>"publication_type_private") -%><%= label_tag("publication_type_private", _("Members Only")) %>
     <% end -%>
     <%= radio_button_tag("publication_type", "protected", (params[:publication_type] == "protected" && params[:publication_symbols_value] != current_user.symbol), :id=>"publication_type_protected") %><%= label_tag("publication_type_protected", _('Specify Directly')) %>
@@ -105,17 +121,6 @@ div.input_line textarea {
     </div>
     <%= render :partial => "shared/symbol_autocomplete_field", :locals => {:publication_symbols_value => params[:publication_symbols_value], :editor_symbols_value => params[:editor_symbols_value], :edit_checkbox => true } %>
     </td></tr></table>
-  </div>
-  <div style="clear: left"></div>
-</div>
-
-<div class="input_line input_option invisible">
-  <div class="input_label" style="height: 3em;"><%= label_tag("trackbacks", _('Topic Entry')) %></div>
-  <div class="input_value">
-    <div id="option_space">
-      <p><%= text_field_tag 'trackbacks', params[:trackbacks], {:size => 60} %></p>
-      <p><%= _('(Provide page IDs in comma separated format. e.g. 1123,1124)')%></p>
-    </div>
   </div>
   <div style="clear: left"></div>
 </div>
@@ -255,21 +260,6 @@ div.input_line textarea {
       <% end -%>
         changePublicationType();
     });
-
-    <% if @board_entry.aim_type == "stock_entry" -%>
-      var changeEditorSymbol = function() {
-        if ($j('#editor_symbol:checked').length > 0) {
-          $j('#editor_status').text("<%= _('Enable group members') %>");
-        } else {
-          $j('#editor_status').text("<%= _('Enable owner only') %>");
-        }
-      };
-      changeEditorSymbol();
-
-      $j('#editor_symbol').live('click', function(){
-        changeEditorSymbol();
-      });
-    <% end -%>
 
     // タグsuggestのスライド表示
     $j('#board_entry_category')
