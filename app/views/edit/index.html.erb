@@ -3,10 +3,6 @@
 
 <% form_tag({:action => 'create'}, :multipart => true, :id => 'board_entry_form') do -%>
   <%= render :partial => 'board_entries/form' %>
-  <div class="publication_status_wrapper"><%= _('Selected publication type') %><span id="publication_status"></span></div>
-  <% if @board_entry.is_stock_entry? -%>
-    <div class="editor_status_wrapper"><%= _('Selected edit authority') %><span id="editor_status"></span></div>
-  <% end -%>
   <%= submit_tag _("Create") , :id => 'submit_button' %>
   <%= send_mail_check_box_tag %>
 <% end -%>
