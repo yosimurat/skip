@@ -20,7 +20,7 @@ Feature: 記事の管理
         |a_group_owned_user |vim_group  |Vimとは    |雑談   |foobar     |全体に公開         |
 
     When    "a_group_owned_user"で"vim_group"グループのサマリページを開く
-    And     "フォーラム"リンクをクリックする
+    And     "記事一覧"リンクをクリックする
     And     "Vimとは"リンクをクリックする
 
     Then    "Vimとは"と表示されていること
@@ -33,7 +33,7 @@ Feature: 記事の管理
         |a_group_owned_user |vim_group  |Vimとは    |雑談   |foobar     |全体に公開         |
 
     When    "a_user"で"vim_group"グループのサマリページを開く
-    And     "フォーラム"リンクをクリックする
+    And     "記事一覧"リンクをクリックする
     And     "Vimとは"リンクをクリックする
 
     Then    "Vimとは"と表示されていること
@@ -200,5 +200,5 @@ Feature: 記事の管理
   Scenario: ユーザとしてGoodJobポイントを追加できる
     Given   "a_user"でブログを書く
     And     "a_group_owned_user"で"1"つめのブログにアクセスする
-    When    "0 GoodJob"ボタンをクリックする
-    Then    "1 GoodJob"と表示されること
+    When    "GoodJob"ボタンをクリックする
+    Then    "1"と表示されること

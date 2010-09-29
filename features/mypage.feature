@@ -24,8 +24,6 @@ Feature: マイページ
     When "マイページ"にアクセスする
 
     Then I should see "Railsについて質問" within "div#questions_wrapper"
-    And I should not see "Railsについて質問" within "div#access_blogs"
-    And I should see "Railsについて雑談" within "div#access_blogs"
     And I should not see "Railsについて質問" within "div#recent_blogs"
     And I should see "Railsについて雑談" within "div#recent_blogs"
 
@@ -42,8 +40,6 @@ Feature: マイページ
     And "マイページ"にアクセスする
 
     Then I should see "Railsについてお知らせ" within "div#messages_box"
-    And I should not see "Railsについてお知らせ" within "div#access_blogs"
-    And I should see "Railsについて雑談" within "div#access_blogs"
     And I should not see "Railsについてお知らせ" within "div#recent_blogs"
     And I should see "Railsについて雑談" within "div#recent_blogs"
 
@@ -153,7 +149,7 @@ Feature: マイページ
       |a_user  |vim_group   |雑談しよう   |雑談|ほげほげ|全体に公開      |
 
     When "a_group_owned_user"で"vim_group"グループのサマリページを開く
-    And "フォーラム"リンクをクリックする
+    And "記事一覧"リンクをクリックする
     And "雑談しよう"リンクをクリックする
     And "コメントを書く"に"こんにちは"と入力する
     And "書き込み"ボタンをクリックする
