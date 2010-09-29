@@ -172,6 +172,14 @@ class BoardEntriesController < ApplicationController
     end
   end
 
+  def comments_list
+    @entry = BoardEntry.accessible(current_user).find(params[:id])
+    unless (@entry.is_question? && @entry.user == current_user)
+      flash[:warn] = _("You are not allowed to see the page.")
+      redirect_to @entry.get_url_hash
+    end
+  end
+
 private
   def make_comment_message
     return unless @board_entry

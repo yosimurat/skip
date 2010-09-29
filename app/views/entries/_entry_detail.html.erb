@@ -98,7 +98,7 @@
   div#board_entry_comments #comments_header {
     /* border: 1px solid silver; */
     position: relative;
-    height: 1.5em;
+    height: 2em;
     font-size: 0.8em;
   }
   div#board_entry_comments #comments_header .buttons {
@@ -300,6 +300,9 @@
 
 <div id="board_entry_comments">
   <div id="comments_header">
+    <% if (entry.is_question? && entry.user == current_user && entry.board_entry_comments.count > 0 ) -%>
+      <span style="font-size:1.2em;"><%= link_to(icon_tag("application_put") + _("[Display list of answers.]"), {:controller=> "board_entries", :action => "comments_list", :id => entry}) %></span>
+    <% end -%>
     <span class="buttons invisible">
       [
        <span id="sort_desc_label" class="invisible"><%= _('New Entries on Top')%></span><a href="#" id="sort_desc_link"><%= _('New Entries on Top')%></a>
