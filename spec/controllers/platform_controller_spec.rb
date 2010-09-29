@@ -246,7 +246,7 @@ describe PlatformController, 'POST /forgot_password' do
       it 'メールアドレスの入力は必須である旨のメッセージを表示する' do
         stub_flash_now
         post :forgot_password, :email => ''
-        flash[:error].should == 'Email is mandatory.'
+        flash[:error].should == 'Email address is mandatory.'
         response.should be_success
       end
     end

@@ -82,7 +82,7 @@ describe GroupsController, "POST #create" do
     end
     it { response.should redirect_to(:controller => "group", :action => "show", :gid => @group.gid) }
     it "flashにメッセージが登録されていること" do
-      flash[:notice].should == 'Group was created successfully.'
+      flash[:notice].should == 'Groups was created successfully.'
     end
   end
   describe "保存に失敗する場合" do
