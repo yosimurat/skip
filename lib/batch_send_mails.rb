@@ -33,7 +33,7 @@ class BatchSendMails < BatchBase
 
         system_message_data = system_message_data(system_message, user)
         unless system_message_data
-          system_message.update_attribute :send_flag, true
+          system_message.update_attribute :send_flag, true unless system_message.frozen?
           next
         end
 
