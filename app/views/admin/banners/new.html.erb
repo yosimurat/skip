@@ -1,0 +1,4 @@
+<% form_for(@banner, :url => admin_banners_path) do |f| -%>
+  <%= render f %>
+  <%= f.submit _("Create"), :disable_with => _("Now creating...") %>
+<% end -%>
