@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.3\n"
-"POT-Creation-Date: 2010-10-01 20:07+0900\n"
+"POT-Creation-Date: 2010-10-01 20:19+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -232,7 +232,7 @@ msgid_plural "%{num} errors occured."
 msgstr[0] "%{num}個のエラーが発生しました"
 
 #: app/controllers/admin/images_controller.rb:148
-#: app/controllers/admin/documents_controller.rb:102
+#: app/controllers/admin/documents_controller.rb:98
 msgid "%{target} was successfully saved."
 msgstr "%{target}を保存しました。"
 
@@ -625,15 +625,15 @@ msgid "Admin::Bookmark|Url"
 msgstr "URL"
 
 #: app/helpers/admin/application_helper.rb:27
-#: app/controllers/admin/documents_controller.rb:114
+#: app/controllers/admin/documents_controller.rb:110
 msgid "Admin::DocumentsController"
 msgstr "説明文設定"
 
-#: app/controllers/admin/documents_controller.rb:22
+#: app/controllers/admin/documents_controller.rb:20
 msgid "Admin::DocumentsController|about_this_site"
 msgstr "このサイトについて"
 
-#: app/controllers/admin/documents_controller.rb:23
+#: app/controllers/admin/documents_controller.rb:21
 msgid "Admin::DocumentsController|about_this_site_description"
 msgstr ""
 "ユーザが登録して初めてSKIPにログインしたタイミングで表示されるページとなりま"
@@ -642,26 +642,16 @@ msgstr ""
 "シーや、業務上での使用方法など、適宜必要だと考えられる事項を記載しましょう。"
 "<br/>尚、システムではフッターにリンクを表示しています。"
 
-#: app/controllers/admin/documents_controller.rb:24
+#: app/controllers/admin/documents_controller.rb:22
 msgid "Admin::DocumentsController|rules"
 msgstr "利用規約"
 
-#: app/controllers/admin/documents_controller.rb:25
+#: app/controllers/admin/documents_controller.rb:23
 msgid "Admin::DocumentsController|rules_description"
 msgstr ""
 "SKIPを利用する上で、各ユーザに守ってもらいたい事項に関する利用規約を記述しま"
 "す。<br/>システムでは、初回ログイン後に表示しています。また、フッターにリンク"
 "を表示しています。"
-
-#: app/controllers/admin/documents_controller.rb:26
-msgid "Admin::DocumentsController|side_banner"
-msgstr "マイページ右バナー"
-
-#: app/controllers/admin/documents_controller.rb:27
-msgid "Admin::DocumentsController|side_banner_description"
-msgstr ""
-"マイページ右側に表示するバナーです。非表示に戻したい場合、[既定のページに戻"
-"す]をクリックして下さい。"
 
 #: app/models/admin/group_category.rb:19
 msgid "Admin::GroupCategory|Code"
@@ -2703,7 +2693,7 @@ msgstr "連絡先"
 msgid "Content"
 msgstr "内容"
 
-#: app/controllers/admin/documents_controller.rb:39
+#: app/controllers/admin/documents_controller.rb:35
 msgid "Content not found."
 msgstr "対象のコンテンツが存在しません。"
 
@@ -3322,7 +3312,7 @@ msgstr "自分以外のユーザがまだ存在しています。削除できま
 msgid "Failed to load rss."
 msgstr "RSSの読み込みに失敗しました。"
 
-#: app/controllers/admin/documents_controller.rb:36
+#: app/controllers/admin/documents_controller.rb:32
 msgid "Failed to open the content."
 msgstr "対象のコンテンツを開くことが出来ませんでした。"
 
@@ -3345,7 +3335,7 @@ msgstr "パスワードリセットに失敗しました。"
 msgid "Failed to save one-time code."
 msgstr "ワンタイムコードの保存に失敗しました。"
 
-#: app/controllers/admin/documents_controller.rb:105
+#: app/controllers/admin/documents_controller.rb:101
 msgid "Failed to save the content.  Try again or contact administrator."
 msgstr ""
 "対象のコンテンツを保存することが出来ませんでした。再度お試し頂くか管理者にお"
@@ -3852,7 +3842,7 @@ msgid "Illegal value(s) found in CSV file."
 msgstr "CSVファイルに不正な値が含まれています。"
 
 #: app/views/admin/users/index.html.erb:61
-#: app/views/admin/banners/index.html.erb:8
+#: app/views/admin/banners/index.html.erb:9
 msgid "Image"
 msgstr "画像"
 
@@ -4191,7 +4181,7 @@ msgid "Link Palette"
 msgstr ""
 
 #: app/views/admin/banners/_form.html.erb:7
-#: app/views/admin/banners/index.html.erb:9
+#: app/views/admin/banners/index.html.erb:10
 msgid "Link URL"
 msgstr "リンクURL"
 
@@ -4621,9 +4611,9 @@ msgstr "該当する共有ファイルはありませんでした。"
 msgid "No messages for you"
 msgstr "お知らせはありません"
 
-#: app/views/admin/banners/index.html.erb:25
+#: app/views/admin/banners/index.html.erb:26
 msgid "No registered banners"
-msgstr ""
+msgstr "登録されているバナーはありません。"
 
 #: app/controllers/services_controller.rb:37
 msgid "No user information registered in %s."
@@ -5424,6 +5414,10 @@ msgid ""
 "Refer to the contact at the bottom of this email in case the link has "
 "expired."
 msgstr "無効になってしまった場合は本メール末尾の連絡先へお問い合わせ下さい。"
+
+#: app/views/admin/banners/index.html.erb:1
+msgid "Registed banners are displayed at the right of a MyPage."
+msgstr "登録されたバナーは、マイページの右側に表示されます。"
 
 #: app/views/portal/_registration_form.html.erb:74
 msgid "Register User"
@@ -6663,8 +6657,8 @@ msgid ""
 msgstr "ユーザ登録が継続出来ません。最初からやり直して下さい。"
 
 #: app/controllers/admin/images_controller.rb:154
-#: app/controllers/admin/documents_controller.rb:42
-#: app/controllers/admin/documents_controller.rb:108
+#: app/controllers/admin/documents_controller.rb:38
+#: app/controllers/admin/documents_controller.rb:104
 msgid "Unexpected error occured. Contact administrator."
 msgstr "想定外のエラーが発生しました。管理者にお問い合わせ下さい。"
 
@@ -7676,7 +7670,7 @@ msgstr "[ダウンロード履歴をクリア]"
 msgid "[Click to hide]"
 msgstr "[クリックでメッセージ消去]"
 
-#: app/views/admin/banners/index.html.erb:27
+#: app/views/admin/banners/index.html.erb:28
 msgid "[Create new]"
 msgstr "[新しく追加する]"
 
@@ -7685,7 +7679,7 @@ msgid "[Delete feed field]"
 msgstr "[フィード欄を削除する]"
 
 #: app/helpers/share_file_helper.rb:26 app/views/wiki/show.html.erb:17
-#: app/views/admin/banners/index.html.erb:18 app/views/chains/edit.html.erb:8
+#: app/views/admin/banners/index.html.erb:19 app/views/chains/edit.html.erb:8
 #: app/views/shared/_chapter_menu.html.erb:4
 msgid "[Delete]"
 msgstr "[削除]"
@@ -7703,7 +7697,7 @@ msgid "[Edit profile]"
 msgstr "[プロフィール変更]"
 
 #: app/helpers/share_file_helper.rb:25 app/views/user/show.html.erb:16
-#: app/views/wiki/show.html.erb:14 app/views/admin/banners/index.html.erb:17
+#: app/views/wiki/show.html.erb:14 app/views/admin/banners/index.html.erb:18
 #: app/views/shared/_chapter_menu.html.erb:6
 msgid "[Edit]"
 msgstr "[編集]"
@@ -8448,6 +8442,14 @@ msgstr "« 前"
 
 #~ msgid "(stock:%s)"
 #~ msgstr "(文書:%s)"
+
+#~ msgid "Admin::DocumentsController|side_banner"
+#~ msgstr "マイページ右バナー"
+
+#~ msgid "Admin::DocumentsController|side_banner_description"
+#~ msgstr ""
+#~ "マイページ右側に表示するバナーです。非表示に戻したい場合、[既定のページに"
+#~ "戻す]をクリックして下さい。"
 
 #~ msgid "Answers List"
 #~ msgstr "回答一覧"
