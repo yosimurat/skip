@@ -23,6 +23,7 @@ module Admin::ApplicationHelper
     output << generate_tab_link( _('User management'), admin_users_path, request.url.include?(admin_users_url) )
     output << generate_tab_link( _('Data management'), admin_groups_path, data_management_urls.any? { |url| request.url.include? url } )
     output << generate_tab_link( _('Admin::ImagesController'), admin_images_path, request.url.include?(admin_images_url) )
+    output << generate_tab_link( _('Admin::BannersController'), admin_banners_path, request.url.include?(admin_banners_url) )
     output << generate_tab_link( _('Admin::DocumentsController'), admin_documents_path, request.url.include?(admin_documents_url) )
     output << generate_tab_link( s_('Admin::SettingsController|feed'), admin_settings_path(:tab => :feed), request.url == admin_settings_url(:tab => :feed) )
     output << generate_tab_link( s_('Admin::SettingsController|security'), admin_settings_path(:tab => :security), request.url == admin_settings_url(:tab => :security) )

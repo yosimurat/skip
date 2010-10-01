@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.3\n"
-"POT-Creation-Date: 2010-10-01 17:02+0900\n"
+"POT-Creation-Date: 2010-10-01 20:07+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,8 +44,8 @@ msgstr ""
 #: app/views/entries/_topix_entries.html.erb:58
 #: app/views/entries/_topix_entries.html.erb:60
 #: app/views/bookmark/list.html.erb:42 app/views/bookmark/show.html.erb:51
-#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:147
-#: app/views/mypage/index.html.erb:164
+#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:151
+#: app/views/mypage/index.html.erb:168
 #: app/views/mypage/entries_by_date.html.erb:13
 #: app/views/mypage/_today_access_blogs_box.html.erb:9
 #: app/views/bookmarks/_topix_bookmarks.html.erb:47
@@ -509,6 +509,26 @@ msgstr ""
 msgid "Admin Menu"
 msgstr ""
 
+#: app/helpers/admin/application_helper.rb:26
+msgid "Admin::BannersController"
+msgstr ""
+
+#: app/models/admin/banner.rb:-
+msgid "Admin::Banner|Created at"
+msgstr ""
+
+#: app/models/admin/banner.rb:-
+msgid "Admin::Banner|Image url"
+msgstr ""
+
+#: app/models/admin/banner.rb:-
+msgid "Admin::Banner|Link url"
+msgstr ""
+
+#: app/models/admin/banner.rb:-
+msgid "Admin::Banner|Updated at"
+msgstr ""
+
 #: app/models/admin/board_entry_comment.rb:17
 msgid "Admin::BoardEntryComment|Contents"
 msgstr "Comment"
@@ -581,7 +601,7 @@ msgstr ""
 msgid "Admin::Bookmark|Url"
 msgstr "URL"
 
-#: app/helpers/admin/application_helper.rb:26
+#: app/helpers/admin/application_helper.rb:27
 #: app/controllers/admin/documents_controller.rb:114
 msgid "Admin::DocumentsController"
 msgstr "Documents"
@@ -959,7 +979,7 @@ msgstr "Enable"
 msgid "Admin::OauthProvider"
 msgstr "OAuth Provider"
 
-#: app/helpers/admin/application_helper.rb:29
+#: app/helpers/admin/application_helper.rb:30
 #: app/controllers/admin/oauth_providers_controller.rb:31
 msgid "Admin::OauthProvidersController"
 msgstr "OAuth Settings"
@@ -978,7 +998,7 @@ msgstr "OpenID URL"
 msgid "Admin::Picture|File"
 msgstr "File"
 
-#: app/helpers/admin/application_helper.rb:27
+#: app/helpers/admin/application_helper.rb:28
 #: app/controllers/admin/settings_controller.rb:23
 msgid "Admin::SettingsController|feed"
 msgstr "RSS feeds"
@@ -992,7 +1012,7 @@ msgstr "Email"
 msgid "Admin::SettingsController|main"
 msgstr "Main"
 
-#: app/helpers/admin/application_helper.rb:28
+#: app/helpers/admin/application_helper.rb:29
 #: app/controllers/admin/settings_controller.rb:24
 msgid "Admin::SettingsController|security"
 msgstr "Security"
@@ -2678,7 +2698,8 @@ msgstr ""
 #: app/views/admin/openid_identifiers/new.html.erb:17
 #: app/views/admin/user_profile_master_categories/new.html.erb:8
 #: app/views/admin/user_profile_masters/new.html.erb:8
-#: app/views/chains/new.html.erb:6 app/views/edit/index.html.erb:6
+#: app/views/admin/banners/new.html.erb:3 app/views/chains/new.html.erb:6
+#: app/views/edit/index.html.erb:6
 msgid "Create"
 msgstr ""
 
@@ -2710,7 +2731,7 @@ msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr ""
 
-#: app/views/mypage/index.html.erb:123
+#: app/views/mypage/index.html.erb:127
 msgid "Create my new bookmark"
 msgstr ""
 
@@ -2724,6 +2745,7 @@ msgstr ""
 msgid "Create stock entry under the '%s'"
 msgstr ""
 
+#: app/controllers/admin/banners_controller.rb:31
 #: app/controllers/edit_controller.rb:114
 msgid "Created successfully."
 msgstr ""
@@ -3737,7 +3759,12 @@ msgid "Illegal value(s) found in CSV file."
 msgstr ""
 
 #: app/views/admin/users/index.html.erb:61
+#: app/views/admin/banners/index.html.erb:8
 msgid "Image"
+msgstr ""
+
+#: app/views/admin/banners/_form.html.erb:2
+msgid "Image URL"
 msgstr ""
 
 #: app/views/admin/users/import.html.erb:14
@@ -3817,7 +3844,7 @@ msgstr ""
 msgid "Internet"
 msgstr ""
 
-#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:144
+#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:148
 msgid "Introduce"
 msgstr ""
 
@@ -4056,6 +4083,11 @@ msgstr ""
 
 #: app/views/chapters/_page_content.html.erb:14
 msgid "Link Palette"
+msgstr ""
+
+#: app/views/admin/banners/_form.html.erb:7
+#: app/views/admin/banners/index.html.erb:9
+msgid "Link URL"
 msgstr ""
 
 #: app/views/shared/_header.html.erb:26
@@ -4366,7 +4398,7 @@ msgid "New Posts"
 msgstr ""
 
 #: app/controllers/feed/bookmarks_controller.rb:8
-#: app/views/mypage/index.html.erb:122
+#: app/views/mypage/index.html.erb:126
 msgid "New bookmarks"
 msgstr ""
 
@@ -4458,7 +4490,7 @@ msgstr ""
 msgid "No matching groups found."
 msgstr ""
 
-#: app/views/mypage/index.html.erb:89
+#: app/views/mypage/index.html.erb:93
 msgid "No matching questions."
 msgstr ""
 
@@ -4473,6 +4505,10 @@ msgstr ""
 
 #: app/views/mypage/index.html.erb:48
 msgid "No messages for you"
+msgstr ""
+
+#: app/views/admin/banners/index.html.erb:25
+msgid "No registered banners"
 msgstr ""
 
 #: app/controllers/services_controller.rb:37
@@ -4587,6 +4623,7 @@ msgid "Now Uploading..."
 msgstr ""
 
 #: app/views/wiki/_navigation.html.erb:9
+#: app/views/admin/banners/new.html.erb:3
 msgid "Now creating..."
 msgstr ""
 
@@ -5228,12 +5265,12 @@ msgstr ""
 msgid "Recent Entries"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:157
+#: app/views/mypage/index.html.erb:161
 msgid "Recent Groups"
 msgstr ""
 
 #: app/controllers/feed/board_entries_controller.rb:35
-#: app/views/mypage/index.html.erb:70
+#: app/views/mypage/index.html.erb:74
 msgid "Recent Popular Entries"
 msgstr ""
 
@@ -5246,7 +5283,7 @@ msgstr ""
 msgid "Recent Questions"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:137
+#: app/views/mypage/index.html.erb:141
 msgid "Recent Users"
 msgstr ""
 
@@ -5885,6 +5922,11 @@ msgstr ""
 msgid "Sort by: "
 msgstr ""
 
+#: app/controllers/admin/banners_controller.rb:36
+#: app/controllers/admin/banners_controller.rb:55
+msgid "Specified URL is invalid."
+msgstr ""
+
 #: app/controllers/group_controller.rb:367
 msgid "Specified group does not exist."
 msgstr ""
@@ -6308,7 +6350,7 @@ msgstr ""
 msgid "Timeout while loading rss."
 msgstr ""
 
-#: app/views/mypage/index.html.erb:128
+#: app/views/mypage/index.html.erb:132
 msgid "Tips for using bookmarklet"
 msgstr ""
 
@@ -6327,7 +6369,7 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:67
+#: app/views/mypage/index.html.erb:71
 msgid "Today Popular Entries"
 msgstr ""
 
@@ -6482,7 +6524,8 @@ msgstr ""
 #: app/views/admin/user_profile_master_categories/edit.html.erb:9
 #: app/views/admin/user_profile_masters/edit.html.erb:8
 #: app/views/admin/user_profiles/edit.html.erb:10
-#: app/views/chains/edit.html.erb:6 app/views/edit/edit.html.erb:12
+#: app/views/admin/banners/edit.html.erb:3 app/views/chains/edit.html.erb:6
+#: app/views/edit/edit.html.erb:12
 msgid "Update"
 msgstr ""
 
@@ -6520,6 +6563,7 @@ msgid "Updated notification email settings."
 msgstr ""
 
 #: app/controllers/mypage_controller.rb:353
+#: app/controllers/admin/banners_controller.rb:50
 msgid "Updated successfully."
 msgstr ""
 
@@ -6535,7 +6579,7 @@ msgstr ""
 #: app/views/group/_manage_info.html.erb:19
 #: app/views/admin/user_profile_master_categories/edit.html.erb:9
 #: app/views/admin/user_profile_masters/edit.html.erb:8
-#: app/views/bookmark/new.html.erb:27
+#: app/views/admin/banners/edit.html.erb:3 app/views/bookmark/new.html.erb:27
 msgid "Updating..."
 msgstr ""
 
@@ -7446,12 +7490,17 @@ msgstr ""
 msgid "[Click to hide]"
 msgstr ""
 
+#: app/views/admin/banners/index.html.erb:27
+msgid "[Create new]"
+msgstr ""
+
 #: app/views/admin/settings/_feed.html.erb:9
 msgid "[Delete feed field]"
 msgstr ""
 
 #: app/helpers/share_file_helper.rb:26 app/views/wiki/show.html.erb:17
-#: app/views/chains/edit.html.erb:8 app/views/shared/_chapter_menu.html.erb:4
+#: app/views/admin/banners/index.html.erb:18 app/views/chains/edit.html.erb:8
+#: app/views/shared/_chapter_menu.html.erb:4
 msgid "[Delete]"
 msgstr ""
 
@@ -7468,7 +7517,8 @@ msgid "[Edit profile]"
 msgstr ""
 
 #: app/helpers/share_file_helper.rb:25 app/views/user/show.html.erb:16
-#: app/views/wiki/show.html.erb:14 app/views/shared/_chapter_menu.html.erb:6
+#: app/views/wiki/show.html.erb:14 app/views/admin/banners/index.html.erb:17
+#: app/views/shared/_chapter_menu.html.erb:6
 msgid "[Edit]"
 msgstr ""
 
@@ -7732,6 +7782,10 @@ msgstr ""
 msgid "admin"
 msgstr ""
 
+#: app/models/admin/banner.rb:-
+msgid "admin::banner"
+msgstr ""
+
 #: app/models/admin/setting.rb:-
 msgid "admin::setting"
 msgstr ""
@@ -7746,6 +7800,10 @@ msgstr ""
 
 #: app/models/attachment.rb:-
 msgid "attachment"
+msgstr ""
+
+#: app/models/admin/banner.rb:-
+msgid "banner"
 msgstr ""
 
 #: app/views/admin/users/change_uid.html.erb:12
@@ -7810,11 +7868,11 @@ msgstr ""
 msgid "description"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:99 app/views/mypage/index.html.erb:102
+#: app/views/mypage/index.html.erb:103 app/views/mypage/index.html.erb:106
 msgid "display flat"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:98 app/views/mypage/index.html.erb:101
+#: app/views/mypage/index.html.erb:102 app/views/mypage/index.html.erb:105
 msgid "display tabs"
 msgstr ""
 

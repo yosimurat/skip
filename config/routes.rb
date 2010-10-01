@@ -116,6 +116,7 @@ ActionController::Routing::Routes.draw do |map|
     admin_map.images_revert 'images/:target/revert', :controller => 'images', :action => 'revert'
 
     admin_map.resources :oauth_providers, :member => {:toggle_status => :post}
+    admin_map.resources :banners, :only => %w(index new create edit update destroy)
   end
 
   map.namespace "feed" do |feed_map|
