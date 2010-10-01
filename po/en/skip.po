@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.3\n"
-"POT-Creation-Date: 2010-10-01 20:07+0900\n"
+"POT-Creation-Date: 2010-10-01 20:19+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -228,7 +228,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: app/controllers/admin/images_controller.rb:148
-#: app/controllers/admin/documents_controller.rb:102
+#: app/controllers/admin/documents_controller.rb:98
 msgid "%{target} was successfully saved."
 msgstr ""
 
@@ -602,15 +602,15 @@ msgid "Admin::Bookmark|Url"
 msgstr "URL"
 
 #: app/helpers/admin/application_helper.rb:27
-#: app/controllers/admin/documents_controller.rb:114
+#: app/controllers/admin/documents_controller.rb:110
 msgid "Admin::DocumentsController"
 msgstr "Documents"
 
-#: app/controllers/admin/documents_controller.rb:22
+#: app/controllers/admin/documents_controller.rb:20
 msgid "Admin::DocumentsController|about_this_site"
 msgstr "About this site"
 
-#: app/controllers/admin/documents_controller.rb:23
+#: app/controllers/admin/documents_controller.rb:21
 msgid "Admin::DocumentsController|about_this_site_description"
 msgstr ""
 "This is the page that users see when they login to SKIP for the first time."
@@ -619,26 +619,16 @@ msgstr ""
 "the site in terms of business.<br />It is linked from the footer in the "
 "system."
 
-#: app/controllers/admin/documents_controller.rb:24
+#: app/controllers/admin/documents_controller.rb:22
 msgid "Admin::DocumentsController|rules"
 msgstr "Terms of Use"
 
-#: app/controllers/admin/documents_controller.rb:25
+#: app/controllers/admin/documents_controller.rb:23
 msgid "Admin::DocumentsController|rules_description"
 msgstr ""
 "Write the terms of use here to make sure everyone understands the rule of "
 "using SKIP. It is shown right after the first login and linked from the "
 "header by default."
-
-#: app/controllers/admin/documents_controller.rb:26
-msgid "Admin::DocumentsController|side_banner"
-msgstr "Mypage right-side banner"
-
-#: app/controllers/admin/documents_controller.rb:27
-msgid "Admin::DocumentsController|side_banner_description"
-msgstr ""
-"Write the right-side banner of Mypage. If you hide this, click the [Revert "
-"to default page] link."
 
 #: app/models/admin/group_category.rb:19
 msgid "Admin::GroupCategory|Code"
@@ -2643,7 +2633,7 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: app/controllers/admin/documents_controller.rb:39
+#: app/controllers/admin/documents_controller.rb:35
 msgid "Content not found."
 msgstr ""
 
@@ -3249,7 +3239,7 @@ msgstr ""
 msgid "Failed to load rss."
 msgstr ""
 
-#: app/controllers/admin/documents_controller.rb:36
+#: app/controllers/admin/documents_controller.rb:32
 msgid "Failed to open the content."
 msgstr ""
 
@@ -3270,7 +3260,7 @@ msgstr ""
 msgid "Failed to save one-time code."
 msgstr ""
 
-#: app/controllers/admin/documents_controller.rb:105
+#: app/controllers/admin/documents_controller.rb:101
 msgid "Failed to save the content.  Try again or contact administrator."
 msgstr ""
 
@@ -3759,7 +3749,7 @@ msgid "Illegal value(s) found in CSV file."
 msgstr ""
 
 #: app/views/admin/users/index.html.erb:61
-#: app/views/admin/banners/index.html.erb:8
+#: app/views/admin/banners/index.html.erb:9
 msgid "Image"
 msgstr ""
 
@@ -4086,7 +4076,7 @@ msgid "Link Palette"
 msgstr ""
 
 #: app/views/admin/banners/_form.html.erb:7
-#: app/views/admin/banners/index.html.erb:9
+#: app/views/admin/banners/index.html.erb:10
 msgid "Link URL"
 msgstr ""
 
@@ -4507,7 +4497,7 @@ msgstr ""
 msgid "No messages for you"
 msgstr ""
 
-#: app/views/admin/banners/index.html.erb:25
+#: app/views/admin/banners/index.html.erb:26
 msgid "No registered banners"
 msgstr ""
 
@@ -5299,6 +5289,10 @@ msgstr ""
 msgid ""
 "Refer to the contact at the bottom of this email in case the link has "
 "expired."
+msgstr ""
+
+#: app/views/admin/banners/index.html.erb:1
+msgid "Registed banners are displayed at the right of a MyPage."
 msgstr ""
 
 #: app/views/portal/_registration_form.html.erb:74
@@ -6503,8 +6497,8 @@ msgid ""
 msgstr ""
 
 #: app/controllers/admin/images_controller.rb:154
-#: app/controllers/admin/documents_controller.rb:42
-#: app/controllers/admin/documents_controller.rb:108
+#: app/controllers/admin/documents_controller.rb:38
+#: app/controllers/admin/documents_controller.rb:104
 msgid "Unexpected error occured. Contact administrator."
 msgstr ""
 
@@ -7490,7 +7484,7 @@ msgstr ""
 msgid "[Click to hide]"
 msgstr ""
 
-#: app/views/admin/banners/index.html.erb:27
+#: app/views/admin/banners/index.html.erb:28
 msgid "[Create new]"
 msgstr ""
 
@@ -7499,7 +7493,7 @@ msgid "[Delete feed field]"
 msgstr ""
 
 #: app/helpers/share_file_helper.rb:26 app/views/wiki/show.html.erb:17
-#: app/views/admin/banners/index.html.erb:18 app/views/chains/edit.html.erb:8
+#: app/views/admin/banners/index.html.erb:19 app/views/chains/edit.html.erb:8
 #: app/views/shared/_chapter_menu.html.erb:4
 msgid "[Delete]"
 msgstr ""
@@ -7517,7 +7511,7 @@ msgid "[Edit profile]"
 msgstr ""
 
 #: app/helpers/share_file_helper.rb:25 app/views/user/show.html.erb:16
-#: app/views/wiki/show.html.erb:14 app/views/admin/banners/index.html.erb:17
+#: app/views/wiki/show.html.erb:14 app/views/admin/banners/index.html.erb:18
 #: app/views/shared/_chapter_menu.html.erb:6
 msgid "[Edit]"
 msgstr ""
@@ -8249,6 +8243,14 @@ msgstr ""
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr ""
+
+#~ msgid "Admin::DocumentsController|side_banner"
+#~ msgstr "Mypage right-side banner"
+
+#~ msgid "Admin::DocumentsController|side_banner_description"
+#~ msgstr ""
+#~ "Write the right-side banner of Mypage. If you hide this, click the "
+#~ "[Revert to default page] link."
 
 #~ msgid "Create a new group"
 #~ msgstr "Create a group"
