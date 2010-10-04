@@ -23,7 +23,7 @@ class UserMailer::Base < ActionMailer::Base
 private
   def self.base64(text)
     if GetText.locale.language == 'ja'
-      NKF.nkf("-WMm0 --oc=ISO-2022-JP-1", text)
+      NKF.nkf("-WMm0j", text)
     else
       text
     end
