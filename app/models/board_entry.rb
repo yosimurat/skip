@@ -606,6 +606,7 @@ class BoardEntry < ActiveRecord::Base
   end
 
   def send_trackbacks!(user, comma_tb_ids)
+    return if comma_tb_ids.blank?
     tb_entries = BoardEntry.accessible(user).id_is(comma_tb_ids.split(',').map(&:strip))
     current_tb_entries = to_entry_trackbacks.map(&:board_entry)
     # 登録済みのトラバが今回未送信(=> 削除する)
