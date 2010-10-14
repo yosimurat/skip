@@ -62,7 +62,7 @@
 
     <% Admin::Banner.all.each do |banner| -%>
       <div style="margin-bottom:5px;">
-        <%= link_to(image_tag(h(banner.image_url), :width => '180'), h(banner.link_url)) %>
+        <%= link_to(image_tag(h(banner.image_url), :width => '180'), h(banner.link_url), :target => '_blank') %>
       </div>
     <% end -%>
 
