@@ -16,7 +16,7 @@
       <% @entry.board_entry_comments.each do |comment| -%>
         <tr style="background:<%= cycle('#ffffff', '#fffdee') %>">
           <td style="padding:5px;"><%= comment.created_on.strftime(_("%B %d %Y %H:%M")) %></td>
-          <td style="padding:5px;"><%= comment.user.name %></td>
+          <td style="padding:5px;"><%= h comment.user.name %></td>
           <td style="padding:5px;"><%= hiki_parse(comment.contents, comment.board_entry.symbol) %></td>
         </tr>
       <% end -%>
