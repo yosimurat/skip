@@ -7,10 +7,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.3\n"
-"POT-Creation-Date: 2010-10-01 20:19+0900\n"
+"POT-Creation-Date: 2010-10-14 09:47+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1754,8 +1755,8 @@ msgid ""
 "Administrative user has already been registered. Log in with the account or "
 "contact %{contact_link} in case of failure."
 msgstr ""
-"既に管理者ユーザが登録済みです。ログインして下さい。ログイン出来ない場合は%"
-"{contact_link}下さい。"
+"既に管理者ユーザが登録済みです。ログインして下さい。ログイン出来ない場合"
+"は%{contact_link}下さい。"
 
 #: app/helpers/groups_helper.rb:22 app/views/users/_user.html.erb:6
 #: app/views/group/_manage_participations.html.erb:47
@@ -1859,18 +1860,6 @@ msgid ""
 msgstr ""
 "既にメールアドレスの変更を申請済みです。記入したメールアドレスで再申請しま"
 "す。"
-
-#: app/views/board_entries/comments_list.html.erb:12
-msgid "Answered Date"
-msgstr "回答日時"
-
-#: app/views/board_entries/comments_list.html.erb:13
-msgid "Answered User"
-msgstr "回答者"
-
-#: app/views/board_entries/comments_list.html.erb:1
-msgid "Answers list of %s"
-msgstr "「%s」の回答一覧"
 
 #: app/views/users/index.html.erb:35
 msgid "Any"
@@ -2653,6 +2642,14 @@ msgstr "コメントを削除しました。"
 msgid "Comment(%s)"
 msgid_plural "Comments(%s)"
 msgstr[0] "コメント(%s)"
+
+#: app/views/board_entries/comments_list.html.erb:12
+msgid "Commented Date"
+msgstr "コメント日時"
+
+#: app/views/board_entries/comments_list.html.erb:13
+msgid "Commented User"
+msgstr "投稿者"
 
 #: app/views/statistics/_current_statistics.html.erb:37
 #: app/views/statistics/_monthly_history.html.erb:50
@@ -3989,7 +3986,7 @@ msgstr "フォーマットが不正です。uid:xxxxxxのような形で入力�
 
 #: app/controllers/board_entries_controller.rb:26
 #: app/controllers/monta_controller.rb:22
-#: app/controllers/monta_controller.rb:33 app/models/board_entry.rb:705
+#: app/controllers/monta_controller.rb:33 app/models/board_entry.rb:706
 msgid "Invalid operation."
 msgstr "不正な操作です"
 
@@ -4585,12 +4582,12 @@ msgstr "該当するブックマークはありませんでした。"
 msgid "No matching data found."
 msgstr "該当するデータはありませんでした。"
 
-#: app/controllers/user_controller.rb:57
+#: app/controllers/user_controller.rb:59
 msgid "No matching entries found."
 msgstr "該当する投稿はありませんでした。"
 
 #: app/controllers/groups_controller.rb:33
-#: app/controllers/user_controller.rb:117
+#: app/controllers/user_controller.rb:119
 msgid "No matching groups found."
 msgstr "該当するグループはありませんでした。"
 
@@ -4919,8 +4916,8 @@ msgid ""
 "Operation unauthorized. Verify the URL and retry. Contact %{contact_link} if "
 "the problem persists."
 msgstr ""
-"この操作は、許可されていません。URLをご確認の上再度お試し頂くか、%"
-"{contact_link}下さい。"
+"この操作は、許可されていません。URLをご確認の上再度お試し頂く"
+"か、%{contact_link}下さい。"
 
 #: app/views/statistics/index.html.erb:31
 msgid "Other indices (FYI)"
@@ -6410,11 +6407,11 @@ msgstr ""
 msgid "The titles are shared among all users so be careful upon updating."
 msgstr "タイトルは全ユーザ共通です。修正の際はご注意ください。"
 
-#: app/controllers/user_controller.rb:62 app/controllers/user_controller.rb:88
+#: app/controllers/user_controller.rb:64 app/controllers/user_controller.rb:90
 msgid "There are no entries posted."
 msgstr "現在投稿がありません。"
 
-#: app/controllers/user_controller.rb:174
+#: app/controllers/user_controller.rb:176
 msgid "There are no introductions."
 msgstr "現在紹介文はありません。"
 
@@ -7448,7 +7445,7 @@ msgid "You are invited to the %{abbr_app_title} from %{user_name}"
 msgstr "%{user_name}さんから%{abbr_app_title}へ招待されています。"
 
 #: app/controllers/board_entries_controller.rb:178
-#: app/controllers/user_controller.rb:88
+#: app/controllers/user_controller.rb:90
 msgid "You are not allowed to see the page."
 msgstr "閲覧権限がありません。"
 
@@ -7620,14 +7617,14 @@ msgstr "[更にファイルを追加]"
 msgid "[Archive of %{month}/%{year}]"
 msgstr "【%{year}年%{month}月のアーカイブ】"
 
-#: app/views/board_entries/comments_list.html.erb:3
-#: app/views/board_entries/comments_list.html.erb:26
-msgid "[Back to question]"
-msgstr "[質問の画面へ戻る]"
-
 #: app/views/histories/diff.html.erb:41 app/views/histories/show.html.erb:9
 msgid "[Back to the histories list]"
 msgstr "[履歴一覧に戻る]"
+
+#: app/views/board_entries/comments_list.html.erb:3
+#: app/views/board_entries/comments_list.html.erb:26
+msgid "[Back to]"
+msgstr "[前の画面に戻る]"
 
 #: app/views/entries/_entry_detail.html.erb:264
 #: app/views/entries/_entry_detail.html.erb:276
@@ -7685,8 +7682,8 @@ msgid "[Delete]"
 msgstr "[削除]"
 
 #: app/views/entries/_entry_detail.html.erb:304
-msgid "[Display list of answers.]"
-msgstr "[回答を一覧表示する]"
+msgid "[Display list of comments.]"
+msgstr "[コメントを一覧表示する]"
 
 #: app/views/layouts/wiki.html.erb:23
 msgid "[Edit page title]"
@@ -7726,7 +7723,7 @@ msgstr "[既に読んだ記事を隠す]"
 msgid "[Hints on writing entries]"
 msgstr "【本文の書き方に関するヒント】"
 
-#: app/models/board_entry.rb:815
+#: app/models/board_entry.rb:816
 msgid "[Link does not exist...%s>]"
 msgstr "[リンク先が存在しません...%s>]"
 
@@ -8041,6 +8038,10 @@ msgstr ""
 #: app/models/chapter.rb:-
 msgid "chapter"
 msgstr ""
+
+#: app/views/board_entries/comments_list.html.erb:1
+msgid "comments list of %s"
+msgstr "「%s」のコメント一覧"
 
 #: app/models/content.rb:-
 msgid "content"
@@ -8451,11 +8452,20 @@ msgstr "« 前"
 #~ "マイページ右側に表示するバナーです。非表示に戻したい場合、[既定のページに"
 #~ "戻す]をクリックして下さい。"
 
+#~ msgid "Answered Date"
+#~ msgstr "回答日時"
+
+#~ msgid "Answered User"
+#~ msgstr "回答者"
+
 #~ msgid "Answers List"
 #~ msgstr "回答一覧"
 
 #~ msgid "Answers list"
 #~ msgstr "回答一覧"
+
+#~ msgid "Answers list of %s"
+#~ msgstr "「%s」の回答一覧"
 
 #~ msgid "Answers list of %{title}"
 #~ msgstr "「%{title}」の回答一覧"
@@ -8477,3 +8487,9 @@ msgstr "« 前"
 
 #~ msgid "Selected publication type"
 #~ msgstr "選択されている公開範囲"
+
+#~ msgid "[Back to question]"
+#~ msgstr "[質問の画面へ戻る]"
+
+#~ msgid "[Display list of answers.]"
+#~ msgstr "[回答を一覧表示する]"

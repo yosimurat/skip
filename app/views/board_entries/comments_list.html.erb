@@ -1,6 +1,6 @@
-<% @title = _("Answers list of %s") % @entry.title -%>
+<% @title = _("comments list of %s") % @entry.title -%>
 <div class="margin05em"><%= _('You can paste following table into excel.') %></div>
-<div class="margin05em"><%= link_to(_('[Back to question]'), @entry.get_url_hash) %></div>
+<div class="margin05em"><%= link_to(_('[Back to]'), @entry.get_url_hash) %></div>
 
 <% unless @entry.board_entry_comments.blank? -%>
   <table class="normal">
@@ -9,8 +9,8 @@
     <col />
     <tbody>
       <tr>
-        <th style="padding:5px;"><%= _('Answered Date') %></th>
-        <th style="padding:5px;"><%= _('Answered User') %></th>
+        <th style="padding:5px;"><%= _('Commented Date') %></th>
+        <th style="padding:5px;"><%= _('Commented User') %></th>
         <th style="padding:5px;"><%= _("Comment") %></th>
       </tr>
       <% @entry.board_entry_comments.each do |comment| -%>
@@ -23,5 +23,5 @@
     </tbody>
   </table>
 
-  <div class="margin05em"><%= link_to(_('[Back to question]'), @entry.get_url_hash) %></div>
+  <div class="margin05em"><%= link_to(_('[Back to]'), @entry.get_url_hash) %></div>
 <% end -%>

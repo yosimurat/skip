@@ -6,10 +6,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.3\n"
-"POT-Creation-Date: 2010-10-01 20:19+0900\n"
+"POT-Creation-Date: 2010-10-14 09:47+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1811,18 +1812,6 @@ msgid ""
 "discarded and we will proceed on the new email address."
 msgstr ""
 
-#: app/views/board_entries/comments_list.html.erb:12
-msgid "Answered Date"
-msgstr ""
-
-#: app/views/board_entries/comments_list.html.erb:13
-msgid "Answered User"
-msgstr ""
-
-#: app/views/board_entries/comments_list.html.erb:1
-msgid "Answers list of %s"
-msgstr ""
-
 #: app/views/users/index.html.erb:35
 msgid "Any"
 msgstr ""
@@ -2598,6 +2587,14 @@ msgid "Comment(%s)"
 msgid_plural "Comments(%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#: app/views/board_entries/comments_list.html.erb:12
+msgid "Commented Date"
+msgstr ""
+
+#: app/views/board_entries/comments_list.html.erb:13
+msgid "Commented User"
+msgstr ""
 
 #: app/views/statistics/_current_statistics.html.erb:37
 #: app/views/statistics/_monthly_history.html.erb:50
@@ -3892,7 +3889,7 @@ msgstr ""
 
 #: app/controllers/board_entries_controller.rb:26
 #: app/controllers/monta_controller.rb:22
-#: app/controllers/monta_controller.rb:33 app/models/board_entry.rb:705
+#: app/controllers/monta_controller.rb:33 app/models/board_entry.rb:706
 msgid "Invalid operation."
 msgstr ""
 
@@ -4471,12 +4468,12 @@ msgstr ""
 msgid "No matching data found."
 msgstr ""
 
-#: app/controllers/user_controller.rb:57
+#: app/controllers/user_controller.rb:59
 msgid "No matching entries found."
 msgstr ""
 
 #: app/controllers/groups_controller.rb:33
-#: app/controllers/user_controller.rb:117
+#: app/controllers/user_controller.rb:119
 msgid "No matching groups found."
 msgstr ""
 
@@ -6256,11 +6253,11 @@ msgstr ""
 msgid "The titles are shared among all users so be careful upon updating."
 msgstr ""
 
-#: app/controllers/user_controller.rb:62 app/controllers/user_controller.rb:88
+#: app/controllers/user_controller.rb:64 app/controllers/user_controller.rb:90
 msgid "There are no entries posted."
 msgstr ""
 
-#: app/controllers/user_controller.rb:174
+#: app/controllers/user_controller.rb:176
 msgid "There are no introductions."
 msgstr ""
 
@@ -7270,7 +7267,7 @@ msgid "You are invited to the %{abbr_app_title} from %{user_name}"
 msgstr ""
 
 #: app/controllers/board_entries_controller.rb:178
-#: app/controllers/user_controller.rb:88
+#: app/controllers/user_controller.rb:90
 msgid "You are not allowed to see the page."
 msgstr ""
 
@@ -7433,13 +7430,13 @@ msgstr ""
 msgid "[Archive of %{month}/%{year}]"
 msgstr ""
 
-#: app/views/board_entries/comments_list.html.erb:3
-#: app/views/board_entries/comments_list.html.erb:26
-msgid "[Back to question]"
-msgstr ""
-
 #: app/views/histories/diff.html.erb:41 app/views/histories/show.html.erb:9
 msgid "[Back to the histories list]"
+msgstr ""
+
+#: app/views/board_entries/comments_list.html.erb:3
+#: app/views/board_entries/comments_list.html.erb:26
+msgid "[Back to]"
 msgstr ""
 
 #: app/views/entries/_entry_detail.html.erb:264
@@ -7499,7 +7496,7 @@ msgid "[Delete]"
 msgstr ""
 
 #: app/views/entries/_entry_detail.html.erb:304
-msgid "[Display list of answers.]"
+msgid "[Display list of comments.]"
 msgstr ""
 
 #: app/views/layouts/wiki.html.erb:23
@@ -7540,7 +7537,7 @@ msgstr ""
 msgid "[Hints on writing entries]"
 msgstr ""
 
-#: app/models/board_entry.rb:815
+#: app/models/board_entry.rb:816
 msgid "[Link does not exist...%s>]"
 msgstr ""
 
@@ -7850,6 +7847,10 @@ msgstr ""
 
 #: app/models/chapter.rb:-
 msgid "chapter"
+msgstr ""
+
+#: app/views/board_entries/comments_list.html.erb:1
+msgid "comments list of %s"
 msgstr ""
 
 #: app/models/content.rb:-
