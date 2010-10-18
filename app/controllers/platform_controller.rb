@@ -309,6 +309,7 @@ class PlatformController < ApplicationController
         if result
           self.current_user = user
           logger.info(current_user.to_s_log('[Login successful with password]'))
+          LoginLog.create(:user_id => current_user.id) if SkipEmbedded::InitialSettings['enable_collect_logs']
           remove_current_page_from_cookie
           handle_remember_cookie!(params[:login_save] == 'true')
           redirect_to_return_to_or_root

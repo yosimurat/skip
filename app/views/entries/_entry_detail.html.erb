@@ -98,7 +98,7 @@
   div#board_entry_comments #comments_header {
     /* border: 1px solid silver; */
     position: relative;
-    height: 1.5em;
+    height: 2em;
     font-size: 0.8em;
   }
   div#board_entry_comments #comments_header .buttons {
@@ -268,10 +268,9 @@
     </div>
   </div>
 </div>
-<div style="margin-bottom: 55px;"></div>
 <% else -%>
 <div id="board_entry_control">
-  <span class="evaluation">
+  <div class="evaluation">
     <% if bookmark_comments_count > 0 -%>
       <%= link_to(n_("[Bookmarked by: %d member]", "[Bookmarked by: %d members]", bookmark_comments_count) % bookmark_comments_count,{:controller =>'bookmark', :action=>'show', :uri => "/page/" + entry.id.to_s}) %>
     <% end -%>
@@ -292,12 +291,17 @@
       </div>
       <%= render :partial => 'group/stock_entry_index', :locals => { :stock_entries => stock_entries }  %>
     </div>
-    <div class="button"><%= link_to(content_tag('span', _("Create stock entry under the '%s'") % entry.title ), {:controller => 'group', :action => "new_stock_entry", :parent_id => entry.id}, {:class => "rounded", :method => :post}) %></div>
+    <% if current_user.participating_group?(@group) -%>
+      <div class="button"><%= link_to(content_tag('span', _("Create stock entry under the '%s'") % entry.title ), {:controller => 'group', :action => "new_stock_entry", :parent_id => entry.id}, {:class => "rounded", :method => :post}) %></div>
+    <% end -%>
   </div>
 <% end -%>
 
 <div id="board_entry_comments">
   <div id="comments_header">
+    <% if (entry.user == current_user && entry.board_entry_comments.count > 0 ) -%>
+      <span style="font-size:1.2em;"><%= link_to(icon_tag("application_put") + _("[Display list of comments.]"), {:controller=> "board_entries", :action => "comments_list", :id => entry}) %></span>
+    <% end -%>
     <span class="buttons invisible">
       [
        <span id="sort_desc_label" class="invisible"><%= _('New Entries on Top')%></span><a href="#" id="sort_desc_link"><%= _('New Entries on Top')%></a>

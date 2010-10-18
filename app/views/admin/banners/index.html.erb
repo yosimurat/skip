@@ -1,0 +1,28 @@
+<div class="margin05em"><%= _("Registed banners are displayed at the right of a MyPage.") %></div>
+<% unless @banners.blank? -%>
+  <table class="normal">
+    <col class="col200" />
+    <col />
+    <col class="col100" />
+    <tbody>
+      <tr>
+        <th><%= _("Image") %></th>
+        <th><%= _("Link URL") %></th>
+        <th></th>
+      </tr>
+      <% @banners.each do |banner| -%>
+        <tr style="background:<%= cycle('#ffffff', '#fffdee') %>">
+          <td style="padding:10px"><%= image_tag(h(banner[:image_url]), :width => '180') %></td>
+          <td><%= link_to(h(banner[:link_url]),h(banner[:link_url])) %></td>
+          <td>
+            <%= link_to(_("[Edit]"), edit_admin_banner_url(banner)) %>
+            <%= link_to(_("[Delete]"), admin_banner_url(banner), :method => 'delete') %>
+          </td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+<% else -%>
+  <div class="margin05em"><%= _("No registered banners") %></div>
+<% end -%>
+<div class="margin05em"><%= link_to _("[Create new]"), new_admin_banner_path %></div>

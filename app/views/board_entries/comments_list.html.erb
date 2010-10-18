@@ -1,0 +1,27 @@
+<% @title = _("comments list of %s") % @entry.title -%>
+<div class="margin05em"><%= _('You can paste following table into excel.') %></div>
+<div class="margin05em"><%= link_to(_('[Back to]'), @entry.get_url_hash) %></div>
+
+<% unless @entry.board_entry_comments.blank? -%>
+  <table class="normal">
+    <col class="col150" />
+    <col class="col125" />
+    <col />
+    <tbody>
+      <tr>
+        <th style="padding:5px;"><%= _('Commented Date') %></th>
+        <th style="padding:5px;"><%= _('Commented User') %></th>
+        <th style="padding:5px;"><%= _("Comment") %></th>
+      </tr>
+      <% @entry.board_entry_comments.each do |comment| -%>
+        <tr style="background:<%= cycle('#ffffff', '#fffdee') %>">
+          <td style="padding:5px;"><%= comment.created_on.strftime(_("%B %d %Y %H:%M")) %></td>
+          <td style="padding:5px;"><%= h comment.user.name %></td>
+          <td style="padding:5px;"><%= hiki_parse(comment.contents, comment.board_entry.symbol) %></td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+
+  <div class="margin05em"><%= link_to(_('[Back to]'), @entry.get_url_hash) %></div>
+<% end -%>

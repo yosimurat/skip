@@ -23,6 +23,9 @@ class UserController < ApplicationController
   def show
     # 紹介してくれた人一覧
     @against_chains = @user.against_chains.order_new.limit(5)
+    if current_target_user != current_user
+      ProfileAccessLog.create(:to_user_id => current_target_user.id, :from_user_id => current_user.id) if SkipEmbedded::InitialSettings['enable_collect_logs']
+    end
     if current_target_user.retired?
       render :show_retired
     else
