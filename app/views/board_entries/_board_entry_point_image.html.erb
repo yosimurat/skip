@@ -1,12 +1,14 @@
 <% if entry.point_incrementable?(@current_user) -%>
-  <div style="position:relative;height:40px;">
-    <p style="position:absolute;top:0px;right:0px;"><img src="/custom/images/button/fish_top.png"></p>
-  <div id="entry_point_number" style="position:absolute;top:15px;right:53px;font-weight:bold;font-size:14px;width:30px;text-align:center;"><%= entry.point %></div>
+  <div style="height:40px;">
+    <img src="/custom/images/button/fish_top.png" style="position:absolute;top:15px;right:0px;">
+    <div id="entry_point_number" style="position:absolute;top:30px;right:53px;font-weight:bold;font-size:14px;width:30px;text-align:center;"><%= entry.point %></div>
   </div>
-  <img src="/custom/images/button/fish_left.png">
-  <% form_tag url_for(:controller => :board_entries, :action => :ado_pointup, :id => entry.id), :id => 'entry_point_form' do -%>
-    <%= submit_tag "#{h Admin::Setting.point_button}", :style => 'background:url("/custom/images/button/button.png");width:80px;height:31px;color:white;border:none;cursor:pointer;' %>
-  <% end -%>
-<% else -%>
-  <%= _("(Got %{point} %{point_button})") % {:point => "<span class=count#{entry.state.rank}>#{entry.point}</span>" , :point_button => h(Admin::Setting.point_button)}%>
+  <div style="height:40px;">
+    <img src="/custom/images/button/fish_left.png" style="position:absolute;top:55px;right:85px;">
+    <% form_tag url_for(:controller => :board_entries, :action => :ado_pointup, :id => entry.id), :id => 'entry_point_form' do -%>
+      <%= submit_tag "#{h Admin::Setting.point_button}", :style => 'position:absolute;top:55px;right:0px;background:url("/custom/images/button/button.png");width:80px;height:31px;color:white;border:none;cursor:pointer;' %>
+    <% end -%>
+  </div>
+  <% else -%>
+    <%= _("(Got %{point} %{point_button})") % {:point => "<span class=count#{entry.state.rank}>#{entry.point}</span>" , :point_button => h(Admin::Setting.point_button)}%>
 <% end -%>
