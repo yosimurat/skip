@@ -196,7 +196,7 @@ SKIPでは、ユニットテストにRspecを利用しています。
 ================================================================================
 SKIPのダウンロードありがとうございます。
 改善要望や不具合を発見したなどありましたら、SKIPユーザグループにてご報告ください。
-  SKIPユーザグループ = http://openskip.youroom.in/
+  SKIPユーザグループ = https://www.youroom.in/r/openskip
 
 * ライセンス  ・・・  GPL ver.3 (http://www.gnu.org/licenses/gpl.html)
 * アイコン提供・・・  famfamfam.com (http://www.famfamfam.com/lab/icons/silk/)
