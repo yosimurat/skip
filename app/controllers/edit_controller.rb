@@ -51,7 +51,12 @@ class EditController < ApplicationController
       end
     end
 
-    setup_layout @board_entry
+    if (@board_entry.parent_id != nil && BoardEntry.id_is(@board_entry.parent_id).blank?)
+      flash[:error] = _('Parent Entry was already deleted.')
+      redirect_to :controller => 'group', :action => 'show', :gid => @board_entry.symbol_id
+    else
+      setup_layout @board_entry
+    end
   end
 
   # post_action
