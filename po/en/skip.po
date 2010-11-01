@@ -5,8 +5,8 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: skip 1.8.3\n"
-"POT-Creation-Date: 2010-10-14 09:47+0900\n"
+"Project-Id-Version: skip 1.8.4\n"
+"POT-Creation-Date: 2010-11-01 13:42+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -266,7 +266,7 @@ msgid ""
 "g. Yamada, administration)"
 msgstr ""
 
-#: app/views/board_entries/_board_entry_point_image.html.erb:11
+#: app/views/board_entries/_board_entry_point_image.html.erb:13
 #: app/views/board_entries/_board_entry_point.html.erb:12
 msgid "(Got %{point} %{point_button})"
 msgstr ""
@@ -2733,7 +2733,7 @@ msgid "Create stock entry under the '%s'"
 msgstr ""
 
 #: app/controllers/admin/banners_controller.rb:31
-#: app/controllers/edit_controller.rb:114
+#: app/controllers/edit_controller.rb:119
 msgid "Created successfully."
 msgstr ""
 
@@ -2828,7 +2828,7 @@ msgid "Delete all the groups under the group category before you delete it."
 msgstr ""
 
 #: app/controllers/admin/group_categories_controller.rb:32
-#: app/controllers/edit_controller.rb:267
+#: app/controllers/edit_controller.rb:272
 msgid "Deletion complete."
 msgstr ""
 
@@ -3128,7 +3128,7 @@ msgstr ""
 msgid "Entry was successfully set to %{operation}."
 msgstr ""
 
-#: app/controllers/edit_controller.rb:233
+#: app/controllers/edit_controller.rb:238
 msgid "Entry was successfully updated."
 msgstr ""
 
@@ -3548,7 +3548,7 @@ msgstr ""
 #: app/controllers/group_controller.rb:354
 #: app/controllers/application_controller.rb:349
 #: app/controllers/share_file_controller.rb:182
-#: app/controllers/edit_controller.rb:309
+#: app/controllers/edit_controller.rb:314
 #: app/views/admin/_data_menu_box.html.erb:6
 msgid "Groups"
 msgstr ""
@@ -3898,13 +3898,13 @@ msgstr ""
 msgid "Invalid parameter(s) detected."
 msgstr ""
 
-#: app/controllers/edit_controller.rb:70
-#: app/controllers/edit_controller.rb:184
+#: app/controllers/edit_controller.rb:75
+#: app/controllers/edit_controller.rb:189
 msgid "Invalid parameter(s) found."
 msgstr ""
 
 #: app/controllers/share_file_controller.rb:282
-#: app/controllers/edit_controller.rb:329
+#: app/controllers/edit_controller.rb:334
 msgid "Invalid parameter(s)."
 msgstr ""
 
@@ -3912,8 +3912,8 @@ msgstr ""
 msgid "Invalid password reset URL. Try again or contact system administrator."
 msgstr ""
 
-#: app/controllers/edit_controller.rb:339
-#: app/controllers/edit_controller.rb:345
+#: app/controllers/edit_controller.rb:344
+#: app/controllers/edit_controller.rb:350
 msgid "Invalid privacy setting."
 msgstr ""
 
@@ -4324,7 +4324,7 @@ msgstr ""
 msgid "My Account"
 msgstr ""
 
-#: app/controllers/edit_controller.rb:309
+#: app/controllers/edit_controller.rb:314
 msgid "My Blog"
 msgstr ""
 
@@ -4870,6 +4870,10 @@ msgstr ""
 
 #: app/models/page.rb:-
 msgid "Page|Updated at"
+msgstr ""
+
+#: app/controllers/edit_controller.rb:55
+msgid "Parent Entry was already deleted."
 msgstr ""
 
 #: app/controllers/board_entries_controller.rb:61
@@ -5934,7 +5938,7 @@ msgstr ""
 msgid "Specified share file owner does not exist."
 msgstr ""
 
-#: app/controllers/edit_controller.rb:293
+#: app/controllers/edit_controller.rb:298
 msgid "Specified trackback was deleted successfully."
 msgstr ""
 
@@ -6219,7 +6223,7 @@ msgstr ""
 msgid "The file size is limited to %s kb."
 msgstr ""
 
-#: app/controllers/edit_controller.rb:92
+#: app/controllers/edit_controller.rb:97
 msgid "The parameter in the parents stock entry is illegal."
 msgstr ""
 
@@ -6528,11 +6532,11 @@ msgstr ""
 msgid "Update complete."
 msgstr ""
 
-#: app/controllers/edit_controller.rb:278
+#: app/controllers/edit_controller.rb:283
 msgid "Update on the same entry from other users detected. Please try again."
 msgstr ""
 
-#: app/controllers/edit_controller.rb:246
+#: app/controllers/edit_controller.rb:251
 msgid "Update on the same entry from other users detected. Reset the edit?"
 msgstr ""
 
@@ -7972,7 +7976,7 @@ msgstr ""
 msgid "login log"
 msgstr ""
 
-#: app/controllers/edit_controller.rb:351
+#: app/controllers/edit_controller.rb:356
 msgid "needs to be a valid date."
 msgstr ""
 

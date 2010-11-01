@@ -6,8 +6,8 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: skip 1.8.3\n"
-"POT-Creation-Date: 2010-10-14 09:47+0900\n"
+"Project-Id-Version: skip 1.8.4\n"
+"POT-Creation-Date: 2010-11-01 13:42+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -273,7 +273,7 @@ msgstr ""
 "(直接指定の際は、\"uid:ニックネーム\"、\"gid:グループ名\"のように入力してくだ"
 "さい。また漢字氏名、%sによる部分検索も可能です。ex:山田、総務)"
 
-#: app/views/board_entries/_board_entry_point_image.html.erb:11
+#: app/views/board_entries/_board_entry_point_image.html.erb:13
 #: app/views/board_entries/_board_entry_point.html.erb:12
 msgid "(Got %{point} %{point_button})"
 msgstr "(%{point} %{point_button} 頂きました)"
@@ -2795,7 +2795,7 @@ msgid "Create stock entry under the '%s'"
 msgstr "「%s」配下に文書を作る"
 
 #: app/controllers/admin/banners_controller.rb:31
-#: app/controllers/edit_controller.rb:114
+#: app/controllers/edit_controller.rb:119
 msgid "Created successfully."
 msgstr "正しく作成されました。"
 
@@ -2893,7 +2893,7 @@ msgstr ""
 "り替えておく必要があります。(切り替えは、各グループの管理画面で行えます。)"
 
 #: app/controllers/admin/group_categories_controller.rb:32
-#: app/controllers/edit_controller.rb:267
+#: app/controllers/edit_controller.rb:272
 msgid "Deletion complete."
 msgstr "削除しました。"
 
@@ -3201,7 +3201,7 @@ msgstr "記事を未読にしました。"
 msgid "Entry was successfully set to %{operation}."
 msgstr "記事を%{operation}にしました。"
 
-#: app/controllers/edit_controller.rb:233
+#: app/controllers/edit_controller.rb:238
 msgid "Entry was successfully updated."
 msgstr "記事の更新に成功しました。"
 
@@ -3625,7 +3625,7 @@ msgstr "はい"
 #: app/controllers/group_controller.rb:354
 #: app/controllers/application_controller.rb:349
 #: app/controllers/share_file_controller.rb:182
-#: app/controllers/edit_controller.rb:309
+#: app/controllers/edit_controller.rb:314
 #: app/views/admin/_data_menu_box.html.erb:6
 msgid "Groups"
 msgstr "グループ"
@@ -3995,13 +3995,13 @@ msgstr "不正な操作です"
 msgid "Invalid parameter(s) detected."
 msgstr "不正なパラメタです。"
 
-#: app/controllers/edit_controller.rb:70
-#: app/controllers/edit_controller.rb:184
+#: app/controllers/edit_controller.rb:75
+#: app/controllers/edit_controller.rb:189
 msgid "Invalid parameter(s) found."
 msgstr "不正なパラメータがあります"
 
 #: app/controllers/share_file_controller.rb:282
-#: app/controllers/edit_controller.rb:329
+#: app/controllers/edit_controller.rb:334
 msgid "Invalid parameter(s)."
 msgstr "パラメータが不正です"
 
@@ -4011,8 +4011,8 @@ msgstr ""
 "パスワードリセットのためのURLが不正です。再度お試し頂くか、システム管理者にお"
 "問い合わせ下さい。"
 
-#: app/controllers/edit_controller.rb:339
-#: app/controllers/edit_controller.rb:345
+#: app/controllers/edit_controller.rb:344
+#: app/controllers/edit_controller.rb:350
 msgid "Invalid privacy setting."
 msgstr "公開範囲の指定が不正です"
 
@@ -4436,7 +4436,7 @@ msgstr "音楽鑑賞"
 msgid "My Account"
 msgstr "自分の管理"
 
-#: app/controllers/edit_controller.rb:309
+#: app/controllers/edit_controller.rb:314
 msgid "My Blog"
 msgstr "マイブログ"
 
@@ -4991,6 +4991,10 @@ msgstr ""
 #: app/models/page.rb:-
 msgid "Page|Updated at"
 msgstr ""
+
+#: app/controllers/edit_controller.rb:55
+msgid "Parent Entry was already deleted."
+msgstr "親文書となる記事が既に削除されています。"
 
 #: app/controllers/board_entries_controller.rb:61
 msgid "Parent comment could not be found. Try reloading the page."
@@ -6078,7 +6082,7 @@ msgstr "指定されたページは存在しません。"
 msgid "Specified share file owner does not exist."
 msgstr "指定のページは存在していません。"
 
-#: app/controllers/edit_controller.rb:293
+#: app/controllers/edit_controller.rb:298
 msgid "Specified trackback was deleted successfully."
 msgstr "指定の話題のリンクを削除しました"
 
@@ -6370,7 +6374,7 @@ msgstr "記事の最終更新日"
 msgid "The file size is limited to %s kb."
 msgstr "画像サイズは %s kbまでです。"
 
-#: app/controllers/edit_controller.rb:92
+#: app/controllers/edit_controller.rb:97
 msgid "The parameter in the parents stock entry is illegal."
 msgstr "親文書のパラメータが不正です。"
 
@@ -6688,11 +6692,11 @@ msgstr "以下の属性を更新する"
 msgid "Update complete."
 msgstr "変更しました"
 
-#: app/controllers/edit_controller.rb:278
+#: app/controllers/edit_controller.rb:283
 msgid "Update on the same entry from other users detected. Please try again."
 msgstr "他の人によって同じ投稿に更新がかかっています。もう一度お試し下さい。"
 
-#: app/controllers/edit_controller.rb:246
+#: app/controllers/edit_controller.rb:251
 msgid "Update on the same entry from other users detected. Reset the edit?"
 msgstr "他の人によって同じ投稿に更新がかかっています。編集をやり直しますか？"
 
@@ -8162,7 +8166,7 @@ msgstr "アップロードしています…"
 msgid "login log"
 msgstr ""
 
-#: app/controllers/edit_controller.rb:351
+#: app/controllers/edit_controller.rb:356
 msgid "needs to be a valid date."
 msgstr "には存在する日付を指定してください"
 
