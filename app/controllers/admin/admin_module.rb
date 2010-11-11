@@ -80,7 +80,7 @@ module Admin::AdminModule
       @query = params[:query]
       objects = admin_model_class
       objects = objects.scoped(:conditions => [search_condition, { :lqs => SkipUtil.to_lqs(@query) }]) if search_condition
-      objects = objects.paginate(:page => params[:page], :per_page => 100)
+      objects = objects.paginate(:page => params[:page], :per_page => params[:per_page].blank? ? 100 : params[:per_page].to_i)
 
       set_pluralize_instance_val objects
 
