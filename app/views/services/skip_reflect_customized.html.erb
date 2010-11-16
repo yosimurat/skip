@@ -51,9 +51,9 @@ function sub_window_open(url, title, width, height) {
   sub_window = window.open(url, title, 'width='+width+',height='+height+',resizable=yes,scrollbars=yes');
   sub_window.focus();
 };
-function open_hiki() { sub_window_open('#{root_url}hiki.html', '#{hiki}', 500,600); };
-function open_rule() { sub_window_open('#{root_url}custom/rules.html', '#{terms}', 780,700); };
-function open_site() { sub_window_open('#{root_url}custom/about_this_site.html', '#{about}', 720,660); };
+function open_hiki() { sub_window_open('#{root_url}hiki.html', 'HikiNotation', 500,600); };
+function open_rule() { sub_window_open('#{root_url}custom/rules.html', 'TermsOfUse', 780,700); };
+function open_site() { sub_window_open('#{root_url}custom/about_this_site.html', 'AboutThisSite', 720,660); };
   RUBY
 -%>
 <%= header_js %>
