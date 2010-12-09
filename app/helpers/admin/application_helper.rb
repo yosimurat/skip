@@ -28,6 +28,7 @@ module Admin::ApplicationHelper
     output << generate_tab_link( s_('Admin::SettingsController|feed'), admin_settings_path(:tab => :feed), request.url == admin_settings_url(:tab => :feed) )
     output << generate_tab_link( s_('Admin::SettingsController|security'), admin_settings_path(:tab => :security), request.url == admin_settings_url(:tab => :security) )
     output << generate_tab_link( _('Admin::OauthProvidersController'), admin_oauth_providers_path, request.url.include?(admin_oauth_providers_url) ) unless OauthProvider.count.zero?
+    output << generate_tab_link( _('MailMagazine'), new_admin_mail_magazine_path, request.url.include?(admin_mail_magazines_url) )
     output << '</ul>'
   end
 

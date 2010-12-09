@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.4\n"
-"POT-Creation-Date: 2010-11-01 13:42+0900\n"
+"POT-Creation-Date: 2010-12-09 15:24+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1945,6 +1945,10 @@ msgstr "対象ユーザに利用開始通知メールを送信しますが宜し
 msgid "Are you sure to send email to all users? (%s users)"
 msgstr "全ユーザ(%s人)にメールが送信されますが、宜しいですか?"
 
+#: app/views/admin/mail_magazines/new.html.erb:13
+msgid "Are you sure to send mail magazine ?"
+msgstr "本当にメールマガジンを送信しますか？"
+
 #: app/views/group/_action_box.html.erb:6
 #: app/views/pictures/_pictures.html.erb:28
 #: app/views/user/_action_box.html.erb:10 app/views/wiki/show.html.erb:17
@@ -2686,7 +2690,7 @@ msgstr "連絡先："
 msgid "Contact Information"
 msgstr "連絡先"
 
-#: app/helpers/wiki_helper.rb:5
+#: app/helpers/wiki_helper.rb:5 app/views/admin/mail_magazines/new.html.erb:11
 msgid "Content"
 msgstr "内容"
 
@@ -3873,6 +3877,10 @@ msgstr ""
 "パスワードを変更するには以下のフォームに現在のパスワード、変更するパスワー"
 "ド、確認用パスワードを入力して下さい。"
 
+#: app/controllers/admin/mail_magazines_controller.rb:31
+msgid "Input title and contents."
+msgstr "件名と内容は必ず入力してください。"
+
 #: app/controllers/admin/users_controller.rb:122
 msgid "Inquiries"
 msgstr "お問い合わせ"
@@ -4323,6 +4331,14 @@ msgstr "ログアウト"
 #: app/views/mypage/welcome.html.erb:42
 msgid "Look for groups you may want to join ..."
 msgstr "入ってみたいグループが無いか探してみましょう！ ..."
+
+#: app/controllers/admin/mail_magazines_controller.rb:28
+msgid "Mail magazines were sucessfully sended."
+msgstr "メールマガジンの送信に成功しました。"
+
+#: app/helpers/admin/application_helper.rb:31
+msgid "MailMagazine"
+msgstr "メルマガ"
 
 #: app/views/portal/_registration_form.html.erb:51
 msgid ""
@@ -5687,6 +5703,7 @@ msgstr "自分の管理"
 msgid "Self Introduction"
 msgstr "自己紹介"
 
+#: app/views/admin/mail_magazines/new.html.erb:13
 #: app/views/platform/reset_openid.html.erb:25
 #: app/views/platform/_mail_form.html.erb:7
 #: app/views/invitations/new.html.erb:26
@@ -5715,9 +5732,10 @@ msgstr "公開されている人にメールを送信する"
 msgid "Send the URL to the email address below."
 msgstr "以下のメールアドレスにURLを送信してください。"
 
+#: app/views/admin/mail_magazines/new.html.erb:13
 #: app/views/invitations/new.html.erb:26
 msgid "Sending..."
-msgstr ""
+msgstr "送信しています..."
 
 #: app/controllers/platform_controller.rb:165
 msgid "Sent an email containing the URL for resettig OpenID URL to %{email}."
@@ -5872,7 +5890,7 @@ msgstr "履歴を全て表示"
 msgid "Show current image"
 msgstr "現在の画像を表示"
 
-#: app/views/mypage/_today_access_blogs_box.html.erb:31
+#: app/views/mypage/_today_access_blogs_box.html.erb:32
 msgid "Show other rankings"
 msgstr "他のランキングを見る"
 
@@ -6373,6 +6391,12 @@ msgstr "記事の最終更新日"
 #: app/views/pictures/new.html.erb:7
 msgid "The file size is limited to %s kb."
 msgstr "画像サイズは %s kbまでです。"
+
+#: app/views/admin/mail_magazines/new.html.erb:2
+msgid ""
+"The mail magazine can be send to users of active status.<br/>If many active "
+"users exist, a lot of time is required until the mail magazine reaches users."
+msgstr "ステータスが使用中のユーザに向けてメールマガジンを送信することができます。<br />ステータスについては、ユーザ管理タブにてご確認ください。<br />ユーザ数が多い場合は、メールマガジンがユーザに届くまでに時間がかかる場合があります。"
 
 #: app/controllers/edit_controller.rb:97
 msgid "The parameter in the parents stock entry is illegal."
@@ -8313,6 +8337,10 @@ msgstr ""
 msgid "stared"
 msgstr ""
 
+#: app/views/admin/mail_magazines/new.html.erb:8
+msgid "subject"
+msgstr "件名"
+
 #: app/views/admin/board_entries/index.html.erb:18
 msgid "symbol"
 msgstr ""
@@ -8455,6 +8483,9 @@ msgstr "« 前"
 #~ msgstr ""
 #~ "マイページ右側に表示するバナーです。非表示に戻したい場合、[既定のページに"
 #~ "戻す]をクリックして下さい。"
+
+#~ msgid "Admin::MailMagazinesController"
+#~ msgstr "メルマガ送信"
 
 #~ msgid "Answered Date"
 #~ msgstr "回答日時"

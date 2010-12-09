@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.4\n"
-"POT-Creation-Date: 2010-11-01 13:42+0900\n"
+"POT-Creation-Date: 2010-12-09 15:24+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1896,6 +1896,10 @@ msgstr ""
 msgid "Are you sure to send email to all users? (%s users)"
 msgstr ""
 
+#: app/views/admin/mail_magazines/new.html.erb:13
+msgid "Are you sure to send mail magazine ?"
+msgstr ""
+
 #: app/views/group/_action_box.html.erb:6
 #: app/views/pictures/_pictures.html.erb:28
 #: app/views/user/_action_box.html.erb:10 app/views/wiki/show.html.erb:17
@@ -2626,7 +2630,7 @@ msgstr ""
 msgid "Contact Information"
 msgstr ""
 
-#: app/helpers/wiki_helper.rb:5
+#: app/helpers/wiki_helper.rb:5 app/views/admin/mail_magazines/new.html.erb:11
 msgid "Content"
 msgstr ""
 
@@ -3778,6 +3782,10 @@ msgid ""
 "your password."
 msgstr ""
 
+#: app/controllers/admin/mail_magazines_controller.rb:31
+msgid "Input title and contents."
+msgstr ""
+
 #: app/controllers/admin/users_controller.rb:122
 msgid "Inquiries"
 msgstr ""
@@ -4213,6 +4221,14 @@ msgstr ""
 
 #: app/views/mypage/welcome.html.erb:42
 msgid "Look for groups you may want to join ..."
+msgstr ""
+
+#: app/controllers/admin/mail_magazines_controller.rb:28
+msgid "Mail magazines were sucessfully sended."
+msgstr ""
+
+#: app/helpers/admin/application_helper.rb:31
+msgid "MailMagazine"
 msgstr ""
 
 #: app/views/portal/_registration_form.html.erb:51
@@ -5556,6 +5572,7 @@ msgstr ""
 msgid "Self Introduction"
 msgstr ""
 
+#: app/views/admin/mail_magazines/new.html.erb:13
 #: app/views/platform/reset_openid.html.erb:25
 #: app/views/platform/_mail_form.html.erb:7
 #: app/views/invitations/new.html.erb:26
@@ -5584,6 +5601,7 @@ msgstr ""
 msgid "Send the URL to the email address below."
 msgstr ""
 
+#: app/views/admin/mail_magazines/new.html.erb:13
 #: app/views/invitations/new.html.erb:26
 msgid "Sending..."
 msgstr ""
@@ -5740,7 +5758,7 @@ msgstr ""
 msgid "Show current image"
 msgstr ""
 
-#: app/views/mypage/_today_access_blogs_box.html.erb:31
+#: app/views/mypage/_today_access_blogs_box.html.erb:32
 msgid "Show other rankings"
 msgstr ""
 
@@ -6221,6 +6239,12 @@ msgstr ""
 
 #: app/views/pictures/new.html.erb:7
 msgid "The file size is limited to %s kb."
+msgstr ""
+
+#: app/views/admin/mail_magazines/new.html.erb:2
+msgid ""
+"The mail magazine can be send to users of active status.<br/>If many active "
+"users exist, a lot of time is required until the mail magazine reaches users."
 msgstr ""
 
 #: app/controllers/edit_controller.rb:97
@@ -8121,6 +8145,10 @@ msgstr ""
 
 #: app/views/admin/bookmark_comments/index.html.erb:20
 msgid "stared"
+msgstr ""
+
+#: app/views/admin/mail_magazines/new.html.erb:8
+msgid "subject"
 msgstr ""
 
 #: app/views/admin/board_entries/index.html.erb:18
