@@ -2541,7 +2541,7 @@ msgid ""
 "Changes made to %s, passwords etc by users will be overwritten upon data "
 "update."
 msgstr ""
-"データが更新される場合、ユーザが%sやパスワード等を自分自身で変更している場合"
+"データが更新される場合、ユーザが%s等を自分自身で変更している場合"
 "でも上書きされますのでご注意下さい。"
 
 #: app/models/chapter.rb:-
