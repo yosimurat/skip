@@ -15,10 +15,6 @@
 
 
 class Admin::MailMagazinesController < Admin::ApplicationController
-  include Admin::AdminModule::AdminRootModule
-
-  def new
-  end
 
   def create
     if params[:mail_magazine]
