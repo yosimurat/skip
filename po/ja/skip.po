@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.4\n"
-"POT-Creation-Date: 2010-12-09 15:24+0900\n"
+"POT-Creation-Date: 2010-12-20 13:17+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -267,11 +267,10 @@ msgstr ""
 #: app/views/shared/_symbol_autocomplete_field.html.erb:10
 msgid ""
 "(Enter in \"uid:Nickname\" or \"gid:Group Name\" format when you want to "
-"specify directly. Partial match search is also available for name and %s. e."
-"g. Yamada, administration)"
-msgstr ""
-"(直接指定の際は、\"uid:ニックネーム\"、\"gid:グループ名\"のように入力してくだ"
-"さい。また漢字氏名、%sによる部分検索も可能です。ex:山田、総務)"
+"specify directly. Partial match search is also available for name. e.g. "
+"Yamada, administration)"
+msgstr "(直接指定の際は、\"uid:ニックネーム\"、\"gid:グループ名\"のように入力してくだ"
+"さい。ユーザ名やグループ名の一部を入力し、Ctrlキー/Shiftキー/矢印キーのいずれかを押すと、候補が表示されます。)"
 
 #: app/views/board_entries/_board_entry_point_image.html.erb:13
 #: app/views/board_entries/_board_entry_point.html.erb:12
@@ -1801,7 +1800,7 @@ msgstr "全て(%{num})"
 msgid "All Term"
 msgstr "全期間"
 
-#: app/views/board_entries/_form.html.erb:292
+#: app/views/board_entries/_form.html.erb:293
 msgid "All changes will be discarded if you navigate away from this page."
 msgstr "移動すると編集内容が破棄されます。"
 
@@ -1941,7 +1940,7 @@ msgstr "グループを退会しますがよろしいですか?"
 msgid "Are you sure to send activation email to target user?"
 msgstr "対象ユーザに利用開始通知メールを送信しますが宜しいですか?"
 
-#: app/views/board_entries/_form.html.erb:189
+#: app/views/board_entries/_form.html.erb:190
 msgid "Are you sure to send email to all users? (%s users)"
 msgstr "全ユーザ(%s人)にメールが送信されますが、宜しいですか?"
 
@@ -2541,8 +2540,8 @@ msgid ""
 "Changes made to %s, passwords etc by users will be overwritten upon data "
 "update."
 msgstr ""
-"データが更新される場合、ユーザが%s等を自分自身で変更している場合"
-"でも上書きされますのでご注意下さい。"
+"データが更新される場合、ユーザが%s等を自分自身で変更している場合でも上書きさ"
+"れますのでご注意下さい。"
 
 #: app/models/chapter.rb:-
 msgid "Chapter|Content"
@@ -3025,7 +3024,7 @@ msgstr "コメントの編集"
 msgid "Edit Profile"
 msgstr "プロフィール変更"
 
-#: app/views/board_entries/_form.html.erb:120
+#: app/views/board_entries/_form.html.erb:121
 msgid "Edit by Members Allowed"
 msgstr "参加者の編集可"
 
@@ -3830,7 +3829,7 @@ msgstr ""
 "この文書には子文書があります。本文書を削除すると、子文書も同時に削除されま"
 "す。"
 
-#: app/views/board_entries/_form.html.erb:168
+#: app/views/board_entries/_form.html.erb:169
 msgid ""
 "Illegal format in \"Topic entry\". List the page IDs and separate each other "
 "by commas."
@@ -3877,7 +3876,8 @@ msgstr ""
 "パスワードを変更するには以下のフォームに現在のパスワード、変更するパスワー"
 "ド、確認用パスワードを入力して下さい。"
 
-#: app/controllers/admin/mail_magazines_controller.rb:31
+#: app/controllers/admin/mail_magazines_controller.rb:28
+#: app/controllers/admin/mail_magazines_controller.rb:32
 msgid "Input title and contents."
 msgstr "件名と内容は必ず入力してください。"
 
@@ -4332,7 +4332,7 @@ msgstr "ログアウト"
 msgid "Look for groups you may want to join ..."
 msgstr "入ってみたいグループが無いか探してみましょう！ ..."
 
-#: app/controllers/admin/mail_magazines_controller.rb:28
+#: app/controllers/admin/mail_magazines_controller.rb:25
 msgid "Mail magazines were sucessfully sended."
 msgstr "メールマガジンの送信に成功しました。"
 
@@ -4382,7 +4382,7 @@ msgstr "参加者"
 
 #: app/helpers/application_helper.rb:235 app/helpers/application_helper.rb:260
 #: app/helpers/share_file_helper.rb:19 app/views/group/_form.html.erb:53
-#: app/views/board_entries/_form.html.erb:115
+#: app/views/board_entries/_form.html.erb:116
 msgid "Members Only"
 msgstr "参加者のみ"
 
@@ -4633,7 +4633,7 @@ msgid "No user information registered in %s."
 msgstr "%sにユーザ情報が登録されていません。"
 
 #: app/views/share_file/_form.html.erb:82
-#: app/views/board_entries/_form.html.erb:179
+#: app/views/board_entries/_form.html.erb:180
 msgid "No user selected. Are you sure to make this open to all users?"
 msgstr ""
 "ユーザの指定がされていません。このままだと、「全体に公開」になりますがよろし"
@@ -4809,7 +4809,7 @@ msgstr "質問中"
 #: app/views/share_file/new_ajax_upload.html.erb:19
 #: app/views/group/_form.html.erb:52
 #: app/views/board_entries/_form.html.erb:107
-#: app/views/board_entries/_form.html.erb:113
+#: app/views/board_entries/_form.html.erb:114
 msgid "Open to All"
 msgstr "全体に公開"
 
@@ -4972,7 +4972,7 @@ msgstr "activation_codeを上書きしました。初期管理者登録用URLは
 #: app/helpers/application_helper.rb:235 app/helpers/application_helper.rb:260
 #: app/helpers/share_file_helper.rb:19
 #: app/views/board_entries/_form.html.erb:104
-#: app/views/board_entries/_form.html.erb:110
+#: app/views/board_entries/_form.html.erb:111
 msgid "Owner Only"
 msgstr "下書き"
 
@@ -6106,6 +6106,7 @@ msgstr "指定の話題のリンクを削除しました"
 
 #: app/helpers/application_helper.rb:233 app/helpers/application_helper.rb:257
 #: app/views/share_file/_form.html.erb:38
+#: app/views/board_entries/_form.html.erb:109
 #: app/views/board_entries/_form.html.erb:117
 msgid "Specify Directly"
 msgstr "直接指定"
@@ -6396,7 +6397,10 @@ msgstr "画像サイズは %s kbまでです。"
 msgid ""
 "The mail magazine can be send to users of active status.<br/>If many active "
 "users exist, a lot of time is required until the mail magazine reaches users."
-msgstr "ステータスが使用中のユーザに向けてメールマガジンを送信することができます。<br />ステータスについては、ユーザ管理タブにてご確認ください。<br />ユーザ数が多い場合は、メールマガジンがユーザに届くまでに時間がかかる場合があります。"
+msgstr ""
+"ステータスが使用中のユーザに向けてメールマガジンを送信することができます。"
+"<br />ステータスについては、ユーザ管理タブにてご確認ください。<br />ユーザ数"
+"が多い場合は、メールマガジンがユーザに届くまでに時間がかかる場合があります。"
 
 #: app/controllers/edit_controller.rb:97
 msgid "The parameter in the parents stock entry is illegal."
@@ -6609,11 +6613,11 @@ msgstr "総記事件数"
 msgid "Total Entries: %s entries"
 msgstr "総記事件数：%s件"
 
-#: app/views/mypage/_antenna_box.html.erb:7
+#: app/views/mypage/_antenna_box.html.erb:8
 msgid "Trace Comments"
 msgstr "コメントの行方"
 
-#: app/views/mypage/_antenna_box.html.erb:8
+#: app/views/mypage/_antenna_box.html.erb:15
 msgid "Track of Bookmarks"
 msgstr "ブクマの行方"
 
@@ -7278,7 +7282,6 @@ msgstr "認証再設定トークン有効期限"
 #: app/views/users/index.html.erb:29
 #: app/views/user/_account_information.html.erb:26
 #: app/views/user/show.html.erb:46 app/views/admin/users/import.html.erb:9
-#: app/views/shared/_symbol_autocomplete_field.html.erb:10
 msgid "User|Section"
 msgstr "所属"
 
@@ -8445,7 +8448,7 @@ msgstr "人"
 
 #: app/views/board_entries/_board_entry_point.html.erb:9
 msgid "users said '%s'"
-msgstr "人が「%s」と言っています。"
+msgstr "回「%s」が押されました。"
 
 #: app/views/admin/users/import.html.erb:16
 msgid ""
@@ -8472,6 +8475,14 @@ msgstr ""
 #: app/views/chapters/_page_content.html.erb:188
 msgid "« Previous"
 msgstr "« 前"
+
+#~ msgid ""
+#~ "(Enter in \"uid:Nickname\" or \"gid:Group Name\" format when you want to "
+#~ "specify directly. Partial match search is also available for name and %s. "
+#~ "e.g. Yamada, administration)"
+#~ msgstr ""
+#~ "(直接指定の際は、\"uid:ニックネーム\"、\"gid:グループ名\"のように入力して"
+#~ "ください。また漢字氏名、%sによる部分検索も可能です。ex:山田、総務)"
 
 #~ msgid "(stock:%s)"
 #~ msgstr "(文書:%s)"
