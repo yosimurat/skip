@@ -107,7 +107,7 @@ class Tag < ActiveRecord::Base
     middle_records.clear
     unless comma_tags.blank?
       comma_tags.split(',').each do |tag_name|
-        tag = find_by_name(tag_name) || create(:name => tag_name)
+        tag = find_by_name(tag_name.strip) || create(:name => tag_name.strip)
         middle_records.create(:tag_id => tag.id)
       end
     end

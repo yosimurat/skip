@@ -4,16 +4,30 @@
   </div>
   <div class="box_space_body">
     <ul class="notices system">
-      <li><%= link_to(icon_tag('comment') +  _('Trace Comments'), :action => 'entries_by_antenna', :target_type => 'comment') + "(#{Notice.trace_comments_count(current_user)})" %></li>
-      <li><%= link_to(icon_tag('tag_blue') +  _('Track of Bookmarks'), :action => 'entries_by_antenna', :target_type => 'bookmark') + "(#{Notice.track_of_bookmarks_count(current_user)})" %></li>
+      <li>
+        <%= link_to(icon_tag('comment') +  _('Trace Comments'), :action => 'entries_by_antenna', :target_type => 'comment') %>
+        <% count = Notice.trace_comments_count(current_user) -%>
+        <% unless count == 0 -%>
+          <span class="notice_unread ui-corner-all"><%= Notice.trace_comments_count(current_user) %></span>
+        <% end -%>
+      </li>
+      <li>
+        <%= link_to(icon_tag('tag_blue') +  _('Track of Bookmarks'), :action => 'entries_by_antenna', :target_type => 'bookmark') %>
+        <% count = Notice.track_of_bookmarks_count(current_user) -%>
+        <% unless count == 0 -%>
+          <span class="notice_unread ui-corner-all"><%= Notice.track_of_bookmarks_count(current_user) %></span>
+        <% end -%>
+      </li>
     </ul>
     <% BoardEntry.unread_for_antenna(current_user).each do |type, list| -%>
       <% content_tag(:ul, :class => 'notices by_type') do -%>
         <% list.each do |symbol, list| -%>
           <% entry = list[0] -%>
-          <% count_as_s = "(#{list.length.to_s})" -%>
           <% icon_name = entry.owner_is_user? ? 'user_suit' : 'group' -%>
-          <li><%= link_to(icon_tag(icon_name) + truncate(h(entry.symbol_name), :length => 12), :action => 'entries_by_antenna', :target_type => entry.owner_is_user? ? 'user' : 'group', :target_id => entry.load_owner.id) + count_as_s %></li>
+          <li>
+            <%= link_to(icon_tag(icon_name) + truncate(h(entry.symbol_name), :length => 12), :action => 'entries_by_antenna', :target_type => entry.owner_is_user? ? 'user' : 'group', :target_id => entry.load_owner.id) %>
+            <span class="notice_unread ui-corner-all"><%= list.length %></span>
+          </li>
         <% end -%>
       <% end -%>
     <% end -%>

@@ -117,6 +117,7 @@ ActionController::Routing::Routes.draw do |map|
 
     admin_map.resources :oauth_providers, :member => {:toggle_status => :post}
     admin_map.resources :banners, :only => %w(index new create edit update destroy)
+    admin_map.resources :mail_magazines, :only => %w(new create)
   end
 
   map.namespace "feed" do |feed_map|

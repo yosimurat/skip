@@ -28,6 +28,8 @@
         <% end -%>
       </table>
     </div>
-    <%= link_to( _('Show other rankings'), :controller => '/rankings', :action => 'index') if ranking_enabled? %>
+    <% if ranking_enabled? -%>
+      <div class="other_ranking"><%= link_to( icon_tag("award_star_gold_1") + _('Show other rankings'), :controller => '/rankings', :action => 'index') %></div>
+    <% end -%>
   </div>
 <% end -%>

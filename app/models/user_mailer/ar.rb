@@ -42,4 +42,13 @@ class UserMailer::AR < UserMailer::Base
     @headers    = {}
     @body       = {:link_url => link_url, :message => message, :message_manage_url => message_manage_url, :header => header, :footer => footer}
   end
+
+  def sent_mail_magazine(recipient, mail_magazine)
+    @recipients = recipient
+    @subject    = UserMailer::Base.base64(mail_magazine[:title])
+    @from       = from
+    @send_on    = Time.now
+    @headers    = {}
+    @body       = {:message => mail_magazine[:contents], :footer => footer}
+  end
 end
