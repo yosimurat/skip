@@ -15,7 +15,7 @@
       <%= render :partial => 'group/stock_entry_index', :locals => { :stock_entries => stock_entries } %>
     </div>
     <div class="button">
-      <% if current_user.participating_group?(@group) -%>
+      <% if current_user.participating_group?(@group) and root_stock_entry.publication_users.include?(current_user) -%>
         <%= link_to(content_tag('span', _("Create stock entry under the '%s'") % root_stock_entry.title ), {:controller => 'group', :action => "new_stock_entry", :parent_id => root_stock_entry.id}, {:class => "rounded", :method => :post}) %>
       <% end -%>
     </div>
