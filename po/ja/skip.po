@@ -6,8 +6,8 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: skip 1.8.4\n"
-"POT-Creation-Date: 2010-12-20 13:17+0900\n"
+"Project-Id-Version: skip 1.8.5\n"
+"POT-Creation-Date: 2011-03-17 11:52+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 "この「ユーザ名」はシステムの中で、あなたのことをブログの記事中などで簡易的に"
 "指定する際に使います。"
 
-#: app/helpers/system_messages_helper.rb:30
+#: app/helpers/system_messages_helper.rb:26
 #: app/controllers/rankings_controller.rb:105 app/models/board_entry.rb:431
 #: app/views/groups/_group_list.html.erb:28
 #: app/views/share_file/_topix_share_files.html.erb:39
@@ -237,7 +237,7 @@ msgstr[0] "%{num}個のエラーが発生しました"
 msgid "%{target} was successfully saved."
 msgstr "%{target}を保存しました。"
 
-#: app/helpers/system_messages_helper.rb:90
+#: app/helpers/system_messages_helper.rb:86
 msgid "%{user_name} left your group %{group_name}."
 msgstr "%{user_name}さんが[%{group_name}]から退会しました。"
 
@@ -269,8 +269,10 @@ msgid ""
 "(Enter in \"uid:Nickname\" or \"gid:Group Name\" format when you want to "
 "specify directly. Partial match search is also available for name. e.g. "
 "Yamada, administration)"
-msgstr "(直接指定の際は、\"uid:ニックネーム\"、\"gid:グループ名\"のように入力してくだ"
-"さい。ユーザ名やグループ名の一部を入力し、Ctrlキー/Shiftキー/矢印キーのいずれかを押すと、候補が表示されます。)"
+msgstr ""
+"(直接指定の際は、\"uid:ニックネーム\"、\"gid:グループ名\"のように入力してくだ"
+"さい。ユーザ名やグループ名の一部を入力し、Ctrlキー/Shiftキー/矢印キーのいずれ"
+"かを押すと、候補が表示されます。)"
 
 #: app/views/board_entries/_board_entry_point_image.html.erb:13
 #: app/views/board_entries/_board_entry_point.html.erb:12
@@ -2523,7 +2525,7 @@ msgstr "非公開"
 msgid "Change uid"
 msgstr "ユーザ名変更"
 
-#: app/helpers/system_messages_helper.rb:34
+#: app/helpers/system_messages_helper.rb:30
 msgid "Change your profile picture!"
 msgstr "プロフィール画像を変更しましょう！"
 
@@ -4517,11 +4519,11 @@ msgstr "記事を書く"
 msgid "New bookmarks"
 msgstr "新着ブックマーク"
 
-#: app/helpers/system_messages_helper.rb:43
+#: app/helpers/system_messages_helper.rb:39
 msgid "New user is waiting for approval in %s."
 msgstr "[%s]に承認待ちのユーザがいます!"
 
-#: app/helpers/system_messages_helper.rb:82
+#: app/helpers/system_messages_helper.rb:78
 msgid "New user joined your group [%s]."
 msgstr "[%s]に新しい参加者がいます!"
 
@@ -5984,7 +5986,7 @@ msgstr "ユーザ登録"
 #: app/views/layouts/admin/application.html.erb:70
 #: app/views/layouts/layout.html.erb:130
 msgid "Site Information"
-msgstr "サイト情報"
+msgstr "トレンド・キャッチ"
 
 #: app/models/site_count.rb:-
 msgid "SiteCount|Active users"
@@ -6131,7 +6133,7 @@ msgstr "開始する"
 msgid "Start with the site!"
 msgstr "利用開始！"
 
-#: app/helpers/system_messages_helper.rb:75
+#: app/helpers/system_messages_helper.rb:71
 msgid "State of your question [%s] is changed!"
 msgstr "あなたの質問 [%s] の公開状態が変更されました。"
 
@@ -6406,7 +6408,7 @@ msgstr ""
 msgid "The parameter in the parents stock entry is illegal."
 msgstr "親文書のパラメータが不正です。"
 
-#: app/helpers/system_messages_helper.rb:30
+#: app/helpers/system_messages_helper.rb:26
 msgid "The password expiration date (%s) approaches"
 msgstr "パスワード有効期限(%s)が近づいています"
 
@@ -6451,7 +6453,7 @@ msgstr "現在紹介文はありません。"
 msgid "There are no pages you can see because of the publicity limits."
 msgstr "閲覧制限のため、あなたが見られるページはありませんでした。"
 
-#: app/helpers/system_messages_helper.rb:61
+#: app/helpers/system_messages_helper.rb:57
 msgid "There is a new entry talking about your entry [%s]!"
 msgstr "あなたの記事を話題にした新着記事[%s]があります！"
 
@@ -7459,15 +7461,15 @@ msgstr ""
 "よって、登録頂いた情報は、当然ですが、本サービスの運営以外では利用いたしませ"
 "ん。<br/>"
 
-#: app/helpers/system_messages_helper.rb:97
+#: app/helpers/system_messages_helper.rb:93
 msgid "You are approved to join the group %s."
 msgstr "[%s]への参加が承認されました。"
 
-#: app/helpers/system_messages_helper.rb:104
+#: app/helpers/system_messages_helper.rb:100
 msgid "You are disapproved to join the group %s."
 msgstr "[%s]への参加が棄却されました。"
 
-#: app/helpers/system_messages_helper.rb:118
+#: app/helpers/system_messages_helper.rb:114
 msgid "You are forced to leave the group [%s]."
 msgstr "[%s]を強制退会しました。"
 
@@ -7484,7 +7486,7 @@ msgstr "閲覧権限がありません。"
 msgid "You are now logged out."
 msgstr "ログアウトしました。"
 
-#: app/helpers/system_messages_helper.rb:111
+#: app/helpers/system_messages_helper.rb:107
 msgid "You are now member of the group [%s]."
 msgstr "[%s]に参加することになりました。"
 
@@ -7577,11 +7579,11 @@ msgstr "%{name}を作成します。"
 msgid "You must login with openid."
 msgstr "OpenIDでログインしてください。"
 
-#: app/helpers/system_messages_helper.rb:68
+#: app/helpers/system_messages_helper.rb:64
 msgid "You received an introduction!"
 msgstr "あなたの紹介文が追加されました！"
 
-#: app/helpers/system_messages_helper.rb:54
+#: app/helpers/system_messages_helper.rb:50
 msgid "You recieved a comment on your entry [%s]!"
 msgstr "あなたの記事[%s]に新着コメントがあります！"
 
