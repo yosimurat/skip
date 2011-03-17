@@ -262,5 +262,12 @@ $j(function(){
         return $j.getUrlVars(url_or_href)[name];
       }
     });
+
+    // リッチテキストでimgクリックで別タブ表示
+    $j("div.richtext_img_wrapper img").live("click", function(){
+      window.open( $j(this).attr('src') + '&inline=true');
+      return false;
+    });
+
 });
 
