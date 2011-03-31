@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.5\n"
-"POT-Creation-Date: 2011-03-17 11:52+0900\n"
+"POT-Creation-Date: 2011-03-31 09:40+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2838,6 +2838,10 @@ msgstr "現在設定中のページが消えてしまいますがよろしいで
 #: app/views/admin/documents/index.html.erb:19
 msgid "Customize the document template to fit your usage.<br />"
 msgstr "用途に合わせて、説明文の雛形を修正して下さい。<br />"
+
+#: app/views/trends/index.html.erb:205
+msgid "Data doesn't exist."
+msgstr "必要となるデータが存在しません。"
 
 #: app/helpers/admin/application_helper.rb:24
 msgid "Data management"
@@ -6648,6 +6652,82 @@ msgstr "アクセスした人"
 msgid "Traveling"
 msgstr "旅行"
 
+#: app/views/statistics/index.html.erb:46
+msgid "Trend Information"
+msgstr "遷移状況"
+
+#: app/views/trends/index.html.erb:186
+msgid "Trend chart of blogs"
+msgstr "ブログに関する推移状況"
+
+#: app/views/trends/index.html.erb:195
+msgid "Trend chart of bookmarks"
+msgstr "ブックマークに関する推移状況"
+
+#: app/views/trends/index.html.erb:192
+msgid "Trend chart of entry viewers"
+msgstr "記事閲覧に関する推移状況"
+
+#: app/views/trends/index.html.erb:198
+msgid "Trend chart of full text search"
+msgstr "全文検索に関する推移状況"
+
+#: app/views/trends/index.html.erb:189
+msgid "Trend chart of questions"
+msgstr "質問に関する推移状況"
+
+#: app/models/trend.rb:-
+msgid "Trend|Begin of month"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Blogs comments count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Blogs entries count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Blogs points count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Blogs viewers count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Bookmarks count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Created at"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Full text search count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Questions comments count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Questions entries count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Questions points count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Questions viewers count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Updated at"
+msgstr ""
+
 #: lib/skip_util.rb:20
 msgid "Tue"
 msgstr "火"
@@ -8360,6 +8440,10 @@ msgstr "タグ"
 
 #: app/models/track.rb:-
 msgid "track"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "trend"
 msgstr ""
 
 #: app/models/user_profile_master.rb:156

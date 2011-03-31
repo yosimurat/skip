@@ -1,0 +1,206 @@
+<% if (!@trends.empty? and @trends.size > 1) %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>トレンドグラフ</title>
+    <script language="javascript" type="text/javascript" src="javascripts/jqplot/excanvas.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="javascripts/jqplot/jquery.jqplot.css" />
+
+    <script language="javascript" type="text/javascript" src="javascripts/jqplot/jquery-1.4.4.min.js"></script>
+    <script language="javascript" type="text/javascript" src="javascripts/jqplot/jquery.jqplot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="javascripts/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="javascripts/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="javascripts/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="javascripts/jqplot/plugins/jqplot.highlighter.min.js"></script>
+    <script language="javascript" type="text/javascript" src="javascripts/jqplot/plugins/jqplot.cursor.min.js"></script>
+
+  </head>
+
+  <body>
+
+
+<script language="javascript" type="text/javascript">
+  $(function(){
+    $.jqplot.config.enablePlugins = true;
+
+    blogs_data = <%= graph_of_blogs(@trends) %>;
+    blogs_plot = $.jqplot('blogs_graph', blogs_data, {
+        legend:{show:true, location:'nw'},
+        series:[
+          { label:"投稿数" },
+          { label:"コメント数" },
+          { label:"<%= h(Admin::Setting.point_button) %>数"}
+        ],
+        axes:{
+            xaxis:{
+                renderer:$.jqplot.DateAxisRenderer,
+                rendererOptions:{tickRenderer:$.jqplot.CanvasAxisTickRenderer},
+                tickOptions:{
+                    formatString:'%Y/%m',
+                    fontSize:'9pt',
+                    fontFamily:'Tahoma',
+                    angle:-20
+                },
+                min:blogs_data[0][0][0],
+                tickInterval: '1 month'
+            },
+            yaxis:{tickOptions:{formatString:'%.0f'},min:0}
+        },
+        highlighter: {sizeAdjust: 10},
+        cursor:{
+            showVerticalLine: true,
+            showHorizontalLine: false,
+            showTooltip: true,
+            zoom:false
+        }
+    });
+
+    questions_data = <%= graph_of_questions(@trends) %>;
+    questions_plot = $.jqplot('questions_graph', questions_data, {
+        legend:{show:true, location:'nw'},
+        series:[
+          { label:"投稿数" },
+          { label:"コメント数" },
+          { label:"<%= h(Admin::Setting.point_button) %>数"}
+        ],
+        axes:{
+            xaxis:{
+                renderer:$.jqplot.DateAxisRenderer,
+                rendererOptions:{tickRenderer:$.jqplot.CanvasAxisTickRenderer},
+                tickOptions:{
+                    formatString:'%Y/%m',
+                    fontSize:'9pt',
+                    fontFamily:'Tahoma',
+                    angle:-20
+                },
+                min:questions_data[0][0][0],
+                tickInterval: '1 month'
+            },
+            yaxis:{tickOptions:{formatString:'%.0f'},min:0}
+        },
+        highlighter: {sizeAdjust: 10},
+        cursor:{
+            showVerticalLine: true,
+            showHorizontalLine: false,
+            showTooltip: true,
+            zoom:false
+        }
+    });
+
+    viewers_data = <%= graph_of_viewers(@trends) %>;
+    viewers_plot = $.jqplot('viewers_graph', viewers_data, {
+        legend:{show:true, location:'nw'},
+        series:[
+          { label:"ブログ" },
+          { label:"質問" }
+        ],
+        axes:{
+            xaxis:{
+                renderer:$.jqplot.DateAxisRenderer,
+                rendererOptions:{tickRenderer:$.jqplot.CanvasAxisTickRenderer},
+                tickOptions:{
+                    formatString:'%Y/%m',
+                    fontSize:'9pt',
+                    fontFamily:'Tahoma',
+                    angle:-20
+                },
+                min:viewers_data[0][0][0],
+                tickInterval: '1 month'
+            },
+            yaxis:{tickOptions:{formatString:'%.0f'},min:0}
+        },
+        highlighter: {sizeAdjust: 10},
+        cursor:{
+            showVerticalLine: true,
+            showHorizontalLine: false,
+            showTooltip: true,
+            zoom:false
+        }
+    });
+
+    bookmarks_data = <%= graph_of_bookmarks(@trends) %>;
+    bookmarks_plot = $.jqplot('bookmarks_graph', bookmarks_data, {
+        legend:{show:true, location:'nw'},
+        series:[
+          { label:"ブックマーク数" }
+        ],
+        axes:{
+            xaxis:{
+                renderer:$.jqplot.DateAxisRenderer,
+                rendererOptions:{tickRenderer:$.jqplot.CanvasAxisTickRenderer},
+                tickOptions:{
+                    formatString:'%Y/%m',
+                    fontSize:'9pt',
+                    fontFamily:'Tahoma',
+                    angle:-20
+                },
+                min:questions_data[0][0][0],
+                tickInterval: '1 month'
+            },
+            yaxis:{tickOptions:{formatString:'%.0f'},min:0}
+        },
+        highlighter: {sizeAdjust: 10},
+        cursor:{
+            showVerticalLine: true,
+            showHorizontalLine: false,
+            showTooltip: true,
+            zoom:false
+        }
+    });
+
+    full_text_search_data = <%= graph_of_full_text_search(@trends) %>;
+    full_text_search_plot = $.jqplot('full_text_search_graph', full_text_search_data, {
+        legend:{show:true, location:'nw'},
+        series:[
+          { label:"検索回数" }
+        ],
+        axes:{
+            xaxis:{
+                renderer:$.jqplot.DateAxisRenderer,
+                rendererOptions:{tickRenderer:$.jqplot.CanvasAxisTickRenderer},
+                tickOptions:{
+                    formatString:'%Y/%m',
+                    fontSize:'9pt',
+                    fontFamily:'Tahoma',
+                    angle:-20
+                },
+                min:questions_data[0][0][0],
+                tickInterval: '1 month'
+            },
+            yaxis:{tickOptions:{formatString:'%.0f'},min:0}
+        },
+        highlighter: {sizeAdjust: 10},
+        cursor:{
+            showVerticalLine: true,
+            showHorizontalLine: false,
+            showTooltip: true,
+            zoom:false
+        }
+    });
+  });
+</script>
+
+    <div style="margin:20px 0 20px 30px;">
+      <h3><%= _('Trend chart of blogs') %></h3>
+      <div id="blogs_graph" class="plot" style="width:600px;height:300px;margin-bottom:20px;"></div>
+
+      <h3><%= _('Trend chart of questions') %></h3>
+      <div id="questions_graph" class="plot" style="width:600px;height:300px;margin-bottom:20px;"></div>
+
+      <h3><%= _('Trend chart of entry viewers') %></h3>
+      <div id="viewers_graph" class="plot" style="width:600px;height:300px;margin-bottom:20px;"></div>
+
+      <h3><%= _('Trend chart of bookmarks') %></h3>
+      <div id="bookmarks_graph" class="plot" style="width:600px;height:300px;margin-bottom:20px;"></div>
+
+      <h3><%= _('Trend chart of full text search') %></h3>
+      <div id="full_text_search_graph" class="plot" style="width:600px;height:300px;margin-bottom:20px;"></div>
+    </div>
+
+  </body>
+</html>
+<% else %>
+  <%= _("Data doesn't exist.") %>
+<% end -%>

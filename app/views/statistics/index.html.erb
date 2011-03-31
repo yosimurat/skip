@@ -41,6 +41,10 @@
     <% end -%>
   </div><!-- statistics_history -->
   <% end -%>
+
+  <div style="clear:left;margin-top:15px;"></div>
+  <h2 class="topix_title"><%= icon_tag('asterisk_orange') -%><%= _('Trend Information') %></h2>
+  <iframe src="/trends" height=1900 width=700 border=0 frameborder=0></iframe>
 <% end -%>
 
 <% content_for :javascript_initializers do -%>
