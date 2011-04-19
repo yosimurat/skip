@@ -5,8 +5,8 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: skip 1.8.4\n"
-"POT-Creation-Date: 2010-12-20 13:17+0900\n"
+"Project-Id-Version: skip 1.8.5\n"
+"POT-Creation-Date: 2011-03-31 09:40+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgid ""
 "the system."
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:30
+#: app/helpers/system_messages_helper.rb:26
 #: app/controllers/rankings_controller.rb:105 app/models/board_entry.rb:431
 #: app/views/groups/_group_list.html.erb:28
 #: app/views/share_file/_topix_share_files.html.erb:39
@@ -233,7 +233,7 @@ msgstr[1] ""
 msgid "%{target} was successfully saved."
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:90
+#: app/helpers/system_messages_helper.rb:86
 msgid "%{user_name} left your group %{group_name}."
 msgstr ""
 
@@ -2476,7 +2476,7 @@ msgstr ""
 msgid "Change uid"
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:34
+#: app/helpers/system_messages_helper.rb:30
 msgid "Change your profile picture!"
 msgstr ""
 
@@ -2774,6 +2774,10 @@ msgstr ""
 
 #: app/views/admin/documents/index.html.erb:19
 msgid "Customize the document template to fit your usage.<br />"
+msgstr ""
+
+#: app/views/trends/index.html.erb:205
+msgid "Data doesn't exist."
 msgstr ""
 
 #: app/helpers/admin/application_helper.rb:24
@@ -4406,11 +4410,11 @@ msgstr ""
 msgid "New bookmarks"
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:43
+#: app/helpers/system_messages_helper.rb:39
 msgid "New user is waiting for approval in %s."
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:82
+#: app/helpers/system_messages_helper.rb:78
 msgid "New user joined your group [%s]."
 msgstr ""
 
@@ -5988,7 +5992,7 @@ msgstr ""
 msgid "Start with the site!"
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:75
+#: app/helpers/system_messages_helper.rb:71
 msgid "State of your question [%s] is changed!"
 msgstr ""
 
@@ -6253,7 +6257,7 @@ msgstr ""
 msgid "The parameter in the parents stock entry is illegal."
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:30
+#: app/helpers/system_messages_helper.rb:26
 msgid "The password expiration date (%s) approaches"
 msgstr ""
 
@@ -6295,7 +6299,7 @@ msgstr ""
 msgid "There are no pages you can see because of the publicity limits."
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:61
+#: app/helpers/system_messages_helper.rb:57
 msgid "There is a new entry talking about your entry [%s]!"
 msgstr ""
 
@@ -6482,6 +6486,82 @@ msgstr ""
 
 #: lib/skip_default_data.rb:65
 msgid "Traveling"
+msgstr ""
+
+#: app/views/statistics/index.html.erb:46
+msgid "Trend Information"
+msgstr ""
+
+#: app/views/trends/index.html.erb:186
+msgid "Trend chart of blogs"
+msgstr ""
+
+#: app/views/trends/index.html.erb:195
+msgid "Trend chart of bookmarks"
+msgstr ""
+
+#: app/views/trends/index.html.erb:192
+msgid "Trend chart of entry viewers"
+msgstr ""
+
+#: app/views/trends/index.html.erb:198
+msgid "Trend chart of full text search"
+msgstr ""
+
+#: app/views/trends/index.html.erb:189
+msgid "Trend chart of questions"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Begin of month"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Blogs comments count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Blogs entries count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Blogs points count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Blogs viewers count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Bookmarks count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Created at"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Full text search count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Questions comments count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Questions entries count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Questions points count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Questions viewers count"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "Trend|Updated at"
 msgstr ""
 
 #: lib/skip_util.rb:20
@@ -7279,15 +7359,15 @@ msgid ""
 "for any purpose other than running this service.<br/>"
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:97
+#: app/helpers/system_messages_helper.rb:93
 msgid "You are approved to join the group %s."
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:104
+#: app/helpers/system_messages_helper.rb:100
 msgid "You are disapproved to join the group %s."
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:118
+#: app/helpers/system_messages_helper.rb:114
 msgid "You are forced to leave the group [%s]."
 msgstr ""
 
@@ -7304,7 +7384,7 @@ msgstr ""
 msgid "You are now logged out."
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:111
+#: app/helpers/system_messages_helper.rb:107
 msgid "You are now member of the group [%s]."
 msgstr ""
 
@@ -7388,11 +7468,11 @@ msgstr ""
 msgid "You must login with openid."
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:68
+#: app/helpers/system_messages_helper.rb:64
 msgid "You received an introduction!"
 msgstr ""
 
-#: app/helpers/system_messages_helper.rb:54
+#: app/helpers/system_messages_helper.rb:50
 msgid "You recieved a comment on your entry [%s]!"
 msgstr ""
 
@@ -8166,6 +8246,10 @@ msgstr ""
 
 #: app/models/track.rb:-
 msgid "track"
+msgstr ""
+
+#: app/models/trend.rb:-
+msgid "trend"
 msgstr ""
 
 #: app/models/user_profile_master.rb:156
