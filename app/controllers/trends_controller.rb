@@ -15,7 +15,7 @@
 
 class TrendsController < ApplicationController
   def index
-    @trends = Trend.ascend_by_begin_of_month.limit(12)
+    @trends = Trend.descend_by_begin_of_month.limit(12)
     respond_to do |format|
       format.html { render :layout => false }
     end
