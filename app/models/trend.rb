@@ -46,6 +46,6 @@ class Trend < ActiveRecord::Base
       viewers += e.entry_accesses.updated_on_gte(from).updated_on_lt(to).count
       points += e.state.created_on.between?(from.to_date, to.to_date) ? e.state.point : 0
     end
-    [entries.count, comments, viewers, points]
+    [entries.count, comments, points, viewers]
   end
 end
