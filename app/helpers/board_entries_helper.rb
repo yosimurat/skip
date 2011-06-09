@@ -149,7 +149,7 @@ module BoardEntriesHelper
   end
 
   def parent_stock_entry_title parent_id
-    parent_entry = BoardEntry.accessible(current_user).find(parent_id)
+    parent_entry = BoardEntry.find(parent_id)
     parent_title = parent_entry ? _("Create stock entry under the '%s'") % parent_entry.title  : _('This is the top of stock entry.')
     parent_title
   end
