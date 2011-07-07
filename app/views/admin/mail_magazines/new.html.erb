@@ -10,6 +10,20 @@
 
     <div class="label"><%= _("Content") %></div>
     <div><%= text_area_tag("mail_magazine[contents]", params[:mail_magazine] ? params[:mail_magazine][:contents] :nil, :size => "100x25") %></div>
-    <p><%= submit_tag _('Send'), :disable_with => _('Sending...'), :confirm => _("Are you sure to send mail magazine ?") %><p>
+    <div><%= hidden_field_tag("mail_magazine[preview_only]", '0') %></div>
+    <p>
+      <%= submit_tag _('Send'), :disable_with => _('Sending...'), :confirm => _("Are you sure to send mail magazine ?"), :id => 'send_trigger' %>
+      <input id="preview_trigger" type="button", value="<%= _('Sending test') + _('(The administorator only)') %>"></input>
+    </p>
   <% end -%>
 </div>
+
+<% content_for :javascript_initializers do -%>
+  $j('#send_trigger').click(function() {
+    $j('#mail_magazine_preview_only').val('0');
+  });
+  $j('#preview_trigger').click(function() {
+    $j('#mail_magazine_preview_only').val('1');
+    $j(this).closest('form').submit();
+  });
+<% end %>
