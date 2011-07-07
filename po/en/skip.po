@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.6\n"
-"POT-Creation-Date: 2011-07-07 14:41+0900\n"
+"POT-Creation-Date: 2011-07-07 17:06+0900\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,8 +48,8 @@ msgstr ""
 #: app/views/rankings/bookmark.html.erb:10
 #: app/views/mypage/entries_by_date.html.erb:13
 #: app/views/mypage/_today_access_blogs_box.html.erb:9
-#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:151
-#: app/views/mypage/index.html.erb:168
+#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:152
+#: app/views/mypage/index.html.erb:169
 msgid "%B %d %Y"
 msgstr ""
 
@@ -2730,7 +2730,7 @@ msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr ""
 
-#: app/views/mypage/index.html.erb:127
+#: app/views/mypage/index.html.erb:128
 msgid "Create my new bookmark"
 msgstr ""
 
@@ -3853,7 +3853,7 @@ msgstr ""
 msgid "Internet"
 msgstr ""
 
-#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:148
+#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:149
 msgid "Introduce"
 msgstr ""
 
@@ -4416,7 +4416,7 @@ msgid "New Posts"
 msgstr ""
 
 #: app/controllers/feed/bookmarks_controller.rb:8
-#: app/views/mypage/index.html.erb:126
+#: app/views/mypage/index.html.erb:127
 msgid "New bookmarks"
 msgstr ""
 
@@ -4508,7 +4508,7 @@ msgstr ""
 msgid "No matching groups found."
 msgstr ""
 
-#: app/views/mypage/index.html.erb:93
+#: app/views/mypage/index.html.erb:94
 msgid "No matching questions."
 msgstr ""
 
@@ -5287,12 +5287,12 @@ msgstr ""
 msgid "Recent Entries"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:161
+#: app/views/mypage/index.html.erb:162
 msgid "Recent Groups"
 msgstr ""
 
 #: app/controllers/feed/board_entries_controller.rb:35
-#: app/views/mypage/index.html.erb:74
+#: app/views/mypage/index.html.erb:75
 msgid "Recent Popular Entries"
 msgstr ""
 
@@ -5305,7 +5305,7 @@ msgstr ""
 msgid "Recent Questions"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:141
+#: app/views/mypage/index.html.erb:142
 msgid "Recent Users"
 msgstr ""
 
@@ -6388,7 +6388,7 @@ msgstr ""
 msgid "Timeout while loading rss."
 msgstr ""
 
-#: app/views/mypage/index.html.erb:132
+#: app/views/mypage/index.html.erb:133
 msgid "Tips for using bookmarklet"
 msgstr ""
 
@@ -6407,7 +6407,7 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:71
+#: app/views/mypage/index.html.erb:72
 msgid "Today Popular Entries"
 msgstr ""
 
@@ -6760,6 +6760,10 @@ msgstr ""
 
 #: app/controllers/mypage_controller.rb:239
 msgid "User information was successfully updated."
+msgstr ""
+
+#: app/views/users/_randam_profile_box.html.erb:6
+msgid "User introductions"
 msgstr ""
 
 #: app/helpers/admin/application_helper.rb:23
@@ -7987,11 +7991,11 @@ msgstr ""
 msgid "description"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:103 app/views/mypage/index.html.erb:106
+#: app/views/mypage/index.html.erb:104 app/views/mypage/index.html.erb:107
 msgid "display flat"
 msgstr ""
 
-#: app/views/mypage/index.html.erb:102 app/views/mypage/index.html.erb:105
+#: app/views/mypage/index.html.erb:103 app/views/mypage/index.html.erb:106
 msgid "display tabs"
 msgstr ""
 

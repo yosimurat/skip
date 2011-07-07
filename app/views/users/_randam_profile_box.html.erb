@@ -1,0 +1,21 @@
+<% user_ids = User.active.all(:select => 'id').map(&:id) -%>
+<% rand_user_ids = (1..2).map {|i| user_ids.delete(user_ids.choice) }.compact %>
+<% randam_users = User.active.id_is(rand_user_ids) -%>
+<% unless randam_users.empty? -%>
+<div class="right_box ui-corner-all">
+  <h2 class="ui-corner-top"><%= _("User introductions") %></h2>
+  <table>
+    <tbody>
+      <% randam_users.each do |user| -%>
+      <tr>
+        <td style="padding: 5px;">
+          <%= user_link_to_with_portrait(user, :width => 48, :height => 48) %>
+        </td>
+        <td style="padding: 5px;">
+          <%= user_link_to(user) %>&nbsp;<span class="small_text"><%=h user.section %></span>
+        </td>
+      </tr>
+      <% end -%>
+  </table>
+</div>
+<% end -%>
