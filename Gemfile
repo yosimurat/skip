@@ -47,6 +47,7 @@ gem 'yamler', '0.1.0'
 
 group :development do
   gem 'bullet', '1.7.2'
+  gem 'thin'
 end
 
 group :cucumber do
