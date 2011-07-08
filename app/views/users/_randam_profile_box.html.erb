@@ -1,5 +1,5 @@
 <% user_ids = User.active.all(:select => 'id').map(&:id) -%>
-<% rand_user_ids = (1..2).map {|i| user_ids.delete(user_ids.choice) }.compact %>
+<% rand_user_ids = (1..2).map {|i| user_ids.delete(user_ids.rand) }.compact %>
 <% randam_users = User.active.id_is(rand_user_ids) -%>
 <% unless randam_users.empty? -%>
 <div class="right_box ui-corner-all">
