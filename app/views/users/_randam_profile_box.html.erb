@@ -8,11 +8,16 @@
     <tbody>
       <% randam_users.each do |user| -%>
       <tr>
-        <td style="padding: 5px;">
+        <td rowspan="2" style="padding: 5px;">
           <%= user_link_to_with_portrait(user, :width => 48, :height => 48) %>
         </td>
-        <td style="padding: 5px;">
-          <%= user_link_to(user) %>&nbsp;<span class="small_text"><%=h user.section %></span>
+        <td style="padding: 5px 5px 0 0;">
+          <%= user_link_to(user) %>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 0px 5px 5px 0;">
+          <span class="small_text"><%=h user.section %></span>
         </td>
       </tr>
       <% end -%>
