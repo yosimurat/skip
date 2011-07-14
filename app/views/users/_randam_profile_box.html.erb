@@ -1,8 +1,9 @@
 <% user_ids = User.active.all(:select => 'id').map(&:id) -%>
 <% rand_user_ids = (1..2).map {|i| user_ids.delete(user_ids.rand) }.compact %>
 <% randam_users = User.active.id_is(rand_user_ids) -%>
+<% search_label = _('Search the other users') %>
 <% unless randam_users.empty? -%>
-<div class="right_box ui-corner-all">
+<div id="randam_profile_box" class="right_box ui-corner-all">
   <h2 class="ui-corner-top"><%= _("User introductions") %></h2>
   <table>
     <tbody>
@@ -21,6 +22,20 @@
         </td>
       </tr>
       <% end -%>
+      <tr>
+        <td style="padding: 5px;" colspan="2">
+          <% form_tag({:controller => '/search', :action => 'full_text_search'} ,:method => 'get', :id => 'full_text_form') do -%>
+            <%= hidden_field_tag 'target_aid', 'skip' %>
+            <%= hidden_field_tag 'target_contents', 'user' %>
+            <%= text_field_tag "full_text_query", search_label, :class => "labeled-field", :style => 'width: 130px;' %>
+            <%= submit_tag _('Go'), :class => 'search_button' %>
+          <% end -%>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
+<% end -%>
+<% content_for :javascript_initializers do -%>
+  $j('#randam_profile_box input#full_text_query').labeledTextField(<%= {:message => search_label}.to_json %>);
 <% end -%>

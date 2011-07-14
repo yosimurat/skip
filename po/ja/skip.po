@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.6\n"
-"POT-Creation-Date: 2011-07-07 17:06+0900\n"
+"POT-Creation-Date: 2011-07-13 16:01+0900\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,8 +51,8 @@ msgstr ""
 #: app/views/rankings/bookmark.html.erb:10
 #: app/views/mypage/entries_by_date.html.erb:13
 #: app/views/mypage/_today_access_blogs_box.html.erb:9
-#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:152
-#: app/views/mypage/index.html.erb:169
+#: app/views/mypage/index.html.erb:34 app/views/mypage/index.html.erb:154
+#: app/views/mypage/index.html.erb:171
 msgid "%B %d %Y"
 msgstr "%Y/%m/%d"
 
@@ -2793,7 +2793,7 @@ msgid ""
 "Create an \"open to public\" blog entry disregarding the privacy setting."
 msgstr "記事の公開範囲によらず全体公開のブログとして新しい記事を作成します。"
 
-#: app/views/mypage/index.html.erb:128
+#: app/views/mypage/index.html.erb:130
 msgid "Create my new bookmark"
 msgstr "自分もブックマークする"
 
@@ -3530,6 +3530,10 @@ msgstr "ゲーム"
 msgid "Get an account"
 msgstr "アカウントの登録"
 
+#: app/views/users/_randam_profile_box.html.erb:30
+msgid "Go"
+msgstr ""
+
 #: lib/skip_default_data.rb:65
 msgid "Gourmet"
 msgstr "グルメ"
@@ -3951,7 +3955,7 @@ msgstr "想定外のエラーが発生しました。管理者にお問い合わ
 msgid "Internet"
 msgstr "インターネット"
 
-#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:149
+#: app/views/user/_action_box.html.erb:7 app/views/mypage/index.html.erb:151
 msgid "Introduce"
 msgstr "みんなに紹介する"
 
@@ -4529,7 +4533,7 @@ msgid "New Posts"
 msgstr "記事を書く"
 
 #: app/controllers/feed/bookmarks_controller.rb:8
-#: app/views/mypage/index.html.erb:127
+#: app/views/mypage/index.html.erb:129
 msgid "New bookmarks"
 msgstr "新着ブックマーク"
 
@@ -4623,7 +4627,7 @@ msgstr "該当する投稿はありませんでした。"
 msgid "No matching groups found."
 msgstr "該当するグループはありませんでした。"
 
-#: app/views/mypage/index.html.erb:94
+#: app/views/mypage/index.html.erb:96
 msgid "No matching questions."
 msgstr "みんなからの質問はありません"
 
@@ -5412,12 +5416,12 @@ msgstr "読書"
 msgid "Recent Entries"
 msgstr "新着記事"
 
-#: app/views/mypage/index.html.erb:162
+#: app/views/mypage/index.html.erb:164
 msgid "Recent Groups"
 msgstr "新着グループ"
 
 #: app/controllers/feed/board_entries_controller.rb:35
-#: app/views/mypage/index.html.erb:75
+#: app/views/mypage/index.html.erb:77
 msgid "Recent Popular Entries"
 msgstr "最近の人気記事"
 
@@ -5430,7 +5434,7 @@ msgstr "最近のプロフィール"
 msgid "Recent Questions"
 msgstr "みんなからの質問!"
 
-#: app/views/mypage/index.html.erb:142
+#: app/views/mypage/index.html.erb:144
 msgid "Recent Users"
 msgstr "新着ユーザ"
 
@@ -5669,6 +5673,10 @@ msgstr "検索結果"
 #: app/views/search/_result_info.html.erb:2
 msgid "Search result of <b>%s</b>"
 msgstr "<b>%s</b> の検索結果"
+
+#: app/views/users/_randam_profile_box.html.erb:29
+msgid "Search the other users"
+msgstr "他のユーザを探す"
 
 #: app/views/admin/_search_box.html.erb:6
 msgid "Searching from %{target}"
@@ -6553,7 +6561,7 @@ msgstr "最終更新時間："
 msgid "Timeout while loading rss."
 msgstr "RSSのロード時にタイムアウトしました。"
 
-#: app/views/mypage/index.html.erb:133
+#: app/views/mypage/index.html.erb:135
 msgid "Tips for using bookmarklet"
 msgstr "便利なブックマークレットの使い方"
 
@@ -6572,7 +6580,7 @@ msgstr "利用開始待ち"
 msgid "Today"
 msgstr "今日"
 
-#: app/views/mypage/index.html.erb:72
+#: app/views/mypage/index.html.erb:74
 msgid "Today Popular Entries"
 msgstr "今日の人気記事"
 
@@ -8185,11 +8193,11 @@ msgstr ""
 msgid "description"
 msgstr "説明"
 
-#: app/views/mypage/index.html.erb:104 app/views/mypage/index.html.erb:107
+#: app/views/mypage/index.html.erb:106 app/views/mypage/index.html.erb:109
 msgid "display flat"
 msgstr "並べて表示"
 
-#: app/views/mypage/index.html.erb:103 app/views/mypage/index.html.erb:106
+#: app/views/mypage/index.html.erb:105 app/views/mypage/index.html.erb:108
 msgid "display tabs"
 msgstr "タブで表示"
 
