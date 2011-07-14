@@ -19,11 +19,17 @@ class Admin::MailMagazinesController < Admin::ApplicationController
   def create
     if params[:mail_magazine]
       unless params[:mail_magazine][:title].blank? or params[:mail_magazine][:contents].blank?
-        User.active.each do |user|
-          UserMailer::AR.deliver_sent_mail_magazine(user.email, params[:mail_magazine])
+        if params[:mail_magazine][:preview_only] == '1'
+          UserMailer::AR.deliver_sent_mail_magazine(Admin::Setting.contact_addr, params[:mail_magazine])
+          flash.now[:notice] = _("Mail magazines were sucessfully sended.") + _('(The administorator only)')
+          render :new
+        else
+          User.active.each do |user|
+            UserMailer::AR.deliver_sent_mail_magazine(user.email, params[:mail_magazine])
+          end
+          flash[:notice] = _("Mail magazines were sucessfully sended.")
+          redirect_to new_admin_mail_magazine_path
         end
-        flash[:notice] = _("Mail magazines were sucessfully sended.")
-        redirect_to new_admin_mail_magazine_path
       else
         flash.now[:error] = _("Input title and contents.")
         render :new

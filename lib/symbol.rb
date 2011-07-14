@@ -58,10 +58,10 @@ class Symbol
     items = []
     symbol_type, symbol_id = Symbol.split_symbol search_query
     case symbol_type
-    when "uid" then items = User.partial_match_uid(symbol_id)
+    when "uid" then items = User.active.partial_match_uid(symbol_id).find_without_retired_skip(:all)
     when "gid" then items = Group.active.partial_match_gid(symbol_id)
     else
-      items = User.partial_match_uid_or_name(search_query)
+      items = User.active.partial_match_uid_or_name(search_query).find_without_retired_skip(:all)
       items.concat(Group.active.partial_match_gid_or_name(search_query))
     end
     items
