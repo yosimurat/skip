@@ -77,7 +77,7 @@ Feature: マイページ
     And 新着通知を作成バッチを実行する
     And "alice"でログインする
 
-    Then I should see "コメントの行方(1)" within "div.antenna"
+    Then I should see "コメントの行方 1" within "div.antenna"
 
   Scenario: 新着通知(ブクマの行方)の表示
     Given 以下のブログを書く:
@@ -89,7 +89,7 @@ Feature: マイページ
 
     When "alice"でログインする
 
-    Then I should see "ブクマの行方(1)" within "div.antenna"
+    Then I should see "ブクマの行方 1" within "div.antenna"
 
   Scenario: 新着通知(ユーザ)の表示
     Given "a_user"で"alice"を新着通知に追加する
@@ -100,7 +100,7 @@ Feature: マイページ
 
     When "a_user"でログインする
 
-    Then I should see "alice(1)" within "div.antenna"
+    Then I should see "alice 1" within "div.antenna"
 
   Scenario: 新着通知(グループ)の表示
     Given 以下のグループを作成する:
@@ -114,7 +114,7 @@ Feature: マイページ
 
     When "a_user"でログインする
 
-    Then I should see "VimGroup(1)" within "div.antenna"
+    Then I should see "VimGroup 1" within "div.antenna"
 
   Scenario: タブ表示/並べて表示を切り替える
     Given   "a_user"でログインする

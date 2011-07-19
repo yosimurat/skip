@@ -20,7 +20,8 @@ Feature: ユーザの初期プロフィール登録処理
     And   メールが"interu@test.com"宛に送信されていること
 
   Scenario: 初期登録URLからユーザのプロフィール登録を行なう
-    Given 以下の利用開始前のユーザを登録する:
+    Given ユーザ名を有効にする
+    And 以下の利用開始前のユーザを登録する:
           |login_id|email|name|
           |new001|new001@test.com|新規 一郎|
 
