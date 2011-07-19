@@ -66,8 +66,8 @@
       </div>
     <% end -%>
 
-    <% if SkipEmbedded::InitialSettings['mypage'] && SkipEmbedded::InitialSettings['mypage']['show_user_introductions'] -%>
-      <%= render :partial => 'users/randam_profile_box' %>
+    <% if show_user_introductions? -%>
+      <%= render :partial => 'users/random_profile_box' %>
     <% end -%>
     <%= render :partial => 'rss_feed_box' %>
     <% cache @today_popular_blogs_cache_key do %>

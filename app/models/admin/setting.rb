@@ -68,6 +68,8 @@ class Admin::Setting < ActiveRecord::Base
   N_('Admin::Setting|Close question limit description')
   N_('Admin::Setting|Generate gid auto')
   N_('Admin::Setting|Generate gid auto description')
+  N_('Admin::Setting|Random profile help')
+  N_('Admin::Setting|Random profile help description')
 
 
   # ================================================================================================

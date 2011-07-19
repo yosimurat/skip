@@ -1,13 +1,13 @@
 <% user_ids = User.active.all(:select => 'id').map(&:id) -%>
 <% rand_user_ids = (1..2).map {|i| user_ids.delete(user_ids.rand) }.compact %>
-<% randam_users = User.active.id_is(rand_user_ids) -%>
+<% random_users = User.active.id_is(rand_user_ids) -%>
 <% search_label = _('Search the other users') %>
-<% unless randam_users.empty? -%>
-<div id="randam_profile_box" class="right_box ui-corner-all">
+<% unless random_users.empty? -%>
+<div id="random_profile_box" class="right_box ui-corner-all">
   <h2 class="ui-corner-top"><%= _("User introductions") %></h2>
   <table>
     <tbody>
-      <% randam_users.each do |user| -%>
+      <% random_users.each do |user| -%>
       <tr>
         <td rowspan="2" style="padding: 5px;">
           <%= user_link_to_with_portrait(user, :width => 48, :height => 48) %>
@@ -30,6 +30,7 @@
             <%= text_field_tag "full_text_query", search_label, :class => "labeled-field", :style => 'width: 130px;' %>
             <%= submit_tag _('Go'), :class => 'search_button' %>
           <% end -%>
+          <%=h Admin::Setting.random_profile_help %>
         </td>
       </tr>
     </tbody>
@@ -37,5 +38,5 @@
 </div>
 <% end -%>
 <% content_for :javascript_initializers do -%>
-  $j('#randam_profile_box input#full_text_query').labeledTextField(<%= {:message => search_label}.to_json %>);
+  $j('#random_profile_box input#full_text_query').labeledTextField(<%= {:message => search_label}.to_json %>);
 <% end -%>
