@@ -90,6 +90,8 @@ close_question_limit:
 generate_gid_auto:
   format: boolean
   default: false
+random_profile_help:
+  default: *ユーザのプロフィール情報(自己紹介など)からも検索出来ます。
 
 # ==================================================================================================
 # RSSフィードの設定

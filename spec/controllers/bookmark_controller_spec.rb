@@ -20,6 +20,7 @@ describe BookmarkController do
   before do
     user = user_login
     session[:user_id] = user.id
+    SkipEmbedded::InitialSettings['bookmark']['enable'] = true
   end
   describe "必須項目の新規作成の場合" do
     it "レスポンスが成功であること" do
@@ -57,6 +58,7 @@ end
 describe BookmarkController, "GET #show" do
   before do
     user_login
+    SkipEmbedded::InitialSettings['bookmark']['enable'] = true
   end
   describe "urlが送られていない場合" do
     before do
@@ -88,6 +90,7 @@ end
 describe BookmarkController, "GET #list" do
   before do
     @user = user_login
+    SkipEmbedded::InitialSettings['bookmark']['enable'] = true
     BookmarkComment.stub(:paginate).and_return(@bookmark_comments = [stub_model(BookmarkComment)])
   end
   describe "自分のブックマーク一覧を表示した場合" do
@@ -148,6 +151,7 @@ end
 describe BookmarkController, "POST #destroy" do
   before do
     user_login
+    SkipEmbedded::InitialSettings['bookmark']['enable'] = true
 
     @bookmark_comment = stub_model(BookmarkComment, :user_id => 1)
 

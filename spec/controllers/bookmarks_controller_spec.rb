@@ -18,6 +18,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe BookmarksController, "GET index" do
   before do
     user_login
+    SkipEmbedded::InitialSettings['bookmark']['enable'] = true
   end
   describe "sort_typeに不正なパラメータが送られた場合" do
     it "SQLインジェクションが起こらないこと" do

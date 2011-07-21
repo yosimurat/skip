@@ -82,6 +82,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe RankingsController, '#index' do
   before do
     user_login
+    SkipEmbedded::InitialSettings['ranking']['enable'] = true
   end
   describe '今日が2008/7/1の場合' do
     before do
@@ -108,6 +109,7 @@ end
 describe RankingsController, 'GET /ranking_data/:content_type/:year/:month' do
   before do
     user_login
+    SkipEmbedded::InitialSettings['ranking']['enable'] = true
   end
   describe 'content_typeの指定が不正(nil又は空)の場合' do
     before  { get :data, :content_type => '' }
@@ -215,6 +217,7 @@ end
 describe RankingsController, '#all' do
   before do
     user_login
+    SkipEmbedded::InitialSettings['ranking']['enable'] = true
     get :all
   end
   it { response.should be_success }
@@ -223,6 +226,7 @@ end
 describe RankingsController, '#monthly' do
   before do
     user_login
+    SkipEmbedded::InitialSettings['ranking']['enable'] = true
   end
   describe '年月の指定が無い場合' do
     before do

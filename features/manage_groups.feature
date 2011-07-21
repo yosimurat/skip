@@ -107,7 +107,8 @@ Feature: グループの管理
     Then flashメッセージに"a_userさんをこのグループの参加者から削除しました。"と表示されていること
 
   Scenario: グループ未参加時のアクション表示
-    Given 以下のグループを作成する:
+    Given お知らせ機能を有効にする
+    And 以下のグループを作成する:
       |owner    |gid        |name         |waiting  |
       |alice    |vim_group  |VimGroup     |false    |
 
@@ -123,7 +124,8 @@ Feature: グループの管理
     And "退会する"と表示されていないこと
 
   Scenario: グループ参加時のアクション表示
-    Given 以下のグループを作成する:
+    Given お知らせ機能を有効にする
+    And 以下のグループを作成する:
       |owner    |gid        |name         |waiting  |
       |alice    |vim_group  |VimGroup     |false    |
     And "a_user"が"vim_group"グループに参加する

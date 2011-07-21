@@ -33,6 +33,10 @@ Given /^質問の告知方法の既定値をメール送信にする機能を"([
   end
 end
 
+Given /^ユーザ名を有効にする$/ do
+  SkipEmbedded::InitialSettings['username_use_setting'] = true
+end
+
 module SkipEmbedded
   class InitialSettings
     # テストの時のみ値の入れ替えを可能にしたいので。

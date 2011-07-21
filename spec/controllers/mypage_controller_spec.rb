@@ -80,12 +80,6 @@ describe MypageController, 'mypage > home 関連' do
       get :index
       assigns[:questions].should == @questions
     end
-    it '最近の人気記事が設定されること' do
-      @access_blogs = {}
-      controller.should_receive(:find_access_blogs_as_locals).with(:per_page => 10).and_return(@access_blogs)
-      get :index
-      assigns[:access_blogs].should == @access_blogs
-    end
     it 'ユーザの公開記事が設定されること' do
       @recent_blogs = {}
       controller.should_receive(:find_recent_blogs_as_locals).with(:per_page => 8).and_return(@recent_blogs)
@@ -619,7 +613,7 @@ describe MypageController, '#valid_list_types' do
     @controller = MypageController.new
     GroupCategory.should_receive(:all).and_return([stub_model(GroupCategory, :code => 'category')])
   end
-  it { @controller.send(:valid_list_types).should == %w(questions access_blogs recent_blogs category) }
+  it { @controller.send(:valid_list_types).should == %w(questions recent_blogs category) }
 end
 
 describe MypageController, '#antenna_entry_title' do

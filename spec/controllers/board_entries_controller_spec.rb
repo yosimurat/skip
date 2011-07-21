@@ -91,7 +91,7 @@ describe BoardEntriesController, 'POST #ado_pointup' do
         end
         it 'GoodJobボタンに表示するメッセージが設定されること' do
           post :ado_pointup
-          response.body.should == '0 GoodJob'
+          response.body.should == '0'
         end
         it '200のレスポンスコードが返ること' do
           post :ado_pointup
