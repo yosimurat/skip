@@ -24,7 +24,7 @@
       <% end -%>
       <tr>
         <td style="padding: 5px;" colspan="2">
-          <% form_tag({:controller => '/search', :action => 'full_text_search'} ,:method => 'get', :id => 'full_text_form') do -%>
+          <% form_tag({:controller => '/search', :action => 'full_text_search'} ,:method => 'get') do -%>
             <%= hidden_field_tag 'target_aid', 'skip' %>
             <%= hidden_field_tag 'target_contents', 'user' %>
             <%= text_field_tag "full_text_query", search_label, :class => "labeled-field", :style => 'width: 130px;' %>
