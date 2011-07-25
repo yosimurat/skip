@@ -82,12 +82,12 @@ SKIPを動かすことができます。
 
 4. データベースの作成（mysqlが起動済みであること）
 --------------------------------------------------------------------------------
-    $ RAILS_ENV=production bundle exec rake db:create
-    $ RAILS_ENV=production bundle exec rake db:migrate
+    $ RAILS_ENV=production rake db:create
+    $ RAILS_ENV=production rake db:migrate
 
 5. 初期データの登録
 --------------------------------------------------------------------------------
-    $ RAILS_ENV=production bundle exec rake skip:load_default_data
+    $ RAILS_ENV=production rake skip:load_default_data
 
 6. 初期管理者ユーザ登録URLの生成
 --------------------------------------------------------------------------------
