@@ -31,7 +31,7 @@ SKIPを動かすにあたり以下の環境で検証を行っています。
 
 
 ================================================================================
-* SKIP バージョンアップ（version 1.8.5 -> version 1.8.6）
+* SKIP バージョンアップ（version 1.8.6 -> version 1.8.7）
 ================================================================================
 下記内容に従い旧バージョンから新バージョンにバージョンアップすることで、
 SKIPを動かすことができます。
@@ -49,6 +49,11 @@ SKIPを動かすことができます。
     $ rm public/javascripts/skip_embedded.js
     $ rm public/stylesheets/skip.style.css
 
+3. gemsのインストール
+--------------------------------------------------------------------------------
+    $ gem install bundler -v1.0.13 --no-rdoc --no-ri
+    $ bundle install --deployment --without development test cucumber
+
 
 ================================================================================
 * SKIP セットアップ（新規構築）
@@ -61,23 +66,8 @@ SKIPを動かすことができます。
 
 1. gemsのインストール
 --------------------------------------------------------------------------------
-    $ sudo gem sources -a http://gems.github.com/
-    $ sudo gem sources -a http://rubygems.org/
-    $ sudo gem install rails --version 2.3.5
-    $ sudo gem install openskip-skip_embedded --version 0.9.19
-    $ sudo gem install will_paginate --version 2.3.12
-    $ sudo gem install fastercsv --version 1.5.1
-    $ sudo gem install json --version 1.2.0
-    $ sudo gem install mysql maedana-ar_mailer ruby-openid
-    $ sudo gem install gettext_rails --version 2.0.4
-    $ sudo gem install gettext_activerecord --version 2.0.4
-    $ sudo gem install locale_rails --version 2.0.4
-    $ sudo gem install feed-normalizer --version 1.5.2
-    $ sudo gem install searchlogic --version 2.4.7
-    $ sudo gem install nokogiri --version 1.4.1
-    $ sudo gem install sanitize --version 1.2.0
-    $ sudo gem install diff-lcs --version 1.1.2
-    $ sudo gem install httpclient --version 2.1.5.2
+    $ gem install bundler -v1.0.13 --no-rdoc --no-ri
+    $ bundle install --deployment --without development test cucumber
 
 2. SKIPのファイル解凍（tarファイルをダウンロードした場合のみ）
 --------------------------------------------------------------------------------
@@ -92,12 +82,12 @@ SKIPを動かすことができます。
 
 4. データベースの作成（mysqlが起動済みであること）
 --------------------------------------------------------------------------------
-    $ RAILS_ENV=production rake db:create
-    $ RAILS_ENV=production rake db:migrate
+    $ RAILS_ENV=production bundle exec rake db:create
+    $ RAILS_ENV=production bundle exec rake db:migrate
 
 5. 初期データの登録
 --------------------------------------------------------------------------------
-    $ RAILS_ENV=production rake skip:load_default_data
+    $ RAILS_ENV=production bundle exec rake skip:load_default_data
 
 6. 初期管理者ユーザ登録URLの生成
 --------------------------------------------------------------------------------
@@ -170,23 +160,18 @@ SKIPでは、以下のバッチ処理を行っています。必要に応じてc
 SKIPでは、ユニットテストにRspecを利用しています。
 利用するには、以下を実行してRspecのインストールを行なってください。
 
-1. gemsのインストール
---------------------------------------------------------------------------------
-    $ sudo gem install rspec
-    $ sudo gem install rspec-rails
-
-2. (未インストールならば)hyperestraierのruby用ライブラリのインストール
+1. (未インストールならば)hyperestraierのruby用ライブラリのインストール
 --------------------------------------------------------------------------------
     $ wget http://hyperestraier.sourceforge.net/hyperestraier-1.4.13.tar.gz
     $ tar zxvf hyperestraier-1.4.13.tar.gz
     $ sudo cp hyperestraier-1.4.13/rubypure/estraierpure.rb /path_to_ruby_home/lib/ruby/site_ruby/1.8
 
-3. データベースの作成（mysqlが起動済みであること）
+2. データベースの作成（mysqlが起動済みであること）
 --------------------------------------------------------------------------------
     $ RAILS_ENV=test rake db:create
     $ RAILS_ENV=test rake db:migrate
 
-4. rspecの実行
+3. rspecの実行
 --------------------------------------------------------------------------------
     $ rake spec
 このコマンドを発行するとユニットテストが実行されます。
