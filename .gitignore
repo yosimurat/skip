@@ -20,5 +20,4 @@ pkg/*
 *.#*
 webrat-*.html
 rerun.txt
-.bundle
 .rvmrc
