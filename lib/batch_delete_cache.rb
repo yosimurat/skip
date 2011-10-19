@@ -116,16 +116,25 @@ class BatchDeleteCache < BatchBase
     end
   end
 
-#   class UserDeleter < DefaultDeleter
-#     BatchDeleteCache.add_deleter self
-#     def cache_path(id)
-#       File.join(root_cache_path, "user", dir_id(id), "#{id}.html")
-#     end
+   class UserDeleter < DefaultDeleter
+     BatchDeleteCache.add_deleter self
+     def all_ids
+       return @all_ids if @all_ids
+       @all_ids = User.active.all(:select => "id", :order => "id asc").map(&:id)
+     end
 
-#     def meta_path(id)
-#       File.join("#{root_cache_path}_meta", "user", dir_id(id), "#{id}.html")
-#     end
-#   end
+     def last_id
+       User.find_without_retired_skip(:all).last.id
+     end
+
+     def cache_path(id)
+       File.join(root_cache_path, "user", dir_id(id), "#{id}.html")
+     end
+
+     def meta_path(id)
+       File.join("#{root_cache_path}_meta", "user", dir_id(id), "#{id}.html")
+     end
+   end
 end
 
 BatchDeleteCache.execution unless RAILS_ENV == 'test'
