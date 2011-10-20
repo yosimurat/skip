@@ -1,0 +1,24 @@
+<% form_for @thankyou || current_user.sent_thankyous.build do |f| -%>
+  <p>
+    <%= f.label :comment %>
+    <%= f.text_area :comment, :size => '40x6', :style => 'width: 330px;' %>
+    <%= f.hidden_field :receiver_id, :value => current_target_user.id %>
+  </p>
+  <p style="margin-top: 10px; text-align: right;">
+    <%= f.submit _('Send') %>
+  </p>
+<% end -%>
+
+<% content_for :javascript_initializers do -%>
+  $j('#new_thankyou').submit(function() {
+    $j.ajax({
+      type:'POST',
+      url: $j(this).attr('action'),
+      data: $j(this).serialize(),
+      success: function(html) {
+        $j('#thankyou_dialog').dialog('close');
+      }
+    });
+    return false;
+  });
+<% end -%>

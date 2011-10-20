@@ -269,5 +269,12 @@ $j(function(){
       return false;
     });
 
+    // thankyouダイアログ
+    $j('#thankyou_dialog').dialog({
+      bgiframe: true,
+      autoOpen: false,
+      width: 360,
+      height: 210
+    })
 });
 

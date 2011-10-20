@@ -45,6 +45,9 @@ class User < ActiveRecord::Base
   has_many :system_messages, :dependent => :destroy
   has_many :invitations, :dependent => :destroy
 
+  has_many :sent_thankyous, :class_name => 'Thankyou', :foreign_key => 'sender_id'
+  has_many :received_thankyous, :class_name => 'Thankyou', :foreign_key => 'receiver_id'
+
   validates_presence_of :name
   validates_length_of :name, :maximum => 60
 
