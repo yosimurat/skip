@@ -23,6 +23,8 @@ class UserController < ApplicationController
   def show
     # 紹介してくれた人一覧
     @against_chains = @user.against_chains.order_new.limit(5)
+    # Thankyou一覧
+    @thankyous = @user.received_thankyous.descend_by_created_at.all(:include => [:receiver, :sender])
     if current_target_user != current_user
       ProfileAccessLog.create(:to_user_id => current_target_user.id, :from_user_id => current_user.id) if SkipEmbedded::InitialSettings['enable_collect_logs']
     end

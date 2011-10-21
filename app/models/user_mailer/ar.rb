@@ -51,4 +51,13 @@ class UserMailer::AR < UserMailer::Base
     @headers    = {}
     @body       = {:message => mail_magazine[:contents], :footer => footer}
   end
+
+  def sent_thankyou thankyou
+    @recipients = thankyou.receiver.email
+    @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title}]" + _('You got a new thankyou!'))
+    @from       = from
+    @send_on    = Time.now
+    @headers    = {}
+    @body       = {:thankyou => thankyou, :footer => footer}
+  end
 end

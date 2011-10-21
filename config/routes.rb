@@ -14,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
       user.resources :invitations, :only => [:new, :create]
     end
   end
+  map.resources :thankyous, :only => [:create, :destroy]
 
   map.resources :bookmarks, :only => %w(index) do |bookmark|
     bookmark.resources :bookmark_comments, :only => %w(create)
