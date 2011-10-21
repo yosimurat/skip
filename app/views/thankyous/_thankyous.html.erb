@@ -5,13 +5,13 @@
     <table class="normal user_chain ui-corner-all">
     <% thankyous.each do |thankyou| -%>
       <tr>
-        <th>
-          <%= user_link_to_with_portrait(thankyou.sender, :width => 60, :height => 40) %><br/>
-          <%= user_link_to(thankyou.sender) %>
+        <th rowspan="2">
+          <%= user_link_to_with_portrait(thankyou.sender, :width => 60, :height => 40) %><br/><%= user_link_to(thankyou.sender) %>
         </th>
-        <td>
-          <%= h thankyou.comment %>
-        </td>
+        <td><%= h thankyou.created_at.to_s(:db) %></td>
+      </tr>
+      <tr>
+        <td><%= h thankyou.comment %></td>
       </tr>
     <% end -%>
     </table>
