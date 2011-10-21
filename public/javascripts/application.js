@@ -274,7 +274,12 @@ $j(function(){
       bgiframe: true,
       autoOpen: false,
       width: 360,
-      height: 210
+      height: 210,
+      close: function(){
+        $j(this).find('form').get(0).reset();
+        $j(this).find('.indicator').hide();
+        $j(this).find('input:submit').removeAttr('disabled');
+      }
     })
 });
 
