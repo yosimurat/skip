@@ -276,6 +276,7 @@ class BatchMakeCache < BatchBase
     body_lines << h(user.email) unless Admin::Setting.hide_email
     body_lines << h(user.section)
     body_lines << h(user.against_chains.map{|ac| Sanitize.clean(ac.comment.gsub(/\r\n?/, ' ')) }.join(' '))
+    body_lines << h(user.received_thankyous.map{|thankyou| thankyou.comment}.join(' '))
 
     user.user_profile_values.each do |profile|
       body_lines << h(profile.value)
