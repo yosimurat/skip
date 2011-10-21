@@ -16,7 +16,7 @@
 module ThankyousHelper
   def thankyou_link_to receive_user
     if receive_user != current_user && receive_user.active?
-      icon_tag('thumb_up') + link_to(_('Send a thankyou'), 'javascript:void(0);', :onclick => "$j('#thankyou_dialog').dialog('open');")
+      icon_tag('thumb_up') + link_to(_('Send a thankyou'), 'javascript:void(0);', :data_receiver_id => "#{receive_user.id}", :onclick => "$j('#thankyou_dialog').find('#thankyou_receiver_id').val($j(this).attr('data_receiver_id'));$j('#thankyou_dialog').dialog('open');")
     end
   end
 end

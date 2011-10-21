@@ -1,7 +1,3 @@
-<% content_for :stylesheet do -%>
-  <%= skip_stylesheet_link_tag "themes/cupertino/ui.dialog.css" %>
-<% end -%>
-
 <% content_for :contents_left do -%>
   <% unless current_user == current_target_user -%>
     <%= render(:partial => 'user/action_box', :locals => { :user => current_target_user }) %>
