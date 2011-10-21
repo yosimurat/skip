@@ -274,7 +274,9 @@ $j(function(){
       bgiframe: true,
       autoOpen: false,
       width: 360,
-      height: 210,
+      height: 'auto',
+      resizable: false,
+      hide: 'slide',
       close: function(){
         $j(this).find('form').get(0).reset();
         $j(this).find('.indicator').hide();

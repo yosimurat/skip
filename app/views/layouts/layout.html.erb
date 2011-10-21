@@ -54,9 +54,6 @@
         </div>
         <% end -%>
       </div>
-      <div id="thankyou_dialog" title="<%= _('Send a thankyou') %>">
-        <%= render :partial => 'thankyous/form' %>
-      </div>
     <% elsif current_target_group and !current_target_group.new_record? %>
       <h1 id="title"><%=h current_target_group.name %></h1>
       <ul class="no_style horizontal">
@@ -123,6 +120,10 @@
   <% if current_target_user and !current_target_user.new_record? and !current_target_user.unused? -%>
     <%= render :partial => "shared/global_footer_navigation" -%>
   <% end -%>
+
+  <div id="thankyou_dialog" title="<%= _('Send a thankyou') %>">
+    <%= render :partial => 'thankyous/form' %>
+  </div>
 </div><!-- main -->
 
 <% end -%>
