@@ -273,14 +273,19 @@ $j(function(){
     $j('#thankyou_dialog').dialog({
       bgiframe: true,
       autoOpen: false,
-      width: 360,
+      width: 380,
       height: 'auto',
       resizable: false,
       hide: 'slide',
+      open: function() {
+        $j(this).find('.complete_message').hide();
+        $j(this).find('form').show();
+      },
       close: function(){
         $j(this).find('form').get(0).reset();
         $j(this).find('.indicator').hide();
         $j(this).find('input:submit').removeAttr('disabled');
+        clearTimeout($j(this).find('form').data('closeTimeout'));
       }
     })
 });
