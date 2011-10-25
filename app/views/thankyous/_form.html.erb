@@ -9,17 +9,32 @@
     <%= f.submit _('Send') %>
   </p>
 <% end -%>
+<div class="complete_message invisible">
+  <p>
+    <b><%= _('Successed to send a thankyou.') %></b>
+  </p>
+</div>
 
 <% content_for :javascript_initializers do -%>
   $j('#new_thankyou').submit(function() {
-    $j(this).find('input:submit').attr('disabled', 'disabled');
-    $j(this).find('.indicator').show();
+    $form = $j(this);
+    $form.find('input:submit').attr('disabled', 'disabled');
+    $form.find('.indicator').show();
+    $completeMessage = $j(this).parent().find('.complete_message');
     $j.ajax({
       type:'POST',
       url: $j(this).attr('action'),
       data: $j(this).serialize(),
       success: function(html) {
-        $j('#thankyou_dialog').dialog('close');
+        $form.hide();
+        $completeMessage.show();
+        var closeTimeout = setTimeout(function(){
+          var $dialog = $j('#thankyou_dialog');
+          if($dialog.dialog('isOpen')){
+            $dialog.dialog("close");
+          }
+        }, 3000);
+        $form.data('closeTimeout', closeTimeout);
       }
     });
     return false;
