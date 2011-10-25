@@ -254,6 +254,7 @@ default: &default
   replace_name_of_group:                                             # グループの名称を置き換える
   button_design_image: false
   enable_collect_logs: false
+  replace_name_of_thankyou:                                         # Thankyouのラベルを置き換える
 
 ####################################################################################################
 # 以下設定不要
