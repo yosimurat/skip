@@ -2600,7 +2600,10 @@ msgid ""
 "Click on the URL to see the comment.\n"
 "\n"
 "  %s"
-msgstr "ありがとうコメントを確認するには、以下のURLをクリックしてください。"
+msgstr ""
+"ありがとうコメントを確認するには、以下のURLをクリックしてください。\n"
+"\n"
+"  %s"
 
 #: app/views/user_mailer/ar/sent_message.html.erb:5
 msgid ""
