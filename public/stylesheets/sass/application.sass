@@ -1386,14 +1386,15 @@ div#board_entry_comments
     div.header
       :border-bottom 1px dotted #aaa
       :position relative
-      :height 1.5em
+      :height 1.8em
       :padding 1px 5px
       :vertical-align text-bottom
       :_width 100%
       span.title, span.buttons
         :position absolute
-        :bottom 0
+        :bottom 3px
       span.title
+        :width 50%
         :left 2px
         span.date
           :font-size 0.8em
@@ -1982,5 +1983,21 @@ span.thankyou_link
   padding-left: 10px
   font:
     size: 0.8em
+a.btn_blue
+  text-decoration: none
+  color: #fff
+  border-top: 2px solid #3399ff
+  border-left: 2px solid #3399ff
+  border-right: 2px solid #0033cc
+  border-bottom: 2px solid #0033cc
+  background: #0066ff
+  padding: 2px 10px
+  -moz-border-radius: 6px
+  -webkit-border-radius: 6px
+  border-radius: 6px
     weight: normal
+  &:hover
+    color: #fff
+    text-decoration: none
+    border-color: #00a0dd
 
