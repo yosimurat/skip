@@ -1,5 +1,4 @@
-<% unless thankyous.empty? -%>
-<div class="relative100">
+<div class="relative100 <%= 'invisible' if thankyous.empty? %>">
   <h2 class="topix_title"><%= icon_tag('asterisk_orange') %><%= _('Thankyous') %></h2>
   <div class="topix_body">
     <table id="thankyous_list" class="normal user_chain ui-corner-all">
@@ -9,4 +8,3 @@
     </table>
   </div>
 </div>
-<% end -%>
