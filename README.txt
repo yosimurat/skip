@@ -78,6 +78,7 @@ SKIPを動かすことができます。
     $ sudo gem install sanitize --version 1.2.0
     $ sudo gem install diff-lcs --version 1.1.2
     $ sudo gem install httpclient --version 2.1.5.2
+    $ sudo gem install jrails --version 0.6.0
 
 2. SKIPのファイル解凍（tarファイルをダウンロードした場合のみ）
 --------------------------------------------------------------------------------
