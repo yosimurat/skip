@@ -21,7 +21,7 @@ class ThankyousController < ApplicationController
     end
     respond_to do |format|
       format.js do
-        render :js => '', :status => :created
+        render
       end
     end
   end
