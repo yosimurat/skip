@@ -1,0 +1,13 @@
+page['#new_thankyou'].hide().end()
+page['#new_thankyou'].parent().find('.complete_message').show()
+closeTimeout = <<-RUBY
+var closeTimeout = setTimeout(function(){
+  var $dialog = $j('#thankyou_dialog');
+  if($dialog.dialog('isOpen')){
+    $dialog.dialog("close");
+  }
+}, 3000);
+RUBY
+page << closeTimeout
+page['#new_thankyou'].data('closeTimeout', closeTimeout)
+page.insert_html(:top, 'thankyous_list', render(:partial => 'thankyous/thankyou', :locals => {:thankyou => @thankyou}))

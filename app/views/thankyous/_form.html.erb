@@ -1,4 +1,4 @@
-<% form_for @thankyou || current_user.sent_thankyous.build do |f| -%>
+<% remote_form_for (@thankyou || current_user.sent_thankyous.build), :before => "$form = $j('#new_thankyou');$form.find('input:submit').attr('disabled', 'disabled');$form.find('.indicator').show();" do |f| -%>
   <p>
     <%= f.label :comment %>
     <%= f.text_area :comment, :size => '40x6', :style => 'width: 330px;' %>
@@ -14,29 +14,3 @@
     <b><%= _('Successed to send a thankyou.') %></b>
   </p>
 </div>
-
-<% content_for :javascript_initializers do -%>
-  $j('#new_thankyou').submit(function() {
-    $form = $j(this);
-    $form.find('input:submit').attr('disabled', 'disabled');
-    $form.find('.indicator').show();
-    $completeMessage = $j(this).parent().find('.complete_message');
-    $j.ajax({
-      type:'POST',
-      url: $j(this).attr('action'),
-      data: $j(this).serialize(),
-      success: function(html) {
-        $form.hide();
-        $completeMessage.show();
-        var closeTimeout = setTimeout(function(){
-          var $dialog = $j('#thankyou_dialog');
-          if($dialog.dialog('isOpen')){
-            $dialog.dialog("close");
-          }
-        }, 3000);
-        $form.data('closeTimeout', closeTimeout);
-      }
-    });
-    return false;
-  });
-<% end -%>

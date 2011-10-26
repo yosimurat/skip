@@ -2,17 +2,9 @@
 <div class="relative100">
   <h2 class="topix_title"><%= icon_tag('asterisk_orange') %><%= _('Thankyous') %></h2>
   <div class="topix_body">
-    <table class="normal user_chain ui-corner-all">
+    <table id="thankyous_list" class="normal user_chain ui-corner-all">
     <% thankyous.each do |thankyou| -%>
-      <tr>
-        <th rowspan="2">
-          <%= user_link_to_with_portrait(thankyou.sender, :width => 60, :height => 40) %><br/><%= user_link_to(thankyou.sender) %>
-        </th>
-        <td><%= h thankyou.created_at.to_s(:db) %></td>
-      </tr>
-      <tr>
-        <td><%= h thankyou.comment %></td>
-      </tr>
+      <%= render :partial => 'thankyous/thankyou', :locals => {:thankyou => thankyou} %>
     <% end -%>
     </table>
   </div>
