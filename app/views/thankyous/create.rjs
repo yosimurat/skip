@@ -11,3 +11,5 @@ RUBY
 page << closeTimeout
 page['#new_thankyou'].data('closeTimeout', closeTimeout)
 page.insert_html(:top, 'thankyous_list', render(:partial => 'thankyous/thankyou', :locals => {:thankyou => @thankyou}))
+page['#thankyous_list'].closest('.relative100').show();
+page << "jQuery('img.fit_image').fitimage({ placeholder: relative_url_root + '/images/skip/jquery/fitimage/spacer.gif' });"
