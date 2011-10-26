@@ -44,6 +44,7 @@ gem 'tlsmail', '0.0.1'
 gem 'uuidtools', '1.0.4'
 gem 'will_paginate', '2.3.12', :require => 'will_paginate'
 gem 'yamler', '0.1.0'
+gem 'jrails', :require => 'jrails'
 
 group :development do
   gem 'bullet', '1.7.2'
