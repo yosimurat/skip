@@ -16,7 +16,7 @@
 module ThankyousHelper
   def thankyou_link_to receive_user
     if receive_user != current_user && receive_user.active?
-       link_to(icon_tag('thumb_up') + SkipEmbedded::InitialSettings['replace_name_of_thankyou'] || _('Send a thankyou'), 'javascript:void(0);', :data_receiver_id => "#{receive_user.id}", :class => 'btn_blue', :onclick => "$j('#thankyou_dialog').find('#thankyou_receiver_id').val($j(this).attr('data_receiver_id'));$j('#thankyou_dialog').dialog('open');")
+       link_to(icon_tag('thumb_up') + (SkipEmbedded::InitialSettings['replace_name_of_thankyou'] || _('Send a thankyou')), 'javascript:void(0);', :data_receiver_id => "#{receive_user.id}", :class => 'btn_blue', :onclick => "$j('#thankyou_dialog').find('#thankyou_receiver_id').val($j(this).attr('data_receiver_id'));$j('#thankyou_dialog').dialog('open');")
     end
   end
 end
