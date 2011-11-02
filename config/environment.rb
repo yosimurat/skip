@@ -47,7 +47,6 @@ Rails::Initializer.run do |config|
   # config.active_record.schema_format = :ruby
 
   # See Rails::Configuration for more options
-
 end
 
 # 共通メニュー
