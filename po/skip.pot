@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.7\n"
-"POT-Creation-Date: 2011-10-25 14:14+0100\n"
+"POT-Creation-Date: 2011-11-25 08:36-0000\n"
 "PO-Revision-Date: 2008-08-11 17:41+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4003,6 +4003,10 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
+#: app/views/thankyous/_thankyous.html.erb:2
+msgid "List of %s"
+msgstr ""
+
 #: app/views/entries/_user_archive_box.html.erb:7
 msgid "List of Authors"
 msgstr ""
@@ -5218,7 +5222,7 @@ msgid "Recent tags of other users: "
 msgstr ""
 
 #: app/views/mypage/_thankyous_box.html.erb:4
-msgid "Recently Thankyous"
+msgid "Recently %s"
 msgstr ""
 
 #: app/views/board_entries/_form.html.erb:38
@@ -5776,7 +5780,7 @@ msgstr ""
 #: app/controllers/statistics_controller.rb:67
 #: app/views/layouts/wiki.html.erb:79
 #: app/views/layouts/admin/application.html.erb:70
-#: app/views/layouts/layout.html.erb:137
+#: app/views/layouts/layout.html.erb:138
 msgid "Site Information"
 msgstr ""
 
@@ -6131,10 +6135,6 @@ msgstr ""
 msgid "Terms of Use"
 msgstr ""
 
-#: app/views/thankyous/_thankyous.html.erb:3
-msgid "Thankyous"
-msgstr ""
-
 #: app/models/thankyou.rb:-
 msgid "Thankyou|Comment"
 msgstr ""
@@ -6403,6 +6403,10 @@ msgstr ""
 
 #: app/views/mypage/_today_access_blogs_box.html.erb:22
 msgid "Total"
+msgstr ""
+
+#: app/views/layouts/layout.html.erb:137
+msgid "Total %{thankyou_label} : %{thankyou_count} thankyous"
 msgstr ""
 
 #: app/models/site_count.rb:31
