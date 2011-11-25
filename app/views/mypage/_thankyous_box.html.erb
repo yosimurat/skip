@@ -1,7 +1,7 @@
 <% thankyous = Thankyou.comment_is_not('').created_at_gte(1.month.ago).all(:include => [:receiver, :sender]).sort_by{|i| rand}.slice!(0..4) -%>
 <% unless thankyous.empty? -%>
 <div id="thankyou_box" class="right_box ui-corner-all">
-  <h2 class="ui-corner-top"><%= _("Recently Thankyous") %></h2>
+  <h2 class="ui-corner-top"><%= _("Recently %s") % SkipEmbedded::InitialSettings['replace_name_of_thankyou']  %></h2>
   <table>
     <tbody>
       <% thankyous.each do |thankyou| -%>

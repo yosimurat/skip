@@ -134,6 +134,7 @@
   <span class="item"><%= icon_tag 'table_lightning'    -%> <%= _("Today's Access: %s access") % h(@site_count.today_user_count)%></span>
   <span class="item"><%= icon_tag 'database'           -%> <%= _("Total Entries: %s entries") % h(@site_count.total_blog_count) %></span>
   <span class="item"><%= icon_tag 'database_lightning' -%> <%= _("Today's Entries: %s entries") % h(@site_count.today_blog_count) %></span>
+  <span class="item"><%= icon_tag 'thumb_up'           -%> <%= _("Total %{thankyou_label} : %{thankyou_count} thankyous") % {:thankyou_label => SkipEmbedded::InitialSettings['replace_name_of_thankyou'], :thankyou_count => Thankyou.count } %></span>
   <span class="item_margin_left"><%= icon_tag 'chart_curve'        -%> <%= link_to(_("Site Information"), :controller => "/statistics") -%></span>
 </div>
 <% end -%>

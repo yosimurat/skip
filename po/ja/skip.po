@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.7\n"
-"POT-Creation-Date: 2011-10-25 14:14+0100\n"
+"POT-Creation-Date: 2011-11-25 08:36-0000\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4233,6 +4233,10 @@ msgstr "リンクURL"
 msgid "Links"
 msgstr "リンク"
 
+#: app/views/thankyous/_thankyous.html.erb:2
+msgid "List of %s"
+msgstr "%sの一覧"
+
 #: app/views/entries/_user_archive_box.html.erb:7
 msgid "List of Authors"
 msgstr "投稿者の一覧"
@@ -5467,8 +5471,8 @@ msgid "Recent tags of other users: "
 msgstr "他のユーザの最近のタグ："
 
 #: app/views/mypage/_thankyous_box.html.erb:4
-msgid "Recently Thankyous"
-msgstr "最近のありがとう"
+msgid "Recently %s"
+msgstr "最近の%s"
 
 #: app/views/board_entries/_form.html.erb:38
 msgid "Recommended tags: "
@@ -6045,7 +6049,7 @@ msgstr "ユーザ登録"
 #: app/controllers/statistics_controller.rb:67
 #: app/views/layouts/wiki.html.erb:79
 #: app/views/layouts/admin/application.html.erb:70
-#: app/views/layouts/layout.html.erb:137
+#: app/views/layouts/layout.html.erb:138
 msgid "Site Information"
 msgstr "トレンド・キャッチ"
 
@@ -6400,10 +6404,6 @@ msgstr "山田 太郎"
 msgid "Terms of Use"
 msgstr "利用規約"
 
-#: app/views/thankyous/_thankyous.html.erb:3
-msgid "Thankyous"
-msgstr "ありがとう一覧"
-
 #: app/models/thankyou.rb:-
 msgid "Thankyou|Comment"
 msgstr "コメント"
@@ -6693,6 +6693,10 @@ msgstr "話題の記事："
 #: app/views/mypage/_today_access_blogs_box.html.erb:22
 msgid "Total"
 msgstr "累計"
+
+#: app/views/layouts/layout.html.erb:137
+msgid "Total %{thankyou_label} : %{thankyou_count} thankyous"
+msgstr "総%{thankyou_label}件数 : %{thankyou_count}件"
 
 #: app/models/site_count.rb:31
 msgid "Total Entries"
@@ -8717,11 +8721,17 @@ msgstr "« 前"
 #~ msgid "Enable owner only"
 #~ msgstr "あなたのみ可能"
 
+#~ msgid "Recently Thankyous"
+#~ msgstr "最近のありがとう"
+
 #~ msgid "Selected edit authority"
 #~ msgstr "選択されている編集権限"
 
 #~ msgid "Selected publication type"
 #~ msgstr "選択されている公開範囲"
+
+#~ msgid "Thankyous"
+#~ msgstr "ありがとう一覧"
 
 #~ msgid "[Back to question]"
 #~ msgstr "[質問の画面へ戻る]"
