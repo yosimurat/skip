@@ -6,16 +6,15 @@
     <tbody>
       <% thankyous.each do |thankyou| -%>
       <tr>
-        <td rowspan="2" style="width: 64px; padding: 5px;">
+        <td style="width: 64px; padding: 5px;">
           <%= user_link_to_with_portrait(thankyou.receiver, :width => 64, :height => 64) %>
         </td>
-        <td style="padding: 5px 5px 0 0;">
-          from <%= user_link_to(thankyou.sender) %>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 0px 5px 5px 0;">
-          <span class="small_text"><%=h truncate(thankyou.comment, 20) %></span>
+        <td style="padding: 5px 5px 0 0; vertical-align: top;">
+          <ul>
+            <li>to <%= user_link_to(thankyou.receiver) %></li>
+            <li>from <%= user_link_to(thankyou.sender) %></li>
+            <li><span class="small_text"><%=h truncate(thankyou.comment, 20) %></span></li>
+        </ul>
         </td>
       </tr>
       <% end -%>
