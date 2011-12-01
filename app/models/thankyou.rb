@@ -23,4 +23,8 @@ class Thankyou < ActiveRecord::Base
   validates_length_of :comment, :maximum => 1000
 
   named_scope :limit, proc { |num| { :limit => num } }
+
+  def self.thankyou_label
+    SkipEmbedded::InitialSettings['replace_name_of_thankyou'].blank? ? _('thankyou') : SkipEmbedded::InitialSettings['replace_name_of_thankyou']
+  end
 end
