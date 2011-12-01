@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.7\n"
-"POT-Creation-Date: 2011-11-25 08:36-0000\n"
+"POT-Creation-Date: 2011-12-01 18:44-0000\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2544,9 +2544,9 @@ msgstr ""
 
 #: app/views/user_mailer/ar/sent_thankyou.html.erb:7
 msgid ""
-"Click on the URL to see the comment.\n"
+"Click on the URL to see the %{thankyou_label} comment.\n"
 "\n"
-"  %s"
+"  %{user_url}"
 msgstr ""
 
 #: app/views/user_mailer/ar/sent_message.html.erb:5
@@ -5306,7 +5306,7 @@ msgid "Reading"
 msgstr ""
 
 #: app/views/layouts/layout.html.erb:38
-msgid "Received thankyous"
+msgid "Received %{thankyou_label}"
 msgstr ""
 
 #: app/views/group/show.html.erb:81
@@ -5632,8 +5632,8 @@ msgstr ""
 msgid "Send Emails"
 msgstr ""
 
-#: app/helpers/thankyous_helper.rb:19 app/views/layouts/layout.html.erb:124
-msgid "Send a thankyou"
+#: app/views/layouts/layout.html.erb:124
+msgid "Send a %{thankyou_label}"
 msgstr ""
 
 #: app/views/admin/users/index.html.erb:67
@@ -5663,12 +5663,12 @@ msgstr ""
 msgid "Sending..."
 msgstr ""
 
-#: app/controllers/platform_controller.rb:165
-msgid "Sent an email containing the URL for resettig OpenID URL to %{email}."
+#: app/views/layouts/layout.html.erb:39
+msgid "Sent %{thankyou_label}"
 msgstr ""
 
-#: app/views/layouts/layout.html.erb:39
-msgid "Sent thankyous"
+#: app/controllers/platform_controller.rb:165
+msgid "Sent an email containing the URL for resettig OpenID URL to %{email}."
 msgstr ""
 
 #: app/helpers/calendar_helper.rb:78
@@ -7542,11 +7542,11 @@ msgid "You cannot delete user who is not unused."
 msgstr ""
 
 #: app/views/user_mailer/ar/sent_thankyou.html.erb:3
-msgid "You got a new thankyou from %s"
+msgid "You got a new %{thankyou_label} from %{uid}"
 msgstr ""
 
 #: app/models/user_mailer/ar.rb:57
-msgid "You got a new thankyou!"
+msgid "You got a new %{thankyou_label}thankyou!"
 msgstr ""
 
 #: app/controllers/platform_controller.rb:51
@@ -8342,7 +8342,7 @@ msgstr ""
 msgid "tag"
 msgstr ""
 
-#: app/models/thankyou.rb:-
+#: app/models/thankyou.rb:- app/models/thankyou.rb:28
 msgid "thankyou"
 msgstr ""
 

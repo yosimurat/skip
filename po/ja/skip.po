@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.7\n"
-"POT-Creation-Date: 2011-11-25 08:36-0000\n"
+"POT-Creation-Date: 2011-12-01 18:44-0000\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2597,13 +2597,13 @@ msgstr "%sにアクセスするには、以下URLをクリックしてくださ�
 
 #: app/views/user_mailer/ar/sent_thankyou.html.erb:7
 msgid ""
-"Click on the URL to see the comment.\n"
+"Click on the URL to see the %{thankyou_label} comment.\n"
 "\n"
-"  %s"
+"  %{user_url}"
 msgstr ""
-"ありがとうコメントを確認するには、以下のURLをクリックしてください。\n"
+"%{thankyou_label}コメントを確認するには、以下のURLをクリックしてください。\n"
 "\n"
-"  %s"
+"  %{user_url}"
 
 #: app/views/user_mailer/ar/sent_message.html.erb:5
 msgid ""
@@ -5436,8 +5436,8 @@ msgid "Reading"
 msgstr "読書"
 
 #: app/views/layouts/layout.html.erb:38
-msgid "Received thankyous"
-msgstr "送られたありがとう数"
+msgid "Received %{thankyou_label}"
+msgstr "受け取った%{thankyou_label}数"
 
 #: app/views/group/show.html.erb:81
 #: app/views/mypage/_publicated_entries_tabs.html.erb:1
@@ -5769,9 +5769,9 @@ msgstr "送信する"
 msgid "Send Emails"
 msgstr "投稿時にメールも送信する"
 
-#: app/helpers/thankyous_helper.rb:19 app/views/layouts/layout.html.erb:124
-msgid "Send a thankyou"
-msgstr "ありがとうを送る"
+#: app/views/layouts/layout.html.erb:124
+msgid "Send a %{thankyou_label}"
+msgstr "%{thankyou_label}を送る"
 
 #: app/views/admin/users/index.html.erb:67
 msgid "Send activation email to selected users"
@@ -5800,14 +5800,14 @@ msgstr "テスト送信"
 msgid "Sending..."
 msgstr "送信しています..."
 
+#: app/views/layouts/layout.html.erb:39
+msgid "Sent %{thankyou_label}"
+msgstr "送った%{thankyou_label}数"
+
 #: app/controllers/platform_controller.rb:165
 msgid "Sent an email containing the URL for resettig OpenID URL to %{email}."
 msgstr ""
 "OpenID URLを再設定するためのURLを記載したメールを%{email}宛に送信しました。"
-
-#: app/views/layouts/layout.html.erb:39
-msgid "Sent thankyous"
-msgstr "送ったありがとう数"
 
 #: app/helpers/calendar_helper.rb:78
 msgid "September"
@@ -7738,12 +7738,12 @@ msgid "You cannot delete user who is not unused."
 msgstr "未使用のユーザ以外削除できません。"
 
 #: app/views/user_mailer/ar/sent_thankyou.html.erb:3
-msgid "You got a new thankyou from %s"
-msgstr "%s さんからあなたへありがとうが送られました。"
+msgid "You got a new %{thankyou_label} from %{uid}"
+msgstr "%{uid} さんからあなたへ%{thankyou_label}が送られました。"
 
 #: app/models/user_mailer/ar.rb:57
-msgid "You got a new thankyou!"
-msgstr "新しくありがとうが送られました!"
+msgid "You got a new %{thankyou_label}thankyou!"
+msgstr "新しく%{thankyou_label}が送られました!"
 
 #: app/controllers/platform_controller.rb:51
 msgid "You had been retired."
@@ -8541,7 +8541,7 @@ msgstr ""
 msgid "tag"
 msgstr "タグ"
 
-#: app/models/thankyou.rb:-
+#: app/models/thankyou.rb:- app/models/thankyou.rb:28
 msgid "thankyou"
 msgstr "ありがとう"
 
@@ -8715,11 +8715,23 @@ msgstr "« 前"
 #~ msgid "Back to %s"
 #~ msgstr "「%s」へ戻る"
 
+#~ msgid ""
+#~ "Click on the URL to see the comment.\n"
+#~ "\n"
+#~ "  %s"
+#~ msgstr ""
+#~ "ありがとうコメントを確認するには、以下のURLをクリックしてください。\n"
+#~ "\n"
+#~ "  %s"
+
 #~ msgid "Enable group members"
 #~ msgstr "参加者も編集可能"
 
 #~ msgid "Enable owner only"
 #~ msgstr "あなたのみ可能"
+
+#~ msgid "Received thankyous"
+#~ msgstr "送られたありがとう数"
 
 #~ msgid "Recently Thankyous"
 #~ msgstr "最近のありがとう"
@@ -8730,8 +8742,20 @@ msgstr "« 前"
 #~ msgid "Selected publication type"
 #~ msgstr "選択されている公開範囲"
 
+#~ msgid "Send a thankyou"
+#~ msgstr "ありがとうを送る"
+
+#~ msgid "Sent thankyous"
+#~ msgstr "送ったありがとう数"
+
 #~ msgid "Thankyous"
 #~ msgstr "ありがとう一覧"
+
+#~ msgid "You got a new thankyou from %s"
+#~ msgstr "%s さんからあなたへありがとうが送られました。"
+
+#~ msgid "You got a new thankyou!"
+#~ msgstr "新しくありがとうが送られました!"
 
 #~ msgid "[Back to question]"
 #~ msgstr "[質問の画面へ戻る]"

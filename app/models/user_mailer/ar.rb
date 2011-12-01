@@ -54,7 +54,7 @@ class UserMailer::AR < UserMailer::Base
 
   def sent_thankyou thankyou
     @recipients = thankyou.receiver.email
-    @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title}]" + _('You got a new thankyou!'))
+    @subject    = UserMailer::Base.base64("[#{Admin::Setting.abbr_app_title}]" + _('You got a new %{thankyou_label}thankyou!') % {:thankyou_label => Thankyou.thankyou_label})
     @from       = from
     @send_on    = Time.now
     @headers    = {}
