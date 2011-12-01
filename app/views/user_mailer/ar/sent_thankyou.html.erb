@@ -1,9 +1,9 @@
 <%= @header %>
 
-<%= _("You got a new thankyou from %s") % @thankyou.sender.uid %>
+<%= _("You got a new %{thankyou_label} from %{uid}") % {:thankyou_label => Thankyou.thankyou_label, :uid => @thankyou.sender.uid} %>
 
 <%= @thankyou.comment %>
 
-<%= _("Click on the URL to see the comment.\n\n  %s") % url_for(:controller => :user, :action => 'show', :uid => @thankyou.receiver.uid, :only_path => false) %>
+<%= _("Click on the URL to see the %{thankyou_label} comment.\n\n  %{user_url}") % {:thankyou_label => Thankyou.thankyou_label, :user_url => url_for(:controller => :user, :action => 'show', :uid => @thankyou.receiver.uid, :only_path => false)} %>
 
 <%= @footer %>
