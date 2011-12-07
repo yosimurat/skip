@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.7\n"
-"POT-Creation-Date: 2011-12-01 18:44-0000\n"
+"POT-Creation-Date: 2011-12-07 09:54-0000\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -403,7 +403,7 @@ msgstr ""
 "使用可能な記号は「+/.-_」及び「,」(タグの区切り)のみです。その他の記号、半角"
 "空白は使えません。"
 
-#: app/helpers/rankings_helper.rb:58 app/helpers/rankings_helper.rb:64
+#: app/helpers/rankings_helper.rb:62 app/helpers/rankings_helper.rb:68
 msgid "Access Count"
 msgstr "アクセス数"
 
@@ -2062,11 +2062,11 @@ msgstr "所属：%s"
 msgid "Blog"
 msgstr "ブログ"
 
-#: app/helpers/rankings_helper.rb:43
+#: app/helpers/rankings_helper.rb:45
 msgid "Blog / forum entries got most %s from others (public entries only)"
 msgstr "みんなから最も%sを貰った記事です"
 
-#: app/helpers/rankings_helper.rb:66
+#: app/helpers/rankings_helper.rb:70
 msgid "Blog Entry Count"
 msgstr "ブログ件数"
 
@@ -2655,7 +2655,7 @@ msgstr "漫画"
 msgid "Comment"
 msgstr "コメント"
 
-#: app/helpers/rankings_helper.rb:60 app/helpers/rankings_helper.rb:68
+#: app/helpers/rankings_helper.rb:64 app/helpers/rankings_helper.rb:72
 msgid "Comment Count"
 msgstr "コメント件数"
 
@@ -3211,7 +3211,7 @@ msgstr "あなたがブックマークした記事"
 msgid "Entries count"
 msgstr "記事数"
 
-#: app/helpers/rankings_helper.rb:41
+#: app/helpers/rankings_helper.rb:43
 msgid "Entries most commented (public entries only)"
 msgstr "みんなからコメントが活発に付いたブログです"
 
@@ -4470,7 +4470,7 @@ msgid ""
 msgstr ""
 "%sの月間ランキングです。 ( 対象期間：月初〜昨日まで。日次で更新しています）"
 
-#: app/helpers/rankings_helper.rb:39
+#: app/helpers/rankings_helper.rb:41
 msgid "Most read blog / forum entries (public entries only)"
 msgstr "みんなによく読まれた記事です"
 
@@ -5351,6 +5351,10 @@ msgstr "公開する"
 msgid "Publish Date"
 msgstr "公開日付"
 
+#: app/views/rankings/_list.html.erb:25
+msgid "Ranking of %{thankyou_label}"
+msgstr "%{thankyou_label}ランキング"
+
 #: app/views/rankings/_list.html.erb:2
 msgid "Ranking of Popular Blogs"
 msgstr "人気ブログランキング"
@@ -5382,6 +5386,10 @@ msgstr "ブログ投稿数"
 #: app/helpers/rankings_helper.rb:30
 msgid "Ranking of Popular Users (Comments Posted)"
 msgstr "コメント投稿数"
+
+#: app/helpers/rankings_helper.rb:32
+msgid "Ranking of Received %{thankyou_label}"
+msgstr "受け取った%{thankyou_label}数"
 
 #: app/controllers/rankings_controller.rb:113
 msgid "Rankings"
@@ -5438,6 +5446,10 @@ msgstr "読書"
 #: app/views/layouts/layout.html.erb:38
 msgid "Received %{thankyou_label}"
 msgstr "受け取った%{thankyou_label}数"
+
+#: app/helpers/rankings_helper.rb:74
+msgid "Received %{thankyou_label} Count"
+msgstr ""
 
 #: app/views/group/show.html.erb:81
 #: app/views/mypage/_publicated_entries_tabs.html.erb:1
@@ -7297,12 +7309,12 @@ msgstr "招待したいユーザ／グループ"
 msgid "Users accessed within last 10 days"
 msgstr "アクセスしたことがある人(10日間以内)"
 
-#: app/helpers/rankings_helper.rb:45
+#: app/helpers/rankings_helper.rb:47
 msgid "Users got most access to his / her entries and profile."
 msgstr ""
 "みんなから書いたブログや自身のプロフィールによく訪れてもらったユーザです"
 
-#: app/helpers/rankings_helper.rb:49
+#: app/helpers/rankings_helper.rb:51
 msgid "Users made most comments (disregarding the publicity)"
 msgstr "最もコメントを付けたユーザです(公開範囲に関わらず、カウント)"
 
@@ -7321,9 +7333,13 @@ msgstr ""
 "以下のサービスをご利用の方は、リンクをクリックしていただくことで、それぞれの"
 "IDを利用してログインが可能です。"
 
-#: app/helpers/rankings_helper.rb:47
+#: app/helpers/rankings_helper.rb:49
 msgid "Users posted most blog entries (disregarding the publicity)"
 msgstr "最もブログを投稿したユーザです(公開範囲に関わらず、カウント)"
+
+#: app/helpers/rankings_helper.rb:53
+msgid "Users received most %{thankyou_label}"
+msgstr "最も%{thankyou_label}を受け取ったユーザです"
 
 #: app/views/statistics/index.html.erb:24
 msgid ""
