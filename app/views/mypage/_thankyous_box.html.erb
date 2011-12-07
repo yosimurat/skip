@@ -11,9 +11,9 @@
         </td>
         <td style="padding: 5px 5px 0 0; vertical-align: top;">
           <ul>
-            <li>from <%= user_link_to(thankyou.sender) %></li>
             <li>to <%= user_link_to(thankyou.receiver) %></li>
             <li><span class="small_text"><%=h truncate(thankyou.comment, 20) %></span></li>
+            <li>from <%= user_link_to(thankyou.sender) %></li>
         </ul>
         </td>
       </tr>
