@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.7\n"
-"POT-Creation-Date: 2011-12-01 18:44-0000\n"
+"POT-Creation-Date: 2011-12-07 09:54-0000\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -383,7 +383,7 @@ msgid ""
 "only. Other symbols and white spaces are not accepted."
 msgstr ""
 
-#: app/helpers/rankings_helper.rb:58 app/helpers/rankings_helper.rb:64
+#: app/helpers/rankings_helper.rb:62 app/helpers/rankings_helper.rb:68
 msgid "Access Count"
 msgstr ""
 
@@ -2010,11 +2010,11 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: app/helpers/rankings_helper.rb:43
+#: app/helpers/rankings_helper.rb:45
 msgid "Blog / forum entries got most %s from others (public entries only)"
 msgstr ""
 
-#: app/helpers/rankings_helper.rb:66
+#: app/helpers/rankings_helper.rb:70
 msgid "Blog Entry Count"
 msgstr ""
 
@@ -2593,7 +2593,7 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: app/helpers/rankings_helper.rb:60 app/helpers/rankings_helper.rb:68
+#: app/helpers/rankings_helper.rb:64 app/helpers/rankings_helper.rb:72
 msgid "Comment Count"
 msgstr ""
 
@@ -3132,7 +3132,7 @@ msgstr ""
 msgid "Entries count"
 msgstr ""
 
-#: app/helpers/rankings_helper.rb:41
+#: app/helpers/rankings_helper.rb:43
 msgid "Entries most commented (public entries only)"
 msgstr ""
 
@@ -4352,7 +4352,7 @@ msgid ""
 "Updated daily)"
 msgstr ""
 
-#: app/helpers/rankings_helper.rb:39
+#: app/helpers/rankings_helper.rb:41
 msgid "Most read blog / forum entries (public entries only)"
 msgstr ""
 
@@ -5221,6 +5221,10 @@ msgstr ""
 msgid "Publish Date"
 msgstr ""
 
+#: app/views/rankings/_list.html.erb:25
+msgid "Ranking of %{thankyou_label}"
+msgstr ""
+
 #: app/views/rankings/_list.html.erb:2
 msgid "Ranking of Popular Blogs"
 msgstr ""
@@ -5251,6 +5255,10 @@ msgstr ""
 
 #: app/helpers/rankings_helper.rb:30
 msgid "Ranking of Popular Users (Comments Posted)"
+msgstr ""
+
+#: app/helpers/rankings_helper.rb:32
+msgid "Ranking of Received %{thankyou_label}"
 msgstr ""
 
 #: app/controllers/rankings_controller.rb:113
@@ -5307,6 +5315,10 @@ msgstr ""
 
 #: app/views/layouts/layout.html.erb:38
 msgid "Received %{thankyou_label}"
+msgstr ""
+
+#: app/helpers/rankings_helper.rb:74
+msgid "Received %{thankyou_label} Count"
 msgstr ""
 
 #: app/views/group/show.html.erb:81
@@ -7123,11 +7135,11 @@ msgstr ""
 msgid "Users accessed within last 10 days"
 msgstr ""
 
-#: app/helpers/rankings_helper.rb:45
+#: app/helpers/rankings_helper.rb:47
 msgid "Users got most access to his / her entries and profile."
 msgstr ""
 
-#: app/helpers/rankings_helper.rb:49
+#: app/helpers/rankings_helper.rb:51
 msgid "Users made most comments (disregarding the publicity)"
 msgstr ""
 
@@ -7143,8 +7155,12 @@ msgid ""
 "links below."
 msgstr ""
 
-#: app/helpers/rankings_helper.rb:47
+#: app/helpers/rankings_helper.rb:49
 msgid "Users posted most blog entries (disregarding the publicity)"
+msgstr ""
+
+#: app/helpers/rankings_helper.rb:53
+msgid "Users received most %{thankyou_label}"
 msgstr ""
 
 #: app/views/statistics/index.html.erb:24

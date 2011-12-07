@@ -10,7 +10,7 @@
 <%= render :partial => 'list' %>
 
 <% content_for :javascript_initializers do -%>
-    var contents_types = ['entry_access', 'entry_comment', 'entry_he', 'user_entry', 'user_access', 'commentator'];
+    var contents_types = ['entry_access', 'entry_comment', 'entry_he', 'user_entry', 'user_access', 'commentator', 'received_thankyou'];
     var loadRanking = function(){
         for( var i = 0; i < contents_types.length; i++)
             getRanking(contents_types[i]);

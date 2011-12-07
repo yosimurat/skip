@@ -28,6 +28,8 @@ module RankingsHelper
       _("Ranking of Popular Users (Blog Entries Posted)")
     when :commentator
       _("Ranking of Popular Users (Comments Posted)")
+    when :received_thankyou
+      _("Ranking of Received %{thankyou_label}") % {:thankyou_label => Thankyou.thankyou_label}
     else
       ""
     end
@@ -47,6 +49,8 @@ module RankingsHelper
       _("Users posted most blog entries (disregarding the publicity)")
     when :commentator
       _("Users made most comments (disregarding the publicity)")
+    when :received_thankyou
+      _("Users received most %{thankyou_label}") % {:thankyou_label => Thankyou.thankyou_label}
     else
       ""
     end
@@ -66,6 +70,8 @@ module RankingsHelper
       _("Blog Entry Count")
     when :commentator
       _("Comment Count")
+    when :received_thankyou
+      _("Received %{thankyou_label} Count") % {:thankyou_label => Thankyou.thankyou_label}
     else
       ""
     end
