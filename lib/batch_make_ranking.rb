@@ -48,6 +48,9 @@ class BatchMakeRanking < BatchBase
 
           # コメンテータ
           @maker.create_commentator_ranking exec_date
+
+          # Thankyou
+          @maker.create_thankyou_ranking exec_date
           log_info "[END] make ranking at #{exec_date} %2fsec"%(Time.now - start).to_f
         end
       end
@@ -128,6 +131,17 @@ class BatchMakeRanking < BatchBase
     BoardEntryComment.find_by_sql([sql, { :commentator_conditions => exec_date.strftime('%Y%m%d') }]).each do |record|
       user = find_user_by_id(record.user_id)
       create_ranking_by_user user, record.comment_count, "commentator", exec_date
+    end
+  end
+
+  def create_thankyou_ranking exec_date
+    thankyous = Thankyou.created_at_gte(exec_date.beginning_of_day).created_at_lte(exec_date.end_of_day).scoped(:group => :receiver_id).all(:select => "count(*) thankyou_count, receiver_id")
+    # receiverがincludeやjoinでeager load出来ないので手動で取得しておく
+    receivers_hash = User.id_is(thankyous.map(&:receiver_id)).index_by(&:id)
+    thankyous.each do |thankyou|
+      if receiver = receivers_hash[thankyou.receiver_id]
+        create_ranking_by_user receiver, thankyou.thankyou_count, "received_thankyou", exec_date
+      end
     end
   end
 
