@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.7\n"
-"POT-Creation-Date: 2011-12-07 09:54-0000\n"
+"POT-Creation-Date: 2011-12-08 09:18-0000\n"
 "PO-Revision-Date: 2009-06-29 13:31+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5603,6 +5603,10 @@ msgstr ""
 
 #: app/views/mypage/welcome.html.erb:41
 msgid "See if your friend's already there..."
+msgstr ""
+
+#: app/views/mypage/_thankyous_box.html.erb:23
+msgid "See ranking of %{thankyou_label}"
 msgstr ""
 
 #: app/views/pictures/_pictures.html.erb:23

@@ -20,5 +20,6 @@
       <% end -%>
     </tbody>
   </table>
+  <%= link_to icon_tag('chart_bar') + _('See ranking of %{thankyou_label}') % {:thankyou_label => Thankyou.thankyou_label}, url_for(:controller => 'rankings', :action => 'all') + '#thankyou_rankings' %>
 </div>
 <% end -%>

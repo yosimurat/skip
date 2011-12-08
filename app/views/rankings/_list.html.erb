@@ -22,7 +22,7 @@
 </div>
 <div class="clear_both"></div>
 
-<h2 class="topix_title"><%= icon_tag('star') %><%= _('Ranking of %{thankyou_label}') % {:thankyou_label => Thankyou.thankyou_label} %></h2>
+<h2 id="thankyou_rankings" class="topix_title"><%= icon_tag('star') %><%= _('Ranking of %{thankyou_label}') % {:thankyou_label => Thankyou.thankyou_label} %></h2>
 <div class="ranking_aggregate">
 <% %w(received_thankyou).each do |contents_type| %>
   <div id="<%= contents_type %>" class="ranking_wrapper">
