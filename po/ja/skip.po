@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.7\n"
-"POT-Creation-Date: 2011-12-07 09:54-0000\n"
+"POT-Creation-Date: 2011-12-08 09:18-0000\n"
 "PO-Revision-Date: 2009-11-27 16:12+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5741,6 +5741,10 @@ msgstr "すべて表示"
 #: app/views/mypage/welcome.html.erb:41
 msgid "See if your friend's already there..."
 msgstr "知っている人が既にいないか探してみましょう！ ... "
+
+#: app/views/mypage/_thankyous_box.html.erb:23
+msgid "See ranking of %{thankyou_label}"
+msgstr "%{thankyou_label}ランキングを見る"
 
 #: app/views/pictures/_pictures.html.erb:23
 msgid "Select"
