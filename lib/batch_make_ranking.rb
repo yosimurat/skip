@@ -140,7 +140,7 @@ class BatchMakeRanking < BatchBase
     receivers_hash = User.id_is(thankyous.map(&:receiver_id)).index_by(&:id)
     thankyous.each do |thankyou|
       if receiver = receivers_hash[thankyou.receiver_id]
-        thankyou_count = Thankyou.receiver_id_is(thankyou.receiver_id).count
+        thankyou_count = Thankyou.created_at_lte(exec_date.end_of_day).receiver_id_is(thankyou.receiver_id).count
         create_ranking_by_user receiver, thankyou_count, "received_thankyou", exec_date
       end
     end
