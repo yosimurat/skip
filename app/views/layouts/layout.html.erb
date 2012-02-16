@@ -121,9 +121,11 @@
     <%= render :partial => "shared/global_footer_navigation" -%>
   <% end -%>
 
-  <div id="thankyou_dialog" title="<%= _('Send a %{thankyou_label}') % {:thankyou_label => Thankyou.thankyou_label} %>">
-    <%= render :partial => 'thankyous/form' %>
-  </div>
+  <% if current_user -%>
+    <div id="thankyou_dialog" title="<%= _('Send a %{thankyou_label}') % {:thankyou_label => Thankyou.thankyou_label} %>">
+      <%= render :partial => 'thankyous/form' %>
+    </div>
+  <% end -%>
 </div><!-- main -->
 
 <% end -%>
