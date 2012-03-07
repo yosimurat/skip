@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ActionController::Routing::Routes.draw do |map|
 
   map.root    :controller => 'mypage', :action => 'index'
@@ -14,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
       user.resources :invitations, :only => [:new, :create]
     end
   end
-  map.resources :thankyous, :only => [:create, :destroy]
+  map.resources :thankyous, :only => [:create, :destroy, :index]
 
   map.resources :bookmarks, :only => %w(index) do |bookmark|
     bookmark.resources :bookmark_comments, :only => %w(create)

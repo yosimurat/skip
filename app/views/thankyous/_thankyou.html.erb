@@ -1,9 +1,24 @@
-<tr>
-  <th rowspan="2">
-    <%= user_link_to_with_portrait(thankyou.sender, :width => 60, :height => 40) %><br/><%= user_link_to(thankyou.sender) %>
-  </th>
-  <td><%= h thankyou.created_at.to_s(:db) %></td>
-</tr>
-<tr>
-  <td><%= h thankyou.comment %></td>
-</tr>
+    <table class="thankyou_list">
+      <tr>
+	<th class="user_box ui-corner-all" rowspan="2" valign="top">
+	  <%= user_link_to_with_portrait(thankyou.sender) %><br />
+	  <%= user_link_to(thankyou.sender) %>
+	</th>
+	<td class="arrow" align="center"><%= icon_tag('resultset_next') %></td>
+	<td class="message">
+	  <div class="content ui-corner-all">
+	    <div class="comment">
+	      <%= h thankyou.comment %>
+	    </div>
+	    <div class="date">
+	      [<%= h thankyou.created_at.to_s(:db) %>]
+	    </div>
+	  </div>
+	</td>
+	<td class="arrow"><%= icon_tag('resultset_next') %></td>
+	<th class="user_box ui-corner-all" rowspan="2" valign="bottom">
+	  <%= user_link_to_with_portrait(thankyou.receiver) %><br />
+	  <%= user_link_to(thankyou.receiver) %>
+	</th>
+      </tr>
+    </table>

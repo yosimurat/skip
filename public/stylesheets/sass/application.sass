@@ -355,6 +355,8 @@ div.right_box
     :padding 2px 6px
     span.desc
       :font-size = !x_small_font_size
+    a
+      :color white
   ul
     li
       :margin 6px 2px
@@ -594,7 +596,7 @@ div.search_cond_space
     th
       :width 130px
       :background-color #f0f0ff
-      :padding 0px 5px
+      :padding 5px
       :border-top = !base_border
       :border-bottom = !base_border
     select
@@ -1079,7 +1081,7 @@ div#antenna_navi
 
 // マイページ > ソーシャル
 // ------------------------------------------------------------
-table.chain_table
+table.chain_table, table.thankyou_list
   :width 100%
   :margin 5px 0
   :border-collapse separate
@@ -1090,7 +1092,7 @@ table.chain_table
     :text-align center
     :border = !base_border
   td
-    &.message div.introduction
+    &.message div.introduction, &.message div.content
       :border = !base_border
       :margin 10px 0px
       :overflow hidden
@@ -2011,3 +2013,12 @@ a.btn_blue
     text-decoration: none
     border-color: #00a0dd
 
+table.thankyou_list
+  div
+    :padding 3px
+  div.comment
+    :float left
+  div.date
+    :float left
+    :width 100%
+    :text-align right

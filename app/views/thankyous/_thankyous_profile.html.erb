@@ -1,0 +1,14 @@
+<div class="relative100 <%= 'invisible' if thankyous.empty? %>">
+  <h2 class="topix_title"><%= icon_tag('asterisk_orange') %><%= _('List of %s') % SkipEmbedded::InitialSettings['replace_name_of_thankyou'] %></h2>
+  <div class="topix_body">
+    <table id="thankyous_list">
+    <% thankyous.each do |thankyou| -%>
+      <tr>
+        <td>
+	  <%= render :partial => 'thankyous/thankyou', :locals => {:thankyou => thankyou} %>
+        </td>
+      </tr>
+    <% end -%>
+    </table>
+  </div>
+</div>

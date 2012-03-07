@@ -25,4 +25,22 @@ class ThankyousController < ApplicationController
       end
     end
   end
+
+  def index
+    @title = Thankyou.thankyou_label
+
+    perpage = 10
+    if params[:user]
+      @thankyous = Thankyou.order_new.user_and_type(params[:user], params[:type]).paginate(:page => params[:page], :per_page => perpage)
+    else
+      @thankyous = Thankyou.order_new.user_like_and_type(params[:name], params[:type]).paginate(:page => params[:page], :per_page => perpage)
+    end
+
+    flash.now[:notice] = _('No matching results found.') if @thankyous.empty?
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
 end
