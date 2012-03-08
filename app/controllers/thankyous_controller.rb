@@ -27,7 +27,7 @@ class ThankyousController < ApplicationController
   end
 
   def index
-    @title = Thankyou.thankyou_label
+    @title = _("List of %s") % Thankyou.thankyou_label
 
     perpage = 10
     if params[:user]

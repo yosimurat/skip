@@ -1,14 +1,8 @@
 <div class="relative100 <%= 'invisible' if thankyous.empty? %>">
-  <h2 class="topix_title"><%= icon_tag('asterisk_orange') %><%= _('List of %s') % Thankyou.thankyou_label %></h2>
+  <a name="thankyous"><h2 class="topix_title"><%= icon_tag('asterisk_orange') %><%= _('List of %s') % Thankyou.thankyou_label %></h2></a>
   <div class="topix_body">
-    <table id="thankyous_list">
     <% thankyous.each do |thankyou| -%>
-      <tr>
-        <td>
-	  <%= render :partial => 'thankyous/thankyou', :locals => {:thankyou => thankyou} %>
-        </td>
-      </tr>
+    <%= render :partial => 'thankyous/thankyou', :locals => {:thankyou => thankyou} %>
     <% end -%>
-    </table>
   </div>
 </div>
