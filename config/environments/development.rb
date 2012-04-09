@@ -17,8 +17,6 @@ config.logger = Logger.new(config.log_path, 1, 10.megabytes)
 
 config.action_mailer.delivery_method = :test
 
-#config.gem "josevalim-rails-footnotes",  :lib => "rails-footnotes", :source => "http://gems.github.com"
-
 config.after_initialize do
   Bullet.enable = true
 #  Bullet.alert = true

@@ -355,6 +355,8 @@ div.right_box
     :padding 2px 6px
     span.desc
       :font-size = !x_small_font_size
+    a
+      :color white
   ul
     li
       :margin 6px 2px
@@ -594,7 +596,7 @@ div.search_cond_space
     th
       :width 130px
       :background-color #f0f0ff
-      :padding 0px 5px
+      :padding 5px
       :border-top = !base_border
       :border-bottom = !base_border
     select
@@ -725,6 +727,9 @@ div#contents_container
   div#contents_right
     :margin-left 165px
     :_width 100%
+    :overflow hidden
+    a.rounded
+      :_width 0
   // wiki CSS
   div#wiki_contents_right
     :float right
@@ -1079,7 +1084,7 @@ div#antenna_navi
 
 // マイページ > ソーシャル
 // ------------------------------------------------------------
-table.chain_table
+table.chain_table, table.thankyou_item
   :width 100%
   :margin 5px 0
   :border-collapse separate
@@ -1090,7 +1095,7 @@ table.chain_table
     :text-align center
     :border = !base_border
   td
-    &.message div.introduction
+    &.message div.introduction, &.message div.content
       :border = !base_border
       :margin 10px 0px
       :overflow hidden
@@ -1273,6 +1278,7 @@ table.group_list_box
   tr
     th, td
       :border = !base_border
+      :padding 5px
     th
       :text-align left
       :background-color #f0f0ff
@@ -2019,3 +2025,12 @@ a.btn_blue
     text-decoration: none
     border-color: #00a0dd
 
+table.thankyou_item
+  div
+    :padding 3px
+  div.comment
+    :float left
+  div.date
+    :float left
+    :width 100%
+    :text-align right
