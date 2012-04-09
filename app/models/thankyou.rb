@@ -22,9 +22,38 @@ class Thankyou < ActiveRecord::Base
   validates_presence_of :receiver_id, :sender_id
   validates_length_of :comment, :maximum => 1000
 
+  named_scope :order_new, proc { { :order => 'created_at DESC' } }
+
   named_scope :limit, proc { |num| { :limit => num } }
+
+  named_scope :user_and_type, proc { |word, type|
+    Thankyou.make_scope_user_and_type(word, type)
+  }
+
+  named_scope :user_like_and_type, proc { |word, type|
+    Thankyou.make_scope_user_and_type(word, type, :like)
+  }
 
   def self.thankyou_label
     SkipEmbedded::InitialSettings['replace_name_of_thankyou'].blank? ? _('thankyou') : SkipEmbedded::InitialSettings['replace_name_of_thankyou']
   end
+
+  def self.make_scope_user_and_type(word, type, *options)
+    return { :include => [ :sender, :receiver ] } if word.blank?
+
+    typesym = type.to_sym
+    return { :include => [ :sender, :receiver ] } unless typesym == :sender or typesym == :receiver
+
+    if options.first == :like
+      conditions = ['user_uids.uid like :word OR users.name like :word', { :word => SkipUtil.to_like_query_string(word) } ]
+    else
+      conditions = ['user_uids.uid = :word OR users.name = :word', { :word => word } ]
+    end
+
+    { :joins => { typesym => :user_uids },
+      :conditions => conditions,
+      :include => [ :sender, :receiver ]
+    }
+  end
+
 end

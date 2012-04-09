@@ -35,8 +35,8 @@
             <li><%= _('Subscribers') %>: <%=h(n_("%{count} user", "%{count} users", current_target_user.info[:subscriber_count]) % {:count =>current_target_user.info[:subscriber_count]}) -%></li>
             <li><%= _('Posts') %>: <%=h(n_("%{count} entry", "%{count} entries", current_target_user.info[:blog_count]) % {:count => current_target_user.info[:blog_count]}) -%></li>
             <li><%= _('Days since registered') %>: <%=h(n_("%{count} day", "%{count} days", current_target_user.info[:using_day]) % {:count => current_target_user.info[:using_day]}) -%></li>
-            <li><%= _('Received %{thankyou_label}') % {:thankyou_label => Thankyou.thankyou_label} %>: <%= current_target_user.received_thankyous.count %></li>
-            <li><%= _('Sent %{thankyou_label}') % {:thankyou_label => Thankyou.thankyou_label} %>: <%= current_target_user.sent_thankyous.count %></li>
+            <li><%= link_to_unless current_target_user.received_thankyous.count == 0, icon_tag('thumb_up') + _('Received %{thankyou_label}') % {:thankyou_label => Thankyou.thankyou_label}, { :controller => "user", :action => "show", :uid => current_target_user.uid , :anchor => "thankyous" } %>: <%= current_target_user.received_thankyous.count %></li>
+            <li><%= link_to_unless current_target_user.sent_thankyous.count == 0, icon_tag('email_go') + _('Sent %{thankyou_label}') % {:thankyou_label => Thankyou.thankyou_label}, thankyous_path(:user => current_target_user.uid, :type => :sender) %>: <%= current_target_user.sent_thankyous.count %></li>
           </ul>
           <br class="clear_left" />
         </div>
@@ -136,7 +136,7 @@
   <span class="item"><%= icon_tag 'table_lightning'    -%> <%= _("Today's Access: %s access") % h(@site_count.today_user_count)%></span>
   <span class="item"><%= icon_tag 'database'           -%> <%= _("Total Entries: %s entries") % h(@site_count.total_blog_count) %></span>
   <span class="item"><%= icon_tag 'database_lightning' -%> <%= _("Today's Entries: %s entries") % h(@site_count.today_blog_count) %></span>
-  <span class="item"><%= icon_tag 'thumb_up'           -%> <%= _("Total %{thankyou_label} : %{thankyou_count} thankyous") % {:thankyou_label => SkipEmbedded::InitialSettings['replace_name_of_thankyou'], :thankyou_count => Thankyou.count } %></span>
+  <span class="item"><%= icon_tag 'thumb_up'           -%> <%= _("Total %{thankyou_label} : %{thankyou_count} thankyous") % {:thankyou_label => Thankyou.thankyou_label, :thankyou_count => Thankyou.count } %></span>
   <span class="item_margin_left"><%= icon_tag 'chart_curve'        -%> <%= link_to(_("Site Information"), :controller => "/statistics") -%></span>
 </div>
 <% end -%>

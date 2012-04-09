@@ -1,0 +1,29 @@
+<div class="search_cond_space ui-corner-all">
+  <% form_tag({:action => 'index'}, {:method => 'get'}) do -%>
+  <table class="search_cond_box">
+    <tr>
+      <th><%= label_tag :name, s_("User|Name") + "/" + h(user_name_mode_label) %></th>
+      <td><%= text_field_tag('name', params[:name], :size => 40) %></td>
+    </tr>
+    <tr>
+      <th><%= _('Search Range') %></th>
+      <td>
+        <%= radio_button_tag('type', "sender", params[:type] == 'sender') %>
+        <%= label_tag('type_sender', s_("Thankyou|Sender")) %>
+        <%= radio_button_tag('type', "receiver", params[:type] == 'receiver') %>
+        <%= label_tag('type_receiver', s_("Thankyou|Receiver")) %>
+      </td>
+    </tr>
+  </table>
+  <div class="submit"><%= submit_tag _('Search') %></div>
+  <% end -%>
+</div>
+
+
+<div id="thankyous_list">
+  <% if @thankyous.empty? %>
+  <%= _('No matching results found.') %>
+  <% else %>
+  <%= render :partial => 'thankyous/thankyous', :locals => {:thankyous => @thankyous} %>
+  <% end %>
+</div>

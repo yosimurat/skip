@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skip 1.8.7\n"
 "POT-Creation-Date: 2011-12-08 09:18-0000\n"
-"PO-Revision-Date: 2009-11-27 16:12+0900\n"
+"PO-Revision-Date: 2012-03-04 21:48+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -6426,15 +6426,15 @@ msgstr "コメント"
 
 #: app/models/thankyou.rb:-
 msgid "Thankyou|Created at"
-msgstr ""
+msgstr "送った日時"
 
 #: app/models/thankyou.rb:-
 msgid "Thankyou|Receiver"
-msgstr "受信ユーザ"
+msgstr "受け取ったユーザ"
 
 #: app/models/thankyou.rb:-
 msgid "Thankyou|Sender"
-msgstr "送信ユーザ"
+msgstr "送ったユーザ"
 
 #: app/models/thankyou.rb:-
 msgid "Thankyou|Updated at"
