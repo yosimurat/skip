@@ -29,7 +29,7 @@ class Thankyou < ActiveRecord::Base
   named_scope :user_and_type, proc { |word, type|
     Thankyou.make_scope_user_and_type(word, type)
   }
-    
+
   named_scope :user_like_and_type, proc { |word, type|
     Thankyou.make_scope_user_and_type(word, type, :like)
   }
@@ -41,7 +41,7 @@ class Thankyou < ActiveRecord::Base
   def self.make_scope_user_and_type(word, type, *options)
     return { :include => [ :sender, :receiver ] } if word.blank?
 
-    typesym = type.to_sym 
+    typesym = type.to_sym
     return { :include => [ :sender, :receiver ] } unless typesym == :sender or typesym == :receiver
 
     if options.first == :like
