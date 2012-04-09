@@ -1,10 +1,14 @@
 <div class="relative100 <%= 'invisible' if thankyous.empty? %>">
-  <h2 class="topix_title"><%= icon_tag('asterisk_orange') %><%= _('List of %s') % SkipEmbedded::InitialSettings['replace_name_of_thankyou'] %></h2>
-  <div class="topix_body">
-    <table id="thankyous_list" class="normal user_chain ui-corner-all">
+  <h2 class="topix_title"><%= icon_tag('asterisk_orange') %><%= _('Search result') %></h2>
+
+  <%= i18n_will_paginate_with_container_wrapper thankyous %>
+
+  <div>
     <% thankyous.each do |thankyou| -%>
       <%= render :partial => 'thankyous/thankyou', :locals => {:thankyou => thankyou} %>
     <% end -%>
-    </table>
   </div>
+
+  <%= i18n_will_paginate_with_container_wrapper thankyous %>
+
 </div>
