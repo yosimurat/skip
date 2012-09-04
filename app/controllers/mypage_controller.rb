@@ -503,7 +503,7 @@ class MypageController < ApplicationController
       :id_name => 'message',
       :title_icon => "email",
       :title_name => _("Notices for you"),
-      :pages => pages = BoardEntry.from_recents.accessible(current_user).notice.unread_only_notice(current_user).order_new,
+      :pages => pages = BoardEntry.from_recents.recent(2.month.to_i).accessible(current_user).notice.unread_only_notice(current_user).order_new,
       :symbol2name_hash => BoardEntry.get_symbol2name_hash(pages)
     }
   end
